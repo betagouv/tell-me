@@ -26,5 +26,5 @@ jobs:
           cache: yarn
           node-version: 16
       - run: yarn
-      - run: yarn test:unit
+      - run: yarn test:unit --coverage
       - run: npx codecov
