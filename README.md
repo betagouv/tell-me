@@ -78,7 +78,7 @@ Please have a look at the [contributing document](./CONTRIBUTING.md).
 
 [img-codecov]: https://img.shields.io/codecov/c/github/betagouv/tell-me/main?style=flat-square
 [img-github]:
-  https://img.shields.io/github/workflow/status/betagouv/tell-me/Test%20&%20PRelease/main?style=flat-square
+  https://img.shields.io/github/workflow/status/betagouv/tell-me/Test%20&%20Release/main?style=flat-square
 [img-license]: https://img.shields.io/github/license/betagouv/tell-me?style=flat-square
 
 [lnk-codecov]: https://codecov.io/gh/betagouv/tell-me/branch/main
