@@ -1,0 +1,80 @@
+{
+  "extends": "@ivangabriele/eslint-config-react",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    "no-shadow": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+
+    "react/prop-types": [
+      "error",
+      { "ignore": ["children", "className", "Component", "contentEditable", "pageProps", "ref"] }
+    ],
+    "react/react-in-jsx-scope": "off"
+  },
+  "overrides": [
+    {
+      "files": ["./api/**/*.js", "./pages/api/**/*.js", "./scripts/**/*.js"],
+      "env": {
+        "browser": false
+      }
+    },
+    {
+      "files": ["./api/models/**/*.js"],
+      "rules": {
+        "sort-keys-fix/sort-keys-fix": "off"
+      }
+    },
+    {
+      "files": [
+        "./app-bo/components/atoms/*.jsx",
+        "./app-bo/components/templates/SurveyEditor/blocks/*.jsx",
+        "./app-fo/components/atoms/*.jsx",
+        "./pages/**/*.jsx"
+      ],
+      "rules": {
+        "react/jsx-props-no-spreading": "off"
+      }
+    },
+    {
+      "files": ["./pages/**/*.jsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["**/*.test.js", "./e2e/**/*.js"],
+      "plugins": ["jest"],
+      "env": {
+        "browser": false,
+        "jest/globals": true,
+        "node": true
+      },
+      "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+
+        "jest/no-disabled-tests": "error",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "error",
+        "jest/valid-expect": "error"
+      }
+    },
+    {
+      "files": ["./scripts/**/*.js"],
+      "plugins": ["jest"],
+      "env": {
+        "browser": false,
+        "node": true
+      },
+      "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+      }
+    }
+  ]
+}
