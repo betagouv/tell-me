@@ -65,6 +65,10 @@
   },
   "jest": {
     "clearMocks": true,
+    "collectCoverageFrom": [
+      "{api,app-bo,app-fo}/{hooks,libs}/**/*.js",
+      "**/helpers/**/*.{js,jsx}"
+    ],
     "maxWorkers": "50%"
   }
 }
