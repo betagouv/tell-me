@@ -34,7 +34,7 @@ async function addRsaPrivateKeyToEnvIfNotExist() {
 
 ;(async () => {
   // Don't run dev setup for non-local development environments
-  if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV !== 'development') {
     return
   }
 
