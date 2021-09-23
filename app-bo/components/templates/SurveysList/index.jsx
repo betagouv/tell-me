@@ -35,7 +35,7 @@ export default function SurveysList() {
   }
 
   const addSurvey = async () => {
-    const newSurveyTitle = `New Survey Title #${getRandomId()} (click to edit)`
+    const newSurveyTitle = `New Survey Title #${getRandomId()}`
     const newSurveySlug = slugify(newSurveyTitle)
     const newSurveyData = {
       slug: newSurveySlug,
