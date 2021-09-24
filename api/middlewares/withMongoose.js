@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 
 import handleError from '../helpers/handleError'
 
+mongoose.Schema.Types.String.checkRequired(value => typeof value === 'string')
+
 const { DB_URL } = process.env
 
 function withMongooseSingleton() {
