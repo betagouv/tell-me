@@ -13,6 +13,7 @@ import SurveysList from '../app-bo/components/templates/SurveysList'
 import UsersList from '../app-bo/components/templates/UsersList'
 import isFirstSetup from '../app-bo/helpers/isFirstSetup'
 import useAuth from '../app-bo/hooks/useAuth'
+import useIsMounted from '../app-bo/hooks/useIsMounted'
 
 const Page = styled.div`
   display: flex;
@@ -42,15 +43,20 @@ const Main = styled.main`
 export default function SpaPage() {
   const { state: authState } = useAuth()
   const [mustSetup, setMustSetup] = useState(null)
+  const isMounted = useIsMounted()
 
   const checkSetup = async () => {
     const mustSetup = await isFirstSetup()
 
-    setMustSetup(mustSetup)
+    if (isMounted()) {
+      setMustSetup(mustSetup)
+    }
   }
 
   useEffect(() => {
     checkSetup()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (mustSetup === null || authState.isLoading) {
