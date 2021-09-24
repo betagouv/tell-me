@@ -12,15 +12,12 @@ const StyledHeading1 = styled.h1`
   }
 `
 
-function Title({ children, ...props }, ref) {
-  return (
-    <StyledHeading1 ref={ref} {...props}>
-      {children}
-    </StyledHeading1>
-  )
-}
+const Title = forwardRef(({ children, ...props }, ref) => (
+  <StyledHeading1 ref={ref} {...props}>
+    {children}
+  </StyledHeading1>
+))
 
-const TitleWithRef = forwardRef(Title)
-TitleWithRef.displayName = 'Title'
+Title.displayName = 'Title'
 
-export default TitleWithRef
+export default Title

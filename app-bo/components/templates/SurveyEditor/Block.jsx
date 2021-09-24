@@ -4,9 +4,9 @@ import { useState } from 'react'
 
 import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
 import Choice from './blocks/Choice'
+import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Subtitle from './blocks/Subtitle'
-import Text from './blocks/Text'
 import Editable from './Editable'
 import { countPreviousChoices } from './helpers'
 import Menu from './Menu'
@@ -22,7 +22,8 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
     component: Subtitle,
   },
   [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: {
-    component: Text,
+    component: Paragraph,
+    isRichText: true,
     placeholder: `Type '/' to insert blocks`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: {
@@ -45,7 +46,7 @@ export default function Block({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const { position, type, value } = block
-  const { component, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
+  const { component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
   const isFocused = R.equals(position, focusedBlockPosition)
   const index = type === SURVEY_BLOCK_TYPE.INPUT.CHOICE ? countPreviousChoices(blocks, position) : null
   const isLastBlock = R.equals(position, R.last(blocks).position)
@@ -62,6 +63,7 @@ export default function Block({
         Component={component}
         index={index}
         isFocused={isFocused}
+        isRichText={isRichText}
         onBackspace={() => onRemove(position)}
         onChange={newValue => onChange(position, newValue)}
         onDown={isLastBlock ? null : () => onDown(position)}

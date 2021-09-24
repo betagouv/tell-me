@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
 
+import sanitizeRichText from './helpers/sanitizeRichText'
+
 export default function Editable({
   Component,
   index,
   isFocused,
+  isRichText,
   onBackspace,
   onChange,
   onDown,
@@ -16,8 +19,10 @@ export default function Editable({
 }) {
   const $component = useRef(value)
 
-  const handleNewValue = () => {
-    onChange($component.current.innerText)
+  const handleNewValue = async () => {
+    const value = isRichText ? await sanitizeRichText($component.current.innerHTML) : $component.current.innerText
+
+    onChange(value)
   }
 
   const controlKey = event => {
@@ -89,10 +94,13 @@ export default function Editable({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
+  const innerHTML = { __html: value }
+
   return (
     <Component
       ref={$component}
       contentEditable
+      dangerouslySetInnerHTML={innerHTML}
       index={index}
       onInput={handleNewValue}
       onKeyDown={controlKey}
@@ -100,15 +108,14 @@ export default function Editable({
       spellCheck={false}
       style={{ outline: 0 }}
       suppressContentEditableWarning
-    >
-      {value}
-    </Component>
+    />
   )
 }
 
 Editable.defaultProps = {
   index: null,
   isFocused: false,
+  isRichText: false,
   onBackspace: null,
   onDown: null,
   onSlash: null,
@@ -120,6 +127,7 @@ Editable.propTypes = {
   Component: PropTypes.elementType.isRequired,
   index: PropTypes.number,
   isFocused: PropTypes.bool,
+  isRichText: PropTypes.bool,
   onBackspace: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onDown: PropTypes.func,

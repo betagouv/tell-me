@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledDiv = styled.p`
   cursor: text;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin: 0.75rem 0;
 
