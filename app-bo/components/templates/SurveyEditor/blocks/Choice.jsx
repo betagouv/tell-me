@@ -34,38 +34,37 @@ const Letter = styled.div`
   display: flex;
   font-size: 12px;
   font-weight: 900;
-  height: 18px;
+  height: 1.125rem;
   justify-content: center;
   line-height: 1;
-  min-height: 18px;
-  min-width: 18px;
-  width: 18px;
+  width: 1.125rem;
 `
 
 const Input = styled.div`
   font-size: 16px;
   line-height: 1.15;
   padding-left: 10px;
-  min-width: 5rem;
 
-  :focus:empty::before {
+  :empty::before {
+    min-width: 5rem;
     content: attr(placeholder);
     display: block;
     -webkit-text-fill-color: rgb(187, 187, 187);
   }
 `
 
-const Choice = forwardRef(({ children, index, ...props }, ref) => {
+const Choice = forwardRef(({ dangerouslySetInnerHTML, index, ...props }, ref) => {
+  // eslint-disable-next-line no-underscore-dangle
+  const { __html: value } = dangerouslySetInnerHTML.__html
   const letter = getIndexLetter(index)
+  const isEmpty = value?.length === 0
 
   return (
     <Container>
       <InnerContainer>
         <Letter>{letter}</Letter>
 
-        <Input ref={ref} {...props}>
-          {children}
-        </Input>
+        <Input ref={ref} dangerouslySetInnerHTML={dangerouslySetInnerHTML} isEmpty={isEmpty} {...props} />
       </InnerContainer>
     </Container>
   )

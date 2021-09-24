@@ -13,7 +13,17 @@
 
     "react/prop-types": [
       "error",
-      { "ignore": ["children", "className", "Component", "contentEditable", "pageProps", "ref"] }
+      {
+        "ignore": [
+          "children",
+          "className",
+          "Component",
+          "contentEditable",
+          "dangerouslySetInnerHTML",
+          "pageProps",
+          "ref"
+        ]
+      }
     ],
     "react/react-in-jsx-scope": "off"
   },

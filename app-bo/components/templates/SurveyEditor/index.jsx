@@ -2,11 +2,11 @@ import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import Title from '../../../../app-fo/components/atoms/Title'
 import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
 import useApi from '../../../hooks/useApi'
 import useEquivalenceEffect from '../../../hooks/useEquivalenceEffect'
 import Block from './Block'
+import Title from './blocks/Title'
 import Editable from './Editable'
 import Header from './Header'
 import {

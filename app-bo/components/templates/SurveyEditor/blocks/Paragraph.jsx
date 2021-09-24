@@ -5,7 +5,6 @@ import AppfoParagraph from '../../../../../app-fo/components/atoms/Paragraph'
 const Paragraph = styled(AppfoParagraph)`
   :focus:empty::before {
     content: attr(placeholder);
-    display: block;
     -webkit-text-fill-color: rgb(187, 187, 187);
   }
 `

@@ -6,7 +6,6 @@ import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
 import Choice from './blocks/Choice'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
-import Subtitle from './blocks/Subtitle'
 import Editable from './Editable'
 import { countPreviousChoices } from './helpers'
 import Menu from './Menu'
@@ -18,17 +17,14 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
     component: Question,
     placeholder: `What is your question?`,
   },
-  [SURVEY_BLOCK_TYPE.CONTENT.SUBTITLE]: {
-    component: Subtitle,
-  },
   [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: {
     component: Paragraph,
     isRichText: true,
-    placeholder: `Type '/' to insert blocks`,
+    placeholder: `Insert some text or type '/' to insert a new type of block`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: {
     component: Choice,
-    placeholder: `Option 1`,
+    placeholder: `Option`,
   },
 }
 
@@ -52,6 +48,8 @@ export default function Block({
   const isLastBlock = R.equals(position, R.last(blocks).position)
   const key = `${blocks.length}_${position.page}_${position.rank}`
 
+  const finalPlaceholder = index !== null ? `${placeholder} ${index + 1}` : placeholder
+
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
@@ -70,7 +68,7 @@ export default function Block({
         onEnter={() => onEnter(position)}
         onSlash={() => setIsMenuOpen(true)}
         onUp={() => onUp(position)}
-        placeholder={placeholder}
+        placeholder={finalPlaceholder}
         value={value}
       />
 

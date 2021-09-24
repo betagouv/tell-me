@@ -6,11 +6,7 @@ const StyledHeading1 = styled.h1`
   margin-top: 0;
 `
 
-const Title = forwardRef(({ children, ...props }, ref) => (
-  <StyledHeading1 ref={ref} {...props}>
-    {children}
-  </StyledHeading1>
-))
+const Title = forwardRef((props, ref) => <StyledHeading1 ref={ref} {...props} />)
 
 Title.displayName = 'Title'
 

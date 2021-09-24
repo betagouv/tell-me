@@ -5,11 +5,7 @@ const StyledParagraph = styled.p`
   margin: 0.75rem 0;
 `
 
-const Paragraph = forwardRef(({ children, ...props }, ref) => (
-  <StyledParagraph ref={ref} {...props}>
-    {children}
-  </StyledParagraph>
-))
+const Paragraph = forwardRef((props, ref) => <StyledParagraph ref={ref} {...props} />)
 
 Paragraph.displayName = 'Paragraph'
 
