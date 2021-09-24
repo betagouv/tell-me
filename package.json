@@ -9,7 +9,7 @@
     "debug": "envinfo --binaries --system --markdown",
     "dev": "next dev",
     "dev:docker": "docker-compose down && docker-compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up db",
-    "prepare": "husky install && node -r dotenv/config ./scripts/dev/setup.js",
+    "prepare": "husky install && husky add .husky/pre-commit \"yarn test:lint\" && node -r dotenv/config ./scripts/dev/setup.js",
     "start": "next start",
     "test": "yarn test:lint && yarn test:unit",
     "test:lint": "eslint .",
