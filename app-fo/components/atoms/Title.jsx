@@ -4,12 +4,6 @@ import styled from 'styled-components'
 const StyledHeading1 = styled.h1`
   margin-bottom: 0.75rem;
   margin-top: 0;
-
-  :focus:empty::before {
-    content: attr(placeholder);
-    display: block;
-    -webkit-text-fill-color: rgb(187, 187, 187);
-  }
 `
 
 const Title = forwardRef(({ children, ...props }, ref) => (
