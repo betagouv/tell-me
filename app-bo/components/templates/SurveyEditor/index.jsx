@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Title from '../../../../app-fo/components/atoms/Title'
@@ -72,6 +72,11 @@ export default function SurveyEditor() {
   }, [])
 
   useEquivalenceEffect(() => {
+    // Let's not override existing survey data with the initialization one
+    if (isLoading) {
+      return
+    }
+
     ;(async () => {
       await api.patch(`survey/${id}`, {
         blocks,
