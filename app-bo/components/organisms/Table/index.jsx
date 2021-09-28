@@ -74,7 +74,7 @@ const DeleteButton = styled(MuiIconButton)`
   }
 `
 
-export default function Table({ columns, data, hasPreview, isLoading, name, onAdd, onDelete, path, title }) {
+export default function Table({ columns, data, hasPreview, isLoading, name, onAdd, onDelete, path }) {
   const canAdd = onAdd !== null
 
   return (
@@ -169,5 +169,4 @@ Table.propTypes = {
   onAdd: PropTypes.func,
   onDelete: PropTypes.func.isRequired,
   path: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
 }

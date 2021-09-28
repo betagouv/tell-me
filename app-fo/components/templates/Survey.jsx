@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import * as R from 'ramda'
+import { useState } from 'react'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
@@ -85,6 +86,23 @@ const renderBlocks = blocks => {
 
 export default function PublicSurvey({ data }) {
   const { blocks, title } = data
+  const [isSent, setIsSent] = useState(false)
+
+  const submitSurvey = () => {
+    setIsSent(true)
+  }
+
+  const page = isSent ? (
+    <Question>Thank you!</Question>
+  ) : (
+    <Form initialValues={{}} onSubmit={submitSurvey} validationSchema={FormSchema}>
+      {/* <Form.Input autoComplete="email" label="Email" name="email" type="email" />
+    <Form.Input autoComplete="current-password" label="Password" name="password" type="password" /> */}
+      {renderBlocks(blocks)}
+
+      <Form.Submit>Submit</Form.Submit>
+    </Form>
+  )
 
   return (
     <Page>
@@ -95,13 +113,7 @@ export default function PublicSurvey({ data }) {
 
         <Title>{title}</Title>
 
-        <Form initialValues={{}} onSubmit={() => undefined} validationSchema={FormSchema}>
-          {/* <Form.Input autoComplete="email" label="Email" name="email" type="email" />
-          <Form.Input autoComplete="current-password" label="Password" name="password" type="password" /> */}
-          {renderBlocks(blocks)}
-
-          {/* <Form.Submit>Log In</Form.Submit> */}
-        </Form>
+        {page}
       </Container>
     </Page>
   )
