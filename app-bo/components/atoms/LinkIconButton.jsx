@@ -17,14 +17,19 @@ const IconButton = styled(MuiIconButton)`
   } */
 `
 
-export default function LinkIconButton({ children, to }) {
+export default function LinkIconButton({ children, target, to }) {
   return (
-    <IconButton component={Link} to={to} variant="outlined">
+    <IconButton component={Link} target={target} to={to} variant="outlined">
       {children}
     </IconButton>
   )
 }
 
+LinkIconButton.defaultProps = {
+  target: null,
+}
+
 LinkIconButton.propTypes = {
+  target: PropTypes.oneOf(['_blank']),
   to: PropTypes.string.isRequired,
 }

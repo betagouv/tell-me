@@ -1,6 +1,7 @@
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import VisibilityOutlineIcon from '@mui/icons-material/VisibilityOutlined'
 import MuiBox from '@mui/material/Box'
 import MuiCard from '@mui/material/Card'
 import MuiIconButton from '@mui/material/IconButton'
@@ -73,7 +74,7 @@ const DeleteButton = styled(MuiIconButton)`
   }
 `
 
-export default function Table({ columns, data, isLoading, name, onAdd, onDelete, path, title }) {
+export default function Table({ columns, data, hasPreview, isLoading, name, onAdd, onDelete, path, title }) {
   const canAdd = onAdd !== null
 
   return (
@@ -93,6 +94,7 @@ export default function Table({ columns, data, isLoading, name, onAdd, onDelete,
             {columns.map(({ label }) => (
               <TableCell key={label}>{label}</TableCell>
             ))}
+            {hasPreview && <ActionTableCell />}
             <ActionTableCell />
             <ActionTableCell />
           </MuiTableRow>
@@ -114,6 +116,14 @@ export default function Table({ columns, data, isLoading, name, onAdd, onDelete,
               {columns.map(({ key }) => (
                 <TableCell key={key}>{dataItem[key]}</TableCell>
               ))}
+
+              {hasPreview && (
+                <ActionTableCell>
+                  <EditButton target="_blank" to={`/public/${path}/${dataItem.slug}`}>
+                    <VisibilityOutlineIcon fontSize="small" />
+                  </EditButton>
+                </ActionTableCell>
+              )}
 
               <ActionTableCell>
                 <EditButton to={`/${path}/${id}`}>
@@ -137,6 +147,7 @@ export default function Table({ columns, data, isLoading, name, onAdd, onDelete,
 }
 
 Table.defaultProps = {
+  hasPreview: false,
   onAdd: null,
 }
 
@@ -152,6 +163,7 @@ Table.propTypes = {
       _id: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  hasPreview: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   onAdd: PropTypes.func,

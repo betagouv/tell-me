@@ -65,6 +65,7 @@ export default function SurveysList() {
         <Table
           columns={TABLE_COLUMNS}
           data={surveys}
+          hasPreview
           isLoading={isLoading}
           name="Survey"
           onAdd={addSurvey}
