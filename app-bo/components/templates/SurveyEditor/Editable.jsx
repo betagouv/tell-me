@@ -3,6 +3,16 @@ import { useEffect, useRef } from 'react'
 
 import sanitizeRichText from './helpers/sanitizeRichText'
 
+const KEY = {
+  ARROW_DOWN: 40,
+  ARROW_UP: 38,
+  BACKSPACE: 8,
+  ENTER: 13,
+  NUMPAD_DIVIDE: 111,
+  // NUMPAD_ENTER: 13,
+  SLASH: 191,
+}
+
 export default function Editable({
   Component,
   index,
@@ -26,50 +36,58 @@ export default function Editable({
   }
 
   const controlKey = event => {
-    if (event.keyCode === 13) {
-      event.preventDefault()
+    switch (event.keyCode) {
+      case KEY.ARROW_DOWN:
+        if (onDown !== null) {
+          event.preventDefault()
+          onDown()
+        }
 
-      onEnter()
+        return
 
-      return
-    }
+      case KEY.ARROW_UP:
+        if (onUp !== null) {
+          event.preventDefault()
+          onUp()
+        }
 
-    if (event.keyCode === 38) {
-      if (onBackspace !== null) {
+        return
+
+      case KEY.ENTER:
         event.preventDefault()
-        onUp()
-      }
+        onEnter()
 
-      return
-    }
+        return
 
-    if (event.keyCode === 40) {
-      if (onDown !== null) {
-        event.preventDefault()
-        onDown()
-      }
-
-      return
+      default:
+        break
     }
 
     if ($component.current.innerText.length > 0) {
       return
     }
 
-    if (event.keyCode === 8) {
-      if (onBackspace !== null) {
-        event.preventDefault()
-        onBackspace()
-      }
+    switch (event.keyCode) {
+      case KEY.BACKSPACE:
+        if (onBackspace !== null) {
+          event.preventDefault()
+          onBackspace()
+        }
 
-      return
-    }
+        return
 
-    if (event.keyCode === 191) {
-      if (onSlash !== null) {
-        event.preventDefault()
-        onSlash()
-      }
+      case KEY.NUMPAD_DIVIDE:
+      case KEY.SLASH:
+        if (onSlash !== null) {
+          event.preventDefault()
+          onSlash()
+        }
+
+        // eslint-disable-next-line no-useless-return
+        return
+
+      default:
+        break
     }
   }
 
