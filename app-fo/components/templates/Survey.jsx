@@ -5,6 +5,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
+import isBlockTypeIndexable from '../../../app-bo/components/templates/SurveyEditor/helpers/isBlockTypeIndexable'
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import Header from '../atoms/Header'
 import Logo from '../atoms/Logo'
@@ -28,18 +29,10 @@ const Container = styled.div`
 `
 
 const SURVEY_BLOCK_TYPE_COMPONENT = {
-  [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: {
-    Component: Question,
-    isIndexable: false,
-  },
-  [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: {
-    Component: Paragraph,
-    isIndexable: false,
-  },
-  [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: {
-    Component: Form.RadioInput,
-    isIndexable: true,
-  },
+  [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: Question,
+  [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: Paragraph,
+  [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: Form.CheckboxInput,
+  [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: Form.RadioInput,
 }
 
 const FormSchema = Yup.object().shape({})
@@ -52,7 +45,8 @@ const renderBlocks = blocks => {
 
   return blocks.reduce((components, block, index) => {
     const { _id: id, type, value } = block
-    const { Component, isIndexable } = SURVEY_BLOCK_TYPE_COMPONENT[type]
+    const Component = SURVEY_BLOCK_TYPE_COMPONENT[type]
+    const isIndexable = isBlockTypeIndexable(type)
     const lastBlock = index > 0 ? blocks[index - 1] : null
 
     if (isQuestion(block)) {

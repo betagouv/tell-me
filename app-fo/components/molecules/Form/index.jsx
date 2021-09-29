@@ -3,6 +3,7 @@ import { Formik, Form as FormikForm } from 'formik'
 import PropTypes from 'prop-types'
 import * as Yup from 'yup'
 
+import CheckboxInput from './CheckboxInput'
 import RadioInput from './RadioInput'
 import Submit from './Submit'
 
@@ -39,6 +40,7 @@ Form.propTypes = {
 }
 
 export default Object.assign(Form, {
+  CheckboxInput,
   RadioInput,
   Submit,
 })

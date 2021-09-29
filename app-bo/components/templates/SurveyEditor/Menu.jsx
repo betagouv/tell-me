@@ -1,5 +1,6 @@
-import DoneAllIcon from '@mui/icons-material/DoneAll'
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
+import DoneAllIcon from '@mui/icons-material/DoneAllOutlined'
+import DoneIcon from '@mui/icons-material/DoneOutlined'
+import HelpIcon from '@mui/icons-material/HelpOutline'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MenuItem from '@mui/material/MenuItem'
@@ -12,14 +13,19 @@ import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
 
 const MENU_ITEMS = [
   {
+    blockType: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
+    Icon: HelpIcon,
+    label: 'Question',
+  },
+  {
     blockType: SURVEY_BLOCK_TYPE.INPUT.CHOICE,
     Icon: DoneAllIcon,
     label: 'Multiple choice',
   },
   {
-    blockType: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
-    Icon: HelpOutlineIcon,
-    label: 'Question',
+    blockType: SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
+    Icon: DoneIcon,
+    label: 'Checkboxes',
   },
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length

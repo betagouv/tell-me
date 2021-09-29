@@ -1,25 +1,20 @@
-import PropsTypes from 'prop-types'
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 
-import AppfoChoice from '../../../../../app-fo/components/atoms/Choice'
+import AppfoCheckbox from '../../../../../app-fo/components/atoms/Checkbox'
 
-const StyledChoice = styled(AppfoChoice)`
-  .ChoiceBox {
+const StyledCheckbox = styled(AppfoCheckbox)`
+  .CheckboxBox {
     cursor: text;
   }
 
-  .ChoiceBox:focus-within {
+  .CheckboxBox:focus-within .CheckboxIcon {
     box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px,
       rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
       rgb(60 66 87 / 8%) 0px 2px 5px 0px;
   }
 
-  .ChoiceBox:focus-within .ChoiceBoxLetter {
-    background-color: rgb(102, 102, 102);
-  }
-
-  .ChoiceBox:focus-within > div {
+  .CheckboxBox:focus-within div {
     font-weight: inherit;
   }
 `
@@ -37,22 +32,18 @@ const Input = styled.div`
   }
 `
 
-const Choice = forwardRef(({ dangerouslySetInnerHTML, index, ...props }, ref) => {
+const Checkbox = forwardRef(({ dangerouslySetInnerHTML, ...props }, ref) => {
   // eslint-disable-next-line no-underscore-dangle
   const { __html: value } = dangerouslySetInnerHTML.__html
   const isEmpty = value?.length === 0
 
   return (
-    <StyledChoice index={index}>
+    <StyledCheckbox>
       <Input ref={ref} dangerouslySetInnerHTML={dangerouslySetInnerHTML} isEmpty={isEmpty} {...props} />
-    </StyledChoice>
+    </StyledCheckbox>
   )
 })
 
-Choice.displayName = 'Choice'
+Checkbox.displayName = 'Checkbox'
 
-Choice.propTypes = {
-  index: PropsTypes.number.isRequired,
-}
-
-export default Choice
+export default Checkbox

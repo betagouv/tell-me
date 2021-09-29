@@ -2,19 +2,19 @@ import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Choice from '../../atoms/Choice'
+import Checkbox from '../../atoms/Checkbox'
 
-const StyledChoice = styled(Choice)`
+const StyledCheckbox = styled(Checkbox)`
   align-self: flex-start;
   cursor: pointer;
   justify-self: flex-start;
 
-  .ChoiceBoxLetter {
-    background-color: ${p => (p.isChecked ? 'rgb(0, 122, 255)' : 'rgb(102, 102, 102)')};
+  .CheckboxIcon {
+    background-color: ${p => (p.isChecked ? 'rgb(0, 122, 255)' : 'rgb(255, 255, 255)')};
   }
 `
 
-const StyledRadioInput = styled.input`
+const StyledCheckboxInput = styled.input`
   cursor: pointer;
   height: 0;
   opacity: 0;
@@ -29,23 +29,23 @@ const Label = styled.div`
   padding-left: 10px;
 `
 
-export default function RadioInput({ dangerouslySetInnerHTML, id, index, name, value }) {
+export default function CheckboxInput({ dangerouslySetInnerHTML, id, index, name, value }) {
   const { handleChange, values } = useFormikContext()
 
-  const isChecked = id === values[name]
+  const isChecked = Array.isArray(values[name]) && values[name].includes(id)
   // eslint-disable-next-line no-underscore-dangle
   const label = dangerouslySetInnerHTML.__html
 
   return (
-    <StyledChoice index={index} isChecked={isChecked}>
-      <StyledRadioInput id={id} name={name} onChange={handleChange} type="radio" value={value} />
+    <StyledCheckbox index={index} isChecked={isChecked}>
+      <StyledCheckboxInput id={id} name={name} onChange={handleChange} type="checkbox" value={value} />
 
       <Label isChecked={isChecked}>{label}</Label>
-    </StyledChoice>
+    </StyledCheckbox>
   )
 }
 
-RadioInput.propTypes = {
+CheckboxInput.propTypes = {
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,

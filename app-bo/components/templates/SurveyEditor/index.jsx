@@ -17,6 +17,7 @@ import {
   removeBlock,
   sortBlocksByPosition,
 } from './helpers'
+import isBlockTypeIndexable from './helpers/isBlockTypeIndexable'
 import Loader from './Loader'
 import Logo from './Logo'
 import Row from './Row'
@@ -123,9 +124,7 @@ export default function SurveyEditor() {
 
     const nextPosition = getNextBlockPositionAt(position)
     const nextType =
-      fromBlock !== undefined && fromBlock.type === SURVEY_BLOCK_TYPE.INPUT.CHOICE
-        ? SURVEY_BLOCK_TYPE.INPUT.CHOICE
-        : SURVEY_BLOCK_TYPE.CONTENT.TEXT
+      fromBlock !== undefined && isBlockTypeIndexable(fromBlock.type) ? fromBlock.type : SURVEY_BLOCK_TYPE.CONTENT.TEXT
 
     const newBlock = {
       position: nextPosition,

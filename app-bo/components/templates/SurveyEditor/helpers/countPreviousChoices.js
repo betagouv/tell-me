@@ -1,17 +1,16 @@
-import { SURVEY_BLOCK_TYPE } from '../../../../../common/constants'
 import getBlockAt from './getBlockAt'
 import getPreviousBlockPositionAt from './getPreviousBlockPositionAt'
 
-const isPreviousInputChoice = (page, block) =>
-  block.position.page === page && block.type === SURVEY_BLOCK_TYPE.INPUT.CHOICE
+const isPreviousInputChoice = (page, block, type) => block.position.page === page && block.type === type
 
 export default function countPreviousChoicesAt(blocks, position) {
   const { page } = position
+  const { type } = getBlockAt(blocks, position)
   let counter = 0
   let positionCursor = getPreviousBlockPositionAt(position)
   let previousBlock = getBlockAt(blocks, positionCursor)
 
-  while (isPreviousInputChoice(page, previousBlock)) {
+  while (isPreviousInputChoice(page, previousBlock, type)) {
     counter += 1
 
     positionCursor = getPreviousBlockPositionAt(positionCursor)

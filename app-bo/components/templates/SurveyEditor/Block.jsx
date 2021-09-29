@@ -3,11 +3,13 @@ import * as R from 'ramda'
 import { useState } from 'react'
 
 import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
+import Checkbox from './blocks/Checkbox'
 import Choice from './blocks/Choice'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Editable from './Editable'
 import { countPreviousChoices } from './helpers'
+import isBlockTypeIndexable from './helpers/isBlockTypeIndexable'
 import Menu from './Menu'
 import Row from './Row'
 import * as Type from './types'
@@ -25,6 +27,10 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: {
     component: Choice,
     placeholder: `Option`,
+  },
+  [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: {
+    component: Checkbox,
+    placeholder: `Choice`,
   },
 }
 
@@ -44,7 +50,7 @@ export default function Block({
   const { position, type, value } = block
   const { component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
   const isFocused = R.equals(position, focusedBlockPosition)
-  const index = type === SURVEY_BLOCK_TYPE.INPUT.CHOICE ? countPreviousChoices(blocks, position) : null
+  const index = isBlockTypeIndexable(type) ? countPreviousChoices(blocks, position) : null
   const isLastBlock = R.equals(position, R.last(blocks).position)
   const key = `${blocks.length}_${position.page}_${position.rank}`
 
