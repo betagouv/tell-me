@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import CheckboxInput from './CheckboxInput'
 import RadioInput from './RadioInput'
 import Submit from './Submit'
+import TextInput from './TextInput'
 
 const StyledForm = styled(FormikForm)`
   display: flex;
@@ -43,4 +44,5 @@ export default Object.assign(Form, {
   CheckboxInput,
   RadioInput,
   Submit,
+  TextInput,
 })

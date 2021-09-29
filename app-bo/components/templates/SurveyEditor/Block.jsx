@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
 import Checkbox from './blocks/Checkbox'
 import Choice from './blocks/Choice'
+import Input from './blocks/Input'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Editable from './Editable'
@@ -31,6 +32,10 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: {
     component: Checkbox,
     placeholder: `Choice`,
+  },
+  [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: {
+    component: Input,
+    placeholder: `Type placeholder text`,
   },
 }
 

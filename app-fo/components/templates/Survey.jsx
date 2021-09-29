@@ -33,6 +33,7 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: Paragraph,
   [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: Form.CheckboxInput,
   [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: Form.RadioInput,
+  [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: Form.TextInput,
 }
 
 const FormSchema = Yup.object().shape({})

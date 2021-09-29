@@ -37,17 +37,11 @@ const Input = styled.div`
   }
 `
 
-const Choice = forwardRef(({ dangerouslySetInnerHTML, index, ...props }, ref) => {
-  // eslint-disable-next-line no-underscore-dangle
-  const { __html: value } = dangerouslySetInnerHTML.__html
-  const isEmpty = value?.length === 0
-
-  return (
-    <StyledChoice index={index}>
-      <Input ref={ref} dangerouslySetInnerHTML={dangerouslySetInnerHTML} isEmpty={isEmpty} {...props} />
-    </StyledChoice>
-  )
-})
+const Choice = forwardRef(({ index, ...props }, ref) => (
+  <StyledChoice index={index}>
+    <Input ref={ref} {...props} />
+  </StyledChoice>
+))
 
 Choice.displayName = 'Choice'
 
