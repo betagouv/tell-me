@@ -2,6 +2,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAllOutlined'
 import DoneIcon from '@mui/icons-material/DoneOutlined'
 import HelpIcon from '@mui/icons-material/HelpOutline'
 import ShortTextIcon from '@mui/icons-material/ShortTextOutlined'
+import ViewHeadlineIcon from '@mui/icons-material/ViewHeadlineOutlined'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MenuItem from '@mui/material/MenuItem'
@@ -32,6 +33,11 @@ const MENU_ITEMS = [
     blockType: SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER,
     Icon: ShortTextIcon,
     label: 'Short Answer',
+  },
+  {
+    blockType: SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER,
+    Icon: ViewHeadlineIcon,
+    label: 'Long Answer',
   },
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length

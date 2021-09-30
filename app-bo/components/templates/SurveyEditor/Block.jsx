@@ -8,6 +8,7 @@ import Choice from './blocks/Choice'
 import Input from './blocks/Input'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
+import Textarea from './blocks/Textarea'
 import Editable from './Editable'
 import { countPreviousChoices } from './helpers'
 import isBlockTypeIndexable from './helpers/isBlockTypeIndexable'
@@ -32,6 +33,10 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: {
     component: Checkbox,
     placeholder: `Choice`,
+  },
+  [SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER]: {
+    component: Textarea,
+    placeholder: `Type placeholder text`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: {
     component: Input,

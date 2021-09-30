@@ -19,7 +19,7 @@ const StyledCheckbox = styled(AppfoCheckbox)`
   }
 `
 
-const Input = styled.div`
+const EditableContent = styled.div`
   font-size: 16px;
   line-height: 1.15;
   padding-left: 10px;
@@ -39,7 +39,7 @@ const Checkbox = forwardRef(({ dangerouslySetInnerHTML, ...props }, ref) => {
 
   return (
     <StyledCheckbox>
-      <Input ref={ref} dangerouslySetInnerHTML={dangerouslySetInnerHTML} isEmpty={isEmpty} {...props} />
+      <EditableContent ref={ref} dangerouslySetInnerHTML={dangerouslySetInnerHTML} isEmpty={isEmpty} {...props} />
     </StyledCheckbox>
   )
 })

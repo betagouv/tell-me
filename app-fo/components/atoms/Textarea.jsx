@@ -8,6 +8,6 @@ const Container = styled.div`
   position: relative;
 `
 
-export default function Checkbox({ children, className }) {
+export default function Textarea({ children, className }) {
   return <Container className={className}>{children}</Container>
 }

@@ -24,7 +24,7 @@ const StyledChoice = styled(AppfoChoice)`
   }
 `
 
-const Input = styled.div`
+const EditableContent = styled.div`
   font-size: 16px;
   line-height: 1.15;
   padding-left: 10px;
@@ -39,7 +39,7 @@ const Input = styled.div`
 
 const Choice = forwardRef(({ index, ...props }, ref) => (
   <StyledChoice index={index}>
-    <Input ref={ref} {...props} />
+    <EditableContent ref={ref} {...props} />
   </StyledChoice>
 ))
 

@@ -2,20 +2,21 @@ import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Input from '../../atoms/Input'
+import TextareaField from '../../atoms/Textarea'
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   background-color: rgb(255, 255, 255);
   border-radius: 0.25rem;
   border: 0;
   box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px,
     rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
     rgb(60 66 87 / 8%) 0px 2px 5px 0px;
+  font-family: inherit;
   font-size: 1rem;
-  line-height: 1.5;
-  min-width: 15rem;
+  min-height: calc(27px * 3);
   outline: none;
   padding: 0.25rem 0.75rem calc(0.25rem + 3px);
+  width: 100%;
 
   ::placeholder {
     color: rgb(187, 187, 187);
@@ -28,20 +29,20 @@ const StyledInput = styled.input`
   }
 `
 
-export default function CheckboxInput({ dangerouslySetInnerHTML, id, name }) {
+export default function Textarea({ dangerouslySetInnerHTML, id, name }) {
   const { handleChange } = useFormikContext()
 
   // eslint-disable-next-line no-underscore-dangle
   const placeholder = dangerouslySetInnerHTML.__html
 
   return (
-    <Input>
-      <StyledInput id={id} name={name} onChange={handleChange} placeholder={placeholder} type="text" />
-    </Input>
+    <TextareaField>
+      <StyledTextarea id={id} name={name} onChange={handleChange} placeholder={placeholder} type="text" />
+    </TextareaField>
   )
 }
 
-CheckboxInput.propTypes = {
+Textarea.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }

@@ -3,14 +3,14 @@ import styled from 'styled-components'
 
 const getIndexLetter = index => (index + 10).toString(36).toUpperCase()
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   margin: 0.375rem 0;
   min-height: 1rem;
   position: relative;
 `
 
-export const Box = styled.label`
+const Box = styled.label`
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px,
     rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
@@ -35,7 +35,7 @@ export const Box = styled.label`
   }
 `
 
-export const Letter = styled.span`
+const Letter = styled.span`
   align-items: center;
   background-color: rgb(102, 102, 102);
   border-radius: 0.25rem;

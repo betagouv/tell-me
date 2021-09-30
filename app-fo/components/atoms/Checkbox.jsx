@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+const Container = styled.div`
   align-items: center;
   display: flex;
   margin: 0.375rem 0;
@@ -8,7 +8,7 @@ export const Container = styled.div`
   position: relative;
 `
 
-export const Box = styled.label`
+const Box = styled.label`
   cursor: pointer;
   display: flex;
 
@@ -23,7 +23,7 @@ export const Box = styled.label`
   }
 `
 
-export const Icon = styled.span`
+const Icon = styled.span`
   align-items: center;
   background-color: rgb(255, 255, 255);
   border-radius: 0.25rem;
