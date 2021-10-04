@@ -24,7 +24,7 @@ const INITIAL_BLOCKS = [
   },
 ]
 
-const extractBlocksData = R.map(R.pick(['position', 'type', 'value']))
+const extractBlocksData = R.map(R.pick(['_id', 'position', 'type', 'value']))
 const isBlockTypeCountable = R.flip(R.includes)([SURVEY_BLOCK_TYPE.INPUT.CHECKBOX, SURVEY_BLOCK_TYPE.INPUT.CHOICE])
 
 export default class SurveyBlocksManager {
@@ -47,7 +47,7 @@ export default class SurveyBlocksManager {
   set blocks(blocks) {
     this._blocks = R.reduce((previousBlocks, block) => {
       const lastBlock = R.last(previousBlocks)
-      const { position, type, value } = block
+      const { _id, position, type, value } = block
       const isCountable = isBlockTypeCountable(type)
       const additionalProps = {
         isCountable,
@@ -61,7 +61,7 @@ export default class SurveyBlocksManager {
         }
       }
 
-      const normalizedBlock = new Block({ position, type, value }, additionalProps)
+      const normalizedBlock = new Block({ _id, position, type, value }, additionalProps)
 
       return [...previousBlocks, normalizedBlock]
     }, [])(blocks)
@@ -83,6 +83,10 @@ export default class SurveyBlocksManager {
     return this._focusedBlockIndex
   }
 
+  get isFocused() {
+    return this._focusedBlockIndex !== -1
+  }
+
   changeBlockTypeAt(index, newType) {
     const updatedBlock = {
       ...this.blocks[index],
@@ -102,6 +106,10 @@ export default class SurveyBlocksManager {
   }
 
   addNewBlockAfterFocusedBlock(type) {
+    if (!this.isFocused) {
+      return
+    }
+
     const newBlock = {
       position: {
         ...this.focusedBlock.position,
@@ -140,14 +148,26 @@ export default class SurveyBlocksManager {
   }
 
   changeFocusedBlockType(newType) {
+    if (!this.isFocused) {
+      return
+    }
+
     this.changeBlockTypeAt(this.focusedBlockIndex, newType)
   }
 
   changeFocusedBlockValue(newValue) {
+    if (!this.isFocused) {
+      return
+    }
+
     this.changeBlockValueAt(this.focusedBlockIndex, newValue)
   }
 
   removeFocusedBlock() {
+    if (!this.isFocused) {
+      return
+    }
+
     const oldBlock = this.focusedBlock
 
     this.blocks = R.reduce((newBlocks, block) => {

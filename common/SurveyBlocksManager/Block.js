@@ -7,7 +7,9 @@
 export const getCountLetter = count => (count + 9).toString(36).toUpperCase()
 
 export default class Block {
-  constructor({ position, type, value }, { count, isCountable }) {
+  constructor({ _id, position, type, value }, { count, isCountable }) {
+    this.id = _id
+
     this.position = position
     this.type = type
     this.value = value

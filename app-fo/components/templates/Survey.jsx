@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 
 import isBlockTypeIndexable from '../../../app-bo/components/templates/SurveyEditor/helpers/isBlockTypeIndexable'
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import SurveyBlocksManager from '../../../common/SurveyBlocksManager'
 import Header from '../atoms/Header'
 import Logo from '../atoms/Logo'
 import Paragraph from '../atoms/Paragraph'
@@ -46,7 +47,7 @@ const renderBlocks = blocks => {
   let questionId = null
 
   return blocks.reduce((components, block, index) => {
-    const { _id: id, type, value } = block
+    const { countLetter, id, type, value } = block
     const Component = SURVEY_BLOCK_TYPE_COMPONENT[type]
     const isIndexable = isBlockTypeIndexable(type)
     const lastBlock = index > 0 ? blocks[index - 1] : null
@@ -68,6 +69,7 @@ const renderBlocks = blocks => {
     const newComponent = (
       <Component
         key={id}
+        countLetter={countLetter}
         dangerouslySetInnerHTML={innerHTML}
         id={id}
         index={indexableBlockIndex}
@@ -82,6 +84,7 @@ const renderBlocks = blocks => {
 
 export default function PublicSurvey({ data }) {
   const { blocks, title } = data
+  const surveyBlocksManager = new SurveyBlocksManager(blocks)
   const [isSent, setIsSent] = useState(false)
 
   const submitSurvey = () => {
@@ -94,7 +97,7 @@ export default function PublicSurvey({ data }) {
     <Form initialValues={{}} onSubmit={submitSurvey} validationSchema={FormSchema}>
       {/* <Form.Input autoComplete="email" label="Email" name="email" type="email" />
     <Form.Input autoComplete="current-password" label="Password" name="password" type="password" /> */}
-      {renderBlocks(blocks)}
+      {renderBlocks(surveyBlocksManager.blocks)}
 
       <Form.Submit>Submit</Form.Submit>
     </Form>

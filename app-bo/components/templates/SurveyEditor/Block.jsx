@@ -88,7 +88,7 @@ export default function Block({
         onChange={onChange}
         onDown={onDown}
         onEnter={onEnter}
-        onFocus={onFocus}
+        onFocus={() => onFocus(index)}
         onSlash={() => setIsMenuOpen(true)}
         onUp={onUp}
         placeholder={finalPlaceholder}

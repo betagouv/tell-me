@@ -29,7 +29,7 @@ const Label = styled.div`
   padding-left: 10px;
 `
 
-export default function CheckboxInput({ dangerouslySetInnerHTML, id, index, name }) {
+export default function CheckboxInput({ dangerouslySetInnerHTML, id, name }) {
   const { handleChange, values } = useFormikContext()
 
   const isChecked = Array.isArray(values[name]) && values[name].includes(id)
@@ -37,7 +37,7 @@ export default function CheckboxInput({ dangerouslySetInnerHTML, id, index, name
   const label = dangerouslySetInnerHTML.__html
 
   return (
-    <StyledCheckbox index={index} isChecked={isChecked}>
+    <StyledCheckbox isChecked={isChecked}>
       <StyledCheckboxInput id={id} name={name} onChange={handleChange} type="checkbox" />
 
       <Label isChecked={isChecked}>{label}</Label>
@@ -47,6 +47,5 @@ export default function CheckboxInput({ dangerouslySetInnerHTML, id, index, name
 
 CheckboxInput.propTypes = {
   id: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
 }
