@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import * as R from 'ramda'
 import { useState } from 'react'
 
 import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
@@ -10,8 +9,6 @@ import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Textarea from './blocks/Textarea'
 import Editable from './Editable'
-import { countPreviousChoices } from './helpers'
-import isBlockTypeIndexable from './helpers/isBlockTypeIndexable'
 import Menu from './Menu'
 import Row from './Row'
 import * as Type from './types'
@@ -47,48 +44,58 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
 export default function Block({
   block,
   blocks,
-  focusedBlockPosition,
+  index,
+  isFocused,
   onChange,
   onChangeType,
   onDown,
   onEnter,
+  onFocus,
+  onFocusFromOutside,
   onRemove,
   onUp,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const { position, type, value } = block
+  const { count, countLetter, position, type, value } = block
   const { component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
-  const isFocused = R.equals(position, focusedBlockPosition)
-  const index = isBlockTypeIndexable(type) ? countPreviousChoices(blocks, position) : null
-  const isLastBlock = R.equals(position, R.last(blocks).position)
   const key = `${blocks.length}_${position.page}_${position.rank}`
 
-  const finalPlaceholder = index !== null ? `${placeholder} ${index + 1}` : placeholder
+  const finalPlaceholder = count !== null ? `${placeholder} ${count}` : placeholder
 
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
 
+  const maybeFocus = event => {
+    if (event.target.contentEditable === 'true') {
+      return
+    }
+
+    onFocusFromOutside(index)
+  }
+
   return (
-    <Row key={key}>
+    <Row key={key} className="Row" onClick={maybeFocus}>
       <Editable
         key={key}
         Component={component}
-        index={index}
+        count={count}
+        countLetter={countLetter}
         isFocused={isFocused}
         isRichText={isRichText}
-        onBackspace={() => onRemove(position)}
-        onChange={newValue => onChange(position, newValue)}
-        onDown={isLastBlock ? null : () => onDown(position)}
-        onEnter={() => onEnter(position)}
+        onBackspace={onRemove}
+        onChange={onChange}
+        onDown={onDown}
+        onEnter={onEnter}
+        onFocus={onFocus}
         onSlash={() => setIsMenuOpen(true)}
-        onUp={() => onUp(position)}
+        onUp={onUp}
         placeholder={finalPlaceholder}
         value={value}
       />
 
-      {isMenuOpen && <Menu onClose={closeMenu} onSelect={newType => onChangeType(position, newType)} />}
+      {isMenuOpen && <Menu onClose={closeMenu} onSelect={newType => onChangeType(index, newType)} />}
     </Row>
   )
 }
@@ -96,11 +103,14 @@ export default function Block({
 Block.propTypes = {
   block: Type.Block.isRequired,
   blocks: PropTypes.arrayOf(Type.Block).isRequired,
-  focusedBlockPosition: Type.BlockPosition.isRequired,
+  index: PropTypes.number.isRequired,
+  isFocused: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onChangeType: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
+  onFocusFromOutside: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
 }

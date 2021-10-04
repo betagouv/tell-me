@@ -3,7 +3,6 @@ import MuiSkeleton from '@mui/material/Skeleton'
 import { styled } from '@mui/material/styles'
 
 import Title from '../../../../app-fo/components/atoms/Title'
-import Row from './Row'
 
 const Header = styled(MuiSkeleton)`
   background-color: #cccccc;
@@ -25,6 +24,10 @@ const Logo = styled(MuiSkeleton)`
   width: 6rem;
 `
 
+const TitleRow = styled(MuiBox)`
+  padding: 0 5rem;
+`
+
 const Text = styled(MuiSkeleton)`
   background-color: #cccccc;
 `
@@ -38,11 +41,11 @@ export default function Button() {
         <Logo animation="wave" variant="circular" />
       </LogoContainer>
 
-      <Row>
+      <TitleRow>
         <Title>
           <Text variant="text" />
         </Title>
-      </Row>
+      </TitleRow>
     </>
   )
 }

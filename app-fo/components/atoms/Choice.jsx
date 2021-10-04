@@ -1,8 +1,6 @@
 import PropsTypes from 'prop-types'
 import styled from 'styled-components'
 
-const getIndexLetter = index => (index + 10).toString(36).toUpperCase()
-
 const Container = styled.div`
   display: flex;
   margin: 0.375rem 0;
@@ -49,13 +47,11 @@ const Letter = styled.span`
   width: 1.125rem;
 `
 
-export default function Choice({ children, className, index }) {
-  const letter = getIndexLetter(index)
-
+export default function Choice({ children, className, countLetter }) {
   return (
     <Container className={className}>
       <Box className="ChoiceBox">
-        <Letter className="ChoiceBoxLetter">{letter}</Letter>
+        <Letter className="ChoiceBoxLetter">{countLetter}</Letter>
 
         {children}
       </Box>
@@ -64,5 +60,5 @@ export default function Choice({ children, className, index }) {
 }
 
 Choice.propTypes = {
-  index: PropsTypes.number.isRequired,
+  countLetter: PropsTypes.string.isRequired,
 }

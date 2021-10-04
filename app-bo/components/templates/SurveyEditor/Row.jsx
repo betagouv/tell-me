@@ -1,27 +1,19 @@
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const Container = styled.div`
   padding: 0 5rem;
 
-  ${props =>
-    !props.isFixed &&
-    css`
-      :hover {
-        background-color: #ffffff;
-        cursor: text;
-      }
-    `}
+  :hover {
+    background-color: #ffffff;
+    cursor: text;
+  }
 `
 
-export default function Row({ children, isFixed }) {
-  return <Container isFixed={isFixed}>{children}</Container>
-}
-
-Row.defaultProps = {
-  isFixed: false,
+export default function Row({ children, onClick }) {
+  return <Container onClick={onClick}>{children}</Container>
 }
 
 Row.propTypes = {
-  isFixed: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
 }

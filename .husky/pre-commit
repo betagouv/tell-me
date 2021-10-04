@@ -2,3 +2,8 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn test:lint
+yarn test:lint
+yarn test:lint
+yarn test:lint
+yarn test:lint
+yarn test:lint

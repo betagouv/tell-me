@@ -37,8 +37,8 @@ const EditableContent = styled.div`
   }
 `
 
-const Choice = forwardRef(({ index, ...props }, ref) => (
-  <StyledChoice index={index}>
+const Choice = forwardRef(({ countLetter, ...props }, ref) => (
+  <StyledChoice countLetter={countLetter}>
     <EditableContent ref={ref} {...props} />
   </StyledChoice>
 ))
@@ -46,7 +46,7 @@ const Choice = forwardRef(({ index, ...props }, ref) => (
 Choice.displayName = 'Choice'
 
 Choice.propTypes = {
-  index: PropsTypes.number.isRequired,
+  countLetter: PropsTypes.string.isRequired,
 }
 
 export default Choice

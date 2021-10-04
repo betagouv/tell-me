@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
 
+import usePrevious from '../../../hooks/usePrevious'
 import sanitizeRichText from './helpers/sanitizeRichText'
 
 const KEY = {
@@ -15,19 +16,21 @@ const KEY = {
 
 export default function Editable({
   Component,
-  index,
+  countLetter,
   isFocused,
   isRichText,
   onBackspace,
   onChange,
   onDown,
   onEnter,
+  onFocus,
   onSlash,
   onUp,
   placeholder,
   value,
 }) {
   const $component = useRef(value)
+  const wasFocused = usePrevious(isFocused)
 
   const handleNewValue = async () => {
     const value = isRichText ? await sanitizeRichText($component.current.innerHTML) : $component.current.innerText
@@ -94,19 +97,29 @@ export default function Editable({
   useEffect(() => {
     if (isFocused) {
       const caretPosition = value.length
-
       const range = window.document.createRange()
       const selection = window.getSelection()
 
-      if ($component.current.childNodes.length > 0) {
+      // TODO Handle Rich Text caret positonning.
+      if (isRichText) {
+        range.setStart($component.current, 0)
+      } else if ($component.current.childNodes.length > 0) {
         range.setStart($component.current.childNodes[0], caretPosition)
       } else {
-        range.setStart($component.current, caretPosition)
+        range.setStart($component.current, 0)
       }
 
       range.collapse(true)
       selection.removeAllRanges()
       selection.addRange(range)
+
+      if (!wasFocused) {
+        $component.current.scrollIntoView({
+          behavior: 'auto',
+          block: 'center',
+          inline: 'center',
+        })
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,8 +131,9 @@ export default function Editable({
     <Component
       ref={$component}
       contentEditable
+      countLetter={countLetter}
       dangerouslySetInnerHTML={innerHTML}
-      index={index}
+      onFocus={onFocus}
       onInput={handleNewValue}
       onKeyDown={controlKey}
       placeholder={placeholder}
@@ -131,27 +145,25 @@ export default function Editable({
 }
 
 Editable.defaultProps = {
-  index: null,
-  isFocused: false,
+  countLetter: null,
   isRichText: false,
   onBackspace: null,
-  onDown: null,
   onSlash: null,
-  onUp: null,
   placeholder: null,
 }
 
 Editable.propTypes = {
   Component: PropTypes.elementType.isRequired,
-  index: PropTypes.number,
-  isFocused: PropTypes.bool,
+  countLetter: PropTypes.string,
+  isFocused: PropTypes.bool.isRequired,
   isRichText: PropTypes.bool,
   onBackspace: PropTypes.func,
   onChange: PropTypes.func.isRequired,
-  onDown: PropTypes.func,
+  onDown: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
   onSlash: PropTypes.func,
-  onUp: PropTypes.func,
+  onUp: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
 }

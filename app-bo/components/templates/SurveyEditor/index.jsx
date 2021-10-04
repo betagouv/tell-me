@@ -1,58 +1,45 @@
+import debounce from 'lodash/debounce'
 import * as R from 'ramda'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { SURVEY_BLOCK_TYPE } from '../../../../common/constants'
+import SurveyBlocksManager from '../../../../common/SurveyBlocksManager'
 import useApi from '../../../hooks/useApi'
 import useEquivalenceEffect from '../../../hooks/useEquivalenceEffect'
 import Block from './Block'
 import Title from './blocks/Title'
 import Editable from './Editable'
 import Header from './Header'
-import {
-  cleanBlockPositionIds,
-  getNextBlockPositionAt,
-  getPreviousBlockPositionAt,
-  insertBlock,
-  removeBlock,
-  sortBlocksByPosition,
-} from './helpers'
-import isBlockTypeIndexable from './helpers/isBlockTypeIndexable'
 import Loader from './Loader'
 import Logo from './Logo'
-import Row from './Row'
 
-const INITIAL_BLOCKS = [
-  {
-    position: {
-      page: 1,
-      rank: 1,
-    },
-    type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
-    value: 'This is some free text.',
-  },
-  {
-    position: {
-      page: 1,
-      rank: 2,
-    },
-    type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
-    value: `What's your first question?`,
-  },
-]
-
-const NO_FOCUSED_BLOCK_POSITION = {
-  page: 1,
-  rank: -1,
-}
+const TitleRow = styled.div`
+  padding: 0 5rem;
+`
 
 export default function SurveyEditor() {
-  const [blocks, setBlocks] = useState(INITIAL_BLOCKS)
+  const [, updateState] = useState()
+  const forceUpdate = useCallback(() => updateState({}), [])
+  const surveyBlocksManagerRef = useRef(new SurveyBlocksManager())
   const [title, setTitle] = useState('...')
   const [isLoading, setIsLoading] = useState(true)
-  const [focusedBlockPosition, setFocusedBlockPosition] = useState(NO_FOCUSED_BLOCK_POSITION)
   const { id } = useParams()
   const api = useApi()
+
+  const surveyBlocksManager = surveyBlocksManagerRef.current
+
+  const updateData = debounce(async () => {
+    const data = {
+      blocks: surveyBlocksManager.blocksData,
+      title,
+    }
+
+    ;(async () => {
+      await api.patch(`survey/${id}`, data)
+    })()
+  }, 250)
 
   useEffect(() => {
     ;(async () => {
@@ -64,7 +51,7 @@ export default function SurveyEditor() {
       const { blocks, title } = maybeBody.data
       setTitle(title)
       if (blocks.length > 0) {
-        setBlocks(cleanBlockPositionIds(blocks))
+        surveyBlocksManager.blocks = blocks
       }
       setIsLoading(false)
     })()
@@ -78,25 +65,8 @@ export default function SurveyEditor() {
       return
     }
 
-    ;(async () => {
-      await api.patch(`survey/${id}`, {
-        blocks,
-        title,
-      })
-    })()
-  }, [blocks, title])
-
-  const focusPreviousBlockAt = position => {
-    const previousPosition = getPreviousBlockPositionAt(position)
-
-    setFocusedBlockPosition(previousPosition)
-  }
-
-  const focusNextBlockAt = position => {
-    const nextPosition = getNextBlockPositionAt(position)
-
-    setFocusedBlockPosition(nextPosition)
-  }
+    updateData()
+  }, [surveyBlocksManager.blocks, title])
 
   const updateTitle = newValue => {
     api.patch(`survey/${id}`, {
@@ -104,60 +74,58 @@ export default function SurveyEditor() {
     })
   }
 
-  const changeBlockType = (position, newType) => {
-    const blockIndex = R.findIndex(R.propEq('position', position))(blocks)
-    blocks[blockIndex].type = newType
-    blocks[blockIndex].value = ''
+  const changeFocusedBlockType = (index, newType) => {
+    surveyBlocksManager.changeBlockTypeAt(index, newType)
+    surveyBlocksManager.setFocusAt(index)
 
-    setBlocks([...blocks])
-    setFocusedBlockPosition(position)
+    forceUpdate()
   }
 
-  const appendOrResetBlockAt = position => {
-    const fromBlock = R.find(R.propEq('position', position))(blocks)
+  const appendOrResetFocusedBlock = () => {
+    const { focusedBlock } = surveyBlocksManager
 
-    if (fromBlock !== undefined && fromBlock.type !== SURVEY_BLOCK_TYPE.CONTENT.TEXT && fromBlock.value.length === 0) {
-      changeBlockType(position, SURVEY_BLOCK_TYPE.CONTENT.TEXT)
-
-      return
+    if (focusedBlock.isCountable && focusedBlock.value.length > 0) {
+      surveyBlocksManager.addNewBlockAfterFocusedBlock(focusedBlock.type)
+    } else if (focusedBlock.type === SURVEY_BLOCK_TYPE.CONTENT.TEXT || focusedBlock.value.length > 0) {
+      surveyBlocksManager.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+    } else {
+      surveyBlocksManager.changeFocusedBlockType(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
     }
 
-    const nextPosition = getNextBlockPositionAt(position)
-    const nextType =
-      fromBlock !== undefined && isBlockTypeIndexable(fromBlock.type) ? fromBlock.type : SURVEY_BLOCK_TYPE.CONTENT.TEXT
-
-    const newBlock = {
-      position: nextPosition,
-      type: nextType,
-      value: '',
-    }
-
-    const newBlocks = R.equals(position, R.last(blocks).position)
-      ? [...blocks, newBlock]
-      : sortBlocksByPosition(insertBlock(blocks, newBlock))
-
-    setBlocks(newBlocks)
-    setFocusedBlockPosition(newBlock.position)
+    forceUpdate()
   }
 
-  const updateBlockValueAt = (position, newValue) => {
-    const blockIndex = R.findIndex(R.propEq('position', position))(blocks)
-    blocks[blockIndex].value = newValue
+  const updateFocusedBlockValue = newValue => {
+    surveyBlocksManager.changeFocusedBlockValue(newValue)
 
-    api.patch(`survey/${id}`, {
-      blocks,
-      title,
-    })
+    updateData()
   }
 
-  const removeBlockAt = position => {
-    const oldBlock = R.find(R.propEq('position', position))(blocks)
-    const newBlocks = removeBlock(blocks, oldBlock)
-    const previousBlockPosition = getPreviousBlockPositionAt(position)
+  const removeFocusedBlock = () => {
+    surveyBlocksManager.removeFocusedBlock()
 
-    setBlocks(newBlocks)
-    setFocusedBlockPosition(previousBlockPosition)
+    forceUpdate()
   }
+
+  const focusAndUpdateAt = index => {
+    surveyBlocksManager.setFocusAt(index)
+
+    forceUpdate()
+  }
+
+  const focusPreviousBlock = () => {
+    surveyBlocksManager.focusPreviousBlock()
+
+    forceUpdate()
+  }
+
+  const focusNextBlock = () => {
+    surveyBlocksManager.focusNextBlock()
+
+    forceUpdate()
+  }
+
+  const isTitleFocused = surveyBlocksManager.focusedBlockIndex === -1
 
   if (isLoading) {
     return <Loader />
@@ -168,30 +136,35 @@ export default function SurveyEditor() {
       <Header />
       <Logo />
 
-      <Row isFixed>
+      <TitleRow>
         <Editable
           Component={Title}
-          isFocused={blocks.length === 0 || R.equals(focusedBlockPosition, { page: 1, rank: 0 })}
+          isFocused={isTitleFocused}
           onChange={updateTitle}
-          onDown={() => focusNextBlockAt({ page: 1, rank: 0 })}
-          onEnter={() => appendOrResetBlockAt({ page: 1, rank: 0 })}
+          onDown={focusNextBlock}
+          onEnter={appendOrResetFocusedBlock}
+          onFocus={surveyBlocksManager.unsetFocus}
+          onUp={R.always()}
           value={title}
         />
-      </Row>
+      </TitleRow>
 
-      {blocks.map((block, index) => (
+      {surveyBlocksManager.blocks.map((block, index) => (
         <Block
           // eslint-disable-next-line react/no-array-index-key
           key={`${index}_${block.type}`}
           block={block}
-          blocks={blocks}
-          focusedBlockPosition={focusedBlockPosition}
-          onChange={updateBlockValueAt}
-          onChangeType={changeBlockType}
-          onDown={focusNextBlockAt}
-          onEnter={appendOrResetBlockAt}
-          onRemove={removeBlockAt}
-          onUp={focusPreviousBlockAt}
+          blocks={surveyBlocksManager.blocks}
+          index={index}
+          isFocused={index === surveyBlocksManager.focusedBlockIndex}
+          onChange={updateFocusedBlockValue}
+          onChangeType={changeFocusedBlockType}
+          onDown={focusNextBlock}
+          onEnter={appendOrResetFocusedBlock}
+          onFocus={surveyBlocksManager.setFocusAt}
+          onFocusFromOutside={focusAndUpdateAt}
+          onRemove={removeFocusedBlock}
+          onUp={focusPreviousBlock}
         />
       ))}
     </>
