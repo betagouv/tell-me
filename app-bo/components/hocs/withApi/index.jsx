@@ -68,6 +68,20 @@ export default function withApi(Component) {
       }
     }
 
+    const put = async (path, formData) => {
+      try {
+        const body = await api.ky
+          .put(path, {
+            body: formData,
+          })
+          .json()
+
+        return body
+      } catch (err) {
+        return handleApiError(err, clearSessionToken, 'patch', authState.isAuthenticated)
+      }
+    }
+
     // eslint-disable-next-line no-underscore-dangle
     const _delete = async path => {
       try {
@@ -84,6 +98,7 @@ export default function withApi(Component) {
       get,
       patch,
       post,
+      put,
     }
 
     return (

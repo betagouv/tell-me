@@ -74,6 +74,14 @@ export default function SurveyEditor() {
     })
   }
 
+  const uploadHeader = async formData => {
+    await api.put(`survey/upload/${id}?type=header`, formData)
+  }
+
+  const uploadLogo = async formData => {
+    await api.put(`survey/upload/${id}?type=logo`, formData)
+  }
+
   const changeFocusedBlockType = (index, newType) => {
     surveyBlocksManager.changeBlockTypeAt(index, newType)
     surveyBlocksManager.setFocusAt(index)
@@ -133,8 +141,8 @@ export default function SurveyEditor() {
 
   return (
     <>
-      <Header />
-      <Logo />
+      <Header onChange={uploadHeader} surveyId={id} />
+      <Logo onChange={uploadLogo} surveyId={id} />
 
       <TitleRow>
         <Editable

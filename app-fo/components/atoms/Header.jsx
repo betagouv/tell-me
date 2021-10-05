@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`
@@ -7,6 +8,8 @@ const StyledHeader = styled.header`
   width: 100%;
 `
 
-export default function Header(props) {
-  return <StyledHeader {...props} />
-}
+const Header = forwardRef((props, ref) => <StyledHeader ref={ref} {...props} />)
+
+Header.displayName = 'Header'
+
+export default Header

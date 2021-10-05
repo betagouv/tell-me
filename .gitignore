@@ -137,3 +137,6 @@ sketch
 # Custom
 
 /.env.local
+
+/public/data/*
+!/public/data/.gitkeep
