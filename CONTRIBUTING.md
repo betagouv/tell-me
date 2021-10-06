@@ -17,7 +17,7 @@
 
 - [Node.js](https://nodejs.org)
 - [Yarn](https://yarnpkg.com/getting-started/install)
-- [Docker w/ Docker Compose](https://www.docker.com/get-started)
+- [Docker](https://www.docker.com/get-started)
 
 ### Installation
 
@@ -30,6 +30,7 @@ Then run:
 git clone https://github.com/betagouv/tell-me.git
 cd tell-me
 yarn
+docker compose up -d db
 yarn dev
 ```
 
