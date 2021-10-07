@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs'
+import { pathExists } from 'fs-extra'
 import path from 'path'
 
 import handleError from '../../api/helpers/handleError'
@@ -16,6 +17,11 @@ async function AssetController(req, res) {
 
   const [assetFileName] = req.query.fileName
   const assetPath = path.join(ASSETS_PATH, assetFileName)
+  if (!(await pathExists(assetPath))) {
+    res.status(404).end()
+
+    return
+  }
 
   const assetSource = await fs.readFile(assetPath)
 
