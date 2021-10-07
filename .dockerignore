@@ -1,6 +1,9 @@
 /.git
+/.github
+/.husky
 /.next
 /.vscode
+/coverage
 /node_modules
 /scripts
 
