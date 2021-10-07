@@ -138,5 +138,5 @@ sketch
 
 /.env.local
 
-/public/data/*
-!/public/data/.gitkeep
+/public/survey-assets/*
+!/public/survey-assets/README.md

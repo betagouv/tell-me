@@ -54,7 +54,7 @@ async function SurveysController(req, res) {
       callback(null, false)
     }
     const multerStorage = multer.diskStorage({
-      destination: `${process.cwd()}/public/data`,
+      destination: `${process.cwd()}/public/survey-assets`,
       filename: (_, file, callback) => {
         callback(null, `${id}-${type}.png`)
       },
