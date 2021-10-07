@@ -12,6 +12,7 @@ An awesome open source survey generator.
   - [Architecture](#architecture)
   - [Hosting cost](#hosting-cost)
   - [Required environment variables](#required-environment-variables)
+  - [Optional environment variables](#optional-environment-variables)
   - [PaaS & hosting providers](#paas--hosting-providers)
     - [OVH](#ovh)
 - [Contributing](#contributing)
@@ -48,13 +49,17 @@ external storage (Amazon S3, OVH backup storage, etc).
 Wherever you run Let Me, the app can't run without those environment variables set:
 
 - `DB_URL`: MongoDB URL (which should look like `mongodb://username:password@localhost:27017/db_name`).
-- `NODE_ENV`: Node.js environment. Set it to `production` when deploying your app in production.
-- `PORT`: Port on which the app will run. Most PaaS providers automatically set this environment variable, in which case
-  you should't override it.
 - `RSA_PRIVATE_KEY`: 2048-bit RSA Private Key.
   You can check [Yubiko documentation](https://developers.yubico.com/PIV/Guides/Generating_keys_using_OpenSSL.html) if
   you don't know how to generate a RSA Key Pair.
 - `NEXT_PUBLIC_RSA_PUBLIC_KEY`: RSA Public Key (extracted from above RSA Private Key).
+
+### Optional environment variables
+
+Wherever you run Let Me, the app can't run without those environment variables set:
+
+- `DEBUG`: **Default: `"false"`.** Set to `"true"` to enable debug features (including in production).
+- `PORT`: **Default: `3000`.** Port on which the app will run. Most PaaS providers automatically set this environment variable, in which case you should't override it. 
 
 ### PaaS & hosting providers
 
