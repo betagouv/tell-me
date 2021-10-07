@@ -1,6 +1,10 @@
 const withTranspileModules = require('next-transpile-modules')(['@mui/material', '@mui/system'])
 
 module.exports = withTranspileModules({
+  eslint: {
+    // https://nextjs.org/docs/api-reference/next.config.js/ignoring-eslint
+    ignoreDuringBuilds: true,
+  },
   headers: async () => [
     {
       headers: [
