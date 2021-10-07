@@ -9,5 +9,6 @@ WORKDIR /app
 COPY . .
 
 RUN yarn --production --pure-lockfile
+RUN yarn build
 
 ENTRYPOINT [ "yarn", "start" ]
