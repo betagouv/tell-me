@@ -9,7 +9,7 @@ import Survey from '../../../api/models/Survey'
 import { USER_ROLE } from '../../../common/constants'
 
 const ASSETS_PATH = path.join(process.cwd(), 'assets')
-const ERROR_PATH = 'pages/api/survey/SurveyController()'
+const ERROR_PATH = 'pages/api/survey/SurveyUploadController()'
 
 function runMiddleware(req, res, middleware) {
   return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ export const config = {
   },
 }
 
-async function SurveysController(req, res) {
+async function SurveyUploadController(req, res) {
   if (!['PUT'].includes(req.method)) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -74,4 +74,4 @@ async function SurveysController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(SurveysController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))
+export default withMongoose(withAuthentication(SurveyUploadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))

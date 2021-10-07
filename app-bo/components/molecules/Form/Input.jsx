@@ -17,7 +17,7 @@ const StyledTextField = styled(MuiTextField)`
   }
 `
 
-function Input({ autoComplete, helperText, label, name, onChange, type }) {
+export default function Input({ autoComplete, helperText, isDisabled, label, name, onChange, type }) {
   const { errors, handleChange, submitCount, touched, values } = useFormikContext()
 
   const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
@@ -32,8 +32,9 @@ function Input({ autoComplete, helperText, label, name, onChange, type }) {
 
   return (
     <StyledTextField
-      autoComplete={autoComplete}
+      autoComplete={String(autoComplete)}
       defaultValue={values[name]}
+      disabled={isDisabled}
       error={hasError}
       helperText={hasError ? errors[name] : helperText}
       label={label}
@@ -47,6 +48,7 @@ function Input({ autoComplete, helperText, label, name, onChange, type }) {
 Input.defaultProps = {
   autoComplete: null,
   helperText: ' ',
+  isDisabled: false,
   onChange: null,
   type: 'text',
 }
@@ -54,10 +56,9 @@ Input.defaultProps = {
 Input.propTypes = {
   autoComplete: PropTypes.string,
   helperText: PropTypes.string,
+  isDisabled: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   type: PropTypes.string,
 }
-
-export default Input

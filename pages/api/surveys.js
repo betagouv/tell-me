@@ -5,7 +5,7 @@ import withMongoose from '../../api/middlewares/withMongoose'
 import Survey from '../../api/models/Survey'
 import { USER_ROLE } from '../../common/constants'
 
-const ERROR_PATH = 'pages/api/auth/UsersController()'
+const ERROR_PATH = 'pages/api/SurveysController()'
 
 async function SurveysController(req, res) {
   if (req.method !== 'GET') {

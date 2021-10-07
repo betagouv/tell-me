@@ -59,7 +59,12 @@ export default function LoginModal() {
     <Modal>
       <Modal.Title>Log In</Modal.Title>
 
-      <Form initialValues={formInitialValues} onSubmit={getSessionJwtAndLogIn} validationSchema={FormSchema}>
+      <Form
+        autoComplete
+        initialValues={formInitialValues}
+        onSubmit={getSessionJwtAndLogIn}
+        validationSchema={FormSchema}
+      >
         <Form.Input autoComplete="email" label="Email" name="email" type="email" />
         <Form.Input autoComplete="current-password" label="Password" name="password" type="password" />
 

@@ -2,11 +2,11 @@ import { promises as fs } from 'fs'
 import { pathExists } from 'fs-extra'
 import path from 'path'
 
-import handleError from '../../api/helpers/handleError'
-import ApiError from '../../api/libs/ApiError'
+import handleError from '../../../api/helpers/handleError'
+import ApiError from '../../../api/libs/ApiError'
 
 const ASSETS_PATH = path.join(process.cwd(), 'assets')
-const ERROR_PATH = 'pages/api/auth/IndexController()'
+const ERROR_PATH = 'pages/api/asset/AssetController()'
 
 async function AssetController(req, res) {
   if (req.method !== 'GET') {

@@ -7,7 +7,7 @@ import { USER_ROLE } from '../../../common/constants'
 
 const ERROR_PATH = 'pages/api/survey/SurveyController()'
 
-async function SurveysController(req, res) {
+async function SurveyController(req, res) {
   if (!['DELETE', 'GET', 'PATCH', 'POST'].includes(req.method)) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -81,4 +81,4 @@ async function SurveysController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(SurveysController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))
+export default withMongoose(withAuthentication(SurveyController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))

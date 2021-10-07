@@ -66,7 +66,7 @@ export default function SetupModal({ onDone }) {
     <Modal>
       <Modal.Title>First User Setup</Modal.Title>
 
-      <Form onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
+      <Form autoComplete onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
         <Form.Input autoComplete="email" label="Your email" name="email" type="email" />
         <Form.Input
           autoComplete="new-password"

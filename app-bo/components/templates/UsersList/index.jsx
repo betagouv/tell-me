@@ -9,6 +9,14 @@ const TABLE_COLUMNS = [
     key: 'email',
     label: 'Email',
   },
+  {
+    key: 'role',
+    label: 'Role',
+  },
+  {
+    key: 'isActive',
+    label: 'Active',
+  },
 ]
 
 const Container = styled.div`
@@ -43,18 +51,16 @@ export default function UsersList() {
   }, [])
 
   return (
-    <>
-      <Container>
-        <Table
-          columns={TABLE_COLUMNS}
-          data={users}
-          isLoading={isLoading}
-          name="Survey"
-          onDelete={deleteUser}
-          path="survey"
-          title="Users List"
-        />
-      </Container>
-    </>
+    <Container>
+      <Table
+        columns={TABLE_COLUMNS}
+        data={users}
+        isLoading={isLoading}
+        name="User"
+        onDelete={deleteUser}
+        path="user"
+        title="Users List"
+      />
+    </Container>
   )
 }

@@ -114,7 +114,7 @@ export default function Table({ columns, data, hasPreview, isLoading, name, onAd
               </IdTableCell>
 
               {columns.map(({ key }) => (
-                <TableCell key={key}>{dataItem[key]}</TableCell>
+                <TableCell key={key}>{String(dataItem[key])}</TableCell>
               ))}
 
               {hasPreview && (

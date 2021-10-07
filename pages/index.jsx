@@ -10,6 +10,7 @@ import SetupModal from '../app-bo/components/organisms/SetupModal'
 import Dashboard from '../app-bo/components/templates/Dashboard'
 import SurveyEditor from '../app-bo/components/templates/SurveyEditor'
 import SurveysList from '../app-bo/components/templates/SurveysList'
+import UserEditor from '../app-bo/components/templates/UserEditor'
 import UsersList from '../app-bo/components/templates/UsersList'
 import isFirstSetup from '../app-bo/helpers/isFirstSetup'
 import useAuth from '../app-bo/hooks/useAuth'
@@ -89,6 +90,9 @@ export default function SpaPage() {
               </Route>
               <Route path="/users">
                 <UsersList />
+              </Route>
+              <Route path="/user/:id">
+                <UserEditor />
               </Route>
               <Route path="/">
                 <Dashboard />
