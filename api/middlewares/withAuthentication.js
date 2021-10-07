@@ -14,22 +14,22 @@ export default function withAuthentication(handler, allowedRoles = [USER_ROLE.AD
       const authorizationHeader = req.headers.authorization
 
       if (authorizationHeader === undefined || !/^Bearer .+$/.test(authorizationHeader)) {
-        return handleError(new ApiError(`Unauthorized.`, 401), ERROR_PATH, res)
+        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
 
       const sessionToken = /^Bearer (.+)$/.exec(authorizationHeader)[1]
       const maybeTokenPayload = await getJwtPayload(sessionToken)
       if (maybeTokenPayload === null) {
-        return handleError(new ApiError(`Unauthorized.`, 401), ERROR_PATH, res)
+        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
 
       const user = await User.findById(maybeTokenPayload._id).exec()
       if (user === null || !user.isActive) {
-        return handleError(new ApiError(`Unauthorized.`, 401), ERROR_PATH, res)
+        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
 
       if (!allowedRoles.includes(user.role)) {
-        return handleError(new ApiError(`Forbidden.`, 403), ERROR_PATH, res)
+        return handleError(new ApiError(`Forbidden.`, 403, true), ERROR_PATH, res)
       }
 
       req.user = R.pick(['id'], user)
