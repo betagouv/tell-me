@@ -15,3 +15,6 @@
 /docker-compose.dev.yml
 /docker-compose.yml
 /Dockerfile
+
+/assets/*
+!/assets/README.md

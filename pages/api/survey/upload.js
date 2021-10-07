@@ -1,4 +1,5 @@
 import multer from 'multer'
+import path from 'path'
 
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
@@ -7,6 +8,7 @@ import withMongoose from '../../../api/middlewares/withMongoose'
 import Survey from '../../../api/models/Survey'
 import { USER_ROLE } from '../../../common/constants'
 
+const ASSETS_PATH = path.join(process.cwd(), 'assets')
 const ERROR_PATH = 'pages/api/survey/SurveyController()'
 
 function runMiddleware(req, res, middleware) {
@@ -54,7 +56,7 @@ async function SurveysController(req, res) {
       callback(null, false)
     }
     const multerStorage = multer.diskStorage({
-      destination: `${process.cwd()}/public/survey-assets`,
+      destination: ASSETS_PATH,
       filename: (_, file, callback) => {
         callback(null, `${id}-${type}.png`)
       },

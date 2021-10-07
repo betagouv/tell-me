@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import AppfoHeader from '../../../../app-fo/components/atoms/Header'
 
 const StyledHeader = styled(AppfoHeader)`
-  background-image: url('/survey-assets/${p => p.surveyId}-header.png');
+  background-image: url('/api/asset/${p => p.surveyId}-header.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

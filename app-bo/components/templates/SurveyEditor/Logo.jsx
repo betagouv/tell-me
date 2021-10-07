@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const Placeholder = styled.div`
   background-color: #d5e5a3;
-  background-image: url('/survey-assets/${p => p.surveyId}-logo.png');
+  background-image: url('/api/asset/${p => p.surveyId}-logo.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

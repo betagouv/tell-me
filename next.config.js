@@ -19,6 +19,10 @@ module.exports = withTranspileModules({
   reactStrictMode: true,
   rewrites: async () => [
     {
+      destination: '/api/asset',
+      source: '/api/asset/:fileName*',
+    },
+    {
       destination: '/api/survey/upload',
       source: '/api/survey/upload/:id*',
     },
