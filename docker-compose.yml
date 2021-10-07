@@ -27,7 +27,7 @@ services:
         NODE_ENV: ${NODE_ENV}
         RSA_PRIVATE_KEY: ${RSA_PRIVATE_KEY}
     ports:
-      - ${PORT}:80
+      - ${PORT}:3000
     depends_on:
       - db
 
