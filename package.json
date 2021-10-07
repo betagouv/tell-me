@@ -8,7 +8,7 @@
     "build": "next build",
     "debug": "envinfo --binaries --system --markdown",
     "dev": "next dev",
-    "dev:docker": "docker-compose down && docker-compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up db",
+    "dev:docker": "docker-compose down && docker-compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up -d db",
     "prepare": "husky install && node -r dotenv/config ./scripts/dev/setup.js",
     "start": "next start",
     "test": "yarn test:lint && yarn test:unit",

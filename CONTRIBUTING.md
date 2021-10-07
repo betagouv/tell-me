@@ -30,7 +30,7 @@ Then run:
 git clone https://github.com/betagouv/tell-me.git
 cd tell-me
 yarn
-docker compose up -d db
+yarn dev:docker
 yarn dev
 ```
 
