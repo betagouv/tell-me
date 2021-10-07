@@ -32,6 +32,12 @@ async function AuthLoginController(req, res) {
       return
     }
 
+    if (!maybeUser.isActive) {
+      handleError(new ApiError('Forbidden.', 403, true), ERROR_PATH, res)
+
+      return
+    }
+
     const maybeIp = req.headers['x-real-ip']
     const tokenPayload = R.pick(['_id', 'email', 'role'], maybeUser)
     const sessionToken = await getJwt(tokenPayload)

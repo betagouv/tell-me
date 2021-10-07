@@ -29,8 +29,6 @@ async function AuthSignupController(req, res) {
 
       // And we give them an administrator role
       newUserData.role = USER_ROLE.ADMINISTRATOR
-    } else {
-      newUserData.isActive = false
     }
 
     const newUser = new User(newUserData)

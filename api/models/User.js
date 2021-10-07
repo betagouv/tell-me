@@ -17,7 +17,7 @@ function User() {
           unique: true,
         },
         isActive: {
-          required: true,
+          default: false,
           type: Boolean,
         },
         password: {

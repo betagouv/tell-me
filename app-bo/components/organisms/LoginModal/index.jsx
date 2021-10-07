@@ -32,13 +32,24 @@ export default function LoginModal() {
     }
 
     if (body.hasError) {
-      setErrors({
-        email: 'Wrong email and/or password',
-        password: 'Wrong email and/or password',
-      })
-      setSubmitting(false)
+      if (body.code === 401) {
+        setErrors({
+          email: 'Wrong email and/or password.',
+          password: 'Wrong email and/or password.',
+        })
+        setSubmitting(false)
 
-      return
+        return
+      }
+
+      if (body.code === 403) {
+        setErrors({
+          email: 'Your account is not active.',
+        })
+        setSubmitting(false)
+
+        return
+      }
     }
 
     await logIn(body.data.sessionToken, body.data.refreshToken)
