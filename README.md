@@ -1,10 +1,10 @@
 # Tell Me
 
-An awesome open source survey generator.
-
 [![License][img-license]][lnk-license]
 [![Build Status][img-github]][lnk-github]
 [![Code Coverage][img-codecov]][lnk-codecov]
+
+An awesome open source survey generator.
 
 ---
 
