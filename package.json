@@ -25,7 +25,6 @@
     "@mui/styled-engine-sc": "5.0.0-rc.0",
     "bcryptjs": "2.4.3",
     "bhala": "1.0.0-alpha.1",
-    "body-parser": "1.19.0",
     "dayjs": "1.10.7",
     "dotenv": "10.0.0",
     "formik": "2.2.9",
