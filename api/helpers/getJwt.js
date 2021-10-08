@@ -17,7 +17,7 @@ const signJwt = promisify(jsonwebtoken.sign)
  * @param {Object}    payload   A POJO containing public user data
  * @param {string=}   ip        User client IP
  *
- * @returns {Promise<string>}
+ * @return {Promise<string>}
  */
 export default async function getJwt(payload, ip = null) {
   try {

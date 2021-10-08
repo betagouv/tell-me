@@ -1,6 +1,8 @@
 import { styled } from '@mui/material/styles'
-import { Formik, Form as FormikForm } from 'formik'
+import { Formik, Form as FormikForm, useFormikContext } from 'formik'
+import debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import * as Yup from 'yup'
 
 import CheckboxInput from './CheckboxInput'
@@ -15,7 +17,23 @@ const StyledForm = styled(FormikForm)`
   width: 100%;
 `
 
-function Form({ children, initialValues, onSubmit, validate, validationSchema }) {
+const FormListener = ({ children, onChange }) => {
+  const { isSubmitting, values } = useFormikContext()
+
+  useEffect(() => {
+    if (!onChange || isSubmitting) {
+      return
+    }
+
+    onChange(values)
+  })
+
+  return children
+}
+
+function Form({ children, initialValues, onChange, onSubmit, validate, validationSchema }) {
+  const onChangeDebounced = onChange ? debounce(onChange, 250) : onChange
+
   return (
     <Formik
       enableReinitialize
@@ -24,18 +42,23 @@ function Form({ children, initialValues, onSubmit, validate, validationSchema })
       validate={validate}
       validationSchema={validationSchema}
     >
-      <StyledForm noValidate>{children}</StyledForm>
+      <FormListener onChange={onChangeDebounced}>
+        <StyledForm noValidate>{children}</StyledForm>
+      </FormListener>
     </Formik>
   )
 }
 
 Form.defaultProps = {
   initialValues: {},
+  onChange: null,
   validate: () => ({}),
 }
 
 Form.propTypes = {
-  initialValues: PropTypes.objectOf(PropTypes.string),
+  // eslint-disable-next-line react/forbid-prop-types
+  initialValues: PropTypes.object,
+  onChange: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
   validate: PropTypes.func,
   validationSchema: PropTypes.instanceOf(Yup.ObjectSchema).isRequired,

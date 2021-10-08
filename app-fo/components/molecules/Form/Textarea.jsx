@@ -29,20 +29,18 @@ const StyledTextarea = styled.textarea`
   }
 `
 
-export default function Textarea({ dangerouslySetInnerHTML, id, name }) {
-  const { handleChange } = useFormikContext()
-
-  // eslint-disable-next-line no-underscore-dangle
-  const placeholder = dangerouslySetInnerHTML.__html
+export default function Textarea({ label, name }) {
+  const { handleChange, values } = useFormikContext()
+  const value = values[name]
 
   return (
     <TextareaField>
-      <StyledTextarea id={id} name={name} onChange={handleChange} placeholder={placeholder} type="text" />
+      <StyledTextarea defaultValue={value} name={name} onChange={handleChange} placeholder={label} type="text" />
     </TextareaField>
   )
 }
 
 Textarea.propTypes = {
-  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }

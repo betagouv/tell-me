@@ -28,20 +28,18 @@ const StyledInput = styled.input`
   }
 `
 
-export default function CheckboxInput({ dangerouslySetInnerHTML, id, name }) {
-  const { handleChange } = useFormikContext()
-
-  // eslint-disable-next-line no-underscore-dangle
-  const placeholder = dangerouslySetInnerHTML.__html
+export default function TextInput({ label, name }) {
+  const { handleChange, values } = useFormikContext()
+  const value = values[name]
 
   return (
     <Input>
-      <StyledInput id={id} name={name} onChange={handleChange} placeholder={placeholder} type="text" />
+      <StyledInput defaultValue={value} name={name} onChange={handleChange} placeholder={label} type="text" />
     </Input>
   )
 }
 
-CheckboxInput.propTypes = {
-  id: PropTypes.string.isRequired,
+TextInput.propTypes = {
+  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }

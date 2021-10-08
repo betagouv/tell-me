@@ -1,44 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 
-import SurveyBlocksManager from '.'
 import { SURVEY_BLOCK_TYPE } from '../constants'
+import SurveyBlocksManager from '../SurveyBlocksManager'
 
-expect.extend({
-  toBeABlockOfType(received, type) {
-    const pass = received.type === type
-
-    if (pass) {
-      return {
-        message: () => `expected block NOT to be of type ${type} but received a block of type ${received?.type}`,
-        pass: true,
-      }
-    }
-
-    return {
-      message: () => `expected block to be of type ${type} but received a block of type ${received?.type}`,
-      pass: false,
-    }
-  },
-})
-
-describe('common/SurveyBlocksManager', () => {
+describe('common/SurveyBlocksManager [CRUD Operations]', () => {
   /** @type SurveyBlocksManager */
   let instance
 
-  test('should instantiate', () => {
+  beforeAll(() => {
     instance = new SurveyBlocksManager()
-
-    expect(instance._blocks).toHaveLength(2)
-  })
-
-  test('should focus', () => {
-    instance.setFocusAt(1)
-
-    expect(instance._focusedBlockIndex).toStrictEqual(1)
-    expect(instance.focusedBlock).toMatchObject({
-      position: { rank: 2 },
-      type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
-    })
   })
 
   test('should add another text block after the first one', () => {

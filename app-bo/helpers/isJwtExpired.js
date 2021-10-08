@@ -9,7 +9,7 @@ import handleError from './handleError'
  *
  * @param {string} token
  *
- * @returns {Promise<Object | null>}
+ * @return {Promise<Object | null>}
  */
 export default async function isJwtExpired(token) {
   try {

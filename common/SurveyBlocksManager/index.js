@@ -5,6 +5,20 @@ import * as R from 'ramda'
 import { SURVEY_BLOCK_TYPE } from '../constants'
 import Block from './Block'
 
+/**
+ * @typedef {Object} BlockData - creates a new type named 'SpecialType'
+ * @property {string} [_id] - a string property of SpecialType
+ * @property {BlockPosition} position - a number property of SpecialType
+ * @property {string} type - an optional number property of SpecialType
+ * @property {string} value - an optional number property of SpecialType
+ */
+
+/**
+ * @typedef {Object} BlockPosition - creates a new type named 'SpecialType'
+ * @property {number} page - a string property of SpecialType
+ * @property {number} rank - a number property of SpecialType
+ */
+
 const INITIAL_BLOCKS = [
   {
     position: {
@@ -24,26 +38,38 @@ const INITIAL_BLOCKS = [
   },
 ]
 
-const extractBlocksData = R.map(R.pick(['_id', 'position', 'type', 'value']))
 const isBlockTypeCountable = R.flip(R.includes)([SURVEY_BLOCK_TYPE.INPUT.CHECKBOX, SURVEY_BLOCK_TYPE.INPUT.CHOICE])
+const isInputBlock = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
+const isQuestionBlock = R.propEq('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
 export default class SurveyBlocksManager {
   constructor(blocks = INITIAL_BLOCKS) {
-    this.blocks = blocks
-
-    this.unsetFocus()
+    /**
+     * @private
+     * @type {Block[]}
+     */
+    this._blocks = []
+    /**
+     * @private
+     * @type {number}
+     */
+    this._focusedBlockIndex = -1
 
     Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach(key => {
       if (this[key] instanceof Function && key !== 'constructor') {
         this[key] = this[key].bind(this)
       }
     })
+
+    this.blocks = blocks
   }
 
+  /** @return {Block[]} blocks */
   get blocks() {
     return this._blocks
   }
 
+  /** @param {BlockData} blocks */
   set blocks(blocks) {
     this._blocks = R.reduce((previousBlocks, block) => {
       const lastBlock = R.last(previousBlocks)
@@ -67,7 +93,10 @@ export default class SurveyBlocksManager {
     }, [])(blocks)
   }
 
+  /** @return {BlockData[]} */
   get blocksData() {
+    const extractBlocksData = R.map(R.pick(['_id', 'position', 'type', 'value']))
+
     return extractBlocksData(this._blocks)
   }
 
@@ -85,6 +114,34 @@ export default class SurveyBlocksManager {
 
   get isFocused() {
     return this._focusedBlockIndex !== -1
+  }
+
+  getQuestionTypeAt(index) {
+    const maybeQuestionBlock = this.blocks[index]
+    if (!isQuestionBlock(maybeQuestionBlock)) {
+      throw new Error(`This survey block is not a question.`)
+    }
+
+    let nextBlockIndex = index
+    const blocksLength = this.blocks.length
+    // eslint-disable-next-line no-plusplus
+    while (++nextBlockIndex < blocksLength) {
+      const nextBlock = this.blocks[nextBlockIndex]
+
+      if (isInputBlock(nextBlock)) {
+        return nextBlock.type
+      }
+
+      if (isQuestionBlock(nextBlock)) {
+        break
+      }
+    }
+
+    throw new Error(`This survey question block has no related input block.`)
+  }
+
+  findBlockIndexById(id) {
+    return R.findIndex(R.propEq('id', id))(this.blocks)
   }
 
   changeBlockTypeAt(index, newType) {
@@ -216,5 +273,22 @@ export default class SurveyBlocksManager {
 
   unsetFocus() {
     this._focusedBlockIndex = -1
+  }
+
+  conciliateFormData(formData) {
+    return R.pipe(
+      R.toPairs,
+      R.map(([questionBlockId, answerOrAnswers]) => {
+        const questionBlockIndex = this.findBlockIndexById(questionBlockId)
+        const questionBlock = this.blocks[questionBlockIndex]
+        const questionBlockType = this.getQuestionTypeAt(questionBlockIndex)
+
+        return {
+          answers: Array.isArray(answerOrAnswers) ? answerOrAnswers : [answerOrAnswers],
+          question: questionBlock.value,
+          type: questionBlockType,
+        }
+      }),
+    )(formData)
   }
 }

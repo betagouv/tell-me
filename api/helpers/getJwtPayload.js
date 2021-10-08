@@ -15,7 +15,7 @@ const verifyJwt = promisify(jsonwebtoken.verify)
  *
  * @param {string} token
  *
- * @returns {Promise<Object | null>}
+ * @return {Promise<Object | null>}
  */
 export default async function getJwtPayload(token) {
   try {

@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 
 import * as R from 'ramda'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import isBlockTypeIndexable from '../../../app-bo/components/templates/SurveyEditor/helpers/isBlockTypeIndexable'
+import useApi from '../../../app-bo/hooks/useApi'
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import SurveyBlocksManager from '../../../common/SurveyBlocksManager'
 import Header from '../atoms/Header'
@@ -41,6 +42,7 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
 const FormSchema = Yup.object().shape({})
 
 const isQuestion = R.pipe(R.prop('type'), R.equals(SURVEY_BLOCK_TYPE.CONTENT.QUESTION))
+const isInput = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
 
 const renderBlocks = blocks => {
   let indexableBlockIndex = null
@@ -65,17 +67,19 @@ const renderBlocks = blocks => {
     }
 
     const innerHTML = { __html: value }
+    const label = String(value)
 
-    const newComponent = (
+    const newComponent = isInput(block) ? (
       <Component
         key={id}
         countLetter={countLetter}
-        dangerouslySetInnerHTML={innerHTML}
-        id={id}
         index={indexableBlockIndex}
+        label={label}
         name={questionId}
-        value={id}
+        value={label}
       />
+    ) : (
+      <Component key={id} dangerouslySetInnerHTML={innerHTML} />
     )
 
     return [...components, newComponent]
@@ -83,20 +87,71 @@ const renderBlocks = blocks => {
 }
 
 export default function PublicSurvey({ data }) {
-  const { blocks, title } = data
-  const surveyBlocksManager = new SurveyBlocksManager(blocks)
+  const [isLoading, setIsLoading] = useState(true)
+  const [initialValues, setInitialValues] = useState({})
   const [isSent, setIsSent] = useState(false)
+  const api = useApi()
 
-  const submitSurvey = () => {
+  const { _id: id, blocks, title } = data
+  const surveyBlocksManager = new SurveyBlocksManager(blocks)
+  const surveySessionKey = `survey-${id}`
+
+  const loadFormDataFromSession = () => {
+    const maybeValuesJson = window.sessionStorage.getItem(surveySessionKey)
+    if (maybeValuesJson === null) {
+      setIsLoading(false)
+
+      return
+    }
+
+    const values = JSON.parse(maybeValuesJson)
+
+    setInitialValues(values)
+    setIsLoading(false)
+  }
+
+  const saveFormDataToSession = values => {
+    const valuesJson = JSON.stringify(values)
+
+    window.sessionStorage.setItem(surveySessionKey, valuesJson)
+  }
+
+  const clearFormDataFromSession = () => {
+    window.sessionStorage.removeItem(surveySessionKey)
+  }
+
+  const submitSurvey = async values => {
+    const surveyEntryAnswers = surveyBlocksManager.conciliateFormData(values)
+
+    const surveyEntry = {
+      answers: surveyEntryAnswers,
+      survey: id,
+    }
+
+    await api.post('survey-entry', surveyEntry)
+
+    clearFormDataFromSession()
     setIsSent(true)
   }
 
-  const page = isSent ? (
+  useEffect(() => {
+    loadFormDataFromSession()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // eslint-disable-next-line no-nested-ternary
+  const page = isLoading ? (
+    <Paragraph>Loading…</Paragraph>
+  ) : isSent ? (
     <Question>Thank you!</Question>
   ) : (
-    <Form initialValues={{}} onSubmit={submitSurvey} validationSchema={FormSchema}>
-      {/* <Form.Input autoComplete="email" label="Email" name="email" type="email" />
-    <Form.Input autoComplete="current-password" label="Password" name="password" type="password" /> */}
+    <Form
+      initialValues={initialValues}
+      onChange={saveFormDataToSession}
+      onSubmit={submitSurvey}
+      validationSchema={FormSchema}
+    >
       {renderBlocks(surveyBlocksManager.blocks)}
 
       <Form.Submit>Submit</Form.Submit>

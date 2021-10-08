@@ -29,16 +29,14 @@ const Label = styled.div`
   padding-left: 10px;
 `
 
-export default function RadioInput({ countLetter, dangerouslySetInnerHTML, id, name, value }) {
+export default function RadioInput({ countLetter, label, name, value }) {
   const { handleChange, values } = useFormikContext()
 
-  const isChecked = id === values[name]
-  // eslint-disable-next-line no-underscore-dangle
-  const label = dangerouslySetInnerHTML.__html
+  const isChecked = value === values[name]
 
   return (
     <StyledChoice countLetter={countLetter} isChecked={isChecked}>
-      <StyledRadioInput id={id} name={name} onChange={handleChange} type="radio" value={value} />
+      <StyledRadioInput defaultChecked={isChecked} name={name} onChange={handleChange} type="radio" value={value} />
 
       <Label isChecked={isChecked}>{label}</Label>
     </StyledChoice>
@@ -47,7 +45,7 @@ export default function RadioInput({ countLetter, dangerouslySetInnerHTML, id, n
 
 RadioInput.propTypes = {
   countLetter: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 }

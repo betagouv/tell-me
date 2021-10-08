@@ -36,7 +36,10 @@ function Survey() {
           required: false,
           type: SurveyCover,
         },
-        blocks: [SurveyBlock],
+        blocks: {
+          required: true,
+          type: [SurveyBlock],
+        },
       },
       {
         timestamps: true,

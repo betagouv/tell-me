@@ -23,7 +23,7 @@ import handleError from './handleError'
  *
  * @param {string} token
  *
- * @returns {Promise<JwtPayload | null>}
+ * @return {Promise<JwtPayload | null>}
  */
 export default async function getJwtPayload(token) {
   try {

@@ -50,6 +50,7 @@
     "slugify": "1.6.0",
     "styled-components": "5.3.1",
     "swr": "1.0.1",
+    "unique-string": "3.0.0",
     "yup": "0.32.9",
     "zxcvbn": "4.4.2"
   },
