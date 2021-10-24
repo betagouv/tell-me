@@ -1,7 +1,7 @@
 import SurveyModel from '../../api/models/Survey'
-import Survey from '../../app-fo/components/templates/Survey'
-import convertDocumentToPojo from '../../app-fo/server/convertDocumentToPojo'
-import getMongoose from '../../app-fo/server/getMongoose'
+import convertDocumentToPojo from '../../app/server/convertDocumentToPojo'
+import getMongoose from '../../app/server/getMongoose'
+import Survey from '../../app/templates/Survey'
 
 export default function PublicSurveyPage({ data }) {
   return <Survey data={data} />

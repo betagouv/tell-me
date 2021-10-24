@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import SignupModal from '../app-bo/components/organisms/SignupModal'
+import SignupModal from '../app/organisms/SignupModal'
 
 export default function SignupPage() {
   const router = useRouter()

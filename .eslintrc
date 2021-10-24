@@ -42,9 +42,8 @@
     },
     {
       "files": [
-        "./app-bo/components/atoms/*.jsx",
-        "./app-bo/components/templates/SurveyEditor/blocks/*.jsx",
-        "./app-fo/components/atoms/*.jsx",
+        "**/atoms/*.jsx",
+        "**/blocks/*.jsx",
         "./pages/**/*.jsx"
       ],
       "rules": {

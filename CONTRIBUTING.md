@@ -47,19 +47,17 @@ It will also watch for file changes and automatically re-hydrate the webapp on t
 
 ## Architecture
 
-The monolithic application is conceptually split into 3 different parts:
+The monolithic application is conceptually split into 2 parts:
 
 - **API**: The RESTFul API used by both the BACK and the FRONT.
-- **APP-BO**: The authentication-protected back-office web application, used to administrate and manage all the data.
-- **APP-FO**: The public web application, accessible to anyone, used to publish the surveys.
+- **Application**: The authentication-protected back-office web application, used to administrate and manage all the data.
 
 ### Main directories
 
 ```sh
 api/                # API code base
-app-bo/             # APP-BO code base
-app-fo/             # APP-FO code base
-common/             # Source files that are common to all parts (API, APP-BO & APP-FO)
+app/                # Application code base
+common/             # Source files that are common to all parts (API & Application)
 pages/              # URL path entrypoint file (natively handled by Next.js)
 public/             # Public assets (natively handled by Next.js)
 scripts/            # Docker, database and enviroment-related scripts
@@ -70,14 +68,14 @@ scripts/            # Docker, database and enviroment-related scripts
 All the parts run on [Next.js framework](https://nextjs.org) and all the entrypoint paths are matched by a similar path
 within `pages/` directory.
 
-**API** uses [API Routes](https://nextjs.org/docs/api-routes/introduction).
+The API uses [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction).
 
-**APP-BO** uses an [unofficially documented](https://colinhacks.com/essays/building-a-spa-with-nextjs) strategy to
+The back-office uses an [unofficially documented](https://colinhacks.com/essays/building-a-spa-with-nextjs) strategy to
 be served as an SPA (Single-Page Application), via [`react-router-dom`](https://www.npmjs.com/package/react-router-dom).
 
-**APP-FO** uses SSR (Server-Side Rendering) but could be improved using both [ISR (Incremental Static
-Regeneration)](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) and
-[Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) (for **APP-BO**).
+The front-office (public surveys) uses SSR (Server-Side Rendering) but could be improved using both [ISR (Incremental
+Static Regeneration)](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) and
+[Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode).
 
 There are some URL path resolution caveats with this strategy that are actually circumvented thank to a delarative
 [path rewriting strategy](https://nextjs.org/docs/api-reference/next.config.js/rewrites) (c.f. `next.config.js` file).

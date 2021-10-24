@@ -2,7 +2,7 @@
 
 module.exports = {
   clearMocks: true,
-  collectCoverageFrom: ['{api,app-bo,app-fo}/{hooks,libs}/**/*.js', '**/helpers/**/*.{js,jsx}', 'common/**/*.js'],
+  collectCoverageFrom: ['{api,app}/{hooks,libs}/**/*.js', '**/helpers/**/*.{js,jsx}', 'common/**/*.js'],
   maxWorkers: '50%',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {

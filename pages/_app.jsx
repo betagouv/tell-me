@@ -4,8 +4,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 
-import withApi from '../app-bo/components/hocs/withApi'
-import withAuth from '../app-bo/components/hocs/withAuth'
+import withApi from '../app/hocs/withApi'
+import withAuth from '../app/hocs/withAuth'
 import Global from '../styles/Global'
 import { DARK_THEME, LIGHT_THEME } from '../styles/theme'
 
