@@ -6,7 +6,6 @@ import isFirstSetup from '../app/helpers/isFirstSetup'
 import useAuth from '../app/hooks/useAuth'
 import useIsMounted from '../app/hooks/useIsMounted'
 import Loader from '../app/molecules/Loader'
-import Header from '../app/organisms/Header'
 import LoginModal from '../app/organisms/LoginModal'
 import Menu from '../app/organisms/Menu'
 import SetupModal from '../app/organisms/SetupModal'
@@ -18,12 +17,6 @@ import UsersList from '../app/templates/UserList'
 
 const Page = styled.div`
   display: flex;
-  flex-grow: 1;
-`
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
   flex-grow: 1;
 `
 
@@ -75,31 +68,27 @@ export default function SpaPage() {
       <Page>
         <Menu />
 
-        <Body>
-          <Header />
+        <Main>
+          <Switch>
+            <Route path="/survey/:id">
+              <SurveyEditor />
+            </Route>
+            <Route path="/surveys">
+              <SurveyList />
+            </Route>
 
-          <Main>
-            <Switch>
-              <Route path="/survey/:id">
-                <SurveyEditor />
-              </Route>
-              <Route path="/surveys">
-                <SurveyList />
-              </Route>
+            <Route path="/user/:id">
+              <UserEditor />
+            </Route>
+            <Route path="/users">
+              <UsersList />
+            </Route>
 
-              <Route path="/user/:id">
-                <UserEditor />
-              </Route>
-              <Route path="/users">
-                <UsersList />
-              </Route>
-
-              <Route path="/">
-                <Dashboard />
-              </Route>
-            </Switch>
-          </Main>
-        </Body>
+            <Route path="/">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </Main>
       </Page>
     </BrowserRouter>
   )

@@ -1,15 +1,15 @@
 import { styled } from '@singularity-ui/core'
 import { forwardRef } from 'react'
 
-const StyledTextarea = styled.div`
-  /* https://github.com/singularity-ui/core/blob/main/fields/Textarea.jsx */
+const StyledTextInput = styled.div`
+  /* https://github.com/singularity-ui/core/blob/main/fields/TextInput.jsx */
   background-color: ${p => p.theme.color.body.white};
   border: solid 1px ${p => p.theme.color.secondary.default};
   border-radius: ${p => p.theme.appearance.borderRadius.medium};
   font-family: inherit;
   font-size: ${p => p.theme.typography.size.medium * 100}%;
   font-weight: 400;
-  height: 5rem;
+  margin: 0.25rem 0;
   padding: ${p => p.theme.padding.input.medium};
   transition-delay: 0s, 0s, 0s, 0s;
   transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
@@ -35,8 +35,8 @@ const StyledTextarea = styled.div`
   }
 `
 
-const Textarea = forwardRef(({ ...props }, ref) => <StyledTextarea ref={ref} as="div" {...props} />)
+const TextInput = forwardRef(({ ...props }, ref) => <StyledTextInput ref={ref} {...props} />)
 
-Textarea.displayName = 'Textarea'
+TextInput.displayName = 'TextInput'
 
-export default Textarea
+export default TextInput

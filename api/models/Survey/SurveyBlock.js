@@ -13,6 +13,24 @@ const SurveyBlockPositionType = {
   },
 }
 
+const SurveyBlockPropsType = {
+  ifSelectedThenShowQuestionId: {
+    required: false,
+    type: mongoose.SchemaTypes.ObjectId,
+    default: null,
+  },
+  isHidden: {
+    required: false,
+    type: Boolean,
+    default: false,
+  },
+  isMandatory: {
+    required: false,
+    type: Boolean,
+    default: false,
+  },
+}
+
 const SurveyBlock = new mongoose.Schema({
   type: {
     required: true,
@@ -26,6 +44,15 @@ const SurveyBlock = new mongoose.Schema({
   position: {
     required: true,
     type: SurveyBlockPositionType,
+  },
+  props: {
+    required: false,
+    type: SurveyBlockPropsType,
+    default: {
+      ifSelectedThenShowQuestionId: null,
+      isHidden: false,
+      isMandatory: false,
+    },
   },
 })
 

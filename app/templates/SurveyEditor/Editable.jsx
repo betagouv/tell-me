@@ -32,6 +32,8 @@ export default function Editable({
   const $component = useRef(value)
   const wasFocused = usePrevious(isFocused)
 
+  const innerHTML = { __html: value }
+
   const handleNewValue = async () => {
     const value = isRichText ? await sanitizeRichText($component.current.innerHTML) : $component.current.innerText
 
@@ -122,8 +124,6 @@ export default function Editable({
       }
     }
   })
-
-  const innerHTML = { __html: value }
 
   return (
     <Component

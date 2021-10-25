@@ -5,15 +5,19 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
-import SurveyBlocksManager from '../../../common/SurveyBlocksManager'
 import useApi from '../../hooks/useApi'
 import useEquivalenceEffect from '../../hooks/useEquivalenceEffect'
+import SurveyManager from '../../libs/SurveyManager'
 import Block from './Block'
 import Title from './blocks/Title'
 import Editable from './Editable'
 import Header from './Header'
 import Loader from './Loader'
 import Logo from './Logo'
+
+const Body = styled.div`
+  max-width: 79rem;
+`
 
 const TitleRow = styled.div`
   padding: 0 5rem;
@@ -22,17 +26,17 @@ const TitleRow = styled.div`
 export default function SurveyEditor() {
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
-  const surveyBlocksManagerRef = useRef(new SurveyBlocksManager())
+  const surveyManagerRef = useRef(new SurveyManager())
   const [title, setTitle] = useState('...')
   const [isLoading, setIsLoading] = useState(true)
   const { id } = useParams()
   const api = useApi()
 
-  const surveyBlocksManager = surveyBlocksManagerRef.current
+  const surveyManager = surveyManagerRef.current
 
   const updateData = debounce(async () => {
     const data = {
-      blocks: surveyBlocksManager.blocksData,
+      blocks: surveyManager.blocksData,
       title,
     }
 
@@ -51,7 +55,7 @@ export default function SurveyEditor() {
       const { blocks, title } = maybeBody.data
       setTitle(title)
       if (blocks.length > 0) {
-        surveyBlocksManager.blocks = blocks
+        surveyManager.blocks = blocks
       }
       setIsLoading(false)
     })()
@@ -64,7 +68,7 @@ export default function SurveyEditor() {
     }
 
     updateData()
-  }, [surveyBlocksManager.blocks, title])
+  }, [surveyManager.blocks, title])
 
   const updateTitle = newValue => {
     api.patch(`survey/${id}`, {
@@ -81,51 +85,57 @@ export default function SurveyEditor() {
   }
 
   const changeFocusedBlockType = (index, newType) => {
-    surveyBlocksManager.changeBlockTypeAt(index, newType)
-    surveyBlocksManager.setFocusAt(index)
+    surveyManager.changeBlockTypeAt(index, newType)
+    surveyManager.setFocusAt(index)
+
+    forceUpdate()
+  }
+
+  const toggleBlockVisibilityAt = index => {
+    surveyManager.toggleBlockVisibilityAt(index)
 
     forceUpdate()
   }
 
   const appendOrResetFocusedBlock = () => {
-    const { focusedBlock } = surveyBlocksManager
+    const { focusedBlock } = surveyManager
 
     if (focusedBlock.isCountable && focusedBlock.value.length > 0) {
-      surveyBlocksManager.addNewBlockAfterFocusedBlock(focusedBlock.type)
+      surveyManager.addNewBlockAfterFocusedBlock(focusedBlock.type)
     } else if (focusedBlock.type === SURVEY_BLOCK_TYPE.CONTENT.TEXT || focusedBlock.value.length > 0) {
-      surveyBlocksManager.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+      surveyManager.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
     } else {
-      surveyBlocksManager.changeFocusedBlockType(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+      surveyManager.changeFocusedBlockType(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
     }
 
     forceUpdate()
   }
 
   const updateFocusedBlockValue = newValue => {
-    surveyBlocksManager.changeFocusedBlockValue(newValue)
+    surveyManager.changeFocusedBlockValue(newValue)
 
     updateData()
   }
 
   const removeFocusedBlock = () => {
-    surveyBlocksManager.removeFocusedBlock()
+    surveyManager.removeFocusedBlock()
 
     forceUpdate()
   }
 
   const focusPreviousBlock = () => {
-    surveyBlocksManager.focusPreviousBlock()
+    surveyManager.focusPreviousBlock()
 
     forceUpdate()
   }
 
   const focusNextBlock = () => {
-    surveyBlocksManager.focusNextBlock()
+    surveyManager.focusNextBlock()
 
     forceUpdate()
   }
 
-  const isTitleFocused = surveyBlocksManager.focusedBlockIndex === -1
+  const isTitleFocused = surveyManager.focusedBlockIndex === -1
 
   if (isLoading) {
     return <Loader />
@@ -136,36 +146,39 @@ export default function SurveyEditor() {
       <Header onChange={uploadHeader} surveyId={id} />
       <Logo onChange={uploadLogo} surveyId={id} />
 
-      <TitleRow>
-        <Editable
-          Component={Title}
-          isFocused={isTitleFocused}
-          onChange={updateTitle}
-          onDown={focusNextBlock}
-          onEnter={appendOrResetFocusedBlock}
-          onFocus={surveyBlocksManager.unsetFocus}
-          onUp={R.always()}
-          value={title}
-        />
-      </TitleRow>
+      <Body>
+        <TitleRow>
+          <Editable
+            Component={Title}
+            isFocused={isTitleFocused}
+            onChange={updateTitle}
+            onDown={focusNextBlock}
+            onEnter={appendOrResetFocusedBlock}
+            onFocus={surveyManager.unsetFocus}
+            onUp={R.always()}
+            value={title}
+          />
+        </TitleRow>
 
-      {surveyBlocksManager.blocks.map((block, index) => (
-        <Block
-          // eslint-disable-next-line react/no-array-index-key
-          key={`${index}_${block.type}`}
-          block={block}
-          blocks={surveyBlocksManager.blocks}
-          index={index}
-          isFocused={index === surveyBlocksManager.focusedBlockIndex}
-          onChange={updateFocusedBlockValue}
-          onChangeType={changeFocusedBlockType}
-          onDown={focusNextBlock}
-          onEnter={appendOrResetFocusedBlock}
-          onFocus={surveyBlocksManager.setFocusAt}
-          onRemove={removeFocusedBlock}
-          onUp={focusPreviousBlock}
-        />
-      ))}
+        {surveyManager.blocks.map((block, index) => (
+          <Block
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${index}_${block.type}`}
+            block={block}
+            blocks={surveyManager.blocks}
+            index={index}
+            isFocused={index === surveyManager.focusedBlockIndex}
+            onChange={updateFocusedBlockValue}
+            onChangeType={changeFocusedBlockType}
+            onDown={focusNextBlock}
+            onEnter={appendOrResetFocusedBlock}
+            onFocus={surveyManager.setFocusAt}
+            onRemove={removeFocusedBlock}
+            onToggleVisibility={toggleBlockVisibilityAt}
+            onUp={focusPreviousBlock}
+          />
+        ))}
+      </Body>
     </>
   )
 }

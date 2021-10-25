@@ -1,14 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 
-import { SURVEY_BLOCK_TYPE } from '../constants'
-import SurveyBlocksManager from '../SurveyBlocksManager'
+import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import SurveyManager from '../SurveyManager'
 
-describe('common/SurveyBlocksManager [Base Operations]', () => {
-  /** @type SurveyBlocksManager */
+describe('common/SurveyManager [Base Operations]', () => {
+  /** @type SurveyManager */
   let instance
 
   test('should instantiate', () => {
-    instance = new SurveyBlocksManager()
+    instance = new SurveyManager()
 
     expect(instance._blocks).toHaveLength(2)
   })

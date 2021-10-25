@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import Checkbox from './blocks/Checkbox'
 import Choice from './blocks/Choice'
-import Input from './blocks/Input'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Textarea from './blocks/Textarea'
+import TextInput from './blocks/TextInput'
 import Editable from './Editable'
 import Menu from './Menu'
 import Row from './Row'
@@ -36,7 +36,7 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
     placeholder: `Type placeholder text`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: {
-    component: Input,
+    component: TextInput,
     placeholder: `Type placeholder text`,
   },
 }
@@ -52,6 +52,7 @@ export default function Block({
   onEnter,
   onFocus,
   onRemove,
+  onToggleVisibility,
   onUp,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -67,7 +68,14 @@ export default function Block({
   }
 
   return (
-    <Row key={key} className="Row">
+    <Row
+      key={key}
+      block={block}
+      className="Row"
+      is
+      onDelete={onRemove}
+      onToggleVisibility={() => onToggleVisibility(index)}
+    >
       <Editable
         key={key}
         Component={component}
@@ -102,5 +110,6 @@ Block.propTypes = {
   onEnter: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  onToggleVisibility: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
 }

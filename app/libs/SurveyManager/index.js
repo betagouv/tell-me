@@ -2,7 +2,7 @@
 
 import * as R from 'ramda'
 
-import { SURVEY_BLOCK_TYPE } from '../constants'
+import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import Block from './Block'
 
 /**
@@ -42,7 +42,7 @@ const isBlockTypeCountable = R.flip(R.includes)([SURVEY_BLOCK_TYPE.INPUT.CHECKBO
 const isInputBlock = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
 const isQuestionBlock = R.propEq('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
-export default class SurveyBlocksManager {
+export default class SurveyManager {
   constructor(blocks = INITIAL_BLOCKS) {
     /**
      * @private
@@ -71,11 +71,15 @@ export default class SurveyBlocksManager {
 
   /** @param {BlockData} blocks */
   set blocks(blocks) {
+    let isHidden = false
+
     this._blocks = R.reduce((previousBlocks, block) => {
       const lastBlock = R.last(previousBlocks)
-      const { _id, position, type, value } = block
+      const { _id, position, props, type, value } = block
       const isCountable = isBlockTypeCountable(type)
+      const isQuestion = type === SURVEY_BLOCK_TYPE.CONTENT.QUESTION
       const additionalProps = {
+        ...props,
         isCountable,
       }
 
@@ -87,7 +91,19 @@ export default class SurveyBlocksManager {
         }
       }
 
+      if (isQuestion) {
+        isHidden = Boolean(additionalProps.isHidden)
+      } else {
+        additionalProps.isHidden = isHidden
+      }
+
+      additionalProps.isUnlinked = false
+
       const normalizedBlock = new Block({ _id, position, type, value }, additionalProps)
+
+      if (normalizedBlock.isQuestion) {
+        isHidden = normalizedBlock.isHidden
+      }
 
       return [...previousBlocks, normalizedBlock]
     }, [])(blocks)
@@ -95,7 +111,7 @@ export default class SurveyBlocksManager {
 
   /** @return {BlockData[]} */
   get blocksData() {
-    const extractBlocksData = R.map(R.pick(['_id', 'position', 'type', 'value']))
+    const extractBlocksData = R.map(R.pick(['_id', 'position', 'props', 'type', 'value']))
 
     return extractBlocksData(this._blocks)
   }
@@ -157,6 +173,18 @@ export default class SurveyBlocksManager {
     const updatedBlock = {
       ...this.blocks[index],
       value: newValue,
+    }
+
+    this.blocks = R.update(index, updatedBlock)(this.blocks)
+  }
+
+  toggleBlockVisibilityAt(index) {
+    const updatedBlock = {
+      ...this.blocks[index],
+      props: {
+        ...this.blocks[index].props,
+        isHidden: !this.blocks[index].props.isHidden,
+      },
     }
 
     this.blocks = R.update(index, updatedBlock)(this.blocks)

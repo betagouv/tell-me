@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../common/constants'
-import SurveyBlocksManager from '../../common/SurveyBlocksManager'
 import Header from '../atoms/Header'
 import Logo from '../atoms/Logo'
 import Paragraph from '../atoms/Paragraph'
 import Question from '../atoms/Question'
-import Title from '../atoms/Title'
+import SurveyTitle from '../atoms/SurveyTitle'
 import useApi from '../hooks/useApi'
+import SurveyManager from '../libs/SurveyManager'
 import SurveyForm from '../molecules/SurveyForm'
 import isBlockTypeIndexable from './SurveyEditor/helpers/isBlockTypeIndexable'
 
@@ -49,6 +49,10 @@ const renderBlocks = blocks => {
   let questionId = null
 
   return blocks.reduce((components, block, index) => {
+    if (block.isHidden) {
+      return components
+    }
+
     const { countLetter, id, type, value } = block
     const Component = SURVEY_BLOCK_TYPE_COMPONENT[type]
     const isIndexable = isBlockTypeIndexable(type)
@@ -93,7 +97,7 @@ export default function PublicSurvey({ data }) {
   const api = useApi()
 
   const { _id: id, blocks, title } = data
-  const surveyBlocksManager = new SurveyBlocksManager(blocks)
+  const surveyManager = new SurveyManager(blocks)
   const surveySessionKey = `survey-${id}`
 
   const loadFormDataFromSession = () => {
@@ -121,7 +125,7 @@ export default function PublicSurvey({ data }) {
   }
 
   const submitSurvey = async values => {
-    const surveyEntryAnswers = surveyBlocksManager.conciliateFormData(values)
+    const surveyEntryAnswers = surveyManager.conciliateFormData(values)
 
     const surveyEntry = {
       answers: surveyEntryAnswers,
@@ -150,7 +154,7 @@ export default function PublicSurvey({ data }) {
       onSubmit={submitSurvey}
       validationSchema={FormSchema}
     >
-      {renderBlocks(surveyBlocksManager.blocks)}
+      {renderBlocks(surveyManager.blocks)}
 
       <SurveyForm.Submit>Submit</SurveyForm.Submit>
     </SurveyForm>
@@ -163,7 +167,7 @@ export default function PublicSurvey({ data }) {
       <Container>
         <Logo />
 
-        <Title>{title}</Title>
+        <SurveyTitle>{title}</SurveyTitle>
 
         {page}
       </Container>

@@ -1,14 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 
-import { SURVEY_BLOCK_TYPE } from '../constants'
-import SurveyBlocksManager from '../SurveyBlocksManager'
+import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import SurveyManager from '../SurveyManager'
 
-describe('common/SurveyBlocksManager [CRUD Operations]', () => {
-  /** @type SurveyBlocksManager */
+describe('common/SurveyManager [CRUD Operations]', () => {
+  /** @type SurveyManager */
   let instance
 
   beforeAll(() => {
-    instance = new SurveyBlocksManager()
+    instance = new SurveyManager()
   })
 
   test('should add another text block after the first one', () => {

@@ -1,8 +1,8 @@
 import { styled } from '@singularity-ui/core'
 
-import AppfoTitle from '../../../atoms/Title'
+import SurveyTitle from '../../../atoms/SurveyTitle'
 
-const Title = styled(AppfoTitle)`
+const Title = styled(SurveyTitle)`
   :empty::before {
     content: 'Your Survey Title';
     cursor: text;
