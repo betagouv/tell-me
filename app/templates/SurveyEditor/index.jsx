@@ -27,8 +27,8 @@ export default function SurveyEditor() {
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
   const surveyManagerRef = useRef(new SurveyManager())
-  const [title, setTitle] = useState('...')
   const [isLoading, setIsLoading] = useState(true)
+  const [title, setTitle] = useState('...')
   const { id } = useParams()
   const api = useApi()
 
@@ -93,6 +93,12 @@ export default function SurveyEditor() {
 
   const toggleBlockVisibilityAt = index => {
     surveyManager.toggleBlockVisibilityAt(index)
+
+    forceUpdate()
+  }
+
+  const setIfSelectedThenShowQuestionIdAt = (index, questionBlockId) => {
+    surveyManager.setIfSelectedThenShowQuestionIdAt(index, questionBlockId)
 
     forceUpdate()
   }
@@ -169,6 +175,7 @@ export default function SurveyEditor() {
             index={index}
             isFocused={index === surveyManager.focusedBlockIndex}
             onChange={updateFocusedBlockValue}
+            onChangeCondition={setIfSelectedThenShowQuestionIdAt}
             onChangeType={changeFocusedBlockType}
             onDown={focusNextBlock}
             onEnter={appendOrResetFocusedBlock}
@@ -176,6 +183,7 @@ export default function SurveyEditor() {
             onRemove={removeFocusedBlock}
             onToggleVisibility={toggleBlockVisibilityAt}
             onUp={focusPreviousBlock}
+            questionBlockAsOptions={surveyManager.questionBlockAsOptions}
           />
         ))}
       </Body>

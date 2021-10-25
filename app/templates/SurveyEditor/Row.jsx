@@ -1,6 +1,6 @@
 import { css, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
-import { Eye, EyeOff, GitPullRequest, Move, Shield, ShieldOff, Trash } from 'react-feather'
+import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
 
 import { SurveyManagerBlockShape } from '../../shapes'
 
@@ -71,8 +71,8 @@ export default function Row({ block, children, onCondition, onDelete, onMove, on
       <Button accent="primary" className="Button" isDisabled={!block.isQuestion} onClick={onToggleVisibility}>
         {block.isHidden ? <EyeOff /> : <Eye />}
       </Button>
-      <Button accent="secondary" className="Button" isDisabled={!block.isQuestion} onClick={onCondition}>
-        <GitPullRequest />
+      <Button accent="secondary" className="Button" isDisabled={!block.isChoice} onClick={onCondition}>
+        <CornerDownRight />
       </Button>
       <Button accent="danger" className="Button" onClick={onDelete}>
         <Trash />

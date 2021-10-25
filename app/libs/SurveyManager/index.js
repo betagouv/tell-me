@@ -25,6 +25,11 @@ const INITIAL_BLOCKS = [
       page: 1,
       rank: 1,
     },
+    props: {
+      ifSelectedThenShowQuestionId: null,
+      isHidden: false,
+      isMandatory: false,
+    },
     type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
     value: 'This is some free text.',
   },
@@ -32,6 +37,11 @@ const INITIAL_BLOCKS = [
     position: {
       page: 1,
       rank: 2,
+    },
+    props: {
+      ifSelectedThenShowQuestionId: null,
+      isHidden: false,
+      isMandatory: false,
     },
     type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
     value: `What's your first question?`,
@@ -69,9 +79,18 @@ export default class SurveyManager {
     return this._blocks
   }
 
+  /** @return {Block[]} */
+  get questionBlockAsOptions() {
+    return R.pipe(
+      R.filter(isQuestionBlock),
+      R.map(({ _id, value }) => ({ label: value, value: _id })),
+    )(this._blocks)
+  }
+
   /** @param {BlockData} blocks */
   set blocks(blocks) {
     let isHidden = false
+    let questionId = null
 
     this._blocks = R.reduce((previousBlocks, block) => {
       const lastBlock = R.last(previousBlocks)
@@ -81,6 +100,15 @@ export default class SurveyManager {
       const additionalProps = {
         ...props,
         isCountable,
+      }
+
+      if (props.ifSelectedThenShowQuestionId !== null) {
+        const conditionalQuestionBlock = R.find(R.propEq('_id', props.ifSelectedThenShowQuestionId))(blocks)
+
+        additionalProps.questionBlockAsOption = {
+          label: conditionalQuestionBlock.value,
+          value: conditionalQuestionBlock._id,
+        }
       }
 
       if (isCountable) {
@@ -93,10 +121,12 @@ export default class SurveyManager {
 
       if (isQuestion) {
         isHidden = Boolean(additionalProps.isHidden)
+        questionId = _id
       } else {
         additionalProps.isHidden = isHidden
       }
 
+      additionalProps.questionId = questionId
       additionalProps.isUnlinked = false
 
       const normalizedBlock = new Block({ _id, position, type, value }, additionalProps)
@@ -157,7 +187,7 @@ export default class SurveyManager {
   }
 
   findBlockIndexById(id) {
-    return R.findIndex(R.propEq('id', id))(this.blocks)
+    return R.findIndex(R.propEq('_id', id))(this.blocks)
   }
 
   changeBlockTypeAt(index, newType) {
@@ -184,6 +214,18 @@ export default class SurveyManager {
       props: {
         ...this.blocks[index].props,
         isHidden: !this.blocks[index].props.isHidden,
+      },
+    }
+
+    this.blocks = R.update(index, updatedBlock)(this.blocks)
+  }
+
+  setIfSelectedThenShowQuestionIdAt(index, questionBlockId) {
+    const updatedBlock = {
+      ...this.blocks[index],
+      props: {
+        ...this.blocks[index].props,
+        ifSelectedThenShowQuestionId: questionBlockId,
       },
     }
 

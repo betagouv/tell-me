@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { styled } from '@singularity-ui/core'
+import { useFormikContext } from 'formik'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
@@ -44,23 +45,39 @@ const FormSchema = Yup.object().shape({})
 const isQuestion = R.pipe(R.prop('type'), R.equals(SURVEY_BLOCK_TYPE.CONTENT.QUESTION))
 const isInput = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
 
-const renderBlocks = blocks => {
+const renderBlocks = (blocks, values) => {
   let indexableBlockIndex = null
+  let isHidden = false
   let questionId = null
 
   return blocks.reduce((components, block, index) => {
-    if (block.isHidden) {
+    const { _id, countLetter, type, value } = block
+
+    if (isQuestion(block)) {
+      questionId = _id
+
+      if (block.isHidden) {
+        const maybeConditioningInputBlock = R.find(R.propEq('ifSelectedThenShowQuestionId', block._id))(blocks)
+        if (maybeConditioningInputBlock === undefined) {
+          isHidden = true
+
+          return components
+        }
+
+        const conditonalQuestionAnswerValue = values[maybeConditioningInputBlock.questionId]
+        isHidden = conditonalQuestionAnswerValue !== maybeConditioningInputBlock.value
+
+        if (isHidden) {
+          return components
+        }
+      }
+    } else if (isHidden) {
       return components
     }
 
-    const { countLetter, id, type, value } = block
     const Component = SURVEY_BLOCK_TYPE_COMPONENT[type]
     const isIndexable = isBlockTypeIndexable(type)
     const lastBlock = index > 0 ? blocks[index - 1] : null
-
-    if (isQuestion(block)) {
-      questionId = id
-    }
 
     if (!isIndexable) {
       indexableBlockIndex = null
@@ -75,7 +92,7 @@ const renderBlocks = blocks => {
 
     const newComponent = isInput(block) ? (
       <Component
-        key={id}
+        key={_id}
         countLetter={countLetter}
         index={indexableBlockIndex}
         label={label}
@@ -83,11 +100,17 @@ const renderBlocks = blocks => {
         value={label}
       />
     ) : (
-      <Component key={id} dangerouslySetInnerHTML={innerHTML} />
+      <Component key={_id} dangerouslySetInnerHTML={innerHTML} />
     )
 
     return [...components, newComponent]
   }, [])
+}
+
+const SurveyBlocks = ({ blocks }) => {
+  const { values } = useFormikContext()
+
+  return renderBlocks(blocks, values)
 }
 
 export default function PublicSurvey({ data }) {
@@ -96,9 +119,9 @@ export default function PublicSurvey({ data }) {
   const [isSent, setIsSent] = useState(false)
   const api = useApi()
 
-  const { _id: id, blocks, title } = data
+  const { _id, blocks, title } = data
   const surveyManager = new SurveyManager(blocks)
-  const surveySessionKey = `survey-${id}`
+  const surveySessionKey = `survey-${_id}`
 
   const loadFormDataFromSession = () => {
     const maybeValuesJson = window.sessionStorage.getItem(surveySessionKey)
@@ -129,7 +152,7 @@ export default function PublicSurvey({ data }) {
 
     const surveyEntry = {
       answers: surveyEntryAnswers,
-      survey: id,
+      survey: _id,
     }
 
     await api.post('survey-entry', surveyEntry)
@@ -154,7 +177,7 @@ export default function PublicSurvey({ data }) {
       onSubmit={submitSurvey}
       validationSchema={FormSchema}
     >
-      {renderBlocks(surveyManager.blocks)}
+      <SurveyBlocks blocks={surveyManager.blocks} />
 
       <SurveyForm.Submit>Submit</SurveyForm.Submit>
     </SurveyForm>

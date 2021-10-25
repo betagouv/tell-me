@@ -36,7 +36,7 @@ describe('common/SurveyManager [Form Operations]', () => {
     instance.fillWithFakeIds()
 
     const formData = {
-      [instance._blocks[2].id]: ['Choice 1', 'Choice 3'],
+      [instance._blocks[2]._id]: ['Choice 1', 'Choice 3'],
     }
 
     const result = instance.conciliateFormData(formData)
@@ -65,7 +65,7 @@ describe('common/SurveyManager [Form Operations]', () => {
     instance.fillWithFakeIds()
 
     const formData = {
-      [instance._blocks[2].id]: 'Option 2',
+      [instance._blocks[2]._id]: 'Option 2',
     }
 
     const result = instance.conciliateFormData(formData)

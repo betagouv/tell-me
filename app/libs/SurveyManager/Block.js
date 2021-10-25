@@ -41,7 +41,16 @@ export default class Block {
    */
   constructor(
     { _id, position, type, value },
-    { count, ifSelectedThenShowQuestionId, isCountable, isHidden, isMandatory, isUnlinked },
+    {
+      count,
+      ifSelectedThenShowQuestionId,
+      isCountable,
+      isHidden,
+      isMandatory,
+      isUnlinked,
+      questionBlockAsOption,
+      questionId,
+    },
   ) {
     /** @private */
     this._count = isCountable ? count : null
@@ -49,6 +58,8 @@ export default class Block {
     this._countLetter = isCountable ? getCountLetter(count) : null
     /** @private */
     this._ifSelectedThenShowQuestionId = ifSelectedThenShowQuestionId || null
+    /** @private */
+    this._isChoice = type === SURVEY_BLOCK_TYPE.INPUT.CHOICE
     /**
      * @private
      *
@@ -71,8 +82,12 @@ export default class Block {
      * If `true`, this means that this block is an input that can't be linked to a parent question block.
      */
     this._isUnlinked = isUnlinked
+    /** @private */
+    this._questionBlockAsOption = questionBlockAsOption || null
+    /** @private */
+    this._questionId = questionId
 
-    this.id = _id
+    this._id = _id
 
     this.position = position
     this.type = type
@@ -97,6 +112,10 @@ export default class Block {
     return this._ifSelectedThenShowQuestionId
   }
 
+  get isChoice() {
+    return this._isChoice
+  }
+
   get isCountable() {
     return this._isCountable
   }
@@ -119,5 +138,13 @@ export default class Block {
 
   get isUnlinked() {
     return this._isUnlinked
+  }
+
+  get questionBlockAsOption() {
+    return this._questionBlockAsOption
+  }
+
+  get questionId() {
+    return this._questionId
   }
 }

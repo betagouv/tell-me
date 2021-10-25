@@ -1,7 +1,10 @@
+import { Select, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { CornerDownRight } from 'react-feather'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import { SelectOptionShape, SurveyManagerBlockShape } from '../../shapes'
 import Checkbox from './blocks/Checkbox'
 import Choice from './blocks/Choice'
 import Paragraph from './blocks/Paragraph'
@@ -11,7 +14,6 @@ import TextInput from './blocks/TextInput'
 import Editable from './Editable'
 import Menu from './Menu'
 import Row from './Row'
-import * as Type from './types'
 
 const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: {
@@ -41,12 +43,27 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   },
 }
 
+const Condition = styled.div`
+  display: flex;
+  padding-bottom: 0.25rem;
+
+  > svg {
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+  }
+`
+
+const StyledSelect = styled(Select)`
+  width: 100%;
+`
+
 export default function Block({
   block,
   blocks,
   index,
   isFocused,
   onChange,
+  onChangeCondition,
   onChangeType,
   onDown,
   onEnter,
@@ -54,17 +71,36 @@ export default function Block({
   onRemove,
   onToggleVisibility,
   onUp,
+  questionBlockAsOptions,
 }) {
+  // console.log(questionBlockAsOptions)
+
+  const [isConditionOpen, setIsConditionOpen] = useState(block.ifSelectedThenShowQuestionId !== null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const { count, countLetter, position, type, value } = block
   const { component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
   const key = `${blocks.length}_${position.page}_${position.rank}`
-
   const finalPlaceholder = count !== null ? `${placeholder} ${count}` : placeholder
 
   const closeMenu = () => {
     setIsMenuOpen(false)
+  }
+
+  const setCondition = ({ value }) => {
+    onChangeCondition(index, value)
+  }
+
+  const toggleCondition = () => {
+    if (block.ifSelectedThenShowQuestionId !== null) {
+      onChangeCondition(index, null)
+    }
+
+    setIsConditionOpen(!isConditionOpen)
+  }
+
+  const toggleVisibility = () => {
+    onToggleVisibility(index)
   }
 
   return (
@@ -72,9 +108,9 @@ export default function Block({
       key={key}
       block={block}
       className="Row"
-      is
+      onCondition={toggleCondition}
       onDelete={onRemove}
-      onToggleVisibility={() => onToggleVisibility(index)}
+      onToggleVisibility={toggleVisibility}
     >
       <Editable
         key={key}
@@ -94,17 +130,30 @@ export default function Block({
         value={value}
       />
 
+      {isConditionOpen && (
+        <Condition>
+          <CornerDownRight />
+          <StyledSelect
+            defaultValue={block.questionBlockAsOption}
+            onChange={setCondition}
+            options={questionBlockAsOptions}
+            size="small"
+          />
+        </Condition>
+      )}
+
       {isMenuOpen && <Menu onClose={closeMenu} onSelect={newType => onChangeType(index, newType)} />}
     </Row>
   )
 }
 
 Block.propTypes = {
-  block: Type.Block.isRequired,
-  blocks: PropTypes.arrayOf(Type.Block).isRequired,
+  block: PropTypes.shape(SurveyManagerBlockShape).isRequired,
+  blocks: PropTypes.arrayOf(PropTypes.shape(SurveyManagerBlockShape)).isRequired,
   index: PropTypes.number.isRequired,
   isFocused: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  onChangeCondition: PropTypes.func.isRequired,
   onChangeType: PropTypes.func.isRequired,
   onDown: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
@@ -112,4 +161,5 @@ Block.propTypes = {
   onRemove: PropTypes.func.isRequired,
   onToggleVisibility: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
+  questionBlockAsOptions: PropTypes.arrayOf(PropTypes.shape(SelectOptionShape)).isRequired,
 }
