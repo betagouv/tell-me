@@ -12,7 +12,7 @@
     "prepare": "husky install && node -r dotenv/config ./scripts/dev/setup.js",
     "start": "next start",
     "test": "yarn test:lint && yarn test:unit",
-    "test:lint": "eslint .",
+    "test:lint": "eslint --ext js,jsx .",
     "test:unit": "jest",
     "test:watch": "jest --watch"
   },
