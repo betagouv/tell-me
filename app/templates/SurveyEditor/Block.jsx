@@ -51,7 +51,6 @@ export default function Block({
   onDown,
   onEnter,
   onFocus,
-  onFocusFromOutside,
   onRemove,
   onUp,
 }) {
@@ -67,16 +66,8 @@ export default function Block({
     setIsMenuOpen(false)
   }
 
-  const maybeFocus = event => {
-    if (event.target.contentEditable === 'true') {
-      return
-    }
-
-    onFocusFromOutside(index)
-  }
-
   return (
-    <Row key={key} className="Row" onClick={maybeFocus}>
+    <Row key={key} className="Row">
       <Editable
         key={key}
         Component={component}
@@ -110,7 +101,6 @@ Block.propTypes = {
   onDown: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
-  onFocusFromOutside: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
 }

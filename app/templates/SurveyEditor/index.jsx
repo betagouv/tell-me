@@ -113,12 +113,6 @@ export default function SurveyEditor() {
     forceUpdate()
   }
 
-  const focusAndUpdateAt = index => {
-    surveyBlocksManager.setFocusAt(index)
-
-    forceUpdate()
-  }
-
   const focusPreviousBlock = () => {
     surveyBlocksManager.focusPreviousBlock()
 
@@ -168,7 +162,6 @@ export default function SurveyEditor() {
           onDown={focusNextBlock}
           onEnter={appendOrResetFocusedBlock}
           onFocus={surveyBlocksManager.setFocusAt}
-          onFocusFromOutside={focusAndUpdateAt}
           onRemove={removeFocusedBlock}
           onUp={focusPreviousBlock}
         />

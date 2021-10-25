@@ -6,7 +6,6 @@ const Container = styled.div`
 
   :hover {
     background-color: #ffffff;
-    cursor: text;
   }
 `
 
