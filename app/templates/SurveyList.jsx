@@ -1,7 +1,7 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
-import { Edit, Eye, Trash } from 'react-feather'
+import { Database, Edit, Eye, Trash } from 'react-feather'
 import { useHistory } from 'react-router-dom'
 
 import AdminBox from '../atoms/AdminBox'
@@ -39,6 +39,10 @@ export default function SurveyList() {
     loadSurveys()
   }, [])
 
+  const goToSurveyEntryList = id => {
+    history.push(`/survey/${id}/entries`)
+  }
+
   const openSurvey = id => {
     const survey = R.find(R.propEq('_id', id))(surveys)
 
@@ -58,7 +62,14 @@ export default function SurveyList() {
   const columns = [
     ...BASE_COLUMNS,
     {
-      accent: 'secondary',
+      accent: 'success',
+      action: goToSurveyEntryList,
+      Icon: Database,
+      label: 'View this survey results',
+      type: 'action',
+    },
+    {
+      accent: 'primary',
       action: openSurvey,
       Icon: Eye,
       label: 'Preview this survey',

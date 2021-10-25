@@ -11,6 +11,7 @@ import Menu from '../app/organisms/Menu'
 import SetupModal from '../app/organisms/SetupModal'
 import Dashboard from '../app/templates/Dashboard'
 import SurveyEditor from '../app/templates/SurveyEditor'
+import SurveyEntryList from '../app/templates/SurveyEntryList'
 import SurveyList from '../app/templates/SurveyList'
 import UserEditor from '../app/templates/UserEditor'
 import UsersList from '../app/templates/UserList'
@@ -70,6 +71,9 @@ export default function SpaPage() {
 
         <Main>
           <Switch>
+            <Route path="/survey/:id/entries">
+              <SurveyEntryList />
+            </Route>
             <Route path="/survey/:id">
               <SurveyEditor />
             </Route>

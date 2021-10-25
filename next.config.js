@@ -21,8 +21,12 @@ module.exports = {
       source: '/api/asset/:fileName*',
     },
     {
+      destination: '/api/survey/entries',
+      source: '/api/survey/:id*/entries',
+    },
+    {
       destination: '/api/survey/upload',
-      source: '/api/survey/upload/:id*',
+      source: '/api/survey/:id*/upload',
     },
     {
       destination: '/api/survey',

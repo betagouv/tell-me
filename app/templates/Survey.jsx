@@ -157,7 +157,7 @@ export default function PublicSurvey({ data }) {
       survey: _id,
     }
 
-    await api.post('survey-entry', surveyEntry)
+    await api.post('survey/entry', surveyEntry)
 
     clearFormDataFromSession()
     setIsSent(true)

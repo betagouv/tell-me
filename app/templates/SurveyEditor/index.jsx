@@ -77,11 +77,11 @@ export default function SurveyEditor() {
   }
 
   const uploadHeader = async formData => {
-    await api.put(`survey/upload/${id}?type=header`, formData)
+    await api.put(`survey/${id}/upload?type=header`, formData)
   }
 
   const uploadLogo = async formData => {
-    await api.put(`survey/upload/${id}?type=logo`, formData)
+    await api.put(`survey/${id}/upload?type=logo`, formData)
   }
 
   const changeFocusedBlockType = (index, newType) => {
