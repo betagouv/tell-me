@@ -2,25 +2,12 @@ import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
 
-const Container = styled.div`
-  height: 5rem;
-  position: relative;
-`
+import SurveyLogo from '../../atoms/SurveyLogo'
 
-const Placeholder = styled.div`
-  background-color: #d5e5a3;
-  background-image: url('/api/asset/${p => p.surveyId}-logo.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+const StyledSurveyLogo = styled(SurveyLogo)`
   border: solid 2px #d5e5a3;
-  border-radius: 50%;
   display: flex;
-  height: 6rem;
   left: 2.5rem;
-  position: absolute;
-  top: -3rem;
-  width: 6rem;
 
   :hover {
     background-color: white;
@@ -52,11 +39,9 @@ export default function Logo({ onChange, surveyId }) {
   }
 
   return (
-    <Container>
-      <Placeholder ref={$logo} surveyId={surveyId}>
-        <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
-      </Placeholder>
-    </Container>
+    <StyledSurveyLogo ref={$logo} surveyId={surveyId}>
+      <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
+    </StyledSurveyLogo>
   )
 }
 

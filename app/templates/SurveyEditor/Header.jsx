@@ -2,13 +2,9 @@ import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
 
-import AppfoHeader from '../../atoms/Header'
+import SurveyHeader from '../../atoms/SurveyHeader'
 
-const StyledHeader = styled(AppfoHeader)`
-  background-image: url('/api/asset/${p => p.surveyId}-header.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+const StyledSurveyHeader = styled(SurveyHeader)`
   display: flex;
   opacity: 0.75 !important;
 
@@ -42,9 +38,9 @@ export default function Header({ onChange, surveyId }) {
   }
 
   return (
-    <StyledHeader ref={$header} surveyId={surveyId}>
+    <StyledSurveyHeader ref={$header} surveyId={surveyId}>
       <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
-    </StyledHeader>
+    </StyledSurveyHeader>
   )
 }
 

@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../common/constants'
-import Header from '../atoms/Header'
-import Logo from '../atoms/Logo'
 import Paragraph from '../atoms/Paragraph'
 import Question from '../atoms/Question'
+import SurveyHeader from '../atoms/SurveyHeader'
+import SurveyLogo from '../atoms/SurveyLogo'
 import SurveyTitle from '../atoms/SurveyTitle'
 import useApi from '../hooks/useApi'
 import SurveyManager from '../libs/SurveyManager'
@@ -187,10 +187,10 @@ export default function PublicSurvey({ data }) {
 
   return (
     <Page>
-      <Header />
+      <SurveyHeader surveyId={_id} />
 
       <Container>
-        <Logo />
+        <SurveyLogo surveyId={_id} />
 
         <SurveyTitle>{title}</SurveyTitle>
 
