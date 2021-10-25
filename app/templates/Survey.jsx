@@ -70,6 +70,8 @@ const renderBlocks = (blocks, values) => {
         if (isHidden) {
           return components
         }
+      } else {
+        isHidden = false
       }
     } else if (isHidden) {
       return components
