@@ -13,7 +13,7 @@ const MENU_ITEMS = [
   {
     blockType: SURVEY_BLOCK_TYPE.INPUT.CHOICE,
     // Icon: DoneAllIcon,
-    label: 'Multiple choice',
+    label: 'Choice',
   },
   {
     blockType: SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
