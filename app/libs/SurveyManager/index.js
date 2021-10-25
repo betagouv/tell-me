@@ -242,6 +242,11 @@ export default class SurveyManager {
         ...this.focusedBlock.position,
         rank: this.focusedBlock.position.rank + 1,
       },
+      props: {
+        ifSelectedThenShowQuestionId: null,
+        isHidden: false,
+        isMandatory: false,
+      },
       type,
       value: '',
     }

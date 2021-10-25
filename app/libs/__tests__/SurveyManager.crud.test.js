@@ -19,15 +19,30 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     expect(instance._blocks).toMatchObject([
       {
         position: { rank: 1 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
       },
       {
         position: { rank: 2 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
         value: '',
       },
       {
         position: { rank: 3 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
     ])
@@ -41,18 +56,38 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     expect(instance._blocks).toMatchObject([
       {
         position: { rank: 1 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
       },
       {
         position: { rank: 2 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
       },
       {
         position: { rank: 3 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
       {
         position: { rank: 4 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
       },
     ])
@@ -66,15 +101,30 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     expect(instance._blocks).toMatchObject([
       {
         position: { rank: 1 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
         value: '',
       },
       {
         position: { rank: 2 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
       {
         position: { rank: 3 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
       },
     ])
@@ -88,10 +138,20 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     expect(instance._blocks).toMatchObject([
       {
         position: { rank: 1 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
       },
       {
         position: { rank: 2 },
+        props: {
+          ifSelectedThenShowQuestionId: null,
+          isHidden: false,
+          isMandatory: false,
+        },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
     ])
