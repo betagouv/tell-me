@@ -105,8 +105,6 @@ export default function withAuth(Component) {
           isLoading: false,
         })
       })()
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles'
+import { styled } from '@singularity-ui/core'
 import { Formik, Form as FormikForm, useFormikContext } from 'formik'
 import debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'

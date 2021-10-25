@@ -1,7 +1,6 @@
-import Box from '@mui/material/Box'
-import { styled } from '@mui/material/styles'
+import { styled } from '@singularity-ui/core'
 
-const StyledOverlay = styled(Box)`
+const StyledOverlay = styled.div`
   align-items: center;
   display: flex;
   flex-grow: 1;

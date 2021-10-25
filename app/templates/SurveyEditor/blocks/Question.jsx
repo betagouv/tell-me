@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '@singularity-ui/core'
 
 import AppfoQuestion from '../../../atoms/Question'
 

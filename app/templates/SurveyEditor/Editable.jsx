@@ -121,8 +121,6 @@ export default function Editable({
         })
       }
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
   const innerHTML = { __html: value }

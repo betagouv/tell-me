@@ -1,12 +1,14 @@
 import * as Yup from 'yup'
 
-import useApi from '../../hooks/useApi'
-import useAuth from '../../hooks/useAuth'
-import Form from '../../molecules/Form'
-import Modal from '../../molecules/Modal'
+import Field from '../atoms/Field'
+import Title from '../atoms/Title'
+import useApi from '../hooks/useApi'
+import useAuth from '../hooks/useAuth'
+import Form from '../molecules/Form'
+import Modal from '../molecules/Modal'
 
 const FormSchema = Yup.object().shape({
-  email: Yup.string().required(`Please enter your email address.`).email(`This email doesn't look well formatted.`),
+  email: Yup.string().required(`Please enter your email address.`).email(`This email doesn't seem well formatted.`),
   password: Yup.string().required(`Please enter your password.`),
 })
 
@@ -57,7 +59,7 @@ export default function LoginModal() {
 
   return (
     <Modal>
-      <Modal.Title>Log In</Modal.Title>
+      <Title>Log In</Title>
 
       <Form
         autoComplete
@@ -65,10 +67,16 @@ export default function LoginModal() {
         onSubmit={getSessionJwtAndLogIn}
         validationSchema={FormSchema}
       >
-        <Form.Input autoComplete="email" label="Email" name="email" type="email" />
-        <Form.Input autoComplete="current-password" label="Password" name="password" type="password" />
+        <Field>
+          <Form.Input autoComplete="email" label="Email" name="email" type="email" />
+        </Field>
+        <Field>
+          <Form.Input autoComplete="current-password" label="Password" name="password" type="password" />
+        </Field>
 
-        <Form.Submit>Log In</Form.Submit>
+        <Field>
+          <Form.Submit>Log In</Form.Submit>
+        </Field>
       </Form>
     </Modal>
   )

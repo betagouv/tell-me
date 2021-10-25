@@ -1,13 +1,4 @@
-import DoneAllIcon from '@mui/icons-material/DoneAllOutlined'
-import DoneIcon from '@mui/icons-material/DoneOutlined'
-import HelpIcon from '@mui/icons-material/HelpOutline'
-import ShortTextIcon from '@mui/icons-material/ShortTextOutlined'
-import ViewHeadlineIcon from '@mui/icons-material/ViewHeadlineOutlined'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import MenuItem from '@mui/material/MenuItem'
-import MenuList from '@mui/material/MenuList'
-import Popover from '@mui/material/Popover'
+import { css, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 
@@ -16,35 +7,71 @@ import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 const MENU_ITEMS = [
   {
     blockType: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
-    Icon: HelpIcon,
+    // Icon: HelpIcon,
     label: 'Question',
   },
   {
     blockType: SURVEY_BLOCK_TYPE.INPUT.CHOICE,
-    Icon: DoneAllIcon,
+    // Icon: DoneAllIcon,
     label: 'Multiple choice',
   },
   {
     blockType: SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
-    Icon: DoneIcon,
+    // Icon: DoneIcon,
     label: 'Checkboxes',
   },
   {
     blockType: SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER,
-    Icon: ShortTextIcon,
+    // Icon: ShortTextIcon,
     label: 'Short Answer',
   },
   {
     blockType: SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER,
-    Icon: ViewHeadlineIcon,
+    // Icon: ViewHeadlineIcon,
     label: 'Long Answer',
   },
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
+const Box = styled.div`
+  position: relative;
+`
+
+const FocusInput = styled.input`
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+`
+
+const FloatingMenu = styled.div`
+  background-color: ${p => p.theme.color.primary.default};
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: -2rem;
+`
+
+const MenuItem = styled.div`
+  color: ${p => p.theme.color.body.white};
+  cursor: pointer;
+  display: inline-block;
+  padding: ${p => p.theme.padding.button.medium};
+
+  :hover {
+    background-color: ${p => p.theme.color.primary.active};
+  }
+
+  ${p =>
+    p.isSelected &&
+    css`
+      background-color: ${p => p.theme.color.primary.active};
+    `}
+`
+
 export default function Menu({ onClose, onSelect }) {
-  const $anchor = useRef(null)
-  const [isMounted, setIsMounted] = useState(false)
+  const $focusInput = useRef(null)
+  // const [isMounted, setIsMounted] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const moveUp = () => {
@@ -95,44 +122,29 @@ export default function Menu({ onClose, onSelect }) {
   }
 
   useEffect(() => {
-    setIsMounted(true)
+    // setIsMounted(true)
+
+    $focusInput.current.focus()
   }, [])
 
   return (
-    <>
-      <div ref={$anchor} />
+    <Box>
+      <FocusInput ref={$focusInput} onKeyDown={controlKey} type="text" />
 
-      <Popover
-        anchorEl={$anchor.current}
-        anchorOrigin={{
-          horizontal: 'left',
-          vertical: 'bottom',
-        }}
-        onClose={onClose}
-        onKeyDown={controlKey}
-        open={isMounted}
-        transformOrigin={{
-          horizontal: 'left',
-          vertical: 'top',
-        }}
-      >
-        <MenuList>
-          {MENU_ITEMS.map(({ Icon, label }, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <MenuItem
-              key={label}
-              onClick={() => onSelect(MENU_ITEMS[index].blockType)}
-              selected={index === selectedIndex}
-            >
-              <ListItemIcon>
-                <Icon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText>{label}</ListItemText>
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Popover>
-    </>
+      <FloatingMenu>
+        {MENU_ITEMS.map(({ label }, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <MenuItem
+            key={label}
+            isSelected={index === selectedIndex}
+            onClick={() => onSelect(MENU_ITEMS[index].blockType)}
+          >
+            {/* <Icon fontSize="small" /> */}
+            {label}
+          </MenuItem>
+        ))}
+      </FloatingMenu>
+    </Box>
   )
 }
 

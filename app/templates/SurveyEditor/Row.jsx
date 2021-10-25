@@ -1,5 +1,5 @@
+import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
 const Container = styled.div`
   padding: 0 5rem;

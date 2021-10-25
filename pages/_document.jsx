@@ -1,5 +1,5 @@
+import { ServerStyleSheet } from '@singularity-ui/core'
 import Document from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
 
 export default class TellMeDocument extends Document {
   static async getInitialProps(ctx) {
@@ -9,7 +9,6 @@ export default class TellMeDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          // eslint-disable-next-line react/jsx-props-no-spreading
           enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         })
 

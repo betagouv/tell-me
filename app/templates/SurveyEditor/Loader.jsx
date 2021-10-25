@@ -1,22 +1,21 @@
-import MuiBox from '@mui/material/Box'
-import MuiSkeleton from '@mui/material/Skeleton'
-import { styled } from '@mui/material/styles'
+import { styled } from '@singularity-ui/core'
 
 import Title from '../../atoms/Title'
 
-const Header = styled(MuiSkeleton)`
+const Header = styled.div`
   background-color: #cccccc;
   height: 10rem;
 `
 
-const LogoContainer = styled(MuiBox)`
+const LogoContainer = styled.div`
   height: 5rem;
   position: relative;
 `
 
-const Logo = styled(MuiSkeleton)`
+const Logo = styled.div`
   background-color: #dddddd;
   border: solid 2px #dddddd;
+  border-radius: 50%;
   height: 6rem;
   left: 2.5rem;
   position: absolute;
@@ -24,11 +23,11 @@ const Logo = styled(MuiSkeleton)`
   width: 6rem;
 `
 
-const TitleRow = styled(MuiBox)`
+const TitleRow = styled.div`
   padding: 0 5rem;
 `
 
-const Text = styled(MuiSkeleton)`
+const Text = styled.div`
   background-color: #cccccc;
 `
 

@@ -1,6 +1,6 @@
+import { styled } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
 import Choice from '../../atoms/Choice'
 

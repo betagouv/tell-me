@@ -58,4 +58,10 @@ export const USER_ROLE = {
   VIEWER: 'VIEWER',
 }
 
+export const USER_ROLE_LABEL = {
+  ADMINISTRATOR: 'Administror',
+  MANAGER: 'Manager',
+  VIEWER: 'Viewer',
+}
+
 export const USER_ROLES = Object.values(USER_ROLE)

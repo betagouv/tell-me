@@ -1,16 +1,11 @@
-import Box from '@mui/material/Box'
-import { styled } from '@mui/material/styles'
+import { styled } from '@singularity-ui/core'
 
-const StyledOverlay = styled(Box)`
-  align-items: flex-end;
+const StyledOverlay = styled.div`
+  align-items: center;
   display: flex;
   flex-grow: 1;
   justify-content: center;
   padding: 2rem;
-
-  ${({ theme }) => theme.breakpoints.up('sm')} {
-    align-items: center;
-  }
 `
 
 export default function Overlay({ children }) {

@@ -1,6 +1,6 @@
+import { styled } from '@singularity-ui/core'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
 
 import isFirstSetup from '../app/helpers/isFirstSetup'
 import useAuth from '../app/hooks/useAuth'
@@ -12,9 +12,9 @@ import Menu from '../app/organisms/Menu'
 import SetupModal from '../app/organisms/SetupModal'
 import Dashboard from '../app/templates/Dashboard'
 import SurveyEditor from '../app/templates/SurveyEditor'
-import SurveysList from '../app/templates/SurveysList'
+import SurveyList from '../app/templates/SurveyList'
 import UserEditor from '../app/templates/UserEditor'
-import UsersList from '../app/templates/UsersList'
+import UsersList from '../app/templates/UserList'
 
 const Page = styled.div`
   display: flex;
@@ -56,8 +56,6 @@ export default function SpaPage() {
 
   useEffect(() => {
     checkSetup()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (mustSetup === null || authState.isLoading) {
@@ -82,18 +80,20 @@ export default function SpaPage() {
 
           <Main>
             <Switch>
-              <Route path="/surveys">
-                <SurveysList />
-              </Route>
               <Route path="/survey/:id">
                 <SurveyEditor />
+              </Route>
+              <Route path="/surveys">
+                <SurveyList />
+              </Route>
+
+              <Route path="/user/:id">
+                <UserEditor />
               </Route>
               <Route path="/users">
                 <UsersList />
               </Route>
-              <Route path="/user/:id">
-                <UserEditor />
-              </Route>
+
               <Route path="/">
                 <Dashboard />
               </Route>

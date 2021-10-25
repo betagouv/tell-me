@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles'
+import { styled } from '@singularity-ui/core'
 import { Formik, Form as FormikForm } from 'formik'
 import PropTypes from 'prop-types'
 import * as Yup from 'yup'
@@ -7,6 +7,7 @@ import Checkbox from './Checkbox'
 import Input from './Input'
 import Select from './Select'
 import Submit from './Submit'
+import Textarea from './Textarea'
 
 const StyledForm = styled(FormikForm)`
   display: flex;
@@ -50,4 +51,5 @@ export default Object.assign(Form, {
   Input,
   Select,
   Submit,
+  Textarea,
 })

@@ -1,41 +1,56 @@
-import MuiMenuItem from '@mui/material/MenuItem'
-import MuiSelect from '@mui/material/Select'
-// import { styled } from '@mui/material/styles'
+import { Select as SingularitySelect } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-export default function Select({ isDisabled, label, name, onChange, options }) {
-  const { handleChange, values } = useFormikContext()
+export default function Select({ helper, isAsync, isDisabled, isMulti, label, name, noLabel, options }) {
+  const { errors, setFieldValue, submitCount, touched, values } = useFormikContext()
 
-  const handleFinalChange = event => {
-    if (onChange !== null) {
-      onChange(event)
-    }
+  const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
+  const maybeError = hasError ? errors[name] : null
 
-    handleChange(event)
+  const updateFormikValues = option => {
+    setFieldValue(name, option)
   }
 
   return (
-    <MuiSelect disabled={isDisabled} label={label} name={name} onChange={handleFinalChange} value={values[name]}>
-      {options.map(([value, label]) => (
-        <MuiMenuItem key={value} value={value}>
-          {label}
-        </MuiMenuItem>
-      ))}
-    </MuiSelect>
+    <SingularitySelect
+      cacheOptions={isAsync}
+      defaultValue={values[name]}
+      disabled={isDisabled}
+      error={maybeError}
+      helper={helper}
+      isAsync={isAsync}
+      isMulti={isMulti}
+      label={!noLabel ? label : null}
+      loadOptions={isAsync ? options : null}
+      name={name}
+      onChange={updateFormikValues}
+      // onInputChange={isAsync ? updateFormikValues2 : null}
+      options={!isAsync ? options : undefined}
+      placeholder={noLabel ? label : null}
+    />
   )
 }
 
 Select.defaultProps = {
+  helper: ' ',
+  isAsync: false,
   isDisabled: false,
-  onChange: null,
+  isMulti: false,
+  noLabel: false,
 }
 
 Select.propTypes = {
+  helper: PropTypes.string,
+  isAsync: PropTypes.bool,
   isDisabled: PropTypes.bool,
+  isMulti: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  options: PropTypes.array.isRequired,
+  noLabel: PropTypes.bool,
+  options: PropTypes.oneOfType([
+    // eslint-disable-next-line react/forbid-prop-types
+    PropTypes.array,
+    PropTypes.func,
+  ]).isRequired,
 }

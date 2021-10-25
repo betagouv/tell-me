@@ -5,7 +5,7 @@ import Context from './Context'
 
 const handleApiError = async (err, clearSessionToken, method, isAuthenticated) => {
   if (err?.response === undefined) {
-    handleError(err, `components/hocs/withApi#${method}()`)
+    handleError(err, `components/hocs/WithApi#${method}()`)
 
     return null
   }

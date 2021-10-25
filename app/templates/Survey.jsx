@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
+import { styled } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../common/constants'
@@ -136,8 +136,6 @@ export default function PublicSurvey({ data }) {
 
   useEffect(() => {
     loadFormDataFromSession()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // eslint-disable-next-line no-nested-ternary

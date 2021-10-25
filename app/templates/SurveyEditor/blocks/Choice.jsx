@@ -1,6 +1,6 @@
+import { styled } from '@singularity-ui/core'
 import PropsTypes from 'prop-types'
 import { forwardRef } from 'react'
-import styled from 'styled-components'
 
 import AppfoChoice from '../../../atoms/Choice'
 

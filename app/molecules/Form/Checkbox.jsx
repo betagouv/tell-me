@@ -1,39 +1,33 @@
-import MuiCheckbox from '@mui/material/Checkbox'
-import MuiFormControlLabel from '@mui/material/FormControlLabel'
-// import { styled } from '@mui/material/styles'
+import { Checkbox as SingularityCheckbox } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-export default function Checkbox({ isDisabled, label, name, onChange }) {
-  const { handleChange, values } = useFormikContext()
+export default function Checkbox({ isDisabled, label, name }) {
+  const { setFieldValue, values } = useFormikContext()
 
-  const handleFinalChange = event => {
-    if (onChange !== null) {
-      onChange(event)
-    }
+  const isChecked = Boolean(values[name])
 
-    handleChange(event)
+  const updateFormikValues = event => {
+    setFieldValue(name, event.target.checked)
   }
 
   return (
-    <MuiFormControlLabel
-      checked={values[name]}
-      control={<MuiCheckbox name={name} />}
+    <SingularityCheckbox
+      defaultChecked={isChecked}
       disabled={isDisabled}
       label={label}
-      onChange={handleFinalChange}
+      name={name}
+      onChange={updateFormikValues}
     />
   )
 }
 
 Checkbox.defaultProps = {
   isDisabled: false,
-  onChange: null,
 }
 
 Checkbox.propTypes = {
   isDisabled: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
 }

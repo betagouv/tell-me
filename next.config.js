@@ -1,6 +1,4 @@
-const withTranspileModules = require('next-transpile-modules')(['@mui/material', '@mui/system'])
-
-module.exports = withTranspileModules({
+module.exports = {
   eslint: {
     // https://nextjs.org/docs/api-reference/next.config.js/ignoring-eslint
     ignoreDuringBuilds: true,
@@ -47,13 +45,4 @@ module.exports = withTranspileModules({
       source: '/:any*',
     },
   ],
-  webpack: config => {
-    // eslint-disable-next-line no-param-reassign
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@mui/styled-engine': '@mui/styled-engine-sc',
-    }
-
-    return config
-  },
-})
+}

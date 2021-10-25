@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '@singularity-ui/core'
 
 import AppfoTitle from '../../../atoms/Title'
 

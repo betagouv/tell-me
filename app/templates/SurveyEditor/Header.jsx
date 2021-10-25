@@ -1,6 +1,6 @@
+import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
-import styled from 'styled-components'
 
 import AppfoHeader from '../../atoms/Header'
 

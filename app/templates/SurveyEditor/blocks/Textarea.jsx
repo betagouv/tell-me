@@ -1,5 +1,5 @@
+import { styled } from '@singularity-ui/core'
 import { forwardRef } from 'react'
-import styled from 'styled-components'
 
 import AppfoTextarea from '../../../atoms/Textarea'
 
