@@ -58,15 +58,16 @@ const renderBlocks = (blocks, values) => {
       questionId = _id
 
       if (block.isHidden) {
-        const maybeConditioningInputBlock = R.find(R.propEq('ifSelectedThenShowQuestionId', block._id))(blocks)
-        if (maybeConditioningInputBlock === undefined) {
+        const maybeConditioningInputBlocks = R.filter(R.propEq('ifSelectedThenShowQuestionId', block._id))(blocks)
+        if (maybeConditioningInputBlocks.length === 0) {
           isHidden = true
 
           return components
         }
 
-        const conditonalQuestionAnswerValue = values[maybeConditioningInputBlock.questionId]
-        isHidden = conditonalQuestionAnswerValue !== maybeConditioningInputBlock.value
+        const conditioningInputBlockValues = R.map(R.prop('value'))(maybeConditioningInputBlocks)
+        const conditonalQuestionAnswerValue = values[maybeConditioningInputBlocks[0].questionId]
+        isHidden = !conditioningInputBlockValues.includes(conditonalQuestionAnswerValue)
 
         if (isHidden) {
           return components
