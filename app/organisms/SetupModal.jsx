@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import zxcvbn from 'zxcvbn'
 
-import useApi from '../../hooks/useApi'
-import Form from '../../molecules/Form'
-import Modal from '../../molecules/Modal'
+import Field from '../atoms/Field'
+import Title from '../atoms/Title'
+import useApi from '../hooks/useApi'
+import Form from '../molecules/Form'
+import Modal from '../molecules/Modal'
 
 const FormSchema = Yup.object().shape({
   email: Yup.string().required(`Please enter your email address.`).email(`This email doesn't look well formatted.`),
@@ -64,26 +66,34 @@ export default function SetupModal({ onDone }) {
 
   return (
     <Modal>
-      <Modal.Title>First User Setup</Modal.Title>
+      <Title>First User Setup</Title>
 
       <Form autoComplete onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
-        <Form.Input autoComplete="email" label="Your email" name="email" type="email" />
-        <Form.Input
-          autoComplete="new-password"
-          helperText={passwordHelperText}
-          label="A new password"
-          name="password"
-          onChange={checkPasswordStrength}
-          type="password"
-        />
-        <Form.Input
-          autoComplete="new-password"
-          label="Your new password (again)"
-          name="passwordConfirmation"
-          type="password"
-        />
+        <Field>
+          <Form.Input autoComplete="email" label="Your email" name="email" type="email" />
+        </Field>
+        <Field>
+          <Form.Input
+            autoComplete="new-password"
+            helperText={passwordHelperText}
+            label="A new password"
+            name="password"
+            onChange={checkPasswordStrength}
+            type="password"
+          />
+        </Field>
+        <Field>
+          <Form.Input
+            autoComplete="new-password"
+            label="Your new password (again)"
+            name="passwordConfirmation"
+            type="password"
+          />
+        </Field>
 
-        <Form.Submit>Create</Form.Submit>
+        <Field>
+          <Form.Submit>Create</Form.Submit>
+        </Field>
       </Form>
     </Modal>
   )
