@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
+import mongoose from 'mongoose'
 import * as R from 'ramda'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
@@ -238,6 +239,7 @@ export default class SurveyManager {
     }
 
     const newBlock = {
+      _id: new mongoose.Types.ObjectId().toString(),
       position: {
         ...this.focusedBlock.position,
         rank: this.focusedBlock.position.rank + 1,
