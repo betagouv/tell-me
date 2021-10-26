@@ -22,6 +22,7 @@ import Block from './Block'
 
 const INITIAL_BLOCKS = [
   {
+    _id: new mongoose.Types.ObjectId().toString(),
     position: {
       page: 1,
       rank: 1,
@@ -35,6 +36,7 @@ const INITIAL_BLOCKS = [
     value: 'This is some free text.',
   },
   {
+    _id: new mongoose.Types.ObjectId().toString(),
     position: {
       page: 1,
       rank: 2,
