@@ -33,13 +33,13 @@ export default function SurveyEntryList() {
         answers.forEach(answer => {
           if (!headers.includes(answer.question)) {
             headers.push(answer.question)
-            rowData.push(answer.answers.join(', '))
+            rowData.push(answer.values.join(', '))
 
             return
           }
 
           const headerIndex = R.findIndex(R.equals(answer.question))(headers)
-          rowData[headerIndex] = answer.answers.join(', ')
+          rowData[headerIndex] = answer.values.join(', ')
         })
 
         return [headers, ...values, rowData]

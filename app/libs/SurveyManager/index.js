@@ -363,9 +363,9 @@ export default class SurveyManager {
         const questionBlockType = this.getQuestionTypeAt(questionBlockIndex)
 
         return {
-          answers: Array.isArray(answerOrAnswers) ? answerOrAnswers : [answerOrAnswers],
           question: questionBlock.value,
           type: questionBlockType,
+          values: Array.isArray(answerOrAnswers) ? answerOrAnswers : [answerOrAnswers],
         }
       }),
     )(formData)

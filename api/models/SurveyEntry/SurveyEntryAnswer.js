@@ -12,7 +12,7 @@ const SurveyEntryAnswer = new mongoose.Schema({
     type: String,
     enum: SURVEY_BLOCK_TYPES,
   },
-  answers: {
+  values: {
     required: true,
     type: [String],
   },

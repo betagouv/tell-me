@@ -43,9 +43,9 @@ describe('common/SurveyManager [Form Operations]', () => {
 
     expect(result).toMatchObject([
       {
-        answers: ['Choice 1', 'Choice 3'],
         question: 'Checkbox question',
         type: SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
+        values: ['Choice 1', 'Choice 3'],
       },
     ])
   })
@@ -72,9 +72,9 @@ describe('common/SurveyManager [Form Operations]', () => {
 
     expect(result).toMatchObject([
       {
-        answers: ['Option 2'],
         question: 'Choice question',
         type: SURVEY_BLOCK_TYPE.INPUT.CHOICE,
+        values: ['Option 2'],
       },
     ])
   })
