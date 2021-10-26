@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom'
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
 import Title from '../atoms/Title'
+import getRandomId from '../helpers/getRandomId'
+import slugify from '../helpers/slugify'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
@@ -49,7 +51,25 @@ export default function SurveyList() {
     window.open(`/public/survey/${survey.slug}`, '_blank')
   }
 
-  const goToSurveyEditor = id => {
+  const goToSurveyEditor = async id => {
+    if (id === 'new') {
+      const newSurveyTitle = `New Survey Title #${getRandomId()}`
+      const newSurveySlug = slugify(newSurveyTitle)
+      const newSurveyData = {
+        slug: newSurveySlug,
+        title: newSurveyTitle,
+      }
+
+      const maybeBody = await api.post('survey', newSurveyData)
+      if (maybeBody === null || maybeBody.hasError) {
+        return
+      }
+
+      history.push(`/survey/${maybeBody.data._id}`)
+
+      return
+    }
+
     history.push(`/survey/${id}`)
   }
 
