@@ -25,6 +25,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  margin-left: 16rem;
 `
 
 /**
