@@ -105,6 +105,7 @@ committed. If there is any lint error can't be auto-fixed, your changes won't be
   },
   "eslint.codeActionsOnSave.mode": "all",
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
   "eslint.format.enable": true,
   "eslint.packageManager": "yarn",
   "[css]": {
