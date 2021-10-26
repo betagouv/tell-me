@@ -4,6 +4,7 @@ import { styled } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../common/constants'
@@ -121,6 +122,7 @@ export default function PublicSurvey({ data }) {
   const [isLoading, setIsLoading] = useState(true)
   const [initialValues, setInitialValues] = useState({})
   const [isSent, setIsSent] = useState(false)
+  const intl = useIntl()
   const api = useApi()
 
   const { _id, blocks, title } = data
@@ -173,7 +175,13 @@ export default function PublicSurvey({ data }) {
   const page = isLoading ? (
     <Paragraph>Loading…</Paragraph>
   ) : isSent ? (
-    <Question>Thank you!</Question>
+    <Question>
+      {intl.formatMessage({
+        defaultMessage: 'Thank you!',
+        description: '[Public Survey] Thank you message once the survey has been sent.',
+        id: 'i8B3g5',
+      })}
+    </Question>
   ) : (
     <SurveyForm
       initialValues={initialValues}
@@ -183,7 +191,13 @@ export default function PublicSurvey({ data }) {
     >
       <SurveyBlocks blocks={surveyManager.blocks} />
 
-      <SurveyForm.Submit>Submit</SurveyForm.Submit>
+      <SurveyForm.Submit>
+        {intl.formatMessage({
+          defaultMessage: 'Submit',
+          description: '[Public Survey] Submit button label.',
+          id: 'i0E602',
+        })}
+      </SurveyForm.Submit>
     </SurveyForm>
   )
 

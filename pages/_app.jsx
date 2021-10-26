@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import withApi from '../app/hocs/withApi'
 import withAuth from '../app/hocs/withAuth'
+import withLocalization from '../app/hocs/withLocalization'
 
 import '@fontsource/poppins/300.css'
 import '@fontsource/poppins/400.css'
@@ -33,7 +34,7 @@ const GlobalStyleCustom = createGlobalStyle`
 export default function TellMeApp({ Component, pageProps }) {
   const { pathname } = useRouter()
 
-  const WrappedComponent = withAuth(withApi(Component))
+  const WrappedComponent = withLocalization(withAuth(withApi(Component)))
 
   if (!pathname.startsWith('/survey/') && !process.browser) {
     return <div id="__tma" suppressHydrationWarning />

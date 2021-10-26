@@ -1,3 +1,4 @@
+import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
 import Field from '../atoms/Field'
@@ -13,8 +14,10 @@ const FormSchema = Yup.object().shape({
 })
 
 export default function LoginModal() {
+  const intl = useIntl()
   const api = useApi()
   const { logIn, user } = useAuth()
+
   const hasUserEmail = user?.email !== undefined
 
   const formInitialValues = {
@@ -59,7 +62,13 @@ export default function LoginModal() {
 
   return (
     <Modal>
-      <Title>Log In</Title>
+      <Title>
+        {intl.formatMessage({
+          defaultMessage: 'Log In',
+          description: '[Login Modal] Modal title.',
+          id: 'wHB27C',
+        })}
+      </Title>
 
       <Form
         autoComplete
@@ -68,14 +77,38 @@ export default function LoginModal() {
         validationSchema={FormSchema}
       >
         <Field>
-          <Form.Input autoComplete="email" label="Email" name="email" type="email" />
+          <Form.Input
+            autoComplete="email"
+            label={intl.formatMessage({
+              defaultMessage: 'Email',
+              description: '[Login Modal] Form email input label.',
+              id: 'ugMu4J',
+            })}
+            name="email"
+            type="email"
+          />
         </Field>
         <Field>
-          <Form.Input autoComplete="current-password" label="Password" name="password" type="password" />
+          <Form.Input
+            autoComplete="current-password"
+            label={intl.formatMessage({
+              defaultMessage: 'Password',
+              description: '[Login Modal] Form password input label.',
+              id: 'xhJCpr',
+            })}
+            name="password"
+            type="password"
+          />
         </Field>
 
         <Field>
-          <Form.Submit>Log In</Form.Submit>
+          <Form.Submit>
+            {intl.formatMessage({
+              defaultMessage: 'Log In',
+              description: '[Login Modal] Form submit button label.',
+              id: 'I8y4ic',
+            })}
+          </Form.Submit>
         </Field>
       </Form>
     </Modal>

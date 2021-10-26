@@ -49,4 +49,11 @@ module.exports = {
       source: '/:any*',
     },
   ],
+  webpack: config => {
+    // https://formatjs.io/docs/guides/advanced-usage#webpackconfigjs
+    // eslint-disable-next-line no-param-reassign
+    config.resolve.alias['@formatjs/icu-messageformat-parser'] = '@formatjs/icu-messageformat-parser/no-parser'
+
+    return config
+  },
 }

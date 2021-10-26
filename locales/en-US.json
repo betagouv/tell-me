@@ -1,0 +1,26 @@
+{
+  "I8y4ic": {
+    "defaultMessage": "Log In",
+    "description": "[Login Modal] Form submit button label."
+  },
+  "i0E602": {
+    "defaultMessage": "Submit",
+    "description": "[Public Survey] Submit button label."
+  },
+  "i8B3g5": {
+    "defaultMessage": "Thank you!",
+    "description": "[Public Survey] Thank you message once the survey has been sent."
+  },
+  "ugMu4J": {
+    "defaultMessage": "Email",
+    "description": "[Login Modal] Form email input label."
+  },
+  "wHB27C": {
+    "defaultMessage": "Log In",
+    "description": "[Login Modal] Modal title."
+  },
+  "xhJCpr": {
+    "defaultMessage": "Password",
+    "description": "[Login Modal] Form password input label."
+  }
+}

@@ -4,6 +4,15 @@ import * as R from 'ramda'
 
 const listDeepObjectValues = input => R.pipe(R.values, R.map(R.values), R.flatten)(input)
 
+export const LOCALE = {
+  en: 'en-US',
+  'en-US': 'en-US',
+  fr: 'fr-FR',
+  'fr-FR': 'fr-FR',
+}
+
+export const LOCALES = R.keys(LOCALE)
+
 export const SURVEY_BLOCK_TYPE = {
   ACTION: {
     NEXT: 'ACTION.NEXT',

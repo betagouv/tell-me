@@ -7,7 +7,31 @@
   "parserOptions": {
     "ecmaVersion": 2021
   },
+  "plugins": ["formatjs"],
   "rules": {
+    "formatjs/enforce-default-message": "error",
+    "formatjs/enforce-description": "error",
+    "formatjs/enforce-id": "error",
+    "formatjs/enforce-placeholders": "error",
+    "formatjs/enforce-plural-rules": [
+      "error",
+      // https://formatjs.io/docs/tooling/linter/#available-rules-1
+      {
+        "few": false,
+        "many": false,
+        "one": true,
+        "other": true,
+        "two": false,
+        "zero": false
+      }
+    ],
+    "formatjs/no-camel-case": "error",
+    "formatjs/no-complex-selectors": ["error", { "limit": 2 }],
+    "formatjs/no-emoji": "error",
+    "formatjs/no-multiple-plurals": "error",
+    "formatjs/no-multiple-whitespaces": "error",
+    "formatjs/no-offset": "error",
+
     "no-shadow": "off",
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
 
