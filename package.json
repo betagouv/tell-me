@@ -19,6 +19,7 @@
   "dependencies": {
     "@fontsource/poppins": "4.5.0",
     "@singularity-ui/core": "1.5.1",
+    "babel-plugin-styled-components": "1.13.2",
     "bcryptjs": "2.4.3",
     "bhala": "1.0.0-alpha.1",
     "dayjs": "1.10.7",
@@ -54,7 +55,6 @@
     "@ivangabriele/prettier-config": "1.1.0",
     "@types/jest": "27.0.2",
     "babel-jest": "27.2.4",
-    "babel-plugin-styled-components": "1.13.2",
     "envinfo": "7.8.1",
     "eslint-plugin-jest": "24.4.0",
     "husky": "7.0.2",
