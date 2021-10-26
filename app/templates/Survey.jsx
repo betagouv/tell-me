@@ -22,6 +22,7 @@ const Page = styled.div`
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 5rem;
 `
 
 const Container = styled.div`

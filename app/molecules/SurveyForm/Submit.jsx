@@ -2,7 +2,7 @@ import { Button, styled } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 
 const Container = styled.div`
-  margin-top: 1.5rem;
+  padding: 3rem 0;
 `
 
 export default function Submit({ children }) {

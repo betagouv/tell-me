@@ -17,6 +17,7 @@ import Logo from './Logo'
 
 const Body = styled.div`
   max-width: 79rem;
+  padding-bottom: 50%;
 `
 
 const TitleRow = styled.div`
