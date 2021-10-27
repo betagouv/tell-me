@@ -18,7 +18,9 @@ async function UserController(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        const maybeUser = await User.findById(req.query.id).exec()
+        const { userId } = req.query
+
+        const maybeUser = await User.findById(userId).exec()
         if (maybeUser === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
@@ -34,7 +36,9 @@ async function UserController(req, res) {
 
     case 'PATCH':
       try {
-        const maybeUser = await User.findById(req.query.id).exec()
+        const { userId } = req.query
+
+        const maybeUser = await User.findById(userId).exec()
         if (maybeUser === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }

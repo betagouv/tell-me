@@ -19,7 +19,9 @@ async function SurveyController(req, res) {
   switch (req.method) {
     case 'GET':
       try {
-        const maybeSurvey = await Survey.findById(req.query.id).exec()
+        const { surveyId } = req.query
+
+        const maybeSurvey = await Survey.findById(surveyId).exec()
         if (maybeSurvey === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
@@ -49,7 +51,9 @@ async function SurveyController(req, res) {
 
     case 'PATCH':
       try {
-        const maybeSurvey = await Survey.findById(req.query.id).exec()
+        const { surveyId } = req.query
+
+        const maybeSurvey = await Survey.findById(surveyId).exec()
         if (maybeSurvey === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
@@ -68,7 +72,7 @@ async function SurveyController(req, res) {
 
     case 'DELETE':
       try {
-        const surveyId = req.query.id
+        const { surveyId } = req.query
 
         const maybeSurvey = await Survey.findById(surveyId).exec()
         if (maybeSurvey === null) {

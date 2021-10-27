@@ -38,10 +38,11 @@ async function SurveyUploadController(req, res) {
 
   try {
     const {
-      id: [id],
+      surveyId: [surveyId],
       type,
     } = req.query
-    const maybeSurvey = await Survey.findById(id).exec()
+
+    const maybeSurvey = await Survey.findById(surveyId).exec()
     if (maybeSurvey === null) {
       handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
     }
@@ -58,7 +59,7 @@ async function SurveyUploadController(req, res) {
     const multerStorage = multer.diskStorage({
       destination: ASSETS_PATH,
       filename: (_, file, callback) => {
-        callback(null, `${id}-${type}.png`)
+        callback(null, `${surveyId}-${type}.png`)
       },
     })
     const upload = multer({

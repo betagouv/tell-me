@@ -19,7 +19,9 @@ async function SurveyEntryController(req, res) {
     case 'GET':
       withAuthentication(async () => {
         try {
-          const maybeSurveyEntry = await SurveyEntry.findById(req.query.id).exec()
+          const { surveyEntryId } = req.query
+
+          const maybeSurveyEntry = await SurveyEntry.findById(surveyEntryId).exec()
           if (maybeSurveyEntry === null) {
             handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
           }
@@ -51,12 +53,14 @@ async function SurveyEntryController(req, res) {
     case 'DELETE':
       withAuthentication(async () => {
         try {
-          const maybeSurveyEntry = await SurveyEntry.findById(req.query.id).exec()
+          const { surveyEntryId } = req.query
+
+          const maybeSurveyEntry = await SurveyEntry.findById(surveyEntryId).exec()
           if (maybeSurveyEntry === null) {
             handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
           }
 
-          await maybeSurveyEntry.findByIdAndDelete(req.query.id)
+          await maybeSurveyEntry.findByIdAndDelete(surveyEntryId)
 
           res.status(204).end()
         } catch (err) {

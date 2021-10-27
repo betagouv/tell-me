@@ -22,19 +22,19 @@ module.exports = {
     },
     {
       destination: '/api/survey/entries',
-      source: '/api/survey/:id*/entries',
+      source: '/api/survey/:surveyId*/entries',
     },
     {
       destination: '/api/survey/upload',
-      source: '/api/survey/:id*/upload',
+      source: '/api/survey/:surveyId*/upload',
     },
     {
       destination: '/api/survey',
-      source: '/api/survey/:id*',
+      source: '/api/survey/:surveyId*',
     },
     {
       destination: '/api/user',
-      source: '/api/user/:id*',
+      source: '/api/user/:userId*',
     },
     {
       destination: '/api/404',
