@@ -16,7 +16,7 @@ async function SurveyEntriesController(req, res) {
 
   try {
     const surveyEntries = await SurveyEntry.find({
-      surveyId: req.query.surveyId,
+      survey: req.query.surveyId,
     }).exec()
 
     res.status(200).json({
