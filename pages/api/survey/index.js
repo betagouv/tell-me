@@ -3,6 +3,7 @@ import ApiError from '../../../api/libs/ApiError'
 import withAuthentication from '../../../api/middlewares/withAuthentication'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import Survey from '../../../api/models/Survey'
+import SurveyEntry from '../../../api/models/SurveyEntry'
 import { USER_ROLE } from '../../../common/constants'
 
 const ERROR_PATH = 'pages/api/survey/SurveyController()'
@@ -67,12 +68,17 @@ async function SurveyController(req, res) {
 
     case 'DELETE':
       try {
-        const maybeSurvey = await Survey.findById(req.query.id).exec()
+        const surveyId = req.query.id
+
+        const maybeSurvey = await Survey.findById(surveyId).exec()
         if (maybeSurvey === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
-        await Survey.findByIdAndDelete(req.query.id)
+        await SurveyEntry.deleteMany({
+          survey: surveyId,
+        })
+        await Survey.findByIdAndDelete(surveyId)
 
         res.status(204).end()
       } catch (err) {
