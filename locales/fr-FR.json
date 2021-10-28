@@ -1,7 +1,22 @@
 {
+  "A2n/eF": {
+    "defaultMessage": "Un nouveau mot de passe"
+  },
+  "Ci9rPk": {
+    "defaultMessage": "Créer",
+    "description": "[Setup Modal] Submit button label."
+  },
+  "DPOyaV": {
+    "defaultMessage": "Your email",
+    "description": "[Setup Modal] Email input label."
+  },
   "I8y4ic": {
     "defaultMessage": "Se connecter",
     "description": "[Login Modal] Form submit button label."
+  },
+  "hWoiIQ": {
+    "defaultMessage": "Répêtez votre nouveau mot de passe",
+    "description": "[Setup Modal] Password repeat input label."
   },
   "i0E602": {
     "defaultMessage": "Envoyer",

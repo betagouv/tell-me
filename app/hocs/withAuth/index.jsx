@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 
 import getJwtPayload from '../../helpers/getJwtPayload'
 import isJwtExpired from '../../helpers/isJwtExpired'
+import resetLocalStorage from '../../helpers/resetLocalStorage'
+import useIsMounted from '../../hooks/useIsMounted'
 import Context from './Context'
 
 const getInitialState = () => {
@@ -28,6 +30,7 @@ export default function withAuth(Component) {
   return function WithAuth(pageProps) {
     const [state, setState] = useState(getInitialState())
     const [user, setUser] = useState(getInitialUser())
+    const isMounted = useIsMounted()
 
     const logIn = async (sessionToken, refreshToken = null) => {
       const sessionTokenPayload = await getJwtPayload(sessionToken)
@@ -41,36 +44,42 @@ export default function withAuth(Component) {
       window.localStorage.setItem('sessionToken', sessionToken)
       window.localStorage.setItem('user', userJson)
 
-      setState({
-        ...state,
-        isAuthenticated: true,
-        refreshToken,
-        sessionToken,
-      })
-      setUser(user)
+      if (isMounted()) {
+        setUser(user)
+        setState({
+          ...state,
+          isAuthenticated: true,
+          refreshToken,
+          sessionToken,
+        })
+      }
     }
 
     // Useful to force a re-login with the email field prefilled
     const clearSessionToken = () => {
       window.localStorage.removeItem('sessionToken')
 
-      setState({
-        ...state,
-        isAuthenticated: false,
-        sessionToken: null,
-      })
+      if (isMounted()) {
+        setState({
+          ...state,
+          isAuthenticated: false,
+          sessionToken: null,
+        })
+      }
     }
 
     const logOut = () => {
-      window.localStorage.clear()
+      resetLocalStorage()
 
-      setState({
-        ...state,
-        isAuthenticated: false,
-        refreshToken: null,
-        sessionToken: null,
-      })
-      setUser(null)
+      if (isMounted()) {
+        setState({
+          ...state,
+          isAuthenticated: false,
+          refreshToken: null,
+          sessionToken: null,
+        })
+        setUser(null)
+      }
     }
 
     const providerValue = {
@@ -82,7 +91,7 @@ export default function withAuth(Component) {
     }
 
     useEffect(() => {
-      if (state.sessionToken === null) {
+      if (state.sessionToken === null && isMounted()) {
         setState({
           ...state,
           isAuthenticated: false,
@@ -99,11 +108,13 @@ export default function withAuth(Component) {
           clearSessionToken()
         }
 
-        setState({
-          ...state,
-          isAuthenticated: true,
-          isLoading: false,
-        })
+        if (isMounted()) {
+          setState({
+            ...state,
+            isAuthenticated: true,
+            isLoading: false,
+          })
+        }
       })()
     }, [])
 

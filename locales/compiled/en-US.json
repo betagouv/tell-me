@@ -1,8 +1,32 @@
 {
+  "A2n/eF": [
+    {
+      "type": 0,
+      "value": "A new password"
+    }
+  ],
+  "Ci9rPk": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "DPOyaV": [
+    {
+      "type": 0,
+      "value": "Your email"
+    }
+  ],
   "I8y4ic": [
     {
       "type": 0,
       "value": "Log In"
+    }
+  ],
+  "hWoiIQ": [
+    {
+      "type": 0,
+      "value": "Your new password (again)"
     }
   ],
   "i0E602": [

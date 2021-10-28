@@ -6,6 +6,7 @@ const Context = createContext({
   logOut: () => undefined,
   state: {
     isAuthenticated: false,
+    isLoading: false,
     refreshToken: null,
     sessionToken: null,
   },

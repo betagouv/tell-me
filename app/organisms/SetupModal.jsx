@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 import zxcvbn from 'zxcvbn'
 
@@ -27,6 +28,7 @@ const validateForm = values => {
 
 export default function SetupModal({ onDone }) {
   const [passwordHelperText, setPasswordHelperText] = useState(' ')
+  const intl = useIntl()
   const api = useApi()
 
   useEffect(() => {
@@ -70,13 +72,26 @@ export default function SetupModal({ onDone }) {
 
       <Form autoComplete onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
         <Field>
-          <Form.Input autoComplete="email" label="Your email" name="email" type="email" />
+          <Form.Input
+            autoComplete="email"
+            label={intl.formatMessage({
+              defaultMessage: 'Your email',
+              description: '[Setup Modal] Email input label.',
+              id: 'DPOyaV',
+            })}
+            name="email"
+            type="email"
+          />
         </Field>
         <Field>
           <Form.Input
             autoComplete="new-password"
             helperText={passwordHelperText}
-            label="A new password"
+            label={intl.formatMessage({
+              defaultMessage: 'A new password',
+              description: '[Setup Modal] Password input label.',
+              id: 'A2n/eF',
+            })}
             name="password"
             onChange={checkPasswordStrength}
             type="password"
@@ -85,14 +100,24 @@ export default function SetupModal({ onDone }) {
         <Field>
           <Form.Input
             autoComplete="new-password"
-            label="Your new password (again)"
+            label={intl.formatMessage({
+              defaultMessage: 'Your new password (again)',
+              description: '[Setup Modal] Password repeat input label.',
+              id: 'hWoiIQ',
+            })}
             name="passwordConfirmation"
             type="password"
           />
         </Field>
 
         <Field>
-          <Form.Submit>Create</Form.Submit>
+          <Form.Submit>
+            {intl.formatMessage({
+              defaultMessage: 'Create',
+              description: '[Setup Modal] Submit button label.',
+              id: 'Ci9rPk',
+            })}
+          </Form.Submit>
         </Field>
       </Form>
     </Modal>

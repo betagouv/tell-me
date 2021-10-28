@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import isFirstSetup from '../app/helpers/isFirstSetup'
+import resetLocalStorage from '../app/helpers/resetLocalStorage'
 import useAuth from '../app/hooks/useAuth'
 import useIsMounted from '../app/hooks/useIsMounted'
 import Loader from '../app/molecules/Loader'
@@ -43,6 +44,11 @@ export default function SpaPage() {
 
   const checkSetup = async () => {
     const mustSetup = await isFirstSetup()
+
+    if (mustSetup) {
+      // We clear any locally stored data
+      resetLocalStorage()
+    }
 
     if (isMounted()) {
       setMustSetup(mustSetup)

@@ -34,7 +34,7 @@ const GlobalStyleCustom = createGlobalStyle`
 export default function TellMeApp({ Component, pageProps }) {
   const { pathname } = useRouter()
 
-  const WrappedComponent = withLocalization(withAuth(withApi(Component)))
+  const WrappedComponent = withAuth(withApi(withLocalization(Component)))
 
   if (!pathname.startsWith('/survey/') && !process.browser) {
     return <div id="__tma" suppressHydrationWarning />
