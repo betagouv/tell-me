@@ -11,10 +11,22 @@
       "value": "Create"
     }
   ],
+  "D6/Uxz": [
+    {
+      "type": 0,
+      "value": "Surveys"
+    }
+  ],
   "DPOyaV": [
     {
       "type": 0,
       "value": "Your email"
+    }
+  ],
+  "EEsDeJ": [
+    {
+      "type": 0,
+      "value": "Dashboard"
     }
   ],
   "I8y4ic": [
@@ -75,6 +87,12 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "zGNJ13": [
+    {
+      "type": 0,
+      "value": "Users"
     }
   ]
 }

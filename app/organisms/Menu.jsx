@@ -1,5 +1,6 @@
 import { styled } from '@singularity-ui/core'
 import { LogOut, Settings } from 'react-feather'
+import { useIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
 
 import { USER_ROLE } from '../../common/constants'
@@ -74,6 +75,7 @@ const UserMenu = styled.div`
 `
 
 export default function Menu() {
+  const intl = useIntl()
   const { logOut, user } = useAuth()
 
   return (
@@ -82,10 +84,30 @@ export default function Menu() {
         <Brand>Tell Me</Brand>
 
         <MainMenu>
-          <Link to="/">Dashboard</Link>
-          <Link to="/surveys">Surveys</Link>
+          <Link to="/">
+            {intl.formatMessage({
+              defaultMessage: 'Dashboard',
+              description: '[Sidebar Main Menu] Dashboard label.',
+              id: 'EEsDeJ',
+            })}
+          </Link>
+          <Link to="/surveys">
+            {intl.formatMessage({
+              defaultMessage: 'Surveys',
+              description: '[Sidebar Main Menu] Surveys label.',
+              id: 'D6/Uxz',
+            })}
+          </Link>
 
-          {user.role === USER_ROLE.ADMINISTRATOR && <Link to="/users">Users</Link>}
+          {user.role === USER_ROLE.ADMINISTRATOR && (
+            <Link to="/users">
+              {intl.formatMessage({
+                defaultMessage: 'Users',
+                description: '[Sidebar Main Menu] Users label.',
+                id: 'zGNJ13',
+              })}
+            </Link>
+          )}
         </MainMenu>
       </div>
       <UserMenu>

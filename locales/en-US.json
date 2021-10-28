@@ -7,9 +7,17 @@
     "defaultMessage": "Create",
     "description": "[Setup Modal] Submit button label."
   },
+  "D6/Uxz": {
+    "defaultMessage": "Surveys",
+    "description": "[Sidebar Main Menu] Surveys label."
+  },
   "DPOyaV": {
     "defaultMessage": "Your email",
     "description": "[Setup Modal] Email input label."
+  },
+  "EEsDeJ": {
+    "defaultMessage": "Dashboard",
+    "description": "[Sidebar Main Menu] Dashboard label."
   },
   "I8y4ic": {
     "defaultMessage": "Log In",
@@ -50,5 +58,9 @@
   "xhJCpr": {
     "defaultMessage": "Password",
     "description": "[Login Modal] Form password input label."
+  },
+  "zGNJ13": {
+    "defaultMessage": "Users",
+    "description": "[Sidebar Main Menu] Users label."
   }
 }

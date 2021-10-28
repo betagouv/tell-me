@@ -11,10 +11,22 @@
       "value": "Créer"
     }
   ],
+  "D6/Uxz": [
+    {
+      "type": 0,
+      "value": "Questionnaires"
+    }
+  ],
   "DPOyaV": [
     {
       "type": 0,
       "value": "Your email"
+    }
+  ],
+  "EEsDeJ": [
+    {
+      "type": 0,
+      "value": "Tableau de bord"
     }
   ],
   "I8y4ic": [
@@ -75,6 +87,12 @@
     {
       "type": 0,
       "value": "Mot de passe"
+    }
+  ],
+  "zGNJ13": [
+    {
+      "type": 0,
+      "value": "Utilisateur·rices"
     }
   ]
 }
