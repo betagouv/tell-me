@@ -1,4 +1,5 @@
 import { styled } from '@singularity-ui/core'
+import { LogOut, Settings } from 'react-feather'
 import { Link } from 'react-router-dom'
 
 import { USER_ROLE } from '../../common/constants'
@@ -35,7 +36,7 @@ const Brand = styled.div`
   }
 `
 
-const List = styled.div`
+const MainMenu = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 0.5rem;
@@ -53,21 +54,46 @@ const List = styled.div`
   }
 `
 
+const UserMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 1rem;
+
+  > a,
+  > svg {
+    color: white;
+    display: block;
+    opacity: 0.75;
+    cursor: pointer;
+    text-decoration: none;
+
+    :hover {
+      opacity: 1;
+    }
+  }
+`
+
 export default function Menu() {
-  const { user } = useAuth()
+  const { logOut, user } = useAuth()
 
   return (
     <Container>
       <div>
         <Brand>Tell Me</Brand>
 
-        <List>
+        <MainMenu>
           <Link to="/">Dashboard</Link>
           <Link to="/surveys">Surveys</Link>
 
           {user.role === USER_ROLE.ADMINISTRATOR && <Link to="/users">Users</Link>}
-        </List>
+        </MainMenu>
       </div>
+      <UserMenu>
+        <Link to="/me">
+          <Settings />
+        </Link>
+        <LogOut onClick={logOut} />
+      </UserMenu>
     </Container>
   )
 }

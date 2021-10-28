@@ -2,7 +2,8 @@
 
 - [Get Started](#get-started)
   - [Requirements](#requirements)
-  - [Installation](#installation)
+  - [Setup](#setup)
+  - [Local development](#local-development)
 - [Architecture](#architecture)
   - [Main directories](#main-directories)
   - [Technological stack](#technological-stack)
@@ -19,7 +20,7 @@
 - [Yarn](https://yarnpkg.com/getting-started/install)
 - [Docker](https://www.docker.com/get-started)
 
-### Installation
+### Setup
 
 > ⚠️ **Important**  
 > If you're under **Windows**, please run all the CLI commands within a Linux shell-like terminal (i.e.: Git Bash).
@@ -31,6 +32,19 @@ git clone https://github.com/betagouv/tell-me.git
 cd tell-me
 yarn
 yarn dev:docker
+yarn db:migrate
+```
+
+> 📋 **Note**  
+> The `yarn` command install the dependencies but also run the `scripts/dev/setup.js` scripts. This script does the
+> following tasks, if necessary:
+> - Copy `.env.example` file to a `.env` one.
+> - Generate a RSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io))
+
+### Local development
+
+```sh
+yarn dev:docker
 yarn dev
 ```
 
@@ -38,12 +52,6 @@ This will run MongoDB within a Docker container via Docker Compose and run the w
 [http://localhost:3000](http://localhost:3000).
 
 It will also watch for file changes and automatically re-hydrate the webapp on the go.
-
-> 📋 **Note**  
-> The `yarn` command install the dependencies but also run the `scripts/dev/setup.js` scripts. This script does the
-> following tasks, if necessary:
-> - Copy `.env.example` file to a `.env` one.
-> - Generate a RSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io))
 
 ## Architecture
 

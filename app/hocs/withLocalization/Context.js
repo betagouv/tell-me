@@ -2,7 +2,7 @@ import { createContext } from 'react'
 
 const Context = createContext({
   locale: null,
-  setLocale: () => undefined,
+  refresh: () => undefined,
 })
 
 export default Context

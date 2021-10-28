@@ -40,8 +40,15 @@ const withLocalization = Component => {
       setLocale(getLocale())
     }, [])
 
+    const refresh = newLocale => {
+      window.localStorage.setItem('locale', newLocale)
+
+      setLocale(getLocale())
+    }
+
     const providerValue = {
       locale,
+      refresh,
     }
 
     return (

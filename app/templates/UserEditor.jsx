@@ -18,7 +18,7 @@ const FormSchema = Yup.object().shape({
   roleAsOption: Yup.object().required(`Role is mandatory.`),
 })
 
-const ROLES_AS_OPTIONS = R.pipe(
+const ROLE_AS_OPTIONS = R.pipe(
   R.toPairs,
   R.map(([value, label]) => ({ label, value })),
 )(USER_ROLE_LABEL)
@@ -40,9 +40,7 @@ export default function UserEditor() {
     }
 
     const userData = maybeBody.data
-
     const userEditableData = R.pick(['email', 'firstName', 'lastName', 'isActive'])(userData)
-
     userEditableData.roleAsOption = {
       label: USER_ROLE_LABEL[userData.role],
       value: userData.role,
@@ -103,7 +101,7 @@ export default function UserEditor() {
           )}
 
           <Field>
-            <Form.Select label="Role" name="roleAsOption" options={ROLES_AS_OPTIONS} />
+            <Form.Select label="Role" name="roleAsOption" options={ROLE_AS_OPTIONS} />
           </Field>
 
           <Field>

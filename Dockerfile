@@ -16,5 +16,6 @@ COPY . .
 
 RUN yarn --production --pure-lockfile
 RUN yarn build
+RUN yarn db:migrate
 
 ENTRYPOINT [ "yarn", "start" ]

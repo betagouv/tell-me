@@ -42,6 +42,7 @@ export default function withAuth(Component) {
         window.localStorage.setItem('refreshToken', refreshToken)
       }
       window.localStorage.setItem('sessionToken', sessionToken)
+      window.localStorage.setItem('locale', sessionTokenPayload.locale)
       window.localStorage.setItem('user', userJson)
 
       if (isMounted()) {

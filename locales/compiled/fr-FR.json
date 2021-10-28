@@ -2,13 +2,13 @@
   "A2n/eF": [
     {
       "type": 0,
-      "value": "A new password"
+      "value": "Un nouveau mot de passe"
     }
   ],
   "Ci9rPk": [
     {
       "type": 0,
-      "value": "Create"
+      "value": "Créer"
     }
   ],
   "DPOyaV": [
@@ -23,10 +23,16 @@
       "value": "Se connecter"
     }
   ],
+  "NNlf6B": [
+    {
+      "type": 0,
+      "value": "Mes préférences"
+    }
+  ],
   "hWoiIQ": [
     {
       "type": 0,
-      "value": "Your new password (again)"
+      "value": "Répêtez votre nouveau mot de passe"
     }
   ],
   "i0E602": [
@@ -39,6 +45,18 @@
     {
       "type": 0,
       "value": "Merci !"
+    }
+  ],
+  "lGHKue": [
+    {
+      "type": 0,
+      "value": "Langue"
+    }
+  ],
+  "pLn6i2": [
+    {
+      "type": 0,
+      "value": "Mettre à jour"
     }
   ],
   "ugMu4J": [

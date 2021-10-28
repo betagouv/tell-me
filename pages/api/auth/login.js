@@ -7,6 +7,7 @@ import ApiError from '../../../api/libs/ApiError'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import Token from '../../../api/models/Token'
 import User from '../../../api/models/User'
+import UserConfig from '../../../api/models/UserConfig'
 
 const ERROR_PATH = 'pages/api/auth/AuthLoginController()'
 
@@ -31,15 +32,21 @@ async function AuthLoginController(req, res) {
 
       return
     }
-
     if (!maybeUser.isActive) {
       handleError(new ApiError('Forbidden.', 403, true), ERROR_PATH, res)
 
       return
     }
 
+    const userConfig = await UserConfig.findOne({
+      user: maybeUser.id,
+    })
     const maybeIp = req.headers['x-real-ip']
-    const tokenPayload = R.pick(['_id', 'email', 'role'], maybeUser)
+    const tokenPayload = {
+      ...R.pick(['_id', 'email', 'role'], maybeUser),
+      ...R.pick(['locale'], userConfig),
+    }
+
     const sessionToken = await getJwt(tokenPayload)
 
     // If we can't resolve the client IP for the authenticated user,

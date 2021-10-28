@@ -23,7 +23,8 @@ export default function withAuthentication(handler, allowedRoles = [USER_ROLE.AD
         return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
 
-      const user = await User.findById(maybeTokenPayload._id).exec()
+      const userId = maybeTokenPayload._id
+      const user = await User.findById(userId).exec()
       if (user === null || !user.isActive) {
         return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
@@ -32,7 +33,7 @@ export default function withAuthentication(handler, allowedRoles = [USER_ROLE.AD
         return handleError(new ApiError(`Forbidden.`, 403, true), ERROR_PATH, res)
       }
 
-      req.user = R.pick(['id'], user)
+      req.me = R.pick(['id'], user)
 
       return handler(req, res)
     } catch (err) {

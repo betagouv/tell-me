@@ -15,6 +15,10 @@
     "defaultMessage": "Log In",
     "description": "[Login Modal] Form submit button label."
   },
+  "NNlf6B": {
+    "defaultMessage": "My Settings",
+    "description": "[My Settings] Title."
+  },
   "hWoiIQ": {
     "defaultMessage": "Your new password (again)",
     "description": "[Setup Modal] Password repeat input label."
@@ -26,6 +30,14 @@
   "i8B3g5": {
     "defaultMessage": "Thank you!",
     "description": "[Public Survey] Thank you message once the survey has been sent."
+  },
+  "lGHKue": {
+    "defaultMessage": "Language",
+    "description": "[My Settings] Form language select label."
+  },
+  "pLn6i2": {
+    "defaultMessage": "Update",
+    "description": "[My Settings] Form submit button label."
   },
   "ugMu4J": {
     "defaultMessage": "Email",

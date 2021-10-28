@@ -11,6 +11,11 @@ export const LOCALE = {
   'fr-FR': 'fr-FR',
 }
 
+export const LOCALE_LABEL = {
+  'en-US': 'English (US)',
+  'fr-FR': 'Français (France)',
+}
+
 export const LOCALES = R.keys(LOCALE)
 
 export const SURVEY_BLOCK_TYPE = {
