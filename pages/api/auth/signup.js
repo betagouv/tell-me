@@ -6,6 +6,7 @@ import isReady from '../../../api/helpers/isReady'
 import ApiError from '../../../api/libs/ApiError'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import User from '../../../api/models/User'
+import UserConfig from '../../../api/models/UserConfig'
 import { USER_ROLE } from '../../../common/constants'
 
 const ERROR_PATH = 'pages/api/auth/AuthSignupController()'
@@ -33,6 +34,11 @@ async function AuthSignupController(req, res) {
 
     const newUser = new User(newUserData)
     await newUser.save()
+
+    const newUserConfig = new UserConfig({
+      user: newUser.id,
+    })
+    await newUserConfig.save()
 
     res.status(201).json({})
   } catch (err) {
