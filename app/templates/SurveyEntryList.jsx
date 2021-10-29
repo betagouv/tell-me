@@ -26,10 +26,10 @@ export default function SurveyEntryList() {
     const data = R.reduce(
       (data, entry) => {
         const { answers, createdAt } = entry
-        const headers = data[0]
-        const values = data.slice(1)
+        const headers = [...data[0]]
+        const values = [...data.slice(1)]
 
-        const rowData = [createdAt, new Array(headers.length).fill('')]
+        const rowData = [createdAt, ...new Array(headers.length - 1).fill('')]
         answers.forEach(answer => {
           if (!headers.includes(answer.question)) {
             headers.push(answer.question)
