@@ -58,6 +58,8 @@ const Button = styled.div`
   }
 `
 
+const noop = () => undefined
+
 export default function Row({ block, children, onCondition, onDelete, onMove, onToggleVisibility }) {
   return (
     <Box>
@@ -67,13 +69,28 @@ export default function Row({ block, children, onCondition, onDelete, onMove, on
 
       <Content isHidden={block.props.isHidden}>{children}</Content>
 
-      <Button accent="secondary" className="Button" isDisabled={!block.isQuestion} onClick={onCondition}>
+      <Button
+        accent="secondary"
+        className="Button"
+        isDisabled={!block.isQuestion}
+        onClick={block.isQuestion ? onCondition : noop}
+      >
         {block.isMandatory ? <Shield /> : <ShieldOff />}
       </Button>
-      <Button accent="primary" className="Button" isDisabled={!block.isQuestion} onClick={onToggleVisibility}>
+      <Button
+        accent="primary"
+        className="Button"
+        isDisabled={!block.isQuestion}
+        onClick={block.isQuestion ? onToggleVisibility : noop}
+      >
         {block.isHidden ? <EyeOff /> : <Eye />}
       </Button>
-      <Button accent="secondary" className="Button" isDisabled={!block.isChoice} onClick={onCondition}>
+      <Button
+        accent="secondary"
+        className="Button"
+        isDisabled={!block.isChoice}
+        onClick={block.isChoice ? onCondition : noop}
+      >
         <CornerDownRight />
       </Button>
       <Button accent="danger" className="Button" onClick={onDelete}>
@@ -84,8 +101,8 @@ export default function Row({ block, children, onCondition, onDelete, onMove, on
 }
 
 Row.defaultProps = {
-  onCondition: () => undefined,
-  onMove: () => undefined,
+  onCondition: noop,
+  onMove: noop,
 }
 
 Row.propTypes = {
