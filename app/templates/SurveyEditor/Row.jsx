@@ -14,8 +14,11 @@ const Box = styled.div`
     background-color: #ffffff;
   }
 
+  .Button {
+    visibility: hidden;
+  }
   :hover > .Button {
-    opacity: 1;
+    visibility: visible;
   }
 `
 
@@ -28,25 +31,24 @@ const Content = styled.div`
 const Button = styled.div`
   align-items: center;
   background-color: ${p => p.theme.color[p.accent].background};
-  cursor: pointer;
   display: flex;
   justify-content: center;
   min-height: 3rem;
   min-width: 3rem;
-  opacity: 0;
 
   ${p =>
     !p.isDisabled
       ? css`
+          cursor: pointer;
+          opacity: 0.65;
+
           :hover {
             background-color: ${p => p.theme.color[p.accent].active};
             opacity: 1;
           }
         `
       : css`
-          :hover {
-            cursor: not-allowed;
-          }
+          opacity: 0.1;
         `}
 
   svg {
