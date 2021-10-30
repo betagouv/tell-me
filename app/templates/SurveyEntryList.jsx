@@ -1,4 +1,4 @@
-import { Button, Card } from '@singularity-ui/core'
+import { Button, Card, styled } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -9,6 +9,15 @@ import AdminHeader from '../atoms/AdminHeader'
 import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
+
+const StyledCard = styled(Card)`
+  display: flex;
+  max-width: 100%;
+`
+
+const StyledReactSpreadsheet = styled(ReactSpreadsheet)`
+  overflow: auto;
+`
 
 export default function SurveyEntryList() {
   const [surveyData, setSurveyData] = useState([])
@@ -68,10 +77,10 @@ export default function SurveyEntryList() {
         </Button>
       </AdminHeader>
 
-      <Card>
+      <StyledCard>
         {surveyData.length === 0 && 'Loading...'}
-        {surveyData.length !== 0 && <ReactSpreadsheet data={surveyData} />}
-      </Card>
+        {surveyData.length !== 0 && <StyledReactSpreadsheet data={surveyData} />}
+      </StyledCard>
     </AdminBox>
   )
 }

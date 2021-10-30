@@ -12,8 +12,7 @@ import '@fontsource/poppins/500.css'
 import '@fontsource/poppins/600.css'
 
 const GlobalStyleCustom = createGlobalStyle`
-  html {
-    display: flex;
+  html, body {
     height: 100%;
   }
 
@@ -28,7 +27,9 @@ const GlobalStyleCustom = createGlobalStyle`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-  }
+    min-height: 0;
+    min-width: 0;
+ }
 `
 
 export default function TellMeApp({ Component, pageProps }) {
