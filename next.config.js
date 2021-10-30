@@ -22,7 +22,11 @@ module.exports = {
     },
     {
       destination: '/api/one-time-token',
-      source: '/api/one-time-token/:userId*',
+      source: '/api/one-time-token/:oneTimeTokenId*',
+    },
+    {
+      destination: '/api/refresh-token',
+      source: '/api/refresh-token/:refreshTokenId*',
     },
     {
       destination: '/api/survey/download',

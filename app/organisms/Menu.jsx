@@ -108,6 +108,13 @@ export default function Menu() {
                   id: 'zGNJ13',
                 })}
               </Link>
+              <Link to="/refresh-tokens">
+                {intl.formatMessage({
+                  defaultMessage: 'Refresh Tokens',
+                  description: '[Sidebar Main Menu] Refresh Tokens label.',
+                  id: 'bkZg0U',
+                })}
+              </Link>
               <Link to="/one-time-tokens">
                 {intl.formatMessage({
                   defaultMessage: 'One Time Tokens',

@@ -5,7 +5,7 @@ import getJwt from '../../../api/helpers/getJwt'
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withMongoose from '../../../api/middlewares/withMongoose'
-import Token from '../../../api/models/Token'
+import RefreshToken from '../../../api/models/RefreshToken'
 import User from '../../../api/models/User'
 import UserConfig from '../../../api/models/UserConfig'
 
@@ -53,29 +53,29 @@ async function AuthLoginController(req, res) {
       ...R.pick(['_id', 'email', 'role'], maybeUser),
       ...R.pick(['locale'], userConfig),
     }
-    const sessionToken = await getJwt(tokenPayload)
+    const sessionTokenValue = await getJwt(tokenPayload)
 
     // Delete all existing Refresh JWT for the authenticated user client
-    await Token.deleteMany({
+    await RefreshToken.deleteMany({
       ip: maybeIp,
       user: maybeUser.id,
     }).exec()
 
-    const refreshToken = await getJwt(tokenPayload, maybeIp)
-
-    // Save the new Refresh JWT for the authenticated user client
-    const newTokenData = {
+    const refreshTokenValue = await getJwt(tokenPayload, maybeIp)
+    const newRefreshTokenData = {
       ip: maybeIp,
       user: maybeUser.id,
-      value: refreshToken,
+      value: refreshTokenValue,
     }
-    const newToken = new Token(newTokenData)
-    await newToken.save()
+
+    // Save the new Refresh JWT for the authenticated user client
+    const newRefreshToken = new RefreshToken(newRefreshTokenData)
+    await newRefreshToken.save()
 
     res.status(200).json({
       data: {
-        refreshToken,
-        sessionToken,
+        refreshToken: refreshTokenValue,
+        sessionToken: sessionTokenValue,
       },
     })
   } catch (err) {

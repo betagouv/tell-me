@@ -26,6 +26,10 @@
     "defaultMessage": "Mes préférences",
     "description": "[My Settings] Title."
   },
+  "bkZg0U": {
+    "defaultMessage": "Refresh Tokens",
+    "description": "[Sidebar Main Menu] Refresh Tokens label."
+  },
   "hWoiIQ": {
     "defaultMessage": "Répêtez votre nouveau mot de passe",
     "description": "[Setup Modal] Password repeat input label."

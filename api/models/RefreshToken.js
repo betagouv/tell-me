@@ -2,13 +2,13 @@ import mongoose from 'mongoose'
 
 const THIRTY_DAYS_IN_SECONDS = 30 * 24 * 60 * 60
 
-function Token() {
-  if (mongoose.models.Token) {
-    return mongoose.models.Token
+function RefreshToken() {
+  if (mongoose.models.RefreshToken) {
+    return mongoose.models.RefreshToken
   }
 
   return mongoose.model(
-    'Token',
+    'RefreshToken',
     new mongoose.Schema(
       {
         user: {
@@ -42,4 +42,4 @@ function Token() {
   )
 }
 
-export default Token()
+export default RefreshToken()
