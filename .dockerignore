@@ -5,7 +5,8 @@
 /.vscode
 /coverage
 /node_modules
-/scripts
+/scripts/*
+!/scripts/db/migrate.js
 
 /.dockerignore
 /.env
