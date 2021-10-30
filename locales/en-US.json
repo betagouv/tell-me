@@ -47,6 +47,10 @@
     "defaultMessage": "Update",
     "description": "[My Settings] Form submit button label."
   },
+  "tIFSst": {
+    "defaultMessage": "One Time Tokens",
+    "description": "[Sidebar Main Menu] One Time Tokens label."
+  },
   "ugMu4J": {
     "defaultMessage": "Email",
     "description": "[Login Modal] Form email input label."

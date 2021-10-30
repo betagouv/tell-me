@@ -12,6 +12,7 @@ import Menu from '../app/organisms/Menu'
 import SetupModal from '../app/organisms/SetupModal'
 import Dashboard from '../app/templates/Dashboard'
 import MyConfig from '../app/templates/MyConfig'
+import OneTimeTokenList from '../app/templates/OneTimeTokenList'
 import SurveyEditor from '../app/templates/SurveyEditor'
 import SurveyEntryList from '../app/templates/SurveyEntryList'
 import SurveyList from '../app/templates/SurveyList'
@@ -85,6 +86,10 @@ export default function SpaPage() {
           <Switch>
             <Route path="/me">
               <MyConfig />
+            </Route>
+
+            <Route path="/one-time-tokens">
+              <OneTimeTokenList />
             </Route>
 
             <Route path="/survey/:id/entries">

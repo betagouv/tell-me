@@ -10,6 +10,7 @@ import User from '../../../api/models/User'
 import UserConfig from '../../../api/models/UserConfig'
 
 const ERROR_PATH = 'pages/api/auth/AuthLoginController()'
+const { NODE_ENV } = process.env
 
 async function AuthLoginController(req, res) {
   if (req.method !== 'POST') {
@@ -38,42 +39,35 @@ async function AuthLoginController(req, res) {
       return
     }
 
-    const userConfig = await UserConfig.findOne({
-      user: maybeUser.id,
-    })
-    const maybeIp = req.headers['x-real-ip']
-    const tokenPayload = {
-      ...R.pick(['_id', 'email', 'role'], maybeUser),
-      ...R.pick(['locale'], userConfig),
-    }
-
-    const sessionToken = await getJwt(tokenPayload)
-
-    // If we can't resolve the client IP for the authenticated user,
-    // let's skip the Refresh JWT step
+    const maybeIp = NODE_ENV === 'production' ? req.headers['x-real-ip'] : '0.0.0.0'
     if (maybeIp === undefined) {
-      res.status(200).json({
-        data: {
-          sessionToken,
-        },
-      })
+      handleError(new ApiError(`Unresolvable IP.`, 403, true), ERROR_PATH, res)
 
       return
     }
 
+    const userConfig = await UserConfig.findOne({
+      user: maybeUser.id,
+    })
+    const tokenPayload = {
+      ...R.pick(['_id', 'email', 'role'], maybeUser),
+      ...R.pick(['locale'], userConfig),
+    }
+    const sessionToken = await getJwt(tokenPayload)
+
     // Delete all existing Refresh JWT for the authenticated user client
     await Token.deleteMany({
-      email: maybeUser.email,
       ip: maybeIp,
+      user: maybeUser.id,
     }).exec()
 
     const refreshToken = await getJwt(tokenPayload, maybeIp)
 
     // Save the new Refresh JWT for the authenticated user client
     const newTokenData = {
-      email: maybeUser.email,
       ip: maybeIp,
-      token: refreshToken,
+      user: maybeUser.id,
+      value: refreshToken,
     }
     const newToken = new Token(newTokenData)
     await newToken.save()

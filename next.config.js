@@ -21,6 +21,14 @@ module.exports = {
       source: '/api/asset/:fileName*',
     },
     {
+      destination: '/api/one-time-token',
+      source: '/api/one-time-token/:userId*',
+    },
+    {
+      destination: '/api/survey/download',
+      source: '/api/survey/:surveyId*/download',
+    },
+    {
       destination: '/api/survey/entries',
       source: '/api/survey/:surveyId*/entries',
     },

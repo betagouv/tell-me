@@ -50,6 +50,18 @@ export const SURVEY_COVER_TYPE = {
 
 export const SURVEY_COVER_TYPES = Object.values(SURVEY_COVER_TYPE)
 
+export const SURVEY_ENTRIES_DOWLOAD_CONTENT_TYPE = {
+  CSV: 'text/csv',
+  XLSX: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+}
+
+export const SURVEY_ENTRIES_DOWLOAD_EXTENSION = {
+  CSV: 'csv',
+  XLSX: 'xlsx',
+}
+
+export const SURVEY_ENTRIES_DOWLOAD_EXTENSIONS = Object.values(SURVEY_ENTRIES_DOWLOAD_EXTENSION)
+
 export const SURVEY_LOGO_TYPE = {
   URL: 'URL',
 }

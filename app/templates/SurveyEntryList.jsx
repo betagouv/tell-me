@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactSpreadsheet from 'react-spreadsheet'
 
+import { SURVEY_ENTRIES_DOWLOAD_EXTENSION } from '../../common/constants'
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
 import Title from '../atoms/Title'
@@ -20,10 +21,25 @@ const StyledReactSpreadsheet = styled(ReactSpreadsheet)`
 `
 
 export default function SurveyEntryList() {
-  const [surveyData, setSurveyData] = useState([])
+  const [isDownloading, setIsDownloading] = useState(false)
+  const [surveyEntries, setSurveyEntries] = useState(null)
+  const [survey, setSurvey] = useState(null)
   const { id: surveyId } = useParams()
   const api = useApi()
   const isMounted = useIsMounted()
+
+  const isLoading = survey === null || surveyEntries === null
+
+  const loadSurvey = async () => {
+    const maybeBody = await api.get(`survey/${surveyId}`)
+    if (maybeBody === null || maybeBody.hasError) {
+      return
+    }
+
+    if (isMounted()) {
+      setSurvey(maybeBody.data)
+    }
+  }
 
   const loadSurveyEntries = async () => {
     const maybeBody = await api.get(`survey/${surveyId}/entries`)
@@ -59,27 +75,47 @@ export default function SurveyEntryList() {
     const spreadsheetData = data.map(dataRow => dataRow.map(value => ({ value })))
 
     if (isMounted()) {
-      setSurveyData(spreadsheetData)
+      setSurveyEntries(spreadsheetData)
     }
   }
 
   useEffect(() => {
+    loadSurvey()
     loadSurveyEntries()
   }, [])
+
+  const download = async fileExtension => {
+    if (isMounted()) {
+      setIsDownloading(true)
+    }
+
+    const maybeBody = await api.get(`auth/one-time-token`)
+    if (maybeBody === null || maybeBody.hasError) {
+      return
+    }
+
+    const { oneTimeToken } = maybeBody.data
+
+    window.open(`/api/survey/${surveyId}/download?fileExtension=${fileExtension}&oneTimeToken=${oneTimeToken}`)
+
+    if (isMounted()) {
+      setIsDownloading(false)
+    }
+  }
 
   return (
     <AdminBox>
       <AdminHeader>
         <Title>Survey Entries</Title>
 
-        <Button onClick={() => undefined} size="small">
+        <Button disabled={isDownloading} onClick={() => download(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)} size="small">
           Export CSV
         </Button>
       </AdminHeader>
 
       <StyledCard>
-        {surveyData.length === 0 && 'Loading...'}
-        {surveyData.length !== 0 && <StyledReactSpreadsheet data={surveyData} />}
+        {isLoading && 'Loading...'}
+        {!isLoading && <StyledReactSpreadsheet data={surveyEntries} />}
       </StyledCard>
     </AdminBox>
   )

@@ -1,14 +1,14 @@
 import mongoose from 'mongoose'
 
-const THIRTY_DAYS_IN_SECONDS = 30 * 24 * 60 * 60
+const TEN_MINUTES_IN_SECONDS = 10 * 60
 
-function Token() {
-  if (mongoose.models.Token) {
-    return mongoose.models.Token
+function OneTimeToken() {
+  if (mongoose.models.OneTimeToken) {
+    return mongoose.models.OneTimeToken
   }
 
   return mongoose.model(
-    'Token',
+    'OneTimeToken',
     new mongoose.Schema(
       {
         user: {
@@ -31,7 +31,7 @@ function Token() {
           type: Date,
           default: Date.now,
           index: {
-            expireAfterSeconds: THIRTY_DAYS_IN_SECONDS,
+            expireAfterSeconds: TEN_MINUTES_IN_SECONDS,
           },
         },
       },
@@ -42,4 +42,4 @@ function Token() {
   )
 }
 
-export default Token()
+export default OneTimeToken()

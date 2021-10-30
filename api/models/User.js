@@ -17,19 +17,21 @@ function User() {
           unique: true,
         },
         isActive: {
-          default: false,
+          required: false,
           type: Boolean,
+          default: false,
         },
         password: {
           required: true,
-          select: false,
           type: String,
+          select: false,
+          unique: true,
         },
         role: {
-          default: USER_ROLE.VIEWER,
-          enum: USER_ROLES,
           required: false,
           type: String,
+          default: USER_ROLE.VIEWER,
+          enum: USER_ROLES,
         },
       },
       {

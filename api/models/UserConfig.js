@@ -17,9 +17,10 @@ function UserConfig() {
           ref: 'User',
         },
         locale: {
+          required: false,
+          type: String,
           default: LOCALE['en-US'],
           enum: LOCALES,
-          type: String,
         },
       },
       {

@@ -14,7 +14,7 @@
   "D6/Uxz": [
     {
       "type": 0,
-      "value": "Questionnaires"
+      "value": "Surveys"
     }
   ],
   "DPOyaV": [
@@ -26,7 +26,7 @@
   "EEsDeJ": [
     {
       "type": 0,
-      "value": "Tableau de bord"
+      "value": "Dashboard"
     }
   ],
   "I8y4ic": [
@@ -71,6 +71,12 @@
       "value": "Mettre à jour"
     }
   ],
+  "tIFSst": [
+    {
+      "type": 0,
+      "value": "One Time Tokens"
+    }
+  ],
   "ugMu4J": [
     {
       "type": 0,
@@ -92,7 +98,7 @@
   "zGNJ13": [
     {
       "type": 0,
-      "value": "Utilisateur·rices"
+      "value": "Users"
     }
   ]
 }

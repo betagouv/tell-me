@@ -1,11 +1,13 @@
 import { createContext } from 'react'
 
+const anoop = async () => Promise.resolve()
+
 const Context = createContext({
-  delete: () => undefined,
-  get: () => undefined,
-  patch: () => undefined,
-  post: () => undefined,
-  put: () => undefined,
+  delete: anoop,
+  get: anoop,
+  patch: anoop,
+  post: anoop,
+  put: anoop,
 })
 
 export default Context

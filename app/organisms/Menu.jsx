@@ -100,13 +100,22 @@ export default function Menu() {
           </Link>
 
           {user.role === USER_ROLE.ADMINISTRATOR && (
-            <Link to="/users">
-              {intl.formatMessage({
-                defaultMessage: 'Users',
-                description: '[Sidebar Main Menu] Users label.',
-                id: 'zGNJ13',
-              })}
-            </Link>
+            <>
+              <Link to="/users">
+                {intl.formatMessage({
+                  defaultMessage: 'Users',
+                  description: '[Sidebar Main Menu] Users label.',
+                  id: 'zGNJ13',
+                })}
+              </Link>
+              <Link to="/one-time-tokens">
+                {intl.formatMessage({
+                  defaultMessage: 'One Time Tokens',
+                  description: '[Sidebar Main Menu] One Time Tokens label.',
+                  id: 'tIFSst',
+                })}
+              </Link>
+            </>
           )}
         </MainMenu>
       </div>
