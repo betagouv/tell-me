@@ -64,6 +64,15 @@ export default function Editable({
 
         return
 
+      case KEY.NUMPAD_DIVIDE:
+      case KEY.SLASH:
+        if (onSlash !== null) {
+          event.preventDefault()
+          onSlash()
+        }
+
+        return
+
       default:
         break
     }
@@ -77,15 +86,6 @@ export default function Editable({
         if (onBackspace !== null) {
           event.preventDefault()
           onBackspace()
-        }
-
-        return
-
-      case KEY.NUMPAD_DIVIDE:
-      case KEY.SLASH:
-        if (onSlash !== null) {
-          event.preventDefault()
-          onSlash()
         }
 
         // eslint-disable-next-line no-useless-return
