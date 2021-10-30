@@ -1,12 +1,18 @@
 FROM node:16-alpine
 
+# Mandatory arguments
 ARG NEXT_PUBLIC_RSA_PUBLIC_KEY
-ARG NODE_ENV=production
 
-ENV DEBUG=false
+# Optional arguments
+ARG DEBUG=false
+ARG NODE_ENV=production
+ARG YARN_PRODUCTION=true
+
+ENV DEBUG=$DEBUG
 ENV NEXT_PUBLIC_RSA_PUBLIC_KEY=$NEXT_PUBLIC_RSA_PUBLIC_KEY
 ENV NEXT_PUBLIC_NODE_ENV=$NODE_ENV
 ENV NODE_ENV=$NODE_ENV
+ENV YARN_PRODUCTION=$YARN_PRODUCTION
 
 EXPOSE 3000
 
@@ -14,7 +20,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn --production --pure-lockfile
+RUN yarn
 RUN yarn build
 
 ENTRYPOINT [ "yarn", "start" ]
