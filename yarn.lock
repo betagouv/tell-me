@@ -1716,13 +1716,13 @@ bessel@^1.0.2:
   resolved "https://registry.yarnpkg.com/bessel/-/bessel-1.0.2.tgz#828812291e0b62e94959cdea43fac186e8a7202d"
   integrity sha512-Al3nHGQGqDYqqinXhQzmwmcRToe/3WyBv4N8aZc5Pef8xw2neZlR9VPi84Sa23JtgWcucu18HxVZrnI0fn2etw==
 
-bhala@2.0.0-alpha.0:
-  version "2.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/bhala/-/bhala-2.0.0-alpha.0.tgz#cc138ce96d883b563b7c62f443d6701f45d57a87"
-  integrity sha512-bauGO1dzsHRwbLjH8mIR/WJWfTNSuuGX1cuuTm0vqldHR/xlfODW+UpnwHTicaw0SNA7s+cO7Re4bB3d6Ym3sA==
+bhala@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/bhala/-/bhala-2.0.2.tgz#4f951c78577b287c41939a91da36bdc0e51b2087"
+  integrity sha512-eshFkm3jGDSL72VyYfRI8Rf0o7gW32qtCRH75LlDOKAHxxEJVjB02hEaI5ZoV7Ka2viCrr9tOqvXWPq/29a1wA==
   dependencies:
-    chalk "4.1.2"
-    node-emoji "1.11.0"
+    chalk "^4.1.2"
+    node-emoji "^1.11.0"
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -2015,7 +2015,7 @@ chalk@4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@4.1.2, chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
+chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -5357,7 +5357,7 @@ next@11.1.2:
     "@next/swc-linux-x64-gnu" "11.1.2"
     "@next/swc-win32-x64-msvc" "11.1.2"
 
-node-emoji@1.11.0:
+node-emoji@^1.11.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.11.0.tgz#69a0150e6946e2f115e9d7ea4df7971e2628301c"
   integrity sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==

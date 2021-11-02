@@ -29,7 +29,7 @@
     "babel-plugin-formatjs": "10.3.11",
     "babel-plugin-styled-components": "1.13.2",
     "bcryptjs": "2.4.3",
-    "bhala": "2.0.0-alpha.0",
+    "bhala": "2.0.2",
     "dayjs": "1.10.7",
     "dotenv": "10.0.0",
     "formik": "2.2.9",
