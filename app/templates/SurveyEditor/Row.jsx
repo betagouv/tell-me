@@ -88,7 +88,7 @@ export default function Row({ block, children, onCondition, onDelete, onMove, on
       <Button
         accent="secondary"
         className="Button"
-        isDisabled={!block.isCheckbox || !block.isChoice}
+        isDisabled={!block.isCheckbox && !block.isChoice}
         onClick={block.isCheckbox || block.isChoice ? onCondition : noop}
       >
         <CornerDownRight />
