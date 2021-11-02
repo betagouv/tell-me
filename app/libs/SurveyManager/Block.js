@@ -59,6 +59,8 @@ export default class Block {
     /** @private */
     this._ifSelectedThenShowQuestionId = ifSelectedThenShowQuestionId || null
     /** @private */
+    this._isCheckbox = type === SURVEY_BLOCK_TYPE.INPUT.CHECKBOX
+    /** @private */
     this._isChoice = type === SURVEY_BLOCK_TYPE.INPUT.CHOICE
     /**
      * @private
@@ -110,6 +112,10 @@ export default class Block {
 
   get ifSelectedThenShowQuestionId() {
     return this._ifSelectedThenShowQuestionId
+  }
+
+  get isCheckbox() {
+    return this._isCheckbox
   }
 
   get isChoice() {

@@ -1,4 +1,4 @@
-import ß from 'bhala'
+/* eslint-disable no-console */
 
 const getErrorConstructorName = error => {
   if (error === undefined || error.constructor === undefined) {
@@ -34,11 +34,11 @@ export default function handleError(error, path) {
 
     default:
       // eslint-disable-next-line no-case-declarations
-      ß.error(`[app/helpers/handleError()] This type of error can't be processed. This should never happen.`)
-      ß.error(`[app/helpers/handleError()] Error Type: ${typeof error}`)
-      ß.error(`[app/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
+      console.error(`[app/helpers/handleError()] This type of error can't be processed. This should never happen.`)
+      console.error(`[app/helpers/handleError()] Error Type: ${typeof error}`)
+      console.error(`[app/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
       errorString = String(error)
   }
 
-  ß.error(`[${errorPath}] ${errorString}`)
+  console.error(`[${errorPath}] ${errorString}`)
 }
