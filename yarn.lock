@@ -1716,12 +1716,13 @@ bessel@^1.0.2:
   resolved "https://registry.yarnpkg.com/bessel/-/bessel-1.0.2.tgz#828812291e0b62e94959cdea43fac186e8a7202d"
   integrity sha512-Al3nHGQGqDYqqinXhQzmwmcRToe/3WyBv4N8aZc5Pef8xw2neZlR9VPi84Sa23JtgWcucu18HxVZrnI0fn2etw==
 
-bhala@1.0.0-alpha.1:
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/bhala/-/bhala-1.0.0-alpha.1.tgz#03bee13957daa358f296746107e4329b44afb936"
-  integrity sha512-hs0olkVwBrqTwPRrjbRSP1uO+fiCtARCnq6hmTnNlRoTtIMfXEhFXFojeGyNNJShwgpENc3WlktE+ej/RMWZBQ==
+bhala@2.0.0-alpha.0:
+  version "2.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/bhala/-/bhala-2.0.0-alpha.0.tgz#cc138ce96d883b563b7c62f443d6701f45d57a87"
+  integrity sha512-bauGO1dzsHRwbLjH8mIR/WJWfTNSuuGX1cuuTm0vqldHR/xlfODW+UpnwHTicaw0SNA7s+cO7Re4bB3d6Ym3sA==
   dependencies:
     chalk "4.1.2"
+    node-emoji "1.11.0"
 
 big.js@^5.2.2:
   version "5.2.2"
@@ -5355,6 +5356,13 @@ next@11.1.2:
     "@next/swc-darwin-x64" "11.1.2"
     "@next/swc-linux-x64-gnu" "11.1.2"
     "@next/swc-win32-x64-msvc" "11.1.2"
+
+node-emoji@1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.11.0.tgz#69a0150e6946e2f115e9d7ea4df7971e2628301c"
+  integrity sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==
+  dependencies:
+    lodash "^4.17.21"
 
 node-environment-flags@^1.0.5:
   version "1.0.6"

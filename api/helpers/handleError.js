@@ -41,13 +41,13 @@ export default function handleError(error, path, res) {
 
     default:
       // eslint-disable-next-line no-case-declarations
-      ß.error(`[api/helpers/handleError()] This type of error can't be processed. This should never happen.`, '❌')
-      ß.error(`[api/helpers/handleError()] Error Type: ${typeof error}`, '❌')
-      ß.error(`[api/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`, '❌')
+      ß.error(`[api/helpers/handleError()] This type of error can't be processed. This should never happen.`)
+      ß.error(`[api/helpers/handleError()] Error Type: ${typeof error}`)
+      ß.error(`[api/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
       errorString = String(error)
   }
 
-  ß.error(`[${errorPath}] ${errorString}`, '❌')
+  ß.error(`[${errorPath}] ${errorString}`)
 
   if (res === undefined) {
     return

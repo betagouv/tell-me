@@ -8,7 +8,7 @@ async function addRsaPrivateKeyToEnvIfNotExist() {
   const envPath = path.join(__dirname, '../../.env')
 
   if (!(await pathExists(envPath))) {
-    ß.info(`Generating initial .env file...`, 'ℹ️')
+    ß.info(`Generating initial .env file...`)
 
     const envExamplePath = path.join(__dirname, '../../.env.example')
     await fs.copyFile(envExamplePath, envPath)
@@ -19,7 +19,7 @@ async function addRsaPrivateKeyToEnvIfNotExist() {
     return
   }
 
-  ß.info(`Generating development-only RSA Key Pair...`, 'ℹ️')
+  ß.info(`Generating development-only RSA Key Pair...`)
 
   const rsaKeyPair = keypair()
   const envSourceRsaPrivateKeyLine = `RSA_PRIVATE_KEY="${rsaKeyPair.private.trim().replace(/\n/g, '\\n')}"`
@@ -38,7 +38,7 @@ async function addRsaPrivateKeyToEnvIfNotExist() {
     return
   }
 
-  ß.info(`Running development setup...`, 'ℹ️')
+  ß.info(`Running development setup...`)
 
   await addRsaPrivateKeyToEnvIfNotExist()
 })()
