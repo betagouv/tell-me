@@ -68,14 +68,20 @@ const renderBlocks = (blocks, values) => {
 
         const conditioningInputBlockValues = R.map(R.prop('value'))(maybeConditioningInputBlocks)
         const conditonalQuestionAnswerValueOrValues = values[maybeConditioningInputBlocks[0].questionId]
-        isHidden =
-          conditonalQuestionAnswerValueOrValues === undefined ||
-          (typeof conditonalQuestionAnswerValueOrValues === 'string' &&
-            R.includes(conditonalQuestionAnswerValueOrValues, conditioningInputBlockValues)) ||
-          !(
-            Array.isArray(conditonalQuestionAnswerValueOrValues) &&
-            R.intersection(conditioningInputBlockValues, conditonalQuestionAnswerValueOrValues).length > 0
-          )
+
+        if (
+          typeof conditonalQuestionAnswerValueOrValues === 'string' &&
+          R.includes(conditonalQuestionAnswerValueOrValues, conditioningInputBlockValues)
+        ) {
+          isHidden = false
+        } else if (
+          Array.isArray(conditonalQuestionAnswerValueOrValues) &&
+          R.intersection(conditioningInputBlockValues, conditonalQuestionAnswerValueOrValues).length > 0
+        ) {
+          isHidden = false
+        } else {
+          isHidden = true
+        }
 
         if (isHidden) {
           return components
