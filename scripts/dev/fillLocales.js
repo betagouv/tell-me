@@ -9,16 +9,16 @@ const sortPairByKeyCaseSensitive = R.sortBy(R.prop(0))
 const mergeRightButDescription = R.curry((enUsLocale, foreignLocale) =>
   R.pipe(
     R.toPairs,
-    R.map(([localeKey, foreignLocaleEntry]) => {
-      const enUsLocaleEntry = { ...enUsLocale[localeKey] }
-      const enUsLocaleEntryWithoutDescription = R.omit(['description'])(foreignLocaleEntry)
+    R.map(([localeKey, enUsLocaleEntry]) => {
+      const foreignLocaleEntry = { ...foreignLocale[localeKey] }
+      const enUsLocaleEntryWithoutDescription = R.omit(['description'])(enUsLocaleEntry)
       const newForeignLocaleEntry = R.mergeRight(enUsLocaleEntryWithoutDescription)(foreignLocaleEntry)
       newForeignLocaleEntry.description = String(enUsLocaleEntry.description)
 
       return [localeKey, newForeignLocaleEntry]
     }),
     R.fromPairs,
-  )(foreignLocale),
+  )(enUsLocale),
 )
 
 ;(async () => {
