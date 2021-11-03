@@ -6,6 +6,20 @@ const { promisify } = require('util')
 const asyncGlob = promisify(glob)
 
 const sortPairByKeyCaseSensitive = R.sortBy(R.prop(0))
+const mergeRightButDescription = R.curry((enUsLocale, foreignLocale) =>
+  R.pipe(
+    R.toPairs,
+    R.map(([localeKey, foreignLocaleEntry]) => {
+      const enUsLocaleEntry = { ...enUsLocale[localeKey] }
+      const enUsLocaleEntryWithoutDescription = R.omit(['description'])(foreignLocaleEntry)
+      const newForeignLocaleEntry = R.mergeRight(enUsLocaleEntryWithoutDescription)(foreignLocaleEntry)
+      newForeignLocaleEntry.description = String(enUsLocaleEntry.description)
+
+      return [localeKey, newForeignLocaleEntry]
+    }),
+    R.fromPairs,
+  )(foreignLocale),
+)
 
 ;(async () => {
   const localeFilePaths = await asyncGlob('./locales/*.json')
@@ -24,7 +38,7 @@ const sortPairByKeyCaseSensitive = R.sortBy(R.prop(0))
         R.toPairs,
         R.reject(([id]) => !enUsLocaleIds.includes(id)),
         R.fromPairs,
-        R.mergeRight(enUsLocale),
+        mergeRightButDescription(enUsLocale),
         R.toPairs,
         sortPairByKeyCaseSensitive,
         R.fromPairs,
