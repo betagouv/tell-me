@@ -1,6 +1,7 @@
 import { Button, Card, styled } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useParams } from 'react-router-dom'
 import ReactSpreadsheet from 'react-spreadsheet'
 
@@ -25,6 +26,7 @@ export default function SurveyEntryList() {
   const [surveyEntries, setSurveyEntries] = useState(null)
   const [survey, setSurvey] = useState(null)
   const { id: surveyId } = useParams()
+  const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
 
@@ -106,10 +108,20 @@ export default function SurveyEntryList() {
   return (
     <AdminBox>
       <AdminHeader>
-        <Title>Survey Entries</Title>
+        <Title>
+          {intl.formatMessage({
+            defaultMessage: 'Survey Answers',
+            description: '[Survey Answers List] Survey answers list title.',
+            id: 'ZxR2Ts',
+          })}
+        </Title>
 
         <Button disabled={isDownloading} onClick={() => download(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)} size="small">
-          Export CSV
+          {intl.formatMessage({
+            defaultMessage: 'Export as CSV',
+            description: '[Survey Answers List] Export answers in CSV format button label.',
+            id: 'YsRqXk',
+          })}
         </Button>
       </AdminHeader>
 

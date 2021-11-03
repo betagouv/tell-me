@@ -39,6 +39,14 @@
     "defaultMessage": "My Settings",
     "description": "[My Settings] Title."
   },
+  "YsRqXk": {
+    "defaultMessage": "Export as CSV",
+    "description": "[Survey Answers List] Export answers in CSV format button label."
+  },
+  "ZxR2Ts": {
+    "defaultMessage": "Survey Answers",
+    "description": "[Survey Answers List] Survey answers list title."
+  },
   "bkZg0U": {
     "defaultMessage": "Refresh Tokens",
     "description": "[Sidebar Main Menu] Refresh Tokens label."

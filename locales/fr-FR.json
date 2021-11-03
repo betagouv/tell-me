@@ -39,6 +39,14 @@
     "defaultMessage": "Mes préférences",
     "description": "[My Settings] Title."
   },
+  "YsRqXk": {
+    "defaultMessage": "Exporter en CSV",
+    "description": "[Survey Answers List] Export answers in CSV format button label."
+  },
+  "ZxR2Ts": {
+    "defaultMessage": "Réponses au questionnaire",
+    "description": "[Survey Answers List] Survey answers list title."
+  },
   "bkZg0U": {
     "defaultMessage": "Jetons de rafraîchissement",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
