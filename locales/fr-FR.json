@@ -7,7 +7,7 @@
     "description": "[Setup Modal] Submit button label."
   },
   "D6/Uxz": {
-    "defaultMessage": "Surveys",
+    "defaultMessage": "Questionnaires",
     "description": "[Sidebar Main Menu] Surveys label."
   },
   "DPOyaV": {
@@ -15,7 +15,7 @@
     "description": "[Setup Modal] Email input label."
   },
   "EEsDeJ": {
-    "defaultMessage": "Dashboard",
+    "defaultMessage": "Tableau de bord",
     "description": "[Sidebar Main Menu] Dashboard label."
   },
   "I8y4ic": {
@@ -27,7 +27,7 @@
     "description": "[My Settings] Title."
   },
   "bkZg0U": {
-    "defaultMessage": "Refresh Tokens",
+    "defaultMessage": "Jetons de rafraîchissement",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
   },
   "hWoiIQ": {
@@ -51,7 +51,7 @@
     "description": "[My Settings] Form submit button label."
   },
   "tIFSst": {
-    "defaultMessage": "One Time Tokens",
+    "defaultMessage": "Jetons jetables",
     "description": "[Sidebar Main Menu] One Time Tokens label."
   },
   "ugMu4J": {
@@ -67,7 +67,7 @@
     "description": "[Login Modal] Form password input label."
   },
   "zGNJ13": {
-    "defaultMessage": "Users",
+    "defaultMessage": "Utilisateur·rices",
     "description": "[Sidebar Main Menu] Users label."
   }
 }
