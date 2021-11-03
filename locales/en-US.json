@@ -3,6 +3,10 @@
     "defaultMessage": "Dashboard",
     "description": "[Dashboard] Title."
   },
+  "91i3BC": {
+    "defaultMessage": "Title",
+    "description": "[Surveys List] Title table column name."
+  },
   "A2n/eF": {
     "defaultMessage": "A new password",
     "description": "[Setup Modal] Password input label."
@@ -26,6 +30,10 @@
   "I8y4ic": {
     "defaultMessage": "Log In",
     "description": "[Login Modal] Form submit button label."
+  },
+  "IEpCqZ": {
+    "defaultMessage": "New Survey",
+    "description": "[Surveys List] New survey button label."
   },
   "NNlf6B": {
     "defaultMessage": "My Settings",
@@ -58,6 +66,10 @@
   "tIFSst": {
     "defaultMessage": "One Time Tokens",
     "description": "[Sidebar Main Menu] One Time Tokens label."
+  },
+  "tnYUFj": {
+    "defaultMessage": "Survey",
+    "description": "[Surveys List] Titles."
   },
   "ugMu4J": {
     "defaultMessage": "Email",

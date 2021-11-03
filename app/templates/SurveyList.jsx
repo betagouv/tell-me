@@ -2,6 +2,7 @@ import { Button, Card, Table } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { Database, Edit, Eye, Trash } from 'react-feather'
+import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 
 import AdminBox from '../atoms/AdminBox'
@@ -12,17 +13,10 @@ import slugify from '../helpers/slugify'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
-const BASE_COLUMNS = [
-  {
-    isSortable: true,
-    key: 'title',
-    label: 'Title',
-  },
-]
-
 export default function SurveyList() {
   const [surveys, setSurveys] = useState([])
   const history = useHistory()
+  const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
 
@@ -80,7 +74,15 @@ export default function SurveyList() {
   }
 
   const columns = [
-    ...BASE_COLUMNS,
+    {
+      isSortable: true,
+      key: 'title',
+      label: intl.formatMessage({
+        defaultMessage: 'Title',
+        description: '[Surveys List] Title table column name.',
+        id: '91i3BC',
+      }),
+    },
     {
       accent: 'success',
       action: goToSurveyEntryList,
@@ -114,10 +116,20 @@ export default function SurveyList() {
   return (
     <AdminBox>
       <AdminHeader>
-        <Title>Surveys</Title>
+        <Title>
+          {intl.formatMessage({
+            defaultMessage: 'Survey',
+            description: '[Surveys List] Titles.',
+            id: 'tnYUFj',
+          })}
+        </Title>
 
         <Button onClick={() => goToSurveyEditor('new')} size="small">
-          New Survey
+          {intl.formatMessage({
+            defaultMessage: 'New Survey',
+            description: '[Surveys List] New survey button label.',
+            id: 'IEpCqZ',
+          })}
         </Button>
       </AdminHeader>
 
