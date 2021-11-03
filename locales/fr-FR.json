@@ -1,6 +1,11 @@
 {
+  "/2pv6j": {
+    "defaultMessage": "Tableau de bord",
+    "description": "[Dashboard] Title."
+  },
   "A2n/eF": {
-    "defaultMessage": "Un nouveau mot de passe"
+    "defaultMessage": "Un nouveau mot de passe",
+    "description": "[Setup Modal] Password input label."
   },
   "Ci9rPk": {
     "defaultMessage": "Créer",

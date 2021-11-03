@@ -1,4 +1,8 @@
 {
+  "/2pv6j": {
+    "defaultMessage": "Dashboard",
+    "description": "[Dashboard] Title."
+  },
   "A2n/eF": {
     "defaultMessage": "A new password",
     "description": "[Setup Modal] Password input label."
