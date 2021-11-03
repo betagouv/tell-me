@@ -190,7 +190,7 @@ export default function PublicSurvey({ data }) {
   ) : isSent ? (
     <Question>
       {intl.formatMessage({
-        defaultMessage: 'Thank you!',
+        defaultMessage: 'Thank you for your interest in helping our project!',
         description: '[Public Survey] Thank you message once the survey has been sent.',
         id: 'i8B3g5',
       })}
