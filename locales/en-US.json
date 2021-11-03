@@ -1,15 +1,31 @@
 {
   "/2pv6j": {
     "defaultMessage": "Dashboard",
-    "description": "[Dashboard] Title."
+    "description": "[Dashboard] Page title."
+  },
+  "4toEG": {
+    "defaultMessage": "Edit this user",
+    "description": "[Users List] Table row \"user edition\" button label."
+  },
+  "8F0yyx": {
+    "defaultMessage": "Delete this user",
+    "description": "[Users List] Table row \"user deletion\" button label."
+  },
+  "8vxOf": {
+    "defaultMessage": "Users",
+    "description": "[Users List] Page title."
   },
   "91i3BC": {
     "defaultMessage": "Title",
-    "description": "[Surveys List] Title table column name."
+    "description": "[Surveys List] Table \"title\" column label."
   },
   "A2n/eF": {
     "defaultMessage": "A new password",
     "description": "[Setup Modal] Password input label."
+  },
+  "AYV/5T": {
+    "defaultMessage": "New User",
+    "description": "[Users List] New user button label."
   },
   "Ci9rPk": {
     "defaultMessage": "Create",
@@ -37,7 +53,11 @@
   },
   "NNlf6B": {
     "defaultMessage": "My Settings",
-    "description": "[My Settings] Title."
+    "description": "[My Settings] Page title."
+  },
+  "QBtMwD": {
+    "defaultMessage": "Email",
+    "description": "[Users List] Table \"email\" column label."
   },
   "YsRqXk": {
     "defaultMessage": "Export as CSV",
@@ -63,6 +83,10 @@
     "defaultMessage": "Thank you for your interest in helping our project!",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
+  "kx4x9D": {
+    "defaultMessage": "Role",
+    "description": "[Users List] Table \"role\" column label."
+  },
   "lGHKue": {
     "defaultMessage": "Language",
     "description": "[My Settings] Form language select label."
@@ -77,7 +101,7 @@
   },
   "tnYUFj": {
     "defaultMessage": "Survey",
-    "description": "[Surveys List] Titles."
+    "description": "[Surveys List] Page title."
   },
   "ugMu4J": {
     "defaultMessage": "Email",

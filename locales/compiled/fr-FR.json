@@ -5,6 +5,24 @@
       "value": "Tableau de bord"
     }
   ],
+  "4toEG": [
+    {
+      "type": 0,
+      "value": "Éditer cet·te utilisateur·rices"
+    }
+  ],
+  "8F0yyx": [
+    {
+      "type": 0,
+      "value": "Supprimer cet·te utilisateur·rices"
+    }
+  ],
+  "8vxOf": [
+    {
+      "type": 0,
+      "value": "Utilisateur·rices"
+    }
+  ],
   "91i3BC": [
     {
       "type": 0,
@@ -15,6 +33,12 @@
     {
       "type": 0,
       "value": "Un nouveau mot de passe"
+    }
+  ],
+  "AYV/5T": [
+    {
+      "type": 0,
+      "value": "Nouvel·le utilisateur·rice"
     }
   ],
   "Ci9rPk": [
@@ -59,6 +83,12 @@
       "value": "Mes préférences"
     }
   ],
+  "QBtMwD": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "YsRqXk": [
     {
       "type": 0,
@@ -93,6 +123,12 @@
     {
       "type": 0,
       "value": "Merci de votre intérêt pour notre projet !"
+    }
+  ],
+  "kx4x9D": [
+    {
+      "type": 0,
+      "value": "Rôle"
     }
   ],
   "lGHKue": [

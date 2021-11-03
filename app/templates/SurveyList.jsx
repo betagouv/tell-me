@@ -79,7 +79,7 @@ export default function SurveyList() {
       key: 'title',
       label: intl.formatMessage({
         defaultMessage: 'Title',
-        description: '[Surveys List] Title table column name.',
+        description: '[Surveys List] Table "title" column label.',
         id: '91i3BC',
       }),
     },
@@ -119,7 +119,7 @@ export default function SurveyList() {
         <Title>
           {intl.formatMessage({
             defaultMessage: 'Survey',
-            description: '[Surveys List] Titles.',
+            description: '[Surveys List] Page title.',
             id: 'tnYUFj',
           })}
         </Title>

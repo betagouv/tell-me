@@ -78,7 +78,7 @@ export default function MyConfig() {
         <Title>
           {intl.formatMessage({
             defaultMessage: 'My Settings',
-            description: '[My Settings] Title.',
+            description: '[My Settings] Page title.',
             id: 'NNlf6B',
           })}
         </Title>

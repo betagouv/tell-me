@@ -1,6 +1,7 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import { useEffect, useState } from 'react'
 import { Edit, Trash } from 'react-feather'
+import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 
 import AdminBox from '../atoms/AdminBox'
@@ -9,27 +10,10 @@ import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
-const BASE_COLUMNS = [
-  {
-    isSortable: true,
-    key: 'email',
-    label: 'Email',
-  },
-  {
-    isSortable: true,
-    key: 'role',
-    label: 'Role',
-  },
-  {
-    key: 'isActive',
-    label: '',
-    type: 'boolean',
-  },
-]
-
 export default function UserList() {
   const [users, setUsers] = useState([])
   const history = useHistory()
+  const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
 
@@ -53,19 +37,49 @@ export default function UserList() {
   }
 
   const columns = [
-    ...BASE_COLUMNS,
+    {
+      isSortable: true,
+      key: 'email',
+      label: intl.formatMessage({
+        defaultMessage: 'Email',
+        description: '[Users List] Table "email" column label.',
+        id: 'QBtMwD',
+      }),
+    },
+    {
+      isSortable: true,
+      key: 'role',
+      label: intl.formatMessage({
+        defaultMessage: 'Role',
+        description: '[Users List] Table "role" column label.',
+        id: 'kx4x9D',
+      }),
+    },
+    {
+      key: 'isActive',
+      label: '',
+      type: 'boolean',
+    },
     {
       accent: 'secondary',
       action: goToUserEditor,
       Icon: () => <Edit />,
-      label: 'Edit this user',
+      label: intl.formatMessage({
+        defaultMessage: 'Edit this user',
+        description: '[Users List] Table row "user edition" button label.',
+        id: '4toEG',
+      }),
       type: 'action',
     },
     {
       accent: 'danger',
       action: () => undefined,
       Icon: Trash,
-      label: 'Delete this user',
+      label: intl.formatMessage({
+        defaultMessage: 'Delete this user',
+        description: '[Users List] Table row "user deletion" button label.',
+        id: '8F0yyx',
+      }),
       type: 'action',
     },
   ]
@@ -73,10 +87,20 @@ export default function UserList() {
   return (
     <AdminBox>
       <AdminHeader>
-        <Title>Users</Title>
+        <Title>
+          {intl.formatMessage({
+            defaultMessage: 'Users',
+            description: '[Users List] Page title.',
+            id: '8vxOf',
+          })}
+        </Title>
 
         <Button onClick={() => goToUserEditor('new')} size="small">
-          New User
+          {intl.formatMessage({
+            defaultMessage: 'New User',
+            description: '[Users List] New user button label.',
+            id: 'AYV/5T',
+          })}
         </Button>
       </AdminHeader>
 

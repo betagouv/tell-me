@@ -13,7 +13,7 @@ export default function Dashboard() {
         <Title>
           {intl.formatMessage({
             defaultMessage: 'Dashboard',
-            description: '[Dashboard] Title.',
+            description: '[Dashboard] Page title.',
             id: '/2pv6j',
           })}
         </Title>

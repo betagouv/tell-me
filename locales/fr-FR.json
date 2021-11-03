@@ -1,15 +1,31 @@
 {
   "/2pv6j": {
     "defaultMessage": "Tableau de bord",
-    "description": "[Dashboard] Title."
+    "description": "[Dashboard] Page title."
+  },
+  "4toEG": {
+    "defaultMessage": "Éditer cet·te utilisateur·rices",
+    "description": "[Users List] Table row \"user edition\" button label."
+  },
+  "8F0yyx": {
+    "defaultMessage": "Supprimer cet·te utilisateur·rices",
+    "description": "[Users List] Table row \"user deletion\" button label."
+  },
+  "8vxOf": {
+    "defaultMessage": "Utilisateur·rices",
+    "description": "[Users List] Page title."
   },
   "91i3BC": {
     "defaultMessage": "Titre",
-    "description": "[Surveys List] Title table column name."
+    "description": "[Surveys List] Table \"title\" column label."
   },
   "A2n/eF": {
     "defaultMessage": "Un nouveau mot de passe",
     "description": "[Setup Modal] Password input label."
+  },
+  "AYV/5T": {
+    "defaultMessage": "Nouvel·le utilisateur·rice",
+    "description": "[Users List] New user button label."
   },
   "Ci9rPk": {
     "defaultMessage": "Créer",
@@ -37,7 +53,11 @@
   },
   "NNlf6B": {
     "defaultMessage": "Mes préférences",
-    "description": "[My Settings] Title."
+    "description": "[My Settings] Page title."
+  },
+  "QBtMwD": {
+    "defaultMessage": "Email",
+    "description": "[Users List] Table \"email\" column label."
   },
   "YsRqXk": {
     "defaultMessage": "Exporter en CSV",
@@ -63,6 +83,10 @@
     "defaultMessage": "Merci de votre intérêt pour notre projet !",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
+  "kx4x9D": {
+    "defaultMessage": "Rôle",
+    "description": "[Users List] Table \"role\" column label."
+  },
   "lGHKue": {
     "defaultMessage": "Langue",
     "description": "[My Settings] Form language select label."
@@ -77,7 +101,7 @@
   },
   "tnYUFj": {
     "defaultMessage": "Questionnaires",
-    "description": "[Surveys List] Titles."
+    "description": "[Surveys List] Page title."
   },
   "ugMu4J": {
     "defaultMessage": "Email",
