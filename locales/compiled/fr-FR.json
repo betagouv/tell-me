@@ -1,4 +1,10 @@
 {
+  "+6xdMp": [
+    {
+      "type": 0,
+      "value": "Jetons jetables"
+    }
+  ],
   "+lem9Q": [
     {
       "type": 0,
@@ -21,6 +27,12 @@
     {
       "type": 0,
       "value": "Éditer cet·te utilisateur·rices"
+    }
+  ],
+  "73PR4k": [
+    {
+      "type": 0,
+      "value": "Supprimer ce jeton jetable"
     }
   ],
   "8F0yyx": [
@@ -131,6 +143,12 @@
       "value": "Nouvel·e utilisateur·rice"
     }
   ],
+  "TAgUUN": [
+    {
+      "type": 0,
+      "value": "IP"
+    }
+  ],
   "VXF18U": [
     {
       "type": 0,
@@ -191,6 +209,12 @@
       "value": "Merci de votre intérêt pour notre projet !"
     }
   ],
+  "iMAa/d": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "jGB2t1": [
     {
       "type": 0,
@@ -249,6 +273,12 @@
     {
       "type": 0,
       "value": "Mot de passe"
+    }
+  ],
+  "yW/8Sz": [
+    {
+      "type": 0,
+      "value": "TTL"
     }
   ],
   "zGNJ13": [

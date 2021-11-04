@@ -1,6 +1,7 @@
 import { Card, Table } from '@singularity-ui/core'
 import { useEffect, useState } from 'react'
 import { Trash } from 'react-feather'
+import { useIntl } from 'react-intl'
 
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
@@ -11,6 +12,7 @@ import useIsMounted from '../hooks/useIsMounted'
 export default function OneTimeTokenList() {
   const [isLoading, setIsLoading] = useState(true)
   const [oneTimeTokens, setOneTimeTokens] = useState([])
+  const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
 
@@ -40,23 +42,39 @@ export default function OneTimeTokenList() {
     {
       isSortable: true,
       key: 'user.email',
-      label: 'Email',
+      label: intl.formatMessage({
+        defaultMessage: 'Email',
+        description: '[One Time Tokens List] Table "email" column label.',
+        id: 'iMAa/d',
+      }),
     },
     {
       isSortable: true,
       key: 'ip',
-      label: 'IP',
+      label: intl.formatMessage({
+        defaultMessage: 'IP',
+        description: '[One Time Tokens List] Table "IP" column label.',
+        id: 'TAgUUN',
+      }),
     },
     {
       isSortable: true,
       key: 'ttl',
-      label: 'TTL',
+      label: intl.formatMessage({
+        defaultMessage: 'TTL',
+        description: '[One Time Tokens List] Table "TTL" column label.',
+        id: 'yW/8Sz',
+      }),
     },
     {
       accent: 'danger',
       action: deleteOneTimeToken,
       Icon: Trash,
-      label: 'Delete this one time token',
+      label: intl.formatMessage({
+        defaultMessage: 'Delete this one time token',
+        description: '[One Time Tokens List] Table row "token deletion" button label.',
+        id: '73PR4k',
+      }),
       type: 'action',
     },
   ]
@@ -64,7 +82,13 @@ export default function OneTimeTokenList() {
   return (
     <AdminBox>
       <AdminHeader>
-        <Title>One Time Tokens</Title>
+        <Title>
+          {intl.formatMessage({
+            defaultMessage: 'One Time Tokens',
+            description: '[One Time Tokens List] Page title.',
+            id: '+6xdMp',
+          })}
+        </Title>
       </AdminHeader>
 
       <Card>

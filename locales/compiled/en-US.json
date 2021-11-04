@@ -1,4 +1,10 @@
 {
+  "+6xdMp": [
+    {
+      "type": 0,
+      "value": "One Time Tokens"
+    }
+  ],
   "+lem9Q": [
     {
       "type": 0,
@@ -21,6 +27,12 @@
     {
       "type": 0,
       "value": "Edit this user"
+    }
+  ],
+  "73PR4k": [
+    {
+      "type": 0,
+      "value": "Delete this one time token"
     }
   ],
   "8F0yyx": [
@@ -131,6 +143,12 @@
       "value": "New user"
     }
   ],
+  "TAgUUN": [
+    {
+      "type": 0,
+      "value": "IP"
+    }
+  ],
   "VXF18U": [
     {
       "type": 0,
@@ -191,6 +209,12 @@
       "value": "Thank you for your interest in helping our project!"
     }
   ],
+  "iMAa/d": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "jGB2t1": [
     {
       "type": 0,
@@ -249,6 +273,12 @@
     {
       "type": 0,
       "value": "Password"
+    }
+  ],
+  "yW/8Sz": [
+    {
+      "type": 0,
+      "value": "TTL"
     }
   ],
   "zGNJ13": [

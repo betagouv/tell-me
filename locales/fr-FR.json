@@ -1,4 +1,8 @@
 {
+  "+6xdMp": {
+    "defaultMessage": "Jetons jetables",
+    "description": "[One Time Tokens List] Page title."
+  },
   "+lem9Q": {
     "defaultMessage": "TTL",
     "description": "[Refresh Tokens List] Table \"TTL\" column label."
@@ -14,6 +18,10 @@
   "4toEG": {
     "defaultMessage": "Éditer cet·te utilisateur·rices",
     "description": "[Users List] Table row \"user edition\" button label."
+  },
+  "73PR4k": {
+    "defaultMessage": "Supprimer ce jeton jetable",
+    "description": "[One Time Tokens List] Table row \"token deletion\" button label."
   },
   "8F0yyx": {
     "defaultMessage": "Supprimer cet·te utilisateur·rices",
@@ -87,6 +95,10 @@
     "defaultMessage": "Nouvel·e utilisateur·rice",
     "description": "[Survey Editor] User creation page title."
   },
+  "TAgUUN": {
+    "defaultMessage": "IP",
+    "description": "[One Time Tokens List] Table \"IP\" column label."
+  },
   "VXF18U": {
     "defaultMessage": "Compte actif",
     "description": "[Survey Editor] Form activated account checkbox label."
@@ -127,6 +139,10 @@
     "defaultMessage": "Merci de votre intérêt pour notre projet !",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
+  "iMAa/d": {
+    "defaultMessage": "Email",
+    "description": "[One Time Tokens List] Table \"email\" column label."
+  },
   "jGB2t1": {
     "defaultMessage": "Email",
     "description": "[Refresh Tokens List] Table \"email\" column label."
@@ -166,6 +182,10 @@
   "xhJCpr": {
     "defaultMessage": "Mot de passe",
     "description": "[Login Modal] Form password input label."
+  },
+  "yW/8Sz": {
+    "defaultMessage": "TTL",
+    "description": "[One Time Tokens List] Table \"TTL\" column label."
   },
   "zGNJ13": {
     "defaultMessage": "Utilisateur·rices",

@@ -1,4 +1,8 @@
 {
+  "+6xdMp": {
+    "defaultMessage": "One Time Tokens",
+    "description": "[One Time Tokens List] Page title."
+  },
   "+lem9Q": {
     "defaultMessage": "TTL",
     "description": "[Refresh Tokens List] Table \"TTL\" column label."
@@ -14,6 +18,10 @@
   "4toEG": {
     "defaultMessage": "Edit this user",
     "description": "[Users List] Table row \"user edition\" button label."
+  },
+  "73PR4k": {
+    "defaultMessage": "Delete this one time token",
+    "description": "[One Time Tokens List] Table row \"token deletion\" button label."
   },
   "8F0yyx": {
     "defaultMessage": "Delete this user",
@@ -87,6 +95,10 @@
     "defaultMessage": "New user",
     "description": "[Survey Editor] User creation page title."
   },
+  "TAgUUN": {
+    "defaultMessage": "IP",
+    "description": "[One Time Tokens List] Table \"IP\" column label."
+  },
   "VXF18U": {
     "defaultMessage": "Activated account",
     "description": "[Survey Editor] Form activated account checkbox label."
@@ -127,6 +139,10 @@
     "defaultMessage": "Thank you for your interest in helping our project!",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
+  "iMAa/d": {
+    "defaultMessage": "Email",
+    "description": "[One Time Tokens List] Table \"email\" column label."
+  },
   "jGB2t1": {
     "defaultMessage": "Email",
     "description": "[Refresh Tokens List] Table \"email\" column label."
@@ -166,6 +182,10 @@
   "xhJCpr": {
     "defaultMessage": "Password",
     "description": "[Login Modal] Form password input label."
+  },
+  "yW/8Sz": {
+    "defaultMessage": "TTL",
+    "description": "[One Time Tokens List] Table \"TTL\" column label."
   },
   "zGNJ13": {
     "defaultMessage": "Users",
