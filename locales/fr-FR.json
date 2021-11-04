@@ -1,7 +1,15 @@
 {
+  "+lem9Q": {
+    "defaultMessage": "TTL",
+    "description": "[Refresh Tokens List] Table \"TTL\" column label."
+  },
   "/2pv6j": {
     "defaultMessage": "Tableau de bord",
     "description": "[Dashboard] Page title."
+  },
+  "20hT19": {
+    "defaultMessage": "IP",
+    "description": "[Refresh Tokens List] Table \"IP\" column label."
   },
   "4toEG": {
     "defaultMessage": "Éditer cet·te utilisateur·rices",
@@ -59,6 +67,10 @@
     "defaultMessage": "Nouveau questionnaire",
     "description": "[Surveys List] New survey button label."
   },
+  "Ikt38A": {
+    "defaultMessage": "Jetons de rafraîchissement",
+    "description": "[Refresh Tokens List] Page title."
+  },
   "NNlf6B": {
     "defaultMessage": "Mes préférences",
     "description": "[My Settings] Page title."
@@ -115,6 +127,10 @@
     "defaultMessage": "Merci de votre intérêt pour notre projet !",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
+  "jGB2t1": {
+    "defaultMessage": "Email",
+    "description": "[Refresh Tokens List] Table \"email\" column label."
+  },
   "kx4x9D": {
     "defaultMessage": "Rôle",
     "description": "[Users List] Table \"role\" column label."
@@ -134,6 +150,10 @@
   "tnYUFj": {
     "defaultMessage": "Questionnaires",
     "description": "[Surveys List] Page title."
+  },
+  "uaDzBk": {
+    "defaultMessage": "Supprimer ce jeton de rafraîchissement",
+    "description": "[Refresh Tokens List] Table row \"token deletion\" button label."
   },
   "ugMu4J": {
     "defaultMessage": "Email",

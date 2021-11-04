@@ -1,8 +1,20 @@
 {
+  "+lem9Q": [
+    {
+      "type": 0,
+      "value": "TTL"
+    }
+  ],
   "/2pv6j": [
     {
       "type": 0,
       "value": "Tableau de bord"
+    }
+  ],
+  "20hT19": [
+    {
+      "type": 0,
+      "value": "IP"
     }
   ],
   "4toEG": [
@@ -89,6 +101,12 @@
       "value": "Nouveau questionnaire"
     }
   ],
+  "Ikt38A": [
+    {
+      "type": 0,
+      "value": "Jetons de rafraîchissement"
+    }
+  ],
   "NNlf6B": [
     {
       "type": 0,
@@ -173,6 +191,12 @@
       "value": "Merci de votre intérêt pour notre projet !"
     }
   ],
+  "jGB2t1": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "kx4x9D": [
     {
       "type": 0,
@@ -201,6 +225,12 @@
     {
       "type": 0,
       "value": "Questionnaires"
+    }
+  ],
+  "uaDzBk": [
+    {
+      "type": 0,
+      "value": "Supprimer ce jeton de rafraîchissement"
     }
   ],
   "ugMu4J": [

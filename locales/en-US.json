@@ -1,7 +1,15 @@
 {
+  "+lem9Q": {
+    "defaultMessage": "TTL",
+    "description": "[Refresh Tokens List] Table \"TTL\" column label."
+  },
   "/2pv6j": {
     "defaultMessage": "Dashboard",
     "description": "[Dashboard] Page title."
+  },
+  "20hT19": {
+    "defaultMessage": "IP",
+    "description": "[Refresh Tokens List] Table \"IP\" column label."
   },
   "4toEG": {
     "defaultMessage": "Edit this user",
@@ -59,6 +67,10 @@
     "defaultMessage": "New survey",
     "description": "[Surveys List] New survey button label."
   },
+  "Ikt38A": {
+    "defaultMessage": "Refresh Tokens",
+    "description": "[Refresh Tokens List] Page title."
+  },
   "NNlf6B": {
     "defaultMessage": "My Settings",
     "description": "[My Settings] Page title."
@@ -115,6 +127,10 @@
     "defaultMessage": "Thank you for your interest in helping our project!",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
+  "jGB2t1": {
+    "defaultMessage": "Email",
+    "description": "[Refresh Tokens List] Table \"email\" column label."
+  },
   "kx4x9D": {
     "defaultMessage": "Role",
     "description": "[Users List] Table \"role\" column label."
@@ -134,6 +150,10 @@
   "tnYUFj": {
     "defaultMessage": "Survey",
     "description": "[Surveys List] Page title."
+  },
+  "uaDzBk": {
+    "defaultMessage": "Delete this refresh token",
+    "description": "[Refresh Tokens List] Table row \"token deletion\" button label."
   },
   "ugMu4J": {
     "defaultMessage": "Email",
