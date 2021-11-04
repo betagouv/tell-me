@@ -25,7 +25,7 @@
     "@babel/core": "7.15.8",
     "@babel/node": "7.15.8",
     "@fontsource/poppins": "4.5.0",
-    "@singularity-ui/core": "1.5.1",
+    "@singularity-ui/core": "1.9.0",
     "babel-plugin-formatjs": "10.3.11",
     "babel-plugin-styled-components": "1.13.2",
     "bcryptjs": "2.4.3",

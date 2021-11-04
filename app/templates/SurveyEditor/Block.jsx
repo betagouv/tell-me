@@ -6,9 +6,9 @@ import { CornerDownRight } from 'react-feather'
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import { SelectOptionShape, SurveyManagerBlockShape } from '../../shapes'
 import Checkbox from './blocks/Checkbox'
-import Choice from './blocks/Choice'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
+import Radio from './blocks/Radio'
 import Textarea from './blocks/Textarea'
 import TextInput from './blocks/TextInput'
 import Editable from './Editable'
@@ -26,7 +26,7 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
     placeholder: `Insert some text or type '/' to insert a new type of block`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: {
-    component: Choice,
+    component: Radio,
     placeholder: `Option`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: {
@@ -45,11 +45,10 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
 
 const Condition = styled.div`
   display: flex;
-  padding-bottom: 0.25rem;
+  padding: 0.5rem 0;
 
   > svg {
-    margin-right: 0.5rem;
-    margin-top: 0.2rem;
+    margin: 0.25rem 0.5rem 0 0.6rem;
   }
 `
 

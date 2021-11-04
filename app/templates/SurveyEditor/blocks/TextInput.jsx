@@ -3,6 +3,7 @@ import { forwardRef } from 'react'
 
 const StyledTextInput = styled.div`
   /* https://github.com/singularity-ui/core/blob/main/fields/TextInput.jsx */
+
   background-color: ${p => p.theme.color.body.white};
   border: solid 1px ${p => p.theme.color.secondary.default};
   border-radius: ${p => p.theme.appearance.borderRadius.medium};

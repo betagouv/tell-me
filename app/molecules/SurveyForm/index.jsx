@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import * as Yup from 'yup'
 
-import CheckboxInput from './CheckboxInput'
-import RadioInput from './RadioInput'
+import Checkbox from './Checkbox'
+import Radio from './Radio'
 import Submit from './Submit'
 import Textarea from './Textarea'
 import TextInput from './TextInput'
@@ -65,8 +65,8 @@ SurveyForm.propTypes = {
 }
 
 export default Object.assign(SurveyForm, {
-  CheckboxInput,
-  RadioInput,
+  Checkbox,
+  Radio,
   Submit,
   Textarea,
   TextInput,

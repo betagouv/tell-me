@@ -930,10 +930,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@singularity-ui/core@1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@singularity-ui/core/-/core-1.5.1.tgz#8ca4d03cff14d27ed3e985c6f87dc099c590d7ad"
-  integrity sha512-hYqkGXtKAPUBVB/4gEDfIAh0BOvNZua4UbOSaQI+MuLpNRhFYgWgZuD3EeVrUMaappbxM9Rqx+eJC/gSnNIOgQ==
+"@singularity-ui/core@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@singularity-ui/core/-/core-1.9.0.tgz#92fbb6144e8e8bf48749c05c580f42a8303c7860"
+  integrity sha512-o113BoX4rafM+pLmFtg98x5tr6lz+oPd9nfchxsSx1A/2HNTXBDeB4eEFviFP9qiBOTfAZ50TEOpx3I8wKgY+g==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@fontsource/poppins" "^4.5.0"
