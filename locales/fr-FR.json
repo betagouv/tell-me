@@ -103,10 +103,6 @@
     "defaultMessage": "Mettre à jour l’utilisateur·rice",
     "description": "[Survey Editor] Form \"update\" button label."
   },
-  "hUbkme": {
-    "defaultMessage": "Chargement en cours…",
-    "description": "[Generic Locales] Loading text."
-  },
   "hWoiIQ": {
     "defaultMessage": "Répêtez le nouveau mot de passe",
     "description": "[Setup Modal] Password repeat input label."

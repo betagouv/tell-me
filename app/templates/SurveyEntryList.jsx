@@ -12,6 +12,7 @@ import Subtitle from '../atoms/Subtitle'
 import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
+import Loader from '../molecules/Loader'
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -107,18 +108,14 @@ export default function SurveyEntryList() {
     }
   }
 
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <AdminBox>
       <AdminHeader>
-        <Title>
-          {isLoading
-            ? intl.formatMessage({
-                defaultMessage: 'Loading…',
-                description: '[Generic Locales] Loading text.',
-                id: 'hUbkme',
-              })
-            : survey.title}
-        </Title>
+        <Title>{survey.title}</Title>
 
         <Button disabled={isDownloading} onClick={() => download(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)} size="small">
           {intl.formatMessage({
@@ -138,15 +135,7 @@ export default function SurveyEntryList() {
           })}
         </Subtitle>
 
-        {isLoading ? (
-          intl.formatMessage({
-            defaultMessage: 'Loading…',
-            description: '[Generic Locales] Loading text.',
-            id: 'hUbkme',
-          })
-        ) : (
-          <StyledReactSpreadsheet data={surveyEntries} />
-        )}
+        <StyledReactSpreadsheet data={surveyEntries} />
       </StyledCard>
     </AdminBox>
   )

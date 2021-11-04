@@ -15,6 +15,7 @@ import SurveyLogo from '../atoms/SurveyLogo'
 import SurveyTitle from '../atoms/SurveyTitle'
 import useApi from '../hooks/useApi'
 import SurveyManager from '../libs/SurveyManager'
+import Loader from '../molecules/Loader'
 import SurveyForm from '../molecules/SurveyForm'
 import isBlockTypeIndexable from './SurveyEditor/helpers/isBlockTypeIndexable'
 
@@ -184,42 +185,6 @@ export default function PublicSurvey({ data }) {
     loadFormDataFromSession()
   }, [])
 
-  // eslint-disable-next-line no-nested-ternary
-  const page = isLoading ? (
-    <Paragraph>
-      {intl.formatMessage({
-        defaultMessage: 'Loading…',
-        description: '[Generic Locales] Loading text.',
-        id: 'hUbkme',
-      })}
-    </Paragraph>
-  ) : isSent ? (
-    <Question>
-      {intl.formatMessage({
-        defaultMessage: 'Thank you for your interest in helping our project!',
-        description: '[Public Survey] Thank you message once the survey has been sent.',
-        id: 'i8B3g5',
-      })}
-    </Question>
-  ) : (
-    <SurveyForm
-      initialValues={initialValues}
-      onChange={saveFormDataToSession}
-      onSubmit={submitSurvey}
-      validationSchema={FormSchema}
-    >
-      <SurveyBlocks blocks={surveyManager.blocks} />
-
-      <SurveyForm.Submit>
-        {intl.formatMessage({
-          defaultMessage: 'Submit',
-          description: '[Public Survey] Submit button label.',
-          id: 'i0E602',
-        })}
-      </SurveyForm.Submit>
-    </SurveyForm>
-  )
-
   return (
     <Page>
       <SurveyHeader surveyId={_id} />
@@ -229,7 +194,36 @@ export default function PublicSurvey({ data }) {
 
         <SurveyTitle>{title}</SurveyTitle>
 
-        {page}
+        {isLoading && <Loader />}
+
+        {!isLoading && !isSent && (
+          <SurveyForm
+            initialValues={initialValues}
+            onChange={saveFormDataToSession}
+            onSubmit={submitSurvey}
+            validationSchema={FormSchema}
+          >
+            <SurveyBlocks blocks={surveyManager.blocks} />
+
+            <SurveyForm.Submit>
+              {intl.formatMessage({
+                defaultMessage: 'Submit',
+                description: '[Public Survey] Submit button label.',
+                id: 'i0E602',
+              })}
+            </SurveyForm.Submit>
+          </SurveyForm>
+        )}
+
+        {!isLoading && isSent && (
+          <Question>
+            {intl.formatMessage({
+              defaultMessage: 'Thank you for your interest in helping our project!',
+              description: '[Public Survey] Thank you message once the survey has been sent.',
+              id: 'i8B3g5',
+            })}
+          </Question>
+        )}
       </Container>
     </Page>
   )

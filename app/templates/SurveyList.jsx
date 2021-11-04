@@ -128,7 +128,7 @@ export default function SurveyList() {
 
         <Button onClick={() => goToSurveyEditor('new')} size="small">
           {intl.formatMessage({
-            defaultMessage: 'New Survey',
+            defaultMessage: 'New survey',
             description: '[Surveys List] New survey button label.',
             id: 'IEpCqZ',
           })}

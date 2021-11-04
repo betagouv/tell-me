@@ -13,6 +13,7 @@ import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 import useLocalization from '../hooks/useLocalization'
 import Form from '../molecules/Form'
+import Loader from '../molecules/Loader'
 
 const FormSchema = Yup.object().shape({
   localeAsOption: Yup.object().required(`You must select a language.`),
@@ -69,11 +70,7 @@ export default function MyConfig() {
   }
 
   if (isLoading) {
-    return intl.formatMessage({
-      defaultMessage: 'Loading…',
-      description: '[Generic Locales] Loading text.',
-      id: 'hUbkme',
-    })
+    return <Loader />
   }
 
   return (
@@ -105,8 +102,8 @@ export default function MyConfig() {
           <Field>
             <Form.Submit>
               {intl.formatMessage({
-                defaultMessage: 'Update',
-                description: '[My Settings] Form submit button label.',
+                defaultMessage: 'Update my settings',
+                description: '[My Settings] Form update button label.',
                 id: 'pLn6i2',
               })}
             </Form.Submit>

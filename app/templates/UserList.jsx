@@ -99,7 +99,7 @@ export default function UserList() {
 
         <Button onClick={() => goToUserEditor('new')} size="small">
           {intl.formatMessage({
-            defaultMessage: 'New User',
+            defaultMessage: 'New user',
             description: '[Users List] New user button label.',
             id: 'AYV/5T',
           })}
