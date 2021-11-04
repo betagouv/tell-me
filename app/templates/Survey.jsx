@@ -186,7 +186,13 @@ export default function PublicSurvey({ data }) {
 
   // eslint-disable-next-line no-nested-ternary
   const page = isLoading ? (
-    <Paragraph>Loading…</Paragraph>
+    <Paragraph>
+      {intl.formatMessage({
+        defaultMessage: 'Loading…',
+        description: '[Generic Locales] Loading text.',
+        id: 'hUbkme',
+      })}
+    </Paragraph>
   ) : isSent ? (
     <Question>
       {intl.formatMessage({

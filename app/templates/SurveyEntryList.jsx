@@ -8,12 +8,14 @@ import ReactSpreadsheet from 'react-spreadsheet'
 import { SURVEY_ENTRIES_DOWLOAD_EXTENSION } from '../../common/constants'
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
+import Subtitle from '../atoms/Subtitle'
 import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
 const StyledCard = styled(Card)`
   display: flex;
+  flex-direction: column;
   max-width: 100%;
 `
 
@@ -109,11 +111,13 @@ export default function SurveyEntryList() {
     <AdminBox>
       <AdminHeader>
         <Title>
-          {intl.formatMessage({
-            defaultMessage: 'Survey Answers',
-            description: '[Survey Answers List] Survey answers list title.',
-            id: 'ZxR2Ts',
-          })}
+          {isLoading
+            ? intl.formatMessage({
+                defaultMessage: 'Loading…',
+                description: '[Generic Locales] Loading text.',
+                id: 'hUbkme',
+              })
+            : survey.title}
         </Title>
 
         <Button disabled={isDownloading} onClick={() => download(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)} size="small">
@@ -126,8 +130,23 @@ export default function SurveyEntryList() {
       </AdminHeader>
 
       <StyledCard>
-        {isLoading && 'Loading...'}
-        {!isLoading && <StyledReactSpreadsheet data={surveyEntries} />}
+        <Subtitle>
+          {intl.formatMessage({
+            defaultMessage: 'Survey Answers',
+            description: '[Survey Answers List] Survey answers list subtitle.',
+            id: 'ZxR2Ts',
+          })}
+        </Subtitle>
+
+        {isLoading ? (
+          intl.formatMessage({
+            defaultMessage: 'Loading…',
+            description: '[Generic Locales] Loading text.',
+            id: 'hUbkme',
+          })
+        ) : (
+          <StyledReactSpreadsheet data={surveyEntries} />
+        )}
       </StyledCard>
     </AdminBox>
   )

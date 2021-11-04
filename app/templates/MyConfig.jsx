@@ -69,7 +69,11 @@ export default function MyConfig() {
   }
 
   if (isLoading) {
-    return 'Loading...'
+    return intl.formatMessage({
+      defaultMessage: 'Loading…',
+      description: '[Generic Locales] Loading text.',
+      id: 'hUbkme',
+    })
   }
 
   return (

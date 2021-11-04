@@ -65,11 +65,15 @@
   },
   "ZxR2Ts": {
     "defaultMessage": "Réponses au questionnaire",
-    "description": "[Survey Answers List] Survey answers list title."
+    "description": "[Survey Answers List] Survey answers list subtitle."
   },
   "bkZg0U": {
     "defaultMessage": "Jetons de rafraîchissement",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
+  },
+  "hUbkme": {
+    "defaultMessage": "Chargement en cours…",
+    "description": "[Generic Locales] Loading text."
   },
   "hWoiIQ": {
     "defaultMessage": "Répêtez votre nouveau mot de passe",
