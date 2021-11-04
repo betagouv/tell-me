@@ -20,8 +20,12 @@
     "description": "[Surveys List] Table \"title\" column label."
   },
   "A2n/eF": {
-    "defaultMessage": "Un nouveau mot de passe",
+    "defaultMessage": "Mot de passe",
     "description": "[Setup Modal] Password input label."
+  },
+  "AOWpq6": {
+    "defaultMessage": "Mot de passe",
+    "description": "[Survey Editor] Form password input label."
   },
   "AYV/5T": {
     "defaultMessage": "Nouvel·le utilisateur·rice",
@@ -43,6 +47,10 @@
     "defaultMessage": "Tableau de bord",
     "description": "[Sidebar Main Menu] Dashboard label."
   },
+  "FC8ax/": {
+    "defaultMessage": "Édition d’un·e utilisateur·rice",
+    "description": "[Survey Editor] User edition page title."
+  },
   "I8y4ic": {
     "defaultMessage": "Se connecter",
     "description": "[Login Modal] Form submit button label."
@@ -55,9 +63,25 @@
     "defaultMessage": "Mes préférences",
     "description": "[My Settings] Page title."
   },
+  "Q0wotK": {
+    "defaultMessage": "Email",
+    "description": "[Survey Editor] Form email input label."
+  },
   "QBtMwD": {
     "defaultMessage": "Email",
     "description": "[Users List] Table \"email\" column label."
+  },
+  "SbH89J": {
+    "defaultMessage": "Nouvel·e utilisateur·rice",
+    "description": "[Survey Editor] User creation page title."
+  },
+  "VXF18U": {
+    "defaultMessage": "Compte actif",
+    "description": "[Survey Editor] Form activated account checkbox label."
+  },
+  "XJmbHw": {
+    "defaultMessage": "Rôle",
+    "description": "[Survey Editor] Form role select label."
   },
   "YsRqXk": {
     "defaultMessage": "Exporter en CSV",
@@ -71,12 +95,20 @@
     "defaultMessage": "Jetons de rafraîchissement",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
   },
+  "d97zYv": {
+    "defaultMessage": "Créer l’utilisateur·rice",
+    "description": "[Survey Editor] Form \"create\" button label."
+  },
+  "h4+RiJ": {
+    "defaultMessage": "Mettre à jour l’utilisateur·rice",
+    "description": "[Survey Editor] Form \"update\" button label."
+  },
   "hUbkme": {
     "defaultMessage": "Chargement en cours…",
     "description": "[Generic Locales] Loading text."
   },
   "hWoiIQ": {
-    "defaultMessage": "Répêtez votre nouveau mot de passe",
+    "defaultMessage": "Répêtez le nouveau mot de passe",
     "description": "[Setup Modal] Password repeat input label."
   },
   "i0E602": {
@@ -97,7 +129,7 @@
   },
   "pLn6i2": {
     "defaultMessage": "Mettre à jour",
-    "description": "[My Settings] Form submit button label."
+    "description": "[My Settings] Form update button label."
   },
   "tIFSst": {
     "defaultMessage": "Jetons jetables",

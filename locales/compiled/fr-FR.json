@@ -32,7 +32,13 @@
   "A2n/eF": [
     {
       "type": 0,
-      "value": "Un nouveau mot de passe"
+      "value": "Mot de passe"
+    }
+  ],
+  "AOWpq6": [
+    {
+      "type": 0,
+      "value": "Mot de passe"
     }
   ],
   "AYV/5T": [
@@ -65,6 +71,12 @@
       "value": "Tableau de bord"
     }
   ],
+  "FC8ax/": [
+    {
+      "type": 0,
+      "value": "Édition d’un·e utilisateur·rice"
+    }
+  ],
   "I8y4ic": [
     {
       "type": 0,
@@ -83,10 +95,34 @@
       "value": "Mes préférences"
     }
   ],
+  "Q0wotK": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "QBtMwD": [
     {
       "type": 0,
       "value": "Email"
+    }
+  ],
+  "SbH89J": [
+    {
+      "type": 0,
+      "value": "Nouvel·e utilisateur·rice"
+    }
+  ],
+  "VXF18U": [
+    {
+      "type": 0,
+      "value": "Compte actif"
+    }
+  ],
+  "XJmbHw": [
+    {
+      "type": 0,
+      "value": "Rôle"
     }
   ],
   "YsRqXk": [
@@ -105,6 +141,18 @@
     {
       "type": 0,
       "value": "Jetons de rafraîchissement"
+    }
+  ],
+  "d97zYv": [
+    {
+      "type": 0,
+      "value": "Créer l’utilisateur·rice"
+    }
+  ],
+  "h4+RiJ": [
+    {
+      "type": 0,
+      "value": "Mettre à jour l’utilisateur·rice"
     }
   ],
   "hUbkme": [

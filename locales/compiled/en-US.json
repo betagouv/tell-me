@@ -35,10 +35,16 @@
       "value": "A new password"
     }
   ],
+  "AOWpq6": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
   "AYV/5T": [
     {
       "type": 0,
-      "value": "New User"
+      "value": "New user"
     }
   ],
   "Ci9rPk": [
@@ -65,6 +71,12 @@
       "value": "Dashboard"
     }
   ],
+  "FC8ax/": [
+    {
+      "type": 0,
+      "value": "Edit user"
+    }
+  ],
   "I8y4ic": [
     {
       "type": 0,
@@ -74,7 +86,7 @@
   "IEpCqZ": [
     {
       "type": 0,
-      "value": "New Survey"
+      "value": "New survey"
     }
   ],
   "NNlf6B": [
@@ -83,10 +95,34 @@
       "value": "My Settings"
     }
   ],
+  "Q0wotK": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "QBtMwD": [
     {
       "type": 0,
       "value": "Email"
+    }
+  ],
+  "SbH89J": [
+    {
+      "type": 0,
+      "value": "New user"
+    }
+  ],
+  "VXF18U": [
+    {
+      "type": 0,
+      "value": "Activated account"
+    }
+  ],
+  "XJmbHw": [
+    {
+      "type": 0,
+      "value": "Role"
     }
   ],
   "YsRqXk": [
@@ -105,6 +141,18 @@
     {
       "type": 0,
       "value": "Refresh Tokens"
+    }
+  ],
+  "d97zYv": [
+    {
+      "type": 0,
+      "value": "Create user"
+    }
+  ],
+  "h4+RiJ": [
+    {
+      "type": 0,
+      "value": "Update user"
     }
   ],
   "hUbkme": [
@@ -146,7 +194,7 @@
   "pLn6i2": [
     {
       "type": 0,
-      "value": "Update"
+      "value": "Update my settings"
     }
   ],
   "tIFSst": [
