@@ -9,6 +9,7 @@ import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
 export default function RefreshTokenList() {
+  const [isLoading, setIsLoading] = useState(true)
   const [refreshTokens, setRefreshTokens] = useState([])
   const api = useApi()
   const isMounted = useIsMounted()
@@ -21,6 +22,7 @@ export default function RefreshTokenList() {
 
     if (isMounted()) {
       setRefreshTokens(maybeBody.data)
+      setIsLoading(false)
     }
   }
 
@@ -66,7 +68,13 @@ export default function RefreshTokenList() {
       </AdminHeader>
 
       <Card>
-        <Table columns={columns} data={refreshTokens} defaultSortedKey="ttl" defaultSortedKeyIsDesc />
+        <Table
+          columns={columns}
+          data={refreshTokens}
+          defaultSortedKey="ttl"
+          defaultSortedKeyIsDesc
+          isLoading={isLoading}
+        />
       </Card>
     </AdminBox>
   )

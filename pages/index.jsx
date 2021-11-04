@@ -67,7 +67,11 @@ export default function SpaPage() {
   }, [])
 
   if (mustSetup === null || authState.isLoading) {
-    return <Loader />
+    return (
+      <Page>
+        <Loader />
+      </Page>
+    )
   }
 
   if (mustSetup) {

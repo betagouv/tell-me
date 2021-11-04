@@ -1,6 +1,7 @@
 import { styled } from '@singularity-ui/core'
 
 import Title from '../../atoms/Title'
+import Loader from '../../molecules/Loader'
 
 const Header = styled.div`
   background-color: #cccccc;
@@ -17,7 +18,7 @@ const Logo = styled.div`
   border: solid 2px #dddddd;
   border-radius: 50%;
   height: 6rem;
-  left: 2.5rem;
+  left: 2rem;
   position: absolute;
   top: -3rem;
   width: 6rem;
@@ -29,6 +30,12 @@ const TitleRow = styled.div`
 
 const Text = styled.div`
   background-color: #cccccc;
+`
+
+const Body = styled.div`
+  display: flex;
+  flex-grow: 1;
+  padding-bottom: 10rem;
 `
 
 export default function Button() {
@@ -45,6 +52,10 @@ export default function Button() {
           <Text variant="text" />
         </Title>
       </TitleRow>
+
+      <Body>
+        <Loader />
+      </Body>
     </>
   )
 }

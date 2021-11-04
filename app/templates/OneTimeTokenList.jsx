@@ -9,6 +9,7 @@ import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
 export default function OneTimeTokenList() {
+  const [isLoading, setIsLoading] = useState(true)
   const [oneTimeTokens, setOneTimeTokens] = useState([])
   const api = useApi()
   const isMounted = useIsMounted()
@@ -21,6 +22,7 @@ export default function OneTimeTokenList() {
 
     if (isMounted()) {
       setOneTimeTokens(maybeBody.data)
+      setIsLoading(false)
     }
   }
 
@@ -66,7 +68,13 @@ export default function OneTimeTokenList() {
       </AdminHeader>
 
       <Card>
-        <Table columns={columns} data={oneTimeTokens} defaultSortedKey="ttl" defaultSortedKeyIsDesc />
+        <Table
+          columns={columns}
+          data={oneTimeTokens}
+          defaultSortedKey="ttl"
+          defaultSortedKeyIsDesc
+          isLoading={isLoading}
+        />
       </Card>
     </AdminBox>
   )

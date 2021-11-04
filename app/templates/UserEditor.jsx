@@ -1,7 +1,6 @@
 import { Card } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
 import { useHistory, useParams } from 'react-router-dom'
 import * as Yup from 'yup'
 
@@ -13,6 +12,7 @@ import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 import Form from '../molecules/Form'
+import Loader from '../molecules/Loader'
 
 const FormSchema = Yup.object().shape({
   email: Yup.string().required(`Email is mandatory.`).email(`This email doesn't look well formatted.`),
@@ -25,13 +25,12 @@ const ROLE_AS_OPTIONS = R.pipe(
 )(USER_ROLE_LABEL)
 
 export default function UserEditor() {
-  const api = useApi()
-  const { id } = useParams()
   const [isLoading, setIsLoading] = useState(true)
   const [initialValues, setInitialValues] = useState(null)
+  const { id } = useParams()
   const history = useHistory()
-  const intl = useIntl()
   const isMounted = useIsMounted()
+  const api = useApi()
 
   const isNew = id === 'new'
 
@@ -83,11 +82,7 @@ export default function UserEditor() {
   }
 
   if (isLoading) {
-    return intl.formatMessage({
-      defaultMessage: 'Loading…',
-      description: '[Generic Locales] Loading text.',
-      id: 'hUbkme',
-    })
+    return <Loader />
   }
 
   return (

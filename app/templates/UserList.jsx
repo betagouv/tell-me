@@ -11,6 +11,7 @@ import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
 export default function UserList() {
+  const [isLoading, setIsLoading] = useState(true)
   const [users, setUsers] = useState([])
   const history = useHistory()
   const intl = useIntl()
@@ -25,6 +26,7 @@ export default function UserList() {
 
     if (isMounted()) {
       setUsers(maybeBody.data)
+      setIsLoading(false)
     }
   }
 
@@ -105,7 +107,7 @@ export default function UserList() {
       </AdminHeader>
 
       <Card>
-        <Table columns={columns} data={users} defaultSortedKey="lastName" />
+        <Table columns={columns} data={users} defaultSortedKey="lastName" isLoading={isLoading} />
       </Card>
     </AdminBox>
   )

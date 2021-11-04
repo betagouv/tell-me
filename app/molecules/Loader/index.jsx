@@ -1,17 +1,10 @@
-import { useIntl } from 'react-intl'
-
 import Overlay from './Overlay'
+import Spinner from './Spinner'
 
 export default function Loader() {
-  const intl = useIntl()
-
   return (
     <Overlay>
-      {intl.formatMessage({
-        defaultMessage: 'Loading…',
-        description: '[Generic Locales] Loading text.',
-        id: 'hUbkme',
-      })}
+      <Spinner />
     </Overlay>
   )
 }

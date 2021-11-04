@@ -6,6 +6,7 @@ import SurveyHeader from '../../atoms/SurveyHeader'
 
 const StyledSurveyHeader = styled(SurveyHeader)`
   display: flex;
+  min-height: 10rem;
   opacity: 0.75 !important;
 
   :hover {

@@ -14,6 +14,7 @@ import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 
 export default function SurveyList() {
+  const [isLoading, setIsLoading] = useState(true)
   const [surveys, setSurveys] = useState([])
   const history = useHistory()
   const intl = useIntl()
@@ -28,6 +29,7 @@ export default function SurveyList() {
 
     if (isMounted()) {
       setSurveys(maybeBody.data)
+      setIsLoading(false)
     }
   }
 
@@ -134,7 +136,7 @@ export default function SurveyList() {
       </AdminHeader>
 
       <Card>
-        <Table columns={columns} data={surveys} defaultSortedKey="lastName" />
+        <Table columns={columns} data={surveys} defaultSortedKey="lastName" isLoading={isLoading} />
       </Card>
     </AdminBox>
   )

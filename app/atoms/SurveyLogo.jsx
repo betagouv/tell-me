@@ -21,9 +21,10 @@ const Placeholder = styled.div`
   width: 6rem;
 `
 
-const SurveyLogo = forwardRef((props, ref) => (
-  <Container>
+const SurveyLogo = forwardRef(({ children, className, ...props }, ref) => (
+  <Container className={className}>
     <Placeholder ref={ref} {...props} />
+    {children}
   </Container>
 ))
 

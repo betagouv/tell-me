@@ -5,22 +5,31 @@ import { useRef } from 'react'
 import SurveyLogo from '../../atoms/SurveyLogo'
 
 const StyledSurveyLogo = styled(SurveyLogo)`
-  border: solid 2px #d5e5a3;
-  display: flex;
-  left: 2.5rem;
+  min-height: 5rem;
 
-  :hover {
-    background-color: white;
+  > div {
+    margin-left: 5rem;
   }
 `
 
 const StyledInput = styled.input`
+  border: solid 2px ${p => p.theme.color.secondary.background};
+  border-radius: 50%;
   color: transparent;
   cursor: pointer;
-  flex-grow: 1;
+  height: 6rem;
+  left: 2rem;
+  opacity: 0.75 !important;
+  position: absolute;
+  top: -3rem;
+  width: 6rem;
 
   ::-webkit-file-upload-button {
     visibility: hidden;
+  }
+
+  :hover {
+    border: solid 2px ${p => p.theme.color.secondary.active};
   }
 `
 
