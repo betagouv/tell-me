@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import usePrevious from '../../hooks/usePrevious'
+import FormatMenu from './FormatMenu'
 import sanitizeRichText from './helpers/sanitizeRichText'
 
 const KEY = {
@@ -13,6 +14,8 @@ const KEY = {
   // NUMPAD_ENTER: 13,
   SLASH: 191,
 }
+
+const noop = () => undefined
 
 export default function Editable({
   Component,
@@ -29,15 +32,64 @@ export default function Editable({
   placeholder,
   value,
 }) {
-  const $component = useRef(value)
+  const componentRef = useRef(null)
+
+  // States used for rich text blocks
+  const selectionFocusNodeRef = useRef(null)
+  const selectionFocusOffsetRef = useRef(value.length)
+  const hasFormattedRef = useRef(false)
+  const [controlledValue, setControlledValue] = useState(value)
+  const [formatMenuProps, setFormatMenuProps] = useState(false)
+  const [isFormatMenuOpen, setIsFormatMenuOpen] = useState(false)
+
   const wasFocused = usePrevious(isFocused)
 
-  const innerHTML = { __html: value }
+  // Used as content editable div prop for rich text blocks
+  const innerHTML = { __html: controlledValue }
 
-  const handleNewValue = async () => {
-    const value = isRichText ? await sanitizeRichText($component.current.innerHTML) : $component.current.innerText
+  const closeFormatMenu = () => {
+    setIsFormatMenuOpen(false)
+  }
 
-    onChange(value)
+  const detectUnselection = () => {
+    window.addEventListener('click', closeFormatMenu, {
+      once: true,
+    })
+  }
+
+  const handleInput = async () => {
+    if (!isRichText) {
+      onChange(componentRef.current.innerText)
+
+      return
+    }
+
+    const selection = window.getSelection()
+    selectionFocusNodeRef.current = selection.focusNode
+    selectionFocusOffsetRef.current = selection.focusOffset
+
+    const currentValue = componentRef.current.innerHTML
+    const newValue = await sanitizeRichText(currentValue)
+
+    onChange(newValue)
+
+    if (newValue !== currentValue) {
+      setControlledValue(newValue)
+    }
+  }
+
+  const openFormatMenu = () => {
+    setIsFormatMenuOpen(true)
+  }
+
+  const updateControlledValue = async newValue => {
+    window.removeEventListener('click', closeFormatMenu)
+
+    setControlledValue(newValue)
+    hasFormattedRef.current = true
+
+    closeFormatMenu()
+    onChange(newValue)
   }
 
   const controlKey = event => {
@@ -77,7 +129,7 @@ export default function Editable({
         break
     }
 
-    if ($component.current.innerText.length > 0) {
+    if (componentRef.current.innerText.length > 0) {
       return
     }
 
@@ -96,57 +148,119 @@ export default function Editable({
     }
   }
 
+  /**
+   * @param {MouseEvent} event
+   */
+  const controlMouse = event => {
+    if (!isRichText) {
+      return
+    }
+
+    const selection = window.getSelection()
+    selectionFocusNodeRef.current = selection.focusNode
+    selectionFocusOffsetRef.current = selection.focusOffset
+
+    if (selection.isCollapsed) {
+      return
+    }
+
+    // TODO Handle multi-node rich text formatting.
+    if (selection.anchorNode !== selection.focusNode) {
+      return
+    }
+
+    setFormatMenuProps({
+      anchor: event.target,
+      selection,
+    })
+
+    setImmediate(openFormatMenu)
+  }
+
   useEffect(() => {
-    if (isFocused) {
-      const caretPosition = value.length
-      const range = window.document.createRange()
-      const selection = window.getSelection()
+    if (!isFocused) {
+      return
+    }
 
-      // TODO Handle Rich Text caret positonning.
-      if (isRichText) {
-        range.setStart($component.current, 0)
-      } else if ($component.current.childNodes.length > 0) {
-        range.setStart($component.current.childNodes[0], caretPosition)
-      } else {
-        range.setStart($component.current, 0)
-      }
+    const range = window.document.createRange()
+    const selection = window.getSelection()
 
-      range.collapse(true)
-      selection.removeAllRanges()
-      selection.addRange(range)
+    // TODO Handle Rich Text caret positonning.
+    if (isRichText) {
+      range.setStart(componentRef.current, 0)
+    } else if (componentRef.current.childNodes.length > 0) {
+      range.setStart(componentRef.current.childNodes[0], selectionFocusOffsetRef.current)
+    }
 
-      if (!wasFocused) {
-        $component.current.scrollIntoView({
-          behavior: 'auto',
-          block: 'center',
-          inline: 'center',
-        })
-      }
+    range.collapse(true)
+    selection.removeAllRanges()
+    selection.addRange(range)
+
+    if (!wasFocused) {
+      componentRef.current.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center',
+      })
     }
   })
 
+  useEffect(() => {
+    if (!isFormatMenuOpen) {
+      return
+    }
+
+    setImmediate(detectUnselection)
+  }, [isFormatMenuOpen])
+
+  useEffect(() => {
+    if (!isRichText || isFormatMenuOpen || !hasFormattedRef.current) {
+      return
+    }
+
+    hasFormattedRef.current = false
+
+    const selection = window.getSelection()
+    selection.collapse(selectionFocusNodeRef.current, selectionFocusOffsetRef.current)
+  }, [isFormatMenuOpen])
+
+  useEffect(() => {
+    if (!isFormatMenuOpen) {
+      return
+    }
+
+    setImmediate(detectUnselection)
+  }, [isFormatMenuOpen])
+
   return (
-    <Component
-      ref={$component}
-      contentEditable
-      countLetter={countLetter}
-      dangerouslySetInnerHTML={innerHTML}
-      onFocus={onFocus}
-      onInput={handleNewValue}
-      onKeyDown={controlKey}
-      placeholder={placeholder}
-      spellCheck={false}
-      style={{ outline: 0 }}
-      suppressContentEditableWarning
-    />
+    <>
+      <Component
+        ref={componentRef}
+        contentEditable
+        countLetter={countLetter}
+        dangerouslySetInnerHTML={innerHTML}
+        onFocus={onFocus}
+        onInput={handleInput}
+        onKeyDown={controlKey}
+        onMouseUp={controlMouse}
+        placeholder={placeholder}
+        spellCheck={false}
+        style={{ outline: 0 }}
+        suppressContentEditableWarning
+      />
+
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      {isFormatMenuOpen && <FormatMenu onChange={updateControlledValue} source={value} {...formatMenuProps} />}
+    </>
   )
 }
 
 Editable.defaultProps = {
   countLetter: null,
   isRichText: false,
-  onBackspace: null,
-  onSlash: null,
+  onBackspace: noop,
+  onSelect: noop,
+  onSlash: noop,
   placeholder: null,
 }
 
@@ -160,6 +274,7 @@ Editable.propTypes = {
   onDown: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
   onSlash: PropTypes.func,
   onUp: PropTypes.func.isRequired,
   placeholder: PropTypes.string,

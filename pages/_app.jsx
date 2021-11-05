@@ -41,8 +41,6 @@ export default function TellMeApp({ Component, pageProps }) {
     return <div id="__tma" suppressHydrationWarning />
   }
 
-  // console.log(theme)
-
   return (
     <div id="__tma" suppressHydrationWarning>
       <Head>

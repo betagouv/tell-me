@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import hashCode from '../../helpers/hashCode'
 import useApi from '../../hooks/useApi'
 import useEquivalenceEffect from '../../hooks/useEquivalenceEffect'
 import SurveyManager from '../../libs/SurveyManager'
@@ -170,9 +171,8 @@ export default function SurveyEditor() {
         {surveyManager.blocks.map((block, index) => (
           <Block
             // eslint-disable-next-line react/no-array-index-key
-            key={`${index}_${block.type}`}
+            key={`${index}.${hashCode(block.value)}`}
             block={block}
-            blocks={surveyManager.blocks}
             index={index}
             isFocused={index === surveyManager.focusedBlockIndex}
             onChange={updateFocusedBlockValue}

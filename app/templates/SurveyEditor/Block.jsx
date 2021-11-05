@@ -1,18 +1,18 @@
-import { Select, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { CornerDownRight } from 'react-feather'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import hashCode from '../../helpers/hashCode'
 import { SelectOptionShape, SurveyManagerBlockShape } from '../../shapes'
+import BlockMenu from './BlockMenu'
 import Checkbox from './blocks/Checkbox'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Radio from './blocks/Radio'
 import Textarea from './blocks/Textarea'
 import TextInput from './blocks/TextInput'
+import Condition from './Condition'
 import Editable from './Editable'
-import Menu from './Menu'
 import Row from './Row'
 
 const SURVEY_BLOCK_TYPE_COMPONENT = {
@@ -43,22 +43,8 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   },
 }
 
-const Condition = styled.div`
-  display: flex;
-  padding: 0.5rem 0;
-
-  > svg {
-    margin: 0.25rem 0.5rem 0 0.6rem;
-  }
-`
-
-const StyledSelect = styled(Select)`
-  width: 100%;
-`
-
 export default function Block({
   block,
-  blocks,
   index,
   isFocused,
   onChange,
@@ -72,18 +58,20 @@ export default function Block({
   onUp,
   questionBlockAsOptions,
 }) {
-  // console.log(questionBlockAsOptions)
-
   const [isConditionOpen, setIsConditionOpen] = useState(block.ifSelectedThenShowQuestionId !== null)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isBlockMenuOpen, setIsBlockMenuOpen] = useState(false)
 
-  const { count, countLetter, position, type, value } = block
+  const { count, countLetter, type, value } = block
   const { component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
-  const key = `${blocks.length}_${position.page}_${position.rank}`
+  const key = `${index}.${hashCode(value)}`
   const finalPlaceholder = count !== null ? `${placeholder} ${count}` : placeholder
 
-  const closeMenu = () => {
-    setIsMenuOpen(false)
+  const openBlockMenu = () => {
+    setIsBlockMenuOpen(true)
+  }
+
+  const closeBlockMenu = () => {
+    setIsBlockMenuOpen(false)
   }
 
   const setCondition = ({ value }) => {
@@ -123,32 +111,23 @@ export default function Block({
         onDown={onDown}
         onEnter={onEnter}
         onFocus={() => onFocus(index)}
-        onSlash={() => setIsMenuOpen(true)}
+        onSlash={openBlockMenu}
         onUp={onUp}
         placeholder={finalPlaceholder}
         value={value}
       />
 
       {isConditionOpen && (
-        <Condition>
-          <CornerDownRight />
-          <StyledSelect
-            defaultValue={block.questionBlockAsOption}
-            onChange={setCondition}
-            options={questionBlockAsOptions}
-            size="small"
-          />
-        </Condition>
+        <Condition block={block} onChange={setCondition} questionBlockAsOptions={questionBlockAsOptions} />
       )}
 
-      {isMenuOpen && <Menu onClose={closeMenu} onSelect={newType => onChangeType(index, newType)} />}
+      {isBlockMenuOpen && <BlockMenu onClose={closeBlockMenu} onSelect={newType => onChangeType(index, newType)} />}
     </Row>
   )
 }
 
 Block.propTypes = {
   block: PropTypes.shape(SurveyManagerBlockShape).isRequired,
-  blocks: PropTypes.arrayOf(PropTypes.shape(SurveyManagerBlockShape)).isRequired,
   index: PropTypes.number.isRequired,
   isFocused: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,

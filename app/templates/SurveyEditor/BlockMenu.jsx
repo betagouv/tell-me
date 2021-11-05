@@ -69,7 +69,7 @@ const MenuItem = styled.div`
     `}
 `
 
-export default function Menu({ onClose, onSelect }) {
+export default function BlockMenu({ onClose, onSelect }) {
   const $focusInput = useRef(null)
   // const [isMounted, setIsMounted] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -148,7 +148,7 @@ export default function Menu({ onClose, onSelect }) {
   )
 }
 
-Menu.propTypes = {
+BlockMenu.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
 }
