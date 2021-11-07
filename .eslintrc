@@ -7,6 +7,7 @@
   "parserOptions": {
     "ecmaVersion": 2021
   },
+  "ignorePatterns": ["next-env.d.ts"],
   "plugins": ["formatjs"],
   "rules": {
     "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
