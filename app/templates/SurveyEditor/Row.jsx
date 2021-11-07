@@ -7,6 +7,7 @@ import { SurveyManagerBlockShape } from '../../shapes'
 const Box = styled.div`
   align-items: flex-start;
   display: flex;
+  margin-top: ${p => (p.isQuestion ? p.theme.padding.layout.large : 0)};
   min-height: 3rem;
   padding: 0 1rem 0 1rem;
 
@@ -25,7 +26,7 @@ const Box = styled.div`
 const Content = styled.div`
   flex-grow: 1;
   opacity: ${p => (p.isHidden ? 0.65 : 1)};
-  padding: 0 1rem;
+  padding: 0 1rem 0 ${p => (p.isMandatory ? 0 : '1rem')};
 `
 
 const Button = styled.div`
@@ -58,24 +59,47 @@ const Button = styled.div`
   }
 `
 
+const Asterisk = styled.div`
+  align-items: center;
+  color: ${p => p.theme.color.primary.active};
+  display: flex;
+  font-size: 125%;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 0.5rem 0 1rem;
+`
+
 const noop = () => undefined
 
-export default function Row({ block, children, onCondition, onDelete, onMove, onToggleVisibility }) {
+export default function Row({
+  block,
+  children,
+  onCondition,
+  onDelete,
+  onMove,
+  onToggleObligation,
+  onToggleVisibility,
+}) {
   return (
-    <Box>
+    <Box isQuestion={block.isQuestion}>
       <Button accent="primary" className="Button">
         <Move onClick={onMove} />
       </Button>
 
-      <Content isHidden={block.props.isHidden}>{children}</Content>
+      {block.isMandatory && <Asterisk>*</Asterisk>}
+
+      <Content isHidden={block.props.isHidden} isMandatory={block.props.isMandatory}>
+        {children}
+      </Content>
 
       <Button
         accent="secondary"
         className="Button"
         isDisabled={!block.isQuestion}
-        onClick={block.isQuestion ? onCondition : noop}
+        onClick={block.isQuestion ? onToggleObligation : noop}
       >
-        {block.isMandatory ? <Shield /> : <ShieldOff />}
+        {block.isMandatory ? <ShieldOff /> : <Shield />}
       </Button>
       <Button
         accent="primary"
@@ -83,7 +107,7 @@ export default function Row({ block, children, onCondition, onDelete, onMove, on
         isDisabled={!block.isQuestion}
         onClick={block.isQuestion ? onToggleVisibility : noop}
       >
-        {block.isHidden ? <EyeOff /> : <Eye />}
+        {block.isHidden ? <Eye /> : <EyeOff />}
       </Button>
       <Button
         accent="secondary"
@@ -110,5 +134,6 @@ Row.propTypes = {
   onCondition: PropTypes.func,
   onDelete: PropTypes.func.isRequired,
   onMove: PropTypes.func,
+  onToggleObligation: PropTypes.func.isRequired,
   onToggleVisibility: PropTypes.func.isRequired,
 }

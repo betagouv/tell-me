@@ -54,6 +54,7 @@ export default function Block({
   onEnter,
   onFocus,
   onRemove,
+  onToggleObligation,
   onToggleVisibility,
   onUp,
   questionBlockAsOptions,
@@ -86,6 +87,10 @@ export default function Block({
     setIsConditionOpen(!isConditionOpen)
   }
 
+  const toggleObligation = () => {
+    onToggleObligation(index)
+  }
+
   const toggleVisibility = () => {
     onToggleVisibility(index)
   }
@@ -97,6 +102,7 @@ export default function Block({
       className="Row"
       onCondition={toggleCondition}
       onDelete={onRemove}
+      onToggleObligation={toggleObligation}
       onToggleVisibility={toggleVisibility}
     >
       <Editable
@@ -137,6 +143,7 @@ Block.propTypes = {
   onEnter: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  onToggleObligation: PropTypes.func.isRequired,
   onToggleVisibility: PropTypes.func.isRequired,
   onUp: PropTypes.func.isRequired,
   questionBlockAsOptions: PropTypes.arrayOf(PropTypes.shape(SelectOptionShape)).isRequired,

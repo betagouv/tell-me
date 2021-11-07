@@ -12,6 +12,7 @@ const Label = styled.label`
   font-family: inherit;
   font-size: ${p => p.theme.typography.size.medium * 100}%;
   font-weight: 400;
+  margin: ${p => p.theme.padding.layout.small} 0;
   padding: ${p => p.theme.padding.layout.tiny} 0;
   user-select: none;
   width: 100%;

@@ -93,6 +93,12 @@ export default function SurveyEditor() {
     forceUpdate()
   }
 
+  const toggleObligationAt = index => {
+    surveyManager.toggleBlockObligationAt(index)
+
+    forceUpdate()
+  }
+
   const toggleBlockVisibilityAt = index => {
     surveyManager.toggleBlockVisibilityAt(index)
 
@@ -182,6 +188,7 @@ export default function SurveyEditor() {
             onEnter={appendOrResetFocusedBlock}
             onFocus={surveyManager.setFocusAt}
             onRemove={removeFocusedBlock}
+            onToggleObligation={toggleObligationAt}
             onToggleVisibility={toggleBlockVisibilityAt}
             onUp={focusPreviousBlock}
             questionBlockAsOptions={surveyManager.questionBlockAsOptions}

@@ -1,8 +1,8 @@
 import { styled } from '@singularity-ui/core'
 
-import AppfoParagraph from '../../../atoms/Paragraph'
+import SurveyParagraph from '../../../atoms/SurveyParagraph'
 
-const Paragraph = styled(AppfoParagraph)`
+const Paragraph = styled(SurveyParagraph)`
   :focus:empty::before {
     content: attr(placeholder);
     -webkit-text-fill-color: rgb(187, 187, 187);

@@ -8,10 +8,10 @@ import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../common/constants'
-import Paragraph from '../atoms/Paragraph'
-import Question from '../atoms/Question'
 import SurveyHeader from '../atoms/SurveyHeader'
 import SurveyLogo from '../atoms/SurveyLogo'
+import SurveyParagraph from '../atoms/SurveyParagraph'
+import SurveyQuestion from '../atoms/SurveyQuestion'
 import SurveyTitle from '../atoms/SurveyTitle'
 import useApi from '../hooks/useApi'
 import SurveyManager from '../libs/SurveyManager'
@@ -35,8 +35,8 @@ const Container = styled.div`
 `
 
 const SURVEY_BLOCK_TYPE_COMPONENT = {
-  [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: Question,
-  [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: Paragraph,
+  [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: SurveyQuestion,
+  [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: SurveyParagraph,
   [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: SurveyForm.Checkbox,
   [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: SurveyForm.Radio,
   [SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER]: SurveyForm.Textarea,
@@ -216,13 +216,13 @@ export default function PublicSurvey({ data }) {
         )}
 
         {!isLoading && isSent && (
-          <Question>
+          <SurveyQuestion>
             {intl.formatMessage({
               defaultMessage: 'Thank you for your interest in helping our project!',
               description: '[Public Survey] Thank you message once the survey has been sent.',
               id: 'i8B3g5',
             })}
-          </Question>
+          </SurveyQuestion>
         )}
       </Container>
     </Page>

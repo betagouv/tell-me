@@ -11,7 +11,7 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     instance = new SurveyManager()
   })
 
-  test('should add another text block after the first one', () => {
+  test('should add a text block after the first one', () => {
     instance.setFocusAt(0)
     instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
 
@@ -41,16 +41,16 @@ describe('common/SurveyManager [CRUD Operations]', () => {
         props: {
           ifSelectedThenShowQuestionId: null,
           isHidden: false,
-          isMandatory: false,
+          isMandatory: true,
         },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
     ])
   })
 
-  test('should add another text block after the last one', () => {
+  test('should add a question block after the last one', () => {
     instance.setFocusAt(2)
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
     expect(instance._blocks).toHaveLength(4)
     expect(instance._blocks).toMatchObject([
@@ -77,7 +77,7 @@ describe('common/SurveyManager [CRUD Operations]', () => {
         props: {
           ifSelectedThenShowQuestionId: null,
           isHidden: false,
-          isMandatory: false,
+          isMandatory: true,
         },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
@@ -86,9 +86,9 @@ describe('common/SurveyManager [CRUD Operations]', () => {
         props: {
           ifSelectedThenShowQuestionId: null,
           isHidden: false,
-          isMandatory: false,
+          isMandatory: true,
         },
-        type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
+        type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
     ])
   })
@@ -114,7 +114,7 @@ describe('common/SurveyManager [CRUD Operations]', () => {
         props: {
           ifSelectedThenShowQuestionId: null,
           isHidden: false,
-          isMandatory: false,
+          isMandatory: true,
         },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
@@ -123,9 +123,9 @@ describe('common/SurveyManager [CRUD Operations]', () => {
         props: {
           ifSelectedThenShowQuestionId: null,
           isHidden: false,
-          isMandatory: false,
+          isMandatory: true,
         },
-        type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
+        type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
     ])
   })
@@ -150,7 +150,7 @@ describe('common/SurveyManager [CRUD Operations]', () => {
         props: {
           ifSelectedThenShowQuestionId: null,
           isHidden: false,
-          isMandatory: false,
+          isMandatory: true,
         },
         type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },

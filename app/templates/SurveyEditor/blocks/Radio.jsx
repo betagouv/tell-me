@@ -10,6 +10,7 @@ const Label = styled.div`
   border: solid 1px ${p => p.theme.color.secondary.default};
   border-radius: ${p => p.theme.appearance.borderRadius.medium};
   display: inline-flex;
+  margin: ${p => p.theme.padding.layout.small} 0;
   opacity: 1;
   padding: ${p => p.theme.padding.inputBox.medium};
   user-select: none;

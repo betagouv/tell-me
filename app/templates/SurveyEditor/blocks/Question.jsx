@@ -1,8 +1,8 @@
 import { styled } from '@singularity-ui/core'
 
-import AppfoQuestion from '../../../atoms/Question'
+import SurveyQuestion from '../../../atoms/SurveyQuestion'
 
-const Question = styled(AppfoQuestion)`
+const Question = styled(SurveyQuestion)`
   margin: 0.5rem 0;
 
   :focus:empty::before {

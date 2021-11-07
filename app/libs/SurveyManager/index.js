@@ -44,7 +44,7 @@ const INITIAL_BLOCKS = [
     props: {
       ifSelectedThenShowQuestionId: null,
       isHidden: false,
-      isMandatory: false,
+      isMandatory: true,
     },
     type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
     value: `What's your first question?`,
@@ -200,6 +200,12 @@ export default class SurveyManager {
     }
 
     this.blocks = R.update(index, updatedBlock)(this.blocks)
+
+    if (newType === SURVEY_BLOCK_TYPE.CONTENT.QUESTION) {
+      this.changeBlockPropsAt(index, {
+        isMandatory: true,
+      })
+    }
   }
 
   changeBlockValueAt(index, newValue) {
@@ -211,16 +217,28 @@ export default class SurveyManager {
     this.blocks = R.update(index, updatedBlock)(this.blocks)
   }
 
-  toggleBlockVisibilityAt(index) {
+  changeBlockPropsAt(index, newProps) {
     const updatedBlock = {
       ...this.blocks[index],
       props: {
         ...this.blocks[index].props,
-        isHidden: !this.blocks[index].props.isHidden,
+        ...newProps,
       },
     }
 
     this.blocks = R.update(index, updatedBlock)(this.blocks)
+  }
+
+  toggleBlockObligationAt(index) {
+    this.changeBlockPropsAt(index, {
+      isMandatory: !this.blocks[index].props.isMandatory,
+    })
+  }
+
+  toggleBlockVisibilityAt(index) {
+    this.changeBlockPropsAt(index, {
+      isHidden: !this.blocks[index].props.isHidden,
+    })
   }
 
   setIfSelectedThenShowQuestionIdAt(index, questionBlockId) {
@@ -249,7 +267,7 @@ export default class SurveyManager {
       props: {
         ifSelectedThenShowQuestionId: null,
         isHidden: false,
-        isMandatory: false,
+        isMandatory: type === SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
       },
       type,
       value: '',
@@ -297,6 +315,14 @@ export default class SurveyManager {
     }
 
     this.changeBlockValueAt(this.focusedBlockIndex, newValue)
+  }
+
+  changeFocusedBlockProps(newProps) {
+    if (!this.isFocused) {
+      return
+    }
+
+    this.changeFocusedBlockProps(this.focusedBlockIndex, newProps)
   }
 
   removeFocusedBlock() {
