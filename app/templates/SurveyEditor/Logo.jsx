@@ -2,7 +2,7 @@ import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
 
-import SurveyLogo from '../../atoms/SurveyLogo'
+import SurveyLogo from '../../atoms/SurveyLogo.tsx'
 
 const StyledSurveyLogo = styled(SurveyLogo)`
   min-height: 5rem;

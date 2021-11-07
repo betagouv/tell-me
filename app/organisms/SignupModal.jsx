@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import zxcvbn from 'zxcvbn'
 
-import useApi from '../../hooks/useApi'
-import Form from '../../molecules/Form'
-import Modal from '../../molecules/Modal'
+import useApi from '../hooks/useApi'
+import Form from '../molecules/Form'
+import Modal from '../molecules/Modal'
 
 const FormSchema = Yup.object().shape({
   email: Yup.string().required(`Please enter your email address.`).email(`This email doesn't look well formatted.`),

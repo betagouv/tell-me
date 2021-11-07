@@ -1,5 +1,5 @@
 import { styled } from '@singularity-ui/core'
-import { forwardRef } from 'react'
+import { forwardRef, ForwardRefRenderFunction, ReactChildren } from 'react'
 
 const Container = styled.div`
   height: 5rem;
@@ -21,12 +21,21 @@ const Placeholder = styled.div`
   width: 6rem;
 `
 
-const SurveyLogo = forwardRef(({ children, className, ...props }, ref) => (
+type SuveyLogoProps = {
+  children: ReactChildren
+  className: string
+}
+const SurveyLogoWithoutRef: ForwardRefRenderFunction<HTMLDivElement, SuveyLogoProps> = (
+  { children, className, ...props },
+  ref,
+) => (
   <Container className={className}>
     <Placeholder ref={ref} {...props} />
     {children}
   </Container>
-))
+)
+
+const SurveyLogo = forwardRef(SurveyLogoWithoutRef)
 
 SurveyLogo.displayName = 'SurveyLogo'
 

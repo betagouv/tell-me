@@ -1,8 +1,8 @@
 import { useIntl } from 'react-intl'
 
-import AdminBox from '../atoms/AdminBox'
-import AdminHeader from '../atoms/AdminHeader'
-import Title from '../atoms/Title'
+import AdminBox from '../atoms/AdminBox.tsx'
+import AdminHeader from '../atoms/AdminHeader.tsx'
+import Title from '../atoms/Title.tsx'
 
 export default function Dashboard() {
   const intl = useIntl()

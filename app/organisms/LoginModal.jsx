@@ -1,8 +1,8 @@
 import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
-import Field from '../atoms/Field'
-import Title from '../atoms/Title'
+import Field from '../atoms/Field.tsx'
+import Title from '../atoms/Title.tsx'
 import useApi from '../hooks/useApi'
 import useAuth from '../hooks/useAuth'
 import Form from '../molecules/Form'

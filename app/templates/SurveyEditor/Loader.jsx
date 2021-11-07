@@ -1,6 +1,6 @@
 import { styled } from '@singularity-ui/core'
 
-import Title from '../../atoms/Title'
+import Title from '../../atoms/Title.tsx'
 import Loader from '../../molecules/Loader'
 
 const Header = styled.div`

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 
-import AdminBox from '../atoms/AdminBox'
-import AdminHeader from '../atoms/AdminHeader'
-import Title from '../atoms/Title'
+import AdminBox from '../atoms/AdminBox.tsx'
+import AdminHeader from '../atoms/AdminHeader.tsx'
+import Title from '../atoms/Title.tsx'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 

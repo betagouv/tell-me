@@ -2,7 +2,7 @@ import { TextInput as SuiTextInput } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-import SurveyField from '../../atoms/SurveyField'
+import SurveyField from '../../atoms/SurveyField.tsx'
 
 export default function TextInput({ label, name }) {
   const { handleChange, values } = useFormikContext()

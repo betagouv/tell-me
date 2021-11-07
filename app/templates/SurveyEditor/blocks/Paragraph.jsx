@@ -1,6 +1,6 @@
 import { styled } from '@singularity-ui/core'
 
-import SurveyParagraph from '../../../atoms/SurveyParagraph'
+import SurveyParagraph from '../../../atoms/SurveyParagraph.tsx'
 
 const Paragraph = styled(SurveyParagraph)`
   :focus:empty::before {

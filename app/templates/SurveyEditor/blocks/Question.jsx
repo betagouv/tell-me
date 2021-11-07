@@ -1,6 +1,6 @@
 import { styled } from '@singularity-ui/core'
 
-import SurveyQuestion from '../../../atoms/SurveyQuestion'
+import SurveyQuestion from '../../../atoms/SurveyQuestion.tsx'
 
 const Question = styled(SurveyQuestion)`
   margin: 0.5rem 0;

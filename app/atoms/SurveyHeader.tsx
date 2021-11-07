@@ -1,7 +1,6 @@
 import { styled } from '@singularity-ui/core'
-import { forwardRef } from 'react'
 
-const StyledHeader = styled.header`
+const SurveyHeader = styled.header`
   background-color: #b8d8d8;
   background-image: url('/api/asset/${p => p.surveyId}-header.png');
   background-position: center;
@@ -10,9 +9,5 @@ const StyledHeader = styled.header`
   height: 10rem;
   width: 100%;
 `
-
-const SurveyHeader = forwardRef((props, ref) => <StyledHeader ref={ref} {...props} />)
-
-SurveyHeader.displayName = 'SurveyHeader'
 
 export default SurveyHeader

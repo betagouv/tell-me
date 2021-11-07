@@ -2,7 +2,7 @@ import { Checkbox as SuiCheckbox } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-import SurveyField from '../../atoms/SurveyField'
+import SurveyField from '../../atoms/SurveyField.tsx'
 
 export default function Checkbox({ label, name, value }) {
   const { handleChange, values } = useFormikContext()

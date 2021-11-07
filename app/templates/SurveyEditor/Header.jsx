@@ -2,7 +2,7 @@ import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
 
-import SurveyHeader from '../../atoms/SurveyHeader'
+import SurveyHeader from '../../atoms/SurveyHeader.tsx'
 
 const StyledSurveyHeader = styled(SurveyHeader)`
   display: flex;

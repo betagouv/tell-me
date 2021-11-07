@@ -2,7 +2,7 @@ import { Radio as SuiRadio } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-import SurveyField from '../../atoms/SurveyField'
+import SurveyField from '../../atoms/SurveyField.tsx'
 
 export default function Radio({ countLetter, label, name, value }) {
   const { handleChange, values } = useFormikContext()

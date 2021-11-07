@@ -1,6 +1,6 @@
 import { styled } from '@singularity-ui/core'
 
-import SurveyTitle from '../../../atoms/SurveyTitle'
+import SurveyTitle from '../../../atoms/SurveyTitle.tsx'
 
 const Title = styled(SurveyTitle)`
   :empty::before {

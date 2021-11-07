@@ -2,7 +2,7 @@ import { styled, Textarea as SuiTextarea } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 
-import SurveyField from '../../atoms/SurveyField'
+import SurveyField from '../../atoms/SurveyField.tsx'
 
 const StyledTextarea = styled(SuiTextarea)`
   .Textarea {
