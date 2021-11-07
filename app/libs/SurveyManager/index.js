@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import mongoose from 'mongoose'
 import * as R from 'ramda'
 

@@ -1,6 +1,5 @@
 import { styled } from '@singularity-ui/core'
 import debounce from 'lodash/debounce'
-import * as R from 'ramda'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -9,20 +8,20 @@ import hashCode from '../../helpers/hashCode'
 import useApi from '../../hooks/useApi'
 import useEquivalenceEffect from '../../hooks/useEquivalenceEffect'
 import SurveyManager from '../../libs/SurveyManager'
+import Editable from '../../molecules/Editable/index.tsx'
 import Block from './Block'
 import Title from './blocks/Title'
-import Editable from './Editable'
 import Header from './Header'
 import Loader from './Loader'
 import Logo from './Logo'
 
 const Body = styled.div`
-  max-width: 79rem;
+  max-width: 82rem;
   padding-bottom: 50%;
 `
 
 const TitleRow = styled.div`
-  padding: 0 5rem;
+  padding: 0 13rem 0 7rem;
 `
 
 export default function SurveyEditor() {
@@ -163,14 +162,13 @@ export default function SurveyEditor() {
       <Body>
         <TitleRow>
           <Editable
-            Component={Title}
+            as={Title}
+            defaultValue={title}
             isFocused={isTitleFocused}
             onChange={updateTitle}
-            onDown={focusNextBlock}
-            onEnter={appendOrResetFocusedBlock}
+            onDownKeyDown={focusNextBlock}
+            onEnterKeyDown={appendOrResetFocusedBlock}
             onFocus={surveyManager.unsetFocus}
-            onUp={R.always()}
-            value={title}
           />
         </TitleRow>
 
@@ -184,13 +182,13 @@ export default function SurveyEditor() {
             onChange={updateFocusedBlockValue}
             onChangeCondition={setIfSelectedThenShowQuestionIdAt}
             onChangeType={changeFocusedBlockType}
-            onDown={focusNextBlock}
-            onEnter={appendOrResetFocusedBlock}
+            onDownKeyDown={focusNextBlock}
+            onEnterKeyDown={appendOrResetFocusedBlock}
             onFocus={surveyManager.setFocusAt}
             onRemove={removeFocusedBlock}
             onToggleObligation={toggleObligationAt}
             onToggleVisibility={toggleBlockVisibilityAt}
-            onUp={focusPreviousBlock}
+            onUpKeyDown={focusPreviousBlock}
             questionBlockAsOptions={surveyManager.questionBlockAsOptions}
           />
         ))}

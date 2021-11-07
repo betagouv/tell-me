@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import * as R from 'ramda'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'

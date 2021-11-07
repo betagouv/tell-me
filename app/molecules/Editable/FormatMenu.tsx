@@ -1,12 +1,14 @@
 import { Button, Dialog, styled, TextInput } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
-import { useRef, useState } from 'react'
+import { FunctionComponent, RefObject, useRef, useState } from 'react'
 import { Bold, Italic, Link } from 'react-feather'
 import { usePopper } from 'react-popper'
 import rehypeParse from 'rehype-parse'
 import rehypeStringify from 'rehype-stringify'
 import { unified } from 'unified'
 import unistUtilReduce from 'unist-util-reduce'
+
+import { Node } from './types'
 
 const Box = styled.div`
   align-items: center;
@@ -60,14 +62,15 @@ const stopPropagation = event => {
   event.stopPropagation()
 }
 
-/**
- * @param {{ anchor: MouseEvent, selection: Selection }} props
- *
- * @returns {JSX.Element}
- */
-export default function FormatMenu({ anchor, onChange, selection, source }) {
-  const linkInputRef = useRef(null)
-  const transitorySourceRef = useRef(null)
+export type FormatMenuProps = {
+  anchor: HTMLElement
+  onChange: (newSource: string) => void
+  selection: Selection
+  source: string
+}
+const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, selection, source }) => {
+  const linkInputRef = useRef<HTMLInputElement>(null)
+  const transitorySourceRef = useRef(null) as Common.Writeable<RefObject<string>>
   const [arrowElement, setArrowElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false)
@@ -106,28 +109,25 @@ export default function FormatMenu({ anchor, onChange, selection, source }) {
     setIsLinkDialogOpen(false)
   }
 
-  /**
-   * @param {string} newTagName
-   * @param {*} newTagProperties
-   *
-   * @return {string}
-   */
-  const formatSelectionWithTag = async (newTagName, newTagProperties = {}) => {
+  const formatSelectionWithTag = async (newTagName: string, newTagProperties: any = {}): Promise<string> => {
     // https://github.com/rehypejs/rehype/tree/main/packages/rehype-parse#unifieduserehypeparse-options
     const tree = unified()
-      .use(rehypeParse, {
+      .use<any[], import('hast').Root>(rehypeParse, {
         fragment: true,
       })
       .parse(source)
 
-    const tagName = selection.anchorNode.parentNode.tagName.toLowerCase()
-    const value = selection.anchorNode.textContent
-    const newTree = unistUtilReduce(tree, node => {
+    const tagName = ((selection.anchorNode as Element).parentNode as Element).tagName.toLowerCase()
+    const value = (selection.anchorNode as Element).textContent
+    const newTree = unistUtilReduce(tree, (node: Node) => {
       if (
         (tagName === 'p' && node.type === 'text' && node.value === value) ||
-        (node.tagName === tagName && node.children.length > 0 && node.children[0].value === value)
+        (node.tagName === tagName &&
+          node.children !== undefined &&
+          node.children.length > 0 &&
+          node.children[0].value === value)
       ) {
-        if (node.tagName === newTagName) {
+        if (node.tagName === newTagName && node.children) {
           return node.children[0]
         }
 
@@ -168,15 +168,12 @@ export default function FormatMenu({ anchor, onChange, selection, source }) {
     return newSource
   }
 
-  /**
-   * @param {string} htmlSource
-   * @param {string} whereTagName
-   * @param {string} newTagName
-   * @param {*} newTagProperties
-   *
-   * @return {string}
-   */
-  const replaceHtmlTagWithTag = async (htmlSource, whereTagName, newTagName, newTagProperties = {}) => {
+  const replaceHtmlTagWithTag = async (
+    htmlSource: string,
+    whereTagName: string,
+    newTagName: string,
+    newTagProperties: any = {},
+  ): Promise<string> => {
     // https://github.com/rehypejs/rehype/tree/main/packages/rehype-parse#unifieduserehypeparse-options
     const tree = unified()
       .use(rehypeParse, {
@@ -184,7 +181,7 @@ export default function FormatMenu({ anchor, onChange, selection, source }) {
       })
       .parse(htmlSource)
 
-    const newTree = unistUtilReduce(tree, node => {
+    const newTree = unistUtilReduce(tree, (node: Node) => {
       if (node.tagName === whereTagName && node.type === 'element') {
         return {
           ...node,
@@ -227,6 +224,9 @@ export default function FormatMenu({ anchor, onChange, selection, source }) {
 
   const formatSelectionAsLink = async event => {
     event.stopPropagation()
+    if (linkInputRef.current === null || transitorySourceRef.current === null) {
+      return
+    }
 
     const newSource = await replaceHtmlTagWithTag(transitorySourceRef.current, 'span', 'a', {
       href: linkInputRef.current.value,
@@ -280,9 +280,11 @@ export default function FormatMenu({ anchor, onChange, selection, source }) {
 
 FormatMenu.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  anchor: PropTypes.object.isRequired,
+  anchor: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  selection: PropTypes.object.isRequired,
+  selection: PropTypes.any.isRequired,
   source: PropTypes.string.isRequired,
 }
+
+export default FormatMenu

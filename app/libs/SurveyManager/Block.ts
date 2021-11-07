@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 
 interface GetCountLetter {
@@ -61,8 +59,8 @@ export default class Block {
       questionId: string
     },
   ) {
-    this._count = isCountable ? count : null
-    this._countLetter = isCountable ? getCountLetter(count) : null
+    this._count = isCountable && count !== undefined ? count : null
+    this._countLetter = isCountable && count !== undefined ? getCountLetter(count) : null
     this._ifSelectedThenShowQuestionId = ifSelectedThenShowQuestionId || null
     this._isCheckbox = type === SURVEY_BLOCK_TYPE.INPUT.CHECKBOX
     this._isChoice = type === SURVEY_BLOCK_TYPE.INPUT.CHOICE

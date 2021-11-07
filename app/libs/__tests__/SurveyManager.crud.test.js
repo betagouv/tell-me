@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import SurveyManager from '../SurveyManager'
 

@@ -26,7 +26,7 @@ const Box = styled.div`
 const Content = styled.div`
   flex-grow: 1;
   opacity: ${p => (p.isHidden ? 0.65 : 1)};
-  padding: 0 1rem 0 ${p => (p.isMandatory ? 0 : '1rem')};
+  padding: 0 1rem 0 0;
 `
 
 const Button = styled.div`
@@ -67,7 +67,10 @@ const Asterisk = styled.div`
   font-weight: 700;
   justify-content: center;
   min-height: 3rem;
+  min-width: 3rem;
+  opacity: ${p => (p.isVisible ? 1 : 0)};
   padding: 0 0.5rem 0 1rem;
+  user-select: none;
 `
 
 const noop = () => undefined
@@ -87,11 +90,9 @@ export default function Row({
         <Move onClick={onMove} />
       </Button>
 
-      {block.isMandatory && <Asterisk>*</Asterisk>}
+      <Asterisk isVisible={block.isMandatory}>*</Asterisk>
 
-      <Content isHidden={block.props.isHidden} isMandatory={block.props.isMandatory}>
-        {children}
-      </Content>
+      <Content isHidden={block.props.isHidden}>{children}</Content>
 
       <Button
         accent="secondary"

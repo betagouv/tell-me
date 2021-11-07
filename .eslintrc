@@ -35,7 +35,7 @@
     "formatjs/no-offset": "error",
 
     "no-shadow": "off",
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "no-underscore-dangle": "off",
 
     "react/prop-types": [
       "error",
@@ -57,7 +57,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.ts"],
+      "files": ["**/*.ts", "**/*.tsx"],
       "extends": "@ivangabriele/eslint-config-typescript-react",
       "env": {
         "browser": true,
@@ -69,7 +69,10 @@
       },
       "plugins": ["formatjs"],
       "rules": {
+        "no-underscore-dangle": "off",
+
         "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+        "@typescript-eslint/no-shadow": "off",
 
         "formatjs/enforce-default-message": "error",
         "formatjs/enforce-description": "error",
@@ -93,9 +96,6 @@
         "formatjs/no-multiple-plurals": "error",
         "formatjs/no-multiple-whitespaces": "error",
         "formatjs/no-offset": "error",
-
-        "no-shadow": "off",
-        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
 
         "react/prop-types": [
           "error",

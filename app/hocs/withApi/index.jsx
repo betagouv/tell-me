@@ -82,7 +82,6 @@ export default function withApi(Component) {
       }
     }
 
-    // eslint-disable-next-line no-underscore-dangle
     const _delete = async path => {
       try {
         const body = await api.ky.delete(path).json()

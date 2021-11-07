@@ -12,8 +12,8 @@ const SCHEMA = {
 
 const sanitizeHtml = rehype().data('settings', {}).use(rehypeSanitize, SCHEMA).process
 
-export default async function sanitizeRichText(html) {
-  const sanitizedVFile = await sanitizeHtml(html)
+export default async function sanitizeRichText(source: string): Promise<string> {
+  const sanitizedVFile = await sanitizeHtml(source)
 
-  return sanitizedVFile.value
+  return sanitizedVFile.value as string
 }

@@ -1,6 +1,4 @@
-const withNextTranspileModules = require('next-transpile-modules')(['unist-util-find'])
-
-module.exports = withNextTranspileModules({
+module.exports = {
   eslint: {
     // https://nextjs.org/docs/api-reference/next.config.js/ignoring-eslint
     ignoreDuringBuilds: true,
@@ -70,4 +68,4 @@ module.exports = withNextTranspileModules({
 
     return config
   },
-})
+}
