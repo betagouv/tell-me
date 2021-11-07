@@ -201,11 +201,9 @@ export default class SurveyManager {
 
     this.blocks = R.update(index, updatedBlock)(this.blocks)
 
-    if (newType === SURVEY_BLOCK_TYPE.CONTENT.QUESTION) {
-      this.changeBlockPropsAt(index, {
-        isMandatory: true,
-      })
-    }
+    this.changeBlockPropsAt(index, {
+      isMandatory: newType === SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
+    })
   }
 
   changeBlockValueAt(index, newValue) {

@@ -177,7 +177,7 @@ export default function SurveyEditor() {
         {surveyManager.blocks.map((block, index) => (
           <Block
             // eslint-disable-next-line react/no-array-index-key
-            key={`${index}.${hashCode(block.value)}`}
+            key={`${index}.${block.type}.${hashCode(block.value)}`}
             block={block}
             index={index}
             isFocused={index === surveyManager.focusedBlockIndex}

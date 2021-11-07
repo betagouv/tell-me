@@ -64,7 +64,7 @@ export default function Block({
 
   const { count, countLetter, type, value } = block
   const { component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[type]
-  const key = `${index}.${hashCode(value)}`
+  const key = `${index}.${type}.${hashCode(value)}`
   const finalPlaceholder = count !== null ? `${placeholder} ${count}` : placeholder
 
   const openBlockMenu = () => {
@@ -75,8 +75,12 @@ export default function Block({
     setIsBlockMenuOpen(false)
   }
 
-  const setCondition = ({ value }) => {
+  const changeCondition = ({ value }) => {
     onChangeCondition(index, value)
+  }
+
+  const changeType = newType => {
+    onChangeType(index, newType)
   }
 
   const toggleCondition = () => {
@@ -124,10 +128,10 @@ export default function Block({
       />
 
       {isConditionOpen && (
-        <Condition block={block} onChange={setCondition} questionBlockAsOptions={questionBlockAsOptions} />
+        <Condition block={block} onChange={changeCondition} questionBlockAsOptions={questionBlockAsOptions} />
       )}
 
-      {isBlockMenuOpen && <BlockMenu onClose={closeBlockMenu} onSelect={newType => onChangeType(index, newType)} />}
+      {isBlockMenuOpen && <BlockMenu onClose={closeBlockMenu} onSelect={changeType} />}
     </Row>
   )
 }
