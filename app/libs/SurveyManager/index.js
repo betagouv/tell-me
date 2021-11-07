@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import * as R from 'ramda'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
-import Block from './Block'
+import Block from './Block.ts'
 
 /**
  * @typedef {Object} BlockData - creates a new type named 'SpecialType'

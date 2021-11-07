@@ -9,6 +9,8 @@
   },
   "plugins": ["formatjs"],
   "rules": {
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+
     "formatjs/enforce-default-message": "error",
     "formatjs/enforce-description": "error",
     "formatjs/enforce-id": "error",
@@ -55,13 +57,73 @@
   },
   "overrides": [
     {
-      "files": ["./api/**/*.js", "./pages/api/**/*.js", "./scripts/**/*.js"],
+      "files": ["**/*.ts"],
+      "extends": "@ivangabriele/eslint-config-typescript-react",
+      "env": {
+        "browser": true,
+        "node": true
+      },
+      "parserOptions": {
+        "ecmaVersion": 2021,
+        "project": "./tsconfig.json"
+      },
+      "plugins": ["formatjs"],
+      "rules": {
+        "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+
+        "formatjs/enforce-default-message": "error",
+        "formatjs/enforce-description": "error",
+        "formatjs/enforce-id": "error",
+        "formatjs/enforce-placeholders": "error",
+        "formatjs/enforce-plural-rules": [
+          "error",
+          // https://formatjs.io/docs/tooling/linter/#available-rules-1
+          {
+            "few": false,
+            "many": false,
+            "one": true,
+            "other": true,
+            "two": false,
+            "zero": false
+          }
+        ],
+        "formatjs/no-camel-case": "error",
+        "formatjs/no-complex-selectors": ["error", { "limit": 2 }],
+        "formatjs/no-emoji": "error",
+        "formatjs/no-multiple-plurals": "error",
+        "formatjs/no-multiple-whitespaces": "error",
+        "formatjs/no-offset": "error",
+
+        "no-shadow": "off",
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+
+        "react/prop-types": [
+          "error",
+          {
+            "ignore": [
+              "children",
+              "className",
+              "Component",
+              "contentEditable",
+              "dangerouslySetInnerHTML",
+              "pageProps",
+              "ref"
+            ]
+          }
+        ],
+        "react/react-in-jsx-scope": "off",
+
+        "react-hooks/exhaustive-deps": "off"
+      }
+    },
+    {
+      "files": ["./api/**/*.js", "./pages/api/**/*.js", "./scripts/**/*.js", "./api/**/*.ts", "./pages/api/**/*.ts"],
       "env": {
         "browser": false
       }
     },
     {
-      "files": ["./api/models/**/*.js"],
+      "files": ["./api/models/**/*.js", "./api/models/**/*.ts"],
       "rules": {
         "sort-keys-fix/sort-keys-fix": "off"
       }
@@ -70,20 +132,23 @@
       "files": [
         "**/atoms/*.jsx",
         "**/blocks/*.jsx",
-        "./pages/**/*.jsx"
+        "./pages/**/*.jsx",
+        "**/atoms/*.tsx",
+        "**/blocks/*.tsx",
+        "./pages/**/*.tsx"
       ],
       "rules": {
         "react/jsx-props-no-spreading": "off"
       }
     },
     {
-      "files": ["./pages/**/*.jsx"],
+      "files": ["./pages/**/*.jsx", "./pages/**/*.tsx"],
       "rules": {
         "react/prop-types": "off"
       }
     },
     {
-      "files": ["**/*.test.js", "./e2e/**/*.js"],
+      "files": ["**/*.test.js", "./e2e/**/*.js", "**/*.test.ts", "./e2e/**/*.ts"],
       "plugins": ["jest"],
       "env": {
         "browser": false,
