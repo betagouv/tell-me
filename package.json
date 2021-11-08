@@ -16,8 +16,9 @@
     "intl:extract": "formatjs extract \"{app,pages}/**/*.jsx\" --out-file ./locales/en-US.json",
     "prepare": "husky install && node -r dotenv/config ./scripts/dev/setup.js",
     "start": "yarn db:migrate && next start",
-    "test": "yarn test:lint && yarn test:unit",
+    "test": "yarn test:lint && yarn test:type && yarn test:unit",
     "test:lint": "eslint --ext js,jsx,ts,tsx .",
+    "test:type": "tsc",
     "test:unit": "jest",
     "test:watch": "jest --watch"
   },
