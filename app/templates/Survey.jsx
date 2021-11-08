@@ -34,6 +34,27 @@ const Container = styled.div`
   width: 960px;
 `
 
+const Row = styled.div`
+  display: flex;
+`
+
+const Asterisk = styled.div`
+  align-items: center;
+  color: black;
+  display: flex;
+  font-size: 125%;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 3rem;
+  padding-left: 0.5rem;
+`
+
+const Error = styled.p`
+  color: ${p => p.theme.color.danger.active};
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+`
+
 const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: SurveyQuestion,
   [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: SurveyParagraph,
@@ -43,12 +64,21 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: SurveyForm.TextInput,
 }
 
-const FormSchema = Yup.object().shape({})
+const buildValidationSchema = (blocks, message) =>
+  blocks.reduce((schema, block) => {
+    if (!block.isQuestion || !block.isMandatory) {
+      return schema
+    }
 
-const isQuestion = R.pipe(R.prop('type'), R.equals(SURVEY_BLOCK_TYPE.CONTENT.QUESTION))
-const isInput = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
+    return {
+      ...schema,
+      [block._id]: Yup.string().required(message),
+    }
+  }, {})
 
-const renderBlocks = (blocks, values) => {
+const renderBlocks = (formikContext, blocks) => {
+  const { errors, submitCount, values } = formikContext
+
   let indexableBlockIndex = null
   let isHidden = false
   let questionId = null
@@ -56,7 +86,7 @@ const renderBlocks = (blocks, values) => {
   return blocks.reduce((components, block, index) => {
     const { _id, countLetter, type, value } = block
 
-    if (isQuestion(block)) {
+    if (block.isQuestion) {
       questionId = _id
 
       if (block.isHidden) {
@@ -109,7 +139,7 @@ const renderBlocks = (blocks, values) => {
     const innerHTML = { __html: value }
     const label = String(value)
 
-    const newComponent = isInput(block) ? (
+    const newComponent = block.isInput ? (
       <Component
         key={_id}
         countLetter={countLetter}
@@ -119,17 +149,25 @@ const renderBlocks = (blocks, values) => {
         value={label}
       />
     ) : (
-      <Component key={_id} dangerouslySetInnerHTML={innerHTML} />
+      <Row key={_id}>
+        <Component dangerouslySetInnerHTML={innerHTML} />
+
+        {block.isMandatory && <Asterisk>*</Asterisk>}
+      </Row>
     )
 
-    return [...components, newComponent]
+    if (submitCount === 0 || !errors[_id]) {
+      return [...components, newComponent]
+    }
+
+    return [...components, newComponent, <Error key={`${_id}.error`}>{errors[_id]}</Error>]
   }, [])
 }
 
 const SurveyBlocks = ({ blocks }) => {
-  const { values } = useFormikContext()
+  const formikContext = useFormikContext()
 
-  return renderBlocks(blocks, values)
+  return renderBlocks(formikContext, blocks)
 }
 
 export default function PublicSurvey({ data }) {
@@ -142,6 +180,14 @@ export default function PublicSurvey({ data }) {
   const { _id, blocks, title } = data
   const surveyManager = new SurveyManager(blocks)
   const surveySessionKey = `survey-${_id}`
+
+  const validationMessage = intl.formatMessage({
+    defaultMessage: 'This answer is required to validate the form:',
+    description: '[Public Survey] Missing answer error message for a required question.',
+    id: 'cvJp/S',
+  })
+  const validationSchema = buildValidationSchema(surveyManager.blocks, validationMessage)
+  const FormSchema = Yup.object().shape(validationSchema)
 
   const loadFormDataFromSession = () => {
     const maybeValuesJson = window.sessionStorage.getItem(surveySessionKey)

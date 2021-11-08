@@ -119,6 +119,10 @@
     "defaultMessage": "Refresh Tokens",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
   },
+  "cvJp/S": {
+    "defaultMessage": "This answer is required to validate the form:",
+    "description": "[Public Survey] Missing answer error message for a required question."
+  },
   "d97zYv": {
     "defaultMessage": "Create user",
     "description": "[Survey Editor] Form \"create\" button label."
