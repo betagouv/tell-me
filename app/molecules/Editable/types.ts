@@ -1,6 +1,7 @@
 import { Properties } from 'hast'
 
 export type BlockMenuItem = {
+  category: string
   label: string
   type: string
 }

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-import handleError from '../helpers/handleError'
+import handleError from '../helpers/handleError.ts'
 
 mongoose.Schema.Types.String.checkRequired(value => typeof value === 'string')
 

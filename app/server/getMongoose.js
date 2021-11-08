@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-import handleError from '../helpers/handleError'
+import handleError from '../helpers/handleError.ts'
 
 const { DB_URL } = process.env
 

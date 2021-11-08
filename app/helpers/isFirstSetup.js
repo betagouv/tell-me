@@ -1,6 +1,6 @@
 import ky from 'ky'
 
-import handleError from './handleError'
+import handleError from './handleError.ts'
 
 // eslint-disable-next-line consistent-return
 export default async function isFirstSetup() {

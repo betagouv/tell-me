@@ -1,6 +1,6 @@
 import { css, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
-import { FunctionComponent, useEffect, useState } from 'react'
+import { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 
 import { BlockMenuItem } from './types'
@@ -11,7 +11,16 @@ const Box = styled.div`
   flex-direction: column;
 `
 
-const MenuItem = styled.div`
+const Category = styled.div`
+  background-color: ${p => p.theme.color.primary.background};
+  color: ${p => p.theme.color.primary.default};
+  font-size: 75%;
+  font-weight: 700;
+  padding: ${p => p.theme.padding.layout.tiny} ${p => p.theme.padding.layout.small};
+  text-transform: uppercase;
+`
+
+const Item = styled.div`
   color: ${p => p.theme.color.body.white};
   cursor: pointer;
   display: inline-block;
@@ -79,12 +88,15 @@ const BlockMenu: FunctionComponent<BlockMenuProps> = ({ anchor, items, onCancel,
     <>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Box ref={setPopperElement} style={popper.styles.popper} {...popper.attributes.popper}>
-        {items.map(({ label }, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <MenuItem key={label} data-index={index} isSelected={index === selectedIndex} onClick={handleSelect}>
-            {/* <Icon fontSize="small" /> */}
-            {label}
-          </MenuItem>
+        {items.map(({ category, label }, index) => (
+          <Fragment key={label}>
+            {(index === 0 || category !== items[index - 1].category) && <Category>{category}</Category>}
+
+            <Item data-index={index} isSelected={index === selectedIndex} onClick={handleSelect}>
+              {/* <Icon fontSize="small" /> */}
+              {label}
+            </Item>
+          </Fragment>
         ))}
       </Box>
     </>
@@ -96,6 +108,7 @@ BlockMenu.propTypes = {
   anchor: PropTypes.any.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      category: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
     }).isRequired,

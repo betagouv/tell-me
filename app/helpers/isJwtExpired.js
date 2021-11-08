@@ -1,5 +1,5 @@
 import getJwtPayload from './getJwtPayload'
-import handleError from './handleError'
+import handleError from './handleError.ts'
 
 /**
  * Validate a JWT and decode its payload

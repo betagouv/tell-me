@@ -13,8 +13,8 @@
     "skipLibCheck": true,
     "strict": false,
     "strictNullChecks": true,
-    "target": "es2015"
+    "target": "es5"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app/molecules/__tests__/Editable.sanitizeRichText.test.js"],
   "exclude": ["node_modules"]
 }

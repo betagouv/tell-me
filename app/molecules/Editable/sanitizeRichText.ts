@@ -10,10 +10,15 @@ const SCHEMA = {
   tagNames: ['a', 'b', 'i'],
 }
 
-const sanitizeHtml = rehype().data('settings', {}).use(rehypeSanitize, SCHEMA).process
+const sanitizeHtml = rehype()
+  .data('settings', {
+    fragment: true,
+  })
+  .use(rehypeSanitize, SCHEMA).processSync
 
-export default async function sanitizeRichText(source: string): Promise<string> {
-  const sanitizedVFile = await sanitizeHtml(source)
+export default function sanitizeRichText(source: string): string {
+  const sanitizedVFile = sanitizeHtml(source)
+  const sanitizedSource = String(sanitizedVFile)
 
-  return sanitizedVFile.value as string
+  return sanitizedSource
 }

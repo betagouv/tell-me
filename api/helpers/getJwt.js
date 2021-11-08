@@ -3,7 +3,7 @@
 import jsonwebtoken from 'jsonwebtoken'
 import { promisify } from 'util'
 
-import handleError from './handleError'
+import handleError from './handleError.ts'
 
 const { RSA_PRIVATE_KEY } = process.env
 const TWENTY_MINUTES_IN_SECONDS = 20 * 60

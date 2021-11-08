@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import R from 'ramda'
 
 import getJwt from '../../../api/helpers/getJwt'
-import handleError from '../../../api/helpers/handleError'
+import handleError from '../../../api/helpers/handleError.ts'
 import ApiError from '../../../api/libs/ApiError'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import RefreshToken from '../../../api/models/RefreshToken'

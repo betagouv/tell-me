@@ -1,5 +1,5 @@
 import User from '../models/User'
-import handleError from './handleError'
+import handleError from './handleError.ts'
 
 // Optimize subsequent requests once it's `true`
 let IS_READY = false

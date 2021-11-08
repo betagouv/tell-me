@@ -1,7 +1,7 @@
 import multer from 'multer'
 import path from 'path'
 
-import handleError from '../../../api/helpers/handleError'
+import handleError from '../../../api/helpers/handleError.ts'
 import ApiError from '../../../api/libs/ApiError'
 import withAuthentication from '../../../api/middlewares/withAuthentication'
 import withMongoose from '../../../api/middlewares/withMongoose'

@@ -4,7 +4,7 @@ import { parseJwk } from 'jose-browser-runtime/jwk/parse'
 import { jwtVerify } from 'jose-browser-runtime/jwt/verify'
 import { pem2jwk } from 'pem-jwk'
 
-import handleError from './handleError'
+import handleError from './handleError.ts'
 
 /**
  * @typedef {Object} JwtPayload

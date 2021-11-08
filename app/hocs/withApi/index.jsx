@@ -1,4 +1,4 @@
-import handleError from '../../helpers/handleError'
+import handleError from '../../helpers/handleError.ts'
 import useAuth from '../../hooks/useAuth'
 import api from '../../libs/api'
 import Context from './Context'

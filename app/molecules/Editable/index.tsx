@@ -8,30 +8,40 @@ import usePrevious from '../../hooks/usePrevious'
 import BlockMenu from './BlockMenu'
 import blockMenuReducer, { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
 import FormatMenu, { FormatMenuProps } from './FormatMenu'
-import sanitizeRichText from './sanitizeRichText'
 
 const MENU_ITEMS = [
   {
+    category: 'Content',
     // Icon: HelpIcon,
     label: 'Question',
     type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
   },
   {
+    category: 'Content',
+    // Icon: HelpIcon,
+    label: 'Paragraph',
+    type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
+  },
+  {
+    category: 'Input',
     // Icon: DoneAllIcon,
     label: 'Choice',
     type: SURVEY_BLOCK_TYPE.INPUT.CHOICE,
   },
   {
+    category: 'Input',
     // Icon: DoneIcon,
     label: 'Checkboxes',
     type: SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
   },
   {
+    category: 'Input',
     // Icon: ShortTextIcon,
     label: 'Short Answer',
     type: SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER,
   },
   {
+    category: 'Input',
     // Icon: ViewHeadlineIcon,
     label: 'Long Answer',
     type: SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER,
@@ -133,7 +143,7 @@ const Editable: FunctionComponent<EditableProps> = ({
     }
   }
 
-  const handleInput = async () => {
+  const handleInput = () => {
     if (componentRef.current === null) {
       return
     }
@@ -158,18 +168,13 @@ const Editable: FunctionComponent<EditableProps> = ({
     selectionFocusNodeRef.current = selection.focusNode
     selectionFocusOffsetRef.current = selection.focusOffset
 
-    const currentValue = componentRef.current.innerHTML
-    const newValue = await sanitizeRichText(currentValue)
+    const newValue = componentRef.current.innerHTML
 
     if (hasBlockMenu && !isBlockMenuOpen) {
       lastValueBeforeOpeningBlockMenuRef.current = newValue
     }
 
     onChange(newValue)
-
-    if (newValue !== currentValue) {
-      setControlledValue(newValue)
-    }
   }
 
   const openBlockMenu = () => {

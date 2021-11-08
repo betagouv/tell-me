@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl'
 import enUS from '../../../locales/compiled/en-US.json'
 import frFR from '../../../locales/compiled/fr-FR.json'
 import getLocale from '../../helpers/getLocale'
-import handleError from '../../helpers/handleError'
+import handleError from '../../helpers/handleError.ts'
 import Context from './Context'
 
 export function loadLocaleMessages(locale) {

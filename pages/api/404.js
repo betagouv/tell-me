@@ -1,4 +1,4 @@
-import handleError from '../../api/helpers/handleError'
+import handleError from '../../api/helpers/handleError.ts'
 import ApiError from '../../api/libs/ApiError'
 
 const ERROR_PATH = 'pages/api/auth/NotFoundController()'

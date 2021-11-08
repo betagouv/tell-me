@@ -2,7 +2,7 @@ import R from 'ramda'
 
 import { USER_ROLE } from '../../common/constants'
 import getJwtPayload from '../helpers/getJwtPayload'
-import handleError from '../helpers/handleError'
+import handleError from '../helpers/handleError.ts'
 import ApiError from '../libs/ApiError'
 import OneTimeToken from '../models/OneTimeToken'
 import User from '../models/User'

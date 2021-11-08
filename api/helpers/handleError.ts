@@ -1,4 +1,5 @@
 import ß from 'bhala'
+import { NextApiResponse } from 'next'
 
 import ApiError from '../libs/ApiError'
 
@@ -16,16 +17,12 @@ const getErrorConstructorName = error => {
 /**
  * Handle all kinds of errors. Any error should be caught and handled by this function.
  *
- * @param {*}                               error   Raw error.
- * @param {string}                          path    Exact scope path where this handler was called.
- * @param {import("next").NextApiResponse}  res     Koa context.
- *
  * @example
  * handleError(err, "controllers/MyClass.myMethod()");
  * handleError(err, "helpers/myFunction()");
  * handleError(err, "scripts/myFileName#oneOfTheScriptFunctions()");
  */
-export default function handleError(error, path, res) {
+export default function handleError(error: any, path?: string, res?: NextApiResponse): void {
   const errorPath = path || 'Unknown Path'
 
   let errorString

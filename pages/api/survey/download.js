@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import * as R from 'ramda'
 import XLSX from 'xlsx'
 
-import handleError from '../../../api/helpers/handleError'
+import handleError from '../../../api/helpers/handleError.ts'
 import ApiError from '../../../api/libs/ApiError'
 import withAuthentication from '../../../api/middlewares/withAuthentication'
 import withMongoose from '../../../api/middlewares/withMongoose'

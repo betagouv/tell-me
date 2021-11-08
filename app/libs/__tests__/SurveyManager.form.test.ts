@@ -1,24 +1,7 @@
-import * as R from 'ramda'
-
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import SurveyManager from '../SurveyManager'
 
 describe('common/SurveyManager [Form Operations]', () => {
-  beforeAll(() => {
-    const getRandomString = () => (Math.random() + 1).toString(36).substring(7)
-
-    // eslint-disable-next-line func-names
-    SurveyManager.prototype.fillWithFakeIds = function () {
-      const blocksWithFakeIds = R.map(block => {
-        const blockWithId = R.assoc('_id', getRandomString())(block)
-
-        return blockWithId
-      })(this.blocks)
-
-      this.blocks = blocksWithFakeIds
-    }
-  })
-
   test('should conciliate form data with a checkbox question', () => {
     const instance = new SurveyManager()
     instance.setFocusAt(1)
@@ -31,10 +14,8 @@ describe('common/SurveyManager [Form Operations]', () => {
     instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
     instance.changeFocusedBlockValue('Choice 3')
 
-    instance.fillWithFakeIds()
-
     const formData = {
-      [instance._blocks[2]._id]: ['Choice 1', 'Choice 3'],
+      [instance.blocks[2]._id]: ['Choice 1', 'Choice 3'],
     }
 
     const result = instance.conciliateFormData(formData)
@@ -60,10 +41,8 @@ describe('common/SurveyManager [Form Operations]', () => {
     instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
     instance.changeFocusedBlockValue('Option 3')
 
-    instance.fillWithFakeIds()
-
     const formData = {
-      [instance._blocks[2]._id]: 'Option 2',
+      [instance.blocks[2]._id]: 'Option 2',
     }
 
     const result = instance.conciliateFormData(formData)
