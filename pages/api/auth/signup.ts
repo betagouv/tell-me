@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import R from 'ramda'
 
-import handleError from '../../../api/helpers/handleError.ts'
+import handleError from '../../../api/helpers/handleError'
 import isReady from '../../../api/helpers/isReady'
 import ApiError from '../../../api/libs/ApiError'
 import withMongoose from '../../../api/middlewares/withMongoose'
@@ -20,7 +20,7 @@ async function AuthSignupController(req, res) {
   }
 
   try {
-    const newUserData = R.pick(['email'], req.body)
+    const newUserData: any = R.pick(['email'], req.body)
     newUserData.password = await bcrypt.hash(req.body.password, BCRYPT_SALT_WORK_FACTOR)
 
     if (!(await isReady())) {

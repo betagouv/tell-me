@@ -1,4 +1,4 @@
-import SurveyModel from '../../api/models/Survey'
+import SurveyModel from '../../api/models/Survey/index.ts'
 import convertDocumentToPojo from '../../app/server/convertDocumentToPojo'
 import getMongoose from '../../app/server/getMongoose'
 import Survey from '../../app/templates/Survey'

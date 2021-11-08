@@ -1,4 +1,4 @@
-import handleError from '../../../api/helpers/handleError.ts'
+import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withAuthentication from '../../../api/middlewares/withAuthentication'
 import withMongoose from '../../../api/middlewares/withMongoose'

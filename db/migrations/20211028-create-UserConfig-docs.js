@@ -1,22 +1,28 @@
-/* eslint-disable no-await-in-loop, no-restricted-syntax */
+/* eslint-disable no-await-in-loop, no-restricted-syntax, sort-keys-fix/sort-keys-fix */
 
-import User from '../../api/models/User'
-import UserConfig from '../../api/models/UserConfig'
+/**
+ * @param {import('mongoose').Mongoose} mongoose
+ */
+export default async mongoose => {
+  const User = mongoose.connection.db.collection('users')
+  const users = await User.find().toArray()
 
-export default async () => {
-  const users = await User.find().exec()
+  const UserConfig = mongoose.connection.db.collection('userconfigs')
 
   for (const user of users) {
     const maybeUserConfig = await UserConfig.findOne({
       user: user._id,
-    }).exec()
+    })
 
     if (maybeUserConfig === null) {
-      const newUserConfig = new UserConfig({
-        user: user._id,
-      })
+      const now = new Date()
 
-      await newUserConfig.save()
+      await UserConfig.insertOne({
+        user: user._id,
+        locale: 'en-US',
+        createdAt: now,
+        updatedAs: now,
+      })
     }
   }
 }

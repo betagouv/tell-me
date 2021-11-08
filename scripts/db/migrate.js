@@ -9,23 +9,34 @@ import { promisify } from 'util'
 const asyncGlob = promisify(glob)
 
 dotenv.config()
+const { DB_URL } = process.env
 
 async function migrate() {
-  await mongoose.connect(process.env.DB_URL, {
-    connectTimeoutMS: 5000,
-  })
+  try {
+    if (DB_URL === undefined) {
+      throw new Error('`process.env.DB_URL` is undefined.')
+    }
 
-  const migrationFilePaths = await asyncGlob('./db/migrations/*.js')
+    const mongooseInstance = await mongoose.connect(DB_URL, {
+      connectTimeoutMS: 5000,
+    })
 
-  for (const migrationFilePath of migrationFilePaths) {
-    ß.log(`Running '${migrationFilePath}' migration…`)
-    const migrationModule = await import(`../.${migrationFilePath}`)
-    await migrationModule.default()
+    const migrationFilePaths = await asyncGlob('./db/migrations/*.js')
+
+    for (const migrationFilePath of migrationFilePaths) {
+      ß.log(`Running '${migrationFilePath}' migration…`)
+      const migrationModule = await import(`../.${migrationFilePath}`)
+      await migrationModule.default(mongooseInstance)
+    }
+
+    await mongoose.disconnect()
+
+    process.exit()
+  } catch (err) {
+    ß.error(`[scripts/db/migrate.ts] ${err}`)
+
+    process.exit(1)
   }
-
-  await mongoose.disconnect()
-
-  process.exit()
 }
 
 migrate()

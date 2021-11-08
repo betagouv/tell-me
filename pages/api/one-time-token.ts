@@ -1,13 +1,13 @@
-import handleError from '../../api/helpers/handleError.ts'
+import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuthentication from '../../api/middlewares/withAuthentication'
 import withMongoose from '../../api/middlewares/withMongoose'
-import RefreshToken from '../../api/models/RefreshToken'
+import OneTimeToken from '../../api/models/OneTimeToken'
 import { USER_ROLE } from '../../common/constants'
 
-const ERROR_PATH = 'pages/api/RefreshTokenController()'
+const ERROR_PATH = 'pages/api/OneTimeTokenController()'
 
-async function RefreshTokenController(req, res) {
+async function OneTimeTokenController(req, res) {
   if (!['DELETE'].includes(req.method)) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -19,15 +19,15 @@ async function RefreshTokenController(req, res) {
     case 'DELETE':
       try {
         const {
-          refreshTokenId: [refreshTokenId],
+          oneTimeTokenId: [oneTimeTokenId],
         } = req.query
 
-        const maybeSurvey = await RefreshToken.findById(refreshTokenId).exec()
+        const maybeSurvey = await OneTimeToken.findById(oneTimeTokenId).exec()
         if (maybeSurvey === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
-        await RefreshToken.findByIdAndDelete(refreshTokenId)
+        await OneTimeToken.findByIdAndDelete(oneTimeTokenId)
 
         res.status(204).end()
       } catch (err) {
@@ -36,4 +36,4 @@ async function RefreshTokenController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(RefreshTokenController, [USER_ROLE.ADMINISTRATOR]))
+export default withMongoose(withAuthentication(OneTimeTokenController, [USER_ROLE.ADMINISTRATOR]))

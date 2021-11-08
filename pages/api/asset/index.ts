@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import { pathExists } from 'fs-extra'
 import path from 'path'
 
-import handleError from '../../../api/helpers/handleError.ts'
+import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 
 const ASSETS_PATH = path.join(process.cwd(), 'assets')

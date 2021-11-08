@@ -1,7 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken'
 import { promisify } from 'util'
 
-import handleError from './handleError.ts'
+import handleError from './handleError'
 
 const { RSA_PRIVATE_KEY } = process.env
 
@@ -12,12 +12,12 @@ const verifyJwt = promisify(jsonwebtoken.verify)
  *
  * @description
  * Return `null` if invalid.
- *
- * @param {string} token
- *
- * @return {Promise<Object | null>}
  */
-export default async function getJwtPayload(token) {
+export default async function getJwtPayload(token: string): Promise<
+  Common.Nullable<{
+    _id: string
+  }>
+> {
   try {
     const verificationOptions = {
       algorithms: ['PS256'],

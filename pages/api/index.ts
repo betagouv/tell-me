@@ -1,4 +1,4 @@
-import handleError from '../../api/helpers/handleError.ts'
+import handleError from '../../api/helpers/handleError'
 import isReady from '../../api/helpers/isReady'
 import ApiError from '../../api/libs/ApiError'
 import withMongoose from '../../api/middlewares/withMongoose'
@@ -13,7 +13,7 @@ async function IndexController(req, res) {
     return
   }
 
-  const data = {
+  const data: any = {
     version: VERSION,
   }
   data.isReady = await isReady()

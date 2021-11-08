@@ -1,13 +1,13 @@
-import handleError from '../../api/helpers/handleError.ts'
+import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuthentication from '../../api/middlewares/withAuthentication'
 import withMongoose from '../../api/middlewares/withMongoose'
-import User from '../../api/models/User'
+import OneTimeToken from '../../api/models/OneTimeToken'
 import { USER_ROLE } from '../../common/constants'
 
-const ERROR_PATH = 'pages/api/auth/UsersController()'
+const ERROR_PATH = 'pages/api/OneTimeTokensController()'
 
-async function UsersController(req, res) {
+async function OneTimeTokensController(req, res) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -15,14 +15,14 @@ async function UsersController(req, res) {
   }
 
   try {
-    const users = await User.find().exec()
+    const oneTimeTokens = await OneTimeToken.find().populate('user').exec()
 
     res.status(200).json({
-      data: users,
+      data: oneTimeTokens,
     })
   } catch (err) {
     handleError(err, ERROR_PATH, res)
   }
 }
 
-export default withMongoose(withAuthentication(UsersController, [USER_ROLE.ADMINISTRATOR]))
+export default withMongoose(withAuthentication(OneTimeTokensController, [USER_ROLE.ADMINISTRATOR]))

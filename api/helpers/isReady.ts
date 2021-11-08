@@ -1,11 +1,10 @@
 import User from '../models/User'
-import handleError from './handleError.ts'
+import handleError from './handleError'
 
 // Optimize subsequent requests once it's `true`
 let IS_READY = false
 
-// eslint-disable-next-line consistent-return
-export default async function isReady() {
+export default async function isReady(): Promise<boolean> {
   try {
     if (!IS_READY) {
       const usersCount = await User.count().exec()
@@ -16,5 +15,7 @@ export default async function isReady() {
     return IS_READY
   } catch (err) {
     handleError(err, 'helpers/isReady()')
+
+    return false
   }
 }

@@ -3,7 +3,7 @@
 import jsonwebtoken from 'jsonwebtoken'
 import { promisify } from 'util'
 
-import handleError from './handleError.ts'
+import handleError from './handleError'
 
 const { RSA_PRIVATE_KEY } = process.env
 const TWENTY_MINUTES_IN_SECONDS = 20 * 60
@@ -13,13 +13,11 @@ const signJwt = promisify(jsonwebtoken.sign)
 
 /**
  * Generate either a Session or a Refresh JWT if an `ip` is provided
- *
- * @param {Object}    payload   A POJO containing public user data
- * @param {string=}   ip        User client IP
- *
- * @return {Promise<string>}
  */
-export default async function getJwt(payload, ip = null) {
+export default async function getJwt(
+  payload: any,
+  ip: Common.Nullable<string> = null,
+): Promise<Common.Nullable<string>> {
   try {
     const isRefresh = ip !== null
 

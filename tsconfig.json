@@ -15,6 +15,6 @@
     "strictNullChecks": true,
     "target": "es5"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app/molecules/__tests__/Editable.sanitizeRichText.test.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
