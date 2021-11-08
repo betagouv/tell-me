@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
+
 import { styled } from '@singularity-ui/core'
+import PropTypes from 'prop-types'
 import { forwardRef, ForwardRefRenderFunction, ReactChildren } from 'react'
 
 const Container = styled.div`
@@ -22,15 +25,17 @@ const Placeholder = styled.div`
 `
 
 type SuveyLogoProps = {
-  children: ReactChildren
-  className: string
+  children?: ReactChildren
+  className?: string
+  surveyId: string
 }
 const SurveyLogoWithoutRef: ForwardRefRenderFunction<HTMLDivElement, SuveyLogoProps> = (
-  { children, className, ...props },
+  { children, className, surveyId, ...props },
   ref,
 ) => (
   <Container className={className}>
-    <Placeholder ref={ref} {...props} />
+    <Placeholder ref={ref} surveyId={surveyId} {...props} />
+
     {children}
   </Container>
 )
@@ -38,5 +43,9 @@ const SurveyLogoWithoutRef: ForwardRefRenderFunction<HTMLDivElement, SuveyLogoPr
 const SurveyLogo = forwardRef(SurveyLogoWithoutRef)
 
 SurveyLogo.displayName = 'SurveyLogo'
+
+SurveyLogo.propTypes = {
+  surveyId: PropTypes.string.isRequired,
+}
 
 export default SurveyLogo

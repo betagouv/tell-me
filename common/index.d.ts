@@ -4,13 +4,36 @@ declare namespace Common {
    */
   type Nullable<T> = T | null
 
-  /**
-   * Get the right most non-void thing.
-   */
-  type Specific<Left = void, Right = void> = Right extends void ? Left : Right
+  declare namespace Authentication {
+    import { JWTPayload } from 'jose-browser-runtime/types'
 
-  /**
-   * Make a read-only object props writable.
-   */
-  type Writeable<T> = { -readonly [P in keyof T]: T[P] }
+    interface Payload extends JWTPayload {
+      /** User ID */
+      _id: string
+      /** User email */
+      email: string
+      /**
+       * Expiration date
+       *
+       * @description
+       * Unix timestamp (in seconds)
+       */
+      exp: number
+      /**
+       * Creation date
+       *
+       * @description
+       * Unix timestamp (in seconds)
+       */
+      iat: number
+      /** User locale */
+      locale: string
+      /** User role */
+      role: User.Role
+    }
+  }
+
+  declare namespace User {
+    type Role = 'ADMINISTRATOR' | 'MANAGER' | 'VIEWER'
+  }
 }

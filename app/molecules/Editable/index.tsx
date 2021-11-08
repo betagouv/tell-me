@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import PropTypes from 'prop-types'
-import { ElementType, FunctionComponent, Reducer, RefObject, useEffect, useReducer, useRef, useState } from 'react'
+import { MutableRefObject, Reducer, useEffect, useReducer, useRef, useState } from 'react'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import usePrevious from '../../hooks/usePrevious'
@@ -49,23 +49,7 @@ const MENU_ITEMS = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-export type EditableProps = {
-  as: ElementType
-  defaultValue: string
-  isFocused: boolean
-  isRichText: boolean
-  onBackspaceKeyDown: Common.Nullable<() => void>
-  onChange: (newValue: string) => void
-  onChangeType: Common.Nullable<(newBlockType: string) => void>
-  onDownKeyDown: Common.Nullable<() => void>
-  onEnterKeyDown: Common.Nullable<() => void>
-  onFocus: Common.Nullable<(event: FocusEvent) => void>
-  onUpKeyDown: Common.Nullable<() => void>
-
-  // eslint-disable-next-line typescript-sort-keys/interface
-  [key: string]: any
-}
-const Editable: FunctionComponent<EditableProps> = ({
+const Editable = ({
   as,
   defaultValue,
   isFocused,
@@ -91,12 +75,12 @@ const Editable: FunctionComponent<EditableProps> = ({
   )
   const componentRef = useRef<HTMLElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
-  const lastValueBeforeOpeningBlockMenuRef = useRef(defaultValue) as Common.Writeable<RefObject<string>>
+  const lastValueBeforeOpeningBlockMenuRef = useRef(defaultValue) as MutableRefObject<string>
   const [isBlockMenuOpen, setIsBlockMenuOpen] = useState<boolean>(false)
   const wasFocused = usePrevious(isFocused)
 
   // States used for rich text blocks
-  const selectionFocusNodeRef = useRef(null) as Common.Writeable<RefObject<Node>>
+  const selectionFocusNodeRef = useRef(null) as MutableRefObject<Common.Nullable<Node>>
   const selectionFocusOffsetRef = useRef<number>(defaultValue.length)
   const hasFormattedRef = useRef<boolean>(false)
   const [controlledIsFocused, setControlledIsFocused] = useState(false)
@@ -429,9 +413,9 @@ Editable.defaultProps = {
 Editable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   as: PropTypes.any.isRequired,
-  defaultValue: PropTypes.string as any,
-  isFocused: PropTypes.bool as any,
-  isRichText: PropTypes.bool as any,
+  defaultValue: PropTypes.string,
+  isFocused: PropTypes.bool,
+  isRichText: PropTypes.bool,
   onBackspaceKeyDown: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   onChangeType: PropTypes.func,

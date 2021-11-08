@@ -1,6 +1,6 @@
 import { Button, Dialog, styled, TextInput } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
-import { FunctionComponent, RefObject, useRef, useState } from 'react'
+import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
 import { Bold, Italic, Link } from 'react-feather'
 import { usePopper } from 'react-popper'
 import rehypeParse from 'rehype-parse'
@@ -70,7 +70,7 @@ export type FormatMenuProps = {
 }
 const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, selection, source }) => {
   const linkInputRef = useRef<HTMLInputElement>(null)
-  const transitorySourceRef = useRef(null) as Common.Writeable<RefObject<string>>
+  const transitorySourceRef = useRef(null) as MutableRefObject<Common.Nullable<string>>
   const [arrowElement, setArrowElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false)
