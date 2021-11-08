@@ -3,19 +3,31 @@ import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 interface GetCountLetter {
   (count: number): string
 }
-
 export const getCountLetter: GetCountLetter = count => (count + 9).toString(36).toUpperCase()
+
+export type BlockConstructorData = Omit<Api.Model.Survey.Block, 'props'>
+
+export type BlockConstructorOptions = {
+  count?: number
+  ifSelectedThenShowQuestionId?: string
+  isCountable: boolean
+  isHidden: boolean
+  isMandatory: boolean
+  isUnlinked: boolean
+  questionBlockAsOption?: App.SelectOption
+  questionId: Common.Nullable<string>
+}
 
 export default class Block {
   public readonly _id: string
-  public readonly position: Api.Model.Block.Position
+  public readonly position: Api.Model.Survey.BlockPosition
   public readonly type: string
   public readonly value: string
-  public readonly props: Api.Model.Block.Props
+  public readonly props: Api.Model.Survey.BlockProps
 
-  private _count: number | null
-  private _countLetter: string | null
-  private _ifSelectedThenShowQuestionId: string | null
+  private _count: Common.Nullable<number>
+  private _countLetter: Common.Nullable<string>
+  private _ifSelectedThenShowQuestionId: Common.Nullable<string>
   private _isCheckbox: boolean
   private _isChoice: boolean
   private _isCountable: boolean
@@ -24,21 +36,11 @@ export default class Block {
   private _isMandatory: boolean
   private _isQuestion: boolean
   private _isUnlinked: boolean
-  private _questionBlockAsOption: App.SelectOption | null
-  private _questionId: string
+  private _questionBlockAsOption: Common.Nullable<App.SelectOption>
+  private _questionId: Common.Nullable<string>
 
   constructor(
-    {
-      _id,
-      position,
-      type,
-      value,
-    }: {
-      _id: string
-      position: Api.Model.Block.Position
-      type: string
-      value: string
-    },
+    { _id, position, type, value }: BlockConstructorData,
     {
       count,
       ifSelectedThenShowQuestionId,
@@ -48,16 +50,7 @@ export default class Block {
       isUnlinked,
       questionBlockAsOption,
       questionId,
-    }: {
-      count?: number
-      ifSelectedThenShowQuestionId?: string
-      isCountable: boolean
-      isHidden: boolean
-      isMandatory: boolean
-      isUnlinked: boolean
-      questionBlockAsOption?: App.SelectOption
-      questionId: string
-    },
+    }: BlockConstructorOptions,
   ) {
     this._count = isCountable && count !== undefined ? count : null
     this._countLetter = isCountable && count !== undefined ? getCountLetter(count) : null

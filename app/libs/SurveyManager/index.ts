@@ -1,22 +1,9 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import mongoose from 'mongoose'
 import * as R from 'ramda'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
-import Block from './Block.ts'
-
-/**
- * @typedef {Object} BlockData - creates a new type named 'SpecialType'
- * @property {string} [_id] - a string property of SpecialType
- * @property {BlockPosition} position - a number property of SpecialType
- * @property {string} type - an optional number property of SpecialType
- * @property {string} value - an optional number property of SpecialType
- */
-
-/**
- * @typedef {Object} BlockPosition - creates a new type named 'SpecialType'
- * @property {number} page - a string property of SpecialType
- * @property {number} rank - a number property of SpecialType
- */
+import Block, { BlockConstructorOptions } from './Block'
 
 const INITIAL_BLOCKS = [
   {
@@ -49,16 +36,18 @@ const INITIAL_BLOCKS = [
   },
 ]
 
-const isBlockTypeCountable = R.flip(R.includes)([SURVEY_BLOCK_TYPE.INPUT.CHECKBOX, SURVEY_BLOCK_TYPE.INPUT.CHOICE])
-const isInputBlock = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
-const isQuestionBlock = R.propEq('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
+const isBlockTypeCountable = R.flip(R.includes)([
+  SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
+  SURVEY_BLOCK_TYPE.INPUT.CHOICE,
+]) as any
+const isInputBlock = R.pipe(R.prop<Block['type']>('type'), R.startsWith('INPUT.'))
+const isQuestionBlock = R.propEq<Block['type']>('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
 export default class SurveyManager {
+  private _blocks: Block[]
+  private _focusedBlockIndex: number
+
   constructor(blocks = INITIAL_BLOCKS) {
-    /**
-     * @private
-     * @type {Block[]}
-     */
     this._blocks = []
     /**
      * @private
@@ -75,36 +64,39 @@ export default class SurveyManager {
     this.blocks = blocks
   }
 
-  /** @return {Block[]} blocks */
-  get blocks() {
+  public get blocks(): Block[] {
     return this._blocks
   }
 
-  /** @return {Block[]} */
-  get questionBlockAsOptions() {
-    return R.pipe(
+  public get questionBlockAsOptions(): App.SelectOption[] {
+    return R.pipe<any, any, any>(
       R.filter(isQuestionBlock),
       R.map(({ _id, value }) => ({ label: value, value: _id })),
-    )(this._blocks)
+    )(this._blocks) as App.SelectOption[]
   }
 
-  /** @param {BlockData} blocks */
-  set blocks(blocks) {
+  set blocks(blocks: Api.Model.Survey.Block[]) {
     let isHidden = false
-    let questionId = null
+    let questionId: Common.Nullable<string> = null
 
     this._blocks = R.reduce((previousBlocks, block) => {
-      const lastBlock = R.last(previousBlocks)
-      const { _id, position, props, type, value } = block
-      const isCountable = isBlockTypeCountable(type)
+      const lastBlock = R.last<Block>(previousBlocks)
+      const { _id, position, props, type, value } = block as Api.Model.Survey.Block
+      const isCountable = isBlockTypeCountable(type) as boolean
       const isQuestion = type === SURVEY_BLOCK_TYPE.CONTENT.QUESTION
       const additionalProps = {
         ...props,
         isCountable,
-      }
+      } as BlockConstructorOptions
 
       if (props.ifSelectedThenShowQuestionId !== null) {
-        const conditionalQuestionBlock = R.find(R.propEq('_id', props.ifSelectedThenShowQuestionId))(blocks)
+        const conditionalQuestionBlock = R.find<Api.Model.Survey.Block>(
+          R.propEq('_id', props.ifSelectedThenShowQuestionId),
+        )(blocks)
+
+        if (typeof conditionalQuestionBlock === 'undefined') {
+          throw new Error(`This should never happen.`)
+        }
 
         additionalProps.questionBlockAsOption = {
           label: conditionalQuestionBlock.value,
@@ -113,7 +105,7 @@ export default class SurveyManager {
       }
 
       if (isCountable) {
-        if (lastBlock !== undefined && lastBlock.type === type) {
+        if (lastBlock !== undefined && lastBlock.type === type && lastBlock.count !== null) {
           additionalProps.count = lastBlock.count + 1
         } else {
           additionalProps.count = 1
@@ -140,14 +132,13 @@ export default class SurveyManager {
     }, [])(blocks)
   }
 
-  /** @return {BlockData[]} */
-  get blocksData() {
+  public get blocksData(): Api.Model.Survey.Block[] {
     const extractBlocksData = R.map(R.pick(['_id', 'position', 'props', 'type', 'value']))
 
     return extractBlocksData(this._blocks)
   }
 
-  get focusedBlock() {
+  public get focusedBlock(): Common.Nullable<Block> {
     if (this._focusedBlockIndex < 0) {
       return null
     }
@@ -155,15 +146,15 @@ export default class SurveyManager {
     return this._blocks[this._focusedBlockIndex]
   }
 
-  get focusedBlockIndex() {
+  public get focusedBlockIndex(): number {
     return this._focusedBlockIndex
   }
 
-  get isFocused() {
+  public get isFocused(): boolean {
     return this._focusedBlockIndex !== -1
   }
 
-  getQuestionTypeAt(index) {
+  getQuestionTypeAt(index: number): string {
     const maybeQuestionBlock = this.blocks[index]
     if (!isQuestionBlock(maybeQuestionBlock)) {
       throw new Error(`This survey block is not a question.`)
@@ -187,11 +178,11 @@ export default class SurveyManager {
     throw new Error(`This survey question block has no related input block.`)
   }
 
-  findBlockIndexById(id) {
+  findBlockIndexById(id: string): number {
     return R.findIndex(R.propEq('_id', id))(this.blocks)
   }
 
-  changeBlockTypeAt(index, newType) {
+  changeBlockTypeAt(index: number, newType: string): void {
     const updatedBlock = {
       ...this.blocks[index],
       type: newType,
@@ -204,7 +195,7 @@ export default class SurveyManager {
     })
   }
 
-  changeBlockValueAt(index, newValue) {
+  changeBlockValueAt(index: number, newValue: string): void {
     const updatedBlock = {
       ...this.blocks[index],
       value: newValue,
@@ -213,7 +204,7 @@ export default class SurveyManager {
     this.blocks = R.update(index, updatedBlock)(this.blocks)
   }
 
-  changeBlockPropsAt(index, newProps) {
+  changeBlockPropsAt(index: number, newProps: Partial<Api.Model.Survey.BlockProps>): void {
     const updatedBlock = {
       ...this.blocks[index],
       props: {
@@ -225,32 +216,32 @@ export default class SurveyManager {
     this.blocks = R.update(index, updatedBlock)(this.blocks)
   }
 
-  toggleBlockObligationAt(index) {
+  toggleBlockObligationAt(index: number): void {
     this.changeBlockPropsAt(index, {
       isMandatory: !this.blocks[index].props.isMandatory,
     })
   }
 
-  toggleBlockVisibilityAt(index) {
+  toggleBlockVisibilityAt(index: number): void {
     this.changeBlockPropsAt(index, {
       isHidden: !this.blocks[index].props.isHidden,
     })
   }
 
-  setIfSelectedThenShowQuestionIdAt(index, questionBlockId) {
+  setIfSelectedThenShowQuestionIdAt(index: number, questionBlockId: string): void {
     const updatedBlock = {
       ...this.blocks[index],
       props: {
         ...this.blocks[index].props,
         ifSelectedThenShowQuestionId: questionBlockId,
       },
-    }
+    } as Block
 
     this.blocks = R.update(index, updatedBlock)(this.blocks)
   }
 
-  addNewBlockAfterFocusedBlock(type) {
-    if (!this.isFocused) {
+  addNewBlockAfterFocusedBlock(type: string) {
+    if (!this.isFocused || this.focusedBlock === null) {
       return
     }
 
@@ -269,15 +260,16 @@ export default class SurveyManager {
       value: '',
     }
 
-    this.blocks = R.pipe(
+    this.blocks = R.pipe<any, any, any>(
       R.insert(this.focusedBlockIndex + 1, newBlock),
-      R.reduce((previousBlocks, block) => {
+      R.reduce((previousBlocks: Block[], block: Block) => {
         const { position } = block
         if (position.page !== newBlock.position.page || previousBlocks.length === 0) {
           return [...previousBlocks, block]
         }
 
-        const previousRank = R.last(previousBlocks).position.rank
+        const previousBlock = R.last<Block>(previousBlocks)
+        const previousRank = typeof previousBlock === 'undefined' ? 0 : previousBlock.position.rank
         if (position.rank === previousRank + 1) {
           return [...previousBlocks, block]
         }
@@ -297,7 +289,7 @@ export default class SurveyManager {
     this.focusNextBlock()
   }
 
-  changeFocusedBlockType(newType) {
+  changeFocusedBlockType(newType: string) {
     if (!this.isFocused) {
       return
     }
@@ -313,22 +305,25 @@ export default class SurveyManager {
     this.changeBlockValueAt(this.focusedBlockIndex, newValue)
   }
 
-  changeFocusedBlockProps(newProps) {
+  changeFocusedBlockProps(newProps: Api.Model.Survey.BlockProps) {
     if (!this.isFocused) {
       return
     }
 
-    this.changeFocusedBlockProps(this.focusedBlockIndex, newProps)
+    this.changeBlockPropsAt(this.focusedBlockIndex, newProps)
   }
 
-  removeFocusedBlock() {
+  removeFocusedBlock(): void {
     if (!this.isFocused) {
       return
     }
 
     const oldBlock = this.focusedBlock
+    if (oldBlock === null) {
+      return
+    }
 
-    this.blocks = R.reduce((newBlocks, block) => {
+    this.blocks = R.reduce<any, any>((newBlocks, block) => {
       const { position } = block
       if (position.page !== oldBlock.position.page || position.rank < oldBlock.position.rank) {
         return [...newBlocks, block]
@@ -352,11 +347,11 @@ export default class SurveyManager {
     this.focusPreviousBlock()
   }
 
-  setFocusAt(index) {
+  setFocusAt(index): void {
     this._focusedBlockIndex = index
   }
 
-  focusPreviousBlock() {
+  focusPreviousBlock(): void {
     if (this._focusedBlockIndex < 0) {
       return
     }
@@ -364,7 +359,7 @@ export default class SurveyManager {
     this._focusedBlockIndex -= 1
   }
 
-  focusNextBlock() {
+  focusNextBlock(): void {
     if (this._focusedBlockIndex >= this._blocks.length - 1) {
       return
     }
@@ -372,11 +367,15 @@ export default class SurveyManager {
     this._focusedBlockIndex += 1
   }
 
-  unsetFocus() {
+  unsetFocus(): void {
     this._focusedBlockIndex = -1
   }
 
-  conciliateFormData(formData) {
+  conciliateFormData(formData): Array<{
+    question: string
+    type: string
+    values: string[]
+  }> {
     return R.pipe(
       R.toPairs,
       R.map(([questionBlockId, answerOrAnswers]) => {
