@@ -1,2 +1,220 @@
 {
+  "+6xdMp": {
+    "defaultMessage": "One Time Tokens",
+    "description": "[One Time Tokens List] Page title."
+  },
+  "+lem9Q": {
+    "defaultMessage": "TTL",
+    "description": "[Refresh Tokens List] Table \"TTL\" column label."
+  },
+  "/2pv6j": {
+    "defaultMessage": "Dashboard",
+    "description": "[Dashboard] Page title."
+  },
+  "20hT19": {
+    "defaultMessage": "IP",
+    "description": "[Refresh Tokens List] Table \"IP\" column label."
+  },
+  "4toEG": {
+    "defaultMessage": "Edit this user",
+    "description": "[Users List] Table row \"user edition\" button label."
+  },
+  "73PR4k": {
+    "defaultMessage": "Delete this one time token",
+    "description": "[One Time Tokens List] Table row \"token deletion\" button label."
+  },
+  "8F0yyx": {
+    "defaultMessage": "Delete this user",
+    "description": "[Users List] Table row \"user deletion\" button label."
+  },
+  "8vxOf": {
+    "defaultMessage": "Users",
+    "description": "[Users List] Page title."
+  },
+  "91i3BC": {
+    "defaultMessage": "Title",
+    "description": "[Surveys List] Table \"title\" column label."
+  },
+  "A2n/eF": {
+    "defaultMessage": "A new password",
+    "description": "[Setup Modal] Password input label."
+  },
+  "AOWpq6": {
+    "defaultMessage": "Password",
+    "description": "[Survey Editor] Form password input label."
+  },
+  "AYV/5T": {
+    "defaultMessage": "New user",
+    "description": "[Users List] New user button label."
+  },
+  "Ci9rPk": {
+    "defaultMessage": "Create",
+    "description": "[Setup Modal] Submit button label."
+  },
+  "D6/Uxz": {
+    "defaultMessage": "Surveys",
+    "description": "[Sidebar Main Menu] Surveys label."
+  },
+  "DPOyaV": {
+    "defaultMessage": "Your email",
+    "description": "[Setup Modal] Email input label."
+  },
+  "E/vx8U": {
+    "defaultMessage": "Thank You message",
+    "description": "[Survey Settings] Form thank you message textarea label."
+  },
+  "EEsDeJ": {
+    "defaultMessage": "Dashboard",
+    "description": "[Sidebar Main Menu] Dashboard label."
+  },
+  "FC8ax/": {
+    "defaultMessage": "Edit user",
+    "description": "[Survey Editor] User edition page title."
+  },
+  "I8y4ic": {
+    "defaultMessage": "Log In",
+    "description": "[Login Modal] Form submit button label."
+  },
+  "IEpCqZ": {
+    "defaultMessage": "New survey",
+    "description": "[Surveys List] New survey button label."
+  },
+  "Ikt38A": {
+    "defaultMessage": "Refresh Tokens",
+    "description": "[Refresh Tokens List] Page title."
+  },
+  "N68/ff": {
+    "defaultMessage": "Slug",
+    "description": "[Survey Settings] Form slug input label."
+  },
+  "NNlf6B": {
+    "defaultMessage": "My Settings",
+    "description": "[My Settings] Page title."
+  },
+  "Q0wotK": {
+    "defaultMessage": "Email",
+    "description": "[Survey Editor] Form email input label."
+  },
+  "QBtMwD": {
+    "defaultMessage": "Email",
+    "description": "[Users List] Table \"email\" column label."
+  },
+  "SbH89J": {
+    "defaultMessage": "New user",
+    "description": "[Survey Editor] User creation page title."
+  },
+  "TAgUUN": {
+    "defaultMessage": "IP",
+    "description": "[One Time Tokens List] Table \"IP\" column label."
+  },
+  "VXF18U": {
+    "defaultMessage": "Activated account",
+    "description": "[Survey Editor] Form activated account checkbox label."
+  },
+  "XJmbHw": {
+    "defaultMessage": "Role",
+    "description": "[Survey Editor] Form role select label."
+  },
+  "YbP4R+": {
+    "defaultMessage": "Survey Settings",
+    "description": "[Survey Settings] Page title."
+  },
+  "YsRqXk": {
+    "defaultMessage": "Export as CSV",
+    "description": "[Survey Answers List] Export answers in CSV format button label."
+  },
+  "YzeZvW": {
+    "defaultMessage": "Published",
+    "description": "[Survey Settings] Form published checkbox label."
+  },
+  "ZxR2Ts": {
+    "defaultMessage": "Survey Answers",
+    "description": "[Survey Answers List] Survey answers list subtitle."
+  },
+  "bdTRI9": {
+    "defaultMessage": "Update survey settings",
+    "description": "[Survey Settings] Form update button label."
+  },
+  "bkZg0U": {
+    "defaultMessage": "Refresh Tokens",
+    "description": "[Sidebar Main Menu] Refresh Tokens label."
+  },
+  "cvJp/S": {
+    "defaultMessage": "This answer is required to validate the form:",
+    "description": "[Public Survey] Missing answer error message for a required question."
+  },
+  "d97zYv": {
+    "defaultMessage": "Create user",
+    "description": "[Survey Editor] Form create button label."
+  },
+  "h4+RiJ": {
+    "defaultMessage": "Update user",
+    "description": "[Survey Editor] Form update button label."
+  },
+  "hWoiIQ": {
+    "defaultMessage": "Your new password (again)",
+    "description": "[Setup Modal] Password repeat input label."
+  },
+  "i0E602": {
+    "defaultMessage": "Submit",
+    "description": "[Public Survey] Submit button label."
+  },
+  "i8B3g5": {
+  },
+  "iMAa/d": {
+    "defaultMessage": "Email",
+    "description": "[One Time Tokens List] Table \"email\" column label."
+  },
+  "jGB2t1": {
+    "defaultMessage": "Email",
+    "description": "[Refresh Tokens List] Table \"email\" column label."
+  },
+  "kx4x9D": {
+    "defaultMessage": "Role",
+    "description": "[Users List] Table \"role\" column label."
+  },
+  "lGHKue": {
+    "defaultMessage": "Language",
+    "description": "[My Settings] Form language select label."
+  },
+  "pLn6i2": {
+    "defaultMessage": "Update my settings",
+    "description": "[My Settings] Form update button label."
+  },
+  "pglohm": {
+    "defaultMessage": "Title",
+    "description": "[Survey Settings] Form title input label."
+  },
+  "tIFSst": {
+    "defaultMessage": "One Time Tokens",
+    "description": "[Sidebar Main Menu] One Time Tokens label."
+  },
+  "tnYUFj": {
+    "defaultMessage": "Survey",
+    "description": "[Surveys List] Page title."
+  },
+  "uaDzBk": {
+    "defaultMessage": "Delete this refresh token",
+    "description": "[Refresh Tokens List] Table row \"token deletion\" button label."
+  },
+  "ugMu4J": {
+    "defaultMessage": "Email",
+    "description": "[Login Modal] Form email input label."
+  },
+  "wHB27C": {
+    "defaultMessage": "Log In",
+    "description": "[Login Modal] Modal title."
+  },
+  "xhJCpr": {
+    "defaultMessage": "Password",
+    "description": "[Login Modal] Form password input label."
+  },
+  "yW/8Sz": {
+    "defaultMessage": "TTL",
+    "description": "[One Time Tokens List] Table \"TTL\" column label."
+  },
+  "zGNJ13": {
+    "defaultMessage": "Users",
+    "description": "[Sidebar Main Menu] Users label."
+  }
 }

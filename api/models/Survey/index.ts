@@ -4,6 +4,14 @@ import SurveyBlock from './SurveyBlock'
 import SurveyCover from './SurveyCover'
 import SurveyLogo from './SurveyLogo'
 
+const SurveyPropsType = {
+  thankYouMessage: {
+    required: false,
+    type: String,
+    default: null,
+  },
+}
+
 function Survey() {
   if (mongoose.models.Survey) {
     return mongoose.models.Survey
@@ -39,6 +47,13 @@ function Survey() {
         blocks: {
           required: true,
           type: [SurveyBlock],
+        },
+        props: {
+          required: false,
+          type: SurveyPropsType,
+          default: {
+            thankYouMessage: null,
+          },
         },
       },
       {

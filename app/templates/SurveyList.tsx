@@ -1,7 +1,7 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
-import { Database, Edit, Eye, Trash } from 'react-feather'
+import { Database, Edit, Eye, Settings, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 
@@ -72,6 +72,10 @@ export default function SurveyList() {
     history.push(`/survey/${id}`)
   }
 
+  const goToSurveyConfig = async id => {
+    history.push(`/survey/${id}/config`)
+  }
+
   const deleteSurvey = async id => {
     await api.delete(`survey/${id}`)
 
@@ -107,6 +111,13 @@ export default function SurveyList() {
       action: goToSurveyEditor,
       Icon: Edit,
       label: 'Edit this survey',
+      type: 'action',
+    },
+    {
+      accent: 'secondary',
+      action: goToSurveyConfig,
+      Icon: Settings,
+      label: 'Edit this survey settings',
       type: 'action',
     },
     {

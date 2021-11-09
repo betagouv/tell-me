@@ -14,6 +14,7 @@ import Dashboard from '../app/templates/Dashboard'
 import MyConfig from '../app/templates/MyConfig'
 import OneTimeTokenList from '../app/templates/OneTimeTokenList'
 import RefreshTokenList from '../app/templates/RefreshTokenList'
+import SurveyConfig from '../app/templates/SurveyConfig'
 import SurveyEditor from '../app/templates/SurveyEditor'
 import SurveyEntryList from '../app/templates/SurveyEntryList'
 import SurveyList from '../app/templates/SurveyList'
@@ -103,6 +104,9 @@ export default function SpaPage() {
 
             <Route path="/survey/:id/entries">
               <SurveyEntryList />
+            </Route>
+            <Route path="/survey/:id/config">
+              <SurveyConfig />
             </Route>
             <Route path="/survey/:id">
               <SurveyEditor />

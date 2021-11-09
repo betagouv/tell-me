@@ -159,12 +159,12 @@ export default function UserEditor() {
               {isNew
                 ? intl.formatMessage({
                     defaultMessage: 'Create user',
-                    description: '[Survey Editor] Form "create" button label.',
+                    description: '[Survey Editor] Form create button label.',
                     id: 'd97zYv',
                   })
                 : intl.formatMessage({
                     defaultMessage: 'Update user',
-                    description: '[Survey Editor] Form "update" button label.',
+                    description: '[Survey Editor] Form update button label.',
                     id: 'h4+RiJ',
                   })}
             </Form.Submit>

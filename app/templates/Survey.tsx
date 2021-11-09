@@ -174,7 +174,7 @@ const SurveyBlocks = ({ blocks }) => {
   return <>{renderBlocks(formikContext, blocks)}</>
 }
 
-export default function PublicSurvey({ data }) {
+export default function PublicSurvey({ data: survey }) {
   const [isLoading, setIsLoading] = useState(true)
   const [initialValues, setInitialValues] = useState({})
   const [isSent, setIsSent] = useState(false)
@@ -182,9 +182,8 @@ export default function PublicSurvey({ data }) {
   const api = useApi()
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { _id, blocks, title } = data
-  const surveyManager = new SurveyManager(blocks)
-  const surveySessionKey = `survey-${_id}`
+  const surveyManager = new SurveyManager(survey.blocks)
+  const surveySessionKey = `survey-${survey._id}`
 
   const validationMessage = intl.formatMessage({
     defaultMessage: 'This answer is required to validate the form:',
@@ -223,7 +222,7 @@ export default function PublicSurvey({ data }) {
 
     const surveyEntry = {
       answers: surveyEntryAnswers,
-      survey: _id,
+      survey: survey._id,
     }
 
     await api.post('survey/entry', surveyEntry)
@@ -238,12 +237,12 @@ export default function PublicSurvey({ data }) {
 
   return (
     <Page>
-      <SurveyHeader surveyId={_id} />
+      <SurveyHeader surveyId={survey._id} />
 
       <Container>
-        <SurveyLogo surveyId={_id} />
+        <SurveyLogo surveyId={survey._id} />
 
-        <SurveyTitle>{title}</SurveyTitle>
+        <SurveyTitle>{survey.title}</SurveyTitle>
 
         {isLoading && <Loader />}
 
@@ -268,11 +267,13 @@ export default function PublicSurvey({ data }) {
 
         {!isLoading && isSent && (
           <SurveyQuestion>
-            {intl.formatMessage({
-              defaultMessage: 'Thank you for your interest in helping our project!',
-              description: '[Public Survey] Thank you message once the survey has been sent.',
-              id: 'i8B3g5',
-            })}
+            {survey.props.thankYouMessage && survey.props.thankYouMessage.length > 0
+              ? survey.props.thankYouMessage
+              : intl.formatMessage({
+                  defaultMessage: 'Thank you for your interest in helping our project!',
+                  description: '[Public Survey] Thank you message once the survey has been sent.',
+                  id: 'i8B3g5',
+                })}
           </SurveyQuestion>
         )}
       </Container>

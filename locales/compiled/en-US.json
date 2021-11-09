@@ -1,2 +1,332 @@
 {
+  "+6xdMp": [
+    {
+      "type": 0,
+      "value": "One Time Tokens"
+    }
+  ],
+  "+lem9Q": [
+    {
+      "type": 0,
+      "value": "TTL"
+    }
+  ],
+  "/2pv6j": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
+  "20hT19": [
+    {
+      "type": 0,
+      "value": "IP"
+    }
+  ],
+  "4toEG": [
+    {
+      "type": 0,
+      "value": "Edit this user"
+    }
+  ],
+  "73PR4k": [
+    {
+      "type": 0,
+      "value": "Delete this one time token"
+    }
+  ],
+  "8F0yyx": [
+    {
+      "type": 0,
+      "value": "Delete this user"
+    }
+  ],
+  "8vxOf": [
+    {
+      "type": 0,
+      "value": "Users"
+    }
+  ],
+  "91i3BC": [
+    {
+      "type": 0,
+      "value": "Title"
+    }
+  ],
+  "A2n/eF": [
+    {
+      "type": 0,
+      "value": "A new password"
+    }
+  ],
+  "AOWpq6": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "AYV/5T": [
+    {
+      "type": 0,
+      "value": "New user"
+    }
+  ],
+  "Ci9rPk": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "D6/Uxz": [
+    {
+      "type": 0,
+      "value": "Surveys"
+    }
+  ],
+  "DPOyaV": [
+    {
+      "type": 0,
+      "value": "Your email"
+    }
+  ],
+  "E/vx8U": [
+    {
+      "type": 0,
+      "value": "Thank You message"
+    }
+  ],
+  "EEsDeJ": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
+  "FC8ax/": [
+    {
+      "type": 0,
+      "value": "Edit user"
+    }
+  ],
+  "I8y4ic": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "IEpCqZ": [
+    {
+      "type": 0,
+      "value": "New survey"
+    }
+  ],
+  "Ikt38A": [
+    {
+      "type": 0,
+      "value": "Refresh Tokens"
+    }
+  ],
+  "N68/ff": [
+    {
+      "type": 0,
+      "value": "Slug"
+    }
+  ],
+  "NNlf6B": [
+    {
+      "type": 0,
+      "value": "My Settings"
+    }
+  ],
+  "Q0wotK": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "QBtMwD": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "SbH89J": [
+    {
+      "type": 0,
+      "value": "New user"
+    }
+  ],
+  "TAgUUN": [
+    {
+      "type": 0,
+      "value": "IP"
+    }
+  ],
+  "VXF18U": [
+    {
+      "type": 0,
+      "value": "Activated account"
+    }
+  ],
+  "XJmbHw": [
+    {
+      "type": 0,
+      "value": "Role"
+    }
+  ],
+  "YbP4R+": [
+    {
+      "type": 0,
+      "value": "Survey Settings"
+    }
+  ],
+  "YsRqXk": [
+    {
+      "type": 0,
+      "value": "Export as CSV"
+    }
+  ],
+  "YzeZvW": [
+    {
+      "type": 0,
+      "value": "Published"
+    }
+  ],
+  "ZxR2Ts": [
+    {
+      "type": 0,
+      "value": "Survey Answers"
+    }
+  ],
+  "bdTRI9": [
+    {
+      "type": 0,
+      "value": "Update survey settings"
+    }
+  ],
+  "bkZg0U": [
+    {
+      "type": 0,
+      "value": "Refresh Tokens"
+    }
+  ],
+  "cvJp/S": [
+    {
+      "type": 0,
+      "value": "This answer is required to validate the form:"
+    }
+  ],
+  "d97zYv": [
+    {
+      "type": 0,
+      "value": "Create user"
+    }
+  ],
+  "h4+RiJ": [
+    {
+      "type": 0,
+      "value": "Update user"
+    }
+  ],
+  "hWoiIQ": [
+    {
+      "type": 0,
+      "value": "Your new password (again)"
+    }
+  ],
+  "i0E602": [
+    {
+      "type": 0,
+      "value": "Submit"
+    }
+  ],
+  "i8B3g5": [
+    {
+      "type": 0,
+      "value": "Thank you for your interest in helping our project!"
+    }
+  ],
+  "iMAa/d": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "jGB2t1": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "kx4x9D": [
+    {
+      "type": 0,
+      "value": "Role"
+    }
+  ],
+  "lGHKue": [
+    {
+      "type": 0,
+      "value": "Language"
+    }
+  ],
+  "pLn6i2": [
+    {
+      "type": 0,
+      "value": "Update my settings"
+    }
+  ],
+  "pglohm": [
+    {
+      "type": 0,
+      "value": "Title"
+    }
+  ],
+  "tIFSst": [
+    {
+      "type": 0,
+      "value": "One Time Tokens"
+    }
+  ],
+  "tnYUFj": [
+    {
+      "type": 0,
+      "value": "Survey"
+    }
+  ],
+  "uaDzBk": [
+    {
+      "type": 0,
+      "value": "Delete this refresh token"
+    }
+  ],
+  "ugMu4J": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "wHB27C": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "xhJCpr": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "yW/8Sz": [
+    {
+      "type": 0,
+      "value": "TTL"
+    }
+  ],
+  "zGNJ13": [
+    {
+      "type": 0,
+      "value": "Users"
+    }
+  ]
 }
