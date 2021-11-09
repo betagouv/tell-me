@@ -214,10 +214,10 @@ const Editable = ({
           event.preventDefault()
 
           handleBlockTypeChange(blockMenuState.visibleItems[blockMenuState.selectedIndex].type)
-        } else if (onUpKeyDown !== null) {
+        } else if (onEnterKeyDown !== null) {
           event.preventDefault()
 
-          onUpKeyDown()
+          onEnterKeyDown()
         }
 
         return
