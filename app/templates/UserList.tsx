@@ -63,7 +63,7 @@ export default function UserList() {
       type: 'boolean',
     },
     {
-      accent: 'secondary',
+      accent: 'primary',
       action: goToUserEditor,
       Icon: () => <Edit />,
       label: intl.formatMessage({

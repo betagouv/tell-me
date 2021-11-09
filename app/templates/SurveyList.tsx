@@ -1,7 +1,7 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
-import { Database, Edit, Eye, Settings, Trash } from 'react-feather'
+import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
 import Title from '../atoms/Title'
 import getRandomId from '../helpers/getRandomId'
+import replaceMongoIds from '../helpers/replaceMongoIds'
 import slugify from '../helpers/slugify'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
@@ -76,6 +77,24 @@ export default function SurveyList() {
     history.push(`/survey/${id}/config`)
   }
 
+  const duplicateSurvey = async id => {
+    const maybeGetBody = await api.get(`survey/${id}`)
+    if (maybeGetBody === null || maybeGetBody.hasError) {
+      return
+    }
+
+    const newSurvey = replaceMongoIds(maybeGetBody.data)
+    newSurvey.title = `Copy #${getRandomId()} of ${newSurvey.title}`
+    newSurvey.slug = slugify(newSurvey.title)
+
+    const maybePostBody = await api.post('survey', newSurvey)
+    if (maybePostBody === null || maybePostBody.hasError) {
+      return
+    }
+
+    history.push(`/survey/${newSurvey._id}`)
+  }
+
   const deleteSurvey = async id => {
     await api.delete(`survey/${id}`)
 
@@ -107,7 +126,7 @@ export default function SurveyList() {
       type: 'action',
     },
     {
-      accent: 'secondary',
+      accent: 'primary',
       action: goToSurveyEditor,
       Icon: Edit,
       label: 'Edit this survey',
@@ -118,6 +137,13 @@ export default function SurveyList() {
       action: goToSurveyConfig,
       Icon: Settings,
       label: 'Edit this survey settings',
+      type: 'action',
+    },
+    {
+      accent: 'secondary',
+      action: duplicateSurvey,
+      Icon: Copy,
+      label: 'Duplicate this survey',
       type: 'action',
     },
     {

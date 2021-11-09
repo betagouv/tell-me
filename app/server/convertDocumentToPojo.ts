@@ -1,3 +1,4 @@
+import { Document } from 'mongoose'
 import * as R from 'ramda'
 
 const stringifyObjectId = objectId => objectId.toString()
@@ -11,7 +12,7 @@ const stringifyIfObjectId = R.ifElse(isObjectId, stringifyObjectId, R.identity)
 // eslint-disable-next-line no-use-before-define
 const convertObjectIds = R.map(R.ifElse(isArrayOrPojo, value => convertObjectIds(value), stringifyIfObjectId))
 
-export default function convertDocumentToPojo(document) {
+export default function convertDocumentToPojo(document: Document): any {
   const documentPojoWithObjectIds = document.toObject()
   const documentPojo = convertObjectIds(documentPojoWithObjectIds)
 
