@@ -109,7 +109,7 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
     setIsLinkDialogOpen(false)
   }
 
-  const formatSelectionWithTag = async (newTagName: string, newTagProperties: any = {}): Promise<string> => {
+  const toggleSelectionWithTag = async (newTagName: string, newTagProperties: any = {}): Promise<string> => {
     // https://github.com/rehypejs/rehype/tree/main/packages/rehype-parse#unifieduserehypeparse-options
     const tree = unified()
       .use<any[], import('hast').Root>(rehypeParse, {
@@ -201,7 +201,7 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
   const formatSelectionAsBold = async event => {
     event.stopPropagation()
 
-    const newSource = await formatSelectionWithTag('b')
+    const newSource = await toggleSelectionWithTag('b')
 
     onChange(newSource)
   }
@@ -209,7 +209,7 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
   const formatSelectionAsItalic = async event => {
     event.stopPropagation()
 
-    const newSource = await formatSelectionWithTag('i')
+    const newSource = await toggleSelectionWithTag('i')
 
     onChange(newSource)
   }
@@ -217,7 +217,14 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
   const prepareSelectionAndOpenLinkDialog = async event => {
     event.stopPropagation()
 
-    transitorySourceRef.current = await formatSelectionWithTag('span')
+    const newSource = await toggleSelectionWithTag('a')
+    if (newSource.length < source.length) {
+      onChange(newSource)
+
+      return
+    }
+
+    transitorySourceRef.current = await toggleSelectionWithTag('span')
 
     setIsLinkDialogOpen(true)
   }
