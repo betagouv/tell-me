@@ -1,7 +1,7 @@
 import { Button, Dialog, styled, TextInput } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
-import { Bold, Italic, Link } from 'react-feather'
+import { Bold, Italic, Link, X } from 'react-feather'
 import { usePopper } from 'react-popper'
 import rehypeParse from 'rehype-parse'
 import rehypeStringify from 'rehype-stringify'
@@ -16,7 +16,7 @@ const Box = styled.div`
   border-radius: ${p => p.theme.appearance.borderRadius.small};
   display: flex;
 
-  > button:not(:nth-child(3)) {
+  > button:not(:nth-child(4)) {
     border-right: solid 1px white;
   }
 `
@@ -236,6 +236,14 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
     onChange(newSource)
   }
 
+  const unformatSource = event => {
+    event.stopPropagation()
+
+    const newSource = source.replace(/<[^>]+>/g, '')
+
+    onChange(newSource)
+  }
+
   if (isLinkDialogOpen) {
     return (
       <Dialog>
@@ -270,6 +278,9 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
         <MenuButton onClick={prepareSelectionAndOpenLinkDialog} size="small">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link />
+        </MenuButton>
+        <MenuButton onClick={unformatSource} size="small">
+          <X />
         </MenuButton>
 
         <Arrow ref={setArrowElement} style={popper.styles.arrow} />
