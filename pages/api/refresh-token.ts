@@ -1,6 +1,6 @@
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
-import withAuthentication from '../../api/middlewares/withAuthentication'
+import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
 import RefreshToken from '../../api/models/RefreshToken'
 import { USER_ROLE } from '../../common/constants'
@@ -36,4 +36,4 @@ async function RefreshTokenController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(RefreshTokenController, [USER_ROLE.ADMINISTRATOR]))
+export default withMongoose(withAuth(RefreshTokenController, [USER_ROLE.ADMINISTRATOR]))

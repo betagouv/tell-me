@@ -4,7 +4,7 @@ import XLSX from 'xlsx'
 
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withAuthentication from '../../../api/middlewares/withAuthentication'
+import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import Survey from '../../../api/models/Survey'
 import SurveyEntry from '../../../api/models/SurveyEntry'
@@ -77,5 +77,5 @@ async function SurveyDownloadController(req, res) {
 }
 
 export default withMongoose(
-  withAuthentication(SurveyDownloadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+  withAuth(SurveyDownloadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
 )

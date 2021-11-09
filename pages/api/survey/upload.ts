@@ -3,7 +3,7 @@ import path from 'path'
 
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withAuthentication from '../../../api/middlewares/withAuthentication'
+import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import Survey from '../../../api/models/Survey'
 import { USER_ROLE } from '../../../common/constants'
@@ -75,4 +75,4 @@ async function SurveyUploadController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(SurveyUploadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))
+export default withMongoose(withAuth(SurveyUploadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))

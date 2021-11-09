@@ -1,11 +1,13 @@
 import crypto from 'crypto'
+import { NextApiResponse } from 'next'
 import { promisify } from 'util'
 
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withAuthentication from '../../../api/middlewares/withAuthentication'
+import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import OneTimeToken from '../../../api/models/OneTimeToken'
+import { RequestWithAuth } from '../../../api/types'
 import { USER_ROLE } from '../../../common/constants'
 
 const ERROR_PATH = 'pages/api/auth/AuthOneTimeTokenController()'
@@ -13,7 +15,7 @@ const { NODE_ENV } = process.env
 
 const asyncRandomBytes = promisify(crypto.randomBytes)
 
-async function AuthOneTimeTokenController(req, res) {
+async function AuthOneTimeTokenController(req: RequestWithAuth, res: NextApiResponse) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -50,5 +52,5 @@ async function AuthOneTimeTokenController(req, res) {
 }
 
 export default withMongoose(
-  withAuthentication(AuthOneTimeTokenController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+  withAuth(AuthOneTimeTokenController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
 )

@@ -9,6 +9,7 @@ const Context = createContext<AuthContext>({
   clearSessionToken: noop,
   logIn: anoop,
   logOut: noop,
+  refreshSessionToken: anoop as any,
   state: {
     isAuthenticated: false,
     isLoading: false,

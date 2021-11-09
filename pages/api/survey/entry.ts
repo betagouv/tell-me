@@ -1,6 +1,6 @@
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withAuthentication from '../../../api/middlewares/withAuthentication'
+import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import SurveyEntry from '../../../api/models/SurveyEntry'
 import { USER_ROLE } from '../../../common/constants'
@@ -17,7 +17,7 @@ async function SurveyEntryController(req, res) {
   // eslint-disable-next-line default-case
   switch (req.method) {
     case 'GET':
-      withAuthentication(async () => {
+      withAuth(async () => {
         try {
           const { surveyEntryId } = req.query
 
@@ -51,7 +51,7 @@ async function SurveyEntryController(req, res) {
       return
 
     case 'DELETE':
-      withAuthentication(async () => {
+      withAuth(async () => {
         try {
           const { surveyEntryId } = req.query
 

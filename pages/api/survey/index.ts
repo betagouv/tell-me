@@ -1,6 +1,6 @@
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withAuthentication from '../../../api/middlewares/withAuthentication'
+import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import Survey from '../../../api/models/Survey'
 import SurveyEntry from '../../../api/models/SurveyEntry'
@@ -91,4 +91,4 @@ async function SurveyController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(SurveyController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))
+export default withMongoose(withAuth(SurveyController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))

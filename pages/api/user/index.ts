@@ -1,6 +1,6 @@
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withAuthentication from '../../../api/middlewares/withAuthentication'
+import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import User from '../../../api/models/User'
 import { USER_ROLE } from '../../../common/constants'
@@ -55,4 +55,4 @@ async function UserController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(UserController, [USER_ROLE.ADMINISTRATOR]))
+export default withMongoose(withAuth(UserController, [USER_ROLE.ADMINISTRATOR]))

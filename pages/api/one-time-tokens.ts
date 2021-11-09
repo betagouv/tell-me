@@ -1,6 +1,6 @@
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
-import withAuthentication from '../../api/middlewares/withAuthentication'
+import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
 import OneTimeToken from '../../api/models/OneTimeToken'
 import { USER_ROLE } from '../../common/constants'
@@ -25,4 +25,4 @@ async function OneTimeTokensController(req, res) {
   }
 }
 
-export default withMongoose(withAuthentication(OneTimeTokensController, [USER_ROLE.ADMINISTRATOR]))
+export default withMongoose(withAuth(OneTimeTokensController, [USER_ROLE.ADMINISTRATOR]))

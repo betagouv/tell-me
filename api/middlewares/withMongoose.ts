@@ -11,8 +11,8 @@ const { DB_URL } = process.env
 function withMongooseSingleton() {
   let mongooseInstance: Common.Nullable<Mongoose> = null
 
-  return function withMongoose(handler: NextApiHandler): NextApiHandler<Api.ResponseWithMongoose> {
-    return async (req, res) => {
+  return function withMongoose(handler: NextApiHandler): NextApiHandler {
+    const handlerWithMongoose: NextApiHandler = async (req, res) => {
       try {
         if (mongooseInstance === null) {
           if (DB_URL === undefined) {
@@ -24,13 +24,13 @@ function withMongooseSingleton() {
           })
         }
 
-        ;(req as Api.ResponseWithMongoose).db = mongooseInstance
-
         return await handler(req, res)
       } catch (err) {
-        return handleError(err, 'middlewares/withMongoose()', res)
+        return handleError(err, 'middlewares/handlerWithMongoose()', res)
       }
     }
+
+    return handlerWithMongoose
   }
 }
 

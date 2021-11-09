@@ -15,6 +15,7 @@ export type AuthContext = {
   clearSessionToken: () => void
   logIn: (sessionToken: string, refreshToken?: Common.Nullable<string>) => Promise<void>
   logOut: () => void
+  refreshSessionToken: () => Promise<Common.Nullable<string>>
   state: AuthContextState
   user: Common.Nullable<AuthContextUser>
 }

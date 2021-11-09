@@ -5,6 +5,7 @@ import getJwtPayload from '../../helpers/getJwtPayload'
 import isJwtExpired from '../../helpers/isJwtExpired'
 import resetLocalStorage from '../../helpers/resetLocalStorage'
 import useIsMounted from '../../hooks/useIsMounted'
+import api from '../../libs/api'
 import Context from './Context'
 import { AuthContext, AuthContextState, AuthContextUser } from './types'
 
@@ -60,6 +61,34 @@ export default function withAuth(Component) {
       }
     }
 
+    const refreshSessionToken: AuthContext['refreshSessionToken'] = async () => {
+      if (state.refreshToken === null) {
+        return null
+      }
+
+      const body = await api.ky
+        .post('auth/refresh', {
+          json: {
+            refreshToken: state.refreshToken,
+          },
+        })
+        .json<Api.ResponseBody>()
+      if (body === null || body.hasError) {
+        return null
+      }
+
+      const { sessionToken } = body.data
+
+      window.localStorage.setItem('sessionToken', sessionToken)
+
+      setState({
+        ...state,
+        sessionToken,
+      })
+
+      return sessionToken
+    }
+
     // Useful to force a re-login with the email field prefilled
     const clearSessionToken: AuthContext['clearSessionToken'] = () => {
       window.localStorage.removeItem('sessionToken')
@@ -85,14 +114,6 @@ export default function withAuth(Component) {
         })
         setUser(null)
       }
-    }
-
-    const providerValue: AuthContext = {
-      clearSessionToken,
-      logIn,
-      logOut,
-      state,
-      user,
     }
 
     useEffect(() => {
@@ -126,6 +147,15 @@ export default function withAuth(Component) {
         }
       })()
     }, [])
+
+    const providerValue: AuthContext = {
+      clearSessionToken,
+      logIn,
+      logOut,
+      refreshSessionToken,
+      state,
+      user,
+    }
 
     return (
       <Context.Provider value={providerValue}>

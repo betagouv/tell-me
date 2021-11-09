@@ -1,6 +1,6 @@
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
-import withAuthentication from '../../api/middlewares/withAuthentication'
+import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
 import UserConfig from '../../api/models/UserConfig'
 import { USER_ROLE } from '../../common/constants'
@@ -54,5 +54,5 @@ async function UserConfigController(req, res) {
 }
 
 export default withMongoose(
-  withAuthentication(UserConfigController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+  withAuth(UserConfigController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
 )

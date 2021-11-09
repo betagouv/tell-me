@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs'
+import { NextApiRequest, NextApiResponse } from 'next'
 import R from 'ramda'
 
 import getJwt from '../../../api/helpers/getJwt'
@@ -12,7 +13,7 @@ import UserConfig from '../../../api/models/UserConfig'
 const ERROR_PATH = 'pages/api/auth/AuthLoginController()'
 const { NODE_ENV } = process.env
 
-async function AuthLoginController(req, res) {
+async function AuthLoginController(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -39,7 +40,7 @@ async function AuthLoginController(req, res) {
       return
     }
 
-    const maybeIp = NODE_ENV === 'production' ? req.headers['x-real-ip'] : '0.0.0.0'
+    const maybeIp = (NODE_ENV === 'production' ? req.headers['x-real-ip'] : '0.0.0.0') as string | undefined
     if (maybeIp === undefined) {
       handleError(new ApiError(`Unresolvable IP.`, 403, true), ERROR_PATH, res)
 
