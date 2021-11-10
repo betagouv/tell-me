@@ -22,10 +22,6 @@ const convertSurveyEntriesToCollection = R.pipe(
   R.map(R.reduce((row, { question, values }) => ({ ...row, [question]: values.join(',') }), {})),
 )
 
-/**
- * @param {import('next').NextApiRequest} req
- * @param {import('next').NextApiResponse} res
- */
 async function SurveyDownloadController(req, res) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
