@@ -4,6 +4,10 @@ declare namespace Common {
    */
   type Nullable<T> = T | null
 
+  type AnyProps = {
+    [key: string]: any
+  }
+
   declare namespace Authentication {
     import { JWTPayload } from 'jose-browser-runtime/types'
 

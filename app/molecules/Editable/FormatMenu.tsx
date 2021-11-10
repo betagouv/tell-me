@@ -65,10 +65,9 @@ const stopPropagation = event => {
 export type FormatMenuProps = {
   anchor: HTMLElement
   onChange: (newSource: string) => void
-  selection: Selection
   source: string
 }
-const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, selection, source }) => {
+const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, source }) => {
   const linkInputRef = useRef<HTMLInputElement>(null)
   const transitorySourceRef = useRef(null) as MutableRefObject<Common.Nullable<string>>
   const [arrowElement, setArrowElement] = useState(null)
@@ -92,6 +91,12 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sele
     ],
     placement: 'top',
   })
+
+  const selection = window.getSelection()
+  // console.log(selection)
+  if (selection === null) {
+    return null
+  }
 
   const anchorClientRect = anchor.getClientRects()[0]
   const anchorScreenPositionCenterX = Math.round((anchorClientRect.x * 2 + anchorClientRect.width) / 2)
@@ -300,8 +305,6 @@ FormatMenu.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   anchor: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  selection: PropTypes.any.isRequired,
   source: PropTypes.string.isRequired,
 }
 

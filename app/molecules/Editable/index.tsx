@@ -1,9 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import PropTypes from 'prop-types'
-import { MutableRefObject, Reducer, useEffect, useReducer, useRef, useState } from 'react'
+import {
+  FocusEvent,
+  FocusEventHandler,
+  ForwardRefRenderFunction,
+  FunctionComponent,
+  HTMLAttributes,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  MouseEvent,
+  MutableRefObject,
+  Reducer,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import getRandomId from '../../helpers/getRandomId'
+import useIsMounted from '../../hooks/useIsMounted'
 import usePrevious from '../../hooks/usePrevious'
 import BlockMenu from './BlockMenu'
 import blockMenuReducer, { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
@@ -49,18 +66,40 @@ const MENU_ITEMS = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-const Editable = ({
+type EditableComponentAs<T, P> = ForwardRefRenderFunction<T, HTMLAttributes<T> & P>
+
+type EditableComponent<T = HTMLElement, P = Common.AnyProps> = FunctionComponent<
+  P & {
+    as: EditableComponentAs<T, P>
+    defaultValue?: string
+    isFocused?: boolean
+    isRichText?: boolean
+    onBackspaceKeyDown?: KeyboardEventHandler<T>
+    onChange: (newValue: string) => void
+    onChangeType?: (newType: string) => void
+    onDownKeyDown?: KeyboardEventHandler<T>
+    onEnterKeyDown?: KeyboardEventHandler<T>
+    onFocus?: FocusEventHandler<T>
+    onUpKeyDown?: KeyboardEventHandler<T>
+  }
+>
+
+const stopPropagation = (event: MouseEvent) => {
+  event.stopPropagation()
+}
+
+const Editable: EditableComponent = ({
   as,
-  defaultValue,
-  isFocused,
-  isRichText,
-  onBackspaceKeyDown,
+  defaultValue = '',
+  isFocused = false,
+  isRichText = false,
+  onBackspaceKeyDown = null,
   onChange,
-  onChangeType,
-  onDownKeyDown,
-  onEnterKeyDown,
-  onFocus,
-  onUpKeyDown,
+  onChangeType = null,
+  onDownKeyDown = null,
+  onEnterKeyDown = null,
+  onFocus = null,
+  onUpKeyDown = null,
   ...props
 }) => {
   const [blockMenuState, dispatchToBlockMenu] = useReducer<Reducer<BlockMenuReducerState, BlockMenuReducerAction>>(
@@ -77,15 +116,17 @@ const Editable = ({
   const innerRef = useRef<HTMLDivElement>(null)
   const lastValueBeforeOpeningBlockMenuRef = useRef(defaultValue) as MutableRefObject<string>
   const [isBlockMenuOpen, setIsBlockMenuOpen] = useState<boolean>(false)
+  const isMounted = useIsMounted()
   const wasFocused = usePrevious(isFocused)
 
   // States used for rich text blocks
+  const formatMenuAnchorRef = useRef(null) as MutableRefObject<Common.Nullable<FormatMenuProps['anchor']>>
   const selectionFocusNodeRef = useRef(null) as MutableRefObject<Common.Nullable<Node>>
   const selectionFocusOffsetRef = useRef<number>(defaultValue.length)
   const hasFormattedRef = useRef<boolean>(false)
   const [controlledIsFocused, setControlledIsFocused] = useState(false)
   const [controlledValue, setControlledValue] = useState(defaultValue)
-  const [formatMenuProps, setFormatMenuProps] = useState<Pick<FormatMenuProps, 'anchor' | 'selection'> | null>(null)
+  const [formatMenuKey, setFormatMenuKey] = useState<string>(getRandomId())
   const [isFormatMenuOpen, setIsFormatMenuOpen] = useState<boolean>(false)
 
   const Component = as
@@ -94,14 +135,30 @@ const Editable = ({
   const innerHTML = { __html: controlledValue }
 
   const closeBlockMenu = () => {
+    if (!isMounted()) {
+      return
+    }
+
     setIsBlockMenuOpen(false)
   }
 
-  const closeFormatMenu = () => {
+  const closeFormatMenu = (event?: globalThis.MouseEvent) => {
+    if (!isMounted()) {
+      return
+    }
+
+    if (event === undefined) {
+      window.removeEventListener('click', closeFormatMenu)
+    }
+
     setIsFormatMenuOpen(false)
   }
 
   const detectUnselection = () => {
+    if (!isMounted()) {
+      return
+    }
+
     window.addEventListener('click', closeFormatMenu, {
       once: true,
     })
@@ -119,7 +176,7 @@ const Editable = ({
     onChangeType(newBlockType)
   }
 
-  const handleFocus = (event: FocusEvent): void => {
+  const handleFocus = (event: FocusEvent<HTMLElement>): void => {
     setControlledIsFocused(true)
 
     if (onFocus !== null) {
@@ -162,15 +219,26 @@ const Editable = ({
   }
 
   const openBlockMenu = () => {
+    if (!isMounted()) {
+      return
+    }
+
     setIsBlockMenuOpen(true)
   }
 
   const openFormatMenu = () => {
+    if (!isMounted()) {
+      return
+    }
+
     setIsFormatMenuOpen(true)
+    setFormatMenuKey(getRandomId())
   }
 
   const updateControlledValue = async newValue => {
-    window.removeEventListener('click', closeFormatMenu)
+    if (!isMounted()) {
+      return
+    }
 
     setControlledValue(newValue)
     hasFormattedRef.current = true
@@ -179,7 +247,11 @@ const Editable = ({
     onChange(newValue)
   }
 
-  const controlKey = (event: KeyboardEvent) => {
+  const controlKey = (event: KeyboardEvent<HTMLElement>) => {
+    if (!isMounted()) {
+      return
+    }
+
     // eslint-disable-next-line default-case
     switch (event.code) {
       case 'ArrowDown':
@@ -190,7 +262,7 @@ const Editable = ({
         } else if (onDownKeyDown !== null) {
           event.preventDefault()
 
-          onDownKeyDown()
+          onDownKeyDown(event)
         }
 
         return
@@ -203,7 +275,7 @@ const Editable = ({
         } else if (onUpKeyDown !== null) {
           event.preventDefault()
 
-          onUpKeyDown()
+          onUpKeyDown(event)
         }
 
         return
@@ -217,7 +289,7 @@ const Editable = ({
         } else if (onEnterKeyDown !== null) {
           event.preventDefault()
 
-          onEnterKeyDown()
+          onEnterKeyDown(event)
         }
 
         return
@@ -260,7 +332,7 @@ const Editable = ({
         ) {
           event.preventDefault()
 
-          onBackspaceKeyDown()
+          onBackspaceKeyDown(event)
         }
     }
 
@@ -274,41 +346,42 @@ const Editable = ({
     }
   }
 
-  /**
-   * @param {MouseEvent} event
-   */
-  const controlMouse = event => {
-    if (!isRichText) {
+  const handleSelection = (event: MouseEvent<HTMLElement>) => {
+    if (!isMounted() || !isRichText) {
       return
     }
 
-    const selection = window.getSelection()
-    if (selection === null) {
-      return
-    }
+    formatMenuAnchorRef.current = event.currentTarget
 
-    selectionFocusNodeRef.current = selection.focusNode
-    selectionFocusOffsetRef.current = selection.focusOffset
+    setImmediate(() => {
+      if (!isMounted()) {
+        return
+      }
 
-    if (selection.isCollapsed) {
-      return
-    }
+      const selection = window.getSelection()
+      if (selection === null || selection.isCollapsed) {
+        if (isFormatMenuOpen) {
+          closeFormatMenu()
+        }
 
-    // TODO Handle multi-node rich text formatting.
-    if (selection.anchorNode !== selection.focusNode) {
-      return
-    }
+        return
+      }
 
-    setFormatMenuProps({
-      anchor: event.target,
-      selection,
+      selectionFocusNodeRef.current = selection.focusNode
+      selectionFocusOffsetRef.current = selection.focusOffset
+
+      // TODO Handle multi-node rich text formatting.
+      if (selection.anchorNode !== selection.focusNode) {
+        return
+      }
+
+      openFormatMenu()
+      // setImmediate(() => setFormatMenuAnchor(event.currentTarget))
     })
-
-    setImmediate(openFormatMenu)
   }
 
   useEffect(() => {
-    if (!isFocused || controlledIsFocused || componentRef.current === null) {
+    if (!isMounted() || !isFocused || controlledIsFocused || componentRef.current === null) {
       return
     }
 
@@ -345,7 +418,7 @@ const Editable = ({
   })
 
   useEffect(() => {
-    if (!isFormatMenuOpen) {
+    if (!isMounted() || !isFormatMenuOpen) {
       return
     }
 
@@ -353,7 +426,7 @@ const Editable = ({
   }, [isFormatMenuOpen])
 
   useEffect(() => {
-    if (!isRichText || isFormatMenuOpen || !hasFormattedRef.current) {
+    if (!isMounted() || !isRichText || isFormatMenuOpen || !hasFormattedRef.current) {
       return
     }
 
@@ -367,18 +440,24 @@ const Editable = ({
 
   return (
     <div ref={innerRef}>
-      {isFormatMenuOpen && formatMenuProps !== null && formatMenuProps.anchor !== null && (
-        <FormatMenu onChange={updateControlledValue} source={controlledValue} {...formatMenuProps} />
+      {isFormatMenuOpen && formatMenuAnchorRef.current !== null && (
+        <FormatMenu
+          key={formatMenuKey}
+          anchor={formatMenuAnchorRef.current}
+          onChange={updateControlledValue}
+          source={controlledValue}
+        />
       )}
 
       <Component
         ref={componentRef}
         contentEditable
         dangerouslySetInnerHTML={innerHTML}
+        onClick={stopPropagation}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={controlKey}
-        onMouseUp={controlMouse}
+        onMouseUp={handleSelection}
         spellCheck={false}
         style={{ outline: 0 }}
         suppressContentEditableWarning
@@ -396,18 +475,6 @@ const Editable = ({
       )}
     </div>
   )
-}
-
-Editable.defaultProps = {
-  defaultValue: '',
-  isFocused: false,
-  isRichText: false,
-  onBackspaceKeyDown: null,
-  onChangeType: null,
-  onDownKeyDown: null,
-  onEnterKeyDown: null,
-  onFocus: null,
-  onUpKeyDown: null,
 }
 
 Editable.propTypes = {

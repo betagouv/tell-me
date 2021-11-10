@@ -169,13 +169,10 @@ export default function SurveyEditor() {
             defaultValue={title}
             isFocused={isTitleFocused}
             isRichText={false}
-            onBackspaceKeyDown={null}
             onChange={updateTitle}
-            onChangeType={null}
             onDownKeyDown={focusNextBlock}
             onEnterKeyDown={appendOrResetFocusedBlock}
             onFocus={surveyManager.unsetFocus}
-            onUpKeyDown={null}
           />
         </TitleRow>
 
