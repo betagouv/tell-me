@@ -112,7 +112,9 @@ export default function SurveyConfig() {
               name="thankYouMessage"
               // eslint-disable-next-line formatjs/enforce-description, formatjs/enforce-default-message
               placeholder={intl.formatMessage({
-                id: 'i8B3g5',
+                defaultMessage: 'Thank you for your interest in helping our project!',
+                description: '[Survey Settings] Form thank you message textarea placeholder.',
+                id: 'vaW853',
               })}
             />
           </Field>

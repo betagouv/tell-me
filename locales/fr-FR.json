@@ -161,7 +161,7 @@
   },
   "i8B3g5": {
     "defaultMessage": "Merci de votre intérêt pour notre projet !",
-    "description": "undefined"
+    "description": "[Public Survey] Thank you message once the survey has been sent."
   },
   "iMAa/d": {
     "defaultMessage": "Email",
@@ -202,6 +202,10 @@
   "ugMu4J": {
     "defaultMessage": "Email",
     "description": "[Login Modal] Form email input label."
+  },
+  "vaW853": {
+    "defaultMessage": "Merci de votre intérêt pour notre projet !",
+    "description": "[Survey Settings] Form thank you message textarea placeholder."
   },
   "wHB27C": {
     "defaultMessage": "Connexion",

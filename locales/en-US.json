@@ -160,6 +160,8 @@
     "description": "[Public Survey] Submit button label."
   },
   "i8B3g5": {
+    "defaultMessage": "Thank you for your interest in helping our project!",
+    "description": "[Public Survey] Thank you message once the survey has been sent."
   },
   "iMAa/d": {
     "defaultMessage": "Email",
@@ -200,6 +202,10 @@
   "ugMu4J": {
     "defaultMessage": "Email",
     "description": "[Login Modal] Form email input label."
+  },
+  "vaW853": {
+    "defaultMessage": "Thank you for your interest in helping our project!",
+    "description": "[Survey Settings] Form thank you message textarea placeholder."
   },
   "wHB27C": {
     "defaultMessage": "Log In",
