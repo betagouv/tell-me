@@ -49,10 +49,6 @@ export default class SurveyManager {
 
   constructor(blocks = INITIAL_BLOCKS) {
     this._blocks = []
-    /**
-     * @private
-     * @type {number}
-     */
     this._focusedBlockIndex = -1
 
     Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach(key => {

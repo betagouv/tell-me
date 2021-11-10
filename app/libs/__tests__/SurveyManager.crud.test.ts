@@ -2,8 +2,7 @@ import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import SurveyManager from '../SurveyManager'
 
 describe('common/SurveyManager [CRUD Operations]', () => {
-  /** @type SurveyManager */
-  let instance
+  let instance: SurveyManager
 
   beforeAll(() => {
     instance = new SurveyManager()
@@ -13,8 +12,8 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     instance.setFocusAt(0)
     instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
 
-    expect(instance._blocks).toHaveLength(3)
-    expect(instance._blocks).toMatchObject([
+    expect(instance.blocks).toHaveLength(3)
+    expect(instance.blocks).toMatchObject([
       {
         position: { rank: 1 },
         props: {
@@ -50,8 +49,8 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     instance.setFocusAt(2)
     instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
-    expect(instance._blocks).toHaveLength(4)
-    expect(instance._blocks).toMatchObject([
+    expect(instance.blocks).toHaveLength(4)
+    expect(instance.blocks).toMatchObject([
       {
         position: { rank: 1 },
         props: {
@@ -95,8 +94,8 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     instance.setFocusAt(0)
     instance.removeFocusedBlock()
 
-    expect(instance._blocks).toHaveLength(3)
-    expect(instance._blocks).toMatchObject([
+    expect(instance.blocks).toHaveLength(3)
+    expect(instance.blocks).toMatchObject([
       {
         position: { rank: 1 },
         props: {
@@ -132,8 +131,8 @@ describe('common/SurveyManager [CRUD Operations]', () => {
     instance.setFocusAt(2)
     instance.removeFocusedBlock()
 
-    expect(instance._blocks).toHaveLength(2)
-    expect(instance._blocks).toMatchObject([
+    expect(instance.blocks).toHaveLength(2)
+    expect(instance.blocks).toMatchObject([
       {
         position: { rank: 1 },
         props: {
