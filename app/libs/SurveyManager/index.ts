@@ -48,10 +48,10 @@ const getQuestionTypeAt = (
     type: string
   }>,
   index: number,
-): string => {
+): string | undefined => {
   const maybeQuestionBlock = blocks[index]
   if (!isQuestionBlock(maybeQuestionBlock)) {
-    throw new Error(`This survey block is not a question.`)
+    return undefined
   }
 
   let nextBlockIndex = index
@@ -69,7 +69,7 @@ const getQuestionTypeAt = (
     }
   }
 
-  throw new Error(`This survey question block has no related input block.`)
+  return undefined
 }
 
 export default class SurveyManager {
