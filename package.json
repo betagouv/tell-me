@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "license": "AGPL-3.0",
   "private": true,
+  "engines": {
+    "node": "16"
+  },
   "scripts": {
     "build": "next build",
     "db:migrate": "babel-node ./scripts/db/migrate.js",
