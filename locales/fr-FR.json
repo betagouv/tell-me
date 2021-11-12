@@ -63,9 +63,17 @@
     "defaultMessage": "Message de remerciement",
     "description": "[Survey Settings] Form thank you message textarea label."
   },
+  "EEZTNG": {
+    "defaultMessage": "Installation",
+    "description": "[Setup Modal] Title."
+  },
   "EEsDeJ": {
     "defaultMessage": "Tableau de bord",
     "description": "[Sidebar Main Menu] Dashboard label."
+  },
+  "EYeJTo": {
+    "defaultMessage": "Inscription",
+    "description": "[Signup Modal] Title."
   },
   "FC8ax/": {
     "defaultMessage": "Édition d’un·e utilisateur·rice",
@@ -82,6 +90,10 @@
   "Ikt38A": {
     "defaultMessage": "Jetons de rafraîchissement",
     "description": "[Refresh Tokens List] Page title."
+  },
+  "K06DbM": {
+    "defaultMessage": "Répêtez votre nouveau mot de passe",
+    "description": "[Signup Modal] Password repeat input label."
   },
   "N68/ff": {
     "defaultMessage": "Slug",
@@ -115,6 +127,10 @@
     "defaultMessage": "Rôle",
     "description": "[Survey Editor] Form role select label."
   },
+  "YJ9OxG": {
+    "defaultMessage": "Votre email",
+    "description": "[Signup Modal] Email input label."
+  },
   "YbP4R+": {
     "defaultMessage": "Préférences du formulaire",
     "description": "[Survey Settings] Page title."
@@ -147,12 +163,16 @@
     "defaultMessage": "Créer l’utilisateur·rice",
     "description": "[Survey Editor] Form create button label."
   },
+  "fWOJDC": {
+    "defaultMessage": "Un nouveau mot de passe",
+    "description": "[Signup Modal] Password input label."
+  },
   "h4+RiJ": {
     "defaultMessage": "Mettre à jour l’utilisateur·rice",
     "description": "[Survey Editor] Form update button label."
   },
   "hWoiIQ": {
-    "defaultMessage": "Répêtez le nouveau mot de passe",
+    "defaultMessage": "Répêtez votre nouveau mot de passe",
     "description": "[Setup Modal] Password repeat input label."
   },
   "i0E602": {
@@ -186,6 +206,10 @@
   "pglohm": {
     "defaultMessage": "Titre",
     "description": "[Survey Settings] Form title input label."
+  },
+  "q5x9RM": {
+    "defaultMessage": "S’inscrire",
+    "description": "[Signup Modal] Submit button label."
   },
   "tIFSst": {
     "defaultMessage": "Jetons jetables",

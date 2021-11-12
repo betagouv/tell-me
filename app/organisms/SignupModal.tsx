@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types'
 import { ChangeEvent, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 import zxcvbn from 'zxcvbn'
 
+import Field from '../atoms/Field'
 import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import Form from '../molecules/Form'
@@ -25,7 +27,8 @@ const validateForm = values => {
 }
 
 export default function SignupModal({ onDone }) {
-  const [passwordHelperText, setPasswordHelperText] = useState(' ')
+  const [passwordHelperText, setPasswordHelperText] = useState<Common.Nullable<string>>(null)
+  const intl = useIntl()
   const api = useApi()
 
   useEffect(() => {
@@ -36,7 +39,7 @@ export default function SignupModal({ onDone }) {
     const password = event.currentTarget.value
 
     if (password.length === 0) {
-      setPasswordHelperText(' ')
+      setPasswordHelperText(null)
 
       return
     }
@@ -65,26 +68,63 @@ export default function SignupModal({ onDone }) {
 
   return (
     <Modal>
-      <Title>User Signup</Title>
+      <Title>
+        {intl.formatMessage({
+          defaultMessage: 'Sign Up',
+          description: '[Signup Modal] Title.',
+          id: 'EYeJTo',
+        })}
+      </Title>
 
       <Form autoComplete onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
-        <Form.Input autoComplete="email" label="Your email" name="email" type="email" />
-        <Form.Input
-          autoComplete="new-password"
-          helper={passwordHelperText}
-          label="A new password"
-          name="password"
-          onChange={checkPasswordStrength}
-          type="password"
-        />
-        <Form.Input
-          autoComplete="new-password"
-          label="Your new password (again)"
-          name="passwordConfirmation"
-          type="password"
-        />
+        <Field>
+          <Form.Input
+            autoComplete="email"
+            label={intl.formatMessage({
+              defaultMessage: 'Your email',
+              description: '[Signup Modal] Email input label.',
+              id: 'YJ9OxG',
+            })}
+            name="email"
+            type="email"
+          />
+        </Field>
+        <Field>
+          <Form.Input
+            autoComplete="new-password"
+            helper={passwordHelperText}
+            label={intl.formatMessage({
+              defaultMessage: 'A new password',
+              description: '[Signup Modal] Password input label.',
+              id: 'fWOJDC',
+            })}
+            name="password"
+            onChange={checkPasswordStrength}
+            type="password"
+          />
+        </Field>
+        <Field>
+          <Form.Input
+            autoComplete="new-password"
+            label={intl.formatMessage({
+              defaultMessage: 'Your new password (again)',
+              description: '[Signup Modal] Password repeat input label.',
+              id: 'K06DbM',
+            })}
+            name="passwordConfirmation"
+            type="password"
+          />
+        </Field>
 
-        <Form.Submit>Create</Form.Submit>
+        <Field>
+          <Form.Submit>
+            {intl.formatMessage({
+              defaultMessage: 'Sign Up',
+              description: '[Signup Modal] Submit button label.',
+              id: 'q5x9RM',
+            })}
+          </Form.Submit>
+        </Field>
       </Form>
     </Modal>
   )

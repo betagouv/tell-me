@@ -95,10 +95,22 @@
       "value": "Message de remerciement"
     }
   ],
+  "EEZTNG": [
+    {
+      "type": 0,
+      "value": "Installation"
+    }
+  ],
   "EEsDeJ": [
     {
       "type": 0,
       "value": "Tableau de bord"
+    }
+  ],
+  "EYeJTo": [
+    {
+      "type": 0,
+      "value": "Inscription"
     }
   ],
   "FC8ax/": [
@@ -123,6 +135,12 @@
     {
       "type": 0,
       "value": "Jetons de rafraîchissement"
+    }
+  ],
+  "K06DbM": [
+    {
+      "type": 0,
+      "value": "Répêtez votre nouveau mot de passe"
     }
   ],
   "N68/ff": [
@@ -173,6 +191,12 @@
       "value": "Rôle"
     }
   ],
+  "YJ9OxG": [
+    {
+      "type": 0,
+      "value": "Votre email"
+    }
+  ],
   "YbP4R+": [
     {
       "type": 0,
@@ -221,6 +245,12 @@
       "value": "Créer l’utilisateur·rice"
     }
   ],
+  "fWOJDC": [
+    {
+      "type": 0,
+      "value": "Un nouveau mot de passe"
+    }
+  ],
   "h4+RiJ": [
     {
       "type": 0,
@@ -230,7 +260,7 @@
   "hWoiIQ": [
     {
       "type": 0,
-      "value": "Répêtez le nouveau mot de passe"
+      "value": "Répêtez votre nouveau mot de passe"
     }
   ],
   "i0E602": [
@@ -279,6 +309,12 @@
     {
       "type": 0,
       "value": "Titre"
+    }
+  ],
+  "q5x9RM": [
+    {
+      "type": 0,
+      "value": "S’inscrire"
     }
   ],
   "tIFSst": [

@@ -95,10 +95,22 @@
       "value": "Thank You message"
     }
   ],
+  "EEZTNG": [
+    {
+      "type": 0,
+      "value": "First User Setup"
+    }
+  ],
   "EEsDeJ": [
     {
       "type": 0,
       "value": "Dashboard"
+    }
+  ],
+  "EYeJTo": [
+    {
+      "type": 0,
+      "value": "Sign Up"
     }
   ],
   "FC8ax/": [
@@ -123,6 +135,12 @@
     {
       "type": 0,
       "value": "Refresh Tokens"
+    }
+  ],
+  "K06DbM": [
+    {
+      "type": 0,
+      "value": "Your new password (again)"
     }
   ],
   "N68/ff": [
@@ -173,6 +191,12 @@
       "value": "Role"
     }
   ],
+  "YJ9OxG": [
+    {
+      "type": 0,
+      "value": "Your email"
+    }
+  ],
   "YbP4R+": [
     {
       "type": 0,
@@ -219,6 +243,12 @@
     {
       "type": 0,
       "value": "Create user"
+    }
+  ],
+  "fWOJDC": [
+    {
+      "type": 0,
+      "value": "A new password"
     }
   ],
   "h4+RiJ": [
@@ -279,6 +309,12 @@
     {
       "type": 0,
       "value": "Title"
+    }
+  ],
+  "q5x9RM": [
+    {
+      "type": 0,
+      "value": "Sign Up"
     }
   ],
   "tIFSst": [

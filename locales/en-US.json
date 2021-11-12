@@ -63,9 +63,17 @@
     "defaultMessage": "Thank You message",
     "description": "[Survey Settings] Form thank you message textarea label."
   },
+  "EEZTNG": {
+    "defaultMessage": "First User Setup",
+    "description": "[Setup Modal] Title."
+  },
   "EEsDeJ": {
     "defaultMessage": "Dashboard",
     "description": "[Sidebar Main Menu] Dashboard label."
+  },
+  "EYeJTo": {
+    "defaultMessage": "Sign Up",
+    "description": "[Signup Modal] Title."
   },
   "FC8ax/": {
     "defaultMessage": "Edit user",
@@ -82,6 +90,10 @@
   "Ikt38A": {
     "defaultMessage": "Refresh Tokens",
     "description": "[Refresh Tokens List] Page title."
+  },
+  "K06DbM": {
+    "defaultMessage": "Your new password (again)",
+    "description": "[Signup Modal] Password repeat input label."
   },
   "N68/ff": {
     "defaultMessage": "Slug",
@@ -115,6 +127,10 @@
     "defaultMessage": "Role",
     "description": "[Survey Editor] Form role select label."
   },
+  "YJ9OxG": {
+    "defaultMessage": "Your email",
+    "description": "[Signup Modal] Email input label."
+  },
   "YbP4R+": {
     "defaultMessage": "Survey Settings",
     "description": "[Survey Settings] Page title."
@@ -146,6 +162,10 @@
   "d97zYv": {
     "defaultMessage": "Create user",
     "description": "[Survey Editor] Form create button label."
+  },
+  "fWOJDC": {
+    "defaultMessage": "A new password",
+    "description": "[Signup Modal] Password input label."
   },
   "h4+RiJ": {
     "defaultMessage": "Update user",
@@ -186,6 +206,10 @@
   "pglohm": {
     "defaultMessage": "Title",
     "description": "[Survey Settings] Form title input label."
+  },
+  "q5x9RM": {
+    "defaultMessage": "Sign Up",
+    "description": "[Signup Modal] Submit button label."
   },
   "tIFSst": {
     "defaultMessage": "One Time Tokens",

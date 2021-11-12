@@ -27,7 +27,7 @@ const validateForm = values => {
 }
 
 export default function SetupModal({ onDone }) {
-  const [passwordHelperText, setPasswordHelperText] = useState(' ')
+  const [passwordHelperText, setPasswordHelperText] = useState<Common.Nullable<string>>(null)
   const intl = useIntl()
   const api = useApi()
 
@@ -39,7 +39,7 @@ export default function SetupModal({ onDone }) {
     const password = event.currentTarget.value
 
     if (password.length === 0) {
-      setPasswordHelperText(' ')
+      setPasswordHelperText(null)
 
       return
     }
@@ -68,7 +68,13 @@ export default function SetupModal({ onDone }) {
 
   return (
     <Modal>
-      <Title>First User Setup</Title>
+      <Title>
+        {intl.formatMessage({
+          defaultMessage: 'First User Setup',
+          description: '[Setup Modal] Title.',
+          id: 'EEZTNG',
+        })}
+      </Title>
 
       <Form autoComplete onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
         <Field>
