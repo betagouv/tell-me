@@ -1,8 +1,8 @@
-import { styled } from '@singularity-ui/core'
 import { Formik, Form as FormikForm, useFormikContext } from 'formik'
 import debounce from 'lodash/debounce'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
+import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import Checkbox from './Checkbox'

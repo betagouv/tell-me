@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
-import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
-import { forwardRef, ForwardRefRenderFunction, ReactChildren } from 'react'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
+import styled from 'styled-components'
 
 const Container = styled.div`
   height: 5rem;
@@ -10,7 +10,7 @@ const Container = styled.div`
   width: 100%;
 `
 
-const Placeholder = styled.div`
+const Placeholder = styled.div<any>`
   background-color: #d5e5a3;
   background-image: url('/api/asset/${p => p.surveyId}-logo.png');
   background-position: center;
@@ -25,7 +25,6 @@ const Placeholder = styled.div`
 `
 
 type SuveyLogoProps = {
-  children?: ReactChildren
   className?: string
   surveyId: string
 }

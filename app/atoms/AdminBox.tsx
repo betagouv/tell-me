@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 const AdminBox = styled.div`
   display: flex;

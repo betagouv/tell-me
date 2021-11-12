@@ -1,11 +1,11 @@
-import { css, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
+import styled, { css } from 'styled-components'
 
 import { BlockMenuItem } from './types'
 
-const Box = styled.div`
+const Box = styled.div<any>`
   background-color: ${p => p.theme.color.primary.default};
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ const Category = styled.div`
   text-transform: uppercase;
 `
 
-const Item = styled.div`
+const Item = styled.div<any>`
   color: ${p => p.theme.color.body.white};
   cursor: pointer;
   display: inline-block;

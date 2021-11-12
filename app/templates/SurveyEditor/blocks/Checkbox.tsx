@@ -1,8 +1,8 @@
-import { styled } from '@singularity-ui/core'
 import { forwardRef } from 'react'
 import { Square } from 'react-feather'
+import styled from 'styled-components'
 
-const Label = styled.label`
+const Label = styled.label<any>`
   /* https://github.com/singularity-ui/core/blob/main/fields/Checkbox.jsx */
 
   align-items: center;
@@ -41,7 +41,7 @@ const Label = styled.label`
   }
 `
 
-const Editable = styled.div`
+const Editable = styled.div<any>`
   cursor: text;
   font-weight: 400;
 

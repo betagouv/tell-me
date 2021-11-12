@@ -1,6 +1,7 @@
-import { styled, Textarea as SuiTextarea } from '@singularity-ui/core'
+import { Textarea as SuiTextarea } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import SurveyField from '../../atoms/SurveyField'
 

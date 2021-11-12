@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 const Field = styled.div`
   padding-top: ${p => p.theme.padding.layout.medium};

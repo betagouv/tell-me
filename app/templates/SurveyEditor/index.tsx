@@ -1,7 +1,7 @@
-import { styled } from '@singularity-ui/core'
 import debounce from 'lodash/debounce'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import hashCode from '../../helpers/hashCode'

@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 const SurveyField = styled.div`
   padding-bottom: ${p => p.theme.padding.layout.small};

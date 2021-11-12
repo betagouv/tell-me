@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 const StyledTable = styled.table`
   background-color: #2c292d;

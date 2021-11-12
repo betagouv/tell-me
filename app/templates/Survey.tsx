@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
-import { styled } from '@singularity-ui/core'
 import { FormikContextType, useFormikContext } from 'formik'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../common/constants'
@@ -128,7 +128,7 @@ const renderBlocks = (formikContext: FormikContextType<any>, blocks: Block[]) =>
       return components
     }
 
-    const Component = SURVEY_BLOCK_TYPE_COMPONENT[type]
+    const Component = SURVEY_BLOCK_TYPE_COMPONENT[type] as any
     const isIndexable = isBlockTypeIndexable(type)
     const lastBlock = index > 0 ? blocks[index - 1] : null
 

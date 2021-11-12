@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 const AdminHeader = styled.div`
   align-items: center;

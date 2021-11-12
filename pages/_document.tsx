@@ -1,5 +1,5 @@
-import { ServerStyleSheet } from '@singularity-ui/core'
 import Document from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
 
 export default class TellMeDocument extends Document {
   static async getInitialProps(ctx) {

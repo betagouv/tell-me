@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 const SurveyQuestion = styled.p`
   cursor: text;

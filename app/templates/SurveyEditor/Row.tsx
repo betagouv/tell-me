@@ -1,10 +1,10 @@
-import { css, styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
+import styled, { css } from 'styled-components'
 
 import { SurveyManagerBlockShape } from '../../shapes'
 
-const Box = styled.div`
+const Box = styled.div<any>`
   align-items: flex-start;
   display: flex;
   margin-top: ${p => (p.isQuestion ? p.theme.padding.layout.large : 0)};
@@ -23,13 +23,13 @@ const Box = styled.div`
   }
 `
 
-const Content = styled.div`
+const Content = styled.div<any>`
   flex-grow: 1;
   opacity: ${p => (p.isHidden ? 0.65 : 1)};
   padding: 0 1rem 0 0;
 `
 
-const Button = styled.div`
+const Button = styled.div<any>`
   align-items: center;
   background-color: ${p => p.theme.color[p.accent].background};
   display: flex;
@@ -39,7 +39,7 @@ const Button = styled.div`
 
   ${p =>
     !p.isDisabled
-      ? css`
+      ? css<any>`
           cursor: pointer;
           opacity: 0.65;
 
@@ -59,7 +59,7 @@ const Button = styled.div`
   }
 `
 
-const Asterisk = styled.div`
+const Asterisk = styled.div<any>`
   align-items: center;
   color: ${p => p.theme.color.primary.active};
   display: flex;

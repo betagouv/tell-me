@@ -1,6 +1,7 @@
-import { createGlobalStyle, GlobalStyle, ThemeProvider } from '@singularity-ui/core'
+import { GlobalStyle, ThemeProvider } from '@singularity-ui/core'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { createGlobalStyle } from 'styled-components'
 
 import withApi from '../app/hocs/withApi'
 import withAuth from '../app/hocs/withAuth'
@@ -11,7 +12,11 @@ import '@fontsource/poppins/400.css'
 import '@fontsource/poppins/500.css'
 import '@fontsource/poppins/600.css'
 
-const GlobalStyleCustom = createGlobalStyle`
+const GlobalStyleCustom = createGlobalStyle<{
+  theme: {
+    color: any
+  }
+}>`
   html, body {
     height: 100%;
   }

@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import {
   FocusEvent,
   FocusEventHandler,
-  ForwardRefRenderFunction,
   FunctionComponent,
-  HTMLAttributes,
   KeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
@@ -66,11 +64,9 @@ const MENU_ITEMS = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-type EditableComponentAs<T, P> = ForwardRefRenderFunction<T, HTMLAttributes<T> & P>
-
 type EditableComponent<T = HTMLElement, P = Common.AnyProps> = FunctionComponent<
   P & {
-    as: EditableComponentAs<T, P>
+    as: any
     defaultValue?: string
     isFocused?: boolean
     isRichText?: boolean

@@ -1,7 +1,7 @@
-import { styled } from '@singularity-ui/core'
 import { forwardRef } from 'react'
+import styled from 'styled-components'
 
-const StyledTextInput = styled.div`
+const StyledTextInput = styled.div<any>`
   /* https://github.com/singularity-ui/core/blob/main/fields/TextInput.jsx */
 
   background-color: ${p => p.theme.color.body.white};

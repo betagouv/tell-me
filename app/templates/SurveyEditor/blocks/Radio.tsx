@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
-import { styled } from '@singularity-ui/core'
 import PropsTypes from 'prop-types'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
+import styled from 'styled-components'
 
 const Label = styled.div`
   /* https://github.com/singularity-ui/core/blob/main/fields/Radio.jsx */

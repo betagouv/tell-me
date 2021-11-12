@@ -1,4 +1,4 @@
-import { styled } from '@singularity-ui/core'
+import styled from 'styled-components'
 
 import Title from '../../atoms/Title'
 import Loader from '../../molecules/Loader'
@@ -41,15 +41,15 @@ const Body = styled.div`
 export default function Button() {
   return (
     <>
-      <Header variant="rectangular" />
+      <Header />
 
       <LogoContainer>
-        <Logo animation="wave" variant="circular" />
+        <Logo />
       </LogoContainer>
 
       <TitleRow>
         <Title>
-          <Text variant="text" />
+          <Text />
         </Title>
       </TitleRow>
 

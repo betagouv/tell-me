@@ -1,9 +1,10 @@
-import { Button, Card, styled } from '@singularity-ui/core'
+import { Button, Card } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useParams } from 'react-router-dom'
 import ReactSpreadsheet from 'react-spreadsheet'
+import styled from 'styled-components'
 
 import { SURVEY_ENTRIES_DOWLOAD_EXTENSION } from '../../common/constants'
 import AdminBox from '../atoms/AdminBox'

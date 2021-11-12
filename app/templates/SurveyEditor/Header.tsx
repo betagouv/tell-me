@@ -1,10 +1,10 @@
-import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
+import styled from 'styled-components'
 
 import SurveyHeader from '../../atoms/SurveyHeader'
 
-const StyledSurveyHeader = styled(SurveyHeader)`
+const StyledSurveyHeader = styled<any>(SurveyHeader)`
   display: flex;
   min-height: 10rem;
   opacity: 0.75 !important;

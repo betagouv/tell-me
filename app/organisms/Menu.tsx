@@ -1,7 +1,7 @@
-import { styled } from '@singularity-ui/core'
 import { LogOut, Settings } from 'react-feather'
 import { useIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { USER_ROLE } from '../../common/constants'
 import useAuth from '../hooks/useAuth'

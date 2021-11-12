@@ -1,10 +1,10 @@
-import { styled } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { useRef } from 'react'
+import styled from 'styled-components'
 
 import SurveyLogo from '../../atoms/SurveyLogo'
 
-const StyledSurveyLogo = styled(SurveyLogo)`
+const StyledSurveyLogo = styled<any>(SurveyLogo)`
   min-height: 5rem;
 
   > div {
@@ -12,7 +12,7 @@ const StyledSurveyLogo = styled(SurveyLogo)`
   }
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<any>`
   border: solid 2px ${p => p.theme.color.secondary.background};
   border-radius: 50%;
   color: transparent;

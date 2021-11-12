@@ -1,16 +1,17 @@
-import { Button, Dialog, styled, TextInput } from '@singularity-ui/core'
+import { Button, Dialog, TextInput } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
 import { Bold, Italic, Link, X } from 'react-feather'
 import { usePopper } from 'react-popper'
 import rehypeParse from 'rehype-parse'
 import rehypeStringify from 'rehype-stringify'
+import styled from 'styled-components'
 import { unified } from 'unified'
 import unistUtilReduce from 'unist-util-reduce'
 
 import { Node } from './types'
 
-const Box = styled.div`
+const Box = styled.div<any>`
   align-items: center;
   background-color: black;
   border-radius: ${p => p.theme.appearance.borderRadius.small};
@@ -39,7 +40,7 @@ const MenuButton = styled(Button)`
     color: yellow;
   }
 `
-const Arrow = styled.div`
+const Arrow = styled.div<any>`
   background: inherit;
   height: 0.5rem;
   position: absolute;

@@ -1,5 +1,6 @@
-import { Button, styled } from '@singularity-ui/core'
+import { Button } from '@singularity-ui/core'
 import { useFormikContext } from 'formik'
+import styled from 'styled-components'
 
 const Container = styled.div`
   padding: 3rem 0;

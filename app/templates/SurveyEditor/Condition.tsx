@@ -1,6 +1,7 @@
-import { Select, styled } from '@singularity-ui/core'
+import { Select } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
 import { CornerDownRight } from 'react-feather'
+import styled from 'styled-components'
 
 import { SelectOptionShape, SurveyManagerBlockShape } from '../../shapes'
 

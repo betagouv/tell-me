@@ -1,4 +1,4 @@
-import { keyframes, styled } from '@singularity-ui/core'
+import styled, { keyframes } from 'styled-components'
 
 const Box = styled.div`
   height: 3rem;

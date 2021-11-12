@@ -1,6 +1,6 @@
-import { styled } from '@singularity-ui/core'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import styled from 'styled-components'
 
 import isFirstSetup from '../app/helpers/isFirstSetup'
 import resetLocalStorage from '../app/helpers/resetLocalStorage'
