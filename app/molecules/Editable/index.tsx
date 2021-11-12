@@ -249,8 +249,8 @@ const Editable: EditableComponent = ({
     }
 
     // eslint-disable-next-line default-case
-    switch (event.code) {
-      case 'ArrowDown':
+    switch (event.keyCode) {
+      case 40:
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -263,7 +263,7 @@ const Editable: EditableComponent = ({
 
         return
 
-      case 'ArrowUp':
+      case 38:
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -276,8 +276,7 @@ const Editable: EditableComponent = ({
 
         return
 
-      case 'Enter':
-      case 'NumpadEnter':
+      case 13:
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -290,15 +289,15 @@ const Editable: EditableComponent = ({
 
         return
 
-      case 'Slash':
-      case 'NumpadDivide':
+      case 191:
+      case 111:
         if (hasBlockMenu && !isBlockMenuOpen) {
           openBlockMenu()
         }
 
         return
 
-      case 'Escape':
+      case 27:
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -307,7 +306,7 @@ const Editable: EditableComponent = ({
 
         return
 
-      case 'Backspace':
+      case 8:
         if (isBlockMenuOpen) {
           if (blockMenuState.query.length === 0) {
             closeBlockMenu()
