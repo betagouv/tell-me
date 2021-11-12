@@ -65,10 +65,17 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
   [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: SurveyForm.TextInput,
 }
 
-const buildValidationSchema = (blocks, message) =>
+const buildValidationSchema = (blocks: Block[], message: string) =>
   blocks.reduce((schema, block) => {
     if (!block.isQuestion || !block.isMandatory) {
       return schema
+    }
+
+    if (block.questionType === SURVEY_BLOCK_TYPE.INPUT.CHECKBOX) {
+      return {
+        ...schema,
+        [block._id]: Yup.array(Yup.string()).required(message),
+      }
     }
 
     return {

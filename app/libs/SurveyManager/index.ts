@@ -43,6 +43,35 @@ const isBlockTypeCountable = R.flip(R.includes)([
 const isInputBlock = R.pipe(R.prop<Block['type']>('type'), R.startsWith('INPUT.'))
 const isQuestionBlock = R.propEq<Block['type']>('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
+const getQuestionTypeAt = (
+  blocks: Array<{
+    type: string
+  }>,
+  index: number,
+): string => {
+  const maybeQuestionBlock = blocks[index]
+  if (!isQuestionBlock(maybeQuestionBlock)) {
+    throw new Error(`This survey block is not a question.`)
+  }
+
+  let nextBlockIndex = index
+  const blocksLength = blocks.length
+  // eslint-disable-next-line no-plusplus
+  while (++nextBlockIndex < blocksLength) {
+    const nextBlock = blocks[nextBlockIndex]
+
+    if (isInputBlock(nextBlock)) {
+      return nextBlock.type
+    }
+
+    if (isQuestionBlock(nextBlock)) {
+      break
+    }
+  }
+
+  throw new Error(`This survey question block has no related input block.`)
+}
+
 export default class SurveyManager {
   private _blocks: Block[]
   private _focusedBlockIndex: number
@@ -75,7 +104,7 @@ export default class SurveyManager {
     let isHidden = false
     let questionId: Common.Nullable<string> = null
 
-    this._blocks = R.reduce((previousBlocks, block) => {
+    this._blocks = R.addIndex(R.reduce)<any>((previousBlocks, block, index) => {
       const lastBlock = R.last<Block>(previousBlocks)
       const { _id, position, props, type, value } = block as Api.Model.Survey.Block
       const isCountable = isBlockTypeCountable(type) as boolean
@@ -111,6 +140,8 @@ export default class SurveyManager {
       if (isQuestion) {
         isHidden = Boolean(additionalProps.isHidden)
         questionId = _id
+
+        additionalProps.questionType = getQuestionTypeAt(blocks, index)
       } else {
         additionalProps.isHidden = isHidden
       }
@@ -125,7 +156,7 @@ export default class SurveyManager {
       }
 
       return [...previousBlocks, normalizedBlock]
-    }, [])(blocks)
+    }, [])(blocks as any) as unknown as Block[]
   }
 
   public get blocksData(): Api.Model.Survey.Block[] {
