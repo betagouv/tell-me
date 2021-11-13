@@ -85,7 +85,7 @@ export default function SurveyEditor() {
     await api.put(`survey/${id}/upload?type=logo`, formData)
   }
 
-  const changeFocusedBlockType = (index, newType) => {
+  const changeBlockTypeAt = (index, newType) => {
     surveyManager.changeBlockTypeAt(index, newType)
     surveyManager.setFocusAt(index)
 
@@ -104,31 +104,20 @@ export default function SurveyEditor() {
     forceUpdate()
   }
 
-  const setIfSelectedThenShowQuestionIdAt = (index, questionBlockId) => {
+  const setIfSelectedThenShowQuestionIdAt = (index: number, questionBlockId: Common.Nullable<string>) => {
     surveyManager.setIfSelectedThenShowQuestionIdAt(index, questionBlockId)
 
     forceUpdate()
   }
 
-  const appendOrResetFocusedBlock = () => {
-    const { focusedBlock } = surveyManager
-    if (focusedBlock === null) {
-      return
-    }
-
-    if (focusedBlock.isCountable && focusedBlock.value.length > 0) {
-      surveyManager.addNewBlockAfterFocusedBlock(focusedBlock.type)
-    } else if (focusedBlock.type === SURVEY_BLOCK_TYPE.CONTENT.TEXT || focusedBlock.value.length > 0) {
-      surveyManager.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
-    } else {
-      surveyManager.changeFocusedBlockType(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
-    }
+  const appendNewBlockAt = (index: number = -1, type: string = SURVEY_BLOCK_TYPE.CONTENT.TEXT) => {
+    surveyManager.appendNewBlockAt(index, type)
 
     forceUpdate()
   }
 
-  const updateFocusedBlockValue = newValue => {
-    surveyManager.changeFocusedBlockValue(newValue)
+  const updateBlockValueAt = (index, newValue) => {
+    surveyManager.changeBlockValueAt(index, newValue)
 
     updateData()
   }
@@ -171,7 +160,7 @@ export default function SurveyEditor() {
             isRichText={false}
             onChange={updateTitle}
             onDownKeyDown={focusNextBlock}
-            onEnterKeyDown={appendOrResetFocusedBlock}
+            onEnterKeyDown={appendNewBlockAt}
             onFocus={surveyManager.unsetFocus}
           />
         </TitleRow>
@@ -183,11 +172,11 @@ export default function SurveyEditor() {
             block={block}
             index={index}
             isFocused={index === surveyManager.focusedBlockIndex}
-            onChange={updateFocusedBlockValue}
-            onChangeCondition={setIfSelectedThenShowQuestionIdAt}
-            onChangeType={changeFocusedBlockType}
+            onChangeAt={updateBlockValueAt}
+            onChangeConditionAt={setIfSelectedThenShowQuestionIdAt}
+            onChangeTypeAt={changeBlockTypeAt}
             onDownKeyDown={focusNextBlock}
-            onEnterKeyDown={appendOrResetFocusedBlock}
+            onAppendBlockAt={appendNewBlockAt}
             onFocus={surveyManager.setFocusAt}
             onRemove={removeFocusedBlock}
             onToggleObligation={toggleObligationAt}

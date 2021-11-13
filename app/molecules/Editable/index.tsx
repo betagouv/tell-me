@@ -6,7 +6,6 @@ import {
   FocusEventHandler,
   FunctionComponent,
   KeyboardEvent,
-  KeyboardEventHandler,
   MouseEvent,
   MutableRefObject,
   Reducer,
@@ -70,13 +69,13 @@ type EditableComponent<T = HTMLElement, P = Common.AnyProps> = FunctionComponent
     defaultValue?: string
     isFocused?: boolean
     isRichText?: boolean
-    onBackspaceKeyDown?: KeyboardEventHandler<T>
+    onBackspaceKeyDown?: () => void
     onChange: (newValue: string) => void
     onChangeType?: (newType: string) => void
-    onDownKeyDown?: KeyboardEventHandler<T>
-    onEnterKeyDown?: KeyboardEventHandler<T>
+    onDownKeyDown?: () => void
+    onEnterKeyDown?: () => void
     onFocus?: FocusEventHandler<T>
-    onUpKeyDown?: KeyboardEventHandler<T>
+    onUpKeyDown?: () => void
   }
 >
 
@@ -258,7 +257,7 @@ const Editable: EditableComponent = ({
         } else if (onDownKeyDown !== null) {
           event.preventDefault()
 
-          onDownKeyDown(event)
+          onDownKeyDown()
         }
 
         return
@@ -271,7 +270,7 @@ const Editable: EditableComponent = ({
         } else if (onUpKeyDown !== null) {
           event.preventDefault()
 
-          onUpKeyDown(event)
+          onUpKeyDown()
         }
 
         return
@@ -284,7 +283,7 @@ const Editable: EditableComponent = ({
         } else if (onEnterKeyDown !== null) {
           event.preventDefault()
 
-          onEnterKeyDown(event)
+          onEnterKeyDown()
         }
 
         return
@@ -327,7 +326,7 @@ const Editable: EditableComponent = ({
         ) {
           event.preventDefault()
 
-          onBackspaceKeyDown(event)
+          onBackspaceKeyDown()
         }
     }
 

@@ -1,9 +1,11 @@
 import { Select } from '@singularity-ui/core'
 import PropTypes from 'prop-types'
+import { FunctionComponent } from 'react'
 import { CornerDownRight } from 'react-feather'
 import styled from 'styled-components'
 
-import { SelectOptionShape, SurveyManagerBlockShape } from '../../shapes'
+import Block from '../../libs/SurveyManager/Block'
+import { SelectOptionShape } from '../../shapes'
 
 const Box = styled.div`
   display: flex;
@@ -18,22 +20,28 @@ const StyledSelect = styled(Select)`
   width: 100%;
 `
 
-export default function Condition({ block, onChange, questionBlockAsOptions }) {
-  return (
-    <Box>
-      <CornerDownRight />
-      <StyledSelect
-        defaultValue={block.questionBlockAsOption}
-        onChange={onChange}
-        options={questionBlockAsOptions}
-        size="small"
-      />
-    </Box>
-  )
+type ConditionProps = {
+  block: Block
+  onChange: any
+  questionBlockAsOptions: any
 }
+const Condition: FunctionComponent<ConditionProps> = ({ block, onChange, questionBlockAsOptions }) => (
+  <Box>
+    <CornerDownRight />
+    <StyledSelect
+      defaultValue={block.questionBlockAsOption}
+      onChange={onChange}
+      options={questionBlockAsOptions}
+      size="small"
+    />
+  </Box>
+)
 
 Condition.propTypes = {
-  block: PropTypes.shape(SurveyManagerBlockShape).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  block: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
   questionBlockAsOptions: PropTypes.arrayOf(PropTypes.shape(SelectOptionShape)).isRequired,
 }
+
+export default Condition

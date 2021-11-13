@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
+import { FunctionComponent } from 'react'
 import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
 import styled, { css } from 'styled-components'
 
-import { SurveyManagerBlockShape } from '../../shapes'
+import Block from '../../libs/SurveyManager/Block'
 
 const Box = styled.div<any>`
   align-items: flex-start;
@@ -73,9 +74,16 @@ const Asterisk = styled.div<any>`
   user-select: none;
 `
 
-const noop = () => undefined
-
-export default function Row({
+type RowProps = {
+  block: Block
+  children: any
+  onCondition?: () => void
+  onDelete: () => void
+  onMove?: () => void
+  onToggleObligation: any
+  onToggleVisibility: any
+}
+const Row: FunctionComponent<RowProps> = ({
   block,
   children,
   onCondition,
@@ -83,58 +91,54 @@ export default function Row({
   onMove,
   onToggleObligation,
   onToggleVisibility,
-}) {
-  return (
-    <Box isQuestion={block.isQuestion}>
-      <Button accent="primary" className="Button">
-        <Move onClick={onMove} />
-      </Button>
+}) => (
+  <Box isQuestion={block.isQuestion}>
+    <Button accent="primary" className="Button">
+      <Move onClick={onMove} />
+    </Button>
 
-      <Asterisk isVisible={block.isMandatory}>*</Asterisk>
+    <Asterisk isVisible={block.isMandatory}>*</Asterisk>
 
-      <Content isHidden={block.props.isHidden}>{children}</Content>
+    <Content isHidden={block.props.isHidden}>{children}</Content>
 
-      <Button
-        accent="secondary"
-        className="Button"
-        isDisabled={!block.isQuestion}
-        onClick={block.isQuestion ? onToggleObligation : noop}
-      >
-        {block.isMandatory ? <ShieldOff /> : <Shield />}
-      </Button>
-      <Button
-        accent="primary"
-        className="Button"
-        isDisabled={!block.isQuestion}
-        onClick={block.isQuestion ? onToggleVisibility : noop}
-      >
-        {block.isHidden ? <Eye /> : <EyeOff />}
-      </Button>
-      <Button
-        accent="secondary"
-        className="Button"
-        isDisabled={!block.isCheckbox && !block.isChoice}
-        onClick={block.isCheckbox || block.isChoice ? onCondition : noop}
-      >
-        <CornerDownRight />
-      </Button>
-      <Button accent="danger" className="Button" onClick={onDelete}>
-        <Trash />
-      </Button>
-    </Box>
-  )
-}
-
-Row.defaultProps = {
-  onCondition: noop,
-  onMove: noop,
-}
+    <Button
+      accent="secondary"
+      className="Button"
+      isDisabled={!block.isQuestion}
+      onClick={block.isQuestion ? onToggleObligation : undefined}
+    >
+      {block.isMandatory ? <ShieldOff /> : <Shield />}
+    </Button>
+    <Button
+      accent="primary"
+      className="Button"
+      isDisabled={!block.isQuestion}
+      onClick={block.isQuestion ? onToggleVisibility : undefined}
+    >
+      {block.isHidden ? <Eye /> : <EyeOff />}
+    </Button>
+    <Button
+      accent="secondary"
+      className="Button"
+      isDisabled={!block.isCheckbox && !block.isChoice}
+      onClick={block.isCheckbox || block.isChoice ? onCondition : undefined}
+    >
+      <CornerDownRight />
+    </Button>
+    <Button accent="danger" className="Button" onClick={onDelete}>
+      <Trash />
+    </Button>
+  </Box>
+)
 
 Row.propTypes = {
-  block: PropTypes.shape(SurveyManagerBlockShape).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  block: PropTypes.any.isRequired,
   onCondition: PropTypes.func,
   onDelete: PropTypes.func.isRequired,
   onMove: PropTypes.func,
   onToggleObligation: PropTypes.func.isRequired,
   onToggleVisibility: PropTypes.func.isRequired,
 }
+
+export default Row

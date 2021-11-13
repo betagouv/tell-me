@@ -5,13 +5,13 @@ describe('common/SurveyManager [Form Operations]', () => {
   test('should conciliate form data with a checkbox question', () => {
     const instance = new SurveyManager()
     instance.setFocusAt(1)
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
     instance.changeFocusedBlockValue('Checkbox question')
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
     instance.changeFocusedBlockValue('Choice 1')
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
     instance.changeFocusedBlockValue('Choice 2')
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHECKBOX)
     instance.changeFocusedBlockValue('Choice 3')
 
     const formData = {
@@ -32,13 +32,13 @@ describe('common/SurveyManager [Form Operations]', () => {
   test('should conciliate form data with a choice question', () => {
     const instance = new SurveyManager()
     instance.setFocusAt(1)
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
     instance.changeFocusedBlockValue('Choice question')
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
     instance.changeFocusedBlockValue('Option 1')
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
     instance.changeFocusedBlockValue('Option 2')
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.INPUT.CHOICE)
     instance.changeFocusedBlockValue('Option 3')
 
     const formData = {

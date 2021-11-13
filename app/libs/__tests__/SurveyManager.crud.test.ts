@@ -10,7 +10,7 @@ describe('common/SurveyManager [CRUD Operations]', () => {
 
   test('should add a text block after the first one', () => {
     instance.setFocusAt(0)
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.TEXT)
 
     expect(instance.blocks).toHaveLength(3)
     expect(instance.blocks).toMatchObject([
@@ -47,7 +47,7 @@ describe('common/SurveyManager [CRUD Operations]', () => {
 
   test('should add a question block after the last one', () => {
     instance.setFocusAt(2)
-    instance.addNewBlockAfterFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
+    instance.appendNewBlockToFocusedBlock(SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
     expect(instance.blocks).toHaveLength(4)
     expect(instance.blocks).toMatchObject([
