@@ -77,10 +77,6 @@ type EditableComponent<P = Common.AnyProps> = FunctionComponent<
   }
 >
 
-const stopPropagation = (event: MouseEvent) => {
-  event.stopPropagation()
-}
-
 const Editable: EditableComponent = ({
   as,
   defaultValue = '',
@@ -118,8 +114,6 @@ const Editable: EditableComponent = ({
   const selectionFocusNodeRef = useRef(null) as MutableRefObject<Common.Nullable<Node>>
   const selectionFocusOffsetRef = useRef<number>(defaultValue.length)
   const hasFormattedRef = useRef<boolean>(false)
-  // const [controlledIsFocused, setControlledIsFocused] = useState(false)
-  // const [controlledValue, setControlledValue] = useState(defaultValue)
   const [formatMenuKey, setFormatMenuKey] = useState<string>(getRandomId())
   const [isFormatMenuOpen, setIsFormatMenuOpen] = useState<boolean>(false)
 
@@ -129,30 +123,22 @@ const Editable: EditableComponent = ({
   const innerHTML = { __html: controlledValueRef.current }
 
   const closeBlockMenu = () => {
-    if (!isMounted()) {
-      return
+    if (isMounted()) {
+      setIsBlockMenuOpen(false)
     }
-
-    setIsBlockMenuOpen(false)
   }
 
   const closeFormatMenu = (event?: globalThis.MouseEvent) => {
-    if (!isMounted()) {
-      return
-    }
-
     if (event === undefined) {
       window.removeEventListener('click', closeFormatMenu)
     }
 
-    setIsFormatMenuOpen(false)
+    if (isMounted()) {
+      setIsFormatMenuOpen(false)
+    }
   }
 
   const detectUnselection = () => {
-    if (!isMounted()) {
-      return
-    }
-
     window.addEventListener('click', closeFormatMenu, {
       once: true,
     })
@@ -170,9 +156,15 @@ const Editable: EditableComponent = ({
     onChangeType(newBlockType)
   }
 
-  const handleFocus = (): void => {
-    // setControlledIsFocused(true)
+  const handleClick = () => {
+    if (!isFormatMenuOpen) {
+      return
+    }
 
+    closeFormatMenu()
+  }
+
+  const handleFocus = (): void => {
     if (onFocus !== null) {
       onFocus()
     }
@@ -215,27 +207,19 @@ const Editable: EditableComponent = ({
   }
 
   const openBlockMenu = () => {
-    if (!isMounted()) {
-      return
+    if (isMounted()) {
+      setIsBlockMenuOpen(true)
     }
-
-    setIsBlockMenuOpen(true)
   }
 
   const openFormatMenu = () => {
-    if (!isMounted()) {
-      return
+    if (isMounted()) {
+      setIsFormatMenuOpen(true)
+      setFormatMenuKey(getRandomId())
     }
-
-    setIsFormatMenuOpen(true)
-    setFormatMenuKey(getRandomId())
   }
 
-  const updateControlledValue = async newValue => {
-    if (!isMounted()) {
-      return
-    }
-
+  const updateControlledValue = async (newValue: string) => {
     controlledValueRef.current = newValue
     hasFormattedRef.current = true
 
@@ -371,7 +355,6 @@ const Editable: EditableComponent = ({
       }
 
       openFormatMenu()
-      // setImmediate(() => setFormatMenuAnchor(event.currentTarget))
     })
   }
 
@@ -380,12 +363,13 @@ const Editable: EditableComponent = ({
       return
     }
 
+    const selection = window.getSelection()
+
     const range = window.document.createRange()
     const rangeOffset = Number(controlledValueRef.current.length > 0)
     range.setStart(componentRef.current, rangeOffset)
     range.collapse(true)
 
-    const selection = window.getSelection()
     if (selection !== null) {
       selection.removeAllRanges()
       selection.addRange(range)
@@ -398,7 +382,7 @@ const Editable: EditableComponent = ({
         inline: 'center',
       })
     }
-  })
+  }, [])
 
   useEffect(() => {
     if (!isMounted() || !isFormatMenuOpen) {
@@ -436,7 +420,7 @@ const Editable: EditableComponent = ({
         ref={componentRef}
         contentEditable
         dangerouslySetInnerHTML={innerHTML}
-        onClick={stopPropagation}
+        onClick={handleClick}
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={controlKey}

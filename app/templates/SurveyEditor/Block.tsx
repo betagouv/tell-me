@@ -84,7 +84,7 @@ const Block: FunctionComponent<BlockProps> = ({
   const [isConditionOpen, setIsConditionOpen] = useState(block.ifSelectedThenShowQuestionId !== null)
 
   const { Component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[block.type]
-  const key = `${index}.${block.type}.${hashCode(block.value)}`
+  const key = `${index}.${block.type}.${isFocused}.${hashCode(block.value)}`
   const finalPlaceholder = block.count !== null ? `${placeholder} ${block.count}` : placeholder
 
   const changeCondition = ({ value }) => {
@@ -137,7 +137,6 @@ const Block: FunctionComponent<BlockProps> = ({
 
   return (
     <Row
-      key={key}
       block={block}
       onCondition={toggleCondition}
       onDelete={onRemove}
