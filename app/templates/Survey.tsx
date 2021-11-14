@@ -71,7 +71,7 @@ const buildValidationSchema = (blocks: Block[], message: string) =>
       return schema
     }
 
-    if (block.questionType === SURVEY_BLOCK_TYPE.INPUT.CHECKBOX) {
+    if (block.questionInputType === SURVEY_BLOCK_TYPE.INPUT.CHECKBOX) {
       return {
         ...schema,
         [block._id]: Yup.array(Yup.string()).required(message),

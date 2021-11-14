@@ -16,7 +16,7 @@ export type BlockConstructorOptions = {
   isUnlinked: boolean
   questionBlockAsOption?: App.SelectOption
   questionId: Common.Nullable<string>
-  questionType?: string
+  questionInputType?: string
 }
 
 export default class Block {
@@ -39,7 +39,7 @@ export default class Block {
   private _isUnlinked: boolean
   private _questionBlockAsOption: Common.Nullable<App.SelectOption>
   private _questionId: Common.Nullable<string>
-  private _questionType: Common.Nullable<string>
+  private _questionInputType: Common.Nullable<string>
 
   constructor(
     { _id, position, type, value }: BlockConstructorData,
@@ -52,7 +52,7 @@ export default class Block {
       isUnlinked,
       questionBlockAsOption,
       questionId,
-      questionType,
+      questionInputType,
     }: BlockConstructorOptions,
   ) {
     this._count = isCountable && count !== undefined ? count : null
@@ -76,7 +76,7 @@ export default class Block {
     this._isUnlinked = isUnlinked
     this._questionBlockAsOption = questionBlockAsOption || null
     this._questionId = questionId
-    this._questionType = questionType || null
+    this._questionInputType = questionInputType || null
 
     this._id = _id
 
@@ -143,7 +143,7 @@ export default class Block {
     return this._questionId
   }
 
-  public get questionType() {
-    return this._questionType
+  public get questionInputType() {
+    return this._questionInputType
   }
 }

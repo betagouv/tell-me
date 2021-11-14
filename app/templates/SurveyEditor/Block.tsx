@@ -111,6 +111,10 @@ const Block: FunctionComponent<BlockProps> = ({
     onAppendBlockAt(index, SURVEY_BLOCK_TYPE.CONTENT.TEXT)
   }
 
+  const handleFocus = () => {
+    onFocus(index)
+  }
+
   const handleTypeChange = (newType: string) => {
     onChangeTypeAt(index, newType)
   }
@@ -153,7 +157,7 @@ const Block: FunctionComponent<BlockProps> = ({
         onChangeType={handleTypeChange}
         onDownKeyDown={onDownKeyDown}
         onEnterKeyDown={handleEnterKeyDown}
-        onFocus={() => onFocus(index)}
+        onFocus={handleFocus}
         onUpKeyDown={onUpKeyDown}
         placeholder={finalPlaceholder}
       />

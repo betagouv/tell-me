@@ -2,8 +2,6 @@
 
 import PropTypes from 'prop-types'
 import {
-  FocusEvent,
-  FocusEventHandler,
   FunctionComponent,
   KeyboardEvent,
   MouseEvent,
@@ -63,7 +61,7 @@ const MENU_ITEMS = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-type EditableComponent<T = HTMLElement, P = Common.AnyProps> = FunctionComponent<
+type EditableComponent<P = Common.AnyProps> = FunctionComponent<
   P & {
     as: any
     defaultValue?: string
@@ -74,7 +72,7 @@ type EditableComponent<T = HTMLElement, P = Common.AnyProps> = FunctionComponent
     onChangeType?: (newType: string) => void
     onDownKeyDown?: () => void
     onEnterKeyDown?: () => void
-    onFocus?: FocusEventHandler<T>
+    onFocus?: () => void
     onUpKeyDown?: () => void
   }
 >
@@ -115,19 +113,20 @@ const Editable: EditableComponent = ({
   const wasFocused = usePrevious(isFocused)
 
   // States used for rich text blocks
+  const controlledValueRef = useRef(defaultValue) as MutableRefObject<string>
   const formatMenuAnchorRef = useRef(null) as MutableRefObject<Common.Nullable<FormatMenuProps['anchor']>>
   const selectionFocusNodeRef = useRef(null) as MutableRefObject<Common.Nullable<Node>>
   const selectionFocusOffsetRef = useRef<number>(defaultValue.length)
   const hasFormattedRef = useRef<boolean>(false)
-  const [controlledIsFocused, setControlledIsFocused] = useState(false)
-  const [controlledValue, setControlledValue] = useState(defaultValue)
+  // const [controlledIsFocused, setControlledIsFocused] = useState(false)
+  // const [controlledValue, setControlledValue] = useState(defaultValue)
   const [formatMenuKey, setFormatMenuKey] = useState<string>(getRandomId())
   const [isFormatMenuOpen, setIsFormatMenuOpen] = useState<boolean>(false)
 
   const Component = as
   const hasBlockMenu = MENU_ITEMS.length > 0
   // Used as content editable div prop for rich text blocks
-  const innerHTML = { __html: controlledValue }
+  const innerHTML = { __html: controlledValueRef.current }
 
   const closeBlockMenu = () => {
     if (!isMounted()) {
@@ -171,11 +170,11 @@ const Editable: EditableComponent = ({
     onChangeType(newBlockType)
   }
 
-  const handleFocus = (event: FocusEvent<HTMLElement>): void => {
-    setControlledIsFocused(true)
+  const handleFocus = (): void => {
+    // setControlledIsFocused(true)
 
     if (onFocus !== null) {
-      onFocus(event)
+      onFocus()
     }
   }
 
@@ -187,11 +186,12 @@ const Editable: EditableComponent = ({
     if (!isRichText) {
       const newValue = componentRef.current.innerText
 
+      controlledValueRef.current = newValue
       if (hasBlockMenu && !isBlockMenuOpen) {
         lastValueBeforeOpeningBlockMenuRef.current = newValue
       }
 
-      onChange(componentRef.current.innerText)
+      onChange(newValue)
 
       return
     }
@@ -206,6 +206,7 @@ const Editable: EditableComponent = ({
 
     const newValue = componentRef.current.innerHTML
 
+    controlledValueRef.current = newValue
     if (hasBlockMenu && !isBlockMenuOpen) {
       lastValueBeforeOpeningBlockMenuRef.current = newValue
     }
@@ -235,7 +236,7 @@ const Editable: EditableComponent = ({
       return
     }
 
-    setControlledValue(newValue)
+    controlledValueRef.current = newValue
     hasFormattedRef.current = true
 
     closeFormatMenu()
@@ -375,25 +376,13 @@ const Editable: EditableComponent = ({
   }
 
   useEffect(() => {
-    if (!isMounted() || !isFocused || controlledIsFocused || componentRef.current === null) {
+    if (!isMounted() || !isFocused || componentRef.current === null) {
       return
     }
 
     const range = window.document.createRange()
-    // TODO Handle Rich Text caret positonning.
-    if (isRichText) {
-      range.setStart(componentRef.current, 0)
-      // } else if (componentRef.current.innerText === defaultValue) {
-      //   range.setStart(componentRef.current, componentRef.current.innerText.length)
-    } else if (
-      componentRef.current.childNodes.length > 0 &&
-      (componentRef.current.childNodes[0] as HTMLElement).innerText !== undefined
-    ) {
-      range.setStart(
-        componentRef.current.childNodes[0],
-        (componentRef.current.childNodes[0] as HTMLElement).innerText.length,
-      )
-    }
+    const rangeOffset = Number(controlledValueRef.current.length > 0)
+    range.setStart(componentRef.current, rangeOffset)
     range.collapse(true)
 
     const selection = window.getSelection()
@@ -439,7 +428,7 @@ const Editable: EditableComponent = ({
           key={formatMenuKey}
           anchor={formatMenuAnchorRef.current}
           onChange={updateControlledValue}
-          source={controlledValue}
+          source={controlledValueRef.current}
         />
       )}
 

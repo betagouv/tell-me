@@ -36,19 +36,14 @@ const INITIAL_BLOCKS = [
   },
 ]
 
-const isBlockTypeCountable = R.flip(R.includes)([
+const isBlockTypeCountable: (type: string) => boolean = R.flip(R.includes)([
   SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
   SURVEY_BLOCK_TYPE.INPUT.CHOICE,
 ]) as any
-const isInputBlock = R.pipe(R.prop<Block['type']>('type'), R.startsWith('INPUT.'))
-const isQuestionBlock = R.propEq<Block['type']>('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
+const isInputBlock: (block: Api.Model.Survey.Block) => boolean = R.pipe(R.prop('type'), R.startsWith('INPUT.'))
+const isQuestionBlock: (block: Api.Model.Survey.Block) => boolean = R.propEq('type', SURVEY_BLOCK_TYPE.CONTENT.QUESTION)
 
-const getQuestionTypeAt = (
-  blocks: Array<{
-    type: string
-  }>,
-  index: number,
-): string | undefined => {
+const getQuestionInputTypeAt = (blocks: Api.Model.Survey.Block[], index: number): string | undefined => {
   const maybeQuestionBlock = blocks[index]
   if (!isQuestionBlock(maybeQuestionBlock)) {
     return undefined
@@ -76,38 +71,18 @@ export default class SurveyManager {
   private _blocks: Block[]
   private _focusedBlockIndex: number
 
-  constructor(blocks = INITIAL_BLOCKS) {
-    this._blocks = []
-    this._focusedBlockIndex = -1
-
-    Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach(key => {
-      if (this[key] instanceof Function && key !== 'constructor') {
-        this[key] = this[key].bind(this)
-      }
-    })
-
-    this.blocks = blocks
-  }
-
   public get blocks(): Block[] {
     return this._blocks
   }
 
-  public get questionBlockAsOptions(): App.SelectOption[] {
-    return R.pipe<any, any, any>(
-      R.filter(isQuestionBlock),
-      R.map(({ _id, value }) => ({ label: value, value: _id })),
-    )(this._blocks) as App.SelectOption[]
-  }
-
-  set blocks(blocks: Api.Model.Survey.Block[]) {
+  public set blocks(blocks: Api.Model.Survey.Block[]) {
     let isHidden = false
     let questionId: Common.Nullable<string> = null
 
     this._blocks = R.addIndex(R.reduce)<any>((previousBlocks, block, index) => {
       const lastBlock = R.last<Block>(previousBlocks)
       const { _id, position, props, type, value } = block as Api.Model.Survey.Block
-      const isCountable = isBlockTypeCountable(type) as boolean
+      const isCountable = isBlockTypeCountable(type)
       const isQuestion = type === SURVEY_BLOCK_TYPE.CONTENT.QUESTION
       const additionalProps = {
         ...props,
@@ -141,7 +116,7 @@ export default class SurveyManager {
         isHidden = Boolean(additionalProps.isHidden)
         questionId = _id
 
-        additionalProps.questionType = getQuestionTypeAt(blocks, index)
+        additionalProps.questionInputType = getQuestionInputTypeAt(blocks, index)
       } else {
         additionalProps.isHidden = isHidden
       }
@@ -179,6 +154,26 @@ export default class SurveyManager {
 
   public get isFocused(): boolean {
     return this._focusedBlockIndex !== -1
+  }
+
+  public get questionBlockAsOptions(): App.SelectOption[] {
+    return R.pipe<any, any, any>(
+      R.filter(isQuestionBlock),
+      R.map(({ _id, value }) => ({ label: value, value: _id })),
+    )(this._blocks) as App.SelectOption[]
+  }
+
+  constructor(blocks = INITIAL_BLOCKS) {
+    this._blocks = []
+    this._focusedBlockIndex = -1
+
+    Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach(key => {
+      if (this[key] instanceof Function && key !== 'constructor') {
+        this[key] = this[key].bind(this)
+      }
+    })
+
+    this.blocks = blocks
   }
 
   /**
@@ -230,6 +225,8 @@ export default class SurveyManager {
         return [...previousBlocks, repositionedBlock]
       }, []),
     )(this.blocks)
+
+    this.setFocusAt(index + 1)
   }
 
   public appendNewBlockToFocusedBlock(type: string) {
@@ -238,7 +235,6 @@ export default class SurveyManager {
     }
 
     this.appendNewBlockAt(this.focusedBlockIndex, type)
-    this.focusNextBlock()
   }
 
   public changeBlockTypeAt(index: number, newType: string): void {
@@ -275,7 +271,7 @@ export default class SurveyManager {
     this.blocks = R.update(index, updatedBlock)(this.blocks)
   }
 
-  public changeFocusedBlockType(newType: string) {
+  public changeFocusedBlockType(newType: string): void {
     if (!this.isFocused) {
       return
     }
@@ -283,7 +279,7 @@ export default class SurveyManager {
     this.changeBlockTypeAt(this.focusedBlockIndex, newType)
   }
 
-  public changeFocusedBlockValue(newValue) {
+  public changeFocusedBlockValue(newValue): void {
     if (!this.isFocused) {
       return
     }
@@ -291,7 +287,7 @@ export default class SurveyManager {
     this.changeBlockValueAt(this.focusedBlockIndex, newValue)
   }
 
-  public changeFocusedBlockProps(newProps: Api.Model.Survey.BlockProps) {
+  public changeFocusedBlockProps(newProps: Api.Model.Survey.BlockProps): void {
     if (!this.isFocused) {
       return
     }
@@ -299,7 +295,7 @@ export default class SurveyManager {
     this.changeBlockPropsAt(this.focusedBlockIndex, newProps)
   }
 
-  public conciliateFormData(formData): Array<{
+  public conciliateFormData(formData: { [questionBlockId: string]: string | string[] }): Array<{
     question: string
     type: string
     values: string[]
@@ -309,18 +305,21 @@ export default class SurveyManager {
       R.map(([questionBlockId, answerOrAnswers]) => {
         const questionBlockIndex = this.findBlockIndexById(questionBlockId)
         const questionBlock = this.blocks[questionBlockIndex]
-        const questionBlockType = this.getQuestionTypeAt(questionBlockIndex)
+        const questionInputType = getQuestionInputTypeAt(this.blocks, questionBlockIndex)
+        if (questionInputType === undefined) {
+          throw new Error(`This question should have an input type.`)
+        }
 
         return {
           question: questionBlock.value,
-          type: questionBlockType,
+          type: questionInputType,
           values: Array.isArray(answerOrAnswers) ? answerOrAnswers : [answerOrAnswers],
         }
       }),
     )(formData)
   }
 
-  public getQuestionTypeAt(index: number): string {
+  public getQuestionInputTypeAt(index: number): string {
     const maybeQuestionBlock = this.blocks[index]
     if (!isQuestionBlock(maybeQuestionBlock)) {
       throw new Error(`This survey block is not a question.`)
@@ -349,34 +348,38 @@ export default class SurveyManager {
   }
 
   public focusNextBlock(): void {
-    if (this._focusedBlockIndex >= this._blocks.length - 1) {
+    if (this.focusedBlockIndex >= this.blocks.length - 1) {
       return
     }
 
-    this._focusedBlockIndex += 1
+    this.setFocusAt(this.focusedBlockIndex + 1)
   }
 
   public focusPreviousBlock(): void {
-    if (this._focusedBlockIndex < 0) {
+    if (this.focusedBlockIndex < 0) {
       return
     }
 
-    this._focusedBlockIndex -= 1
+    this.setFocusAt(this.focusedBlockIndex - 1)
   }
 
-  toggleBlockObligationAt(index: number): void {
+  public setFocusAt(index = -1): void {
+    this._focusedBlockIndex = index
+  }
+
+  public toggleBlockObligationAt(index: number): void {
     this.changeBlockPropsAt(index, {
       isMandatory: !this.blocks[index].props.isMandatory,
     })
   }
 
-  toggleBlockVisibilityAt(index: number): void {
+  public toggleBlockVisibilityAt(index: number): void {
     this.changeBlockPropsAt(index, {
       isHidden: !this.blocks[index].props.isHidden,
     })
   }
 
-  setIfSelectedThenShowQuestionIdAt(index: number, questionBlockId: Common.Nullable<string>): void {
+  public setIfSelectedThenShowQuestionIdAt(index: number, questionBlockId: Common.Nullable<string>): void {
     const updatedBlock = {
       ...this.blocks[index],
       props: {
@@ -422,11 +425,7 @@ export default class SurveyManager {
     this.focusPreviousBlock()
   }
 
-  public setFocusAt(index): void {
-    this._focusedBlockIndex = index
-  }
-
   public unsetFocus(): void {
-    this._focusedBlockIndex = -1
+    this.setFocusAt()
   }
 }
