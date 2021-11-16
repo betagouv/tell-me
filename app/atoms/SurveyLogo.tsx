@@ -10,9 +10,11 @@ const Container = styled.div`
   width: 100%;
 `
 
-const Placeholder = styled.div<any>`
+const Placeholder = styled.div<{
+  url?: Common.Nullable<string>
+}>`
   background-color: #d5e5a3;
-  background-image: url('/api/asset/${p => p.surveyId}-logo.png');
+  background-image: url('${p => p.url || ''}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,14 +28,14 @@ const Placeholder = styled.div<any>`
 
 type SuveyLogoProps = {
   className?: string
-  surveyId: string
+  url?: Common.Nullable<string>
 }
 const SurveyLogoWithoutRef: ForwardRefRenderFunction<HTMLDivElement, SuveyLogoProps> = (
-  { children, className, surveyId, ...props },
+  { children, className, url, ...props },
   ref,
 ) => (
   <Container className={className}>
-    <Placeholder ref={ref} surveyId={surveyId} {...props} />
+    <Placeholder ref={ref} url={url} {...props} />
 
     {children}
   </Container>
@@ -44,7 +46,7 @@ const SurveyLogo = forwardRef(SurveyLogoWithoutRef)
 SurveyLogo.displayName = 'SurveyLogo'
 
 SurveyLogo.propTypes = {
-  surveyId: PropTypes.string.isRequired,
+  url: PropTypes.string,
 }
 
 export default SurveyLogo

@@ -45,6 +45,7 @@ export default function handleError(error: any, path?: string, res?: NextApiResp
   }
 
   ß.error(`[${errorPath}] ${errorString}`)
+  ß.error(error)
 
   if (res === undefined) {
     return

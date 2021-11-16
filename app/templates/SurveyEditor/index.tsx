@@ -29,7 +29,9 @@ export default function SurveyEditor() {
   const forceUpdate = useCallback(() => updateState({} as any), [])
   const surveyManagerRef = useRef(new SurveyManager())
   const [isLoading, setIsLoading] = useState(true)
-  const [title, setTitle] = useState('...')
+  const [title, setTitle] = useState('')
+  const [coverUrl, setCoverUrl] = useState(null)
+  const [logoUrl, setLogoUrl] = useState(null)
   const { id } = useParams()
   const api = useApi()
 
@@ -53,11 +55,19 @@ export default function SurveyEditor() {
         return
       }
 
-      const { blocks, title } = maybeBody.data
+      const {
+        blocks,
+        props: { coverUrl, logoUrl },
+        title,
+      } = maybeBody.data
+
       setTitle(title)
+      setCoverUrl(coverUrl)
+      setLogoUrl(logoUrl)
       if (blocks.length > 0) {
         surveyManager.blocks = blocks
       }
+
       setIsLoading(false)
     })()
   }, [])
@@ -77,8 +87,8 @@ export default function SurveyEditor() {
     })
   }
 
-  const uploadHeader = async formData => {
-    await api.put(`survey/${id}/upload?type=header`, formData)
+  const uploadCover = async formData => {
+    await api.put(`survey/${id}/upload?type=cover`, formData)
   }
 
   const uploadLogo = async formData => {
@@ -148,8 +158,8 @@ export default function SurveyEditor() {
 
   return (
     <>
-      <Header onChange={uploadHeader} surveyId={id} />
-      <Logo onChange={uploadLogo} surveyId={id} />
+      <Header onChange={uploadCover} url={coverUrl} />
+      <Logo onChange={uploadLogo} url={logoUrl} />
 
       <Body>
         <TitleRow>

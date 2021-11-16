@@ -24,7 +24,7 @@ const StyledInput = styled.input`
   }
 `
 
-export default function Header({ onChange, surveyId }) {
+export default function Header({ onChange, url }) {
   const $header = useRef<HTMLDivElement>(null)
 
   const updateSelectedFile = event => {
@@ -38,12 +38,12 @@ export default function Header({ onChange, surveyId }) {
     $header.current.style.backgroundImage = `url(${imageUri})`
 
     const formData = new FormData()
-    formData.append('header', image)
+    formData.append('cover', image)
     onChange(formData)
   }
 
   return (
-    <StyledSurveyHeader ref={$header} surveyId={surveyId}>
+    <StyledSurveyHeader ref={$header} url={url}>
       <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
     </StyledSurveyHeader>
   )
@@ -51,5 +51,5 @@ export default function Header({ onChange, surveyId }) {
 
 Header.propTypes = {
   onChange: PropTypes.func.isRequired,
-  surveyId: PropTypes.string.isRequired,
+  url: PropTypes.string,
 }

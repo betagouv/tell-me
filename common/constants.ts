@@ -62,12 +62,6 @@ export const SURVEY_ENTRIES_DOWLOAD_EXTENSION = {
 
 export const SURVEY_ENTRIES_DOWLOAD_EXTENSIONS = Object.values(SURVEY_ENTRIES_DOWLOAD_EXTENSION)
 
-export const SURVEY_LOGO_TYPE = {
-  URL: 'URL',
-}
-
-export const SURVEY_LOGO_TYPES = Object.values(SURVEY_LOGO_TYPE)
-
 export const QUESTION_TYPE = {
   GRADE: 'Grade',
   INPUT: 'Input',

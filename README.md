@@ -76,9 +76,7 @@ Please have a look at the [contributing document](./CONTRIBUTING.md).
 ## Roadmap
 
 - Teams (with an environment variable switch in order to host a shared BetaGouv service?)
-- Localization
 - Accessibility
-- External object storage (Amazon S3, etc)
 
 ---
 

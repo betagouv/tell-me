@@ -244,10 +244,10 @@ export default function PublicSurvey({ data: survey }) {
 
   return (
     <Page>
-      <SurveyHeader surveyId={survey._id} />
+      <SurveyHeader url={survey.props.coverUrl} />
 
       <Container>
-        <SurveyLogo surveyId={survey._id} />
+        <SurveyLogo url={survey.props.logoUrl} />
 
         <SurveyTitle>{survey.title}</SurveyTitle>
 

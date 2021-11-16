@@ -54,13 +54,9 @@ export default function withAuth(handler: NextApiHandler, allowedRoles = [USER_R
         return handleError(new ApiError(`Forbidden.`, 403, true), ERROR_PATH, res)
       }
 
-      const me = R.pick(['id'], user) as RequestMe
-      const reqWithAuth = {
-        ...req,
-        me,
-      } as RequestWithAuth
+      ;(req as RequestWithAuth).me = R.pick(['id'], user) as RequestMe
 
-      return await handler(reqWithAuth, res)
+      return await handler(req, res)
     } catch (err) {
       return handleError(err, ERROR_PATH, res)
     }

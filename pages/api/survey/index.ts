@@ -58,7 +58,16 @@ async function SurveyController(req, res) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
-        maybeSurvey.set(req.body)
+        const maybeSurveyData = maybeSurvey.toObject()
+
+        maybeSurvey.set({
+          ...maybeSurveyData,
+          ...req.body,
+          props: {
+            ...maybeSurveyData.props,
+            ...(req.body.props || {}),
+          },
+        })
         const updatedSurvey = await maybeSurvey.save()
 
         res.status(200).json({

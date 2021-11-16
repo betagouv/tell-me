@@ -33,7 +33,7 @@ const StyledInput = styled.input<any>`
   }
 `
 
-export default function Logo({ onChange, surveyId }) {
+export default function Logo({ onChange, url }) {
   const $logo = useRef<HTMLDivElement>(null)
 
   const updateSelectedFile = event => {
@@ -52,7 +52,7 @@ export default function Logo({ onChange, surveyId }) {
   }
 
   return (
-    <StyledSurveyLogo ref={$logo} surveyId={surveyId}>
+    <StyledSurveyLogo ref={$logo} url={url}>
       <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
     </StyledSurveyLogo>
   )
@@ -60,5 +60,5 @@ export default function Logo({ onChange, surveyId }) {
 
 Logo.propTypes = {
   onChange: PropTypes.func.isRequired,
-  surveyId: PropTypes.string.isRequired,
+  url: PropTypes.string,
 }

@@ -1,10 +1,18 @@
 import mongoose from 'mongoose'
 
 import SurveyBlock from './SurveyBlock'
-import SurveyCover from './SurveyCover'
-import SurveyLogo from './SurveyLogo'
 
 const SurveyPropsType = {
+  coverUrl: {
+    required: false,
+    type: String,
+    default: null,
+  },
+  logoUrl: {
+    required: false,
+    type: String,
+    default: null,
+  },
   thankYouMessage: {
     required: false,
     type: String,
@@ -35,14 +43,6 @@ function Survey() {
           required: false,
           type: Boolean,
           default: false,
-        },
-        logo: {
-          required: false,
-          type: SurveyLogo,
-        },
-        cover: {
-          required: false,
-          type: SurveyCover,
         },
         blocks: {
           required: true,
