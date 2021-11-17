@@ -132,6 +132,12 @@ export default function SurveyEditor() {
     updateData()
   }
 
+  const removeBlockAt = index => {
+    surveyManager.removeBlockAt(index)
+
+    forceUpdate()
+  }
+
   const removeFocusedBlock = () => {
     surveyManager.removeFocusedBlock()
 
@@ -189,6 +195,7 @@ export default function SurveyEditor() {
             onAppendBlockAt={appendNewBlockAt}
             onFocus={surveyManager.setFocusAt}
             onRemove={removeFocusedBlock}
+            onRemoveAt={removeBlockAt}
             onToggleObligation={toggleObligationAt}
             onToggleVisibility={toggleBlockVisibilityAt}
             onUpKeyDown={focusPreviousBlock}

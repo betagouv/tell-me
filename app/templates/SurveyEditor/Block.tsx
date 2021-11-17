@@ -59,6 +59,7 @@ type BlockProps = {
   onDownKeyDown: any
   onFocus: any
   onRemove: any
+  onRemoveAt: (index: number) => void
   onToggleObligation: any
   onToggleVisibility: any
   onUpKeyDown: any
@@ -75,6 +76,7 @@ const Block: FunctionComponent<BlockProps> = ({
   onDownKeyDown,
   onFocus,
   onRemove,
+  onRemoveAt,
   onToggleObligation,
   onToggleVisibility,
   onUpKeyDown,
@@ -95,6 +97,10 @@ const Block: FunctionComponent<BlockProps> = ({
     valueRef.current = newValue
 
     onChangeAt(index, newValue)
+  }
+
+  const handleDelete = () => {
+    onRemoveAt(index)
   }
 
   const handleEnterKeyDown = () => {
@@ -139,7 +145,7 @@ const Block: FunctionComponent<BlockProps> = ({
     <Row
       block={block}
       onCondition={toggleCondition}
-      onDelete={onRemove}
+      onDelete={handleDelete}
       onToggleObligation={toggleObligation}
       onToggleVisibility={toggleVisibility}
     >
@@ -180,6 +186,7 @@ Block.propTypes = {
   onDownKeyDown: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  onRemoveAt: PropTypes.func.isRequired,
   onToggleObligation: PropTypes.func.isRequired,
   onToggleVisibility: PropTypes.func.isRequired,
   onUpKeyDown: PropTypes.func.isRequired,

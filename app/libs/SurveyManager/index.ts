@@ -363,41 +363,9 @@ export default class SurveyManager {
     this.setFocusAt(this.focusedBlockIndex - 1)
   }
 
-  public setFocusAt(index = -1): void {
-    this._focusedBlockIndex = index
-  }
-
-  public toggleBlockObligationAt(index: number): void {
-    this.changeBlockPropsAt(index, {
-      isMandatory: !this.blocks[index].props.isMandatory,
-    })
-  }
-
-  public toggleBlockVisibilityAt(index: number): void {
-    this.changeBlockPropsAt(index, {
-      isHidden: !this.blocks[index].props.isHidden,
-    })
-  }
-
-  public setIfSelectedThenShowQuestionIdAt(index: number, questionBlockId: Common.Nullable<string>): void {
-    const updatedBlock = {
-      ...this.blocks[index],
-      props: {
-        ...this.blocks[index].props,
-        ifSelectedThenShowQuestionId: questionBlockId,
-      },
-    } as Block
-
-    this.blocks = R.update(index, updatedBlock)(this.blocks)
-  }
-
-  public removeFocusedBlock(): void {
-    if (!this.isFocused) {
-      return
-    }
-
-    const oldBlock = this.focusedBlock
-    if (oldBlock === null) {
+  public removeBlockAt(index: number): void {
+    const oldBlock = this.blocks[index]
+    if (oldBlock === undefined) {
       return
     }
 
@@ -422,7 +390,45 @@ export default class SurveyManager {
       return [...newBlocks, updatedBlock]
     }, [])(this.blocks)
 
-    this.focusPreviousBlock()
+    if (index === this.focusedBlockIndex) {
+      this.focusPreviousBlock()
+    }
+  }
+
+  public removeFocusedBlock(): void {
+    if (!this.isFocused) {
+      return
+    }
+
+    this.removeBlockAt(this.focusedBlockIndex)
+  }
+
+  public setFocusAt(index = -1): void {
+    this._focusedBlockIndex = index
+  }
+
+  public setIfSelectedThenShowQuestionIdAt(index: number, questionBlockId: Common.Nullable<string>): void {
+    const updatedBlock = {
+      ...this.blocks[index],
+      props: {
+        ...this.blocks[index].props,
+        ifSelectedThenShowQuestionId: questionBlockId,
+      },
+    } as Block
+
+    this.blocks = R.update(index, updatedBlock)(this.blocks)
+  }
+
+  public toggleBlockObligationAt(index: number): void {
+    this.changeBlockPropsAt(index, {
+      isMandatory: !this.blocks[index].props.isMandatory,
+    })
+  }
+
+  public toggleBlockVisibilityAt(index: number): void {
+    this.changeBlockPropsAt(index, {
+      isHidden: !this.blocks[index].props.isHidden,
+    })
   }
 
   public unsetFocus(): void {
