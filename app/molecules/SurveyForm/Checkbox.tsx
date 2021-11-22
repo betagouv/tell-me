@@ -1,6 +1,6 @@
 import { Checkbox as SuiCheckbox } from '@singularity-ui/core'
+import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
 
 import SurveyField from '../../atoms/SurveyField'
 
@@ -24,7 +24,7 @@ export default function Checkbox({ label, name, value }) {
 }
 
 Checkbox.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  label: BetterPropTypes.string.isRequired,
+  name: BetterPropTypes.string.isRequired,
+  value: BetterPropTypes.string.isRequired,
 }

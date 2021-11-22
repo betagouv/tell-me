@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import {
   FunctionComponent,
   KeyboardEvent,
@@ -451,17 +451,17 @@ const Editable: EditableComponent = ({
 
 Editable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  as: PropTypes.any.isRequired,
-  defaultValue: PropTypes.string,
-  isFocused: PropTypes.bool,
-  isRichText: PropTypes.bool,
-  onBackspaceKeyDown: PropTypes.func,
-  onChange: PropTypes.func.isRequired,
-  onChangeType: PropTypes.func,
-  onDownKeyDown: PropTypes.func,
-  onEnterKeyDown: PropTypes.func,
-  onFocus: PropTypes.func,
-  onUpKeyDown: PropTypes.func,
+  as: BetterPropTypes.any.isRequired,
+  defaultValue: BetterPropTypes.string,
+  isFocused: BetterPropTypes.bool,
+  isRichText: BetterPropTypes.bool,
+  onBackspaceKeyDown: BetterPropTypes.func,
+  onChange: BetterPropTypes.func.isRequired,
+  onChangeType: BetterPropTypes.func,
+  onDownKeyDown: BetterPropTypes.func,
+  onEnterKeyDown: BetterPropTypes.func,
+  onFocus: BetterPropTypes.func,
+  onUpKeyDown: BetterPropTypes.func,
 }
 
 export default Editable

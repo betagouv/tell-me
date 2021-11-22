@@ -1,5 +1,5 @@
 import { Button, Dialog, TextInput } from '@singularity-ui/core'
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
 import { Bold, Italic, Link, X } from 'react-feather'
 import { usePopper } from 'react-popper'
@@ -304,9 +304,9 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sour
 
 FormatMenu.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  anchor: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired,
-  source: PropTypes.string.isRequired,
+  anchor: BetterPropTypes.any.isRequired,
+  onChange: BetterPropTypes.func.isRequired,
+  source: BetterPropTypes.string.isRequired,
 }
 
 export default FormatMenu

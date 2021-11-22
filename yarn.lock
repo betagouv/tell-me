@@ -2781,7 +2781,7 @@ bessel@^1.0.2:
   resolved "https://registry.yarnpkg.com/bessel/-/bessel-1.0.2.tgz#828812291e0b62e94959cdea43fac186e8a7202d"
   integrity sha512-Al3nHGQGqDYqqinXhQzmwmcRToe/3WyBv4N8aZc5Pef8xw2neZlR9VPi84Sa23JtgWcucu18HxVZrnI0fn2etw==
 
-better-prop-types@^1.0.0:
+better-prop-types@1.0.0, better-prop-types@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/better-prop-types/-/better-prop-types-1.0.0.tgz#fd6a162a361c605af9740ddcd3a823eb505e3574"
   integrity sha512-4k1ZHHDhOv51brN9XltZSoUD1Vci6GhOwOWCjMPOZvM0G0KzwH7EyoxXBBBDTlikwhW1YbM4D4BWM46akHkNwQ==

@@ -1,5 +1,5 @@
+import BetterPropTypes from 'better-prop-types'
 import { Formik, Form as FormikForm } from 'formik'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
@@ -38,12 +38,12 @@ Form.defaultProps = {
 }
 
 Form.propTypes = {
-  autoComplete: PropTypes.bool,
+  autoComplete: BetterPropTypes.bool,
   // eslint-disable-next-line react/forbid-prop-types
-  initialValues: PropTypes.any,
-  onSubmit: PropTypes.func.isRequired,
-  validate: PropTypes.func,
-  validationSchema: PropTypes.instanceOf(Yup.ObjectSchema).isRequired,
+  initialValues: BetterPropTypes.any,
+  onSubmit: BetterPropTypes.func.isRequired,
+  validate: BetterPropTypes.func,
+  validationSchema: BetterPropTypes.instanceOf(Yup.ObjectSchema).isRequired,
 }
 
 export default Object.assign(Form, {

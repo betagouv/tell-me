@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
@@ -131,5 +131,5 @@ export default function SignupModal({ onDone }) {
 }
 
 SignupModal.propTypes = {
-  onDone: PropTypes.func.isRequired,
+  onDone: BetterPropTypes.func.isRequired,
 }

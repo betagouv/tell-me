@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
@@ -182,21 +182,21 @@ const Block: FunctionComponent<BlockProps> = ({
 
 Block.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  block: PropTypes.any.isRequired,
-  index: PropTypes.number.isRequired,
-  isFocused: PropTypes.bool.isRequired,
-  onAppendBlockAt: PropTypes.func.isRequired,
-  onChangeAt: PropTypes.func.isRequired,
-  onChangeConditionAt: PropTypes.func.isRequired,
-  onChangeTypeAt: PropTypes.func.isRequired,
-  onDownKeyDown: PropTypes.func.isRequired,
-  onFocus: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-  onRemoveAt: PropTypes.func.isRequired,
-  onToggleObligation: PropTypes.func.isRequired,
-  onToggleVisibility: PropTypes.func.isRequired,
-  onUpKeyDown: PropTypes.func.isRequired,
-  questionBlockAsOptions: PropTypes.arrayOf(PropTypes.shape(SelectOptionShape)).isRequired,
+  block: BetterPropTypes.any.isRequired,
+  index: BetterPropTypes.number.isRequired,
+  isFocused: BetterPropTypes.bool.isRequired,
+  onAppendBlockAt: BetterPropTypes.func.isRequired,
+  onChangeAt: BetterPropTypes.func.isRequired,
+  onChangeConditionAt: BetterPropTypes.func.isRequired,
+  onChangeTypeAt: BetterPropTypes.func.isRequired,
+  onDownKeyDown: BetterPropTypes.func.isRequired,
+  onFocus: BetterPropTypes.func.isRequired,
+  onRemove: BetterPropTypes.func.isRequired,
+  onRemoveAt: BetterPropTypes.func.isRequired,
+  onToggleObligation: BetterPropTypes.func.isRequired,
+  onToggleVisibility: BetterPropTypes.func.isRequired,
+  onUpKeyDown: BetterPropTypes.func.isRequired,
+  questionBlockAsOptions: BetterPropTypes.arrayOf(BetterPropTypes.shape(SelectOptionShape)).isRequired,
 }
 
 export default Block

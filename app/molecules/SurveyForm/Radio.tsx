@@ -1,6 +1,6 @@
 import { Radio as SuiRadio } from '@singularity-ui/core'
+import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
 
 import SurveyField from '../../atoms/SurveyField'
 
@@ -25,8 +25,8 @@ export default function Radio({ countLetter, label, name, value }) {
 }
 
 Radio.propTypes = {
-  countLetter: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  countLetter: BetterPropTypes.string.isRequired,
+  label: BetterPropTypes.string.isRequired,
+  name: BetterPropTypes.string.isRequired,
+  value: BetterPropTypes.string.isRequired,
 }

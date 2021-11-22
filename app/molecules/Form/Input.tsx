@@ -1,6 +1,6 @@
 import { TextInput } from '@singularity-ui/core'
+import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
 import { ChangeEvent } from 'react'
 
 export default function Input({ autoComplete, helper, isDisabled, label, name, noLabel, onChange, type }) {
@@ -43,12 +43,12 @@ Input.defaultProps = {
 }
 
 Input.propTypes = {
-  autoComplete: PropTypes.string,
-  helper: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  noLabel: PropTypes.bool,
-  onChange: PropTypes.func,
-  type: PropTypes.string,
+  autoComplete: BetterPropTypes.string,
+  helper: BetterPropTypes.string,
+  isDisabled: BetterPropTypes.bool,
+  label: BetterPropTypes.string.isRequired,
+  name: BetterPropTypes.string.isRequired,
+  noLabel: BetterPropTypes.bool,
+  onChange: BetterPropTypes.func,
+  type: BetterPropTypes.string,
 }

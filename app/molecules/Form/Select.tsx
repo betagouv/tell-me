@@ -1,6 +1,6 @@
 import { Select as SingularitySelect } from '@singularity-ui/core'
+import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
 
 export default function Select({ helper, isAsync, isDisabled, isMulti, label, name, noLabel, options }) {
   const { errors, setFieldValue, submitCount, touched, values } = useFormikContext<any>()
@@ -41,16 +41,16 @@ Select.defaultProps = {
 }
 
 Select.propTypes = {
-  helper: PropTypes.string,
-  isAsync: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isMulti: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  noLabel: PropTypes.bool,
-  options: PropTypes.oneOfType([
+  helper: BetterPropTypes.string,
+  isAsync: BetterPropTypes.bool,
+  isDisabled: BetterPropTypes.bool,
+  isMulti: BetterPropTypes.bool,
+  label: BetterPropTypes.string.isRequired,
+  name: BetterPropTypes.string.isRequired,
+  noLabel: BetterPropTypes.bool,
+  options: BetterPropTypes.oneOfType([
     // eslint-disable-next-line react/forbid-prop-types
-    PropTypes.array,
-    PropTypes.func,
+    BetterPropTypes.array,
+    BetterPropTypes.func,
   ]).isRequired,
 }

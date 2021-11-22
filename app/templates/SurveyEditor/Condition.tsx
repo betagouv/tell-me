@@ -1,5 +1,5 @@
 import { Select } from '@singularity-ui/core'
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent } from 'react'
 import { CornerDownRight } from 'react-feather'
 import styled from 'styled-components'
@@ -39,9 +39,9 @@ const Condition: FunctionComponent<ConditionProps> = ({ block, onChange, questio
 
 Condition.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  block: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired,
-  questionBlockAsOptions: PropTypes.arrayOf(PropTypes.shape(SelectOptionShape)).isRequired,
+  block: BetterPropTypes.any.isRequired,
+  onChange: BetterPropTypes.func.isRequired,
+  questionBlockAsOptions: BetterPropTypes.arrayOf(BetterPropTypes.shape(SelectOptionShape)).isRequired,
 }
 
 export default Condition

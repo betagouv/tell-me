@@ -1,6 +1,6 @@
 import { Textarea as SuiTextarea } from '@singularity-ui/core'
+import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import SurveyField from '../../atoms/SurveyField'
@@ -24,6 +24,6 @@ export default function Textarea({ label, name }) {
 }
 
 Textarea.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  label: BetterPropTypes.string.isRequired,
+  name: BetterPropTypes.string.isRequired,
 }

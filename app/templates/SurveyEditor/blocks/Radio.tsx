@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import PropsTypes from 'prop-types'
+import PropsTypes from 'better-prop-types'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
 import styled from 'styled-components'
 

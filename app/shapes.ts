@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 
 export const SelectOptionShape = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  label: BetterPropTypes.string.isRequired,
+  value: BetterPropTypes.string.isRequired,
 }

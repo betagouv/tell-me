@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { useRef } from 'react'
 import styled from 'styled-components'
 
@@ -59,6 +59,6 @@ export default function Logo({ onChange, url }) {
 }
 
 Logo.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  url: PropTypes.string,
+  onChange: BetterPropTypes.func.isRequired,
+  url: BetterPropTypes.string,
 }

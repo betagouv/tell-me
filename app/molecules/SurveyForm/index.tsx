@@ -1,6 +1,6 @@
+import BetterPropTypes from 'better-prop-types'
 import { Formik, Form as FormikForm, useFormikContext } from 'formik'
 import debounce from 'lodash/debounce'
-import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import * as Yup from 'yup'
@@ -58,11 +58,11 @@ SurveyForm.defaultProps = {
 
 SurveyForm.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  initialValues: PropTypes.object,
-  onChange: PropTypes.func,
-  onSubmit: PropTypes.func.isRequired,
-  validate: PropTypes.func,
-  validationSchema: PropTypes.instanceOf(Yup.ObjectSchema).isRequired,
+  initialValues: BetterPropTypes.object,
+  onChange: BetterPropTypes.func,
+  onSubmit: BetterPropTypes.func.isRequired,
+  validate: BetterPropTypes.func,
+  validationSchema: BetterPropTypes.instanceOf(Yup.ObjectSchema).isRequired,
 }
 
 export default Object.assign(SurveyForm, {

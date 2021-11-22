@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent } from 'react'
 import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
 import styled, { css } from 'styled-components'
@@ -133,12 +133,12 @@ const Row: FunctionComponent<RowProps> = ({
 
 Row.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  block: PropTypes.any.isRequired,
-  onCondition: PropTypes.func,
-  onDelete: PropTypes.func.isRequired,
-  onMove: PropTypes.func,
-  onToggleObligation: PropTypes.func.isRequired,
-  onToggleVisibility: PropTypes.func.isRequired,
+  block: BetterPropTypes.any.isRequired,
+  onCondition: BetterPropTypes.func,
+  onDelete: BetterPropTypes.func.isRequired,
+  onMove: BetterPropTypes.func,
+  onToggleObligation: BetterPropTypes.func.isRequired,
+  onToggleVisibility: BetterPropTypes.func.isRequired,
 }
 
 export default Row

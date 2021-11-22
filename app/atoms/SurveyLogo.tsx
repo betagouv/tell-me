@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import PropTypes from 'prop-types'
+import BetterPropTypes from 'better-prop-types'
 import { forwardRef, ForwardRefRenderFunction } from 'react'
 import styled from 'styled-components'
 
@@ -46,7 +46,7 @@ const SurveyLogo = forwardRef(SurveyLogoWithoutRef)
 SurveyLogo.displayName = 'SurveyLogo'
 
 SurveyLogo.propTypes = {
-  url: PropTypes.string,
+  url: BetterPropTypes.string,
 }
 
 export default SurveyLogo

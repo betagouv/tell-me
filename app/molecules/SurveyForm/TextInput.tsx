@@ -1,6 +1,6 @@
 import { TextInput as SuiTextInput } from '@singularity-ui/core'
+import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
 
 import SurveyField from '../../atoms/SurveyField'
 
@@ -17,6 +17,6 @@ export default function TextInput({ label, name }) {
 }
 
 TextInput.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  label: BetterPropTypes.string.isRequired,
+  name: BetterPropTypes.string.isRequired,
 }
