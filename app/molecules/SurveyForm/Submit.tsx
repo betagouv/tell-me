@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  padding: 3rem 0;
+  padding: ${p => p.theme.padding.layout.large} 0;
 `
 
 export default function Submit({ children }) {
@@ -11,7 +11,7 @@ export default function Submit({ children }) {
 
   return (
     <Container>
-      <Button disabled={isSubmitting} type="submit" variant="contained">
+      <Button disabled={isSubmitting} type="submit">
         {children}
       </Button>
     </Container>

@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import Checkbox from './Checkbox'
+import FileInput from './FileInput'
 import Radio from './Radio'
 import Submit from './Submit'
 import Textarea from './Textarea'
@@ -66,6 +67,7 @@ SurveyForm.propTypes = {
 
 export default Object.assign(SurveyForm, {
   Checkbox,
+  FileInput,
   Radio,
   Submit,
   Textarea,

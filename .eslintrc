@@ -96,7 +96,7 @@
       "plugins": ["jest"],
       "env": {
         "browser": false,
-        "jest/globals": true,
+        "jest": true,
         "node": true
       },
       "rules": {
@@ -111,7 +111,6 @@
     },
     {
       "files": ["./scripts/**/*.js"],
-      "plugins": ["jest"],
       "env": {
         "browser": false,
         "node": true

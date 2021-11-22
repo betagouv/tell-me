@@ -6,6 +6,7 @@ import SurveyField from '../../atoms/SurveyField'
 
 export default function TextInput({ label, name }) {
   const { handleChange, values } = useFormikContext<any>()
+
   const value = values[name]
 
   return (

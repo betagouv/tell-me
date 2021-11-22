@@ -1,4 +1,5 @@
 import { Card, Table } from '@singularity-ui/core'
+import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
@@ -38,7 +39,7 @@ export default function OneTimeTokenList() {
     loadOneTimeTokens()
   }, [])
 
-  const columns = [
+  const columns: TableColumnProps[] = [
     {
       isSortable: true,
       key: 'user.email',

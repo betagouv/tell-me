@@ -7,11 +7,6 @@ import withApi from '../app/hocs/withApi'
 import withAuth from '../app/hocs/withAuth'
 import withLocalization from '../app/hocs/withLocalization'
 
-import '@fontsource/poppins/300.css'
-import '@fontsource/poppins/400.css'
-import '@fontsource/poppins/500.css'
-import '@fontsource/poppins/600.css'
-
 const GlobalStyleCustom = createGlobalStyle<{
   theme: {
     color: any
@@ -19,11 +14,6 @@ const GlobalStyleCustom = createGlobalStyle<{
 }>`
   html, body {
     height: 100%;
-  }
-
-  body {
-    color: ${p => p.theme.color.body.main};
-    line-height: 1.5;
   }
 
   body,

@@ -9,6 +9,7 @@ const Box = styled.div<any>`
   background-color: ${p => p.theme.color.primary.default};
   display: flex;
   flex-direction: column;
+  z-index: 1;
 `
 
 const Category = styled.div`

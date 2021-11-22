@@ -48,6 +48,12 @@ const MENU_ITEMS = [
   },
   {
     category: 'Input',
+    // Icon: DoneIcon,
+    label: 'File Upload',
+    type: SURVEY_BLOCK_TYPE.INPUT.FILE,
+  },
+  {
+    category: 'Input',
     // Icon: ShortTextIcon,
     label: 'Short Answer',
     type: SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER,
@@ -426,7 +432,6 @@ const Editable: EditableComponent = ({
         onKeyDown={controlKey}
         onMouseUp={handleSelection}
         spellCheck={false}
-        style={{ outline: 0 }}
         suppressContentEditableWarning
         {...props}
       />

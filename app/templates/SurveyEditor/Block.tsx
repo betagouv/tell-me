@@ -7,6 +7,7 @@ import SurveyManagerBlock from '../../libs/SurveyManager/Block'
 import Editable from '../../molecules/Editable'
 import { SelectOptionShape } from '../../shapes'
 import Checkbox from './blocks/Checkbox'
+import FileInput from './blocks/FileInput'
 import Paragraph from './blocks/Paragraph'
 import Question from './blocks/Question'
 import Radio from './blocks/Radio'
@@ -35,6 +36,11 @@ const SURVEY_BLOCK_TYPE_COMPONENT = {
     Component: Checkbox,
     isRichText: false,
     placeholder: `Choice`,
+  },
+  [SURVEY_BLOCK_TYPE.INPUT.FILE]: {
+    Component: FileInput,
+    isRichText: false,
+    placeholder: `Choose a file…`,
   },
   [SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER]: {
     Component: Textarea,

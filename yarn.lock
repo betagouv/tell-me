@@ -1360,11 +1360,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/poppins@4.5.0", "@fontsource/poppins@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/poppins/-/poppins-4.5.0.tgz#a419697b85864afbf8363f5c247b1e9d1f117564"
-  integrity sha512-RqgMIQqKHWNH3IUj+a0MAhlb4g5fftsXRTJ2bauefBmfM8Ja5q+qQZjKwyB/iCc+paJD320zFnLJ8G+y1ZyemQ==
-
 "@formatjs/cli@4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-4.4.0.tgz#e240f1a2caf31a59c148289d3a5cda6dc50f73ad"
@@ -1839,16 +1834,14 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@singularity-ui/core@2.0.0-alpha.7":
-  version "2.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/@singularity-ui/core/-/core-2.0.0-alpha.7.tgz#a5b24991dec8f37a7ffe52eb23d887e218f765a7"
-  integrity sha512-01cx92+7uHQ7VF9oFuS4cvI9yo85PmugRqOa57RRlsWqH+1zeqywgbqx+T68pzyaoOQmlOpjNrpqdklD/REd7Q==
+"@singularity-ui/core@2.0.0-beta.7":
+  version "2.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@singularity-ui/core/-/core-2.0.0-beta.7.tgz#15018951a4b9437f44fd85a6acbfd8d1a4669069"
+  integrity sha512-J3GLejxxeh6k2XYjc7Tm+zIEWcKPhPlJgSbZuXsTOkD0dsTVd1j8eoep9kxWPa+PLnJsjEUMtkYtO2TJp4dTTQ==
   dependencies:
-    "@fontsource/poppins" "^4.5.0"
-    prop-types "^15.7.2"
+    better-prop-types "^1.0.0"
     ramda "^0.27.1"
     react-feather "^2.0.9"
-    react-paginate "^8.0.0"
     react-select "^5.1.0"
     sha1 "^1.1.1"
     tslib "2.3.1"
@@ -2089,7 +2082,7 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.4.1.tgz#e1303048d5389563e130f5bdd89d37a99acb75eb"
   integrity sha512-Fo79ojj3vdEZOHg3wR9ksAMRz4P3S5fDB5e/YWZiFnyFQI1WY2Vftu9XoXVVtJfxB7Bpce/QTqWSSntkz2Znrw==
 
-"@types/prop-types@*":
+"@types/prop-types@*", "@types/prop-types@15.7.4":
   version "15.7.4"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
@@ -2787,6 +2780,14 @@ bessel@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/bessel/-/bessel-1.0.2.tgz#828812291e0b62e94959cdea43fac186e8a7202d"
   integrity sha512-Al3nHGQGqDYqqinXhQzmwmcRToe/3WyBv4N8aZc5Pef8xw2neZlR9VPi84Sa23JtgWcucu18HxVZrnI0fn2etw==
+
+better-prop-types@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/better-prop-types/-/better-prop-types-1.0.0.tgz#fd6a162a361c605af9740ddcd3a823eb505e3574"
+  integrity sha512-4k1ZHHDhOv51brN9XltZSoUD1Vci6GhOwOWCjMPOZvM0G0KzwH7EyoxXBBBDTlikwhW1YbM4D4BWM46akHkNwQ==
+  dependencies:
+    "@types/prop-types" "15.7.4"
+    prop-types "15.7.2"
 
 bhala@2.0.2:
   version "2.0.2"
@@ -7120,7 +7121,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.7.2, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7309,13 +7310,6 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
-react-paginate@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-8.0.0.tgz#b03b4ec221bffd8ecb16dd4c1295c33f8c6fd3df"
-  integrity sha512-l5uNYWqVIhFBljQoyLuMnZ8ykCdoTz6aYfg9+fUdtWy/H9rELBgVBPEA99jVpTsBxqAxXKBZ/sdDrdN4b0hsvg==
-  dependencies:
-    prop-types "^15.6.1"
 
 react-popper@2.2.5:
   version "2.2.5"

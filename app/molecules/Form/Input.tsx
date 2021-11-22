@@ -7,7 +7,7 @@ export default function Input({ autoComplete, helper, isDisabled, label, name, n
   const { errors, handleChange, submitCount, touched, values } = useFormikContext<any>()
 
   const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
-  const maybeError = hasError ? errors[name] : null
+  const maybeError = hasError ? String(errors[name]) : undefined
 
   const checkChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (onChange !== null) {

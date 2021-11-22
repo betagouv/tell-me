@@ -140,3 +140,6 @@ sketch
 
 /assets/*
 !/assets/README.md
+!/assets/private
+/assets/private/*
+!/assets/private/README.md

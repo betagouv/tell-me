@@ -32,6 +32,7 @@ export const SURVEY_BLOCK_TYPE = {
     CHECKBOX: 'INPUT.CHECKBOX',
     CHOICE: 'INPUT.CHOICE',
     EMAIL: 'INPUT.EMAIL',
+    FILE: 'INPUT.FILE',
     LINEAR_SCALE: 'INPUT.LINEAR_SCALE',
     LINK: 'INPUT.LINK',
     LONG_ANSWER: 'INPUT.LONG_ANSWER',
@@ -61,16 +62,6 @@ export const SURVEY_ENTRIES_DOWLOAD_EXTENSION = {
 }
 
 export const SURVEY_ENTRIES_DOWLOAD_EXTENSIONS = Object.values(SURVEY_ENTRIES_DOWLOAD_EXTENSION)
-
-export const QUESTION_TYPE = {
-  GRADE: 'Grade',
-  INPUT: 'Input',
-  NUMBER: 'Number',
-  RADIO: 'Radio',
-  SELECT: 'Select',
-}
-
-export const QUESTION_TYPES = Object.values(QUESTION_TYPE)
 
 export const USER_ROLE = {
   ADMINISTRATOR: 'ADMINISTRATOR',

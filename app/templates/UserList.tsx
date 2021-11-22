@@ -1,4 +1,5 @@
 import { Button, Card, Table } from '@singularity-ui/core'
+import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Edit, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
@@ -38,7 +39,7 @@ export default function UserList() {
     history.push(`/user/${id}`)
   }
 
-  const columns = [
+  const columns: TableColumnProps[] = [
     {
       isSortable: true,
       key: 'email',
@@ -59,7 +60,9 @@ export default function UserList() {
     },
     {
       key: 'isActive',
-      label: '',
+      label: 'Activated',
+      labelOff: 'This user account is inactive.',
+      labelOn: 'This user account is active.',
       type: 'boolean',
     },
     {

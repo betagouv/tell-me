@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 import SurveyEntryAnswer from './SurveyEntryAnswer'
+import SurveyEntryFile from './SurveyEntryFile'
 
 function SurveyEntry() {
   if (mongoose.models.SurveyEntry) {
@@ -19,6 +20,11 @@ function SurveyEntry() {
         answers: {
           required: true,
           type: [SurveyEntryAnswer],
+        },
+        files: {
+          required: false,
+          type: [SurveyEntryFile],
+          default: [],
         },
       },
       {

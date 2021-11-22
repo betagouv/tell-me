@@ -13,11 +13,12 @@ const StyledTextarea = styled(SuiTextarea)`
 
 export default function Textarea({ label, name }) {
   const { handleChange, values } = useFormikContext<any>()
+
   const value = values[name]
 
   return (
     <SurveyField>
-      <StyledTextarea defaultValue={value} name={name} onChange={handleChange} placeholder={label} type="text" />
+      <StyledTextarea defaultValue={value} name={name} onChange={handleChange} placeholder={label} />
     </SurveyField>
   )
 }

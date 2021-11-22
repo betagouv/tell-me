@@ -6,7 +6,7 @@ export default function Select({ helper, isAsync, isDisabled, isMulti, label, na
   const { errors, setFieldValue, submitCount, touched, values } = useFormikContext<any>()
 
   const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
-  const maybeError = hasError ? errors[name] : null
+  const maybeError = hasError ? String(errors[name]) : undefined
 
   const updateFormikValues = option => {
     setFieldValue(name, option)
