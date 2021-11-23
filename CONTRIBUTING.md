@@ -38,6 +38,7 @@ yarn db:migrate
 > 📋 **Note**  
 > The `yarn` command install the dependencies but also run the `scripts/dev/setup.js` scripts. This script does the
 > following tasks, if necessary:
+>
 > - Copy `.env.example` file to a `.env` one.
 > - Generate a RSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io))
 
