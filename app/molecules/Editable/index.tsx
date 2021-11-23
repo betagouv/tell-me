@@ -184,7 +184,6 @@ const Editable: EditableComponent = ({
     if (!isRichText) {
       const newValue = componentRef.current.innerText
 
-      controlledValueRef.current = newValue
       if (hasBlockMenu && !isBlockMenuOpen) {
         lastValueBeforeOpeningBlockMenuRef.current = newValue
       }
@@ -204,7 +203,6 @@ const Editable: EditableComponent = ({
 
     const newValue = componentRef.current.innerHTML
 
-    controlledValueRef.current = newValue
     if (hasBlockMenu && !isBlockMenuOpen) {
       lastValueBeforeOpeningBlockMenuRef.current = newValue
     }
