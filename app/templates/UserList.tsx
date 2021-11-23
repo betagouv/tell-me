@@ -1,7 +1,7 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
-import { Edit, Trash } from 'react-feather'
+import { Edit, Trash, UserCheck, UserX } from 'react-feather'
 import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 
@@ -59,6 +59,8 @@ export default function UserList() {
       }),
     },
     {
+      IconOff: UserX,
+      IconOn: UserCheck,
       key: 'isActive',
       label: 'Activated',
       labelOff: 'This user account is inactive.',
