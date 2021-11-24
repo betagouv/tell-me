@@ -13,6 +13,8 @@ import SetupModal from '../app/organisms/SetupModal'
 import Dashboard from '../app/templates/Dashboard'
 import MyConfig from '../app/templates/MyConfig'
 import OneTimeTokenList from '../app/templates/OneTimeTokenList'
+import PersonalAccessTokenEditor from '../app/templates/PersonalAccessTokenEditor'
+import PersonalAccessTokenList from '../app/templates/PersonalAccessTokenList'
 import RefreshTokenList from '../app/templates/RefreshTokenList'
 import SurveyConfig from '../app/templates/SurveyConfig'
 import SurveyEditor from '../app/templates/SurveyEditor'
@@ -96,6 +98,13 @@ export default function SpaPage() {
 
             <Route path="/one-time-tokens">
               <OneTimeTokenList />
+            </Route>
+
+            <Route path="/personal-access-token/:id">
+              <PersonalAccessTokenEditor />
+            </Route>
+            <Route path="/personal-access-tokens">
+              <PersonalAccessTokenList />
             </Route>
 
             <Route path="/refresh-tokens">

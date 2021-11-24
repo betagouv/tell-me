@@ -1,0 +1,47 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+// =========================================================
+// Constants
+
+enum UserRole {
+  ADMINISTRATOR
+  MANAGER
+  MEMBER
+}
+
+// =========================================================
+// Models
+
+model PersonalAccessToken {
+  id        String   @id @default(cuid())
+  name      String
+  value     String   @unique
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model User {
+  id        String   @id @default(cuid())
+  legacyId  String   @unique
+  role      UserRole @default(MEMBER)
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Project PersonalAccessToken[]
+}

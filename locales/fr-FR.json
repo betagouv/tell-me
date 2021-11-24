@@ -11,6 +11,10 @@
     "defaultMessage": "Tableau de bord",
     "description": "[Dashboard] Page title."
   },
+  "0llMw7": {
+    "defaultMessage": "Valeur",
+    "description": "[Personal Access Token Editor] Form value input label."
+  },
   "20hT19": {
     "defaultMessage": "IP",
     "description": "[Refresh Tokens List] Table \"IP\" column label."
@@ -22,6 +26,10 @@
   "73PR4k": {
     "defaultMessage": "Supprimer ce jeton jetable",
     "description": "[One Time Tokens List] Table row \"token deletion\" button label."
+  },
+  "7LF9Gb": {
+    "defaultMessage": "Mettre à jour",
+    "description": "[Personal Access Token Editor] Form update button label."
   },
   "8F0yyx": {
     "defaultMessage": "Supprimer cet·te utilisateur·rices",
@@ -39,14 +47,6 @@
     "defaultMessage": "Mot de passe",
     "description": "[Setup Modal] Password input label."
   },
-  "AOWpq6": {
-    "defaultMessage": "Mot de passe",
-    "description": "[Survey Editor] Form password input label."
-  },
-  "AYV/5T": {
-    "defaultMessage": "Nouvel·le utilisateur·rice",
-    "description": "[Users List] New user button label."
-  },
   "Ci9rPk": {
     "defaultMessage": "Créer",
     "description": "[Setup Modal] Submit button label."
@@ -58,6 +58,10 @@
   "DPOyaV": {
     "defaultMessage": "Email",
     "description": "[Setup Modal] Email input label."
+  },
+  "Db1A9P": {
+    "defaultMessage": "Nom",
+    "description": "[Personal Access Token Editor] Form name input label."
   },
   "E/vx8U": {
     "defaultMessage": "Message de remerciement",
@@ -77,7 +81,11 @@
   },
   "FC8ax/": {
     "defaultMessage": "Édition d’un·e utilisateur·rice",
-    "description": "[Survey Editor] User edition page title."
+    "description": "[User Editor] Edition page title."
+  },
+  "HF2UUz": {
+    "defaultMessage": "Jetons d’accès personnel",
+    "description": "[Personal Access Tokens List] Page title."
   },
   "I8y4ic": {
     "defaultMessage": "Se connecter",
@@ -95,9 +103,17 @@
     "defaultMessage": "Répêtez votre nouveau mot de passe",
     "description": "[Signup Modal] Password repeat input label."
   },
+  "KahMf6": {
+    "defaultMessage": "Email",
+    "description": "[Personal Access Tokens List] Table \"email\" column label."
+  },
   "N68/ff": {
     "defaultMessage": "Slug",
     "description": "[Survey Settings] Form slug input label."
+  },
+  "NIzhyl": {
+    "defaultMessage": "Nouveau jeton d’accès personnel",
+    "description": "[Personal Access Tokens List] New personal access token button label."
   },
   "NNlf6B": {
     "defaultMessage": "Mes préférences",
@@ -105,27 +121,35 @@
   },
   "Q0wotK": {
     "defaultMessage": "Email",
-    "description": "[Survey Editor] Form email input label."
+    "description": "[User Editor] Form email input label."
   },
   "QBtMwD": {
     "defaultMessage": "Email",
     "description": "[Users List] Table \"email\" column label."
   },
-  "SbH89J": {
-    "defaultMessage": "Nouvel·e utilisateur·rice",
-    "description": "[Survey Editor] User creation page title."
+  "QWfMAC": {
+    "defaultMessage": "Nouveau jeton d’accès personnel",
+    "description": "[Personal Access Token Editor] Creation page title."
   },
   "TAgUUN": {
     "defaultMessage": "IP",
     "description": "[One Time Tokens List] Table \"IP\" column label."
   },
+  "TYZzVl": {
+    "defaultMessage": "Nom",
+    "description": "[Personal Access Tokens List] Table \"name\" column label."
+  },
   "VXF18U": {
     "defaultMessage": "Compte actif",
-    "description": "[Survey Editor] Form activated account checkbox label."
+    "description": "[User Editor] Form activated account checkbox label."
+  },
+  "WL5w1n": {
+    "defaultMessage": "Jetons d’accès personnel",
+    "description": "[Sidebar Main Menu] Personal Access Tokens label."
   },
   "XJmbHw": {
     "defaultMessage": "Rôle",
-    "description": "[Survey Editor] Form role select label."
+    "description": "[User Editor] Form role select label."
   },
   "YJ9OxG": {
     "defaultMessage": "Votre email",
@@ -140,36 +164,40 @@
     "description": "[Survey Answers List] Export answers in CSV format button label."
   },
   "YzeZvW": {
-    "defaultMessage": "Published",
+    "defaultMessage": "Publié",
     "description": "[Survey Settings] Form published checkbox label."
   },
   "ZxR2Ts": {
     "defaultMessage": "Réponses au questionnaire",
     "description": "[Survey Answers List] Survey answers list subtitle."
   },
+  "bVPj59": {
+    "defaultMessage": "Supprimer cet jeton d’accès personnel",
+    "description": "[Personal Access Tokens List] Table row \"token deletion\" button label."
+  },
   "bdTRI9": {
-    "defaultMessage": "Mettre à jour les préférences du formulaire",
+    "defaultMessage": "Mettre à jour",
     "description": "[Survey Settings] Form update button label."
   },
   "bkZg0U": {
     "defaultMessage": "Jetons de rafraîchissement",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
   },
+  "cZz32J": {
+    "defaultMessage": "Edit PAT",
+    "description": "[Personal Access Token Editor] Edition page title."
+  },
   "cvJp/S": {
     "defaultMessage": "Cette réponse est requise pour valider le questionnaire :",
     "description": "[Public Survey] Missing answer error message for a required question."
-  },
-  "d97zYv": {
-    "defaultMessage": "Créer l’utilisateur·rice",
-    "description": "[Survey Editor] Form create button label."
   },
   "fWOJDC": {
     "defaultMessage": "Un nouveau mot de passe",
     "description": "[Signup Modal] Password input label."
   },
   "h4+RiJ": {
-    "defaultMessage": "Mettre à jour l’utilisateur·rice",
-    "description": "[Survey Editor] Form update button label."
+    "defaultMessage": "Mettre à jour",
+    "description": "[User Editor] Form update button label."
   },
   "hWoiIQ": {
     "defaultMessage": "Répêtez votre nouveau mot de passe",
@@ -187,6 +215,10 @@
     "defaultMessage": "Email",
     "description": "[One Time Tokens List] Table \"email\" column label."
   },
+  "j3Zg1g": {
+    "defaultMessage": "Expiré le",
+    "description": "[Personal Access Tokens List] Table \"Expired At\" column label."
+  },
   "jGB2t1": {
     "defaultMessage": "Email",
     "description": "[Refresh Tokens List] Table \"email\" column label."
@@ -199,8 +231,12 @@
     "defaultMessage": "Langue",
     "description": "[My Settings] Form language select label."
   },
+  "nsfyN3": {
+    "defaultMessage": "Créer",
+    "description": "[Personal Access Token Editor] Form create button label."
+  },
   "pLn6i2": {
-    "defaultMessage": "Mettre à jour mes préférences",
+    "defaultMessage": "Mettre à jour",
     "description": "[My Settings] Form update button label."
   },
   "pglohm": {

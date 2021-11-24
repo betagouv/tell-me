@@ -17,6 +17,12 @@
       "value": "Tableau de bord"
     }
   ],
+  "0llMw7": [
+    {
+      "type": 0,
+      "value": "Valeur"
+    }
+  ],
   "20hT19": [
     {
       "type": 0,
@@ -33,6 +39,12 @@
     {
       "type": 0,
       "value": "Supprimer ce jeton jetable"
+    }
+  ],
+  "7LF9Gb": [
+    {
+      "type": 0,
+      "value": "Mettre à jour"
     }
   ],
   "8F0yyx": [
@@ -59,18 +71,6 @@
       "value": "Mot de passe"
     }
   ],
-  "AOWpq6": [
-    {
-      "type": 0,
-      "value": "Mot de passe"
-    }
-  ],
-  "AYV/5T": [
-    {
-      "type": 0,
-      "value": "Nouvel·le utilisateur·rice"
-    }
-  ],
   "Ci9rPk": [
     {
       "type": 0,
@@ -87,6 +87,12 @@
     {
       "type": 0,
       "value": "Email"
+    }
+  ],
+  "Db1A9P": [
+    {
+      "type": 0,
+      "value": "Nom"
     }
   ],
   "E/vx8U": [
@@ -119,6 +125,12 @@
       "value": "Édition d’un·e utilisateur·rice"
     }
   ],
+  "HF2UUz": [
+    {
+      "type": 0,
+      "value": "Jetons d’accès personnel"
+    }
+  ],
   "I8y4ic": [
     {
       "type": 0,
@@ -143,10 +155,22 @@
       "value": "Répêtez votre nouveau mot de passe"
     }
   ],
+  "KahMf6": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "N68/ff": [
     {
       "type": 0,
       "value": "Slug"
+    }
+  ],
+  "NIzhyl": [
+    {
+      "type": 0,
+      "value": "Nouveau jeton d’accès personnel"
     }
   ],
   "NNlf6B": [
@@ -167,10 +191,10 @@
       "value": "Email"
     }
   ],
-  "SbH89J": [
+  "QWfMAC": [
     {
       "type": 0,
-      "value": "Nouvel·e utilisateur·rice"
+      "value": "Nouveau jeton d’accès personnel"
     }
   ],
   "TAgUUN": [
@@ -179,10 +203,22 @@
       "value": "IP"
     }
   ],
+  "TYZzVl": [
+    {
+      "type": 0,
+      "value": "Nom"
+    }
+  ],
   "VXF18U": [
     {
       "type": 0,
       "value": "Compte actif"
+    }
+  ],
+  "WL5w1n": [
+    {
+      "type": 0,
+      "value": "Jetons d’accès personnel"
     }
   ],
   "XJmbHw": [
@@ -212,7 +248,7 @@
   "YzeZvW": [
     {
       "type": 0,
-      "value": "Published"
+      "value": "Publié"
     }
   ],
   "ZxR2Ts": [
@@ -221,10 +257,16 @@
       "value": "Réponses au questionnaire"
     }
   ],
+  "bVPj59": [
+    {
+      "type": 0,
+      "value": "Supprimer cet jeton d’accès personnel"
+    }
+  ],
   "bdTRI9": [
     {
       "type": 0,
-      "value": "Mettre à jour les préférences du formulaire"
+      "value": "Mettre à jour"
     }
   ],
   "bkZg0U": [
@@ -233,16 +275,16 @@
       "value": "Jetons de rafraîchissement"
     }
   ],
+  "cZz32J": [
+    {
+      "type": 0,
+      "value": "Edit PAT"
+    }
+  ],
   "cvJp/S": [
     {
       "type": 0,
       "value": "Cette réponse est requise pour valider le questionnaire :"
-    }
-  ],
-  "d97zYv": [
-    {
-      "type": 0,
-      "value": "Créer l’utilisateur·rice"
     }
   ],
   "fWOJDC": [
@@ -254,7 +296,7 @@
   "h4+RiJ": [
     {
       "type": 0,
-      "value": "Mettre à jour l’utilisateur·rice"
+      "value": "Mettre à jour"
     }
   ],
   "hWoiIQ": [
@@ -281,6 +323,12 @@
       "value": "Email"
     }
   ],
+  "j3Zg1g": [
+    {
+      "type": 0,
+      "value": "Expiré le"
+    }
+  ],
   "jGB2t1": [
     {
       "type": 0,
@@ -299,10 +347,16 @@
       "value": "Langue"
     }
   ],
+  "nsfyN3": [
+    {
+      "type": 0,
+      "value": "Créer"
+    }
+  ],
   "pLn6i2": [
     {
       "type": 0,
-      "value": "Mettre à jour mes préférences"
+      "value": "Mettre à jour"
     }
   ],
   "pglohm": [

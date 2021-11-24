@@ -18,7 +18,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn --frozen-lockfile --production
+RUN yarn --frozen-lockfile
 RUN yarn build
 
 ENTRYPOINT [ "yarn", "start" ]

@@ -102,7 +102,7 @@ export default function MyConfig() {
           <Field>
             <Form.Submit>
               {intl.formatMessage({
-                defaultMessage: 'Update my settings',
+                defaultMessage: 'Update',
                 description: '[My Settings] Form update button label.',
                 id: 'pLn6i2',
               })}

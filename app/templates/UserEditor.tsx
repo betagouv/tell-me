@@ -34,8 +34,6 @@ export default function UserEditor() {
   const isMounted = useIsMounted()
   const api = useApi()
 
-  const isNew = id === 'new'
-
   const loadUser = async () => {
     const maybeBody = await api.get(`user/${id}`)
     if (maybeBody === null || maybeBody.hasError) {
@@ -56,13 +54,6 @@ export default function UserEditor() {
   }
 
   useEffect(() => {
-    if (isNew) {
-      setInitialValues({})
-      setIsLoading(false)
-
-      return
-    }
-
     loadUser()
   }, [])
 
@@ -70,7 +61,7 @@ export default function UserEditor() {
     const userData: any = R.pick(['email', 'firstName', 'lastName', 'isActive'])(values)
     userData.role = values.roleAsOption.value
 
-    const maybeBody = isNew ? await api.post(`user/${id}`, values) : await api.patch(`user/${id}`, userData)
+    const maybeBody = await api.patch(`user/${id}`, userData)
     if (maybeBody === null || maybeBody.hasError) {
       setErrors({
         email: 'Sorry, but something went wrong.',
@@ -91,17 +82,11 @@ export default function UserEditor() {
     <AdminBox>
       <AdminHeader>
         <Title>
-          {isNew
-            ? intl.formatMessage({
-                defaultMessage: 'New user',
-                description: '[Survey Editor] User creation page title.',
-                id: 'SbH89J',
-              })
-            : intl.formatMessage({
-                defaultMessage: 'Edit user',
-                description: '[Survey Editor] User edition page title.',
-                id: 'FC8ax/',
-              })}
+          {intl.formatMessage({
+            defaultMessage: 'Edit user',
+            description: '[User Editor] Edition page title.',
+            id: 'FC8ax/',
+          })}
         </Title>
       </AdminHeader>
 
@@ -110,32 +95,18 @@ export default function UserEditor() {
           <Form.Input
             label={intl.formatMessage({
               defaultMessage: 'Email',
-              description: '[Survey Editor] Form email input label.',
+              description: '[User Editor] Form email input label.',
               id: 'Q0wotK',
             })}
             name="email"
             type="email"
           />
 
-          {isNew && (
-            <Field>
-              <Form.Input
-                label={intl.formatMessage({
-                  defaultMessage: 'Password',
-                  description: '[Survey Editor] Form password input label.',
-                  id: 'AOWpq6',
-                })}
-                name="password"
-                type="password"
-              />
-            </Field>
-          )}
-
           <Field>
             <Form.Select
               label={intl.formatMessage({
                 defaultMessage: 'Role',
-                description: '[Survey Editor] Form role select label.',
+                description: '[User Editor] Form role select label.',
                 id: 'XJmbHw',
               })}
               name="roleAsOption"
@@ -147,7 +118,7 @@ export default function UserEditor() {
             <Form.Checkbox
               label={intl.formatMessage({
                 defaultMessage: 'Activated account',
-                description: '[Survey Editor] Form activated account checkbox label.',
+                description: '[User Editor] Form activated account checkbox label.',
                 id: 'VXF18U',
               })}
               name="isActive"
@@ -156,17 +127,11 @@ export default function UserEditor() {
 
           <Field>
             <Form.Submit>
-              {isNew
-                ? intl.formatMessage({
-                    defaultMessage: 'Create user',
-                    description: '[Survey Editor] Form create button label.',
-                    id: 'd97zYv',
-                  })
-                : intl.formatMessage({
-                    defaultMessage: 'Update user',
-                    description: '[Survey Editor] Form update button label.',
-                    id: 'h4+RiJ',
-                  })}
+              {intl.formatMessage({
+                defaultMessage: 'Update',
+                description: '[User Editor] Form update button label.',
+                id: 'h4+RiJ',
+              })}
             </Form.Submit>
           </Field>
         </Form>

@@ -11,6 +11,10 @@
     "defaultMessage": "Dashboard",
     "description": "[Dashboard] Page title."
   },
+  "0llMw7": {
+    "defaultMessage": "Value",
+    "description": "[Personal Access Token Editor] Form value input label."
+  },
   "20hT19": {
     "defaultMessage": "IP",
     "description": "[Refresh Tokens List] Table \"IP\" column label."
@@ -22,6 +26,10 @@
   "73PR4k": {
     "defaultMessage": "Delete this one time token",
     "description": "[One Time Tokens List] Table row \"token deletion\" button label."
+  },
+  "7LF9Gb": {
+    "defaultMessage": "Update",
+    "description": "[Personal Access Token Editor] Form update button label."
   },
   "8F0yyx": {
     "defaultMessage": "Delete this user",
@@ -39,14 +47,6 @@
     "defaultMessage": "A new password",
     "description": "[Setup Modal] Password input label."
   },
-  "AOWpq6": {
-    "defaultMessage": "Password",
-    "description": "[Survey Editor] Form password input label."
-  },
-  "AYV/5T": {
-    "defaultMessage": "New user",
-    "description": "[Users List] New user button label."
-  },
   "Ci9rPk": {
     "defaultMessage": "Create",
     "description": "[Setup Modal] Submit button label."
@@ -58,6 +58,10 @@
   "DPOyaV": {
     "defaultMessage": "Your email",
     "description": "[Setup Modal] Email input label."
+  },
+  "Db1A9P": {
+    "defaultMessage": "Name",
+    "description": "[Personal Access Token Editor] Form name input label."
   },
   "E/vx8U": {
     "defaultMessage": "Thank You message",
@@ -77,7 +81,11 @@
   },
   "FC8ax/": {
     "defaultMessage": "Edit user",
-    "description": "[Survey Editor] User edition page title."
+    "description": "[User Editor] Edition page title."
+  },
+  "HF2UUz": {
+    "defaultMessage": "Personal Access Tokens",
+    "description": "[Personal Access Tokens List] Page title."
   },
   "I8y4ic": {
     "defaultMessage": "Log In",
@@ -95,9 +103,17 @@
     "defaultMessage": "Your new password (again)",
     "description": "[Signup Modal] Password repeat input label."
   },
+  "KahMf6": {
+    "defaultMessage": "Email",
+    "description": "[Personal Access Tokens List] Table \"email\" column label."
+  },
   "N68/ff": {
     "defaultMessage": "Slug",
     "description": "[Survey Settings] Form slug input label."
+  },
+  "NIzhyl": {
+    "defaultMessage": "New personal access token",
+    "description": "[Personal Access Tokens List] New personal access token button label."
   },
   "NNlf6B": {
     "defaultMessage": "My Settings",
@@ -105,27 +121,35 @@
   },
   "Q0wotK": {
     "defaultMessage": "Email",
-    "description": "[Survey Editor] Form email input label."
+    "description": "[User Editor] Form email input label."
   },
   "QBtMwD": {
     "defaultMessage": "Email",
     "description": "[Users List] Table \"email\" column label."
   },
-  "SbH89J": {
-    "defaultMessage": "New user",
-    "description": "[Survey Editor] User creation page title."
+  "QWfMAC": {
+    "defaultMessage": "New PAT",
+    "description": "[Personal Access Token Editor] Creation page title."
   },
   "TAgUUN": {
     "defaultMessage": "IP",
     "description": "[One Time Tokens List] Table \"IP\" column label."
   },
+  "TYZzVl": {
+    "defaultMessage": "Name",
+    "description": "[Personal Access Tokens List] Table \"name\" column label."
+  },
   "VXF18U": {
     "defaultMessage": "Activated account",
-    "description": "[Survey Editor] Form activated account checkbox label."
+    "description": "[User Editor] Form activated account checkbox label."
+  },
+  "WL5w1n": {
+    "defaultMessage": "Personal Access Tokens",
+    "description": "[Sidebar Main Menu] Personal Access Tokens label."
   },
   "XJmbHw": {
     "defaultMessage": "Role",
-    "description": "[Survey Editor] Form role select label."
+    "description": "[User Editor] Form role select label."
   },
   "YJ9OxG": {
     "defaultMessage": "Your email",
@@ -147,29 +171,33 @@
     "defaultMessage": "Survey Answers",
     "description": "[Survey Answers List] Survey answers list subtitle."
   },
+  "bVPj59": {
+    "defaultMessage": "Delete this personal access token",
+    "description": "[Personal Access Tokens List] Table row \"token deletion\" button label."
+  },
   "bdTRI9": {
-    "defaultMessage": "Update survey settings",
+    "defaultMessage": "Update",
     "description": "[Survey Settings] Form update button label."
   },
   "bkZg0U": {
     "defaultMessage": "Refresh Tokens",
     "description": "[Sidebar Main Menu] Refresh Tokens label."
   },
+  "cZz32J": {
+    "defaultMessage": "Edit PAT",
+    "description": "[Personal Access Token Editor] Edition page title."
+  },
   "cvJp/S": {
     "defaultMessage": "This answer is required to validate the form.",
     "description": "[Public Survey] Missing answer error message for a required question."
-  },
-  "d97zYv": {
-    "defaultMessage": "Create user",
-    "description": "[Survey Editor] Form create button label."
   },
   "fWOJDC": {
     "defaultMessage": "A new password",
     "description": "[Signup Modal] Password input label."
   },
   "h4+RiJ": {
-    "defaultMessage": "Update user",
-    "description": "[Survey Editor] Form update button label."
+    "defaultMessage": "Update",
+    "description": "[User Editor] Form update button label."
   },
   "hWoiIQ": {
     "defaultMessage": "Your new password (again)",
@@ -187,6 +215,10 @@
     "defaultMessage": "Email",
     "description": "[One Time Tokens List] Table \"email\" column label."
   },
+  "j3Zg1g": {
+    "defaultMessage": "Expired at",
+    "description": "[Personal Access Tokens List] Table \"Expired At\" column label."
+  },
   "jGB2t1": {
     "defaultMessage": "Email",
     "description": "[Refresh Tokens List] Table \"email\" column label."
@@ -199,8 +231,12 @@
     "defaultMessage": "Language",
     "description": "[My Settings] Form language select label."
   },
+  "nsfyN3": {
+    "defaultMessage": "Create",
+    "description": "[Personal Access Token Editor] Form create button label."
+  },
   "pLn6i2": {
-    "defaultMessage": "Update my settings",
+    "defaultMessage": "Update",
     "description": "[My Settings] Form update button label."
   },
   "pglohm": {

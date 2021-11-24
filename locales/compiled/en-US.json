@@ -17,6 +17,12 @@
       "value": "Dashboard"
     }
   ],
+  "0llMw7": [
+    {
+      "type": 0,
+      "value": "Value"
+    }
+  ],
   "20hT19": [
     {
       "type": 0,
@@ -33,6 +39,12 @@
     {
       "type": 0,
       "value": "Delete this one time token"
+    }
+  ],
+  "7LF9Gb": [
+    {
+      "type": 0,
+      "value": "Update"
     }
   ],
   "8F0yyx": [
@@ -59,18 +71,6 @@
       "value": "A new password"
     }
   ],
-  "AOWpq6": [
-    {
-      "type": 0,
-      "value": "Password"
-    }
-  ],
-  "AYV/5T": [
-    {
-      "type": 0,
-      "value": "New user"
-    }
-  ],
   "Ci9rPk": [
     {
       "type": 0,
@@ -87,6 +87,12 @@
     {
       "type": 0,
       "value": "Your email"
+    }
+  ],
+  "Db1A9P": [
+    {
+      "type": 0,
+      "value": "Name"
     }
   ],
   "E/vx8U": [
@@ -119,6 +125,12 @@
       "value": "Edit user"
     }
   ],
+  "HF2UUz": [
+    {
+      "type": 0,
+      "value": "Personal Access Tokens"
+    }
+  ],
   "I8y4ic": [
     {
       "type": 0,
@@ -143,10 +155,22 @@
       "value": "Your new password (again)"
     }
   ],
+  "KahMf6": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "N68/ff": [
     {
       "type": 0,
       "value": "Slug"
+    }
+  ],
+  "NIzhyl": [
+    {
+      "type": 0,
+      "value": "New personal access token"
     }
   ],
   "NNlf6B": [
@@ -167,10 +191,10 @@
       "value": "Email"
     }
   ],
-  "SbH89J": [
+  "QWfMAC": [
     {
       "type": 0,
-      "value": "New user"
+      "value": "New PAT"
     }
   ],
   "TAgUUN": [
@@ -179,10 +203,22 @@
       "value": "IP"
     }
   ],
+  "TYZzVl": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
   "VXF18U": [
     {
       "type": 0,
       "value": "Activated account"
+    }
+  ],
+  "WL5w1n": [
+    {
+      "type": 0,
+      "value": "Personal Access Tokens"
     }
   ],
   "XJmbHw": [
@@ -221,10 +257,16 @@
       "value": "Survey Answers"
     }
   ],
+  "bVPj59": [
+    {
+      "type": 0,
+      "value": "Delete this personal access token"
+    }
+  ],
   "bdTRI9": [
     {
       "type": 0,
-      "value": "Update survey settings"
+      "value": "Update"
     }
   ],
   "bkZg0U": [
@@ -233,16 +275,16 @@
       "value": "Refresh Tokens"
     }
   ],
+  "cZz32J": [
+    {
+      "type": 0,
+      "value": "Edit PAT"
+    }
+  ],
   "cvJp/S": [
     {
       "type": 0,
       "value": "This answer is required to validate the form."
-    }
-  ],
-  "d97zYv": [
-    {
-      "type": 0,
-      "value": "Create user"
     }
   ],
   "fWOJDC": [
@@ -254,7 +296,7 @@
   "h4+RiJ": [
     {
       "type": 0,
-      "value": "Update user"
+      "value": "Update"
     }
   ],
   "hWoiIQ": [
@@ -281,6 +323,12 @@
       "value": "Email"
     }
   ],
+  "j3Zg1g": [
+    {
+      "type": 0,
+      "value": "Expired at"
+    }
+  ],
   "jGB2t1": [
     {
       "type": 0,
@@ -299,10 +347,16 @@
       "value": "Language"
     }
   ],
+  "nsfyN3": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
   "pLn6i2": [
     {
       "type": 0,
-      "value": "Update my settings"
+      "value": "Update"
     }
   ],
   "pglohm": [

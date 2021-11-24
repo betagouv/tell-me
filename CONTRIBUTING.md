@@ -122,6 +122,9 @@ committed. If there is any lint error can't be auto-fixed, your changes won't be
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   }
 }
 ```

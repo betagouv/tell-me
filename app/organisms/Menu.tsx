@@ -115,6 +115,13 @@ export default function Menu() {
                   id: 'bkZg0U',
                 })}
               </Link>
+              <Link to="/personal-access-tokens">
+                {intl.formatMessage({
+                  defaultMessage: 'Personal Access Tokens',
+                  description: '[Sidebar Main Menu] Personal Access Tokens label.',
+                  id: 'WL5w1n',
+                })}
+              </Link>
               <Link to="/one-time-tokens">
                 {intl.formatMessage({
                   defaultMessage: 'One Time Tokens',

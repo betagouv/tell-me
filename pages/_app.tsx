@@ -7,6 +7,8 @@ import withApi from '../app/hocs/withApi'
 import withAuth from '../app/hocs/withAuth'
 import withLocalization from '../app/hocs/withLocalization'
 
+import 'react-toastify/dist/ReactToastify.css'
+
 const GlobalStyleCustom = createGlobalStyle<{
   theme: {
     color: any

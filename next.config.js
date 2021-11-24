@@ -25,6 +25,10 @@ module.exports = {
       source: '/api/one-time-token/:oneTimeTokenId*',
     },
     {
+      destination: '/api/personal-access-token',
+      source: '/api/personal-access-token/:personalAccessTokenId*',
+    },
+    {
       destination: '/api/refresh-token',
       source: '/api/refresh-token/:refreshTokenId*',
     },

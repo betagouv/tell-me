@@ -133,7 +133,7 @@ export default function SurveyConfig() {
           <Field>
             <Form.Submit>
               {intl.formatMessage({
-                defaultMessage: 'Update survey settings',
+                defaultMessage: 'Update',
                 description: '[Survey Settings] Form update button label.',
                 id: 'bdTRI9',
               })}

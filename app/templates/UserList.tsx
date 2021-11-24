@@ -1,4 +1,4 @@
-import { Button, Card, Table } from '@singularity-ui/core'
+import { Card, Table } from '@singularity-ui/core'
 import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Edit, Trash, UserCheck, UserX } from 'react-feather'
@@ -19,7 +19,7 @@ export default function UserList() {
   const api = useApi()
   const isMounted = useIsMounted()
 
-  const loadUsers = async () => {
+  const loadUsers = async (): Promise<void> => {
     const maybeBody = await api.get('users')
     if (maybeBody === null || maybeBody.hasError) {
       return
@@ -35,7 +35,7 @@ export default function UserList() {
     loadUsers()
   }, [])
 
-  const goToUserEditor = id => {
+  const goToUserEditor = (id: string): void => {
     history.push(`/user/${id}`)
   }
 
@@ -101,14 +101,6 @@ export default function UserList() {
             id: '8vxOf',
           })}
         </Title>
-
-        <Button onClick={() => goToUserEditor('new')} size="small">
-          {intl.formatMessage({
-            defaultMessage: 'New user',
-            description: '[Users List] New user button label.',
-            id: 'AYV/5T',
-          })}
-        </Button>
       </AdminHeader>
 
       <Card>

@@ -1,7 +1,7 @@
-import bcrypt from 'bcryptjs'
 import { NextApiRequest, NextApiResponse } from 'next'
 import R from 'ramda'
 
+import encrypt from '../../../api/helpers/encrypt'
 import handleError from '../../../api/helpers/handleError'
 import isReady from '../../../api/helpers/isReady'
 import ApiError from '../../../api/libs/ApiError'
@@ -11,7 +11,6 @@ import UserConfig from '../../../api/models/UserConfig'
 import { USER_ROLE } from '../../../common/constants'
 
 const ERROR_PATH = 'pages/api/auth/AuthSignupController()'
-const BCRYPT_SALT_WORK_FACTOR = 10
 
 async function AuthSignupController(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -22,7 +21,7 @@ async function AuthSignupController(req: NextApiRequest, res: NextApiResponse) {
 
   try {
     const newUserData: any = R.pick(['email'], req.body)
-    newUserData.password = await bcrypt.hash(req.body.password, BCRYPT_SALT_WORK_FACTOR)
+    newUserData.password = await encrypt(req.body.password)
 
     if (!(await isReady())) {
       // We make the new user an active one if it's the first one
