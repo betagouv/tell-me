@@ -83,6 +83,7 @@
   },
   "devDependencies": {
     "@formatjs/cli": "4.4.0",
+    "@ivangabriele/commitlint-config": "1.0.2",
     "@ivangabriele/eslint-config-react": "1.5.0",
     "@ivangabriele/eslint-config-typescript-react": "1.5.0",
     "@ivangabriele/prettier-config": "1.1.0",
