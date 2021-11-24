@@ -21,7 +21,7 @@
   },
   "4toEG": {
     "defaultMessage": "Edit this user",
-    "description": "[Users List] Table row \"user edition\" button label."
+    "description": "[Users List] Table row edition button label."
   },
   "73PR4k": {
     "defaultMessage": "Delete this one time token",
@@ -33,7 +33,7 @@
   },
   "8F0yyx": {
     "defaultMessage": "Delete this user",
-    "description": "[Users List] Table row \"user deletion\" button label."
+    "description": "[Users List] Table row deletion button label."
   },
   "8vxOf": {
     "defaultMessage": "Users",
@@ -125,7 +125,7 @@
   },
   "QBtMwD": {
     "defaultMessage": "Email",
-    "description": "[Users List] Table \"email\" column label."
+    "description": "[Users List] Table Email column label."
   },
   "QWfMAC": {
     "defaultMessage": "New PAT",
@@ -170,6 +170,10 @@
   "ZxR2Ts": {
     "defaultMessage": "Survey Answers",
     "description": "[Survey Answers List] Survey answers list subtitle."
+  },
+  "ax3sGB": {
+    "defaultMessage": "Edit this personal access token",
+    "description": "[Personal Access Tokens List] Table row edition button label."
   },
   "bVPj59": {
     "defaultMessage": "Delete this personal access token",
@@ -225,7 +229,7 @@
   },
   "kx4x9D": {
     "defaultMessage": "Role",
-    "description": "[Users List] Table \"role\" column label."
+    "description": "[Users List] Table Role column label."
   },
   "lGHKue": {
     "defaultMessage": "Language",

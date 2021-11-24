@@ -32,7 +32,7 @@ export default function PersonalAccessTokenEditor() {
   const isNew = id === 'new'
 
   const loadPersonalAccessToken = async () => {
-    const maybeBody = await api.get(`personal-access-data/${id}`)
+    const maybeBody = await api.get(`personal-access-token/${id}`)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }

@@ -21,7 +21,7 @@
   },
   "4toEG": {
     "defaultMessage": "Éditer cet·te utilisateur·rices",
-    "description": "[Users List] Table row \"user edition\" button label."
+    "description": "[Users List] Table row edition button label."
   },
   "73PR4k": {
     "defaultMessage": "Supprimer ce jeton jetable",
@@ -33,7 +33,7 @@
   },
   "8F0yyx": {
     "defaultMessage": "Supprimer cet·te utilisateur·rices",
-    "description": "[Users List] Table row \"user deletion\" button label."
+    "description": "[Users List] Table row deletion button label."
   },
   "8vxOf": {
     "defaultMessage": "Utilisateur·rices",
@@ -125,7 +125,7 @@
   },
   "QBtMwD": {
     "defaultMessage": "Email",
-    "description": "[Users List] Table \"email\" column label."
+    "description": "[Users List] Table Email column label."
   },
   "QWfMAC": {
     "defaultMessage": "Nouveau jeton d’accès personnel",
@@ -170,6 +170,10 @@
   "ZxR2Ts": {
     "defaultMessage": "Réponses au questionnaire",
     "description": "[Survey Answers List] Survey answers list subtitle."
+  },
+  "ax3sGB": {
+    "defaultMessage": "Éditer ce jeton d’accès personnel",
+    "description": "[Personal Access Tokens List] Table row edition button label."
   },
   "bVPj59": {
     "defaultMessage": "Supprimer cet jeton d’accès personnel",
@@ -225,7 +229,7 @@
   },
   "kx4x9D": {
     "defaultMessage": "Rôle",
-    "description": "[Users List] Table \"role\" column label."
+    "description": "[Users List] Table Role column label."
   },
   "lGHKue": {
     "defaultMessage": "Langue",

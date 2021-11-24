@@ -45,7 +45,7 @@ export default function UserList() {
       key: 'email',
       label: intl.formatMessage({
         defaultMessage: 'Email',
-        description: '[Users List] Table "email" column label.',
+        description: '[Users List] Table Email column label.',
         id: 'QBtMwD',
       }),
     },
@@ -54,7 +54,7 @@ export default function UserList() {
       key: 'role',
       label: intl.formatMessage({
         defaultMessage: 'Role',
-        description: '[Users List] Table "role" column label.',
+        description: '[Users List] Table Role column label.',
         id: 'kx4x9D',
       }),
     },
@@ -73,7 +73,7 @@ export default function UserList() {
       Icon: Edit,
       label: intl.formatMessage({
         defaultMessage: 'Edit this user',
-        description: '[Users List] Table row "user edition" button label.',
+        description: '[Users List] Table row edition button label.',
         id: '4toEG',
       }),
       type: 'action',
@@ -84,7 +84,7 @@ export default function UserList() {
       Icon: Trash,
       label: intl.formatMessage({
         defaultMessage: 'Delete this user',
-        description: '[Users List] Table row "user deletion" button label.',
+        description: '[Users List] Table row deletion button label.',
         id: '8F0yyx',
       }),
       type: 'action',

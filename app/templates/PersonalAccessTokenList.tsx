@@ -1,7 +1,7 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
-import { Trash } from 'react-feather'
+import { Edit, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 import { useNavigate } from 'react-router-dom'
 
@@ -72,6 +72,17 @@ export default function PersonalAccessTokenList() {
         description: '[Personal Access Tokens List] Table Expired At column label.',
         id: 'j3Zg1g',
       }),
+    },
+    {
+      accent: 'primary',
+      action: goToPersonalAccessTokenEditor,
+      Icon: Edit,
+      label: intl.formatMessage({
+        defaultMessage: 'Edit this personal access token',
+        description: '[Personal Access Tokens List] Table row edition button label.',
+        id: 'ax3sGB',
+      }),
+      type: 'action',
     },
     {
       accent: 'danger',
