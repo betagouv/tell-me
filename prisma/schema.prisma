@@ -20,6 +20,17 @@ enum UserRole {
 // =========================================================
 // Models
 
+model OneTimeToken {
+  id        String   @id @default(cuid())
+  ip        String
+  value     String   @unique
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
 model PersonalAccessToken {
   id        String   @id @default(cuid())
   name      String
@@ -43,5 +54,6 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Project PersonalAccessToken[]
+  oneTimeTokens        OneTimeToken[]
+  personalAccessTokens PersonalAccessToken[]
 }

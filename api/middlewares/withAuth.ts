@@ -6,7 +6,6 @@ import { USER_ROLE } from '../../common/constants'
 import getJwtPayload from '../helpers/getJwtPayload'
 import handleError from '../helpers/handleError'
 import ApiError from '../libs/ApiError'
-import OneTimeToken from '../models/OneTimeToken'
 import User from '../models/User'
 import { HandlerWithAuth, RequestMe, RequestWithAuth } from '../types'
 
@@ -23,7 +22,9 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
         // PAT-based authentication
         // Cancellable 90 days tokens used for external back-end private API requests.
 
-        const [personalAccessToken] = req.query.personalAccessToken
+        const personalAccessToken = Array.isArray(req.query.personalAccessToken)
+          ? req.query.personalAccessToken[0]
+          : req.query.personalAccessToken
 
         const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
           include: {
@@ -33,36 +34,57 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
             value: personalAccessToken,
           },
         })
-        if (maybePersonalAccessToken === null || dayjs().isAfter(dayjs(maybePersonalAccessToken.expiredAt))) {
+        if (maybePersonalAccessToken === null) {
+          return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        }
+        if (dayjs().isAfter(dayjs(maybePersonalAccessToken.expiredAt))) {
+          await req.db.personalAccessToken.delete({
+            where: {
+              value: personalAccessToken,
+            },
+          })
+
           return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
         }
 
         userId = maybePersonalAccessToken.user.legacyId
         userNewId = maybePersonalAccessToken.user.id
-      } else if (req.query.accessToken !== undefined) {
+      } else if (req.query.oneTimeToken !== undefined) {
         // —————————————————————————————————————————————————————————————————————————————
         // OTT-based authentication
         // Disposable tokens used for internal front-end private API requests.
 
-        const maybeOneTimeToken = await OneTimeToken.findOneAndDelete({
-          value: req.query.oneTimeToken,
+        const oneTimeToken = Array.isArray(req.query.oneTimeToken) ? req.query.oneTimeToken[0] : req.query.oneTimeToken
+
+        const maybeOneTimeToken = await req.db.oneTimeToken.findUnique({
+          include: {
+            user: true,
+          },
+          where: {
+            value: oneTimeToken,
+          },
         })
         if (maybeOneTimeToken === null) {
           return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
         }
+        if (dayjs().isAfter(dayjs(maybeOneTimeToken.expiredAt))) {
+          await req.db.oneTimeToken.delete({
+            where: {
+              value: oneTimeToken,
+            },
+          })
 
-        userId = maybeOneTimeToken.user.toString()
-
-        const maybeNewUser = await req.db.user.findUnique({
-          where: {
-            legacyId: userId,
-          },
-        })
-        if (maybeNewUser === null) {
-          return handleError(new ApiError(`Legacy and new databases are not in sync.`, 500), ERROR_PATH, res)
+          return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
         }
 
-        userNewId = maybeNewUser.id
+        await req.db.oneTimeToken.delete({
+          where: {
+            value: oneTimeToken,
+          },
+        })
+
+        userId = maybeOneTimeToken.user.legacyId
+        userNewId = maybeOneTimeToken.user.id
       } else {
         // —————————————————————————————————————————————————————————————————————————————
         // JWT-based authentication

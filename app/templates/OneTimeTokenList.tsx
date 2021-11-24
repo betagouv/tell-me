@@ -45,7 +45,7 @@ export default function OneTimeTokenList() {
       key: 'user.email',
       label: intl.formatMessage({
         defaultMessage: 'Email',
-        description: '[One Time Tokens List] Table "email" column label.',
+        description: '[One Time Tokens List] Table Email column label.',
         id: 'iMAa/d',
       }),
     },
@@ -54,16 +54,16 @@ export default function OneTimeTokenList() {
       key: 'ip',
       label: intl.formatMessage({
         defaultMessage: 'IP',
-        description: '[One Time Tokens List] Table "IP" column label.',
+        description: '[One Time Tokens List] Table IP column label.',
         id: 'TAgUUN',
       }),
     },
     {
       isSortable: true,
-      key: 'ttl',
+      key: 'expiredAt',
       label: intl.formatMessage({
-        defaultMessage: 'TTL',
-        description: '[One Time Tokens List] Table "TTL" column label.',
+        defaultMessage: 'Expired at',
+        description: '[One Time Tokens List] Table Expired At column label.',
         id: 'yW/8Sz',
       }),
     },
@@ -73,7 +73,7 @@ export default function OneTimeTokenList() {
       Icon: Trash,
       label: intl.formatMessage({
         defaultMessage: 'Delete this one time token',
-        description: '[One Time Tokens List] Table row "token deletion" button label.',
+        description: '[One Time Tokens List] Table row deletion button label.',
         id: '73PR4k',
       }),
       type: 'action',

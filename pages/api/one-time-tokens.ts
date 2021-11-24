@@ -1,14 +1,16 @@
+import { NextApiResponse } from 'next'
+
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
 import withPrisma from '../../api/middlewares/withPrisma'
-import OneTimeToken from '../../api/models/OneTimeToken'
+import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
 
 const ERROR_PATH = 'pages/api/OneTimeTokensController()'
 
-async function OneTimeTokensController(req, res) {
+async function OneTimeTokensController(req: RequestWithAuth, res: NextApiResponse) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -16,7 +18,7 @@ async function OneTimeTokensController(req, res) {
   }
 
   try {
-    const oneTimeTokens = await OneTimeToken.find().populate('user').exec()
+    const oneTimeTokens = await req.db.oneTimeToken.findMany()
 
     res.status(200).json({
       data: oneTimeTokens,

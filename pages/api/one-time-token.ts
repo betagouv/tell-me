@@ -1,15 +1,17 @@
+import { NextApiResponse } from 'next'
+
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
 import withPrisma from '../../api/middlewares/withPrisma'
-import OneTimeToken from '../../api/models/OneTimeToken'
+import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
 
 const ERROR_PATH = 'pages/api/OneTimeTokenController()'
 
-async function OneTimeTokenController(req, res) {
-  if (!['DELETE'].includes(req.method)) {
+async function OneTimeTokenController(req: RequestWithAuth, res: NextApiResponse) {
+  if (req.method === undefined || !['DELETE'].includes(req.method)) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return
@@ -23,12 +25,11 @@ async function OneTimeTokenController(req, res) {
           oneTimeTokenId: [oneTimeTokenId],
         } = req.query
 
-        const maybeSurvey = await OneTimeToken.findById(oneTimeTokenId).exec()
-        if (maybeSurvey === null) {
-          handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
-        }
-
-        await OneTimeToken.findByIdAndDelete(oneTimeTokenId)
+        await req.db.oneTimeToken.delete({
+          where: {
+            id: oneTimeTokenId,
+          },
+        })
 
         res.status(204).end()
       } catch (err) {

@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+import dayjs from 'dayjs'
 import { NextApiResponse } from 'next'
 import { promisify } from 'util'
 
@@ -7,7 +8,6 @@ import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
 import withPrisma from '../../../api/middlewares/withPrisma'
-import OneTimeToken from '../../../api/models/OneTimeToken'
 import { RequestWithAuth } from '../../../api/types'
 import { USER_ROLE } from '../../../common/constants'
 
@@ -32,15 +32,20 @@ async function AuthOneTimeTokenController(req: RequestWithAuth, res: NextApiResp
     }
 
     const valueBuffer = await asyncRandomBytes(48)
-    const value = valueBuffer.toString('hex')
-    const newOneTimeTokenData = {
-      ip: maybeIp,
-      user: req.me.id,
-      value,
-    }
 
-    const newToken = new OneTimeToken(newOneTimeTokenData)
-    await newToken.save()
+    const expiredAt = dayjs().add(5, 'minute').toDate()
+    const ip = Array.isArray(maybeIp) ? maybeIp.join(', ') : maybeIp
+    const userId = req.newMe.id
+    const value = valueBuffer.toString('hex')
+
+    await req.db.oneTimeToken.create({
+      data: {
+        expiredAt,
+        ip,
+        userId,
+        value,
+      },
+    })
 
     res.status(200).json({
       data: {

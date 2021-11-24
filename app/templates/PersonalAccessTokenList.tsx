@@ -51,7 +51,7 @@ export default function PersonalAccessTokenList() {
       key: 'user.email',
       label: intl.formatMessage({
         defaultMessage: 'Email',
-        description: '[Personal Access Tokens List] Table "email" column label.',
+        description: '[Personal Access Tokens List] Table Email column label.',
         id: 'KahMf6',
       }),
     },
@@ -60,7 +60,7 @@ export default function PersonalAccessTokenList() {
       key: 'name',
       label: intl.formatMessage({
         defaultMessage: 'Name',
-        description: '[Personal Access Tokens List] Table "name" column label.',
+        description: '[Personal Access Tokens List] Table Name column label.',
         id: 'TYZzVl',
       }),
     },
@@ -69,7 +69,7 @@ export default function PersonalAccessTokenList() {
       key: 'expiredAt',
       label: intl.formatMessage({
         defaultMessage: 'Expired at',
-        description: '[Personal Access Tokens List] Table "Expired At" column label.',
+        description: '[Personal Access Tokens List] Table Expired At column label.',
         id: 'j3Zg1g',
       }),
     },
@@ -79,7 +79,7 @@ export default function PersonalAccessTokenList() {
       Icon: Trash,
       label: intl.formatMessage({
         defaultMessage: 'Delete this personal access token',
-        description: '[Personal Access Tokens List] Table row "token deletion" button label.',
+        description: '[Personal Access Tokens List] Table row deletion button label.',
         id: 'bVPj59',
       }),
       type: 'action',

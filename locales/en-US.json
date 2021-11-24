@@ -25,7 +25,7 @@
   },
   "73PR4k": {
     "defaultMessage": "Delete this one time token",
-    "description": "[One Time Tokens List] Table row \"token deletion\" button label."
+    "description": "[One Time Tokens List] Table row deletion button label."
   },
   "7LF9Gb": {
     "defaultMessage": "Update",
@@ -105,7 +105,7 @@
   },
   "KahMf6": {
     "defaultMessage": "Email",
-    "description": "[Personal Access Tokens List] Table \"email\" column label."
+    "description": "[Personal Access Tokens List] Table Email column label."
   },
   "N68/ff": {
     "defaultMessage": "Slug",
@@ -133,11 +133,11 @@
   },
   "TAgUUN": {
     "defaultMessage": "IP",
-    "description": "[One Time Tokens List] Table \"IP\" column label."
+    "description": "[One Time Tokens List] Table IP column label."
   },
   "TYZzVl": {
     "defaultMessage": "Name",
-    "description": "[Personal Access Tokens List] Table \"name\" column label."
+    "description": "[Personal Access Tokens List] Table Name column label."
   },
   "VXF18U": {
     "defaultMessage": "Activated account",
@@ -173,7 +173,7 @@
   },
   "bVPj59": {
     "defaultMessage": "Delete this personal access token",
-    "description": "[Personal Access Tokens List] Table row \"token deletion\" button label."
+    "description": "[Personal Access Tokens List] Table row deletion button label."
   },
   "bdTRI9": {
     "defaultMessage": "Update",
@@ -213,11 +213,11 @@
   },
   "iMAa/d": {
     "defaultMessage": "Email",
-    "description": "[One Time Tokens List] Table \"email\" column label."
+    "description": "[One Time Tokens List] Table Email column label."
   },
   "j3Zg1g": {
     "defaultMessage": "Expired at",
-    "description": "[Personal Access Tokens List] Table \"Expired At\" column label."
+    "description": "[Personal Access Tokens List] Table Expired At column label."
   },
   "jGB2t1": {
     "defaultMessage": "Email",
@@ -276,8 +276,8 @@
     "description": "[Login Modal] Form password input label."
   },
   "yW/8Sz": {
-    "defaultMessage": "TTL",
-    "description": "[One Time Tokens List] Table \"TTL\" column label."
+    "defaultMessage": "Expired at",
+    "description": "[One Time Tokens List] Table Expired At column label."
   },
   "zGNJ13": {
     "defaultMessage": "Users",
