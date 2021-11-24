@@ -1686,26 +1686,26 @@
     "@commitlint/cli" "14.1.0"
     "@commitlint/config-conventional" "14.1.0"
 
-"@ivangabriele/eslint-config-typescript-react@2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@ivangabriele/eslint-config-typescript-react/-/eslint-config-typescript-react-2.1.3.tgz#98b37e8af410f6f17e84b1e52ed1842c0379f111"
-  integrity sha512-8ugdTia+Obn3rZFdRz7G0Ob3xA84YDUyJFzYF8o0JbJmCfuqCeR1rrcGwdR6irgiGHBoOkKBc8gDdwGC0fD4gw==
+"@ivangabriele/eslint-config-typescript-react@2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@ivangabriele/eslint-config-typescript-react/-/eslint-config-typescript-react-2.1.4.tgz#938a0c5b9bf9fc032bf26d2f54decdca43d21e8b"
+  integrity sha512-02Yh7ONnsBzsaot/g75I5lk8RChb5edt5py+gU5QRTY3EzL0SSvYvWWI/rK8PumsVuEYp1ieBP2qBcMK2wipPw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.4.0"
     "@typescript-eslint/parser" "5.4.0"
     eslint "7.32.0"
-    eslint-config-airbnb "19.0.0"
+    eslint-config-airbnb "19.0.1"
     eslint-config-airbnb-typescript "15.0.0"
     eslint-config-prettier "8.3.0"
     eslint-plugin-import "2.25.3"
-    eslint-plugin-jest "25.2.4"
+    eslint-plugin-jest "25.3.0"
     eslint-plugin-jsx-a11y "6.5.1"
     eslint-plugin-prettier "4.0.0"
     eslint-plugin-react "7.27.1"
     eslint-plugin-react-hooks "4.3.0"
     eslint-plugin-sort-destructure-keys "1.4.0"
     eslint-plugin-sort-keys-fix "1.1.2"
-    eslint-plugin-typescript-sort-keys "2.0.0"
+    eslint-plugin-typescript-sort-keys "2.1.0"
     prettier "2.4.1"
 
 "@ivangabriele/prettier-config@2.0.2":
@@ -4254,10 +4254,10 @@ eslint-config-airbnb-typescript@15.0.0:
   dependencies:
     eslint-config-airbnb-base "^14.2.1"
 
-eslint-config-airbnb@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-airbnb/-/eslint-config-airbnb-19.0.0.tgz#c518503e2dc7c04d91a3e8ff54dcdbd30729829c"
-  integrity sha512-f5FzCDw8osQJtifOGazdBtYuDOH38FVQSOwHvSU0iFjAmkdl4zQ1jG+YV6sVNt4gqVubqJwn98zZQzDoaCwDyw==
+eslint-config-airbnb@19.0.1:
+  version "19.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb/-/eslint-config-airbnb-19.0.1.tgz#c4e39150a22571a78b27f701fd40b67addf21d2a"
+  integrity sha512-ooV8Vdt3gmV6hCSJutRw5beArd56Cd++vvy7j0Y7DBhUKqcTyI7cWNcJpCJlcftGPRLtzdU0hNMtquOUSSm8nA==
   dependencies:
     eslint-config-airbnb-base "^15.0.0"
     object.assign "^4.1.2"
@@ -4317,10 +4317,10 @@ eslint-plugin-import@2.25.3:
     resolve "^1.20.0"
     tsconfig-paths "^3.11.0"
 
-eslint-plugin-jest@25.2.4:
-  version "25.2.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-25.2.4.tgz#bb9f6a0bd1fd524ffb0b8b7a159cd70a58a1a793"
-  integrity sha512-HRyinpgmEdkVr7pNPaYPHCoGqEzpgk79X8pg/xCeoAdurbyQjntJQ4pTzHl7BiVEBlam/F1Qsn+Dk0HtJO7Aaw==
+eslint-plugin-jest@25.3.0:
+  version "25.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-25.3.0.tgz#6c04bbf13624a75684a05391a825b58e2e291950"
+  integrity sha512-79WQtuBsTN1S8Y9+7euBYwxIOia/k7ykkl9OCBHL3xuww5ecursHy/D8GCIlvzHVWv85gOkS5Kv6Sh7RxOgK1Q==
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
 
@@ -4391,13 +4391,13 @@ eslint-plugin-sort-keys-fix@1.1.2:
     natural-compare "^1.4.0"
     requireindex "~1.2.0"
 
-eslint-plugin-typescript-sort-keys@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-typescript-sort-keys/-/eslint-plugin-typescript-sort-keys-2.0.0.tgz#30946eef5ab06336f58799cbf86ef78cb1e11009"
-  integrity sha512-k1LhChmRO8A1waD1ggSABB5pc2u9qTRdL1R1nylU6ODYR5hFb4nQlB3bQyBSnLsINHZuvrkNfPyKnNV8RUBlqQ==
+eslint-plugin-typescript-sort-keys@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-typescript-sort-keys/-/eslint-plugin-typescript-sort-keys-2.1.0.tgz#f51764518aa512d83df9ba68ab2520b7b85ece2d"
+  integrity sha512-ET7ABypdz19m47QnKynzNfWPi4CTNQ5jQQC1X5d0gojIwblkbGiCa5IilsqzBTmqxZ0yXDqKBO/GBkBFQCOFsg==
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
-    json-schema "^0.3.0"
+    json-schema "^0.4.0"
     natural-compare-lite "^1.4.0"
 
 eslint-scope@^5.1.1:
@@ -6201,10 +6201,10 @@ json-schema-traverse@^1.0.0:
   resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz#ae7bcb3656ab77a73ba5c49bf654f38e6b6860e2"
   integrity sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
 
-json-schema@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.3.0.tgz#90a9c5054bd065422c00241851ce8d59475b701b"
-  integrity sha512-TYfxx36xfl52Rf1LU9HyWSLGPdYLL+SQ8/E/0yVyKG8wCCDaSrhPap0vEdlsZWRaS6tnKKLPGiEJGiREVC8kxQ==
+json-schema@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.4.0.tgz#f7de4cf6efab838ebaeb3236474cbba5a1930ab5"
+  integrity sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==
 
 json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"
