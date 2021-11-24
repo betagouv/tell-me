@@ -3,7 +3,7 @@ import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
@@ -14,7 +14,7 @@ import useIsMounted from '../hooks/useIsMounted'
 export default function PersonalAccessTokenList() {
   const [isLoading, setIsLoading] = useState(true)
   const [personalAccessTokens, setPersonalAccessTokens] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
@@ -42,7 +42,7 @@ export default function PersonalAccessTokenList() {
   }, [])
 
   const goToPersonalAccessTokenEditor = (id: string): void => {
-    history.push(`/personal-access-token/${id}`)
+    navigate(`/personal-access-token/${id}`)
   }
 
   const columns: TableColumnProps[] = [

@@ -3,7 +3,7 @@ import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Edit, Trash, UserCheck, UserX } from 'react-feather'
 import { useIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
@@ -14,7 +14,7 @@ import useIsMounted from '../hooks/useIsMounted'
 export default function UserList() {
   const [isLoading, setIsLoading] = useState(true)
   const [users, setUsers] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
@@ -36,7 +36,7 @@ export default function UserList() {
   }, [])
 
   const goToUserEditor = (id: string): void => {
-    history.push(`/user/${id}`)
+    navigate(`/user/${id}`)
   }
 
   const columns: TableColumnProps[] = [

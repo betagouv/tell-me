@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
 
 import isFirstSetup from '../app/helpers/isFirstSetup'
@@ -91,50 +91,26 @@ export default function SpaPage() {
         <Menu />
 
         <Main>
-          <Switch>
-            <Route path="/me">
-              <MyConfig />
-            </Route>
+          <Routes>
+            <Route element={<MyConfig />} path="/me" />
 
-            <Route path="/one-time-tokens">
-              <OneTimeTokenList />
-            </Route>
+            <Route element={<OneTimeTokenList />} path="/one-time-tokens" />
 
-            <Route path="/personal-access-token/:id">
-              <PersonalAccessTokenEditor />
-            </Route>
-            <Route path="/personal-access-tokens">
-              <PersonalAccessTokenList />
-            </Route>
+            <Route element={<PersonalAccessTokenEditor />} path="/personal-access-token/:id" />
+            <Route element={<PersonalAccessTokenList />} path="/personal-access-tokens" />
 
-            <Route path="/refresh-tokens">
-              <RefreshTokenList />
-            </Route>
+            <Route element={<RefreshTokenList />} path="/refresh-tokens" />
 
-            <Route path="/survey/:id/entries">
-              <SurveyEntryList />
-            </Route>
-            <Route path="/survey/:id/config">
-              <SurveyConfig />
-            </Route>
-            <Route path="/survey/:id">
-              <SurveyEditor />
-            </Route>
-            <Route path="/surveys">
-              <SurveyList />
-            </Route>
+            <Route element={<SurveyConfig />} path="/survey/:id/config" />
+            <Route element={<SurveyEntryList />} path="/survey/:id/entries" />
+            <Route element={<SurveyEditor />} path="/survey/:id" />
+            <Route element={<SurveyList />} path="/surveys" />
 
-            <Route path="/user/:id">
-              <UserEditor />
-            </Route>
-            <Route path="/users">
-              <UsersList />
-            </Route>
+            <Route element={<UserEditor />} path="/user/:id" />
+            <Route element={<UsersList />} path="/users" />
 
-            <Route path="/">
-              <Dashboard />
-            </Route>
-          </Switch>
+            <Route element={<Dashboard />} path="/" />
+          </Routes>
         </Main>
       </Page>
     </BrowserRouter>

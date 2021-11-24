@@ -4,7 +4,7 @@ import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
@@ -18,7 +18,7 @@ import useIsMounted from '../hooks/useIsMounted'
 export default function SurveyList() {
   const [isLoading, setIsLoading] = useState(true)
   const [surveys, setSurveys] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
@@ -40,7 +40,7 @@ export default function SurveyList() {
   }, [])
 
   const goToSurveyEntryList = id => {
-    history.push(`/survey/${id}/entries`)
+    navigate(`/survey/${id}/entries`)
   }
 
   const openSurvey = id => {
@@ -66,16 +66,16 @@ export default function SurveyList() {
         return
       }
 
-      history.push(`/survey/${maybeBody.data._id}`)
+      navigate(`/survey/${maybeBody.data._id}`)
 
       return
     }
 
-    history.push(`/survey/${id}`)
+    navigate(`/survey/${id}`)
   }
 
   const goToSurveyConfig = async id => {
-    history.push(`/survey/${id}/config`)
+    navigate(`/survey/${id}/config`)
   }
 
   const duplicateSurvey = async id => {
@@ -93,7 +93,7 @@ export default function SurveyList() {
       return
     }
 
-    history.push(`/survey/${newSurvey._id}`)
+    navigate(`/survey/${newSurvey._id}`)
   }
 
   const deleteSurvey = async id => {

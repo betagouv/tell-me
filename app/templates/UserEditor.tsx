@@ -2,7 +2,7 @@ import { Card } from '@singularity-ui/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { USER_ROLE_LABEL } from '../../common/constants'
@@ -29,7 +29,7 @@ export default function UserEditor() {
   const [isLoading, setIsLoading] = useState(true)
   const [initialValues, setInitialValues] = useState<any>(null)
   const { id } = useParams()
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const isMounted = useIsMounted()
   const api = useApi()
@@ -71,7 +71,7 @@ export default function UserEditor() {
       return
     }
 
-    history.goBack()
+    navigate(-1)
   }
 
   if (isLoading) {
