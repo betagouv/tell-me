@@ -2,6 +2,7 @@ import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
+import withPrisma from '../../api/middlewares/withPrisma'
 import User from '../../api/models/User'
 import { USER_ROLE } from '../../common/constants'
 
@@ -25,4 +26,4 @@ async function UsersController(req, res) {
   }
 }
 
-export default withMongoose(withAuth(UsersController, [USER_ROLE.ADMINISTRATOR]))
+export default withPrisma(withMongoose(withAuth(UsersController, [USER_ROLE.ADMINISTRATOR])))

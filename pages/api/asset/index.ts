@@ -7,6 +7,7 @@ import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
+import withPrisma from '../../../api/middlewares/withPrisma'
 import { USER_ROLE } from '../../../common/constants'
 
 const ASSETS_PATH = path.join(process.cwd(), 'assets')
@@ -27,7 +28,7 @@ async function AssetController(req: NextApiRequest, res: NextApiResponse) {
 
   const maybeAuthMiddleware = req.url.startsWith('/api/asset/private/')
     ? (handler: NextApiHandler) =>
-        withMongoose(withAuth(handler, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]))
+        withPrisma(withMongoose(withAuth(handler, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER])))
     : (handler: NextApiHandler) => handler(req, res)
 
   // eslint-disable-next-line consistent-return

@@ -6,6 +6,7 @@ import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
+import withPrisma from '../../../api/middlewares/withPrisma'
 import Survey from '../../../api/models/Survey'
 import SurveyEntry from '../../../api/models/SurveyEntry'
 import {
@@ -72,6 +73,6 @@ async function SurveyDownloadController(req, res) {
   }
 }
 
-export default withMongoose(
-  withAuth(SurveyDownloadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+export default withPrisma(
+  withMongoose(withAuth(SurveyDownloadController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER])),
 )

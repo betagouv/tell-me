@@ -2,6 +2,7 @@ import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
+import withPrisma from '../../../api/middlewares/withPrisma'
 import SurveyEntry from '../../../api/models/SurveyEntry'
 import { USER_ROLE } from '../../../common/constants'
 
@@ -29,6 +30,6 @@ async function SurveyEntriesController(req, res) {
   }
 }
 
-export default withMongoose(
-  withAuth(SurveyEntriesController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+export default withPrisma(
+  withMongoose(withAuth(SurveyEntriesController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER])),
 )

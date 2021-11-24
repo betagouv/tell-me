@@ -6,6 +6,7 @@ import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
 import withMongoose from '../../../api/middlewares/withMongoose'
+import withPrisma from '../../../api/middlewares/withPrisma'
 import OneTimeToken from '../../../api/models/OneTimeToken'
 import { RequestWithAuth } from '../../../api/types'
 import { USER_ROLE } from '../../../common/constants'
@@ -51,6 +52,6 @@ async function AuthOneTimeTokenController(req: RequestWithAuth, res: NextApiResp
   }
 }
 
-export default withMongoose(
-  withAuth(AuthOneTimeTokenController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+export default withPrisma(
+  withMongoose(withAuth(AuthOneTimeTokenController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER])),
 )

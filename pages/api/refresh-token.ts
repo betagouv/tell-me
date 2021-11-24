@@ -2,6 +2,7 @@ import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withMongoose from '../../api/middlewares/withMongoose'
+import withPrisma from '../../api/middlewares/withPrisma'
 import RefreshToken from '../../api/models/RefreshToken'
 import { USER_ROLE } from '../../common/constants'
 
@@ -36,4 +37,4 @@ async function RefreshTokenController(req, res) {
   }
 }
 
-export default withMongoose(withAuth(RefreshTokenController, [USER_ROLE.ADMINISTRATOR]))
+export default withPrisma(withMongoose(withAuth(RefreshTokenController, [USER_ROLE.ADMINISTRATOR])))

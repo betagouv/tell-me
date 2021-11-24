@@ -8,6 +8,7 @@ import getFileExtension from '../../../api/helpers/getFileExtension'
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withMongoose from '../../../api/middlewares/withMongoose'
+import withPrisma from '../../../api/middlewares/withPrisma'
 import SurveyEntry from '../../../api/models/SurveyEntry'
 
 const { AWS_S3_BUCKET, AWS_S3_REGION } = process.env
@@ -150,4 +151,4 @@ async function SurveyUploadController(req, res) {
   }
 }
 
-export default withMongoose(SurveyUploadController)
+export default withPrisma(withMongoose(SurveyUploadController))
