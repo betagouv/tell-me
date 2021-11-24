@@ -6,8 +6,11 @@
 
 An awesome open source survey generator.
 
+> ⚠️ **This is a work in progress.**
+
 ---
 
+- [Roadmap](#roadmap)
 - [Deployment](#deployment)
   - [Architecture](#architecture)
   - [Hosting cost](#hosting-cost)
@@ -16,9 +19,19 @@ An awesome open source survey generator.
   - [PaaS & hosting providers](#paas--hosting-providers)
     - [OVH](#ovh)
 - [Contributing](#contributing)
-- [Roadmap](#roadmap)
 
 ---
+
+## Roadmap
+
+- Handle survey file upload blocks
+- Add public API to access survey results via a PAT
+- Improve survey results list
+- Allow survey per-result deletion
+- Add dashboard
+- Migrate from MongoDB to PostgreSQL
+- Teams (with an environment variable switch in order to host a shared BetaGouv service?)
+- Accessibility
 
 ## Deployment
 
@@ -59,7 +72,7 @@ Wherever you run Let Me, the app can't run without those environment variables s
 Wherever you run Let Me, the app can't run without those environment variables set:
 
 - `DEBUG`: **Default: `"false"`.** Set to `"true"` to enable debug features (including in production).
-- `PORT`: **Default: `3000`.** Port on which the app will run. Most PaaS providers automatically set this environment variable, in which case you should't override it. 
+- `PORT`: **Default: `3000`.** Port on which the app will run. Most PaaS providers automatically set this environment variable, in which case you should't override it.
 
 ### PaaS & hosting providers
 
@@ -73,18 +86,11 @@ You're a developer and want to either run the app locally or help us improve thi
 
 Please have a look at the [contributing document](./CONTRIBUTING.md).
 
-## Roadmap
-
-- Teams (with an environment variable switch in order to host a shared BetaGouv service?)
-- Accessibility
-
 ---
 
 [img-codecov]: https://img.shields.io/codecov/c/github/betagouv/tell-me/main?style=flat-square
-[img-github]:
-  https://img.shields.io/github/workflow/status/betagouv/tell-me/Test%20&%20Release/main?style=flat-square
+[img-github]: https://img.shields.io/github/workflow/status/betagouv/tell-me/Check/main?style=flat-square
 [img-license]: https://img.shields.io/github/license/betagouv/tell-me?style=flat-square
-
 [lnk-codecov]: https://codecov.io/gh/betagouv/tell-me/branch/main
 [lnk-github]: https://github.com/betagouv/tell-me/actions?query=branch%3Amain++
 [lnk-license]: https://github.com/betagouv/tell-me/blob/main/LICENSE
