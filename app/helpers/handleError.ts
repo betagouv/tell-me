@@ -37,4 +37,5 @@ export default function handleError(error: any, path?: string): void {
   }
 
   ß.error(`[${errorPath}] ${errorString}`)
+  ß.error(error)
 }
