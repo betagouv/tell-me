@@ -188,11 +188,11 @@ export default function SurveyEditor() {
             block={block}
             index={index}
             isFocused={index === surveyManager.focusedBlockIndex}
+            onAppendBlockAt={appendNewBlockAt}
             onChangeAt={updateBlockValueAt}
             onChangeConditionAt={setIfSelectedThenShowQuestionIdAt}
             onChangeTypeAt={changeBlockTypeAt}
             onDownKeyDown={focusNextBlock}
-            onAppendBlockAt={appendNewBlockAt}
             onFocus={surveyManager.setFocusAt}
             onRemove={removeFocusedBlock}
             onRemoveAt={removeBlockAt}

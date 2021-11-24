@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import getJwtPayload from '../../helpers/getJwtPayload'
 import isJwtExpired from '../../helpers/isJwtExpired'
@@ -148,14 +148,17 @@ export default function withAuth(Component) {
       })()
     }, [])
 
-    const providerValue: AuthContext = {
-      clearSessionToken,
-      logIn,
-      logOut,
-      refreshSessionToken,
-      state,
-      user,
-    }
+    const providerValue: AuthContext = useMemo(
+      () => ({
+        clearSessionToken,
+        logIn,
+        logOut,
+        refreshSessionToken,
+        state,
+        user,
+      }),
+      [clearSessionToken, logIn, logOut, refreshSessionToken, state, user],
+    )
 
     return (
       <Context.Provider value={providerValue}>

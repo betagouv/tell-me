@@ -1,4 +1,5 @@
 import { Options } from 'ky'
+import { useMemo } from 'react'
 
 import handleError from '../../helpers/handleError'
 import isJwtExpired from '../../helpers/isJwtExpired'
@@ -119,13 +120,16 @@ export default function withApi(Component) {
       }
     }
 
-    const providerValue: ApiContext = {
-      delete: _delete,
-      get,
-      patch,
-      post,
-      put,
-    }
+    const providerValue: ApiContext = useMemo(
+      () => ({
+        delete: _delete,
+        get,
+        patch,
+        post,
+        put,
+      }),
+      [_delete, get, patch, post, put],
+    )
 
     return (
       <Context.Provider value={providerValue}>

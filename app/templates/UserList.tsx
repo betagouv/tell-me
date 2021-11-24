@@ -70,7 +70,7 @@ export default function UserList() {
     {
       accent: 'primary',
       action: goToUserEditor,
-      Icon: () => <Edit />,
+      Icon: Edit,
       label: intl.formatMessage({
         defaultMessage: 'Edit this user',
         description: '[Users List] Table row "user edition" button label.',

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
 import enUS from '../../../locales/compiled/en-US.json'
@@ -47,10 +47,13 @@ const withLocalization = Component => {
       setLocale(getLocale())
     }
 
-    const providerValue: LocalizationContext = {
-      locale,
-      refresh,
-    }
+    const providerValue: LocalizationContext = useMemo(
+      () => ({
+        locale,
+        refresh,
+      }),
+      [locale, refresh],
+    )
 
     return (
       <IntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
