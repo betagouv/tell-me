@@ -23,6 +23,10 @@
     "defaultMessage": "Edit this user",
     "description": "[Users List] Table row edition button label."
   },
+  "6StYcj": {
+    "defaultMessage": "Answers",
+    "description": "[Survey Answers List] Table Answers column label."
+  },
   "73PR4k": {
     "defaultMessage": "Delete this one time token",
     "description": "[One Time Tokens List] Table row deletion button label."
@@ -274,6 +278,10 @@
   "q5x9RM": {
     "defaultMessage": "Sign Up",
     "description": "[Signup Modal] Submit button label."
+  },
+  "s1Q3aH": {
+    "defaultMessage": "Date",
+    "description": "[Survey Answers List] Table Date column label."
   },
   "tIFSst": {
     "defaultMessage": "One Time Tokens",

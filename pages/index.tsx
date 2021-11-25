@@ -26,8 +26,6 @@ import UsersList from '../app/templates/UserList'
 const Page = styled.div`
   display: flex;
   flex-grow: 1;
-  min-height: 0;
-  min-width: 0;
 `
 
 const Main = styled.main`
@@ -35,8 +33,6 @@ const Main = styled.main`
   flex-direction: column;
   flex-grow: 1;
   margin-left: 16rem;
-  min-height: 0;
-  min-width: 0;
 `
 
 /**

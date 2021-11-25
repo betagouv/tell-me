@@ -23,6 +23,10 @@
     "defaultMessage": "Éditer cet·te utilisateur·rices",
     "description": "[Users List] Table row edition button label."
   },
+  "6StYcj": {
+    "defaultMessage": "Réponses",
+    "description": "[Survey Answers List] Table Answers column label."
+  },
   "73PR4k": {
     "defaultMessage": "Supprimer ce jeton jetable",
     "description": "[One Time Tokens List] Table row deletion button label."
@@ -274,6 +278,10 @@
   "q5x9RM": {
     "defaultMessage": "S’inscrire",
     "description": "[Signup Modal] Submit button label."
+  },
+  "s1Q3aH": {
+    "defaultMessage": "Date",
+    "description": "[Survey Answers List] Table Date column label."
   },
   "tIFSst": {
     "defaultMessage": "Jetons jetables",
