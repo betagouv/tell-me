@@ -18,7 +18,7 @@ export default async function isJwtExpired(token: string): Promise<boolean> {
       return true
     }
 
-    handleError(err, 'app/helpers/isJwtExpired()')
+    handleError(err, 'api/helpers/isJwtExpired()')
 
     return true
   }

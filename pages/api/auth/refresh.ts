@@ -1,8 +1,10 @@
+import dayjs from 'dayjs'
 import { NextApiResponse } from 'next'
 import R from 'ramda'
 
 import getJwt from '../../../api/helpers/getJwt'
 import handleError from '../../../api/helpers/handleError'
+import isJwtExpired from '../../../api/helpers/isJwtExpired'
 import ApiError from '../../../api/libs/ApiError'
 import withPrisma from '../../../api/middlewares/withPrisma'
 import { RequestWithPrisma } from '../../../api/types'
@@ -20,9 +22,6 @@ async function AuthRefreshController(req: RequestWithPrisma, res: NextApiRespons
     const refreshTokenValue = String(req.body.refreshToken)
 
     const maybeRefreshToken = await req.db.refreshToken.findUnique({
-      include: {
-        user: true,
-      },
       where: {
         value: refreshTokenValue,
       },
@@ -32,8 +31,17 @@ async function AuthRefreshController(req: RequestWithPrisma, res: NextApiRespons
 
       return
     }
+    if (dayjs().isAfter(dayjs(maybeRefreshToken.expiredAt)) || !(await isJwtExpired(refreshTokenValue))) {
+      await req.db.refreshToken.delete({
+        where: {
+          value: refreshTokenValue,
+        },
+      })
 
-    const userId = maybeRefreshToken.user.id
+      handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+    }
+
+    const { userId } = maybeRefreshToken
     const maybeUser = await req.db.user.findUnique({
       where: {
         id: userId,
