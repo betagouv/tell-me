@@ -47,7 +47,9 @@ async function AuthSignupController(req: RequestWithPrisma, res: NextApiResponse
 
     const newUserWithoutPassword = R.omit(['password'])(newUser)
 
-    res.status(201).json(newUserWithoutPassword)
+    res.status(201).json({
+      data: newUserWithoutPassword,
+    })
   } catch (err) {
     handleError(err, ERROR_PATH, res)
   }
