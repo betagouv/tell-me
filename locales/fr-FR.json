@@ -43,6 +43,10 @@
     "defaultMessage": "Titre",
     "description": "[Surveys List] Table \"title\" column label."
   },
+  "9vy90u": {
+    "defaultMessage": "Confirmation de suppression",
+    "description": "[Delete Confirmation Dialog] Title."
+  },
   "A2n/eF": {
     "defaultMessage": "Mot de passe",
     "description": "[Setup Modal] Password input label."
@@ -62,6 +66,10 @@
   "Db1A9P": {
     "defaultMessage": "Étiquette",
     "description": "[Personal Access Token Editor] Form Label input label."
+  },
+  "Ddm/Wq": {
+    "defaultMessage": "Supprimer",
+    "description": "[Delete Confirmation Dialog] Delete button label."
   },
   "E/vx8U": {
     "defaultMessage": "Message de remerciement",
@@ -239,9 +247,17 @@
     "defaultMessage": "Langue",
     "description": "[My Settings] Form language select label."
   },
+  "mJMucx": {
+    "defaultMessage": "Annuler",
+    "description": "[Delete Confirmation Dialog] Cancel button label."
+  },
   "nsfyN3": {
     "defaultMessage": "Créer",
     "description": "[Personal Access Token Editor] Form create button label."
+  },
+  "oRbw/6": {
+    "defaultMessage": "Êtes-vous sûr de vouloir supprimer <strong>{entity}</strong>?",
+    "description": "[Delete Confirmation Dialog] Message."
   },
   "oatzvs": {
     "defaultMessage": "Nom",

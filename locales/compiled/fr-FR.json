@@ -65,6 +65,12 @@
       "value": "Titre"
     }
   ],
+  "9vy90u": [
+    {
+      "type": 0,
+      "value": "Confirmation de suppression"
+    }
+  ],
   "A2n/eF": [
     {
       "type": 0,
@@ -93,6 +99,12 @@
     {
       "type": 0,
       "value": "Étiquette"
+    }
+  ],
+  "Ddm/Wq": [
+    {
+      "type": 0,
+      "value": "Supprimer"
     }
   ],
   "E/vx8U": [
@@ -359,10 +371,36 @@
       "value": "Langue"
     }
   ],
+  "mJMucx": [
+    {
+      "type": 0,
+      "value": "Annuler"
+    }
+  ],
   "nsfyN3": [
     {
       "type": 0,
       "value": "Créer"
+    }
+  ],
+  "oRbw/6": [
+    {
+      "type": 0,
+      "value": "Êtes-vous sûr de vouloir supprimer "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "entity"
+        }
+      ],
+      "type": 8,
+      "value": "strong"
+    },
+    {
+      "type": 0,
+      "value": "?"
     }
   ],
   "oatzvs": [

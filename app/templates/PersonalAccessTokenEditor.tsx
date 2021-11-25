@@ -20,9 +20,9 @@ const FormSchema = Yup.object().shape({
 })
 
 export default function PersonalAccessTokenEditor() {
+  const [isCreated, setIsCreated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [initialValues, setInitialValues] = useState<any>(null)
-  const [isCreated, setIsCreated] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate()
   const intl = useIntl()

@@ -40,6 +40,7 @@ export default function withApi(Component) {
         }
 
         const sessionToken = await refreshSessionToken()
+        window.location.reload()
         if (sessionToken === null) {
           return null
         }

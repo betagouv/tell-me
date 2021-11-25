@@ -65,6 +65,12 @@
       "value": "Title"
     }
   ],
+  "9vy90u": [
+    {
+      "type": 0,
+      "value": "Delete Confirmation"
+    }
+  ],
   "A2n/eF": [
     {
       "type": 0,
@@ -93,6 +99,12 @@
     {
       "type": 0,
       "value": "Label"
+    }
+  ],
+  "Ddm/Wq": [
+    {
+      "type": 0,
+      "value": "Delete"
     }
   ],
   "E/vx8U": [
@@ -359,10 +371,36 @@
       "value": "Language"
     }
   ],
+  "mJMucx": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
   "nsfyN3": [
     {
       "type": 0,
       "value": "Create"
+    }
+  ],
+  "oRbw/6": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to delete "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "entity"
+        }
+      ],
+      "type": 8,
+      "value": "strong"
+    },
+    {
+      "type": 0,
+      "value": "?"
     }
   ],
   "oatzvs": [

@@ -1,5 +1,6 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { Edit, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
@@ -10,8 +11,12 @@ import AdminHeader from '../atoms/AdminHeader'
 import Title from '../atoms/Title'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
+import DeletionModal from '../organisms/DeletionModal'
 
 export default function PersonalAccessTokenList() {
+  const [hasDeletionModal, setHasDeletionModal] = useState(false)
+  const [selectedId, setSelectedId] = useState('')
+  const [selectedEntity, setSelectedEntity] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [personalAccessTokens, setPersonalAccessTokens] = useState([])
   const navigate = useNavigate()
@@ -31,19 +36,33 @@ export default function PersonalAccessTokenList() {
     }
   }
 
-  const deletePersonalAccessToken = async (id: string): Promise<void> => {
-    await api.delete(`personal-access-token/${id}`)
+  const closeDeletionModal = () => {
+    setHasDeletionModal(false)
+  }
+
+  const confirmPersonalAccessTokenDeletion = async (id: string): Promise<void> => {
+    const personalAccessToken = R.find(R.propEq('id', id))(personalAccessTokens) as any
+
+    setSelectedId(id)
+    setSelectedEntity(personalAccessToken.label)
+    setHasDeletionModal(true)
+  }
+
+  const deletePersonalAccessToken = async (): Promise<void> => {
+    setHasDeletionModal(false)
+
+    await api.delete(`personal-access-token/${selectedId}`)
 
     await loadPersonalAccessTokens()
+  }
+
+  const goToPersonalAccessTokenEditor = (id: string): void => {
+    navigate(`/personal-access-token/${id}`)
   }
 
   useEffect(() => {
     loadPersonalAccessTokens()
   }, [])
-
-  const goToPersonalAccessTokenEditor = (id: string): void => {
-    navigate(`/personal-access-token/${id}`)
-  }
 
   const columns: TableColumnProps[] = [
     {
@@ -86,7 +105,7 @@ export default function PersonalAccessTokenList() {
     },
     {
       accent: 'danger',
-      action: deletePersonalAccessToken,
+      action: confirmPersonalAccessTokenDeletion,
       Icon: Trash,
       label: intl.formatMessage({
         defaultMessage: 'Delete this personal access token',
@@ -126,6 +145,10 @@ export default function PersonalAccessTokenList() {
           isLoading={isLoading}
         />
       </Card>
+
+      {hasDeletionModal && (
+        <DeletionModal entity={selectedEntity} onCancel={closeDeletionModal} onConfirm={deletePersonalAccessToken} />
+      )}
     </AdminBox>
   )
 }
