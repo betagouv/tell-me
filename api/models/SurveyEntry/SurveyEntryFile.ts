@@ -7,6 +7,10 @@ const SurveyEntryFile = new mongoose.Schema({
     required: true,
     type: String,
   },
+  mimeType: {
+    required: true,
+    type: String,
+  },
   type: {
     required: false,
     type: String,

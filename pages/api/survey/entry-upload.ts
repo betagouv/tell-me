@@ -103,6 +103,7 @@ async function SurveyUploadController(req, res) {
 
               ;(maybeSurveyEntry as any).files.push({
                 _id: fileId,
+                mimeType: file.mimetype,
                 question,
                 type,
                 url: publicUrl,
@@ -124,10 +125,11 @@ async function SurveyUploadController(req, res) {
               const fileId = new mongoose.Types.ObjectId().toString()
               const fileExtension = getFileExtension(file.originalname)
               const fileName = `${fileId}.${fileExtension}`
-              const publicUrl = `/api/asset/${fileName}`
+              const publicUrl = `/api/asset/private/${fileName}`
 
               ;(maybeSurveyEntry as any).files.push({
                 _id: fileId,
+                mimeType: file.mimetype,
                 question,
                 type,
                 url: publicUrl,

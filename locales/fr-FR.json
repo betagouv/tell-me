@@ -75,6 +75,10 @@
     "defaultMessage": "Supprimer",
     "description": "[Delete Confirmation Dialog] Delete button label."
   },
+  "Dus0RS": {
+    "defaultMessage": "Fichiers",
+    "description": "[Survey Answers List] Table Files column label."
+  },
   "E/vx8U": {
     "defaultMessage": "Message de remerciement",
     "description": "[Survey Settings] Form thank you message textarea label."

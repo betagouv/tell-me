@@ -17,6 +17,10 @@ module.exports = {
   reactStrictMode: true,
   rewrites: async () => [
     {
+      destination: '/api/asset/private',
+      source: '/api/asset/private/:fileName*',
+    },
+    {
       destination: '/api/asset',
       source: '/api/asset/:fileName*',
     },

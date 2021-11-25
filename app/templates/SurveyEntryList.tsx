@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
+import getFileExtension from '../../api/helpers/getFileExtension'
 import { SURVEY_ENTRIES_DOWLOAD_EXTENSION } from '../../common/constants'
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
@@ -23,14 +24,24 @@ const StyledCard = styled(Card)`
 `
 
 const StyledTable = styled(Table)`
-  tbody > tr > td:first-child {
+  tbody > tr > td {
     vertical-align: top;
+  }
+
+  tbody > tr > td:not(:first-child) {
+    width: 40%;
   }
 `
 
 const Source = styled.div`
   > div:not(:first-child) {
     padding-top: 0.5rem;
+  }
+
+  button {
+    margin-top: 0.25rem;
+    padding: 0.125rem 0.375rem;
+    text-transform: uppercase;
   }
 `
 
@@ -45,6 +56,43 @@ export default function SurveyEntryList() {
 
   const dayjs = getDayjs()
   const isLoading = survey === null || surveyEntries === null
+
+  const downloadAsset = async (url: string, mimeType: string): Promise<void> => {
+    if (/^https:\/\/[^/]+\.amazonaws\.com\//.test(url)) {
+      // eslint-disable-next-line no-console
+      console.warn('Amazon AWS S3 is not yet supported here.')
+
+      return
+    }
+
+    const maybeBody = await api.get('auth/one-time-token')
+    if (maybeBody === null || maybeBody.hasError) {
+      return
+    }
+
+    const { oneTimeToken } = maybeBody.data
+
+    window.open(`${url}?mimeType=${mimeType}&oneTimeToken=${oneTimeToken}`, '')
+  }
+
+  const exportEntries = async fileExtension => {
+    if (isMounted()) {
+      setIsDownloading(true)
+    }
+
+    const maybeBody = await api.get(`auth/one-time-token`)
+    if (maybeBody === null || maybeBody.hasError) {
+      return
+    }
+
+    const { oneTimeToken } = maybeBody.data
+
+    window.open(`/api/survey/${surveyId}/download?fileExtension=${fileExtension}&oneTimeToken=${oneTimeToken}`)
+
+    if (isMounted()) {
+      setIsDownloading(false)
+    }
+  }
 
   const loadSurvey = async () => {
     const maybeBody = await api.get(`survey/${surveyId}`)
@@ -64,7 +112,21 @@ export default function SurveyEntryList() {
     }
 
     const rawData = maybeBody.data
-    const data = R.map(({ answers, updatedAt }: any) => {
+    const data = R.map(({ answers, files, updatedAt }: any) => {
+      const library = files.map(({ _id, mimeType, question, url }) => (
+        <div key={_id}>
+          <p>
+            <b>{question}</b>
+          </p>
+          <p>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <Button accent="secondary" onClick={() => downloadAsset(url, mimeType)} size="small">
+              {getFileExtension(url)}
+            </Button>
+          </p>
+        </div>
+      ))
+
       const source = answers.map(({ _id, question, values }) => (
         <div key={_id}>
           <p>
@@ -75,6 +137,7 @@ export default function SurveyEntryList() {
       ))
 
       return {
+        library: <Source>{library}</Source>,
         source: <Source>{source}</Source>,
         updatedAt,
       }
@@ -89,25 +152,6 @@ export default function SurveyEntryList() {
     loadSurvey()
     loadSurveyEntries()
   }, [])
-
-  const download = async fileExtension => {
-    if (isMounted()) {
-      setIsDownloading(true)
-    }
-
-    const maybeBody = await api.get(`auth/one-time-token`)
-    if (maybeBody === null || maybeBody.hasError) {
-      return
-    }
-
-    const { oneTimeToken } = maybeBody.data
-
-    window.open(`/api/survey/${surveyId}/download?fileExtension=${fileExtension}&oneTimeToken=${oneTimeToken}`)
-
-    if (isMounted()) {
-      setIsDownloading(false)
-    }
-  }
 
   const columns: TableColumnProps[] = [
     {
@@ -127,6 +171,14 @@ export default function SurveyEntryList() {
         id: '6StYcj',
       }),
     },
+    {
+      key: 'library',
+      label: intl.formatMessage({
+        defaultMessage: 'Files',
+        description: '[Survey Answers List] Table Files column label.',
+        id: 'Dus0RS',
+      }),
+    },
   ]
 
   if (isLoading) {
@@ -138,7 +190,11 @@ export default function SurveyEntryList() {
       <AdminHeader>
         <Title>{survey.title}</Title>
 
-        <Button disabled={isDownloading} onClick={() => download(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)} size="small">
+        <Button
+          disabled={isDownloading}
+          onClick={() => exportEntries(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)}
+          size="small"
+        >
           {intl.formatMessage({
             defaultMessage: 'Export as CSV',
             description: '[Survey Answers List] Export answers in CSV format button label.',
