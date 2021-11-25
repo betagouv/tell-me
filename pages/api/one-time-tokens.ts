@@ -3,7 +3,6 @@ import { NextApiResponse } from 'next'
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
-import withMongoose from '../../api/middlewares/withMongoose'
 import withPrisma from '../../api/middlewares/withPrisma'
 import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
@@ -18,7 +17,21 @@ async function OneTimeTokensController(req: RequestWithAuth, res: NextApiRespons
   }
 
   try {
-    const oneTimeTokens = await req.db.oneTimeToken.findMany()
+    const oneTimeTokens = await req.db.oneTimeToken.findMany({
+      select: {
+        expiredAt: true,
+        id: true,
+        ip: true,
+        user: {
+          select: {
+            email: true,
+            firstName: true,
+            id: true,
+            lastName: true,
+          },
+        },
+      },
+    })
 
     res.status(200).json({
       data: oneTimeTokens,
@@ -28,4 +41,4 @@ async function OneTimeTokensController(req: RequestWithAuth, res: NextApiRespons
   }
 }
 
-export default withPrisma(withMongoose(withAuth(OneTimeTokensController, [USER_ROLE.ADMINISTRATOR])))
+export default withPrisma(withAuth(OneTimeTokensController, [USER_ROLE.ADMINISTRATOR]))

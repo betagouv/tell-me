@@ -19,10 +19,13 @@ const PersonalAccessTokensController: HandlerWithAuth = async (req, res) => {
       select: {
         expiredAt: true,
         id: true,
-        name: true,
+        label: true,
         user: {
           select: {
             email: true,
+            firstName: true,
+            id: true,
+            lastName: true,
           },
         },
       },

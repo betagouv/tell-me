@@ -1,6 +1,5 @@
 import crypto from 'crypto'
 import dayjs from 'dayjs'
-import * as R from 'ramda'
 
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
@@ -60,19 +59,31 @@ const PersonalAccessTokenController: HandlerWithAuth = async (req, res) => {
 
     case 'POST':
       try {
-        const newPersonalAccessTokenData = R.pick(['name'], req.body) as {
-          name: string
-        }
+        const label = String(req.body.label)
         const expiredAt = dayjs().add(90, 'day').toDate()
-        const userId = req.newMe.id
+        const userId = req.me.id
         const value = crypto.randomBytes(32).toString('hex')
 
         const newPersonalAccessToken = await req.db.personalAccessToken.create({
           data: {
-            ...newPersonalAccessTokenData,
             expiredAt,
+            label,
             userId,
             value,
+          },
+          select: {
+            expiredAt: true,
+            id: true,
+            label: true,
+            user: {
+              select: {
+                email: true,
+                firstName: true,
+                id: true,
+                lastName: true,
+              },
+            },
+            value: true,
           },
         })
 
@@ -90,9 +101,6 @@ const PersonalAccessTokenController: HandlerWithAuth = async (req, res) => {
         const {
           personalAccessTokenId: [personalAccessTokenId],
         } = req.query
-        const updatedPersonalAccessTokenData = R.pick(['name'], req.body) as {
-          name: string
-        }
 
         const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
           where: {
@@ -103,8 +111,12 @@ const PersonalAccessTokenController: HandlerWithAuth = async (req, res) => {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
+        const label = String(req.body.label)
+
         const updatedPersonalAccessToken = await req.db.personalAccessToken.update({
-          data: updatedPersonalAccessTokenData,
+          data: {
+            label,
+          },
           where: {
             id: personalAccessTokenId,
           },

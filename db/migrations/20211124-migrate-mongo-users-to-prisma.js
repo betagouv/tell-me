@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import * as R from 'ramda'
 
 /**
  * @param {import('mongoose').Mongoose} mongoose
@@ -8,15 +7,29 @@ export default async mongoose => {
   const prismaInstance = new PrismaClient()
 
   const User = mongoose.connection.db.collection('users')
-  const mongoUsers = await User.find().toArray()
+  const mongoUsers = (await User.find().toArray()).map(mongoUser => ({
+    ...mongoUser,
+    id: mongoUser._id.toString(),
+  }))
+  const UserConfig = mongoose.connection.db.collection('userconfigs')
+  const mongoUserConfigs = (await UserConfig.find().toArray()).map(mongoUserConfig => ({
+    ...mongoUserConfig,
+    userId: mongoUserConfig.user.toString(),
+  }))
+  const postgreUsers = await prismaInstance.user.findMany()
 
-  const postgreUsers = R.pipe(
-    R.map(mongoUser => ({ ...mongoUser, legacyId: mongoUser._id.toString() })),
-    R.map(R.pick(['legacyId', 'role', 'email', 'password', 'isActive', 'createdAt', 'updatedAt'])),
-  )(mongoUsers)
+  const postgreUserConfigs = mongoUserConfigs.map(({ locale, userId }) => {
+    const mongoUser = mongoUsers.find(({ id }) => id === userId)
+    const postgreUser = postgreUsers.find(({ email }) => email === mongoUser.email)
 
-  await prismaInstance.user.createMany({
-    data: postgreUsers,
+    return {
+      locale,
+      userId: postgreUser.id,
+    }
+  })
+
+  await prismaInstance.userConfig.createMany({
+    data: postgreUserConfigs,
     skipDuplicates: true,
   })
 }

@@ -1,15 +1,16 @@
+import { NextApiResponse } from 'next'
+
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
-import withMongoose from '../../api/middlewares/withMongoose'
 import withPrisma from '../../api/middlewares/withPrisma'
-import UserConfig from '../../api/models/UserConfig'
+import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
 
 const ERROR_PATH = 'pages/api/UserConfigController()'
 
-async function UserConfigController(req, res) {
-  if (!['GET', 'PATCH'].includes(req.method)) {
+async function UserConfigController(req: RequestWithAuth, res: NextApiResponse) {
+  if (req.method === undefined || !['GET', 'PATCH'].includes(req.method)) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return
@@ -21,12 +22,14 @@ async function UserConfigController(req, res) {
       try {
         const userId = req.me.id
 
-        const userConfig = await UserConfig.findOne({
-          user: userId,
-        }).exec()
+        const userConfig = await req.db.userConfig.findUnique({
+          where: {
+            userId,
+          },
+        })
 
         res.status(200).json({
-          data: userConfig.toObject(),
+          data: userConfig,
         })
       } catch (err) {
         handleError(err, ERROR_PATH, res)
@@ -37,16 +40,19 @@ async function UserConfigController(req, res) {
     case 'PATCH':
       try {
         const userId = req.me.id
+        const updatedUserConfigData = {
+          locale: String(req.body.locale),
+        }
 
-        const userConfig = await UserConfig.findOne({
-          user: userId,
-        }).exec()
-
-        userConfig.set(req.body)
-        const updatedUserConfig = await userConfig.save()
+        const updatedUserConfig = await req.db.userConfig.update({
+          data: updatedUserConfigData,
+          where: {
+            userId,
+          },
+        })
 
         res.status(200).json({
-          data: updatedUserConfig.toObject(),
+          data: updatedUserConfig,
         })
       } catch (err) {
         handleError(err, ERROR_PATH, res)
@@ -55,5 +61,5 @@ async function UserConfigController(req, res) {
 }
 
 export default withPrisma(
-  withMongoose(withAuth(UserConfigController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER])),
+  withAuth(UserConfigController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
 )

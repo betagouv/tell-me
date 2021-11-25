@@ -92,7 +92,7 @@
   "Db1A9P": [
     {
       "type": 0,
-      "value": "Nom"
+      "value": "Étiquette"
     }
   ],
   "E/vx8U": [
@@ -194,7 +194,7 @@
   "QWfMAC": [
     {
       "type": 0,
-      "value": "Nouveau jeton d’accès personnel"
+      "value": "Création d’un jeton d’accès personnel"
     }
   ],
   "TAgUUN": [
@@ -207,6 +207,12 @@
     {
       "type": 0,
       "value": "Nom"
+    }
+  ],
+  "UaLCH+": [
+    {
+      "type": 0,
+      "value": "Prénom"
     }
   ],
   "VXF18U": [
@@ -284,7 +290,7 @@
   "cZz32J": [
     {
       "type": 0,
-      "value": "Edit PAT"
+      "value": "Édition d’un jeton d’accès personnel"
     }
   ],
   "cvJp/S": [
@@ -357,6 +363,12 @@
     {
       "type": 0,
       "value": "Créer"
+    }
+  ],
+  "oatzvs": [
+    {
+      "type": 0,
+      "value": "Nom"
     }
   ],
   "pLn6i2": [

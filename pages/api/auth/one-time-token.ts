@@ -35,7 +35,7 @@ async function AuthOneTimeTokenController(req: RequestWithAuth, res: NextApiResp
 
     const expiredAt = dayjs().add(5, 'minute').toDate()
     const ip = Array.isArray(maybeIp) ? maybeIp.join(', ') : maybeIp
-    const userId = req.newMe.id
+    const userId = req.me.id
     const value = valueBuffer.toString('hex')
 
     await req.db.oneTimeToken.create({

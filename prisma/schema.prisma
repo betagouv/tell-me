@@ -14,7 +14,7 @@ generator client {
 enum UserRole {
   ADMINISTRATOR
   MANAGER
-  MEMBER
+  VIEWER
 }
 
 // =========================================================
@@ -33,7 +33,19 @@ model OneTimeToken {
 
 model PersonalAccessToken {
   id        String   @id @default(cuid())
-  name      String
+  name      String?
+  label     String?
+  value     String   @unique
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  ip        String
   value     String   @unique
   createdAt DateTime @default(now())
   expiredAt DateTime
@@ -44,8 +56,7 @@ model PersonalAccessToken {
 
 model User {
   id        String   @id @default(cuid())
-  legacyId  String   @unique
-  role      UserRole @default(MEMBER)
+  role      UserRole @default(VIEWER)
   email     String   @unique
   password  String
   firstName String?
@@ -56,4 +67,16 @@ model User {
 
   oneTimeTokens        OneTimeToken[]
   personalAccessTokens PersonalAccessToken[]
+  refreshTokens        RefreshToken[]
+  userConfig           UserConfig?
+}
+
+model UserConfig {
+  id        String   @id @default(cuid())
+  locale    String   @default("en-US")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], map: "UserConfig_userId_fkey")
+  userId String @unique
 }

@@ -13,7 +13,7 @@
   },
   "0llMw7": {
     "defaultMessage": "Valeur",
-    "description": "[Personal Access Token Editor] Form value input label."
+    "description": "[Personal Access Token Editor] Form Value input label."
   },
   "20hT19": {
     "defaultMessage": "IP",
@@ -60,8 +60,8 @@
     "description": "[Setup Modal] Email input label."
   },
   "Db1A9P": {
-    "defaultMessage": "Nom",
-    "description": "[Personal Access Token Editor] Form name input label."
+    "defaultMessage": "Étiquette",
+    "description": "[Personal Access Token Editor] Form Label input label."
   },
   "E/vx8U": {
     "defaultMessage": "Message de remerciement",
@@ -121,14 +121,14 @@
   },
   "Q0wotK": {
     "defaultMessage": "Email",
-    "description": "[User Editor] Form email input label."
+    "description": "[User Editor] Form Email input label."
   },
   "QBtMwD": {
     "defaultMessage": "Email",
     "description": "[Users List] Table Email column label."
   },
   "QWfMAC": {
-    "defaultMessage": "Nouveau jeton d’accès personnel",
+    "defaultMessage": "Création d’un jeton d’accès personnel",
     "description": "[Personal Access Token Editor] Creation page title."
   },
   "TAgUUN": {
@@ -136,8 +136,12 @@
     "description": "[One Time Tokens List] Table IP column label."
   },
   "TYZzVl": {
-    "defaultMessage": "Nom",
-    "description": "[Personal Access Tokens List] Table Name column label."
+    "defaultMessage": "Étiquette",
+    "description": "[Personal Access Tokens List] Table Label column label."
+  },
+  "UaLCH+": {
+    "defaultMessage": "Prénom",
+    "description": "[User Editor] Form First Name input label."
   },
   "VXF18U": {
     "defaultMessage": "Compte actif",
@@ -149,7 +153,7 @@
   },
   "XJmbHw": {
     "defaultMessage": "Rôle",
-    "description": "[User Editor] Form role select label."
+    "description": "[User Editor] Form Role select label."
   },
   "YJ9OxG": {
     "defaultMessage": "Votre email",
@@ -188,7 +192,7 @@
     "description": "[Sidebar Main Menu] Refresh Tokens label."
   },
   "cZz32J": {
-    "defaultMessage": "Edit PAT",
+    "defaultMessage": "Édition d’un jeton d’accès personnel",
     "description": "[Personal Access Token Editor] Edition page title."
   },
   "cvJp/S": {
@@ -238,6 +242,10 @@
   "nsfyN3": {
     "defaultMessage": "Créer",
     "description": "[Personal Access Token Editor] Form create button label."
+  },
+  "oatzvs": {
+    "defaultMessage": "Nom",
+    "description": "[User Editor] Form Last Name input label."
   },
   "pLn6i2": {
     "defaultMessage": "Mettre à jour",

@@ -13,7 +13,7 @@
   },
   "0llMw7": {
     "defaultMessage": "Value",
-    "description": "[Personal Access Token Editor] Form value input label."
+    "description": "[Personal Access Token Editor] Form Value input label."
   },
   "20hT19": {
     "defaultMessage": "IP",
@@ -60,8 +60,8 @@
     "description": "[Setup Modal] Email input label."
   },
   "Db1A9P": {
-    "defaultMessage": "Name",
-    "description": "[Personal Access Token Editor] Form name input label."
+    "defaultMessage": "Label",
+    "description": "[Personal Access Token Editor] Form Label input label."
   },
   "E/vx8U": {
     "defaultMessage": "Thank You message",
@@ -121,7 +121,7 @@
   },
   "Q0wotK": {
     "defaultMessage": "Email",
-    "description": "[User Editor] Form email input label."
+    "description": "[User Editor] Form Email input label."
   },
   "QBtMwD": {
     "defaultMessage": "Email",
@@ -136,8 +136,12 @@
     "description": "[One Time Tokens List] Table IP column label."
   },
   "TYZzVl": {
-    "defaultMessage": "Name",
-    "description": "[Personal Access Tokens List] Table Name column label."
+    "defaultMessage": "Label",
+    "description": "[Personal Access Tokens List] Table Label column label."
+  },
+  "UaLCH+": {
+    "defaultMessage": "First Name",
+    "description": "[User Editor] Form First Name input label."
   },
   "VXF18U": {
     "defaultMessage": "Activated account",
@@ -149,7 +153,7 @@
   },
   "XJmbHw": {
     "defaultMessage": "Role",
-    "description": "[User Editor] Form role select label."
+    "description": "[User Editor] Form Role select label."
   },
   "YJ9OxG": {
     "defaultMessage": "Your email",
@@ -238,6 +242,10 @@
   "nsfyN3": {
     "defaultMessage": "Create",
     "description": "[Personal Access Token Editor] Form create button label."
+  },
+  "oatzvs": {
+    "defaultMessage": "Last Name",
+    "description": "[User Editor] Form Last Name input label."
   },
   "pLn6i2": {
     "defaultMessage": "Update",

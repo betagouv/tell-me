@@ -94,19 +94,41 @@ export default function UserEditor() {
         <Form initialValues={initialValues} onSubmit={updateUserAndGoBack} validationSchema={FormSchema}>
           <Form.Input
             label={intl.formatMessage({
-              defaultMessage: 'Email',
-              description: '[User Editor] Form email input label.',
-              id: 'Q0wotK',
+              defaultMessage: 'First Name',
+              description: '[User Editor] Form First Name input label.',
+              id: 'UaLCH+',
             })}
-            name="email"
-            type="email"
+            name="firstName"
           />
+
+          <Field>
+            <Form.Input
+              label={intl.formatMessage({
+                defaultMessage: 'Last Name',
+                description: '[User Editor] Form Last Name input label.',
+                id: 'oatzvs',
+              })}
+              name="lastName"
+            />
+          </Field>
+
+          <Field>
+            <Form.Input
+              label={intl.formatMessage({
+                defaultMessage: 'Email',
+                description: '[User Editor] Form Email input label.',
+                id: 'Q0wotK',
+              })}
+              name="email"
+              type="email"
+            />
+          </Field>
 
           <Field>
             <Form.Select
               label={intl.formatMessage({
                 defaultMessage: 'Role',
-                description: '[User Editor] Form role select label.',
+                description: '[User Editor] Form Role select label.',
                 id: 'XJmbHw',
               })}
               name="roleAsOption"

@@ -1,20 +1,17 @@
 import dayjs from 'dayjs'
 import { NextApiResponse } from 'next'
-import R from 'ramda'
 
 import { USER_ROLE } from '../../common/constants'
 import getJwtPayload from '../helpers/getJwtPayload'
 import handleError from '../helpers/handleError'
 import ApiError from '../libs/ApiError'
-import User from '../models/User'
-import { HandlerWithAuth, RequestMe, RequestWithAuth } from '../types'
+import { HandlerWithAuth, RequestWithAuth } from '../types'
 
 const ERROR_PATH = 'api/middlewares/withAuth()'
 
 export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_ROLE.ADMINISTRATOR]) {
   const handlerWithAuth = async (req: RequestWithAuth, res: NextApiResponse) => {
     let userId: string
-    let userNewId: string
 
     try {
       if (req.query.personalAccessToken !== undefined) {
@@ -27,9 +24,6 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
           : req.query.personalAccessToken
 
         const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
-          include: {
-            user: true,
-          },
           where: {
             value: personalAccessToken,
           },
@@ -47,8 +41,7 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
           return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
         }
 
-        userId = maybePersonalAccessToken.user.legacyId
-        userNewId = maybePersonalAccessToken.user.id
+        userId = maybePersonalAccessToken.userId
       } else if (req.query.oneTimeToken !== undefined) {
         // —————————————————————————————————————————————————————————————————————————————
         // OTT-based authentication
@@ -57,9 +50,6 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
         const oneTimeToken = Array.isArray(req.query.oneTimeToken) ? req.query.oneTimeToken[0] : req.query.oneTimeToken
 
         const maybeOneTimeToken = await req.db.oneTimeToken.findUnique({
-          include: {
-            user: true,
-          },
           where: {
             value: oneTimeToken,
           },
@@ -83,8 +73,7 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
           },
         })
 
-        userId = maybeOneTimeToken.user.legacyId
-        userNewId = maybeOneTimeToken.user.id
+        userId = maybeOneTimeToken.userId
       } else {
         // —————————————————————————————————————————————————————————————————————————————
         // JWT-based authentication
@@ -107,33 +96,25 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
           return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
         }
 
-        userId = maybeTokenPayload._id
-
-        const maybeNewUser = await req.db.user.findUnique({
-          where: {
-            legacyId: userId,
-          },
-        })
-        if (maybeNewUser === null) {
-          return handleError(new ApiError(`Legacy and new databases are not in sync.`, 500), ERROR_PATH, res)
-        }
-
-        userNewId = maybeNewUser.id
+        userId = maybeTokenPayload.id
       }
 
-      const user = await User.findById(userId).exec()
-      if (user === null || !user.isActive) {
+      const maybeUser = await req.db.user.findUnique({
+        where: {
+          id: userId,
+        },
+      })
+      if (maybeUser === null || !maybeUser.isActive) {
         return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
 
-      if (!allowedRoles.includes(user.role)) {
+      if (!allowedRoles.includes(maybeUser.role)) {
         return handleError(new ApiError(`Forbidden.`, 403, true), ERROR_PATH, res)
       }
 
       const reqWithAuth: RequestWithAuth = Object.assign(req, {
-        me: R.pick(['id'], user) as RequestMe,
-        newMe: {
-          id: userNewId,
+        me: {
+          id: userId,
         },
       })
 

@@ -16,7 +16,7 @@ import Form from '../molecules/Form'
 import Loader from '../molecules/Loader'
 
 const FormSchema = Yup.object().shape({
-  name: Yup.string().required(`Name is mandatory.`),
+  label: Yup.string().required(`Label is mandatory.`),
 })
 
 export default function PersonalAccessTokenEditor() {
@@ -38,7 +38,7 @@ export default function PersonalAccessTokenEditor() {
     }
 
     const personalAccessTokenData = maybeBody.data
-    const personalAccessTokenEditableData: any = R.pick(['name'])(personalAccessTokenData)
+    const personalAccessTokenEditableData: any = R.pick(['label'])(personalAccessTokenData)
 
     if (isMounted()) {
       setInitialValues(personalAccessTokenEditableData)
@@ -61,7 +61,7 @@ export default function PersonalAccessTokenEditor() {
     values,
     { setErrors, setFieldValue, setSubmitting }: FormikHelpers<any>,
   ) => {
-    const personalAccessTokenData: any = R.pick(['name'])(values)
+    const personalAccessTokenData: any = R.pick(['label'])(values)
 
     const maybeBody = isNew
       ? await api.post(`personal-access-token`, values)
@@ -112,11 +112,11 @@ export default function PersonalAccessTokenEditor() {
           <Form.Input
             isDisabled={isCreated}
             label={intl.formatMessage({
-              defaultMessage: 'Name',
-              description: '[Personal Access Token Editor] Form name input label.',
+              defaultMessage: 'Label',
+              description: '[Personal Access Token Editor] Form Label input label.',
               id: 'Db1A9P',
             })}
-            name="name"
+            name="label"
           />
 
           {isCreated && (
@@ -125,7 +125,7 @@ export default function PersonalAccessTokenEditor() {
                 isDisabled
                 label={intl.formatMessage({
                   defaultMessage: 'Value',
-                  description: '[Personal Access Token Editor] Form value input label.',
+                  description: '[Personal Access Token Editor] Form Value input label.',
                   id: '0llMw7',
                 })}
                 name="value"

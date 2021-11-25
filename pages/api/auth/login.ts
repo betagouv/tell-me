@@ -1,19 +1,18 @@
 import bcrypt from 'bcryptjs'
-import { NextApiRequest, NextApiResponse } from 'next'
+import dayjs from 'dayjs'
+import { NextApiResponse } from 'next'
 import R from 'ramda'
 
 import getJwt from '../../../api/helpers/getJwt'
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
-import withMongoose from '../../../api/middlewares/withMongoose'
-import RefreshToken from '../../../api/models/RefreshToken'
-import User from '../../../api/models/User'
-import UserConfig from '../../../api/models/UserConfig'
+import withPrisma from '../../../api/middlewares/withPrisma'
+import { RequestWithPrisma } from '../../../api/types'
 
 const ERROR_PATH = 'pages/api/auth/AuthLoginController()'
 const { NODE_ENV } = process.env
 
-async function AuthLoginController(req: NextApiRequest, res: NextApiResponse) {
+async function AuthLoginController(req: RequestWithPrisma, res: NextApiResponse) {
   if (req.method !== 'POST') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -21,14 +20,23 @@ async function AuthLoginController(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const maybeUser = await User.findOne({ email: req.body.email }).select('+password').exec()
+    const loginUserData = {
+      email: String(req.body.email),
+      password: String(req.body.password),
+    }
+
+    const maybeUser = await req.db.user.findUnique({
+      where: {
+        email: loginUserData.email,
+      },
+    })
     if (maybeUser === null) {
       handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
 
       return
     }
 
-    const matchPassword = await bcrypt.compare(req.body.password, maybeUser.password)
+    const matchPassword = await bcrypt.compare(loginUserData.password, maybeUser.password)
     if (!matchPassword) {
       handleError(new ApiError('Unauthorized.', 401, true), ERROR_PATH, res)
 
@@ -40,38 +48,63 @@ async function AuthLoginController(req: NextApiRequest, res: NextApiResponse) {
       return
     }
 
-    const maybeIp = (NODE_ENV === 'production' ? req.headers['x-real-ip'] : '0.0.0.0') as string | undefined
+    const maybeIp = NODE_ENV === 'production' ? req.headers['x-real-ip'] : '0.0.0.0'
     if (maybeIp === undefined) {
       handleError(new ApiError(`Unresolvable IP.`, 403, true), ERROR_PATH, res)
 
       return
     }
 
-    const userConfig = await UserConfig.findOne({
-      user: maybeUser.id,
+    const ip = Array.isArray(maybeIp) ? maybeIp.join(', ') : maybeIp
+    const userId = maybeUser.id
+
+    const userConfig = await req.db.userConfig.findUnique({
+      where: {
+        userId,
+      },
     })
     const tokenPayload = {
-      ...R.pick(['_id', 'email', 'role'], maybeUser),
+      ...R.pick(['email', 'firstName', 'id', 'lastName', 'role'], maybeUser),
       ...R.pick(['locale'], userConfig),
+    } as {
+      email: string
+      firstName: string
+      id: string
+      lastName: string
+      role: string
     }
     const sessionTokenValue = await getJwt(tokenPayload)
+    if (sessionTokenValue === null) {
+      handleError(new ApiError(`JWT generation failed.`, 500), ERROR_PATH, res)
+
+      return
+    }
 
     // Delete all existing Refresh JWT for the authenticated user client
-    await RefreshToken.deleteMany({
-      ip: maybeIp,
-      user: maybeUser.id,
-    }).exec()
+    await req.db.refreshToken.deleteMany({
+      where: {
+        ip,
+        userId,
+      },
+    })
 
-    const refreshTokenValue = await getJwt(tokenPayload, maybeIp)
-    const newRefreshTokenData = {
-      ip: maybeIp,
-      user: maybeUser.id,
-      value: refreshTokenValue,
+    const expiredAt = dayjs().add(7, 'day').toDate()
+    const refreshTokenValue = await getJwt(tokenPayload, ip)
+    if (refreshTokenValue === null) {
+      handleError(new ApiError(`JWT generation failed.`, 500), ERROR_PATH, res)
+
+      return
     }
 
     // Save the new Refresh JWT for the authenticated user client
-    const newRefreshToken = new RefreshToken(newRefreshTokenData)
-    await newRefreshToken.save()
+    req.db.refreshToken.create({
+      data: {
+        expiredAt,
+        ip,
+        userId,
+        value: refreshTokenValue,
+      },
+    })
 
     res.status(200).json({
       data: {
@@ -84,4 +117,4 @@ async function AuthLoginController(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default withMongoose(AuthLoginController)
+export default withPrisma(AuthLoginController)

@@ -57,10 +57,10 @@ export default function PersonalAccessTokenList() {
     },
     {
       isSortable: true,
-      key: 'name',
+      key: 'label',
       label: intl.formatMessage({
-        defaultMessage: 'Name',
-        description: '[Personal Access Tokens List] Table Name column label.',
+        defaultMessage: 'Label',
+        description: '[Personal Access Tokens List] Table Label column label.',
         id: 'TYZzVl',
       }),
     },

@@ -11,7 +11,6 @@ export type RequestMe = {
 
 export interface RequestWithAuth extends RequestWithPrisma {
   me: RequestMe
-  newMe: RequestMe
 }
 
 export interface RequestWithPrisma extends NextApiRequest {

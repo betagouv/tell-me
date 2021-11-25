@@ -1,14 +1,15 @@
+import { NextApiResponse } from 'next'
+
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
-import withMongoose from '../../api/middlewares/withMongoose'
 import withPrisma from '../../api/middlewares/withPrisma'
-import User from '../../api/models/User'
+import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
 
 const ERROR_PATH = 'pages/api/auth/UsersController()'
 
-async function UsersController(req, res) {
+async function UsersController(req: RequestWithAuth, res: NextApiResponse) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -16,7 +17,7 @@ async function UsersController(req, res) {
   }
 
   try {
-    const users = await User.find().exec()
+    const users = await req.db.user.findMany()
 
     res.status(200).json({
       data: users,
@@ -26,4 +27,4 @@ async function UsersController(req, res) {
   }
 }
 
-export default withPrisma(withMongoose(withAuth(UsersController, [USER_ROLE.ADMINISTRATOR])))
+export default withPrisma(withAuth(UsersController, [USER_ROLE.ADMINISTRATOR]))
