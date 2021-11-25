@@ -43,6 +43,7 @@ services:
       - ${PORT}:3000
     depends_on:
       - db
+      - db_legacy
 
 volumes:
   mongodb-data:
