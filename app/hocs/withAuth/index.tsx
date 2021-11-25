@@ -1,7 +1,9 @@
+import { HTTPError } from 'ky'
 import * as R from 'ramda'
 import { useEffect, useMemo, useState } from 'react'
 
 import getJwtPayload from '../../helpers/getJwtPayload'
+import handleError from '../../helpers/handleError'
 import isJwtExpired from '../../helpers/isJwtExpired'
 import resetLocalStorage from '../../helpers/resetLocalStorage'
 import useIsMounted from '../../hooks/useIsMounted'
@@ -62,31 +64,42 @@ export default function withAuth(Component) {
     }
 
     const refreshSessionToken: AuthContext['refreshSessionToken'] = async () => {
-      if (state.refreshToken === null) {
-        return null
-      }
+      try {
+        if (state.refreshToken === null) {
+          return null
+        }
 
-      const body = await api.ky
-        .post('auth/refresh', {
-          json: {
-            refreshToken: state.refreshToken,
-          },
+        const body = await api.ky
+          .post('auth/refresh', {
+            json: {
+              refreshToken: state.refreshToken,
+            },
+          })
+          .json<Api.ResponseBody>()
+        if (body === null || body.hasError) {
+          return null
+        }
+
+        const { sessionToken } = body.data
+
+        window.localStorage.setItem('sessionToken', sessionToken)
+
+        setState({
+          ...state,
+          sessionToken,
         })
-        .json<Api.ResponseBody>()
-      if (body === null || body.hasError) {
+
+        return sessionToken
+      } catch (err) {
+        if (err instanceof HTTPError) {
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          clearSessionToken()
+        } else {
+          handleError(err, 'app/hocs/withAuth#refreshSessionToken()')
+        }
+
         return null
       }
-
-      const { sessionToken } = body.data
-
-      window.localStorage.setItem('sessionToken', sessionToken)
-
-      setState({
-        ...state,
-        sessionToken,
-      })
-
-      return sessionToken
     }
 
     // Useful to force a re-login with the email field prefilled

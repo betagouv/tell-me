@@ -31,7 +31,7 @@ async function AuthRefreshController(req: RequestWithPrisma, res: NextApiRespons
 
       return
     }
-    if (dayjs().isAfter(dayjs(maybeRefreshToken.expiredAt)) || !(await isJwtExpired(refreshTokenValue))) {
+    if (dayjs().isAfter(dayjs(maybeRefreshToken.expiredAt)) || (await isJwtExpired(refreshTokenValue))) {
       await req.db.refreshToken.delete({
         where: {
           value: refreshTokenValue,
@@ -39,6 +39,8 @@ async function AuthRefreshController(req: RequestWithPrisma, res: NextApiRespons
       })
 
       handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+
+      return
     }
 
     const { userId } = maybeRefreshToken

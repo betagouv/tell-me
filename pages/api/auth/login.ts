@@ -97,7 +97,7 @@ async function AuthLoginController(req: RequestWithPrisma, res: NextApiResponse)
     }
 
     // Save the new Refresh JWT for the authenticated user client
-    req.db.refreshToken.create({
+    await req.db.refreshToken.create({
       data: {
         expiredAt,
         ip,
