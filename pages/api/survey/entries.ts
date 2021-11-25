@@ -31,5 +31,5 @@ async function SurveyEntriesController(req, res) {
 }
 
 export default withPrisma(
-  withMongoose(withAuth(SurveyEntriesController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER])),
+  withMongoose(withAuth(SurveyEntriesController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER], true)),
 )

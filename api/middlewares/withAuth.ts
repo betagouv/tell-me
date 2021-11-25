@@ -9,7 +9,7 @@ import { HandlerWithAuth, RequestWithAuth } from '../types'
 
 const ERROR_PATH = 'api/middlewares/withAuth()'
 
-export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_ROLE.ADMINISTRATOR]) {
+export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_ROLE.ADMINISTRATOR], isPublic = false) {
   const handlerWithAuth = async (req: RequestWithAuth, res: NextApiResponse) => {
     let userId: string
 
@@ -18,6 +18,10 @@ export default function withAuth(handler: HandlerWithAuth, allowedRoles = [USER_
         // —————————————————————————————————————————————————————————————————————————————
         // PAT-based authentication
         // Cancellable 90 days tokens used for external back-end private API requests.
+
+        if (!isPublic) {
+          return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        }
 
         const personalAccessToken = Array.isArray(req.query.personalAccessToken)
           ? req.query.personalAccessToken[0]
