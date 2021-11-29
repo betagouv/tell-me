@@ -76,7 +76,7 @@
     "typescript": "4.5.2",
     "unified": "10.1.1",
     "unist-util-reduce": "0.2.2",
-    "xlsx": "0.17.3",
+    "xlsx": "0.17.4",
     "yup": "0.32.9",
     "zxcvbn": "4.4.2"
   },
