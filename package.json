@@ -94,7 +94,7 @@
     "concurrently": "6.3.0",
     "envinfo": "7.8.1",
     "eslint-plugin-formatjs": "2.18.0",
-    "husky": "7.0.2",
+    "husky": "7.0.4",
     "jest": "27.4.3",
     "keypair": "1.0.4",
     "nodemon": "2.0.14",
