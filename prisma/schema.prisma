@@ -11,6 +11,16 @@ generator client {
 // =========================================================
 // Constants
 
+enum SurveyBlockType {
+  CONTENT_QUESTION
+  CONTENT_TEXT
+  INPUT_CHECKBOX
+  INPUT_CHOICE
+  INPUT_FILE
+  INPUT_LONG_ANSWER
+  INPUT_SHORT_ANSWER
+}
+
 enum UserRole {
   ADMINISTRATOR
   MANAGER
@@ -54,6 +64,63 @@ model RefreshToken {
   userId String
 }
 
+model Survey {
+  id              String   @id @default(cuid())
+  title           String   @unique
+  slug            String   @unique
+  isPublished     Boolean  @default(false)
+  headerUrl       String?
+  logoUrl         String?
+  thankYouMessage String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  blocks  SurveyBlock[]
+  entries SurveyEntry[]
+  owner   User          @relation("OwnedSurveys", fields: [ownerId], references: [id])
+  ownerId String
+}
+
+model SurveyBlock {
+  id           String          @id @default(cuid())
+  type         SurveyBlockType
+  value        String
+  positionPage Int
+  positionRank Int
+  isHidden     Boolean         @default(false)
+  isRequired   Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  ifSelectedThenShowQuestion   SurveyBlock?  @relation("VisibilityToggleInputs", fields: [ifSelectedThenShowQuestionId], references: [id])
+  ifSelectedThenShowQuestionId String?
+  survey                       Survey        @relation(fields: [surveyId], references: [id])
+  surveyId                     String
+  visibilityToggleInputs       SurveyBlock[] @relation("VisibilityToggleInputs")
+}
+
+model SurveyEntry {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  answers  SurveyEntryAnswer[]
+  survey   Survey              @relation(fields: [surveyId], references: [id])
+  surveyId String
+}
+
+model SurveyEntryAnswer {
+  id        String          @id @default(cuid())
+  question  String
+  type      SurveyBlockType
+  value     Json
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  surveyEntry   SurveyEntry @relation(fields: [surveyEntryId], references: [id])
+  surveyEntryId String
+}
+
 model User {
   id        String   @id @default(cuid())
   role      UserRole @default(VIEWER)
@@ -68,7 +135,8 @@ model User {
   oneTimeTokens        OneTimeToken[]
   personalAccessTokens PersonalAccessToken[]
   refreshTokens        RefreshToken[]
-  userConfig           UserConfig?
+  config               UserConfig?
+  ownedSurveys         Survey[]              @relation("OwnedSurveys")
 }
 
 model UserConfig {

@@ -36,6 +36,19 @@ export default function withAuth(Component) {
     const [user, setUser] = useState<Common.Nullable<AuthContextUser>>(getInitialUser())
     const isMounted = useIsMounted()
 
+    // Useful to force a re-login with the email field prefilled
+    const clearSessionToken: AuthContext['clearSessionToken'] = () => {
+      window.localStorage.removeItem('sessionToken')
+
+      if (isMounted()) {
+        setState({
+          ...state,
+          isAuthenticated: false,
+          sessionToken: null,
+        })
+      }
+    }
+
     const logIn: AuthContext['logIn'] = async (sessionToken, refreshToken = null) => {
       const sessionTokenPayload = await getJwtPayload(sessionToken)
       if (sessionTokenPayload === null) {
@@ -60,6 +73,20 @@ export default function withAuth(Component) {
           refreshToken,
           sessionToken,
         })
+      }
+    }
+
+    const logOut: AuthContext['logOut'] = () => {
+      resetLocalStorage()
+
+      if (isMounted()) {
+        setState({
+          ...state,
+          isAuthenticated: false,
+          refreshToken: null,
+          sessionToken: null,
+        })
+        setUser(null)
       }
     }
 
@@ -99,33 +126,6 @@ export default function withAuth(Component) {
         }
 
         return null
-      }
-    }
-
-    // Useful to force a re-login with the email field prefilled
-    const clearSessionToken: AuthContext['clearSessionToken'] = () => {
-      window.localStorage.removeItem('sessionToken')
-
-      if (isMounted()) {
-        setState({
-          ...state,
-          isAuthenticated: false,
-          sessionToken: null,
-        })
-      }
-    }
-
-    const logOut: AuthContext['logOut'] = () => {
-      resetLocalStorage()
-
-      if (isMounted()) {
-        setState({
-          ...state,
-          isAuthenticated: false,
-          refreshToken: null,
-          sessionToken: null,
-        })
-        setUser(null)
       }
     }
 

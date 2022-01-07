@@ -9,8 +9,8 @@ import ApiError from '../../../api/libs/ApiError'
 import withPrisma from '../../../api/middlewares/withPrisma'
 import { RequestWithPrisma } from '../../../api/types'
 
-const ERROR_PATH = 'pages/api/auth/AuthLoginController()'
 const { NODE_ENV } = process.env
+const ERROR_PATH = 'pages/api/auth/AuthLoginController()'
 
 async function AuthLoginController(req: RequestWithPrisma, res: NextApiResponse) {
   if (req.method !== 'POST') {
