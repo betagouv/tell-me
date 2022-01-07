@@ -1,0 +1,53 @@
+<svg width="512" height="512" data-name="Layer 1" version="1.1" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="g">
+   <rect x="483.92" y="224.42" width="18.606" height="16.542" fill="none" opacity=".127" stroke="#fff" stroke-opacity=".70238" stroke-width="2.383"/>
+  </clipPath>
+  <clipPath id="f">
+   <rect x="483.92" y="224.42" width="18.606" height="16.542" fill="none" opacity=".127" stroke="#fff" stroke-opacity=".70238" stroke-width="2.383"/>
+  </clipPath>
+  <clipPath id="d">
+   <rect x="483.92" y="224.42" width="18.606" height="16.542" fill="none" opacity=".127" stroke="#fff" stroke-opacity=".70238" stroke-width="2.383"/>
+  </clipPath>
+  <clipPath id="e">
+   <rect x="483.92" y="224.42" width="18.606" height="16.542" fill="none" opacity=".127" stroke="#fff" stroke-opacity=".70238" stroke-width="2.383"/>
+  </clipPath>
+  <clipPath id="c">
+   <circle cx="467.26" cy="390.52" r="271.08" fill="#0f0" fill-opacity=".49405" fill-rule="evenodd" stroke="#000" stroke-width="1.0124px"/>
+  </clipPath>
+  <clipPath id="b">
+   <circle cx="491.94" cy="342.5" r="198.47" fill="#0f0" fill-opacity=".49405" fill-rule="evenodd" stroke="#000" stroke-width=".74125px"/>
+  </clipPath>
+  <clipPath id="a">
+   <circle cx="491.94" cy="342.5" r="198.47" fill="#0f0" fill-opacity=".49405" fill-rule="evenodd" stroke="#000" stroke-width=".74125px"/>
+  </clipPath>
+ </defs>
+ <title>beta.gouv.fr</title>
+ <g transform="matrix(.31569 0 0 .31569 -92.643 -48.124)">
+  <circle cx="1053.7" cy="912.69" r="760.25" fill="#fff" stroke-width="2.9632"/>
+  <g transform="matrix(2.8045 0 0 2.8045 -255.68 -182.54)" clip-path="url(#c)">
+   <path d="m361.6 554.37s113.58-2.8588 171-30.53c38.65-18.625 72.262-17.97 88.491 12.165 8.3349 15.477-21.311 52.965-86.451 57.085-65.14 4.12-173.04-38.72-173.04-38.72z" clip-path="none" opacity=".167"/>
+   <path d="m314.83 532.21c-35.507 48.34-55.098 75.692-54.314 75.082 31.889-24.803 133.07 93.571 200.26 94.854 79.875 1.525 243.37-54.408 215.31-92.358l-57.199-77.347s-58.336 63.815-197.8 10.895c0 0.04-70.638-17.236-106.26-11.126z" clip-path="none" fill="#eee"/>
+  </g>
+  <g fill="#ddd" fill-rule="evenodd">
+   <ellipse cx="989.42" cy="791.77" rx="44.606" ry="44.606"/>
+   <ellipse cx="1101.1" cy="433.86" rx="66.305" ry="67.475"/>
+   <ellipse cx="1155.3" cy="1101.3" rx="30.098" ry="30.098"/>
+   <ellipse cx="938.52" cy="1247.9" rx="18" ry="18"/>
+  </g>
+  <g fill="none" stroke="#fff" stroke-opacity=".70238" stroke-width="3">
+   <circle transform="matrix(2.0986 0 0 2.5423 97.361 -120.31)" cx="484.52" cy="219.42" r="16.434" clip-path="url(#g)"/>
+   <circle transform="matrix(1.5896 0 0 1.5896 220.59 449.04)" cx="484.52" cy="219.42" r="16.434" clip-path="url(#f)"/>
+   <circle transform="matrix(.88623 0 0 .88623 504.09 1049.9)" cx="484.52" cy="219.42" r="16.434" clip-path="url(#d)"/>
+   <circle transform="matrix(1.142 0 0 1.142 602.8 851.06)" cx="484.52" cy="219.42" r="16.434" clip-path="url(#e)"/>
+  </g>
+  <g transform="matrix(3.8305 0 0 3.8305 -830.66 -401.38)" clip-path="url(#a)" fill="#003195">
+   <path d="m433.69 152.88c12.121-2.4045 18.517 7.3829 18.329 19.521 0 0 2.5048 145.69-6.6051 173.99-8.2124 25.51-78.771 119.95-92.708 138.47-38.219-37.362-59.769-88.549-59.782-142 0.0191-87.397 57.16-164.51 140.77-189.98z" clip-path="none" fill-rule="evenodd"/>
+   <path d="m433.84 152.51-434.74 0.36678v333.39l353.63-1.4358z"/>
+  </g>
+  <g transform="matrix(3.8305 0 0 3.8305 -830.66 -401.38)" clip-path="url(#b)" fill="#f00">
+   <path d="m550.12 152.81c-12.274-1.7938-18.517 7.3829-18.329 19.521 0 0-2.5048 145.69 6.6051 173.99 8.2124 25.51 78.771 119.95 92.708 138.47 38.219-37.362 59.769-88.549 59.782-142-0.0191-87.397-57.16-164.51-140.77-189.98z" fill-rule="evenodd"/>
+   <path d="m546.59 152.44 440.85 0.36677v333.39l-356.29-1.4373z"/>
+  </g>
+ </g>
+</svg>
