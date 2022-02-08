@@ -1,4 +1,4 @@
-import { Button, Dialog } from '@singularity-ui/core'
+import { Button, Dialog } from '@singularity/core'
 import { String } from 'aws-sdk/clients/cloudsearchdomain'
 import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent } from 'react'

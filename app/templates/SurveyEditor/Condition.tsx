@@ -1,4 +1,4 @@
-import { Select } from '@singularity-ui/core'
+import { Select } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent } from 'react'
 import { CornerDownRight } from 'react-feather'

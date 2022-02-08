@@ -1,4 +1,4 @@
-import { Select as SingularitySelect } from '@singularity-ui/core'
+import { Select as SingularitySelect } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 
@@ -16,10 +16,10 @@ export default function Select({ helper, isAsync, isDisabled, isMulti, label, na
     <SingularitySelect
       cacheOptions={isAsync}
       defaultValue={values[name]}
-      disabled={isDisabled}
       error={maybeError}
       helper={helper}
       isAsync={isAsync}
+      isDisabled={isDisabled}
       isMulti={isMulti}
       label={!noLabel ? label : null}
       loadOptions={isAsync ? options : null}

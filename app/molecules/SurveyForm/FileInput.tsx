@@ -1,4 +1,4 @@
-import { FileInput as SuiFileInput } from '@singularity-ui/core'
+import { FileInput as SuiFileInput } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 

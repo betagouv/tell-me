@@ -1,4 +1,4 @@
-import { Radio as SuiRadio } from '@singularity-ui/core'
+import { Radio as SuiRadio } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 

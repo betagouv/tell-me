@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": ".",
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -10,12 +11,27 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
+    "paths": {
+      "@api/*": ["api/*"],
+      "@app/*": ["app/*"],
+      "@common/*": ["common/*"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false,
     "strictNullChecks": true,
     "target": "es5"
   },
-  "include": ["**/*.js", "**/*.ts", "**/*.tsx", "next-env.d.ts"],
-  "exclude": ["node_modules/*"]
+  "include": [
+    "./api/**/*.ts",
+    "./app/**/*.ts",
+    "./app/**/*.tsx",
+    "./common/**/*.ts",
+    "./pages/**/*.ts",
+    "./pages/**/*.tsx",
+    "./scripts/**/*.js",
+    "./next-env.d.ts",
+    "./*.js"
+  ],
+  "exclude": [".next/", "node_modules/*"]
 }

@@ -1,4 +1,4 @@
-import { TextInput as SuiTextInput } from '@singularity-ui/core'
+import { TextInput as SuiTextInput } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 

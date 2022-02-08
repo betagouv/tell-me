@@ -1,5 +1,5 @@
-import { Button, Card, Table } from '@singularity-ui/core'
-import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import { Button, Card, Table } from '@singularity/core'
+import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'

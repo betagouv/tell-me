@@ -1,5 +1,5 @@
-import { Card, Table } from '@singularity-ui/core'
-import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import { Card, Table } from '@singularity/core'
+import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
