@@ -1,11 +1,8 @@
-import BetterPropTypes from 'better-prop-types'
-import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import hashCode from '../../helpers/hashCode'
-import SurveyManagerBlock from '../../libs/SurveyManager/Block'
+import SurveyEditorManagerBlock from '../../libs/SurveyEditorManager/Block'
 import Editable from '../../molecules/Editable'
-import { SelectOptionShape } from '../../shapes'
 import Checkbox from './blocks/Checkbox'
 import FileInput from './blocks/FileInput'
 import Paragraph from './blocks/Paragraph'
@@ -16,52 +13,112 @@ import TextInput from './blocks/TextInput'
 import Condition from './Condition'
 import Row from './Row'
 
-const SURVEY_BLOCK_TYPE_COMPONENT = {
-  [SURVEY_BLOCK_TYPE.CONTENT.QUESTION]: {
-    Component: Question,
+import type TellMe from '../../../schemas/1.0.0/TellMe'
+import type { MutableRefObject } from 'react'
+
+const SURVEY_BLOCK_TYPE_COMPONENT: Record<
+  TellMe.BlockType,
+  {
+    Component: any
+    isRichText: boolean
+    placeholder: string
+  }
+> = {
+  action_next: {
+    Component: () => null,
     isRichText: false,
-    placeholder: `What is your question?`,
+    placeholder: `TODO`,
   },
-  [SURVEY_BLOCK_TYPE.CONTENT.TEXT]: {
+  action_submit: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  content_subtitle: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  content_text: {
     Component: Paragraph,
     isRichText: true,
     placeholder: `Insert some text or type '/' to insert a new type of block`,
   },
-  [SURVEY_BLOCK_TYPE.INPUT.CHOICE]: {
+  input_checkbox: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  input_choice: {
     Component: Radio,
     isRichText: false,
     placeholder: `Option`,
   },
-  [SURVEY_BLOCK_TYPE.INPUT.CHECKBOX]: {
-    Component: Checkbox,
+  input_email: {
+    Component: () => null,
     isRichText: false,
-    placeholder: `Choice`,
+    placeholder: `TODO`,
   },
-  [SURVEY_BLOCK_TYPE.INPUT.FILE]: {
+  input_file: {
     Component: FileInput,
     isRichText: false,
     placeholder: `Choose a file…`,
   },
-  [SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER]: {
+  input_linear_scale: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  input_link: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  input_long_answer: {
     Component: Textarea,
     isRichText: false,
     placeholder: `Type placeholder text`,
   },
-  [SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER]: {
+  input_multiple_choice: {
+    Component: Checkbox,
+    isRichText: false,
+    placeholder: `Choice`,
+  },
+  input_number: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  input_phone: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  input_rating: {
+    Component: () => null,
+    isRichText: false,
+    placeholder: `TODO`,
+  },
+  input_short_answer: {
     Component: TextInput,
     isRichText: false,
     placeholder: `Type placeholder text`,
   },
+  question: {
+    Component: Question,
+    isRichText: false,
+    placeholder: `What is your question?`,
+  },
 }
 
 type BlockProps = {
-  block: SurveyManagerBlock
+  block: SurveyEditorManagerBlock
   index: any
   isFocused: any
   onAppendBlockAt: any
   onChangeAt: (index: number, newValue: string) => void
-  onChangeConditionAt: (index: number, questionBlockId: Common.Nullable<string>) => void
-  onChangeTypeAt: (index: number, newType: string) => void
+  onChangeConditionAt: (index: number, newQuestionBlocksIds: string[]) => void
+  onChangeTypeAt: (index: number, newType: TellMe.BlockType) => void
   onDownKeyDown: any
   onFocus: any
   onRemove: any
@@ -69,9 +126,9 @@ type BlockProps = {
   onToggleObligation: any
   onToggleVisibility: any
   onUpKeyDown: any
-  questionBlockAsOptions: any
+  questionBlocksAsOptions: App.SelectOption[]
 }
-const Block: FunctionComponent<BlockProps> = ({
+export default function Block({
   block,
   index,
   isFocused,
@@ -86,21 +143,21 @@ const Block: FunctionComponent<BlockProps> = ({
   onToggleObligation,
   onToggleVisibility,
   onUpKeyDown,
-  questionBlockAsOptions,
-}) => {
-  const valueRef = useRef(block.value) as MutableRefObject<string>
-  const [isConditionOpen, setIsConditionOpen] = useState(block.ifSelectedThenShowQuestionId !== null)
+  questionBlocksAsOptions,
+}: BlockProps) {
+  const $value = useRef(block.value) as MutableRefObject<string>
+  const [isConditionOpen, setIsConditionOpen] = useState(block.ifTruethyThenShowQuestionIds.length > 0)
 
   const { Component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[block.type]
   const key = `${index}.${block.type}.${isFocused}.${hashCode(block.value)}`
   const finalPlaceholder = block.count !== null ? `${placeholder} ${block.count}` : placeholder
 
-  const changeCondition = ({ value }) => {
-    onChangeConditionAt(index, value)
+  const changeCondition = (newQuestionBlocksIds: string[]) => {
+    onChangeConditionAt(index, newQuestionBlocksIds)
   }
 
   const handleChange = (newValue: string) => {
-    valueRef.current = newValue
+    $value.current = newValue
 
     onChangeAt(index, newValue)
   }
@@ -111,31 +168,27 @@ const Block: FunctionComponent<BlockProps> = ({
 
   const handleEnterKeyDown = () => {
     if (block.isCountable) {
-      if (valueRef.current.length > 0) {
+      if ($value.current.length > 0) {
         onAppendBlockAt(index, block.type)
       } else {
-        onChangeTypeAt(index, SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+        onChangeTypeAt(index, 'content_text')
       }
 
       return
     }
 
-    onAppendBlockAt(index, SURVEY_BLOCK_TYPE.CONTENT.TEXT)
+    onAppendBlockAt(index, 'content_text')
   }
 
   const handleFocus = () => {
     onFocus(index)
   }
 
-  const handleTypeChange = (newType: string) => {
+  const handleTypeChange = (newType: TellMe.BlockType) => {
     onChangeTypeAt(index, newType)
   }
 
   const toggleCondition = () => {
-    if (block.ifSelectedThenShowQuestionId !== null) {
-      onChangeConditionAt(index, null)
-    }
-
     setIsConditionOpen(!isConditionOpen)
   }
 
@@ -174,29 +227,8 @@ const Block: FunctionComponent<BlockProps> = ({
       />
 
       {isConditionOpen && (
-        <Condition block={block} onChange={changeCondition} questionBlockAsOptions={questionBlockAsOptions} />
+        <Condition block={block} onChange={changeCondition} questionBlocksAsOptions={questionBlocksAsOptions} />
       )}
     </Row>
   )
 }
-
-Block.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  block: BetterPropTypes.any.isRequired,
-  index: BetterPropTypes.number.isRequired,
-  isFocused: BetterPropTypes.bool.isRequired,
-  onAppendBlockAt: BetterPropTypes.func.isRequired,
-  onChangeAt: BetterPropTypes.func.isRequired,
-  onChangeConditionAt: BetterPropTypes.func.isRequired,
-  onChangeTypeAt: BetterPropTypes.func.isRequired,
-  onDownKeyDown: BetterPropTypes.func.isRequired,
-  onFocus: BetterPropTypes.func.isRequired,
-  onRemove: BetterPropTypes.func.isRequired,
-  onRemoveAt: BetterPropTypes.func.isRequired,
-  onToggleObligation: BetterPropTypes.func.isRequired,
-  onToggleVisibility: BetterPropTypes.func.isRequired,
-  onUpKeyDown: BetterPropTypes.func.isRequired,
-  questionBlockAsOptions: BetterPropTypes.arrayOf(BetterPropTypes.shape(SelectOptionShape)).isRequired,
-}
-
-export default Block

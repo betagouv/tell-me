@@ -1,4 +1,4 @@
-import ß from 'bhala'
+import { B } from 'bhala'
 
 const getErrorConstructorName = error => {
   if (error === undefined || error.constructor === undefined) {
@@ -30,12 +30,12 @@ export default function handleError(error: any, path?: string): void {
       break
 
     default:
-      ß.error(`[app/helpers/handleError()] This type of error can't be processed. This should never happen.`)
-      ß.error(`[app/helpers/handleError()] Error Type: ${typeof error}`)
-      ß.error(`[app/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
+      B.error(`[app/helpers/handleError()] This type of error can't be processed. This should never happen.`)
+      B.error(`[app/helpers/handleError()] Error Type: ${typeof error}`)
+      B.error(`[app/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
       errorString = String(error)
   }
 
-  ß.error(`[${errorPath}] ${errorString}`)
-  ß.error(error)
+  B.error(`[${errorPath}] ${errorString}`)
+  B.error(error)
 }

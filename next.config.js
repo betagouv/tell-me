@@ -25,6 +25,22 @@ module.exports = {
       source: '/api/asset/:fileName*',
     },
     {
+      destination: '/api/legacy/survey/download',
+      source: '/api/legacy/survey/:surveyId*/download',
+    },
+    {
+      destination: '/api/legacy/survey/entries',
+      source: '/api/legacy/survey/:surveyId*/entries',
+    },
+    {
+      destination: '/api/legacy/survey/upload',
+      source: '/api/legacy/survey/:surveyId*/upload',
+    },
+    {
+      destination: '/api/legacy/survey',
+      source: '/api/legacy/survey/:surveyId*',
+    },
+    {
       destination: '/api/one-time-token',
       source: '/api/one-time-token/:oneTimeTokenId*',
     },
@@ -59,6 +75,10 @@ module.exports = {
     {
       destination: '/api/404',
       source: '/api/:any*',
+    },
+    {
+      destination: '/public/legacy/survey',
+      source: '/public/legacy/survey/:slug*',
     },
     {
       destination: '/public/survey',

@@ -13,7 +13,9 @@ const verifyJwt = promisify(jsonwebtoken.verify)
  * @description
  * Return `null` if invalid.
  */
-export default async function getJwtPayload(token: string): Promise<
+export default async function getJwtPayload(
+  token: string,
+): Promise<
   Common.Nullable<{
     id: string
   }>

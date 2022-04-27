@@ -1,11 +1,8 @@
 import { Select } from '@singularity-ui/core'
-import BetterPropTypes from 'better-prop-types'
-import { FunctionComponent } from 'react'
 import { CornerDownRight } from 'react-feather'
 import styled from 'styled-components'
 
-import Block from '../../libs/SurveyManager/Block'
-import { SelectOptionShape } from '../../shapes'
+import SurveyEditorManagerBlock from '../../libs/SurveyEditorManager/Block'
 
 const Box = styled.div`
   display: flex;
@@ -21,27 +18,27 @@ const StyledSelect = styled(Select)`
 `
 
 type ConditionProps = {
-  block: Block
-  onChange: any
-  questionBlockAsOptions: any
+  block: SurveyEditorManagerBlock
+  onChange: (newQuestionBlocksIds: string[]) => void | Promise<void>
+  questionBlocksAsOptions: App.SelectOption[]
 }
-const Condition: FunctionComponent<ConditionProps> = ({ block, onChange, questionBlockAsOptions }) => (
-  <Box>
-    <CornerDownRight />
-    <StyledSelect
-      defaultValue={block.questionBlockAsOption}
-      onChange={onChange}
-      options={questionBlockAsOptions}
-      size="small"
-    />
-  </Box>
-)
+export default function Condition({ block, onChange, questionBlocksAsOptions }: ConditionProps) {
+  const handleChange = (newQuestionBlocksAsOptions: App.SelectOption[]) => {
+    const newQuestionBlocksIds = newQuestionBlocksAsOptions.map(({ value }) => value)
 
-Condition.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  block: BetterPropTypes.any.isRequired,
-  onChange: BetterPropTypes.func.isRequired,
-  questionBlockAsOptions: BetterPropTypes.arrayOf(BetterPropTypes.shape(SelectOptionShape)).isRequired,
+    onChange(newQuestionBlocksIds)
+  }
+
+  return (
+    <Box>
+      <CornerDownRight />
+      <StyledSelect
+        defaultValue={block.ifTruethyThenShowQuestionsAsOptions}
+        isMulti
+        onChange={handleChange}
+        options={questionBlocksAsOptions}
+        size="small"
+      />
+    </Box>
+  )
 }
-
-export default Condition

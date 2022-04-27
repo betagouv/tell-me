@@ -1,0 +1,124 @@
+{
+  "type": "root",
+  "id": "R01",
+  "data": {
+    "backgroundUri": null,
+    "coverUri": null,
+    "language": "en",
+    "logoUri": null,
+    "title": "A Survey Title",
+    "version": "1.0.0"
+  },
+  "children": [
+    {
+      "type": "input_choice",
+      "id": "B01",
+      "value": "A radio label.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 0
+      }
+    },
+    {
+      "type": "input_email",
+      "id": "B02",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 1
+      }
+    },
+    {
+      "type": "input_file",
+      "id": "B03",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 2
+      }
+    },
+    {
+      "type": "input_linear_scale",
+      "id": "B04",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 3
+      }
+    },
+    {
+      "type": "input_link",
+      "id": "B05",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 4
+      }
+    },
+    {
+      "type": "input_long_answer",
+      "id": "B06",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 5
+      }
+    },
+    {
+      "type": "input_multiple_choice",
+      "id": "B07",
+      "value": "An input label.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 6
+      }
+    },
+    {
+      "type": "input_number",
+      "id": "B08",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 7
+      }
+    },
+    {
+      "type": "input_phone",
+      "id": "B09",
+      "value": "A phone placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 8
+      }
+    },
+    {
+      "type": "input_rating",
+      "id": "B10",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 9
+      }
+    },
+    {
+      "type": "input_short_answer",
+      "id": "B11",
+      "value": "An input placeholder.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 10
+      }
+    }
+  ]
+}

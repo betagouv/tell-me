@@ -11,12 +11,15 @@ import LoginModal from '../app/organisms/LoginModal'
 import Menu from '../app/organisms/Menu'
 import SetupModal from '../app/organisms/SetupModal'
 import Dashboard from '../app/templates/Dashboard'
+import LegacySurveyConfig from '../app/templates/LegacySurveyConfig'
+import LegacySurveyEditor from '../app/templates/LegacySurveyEditor'
+import LegacySurveyEntryList from '../app/templates/LegacySurveyEntryList'
+import LegacySurveyList from '../app/templates/LegacySurveyList'
 import MyConfig from '../app/templates/MyConfig'
 import OneTimeTokenList from '../app/templates/OneTimeTokenList'
 import PersonalAccessTokenEditor from '../app/templates/PersonalAccessTokenEditor'
 import PersonalAccessTokenList from '../app/templates/PersonalAccessTokenList'
 import RefreshTokenList from '../app/templates/RefreshTokenList'
-import SurveyConfig from '../app/templates/SurveyConfig'
 import SurveyEditor from '../app/templates/SurveyEditor'
 import SurveyEntryList from '../app/templates/SurveyEntryList'
 import SurveyList from '../app/templates/SurveyList'
@@ -97,13 +100,18 @@ export default function SpaPage() {
 
             <Route element={<RefreshTokenList />} path="/refresh-tokens" />
 
-            <Route element={<SurveyConfig />} path="/survey/:id/config" />
-            <Route element={<SurveyEntryList />} path="/survey/:id/entries" />
-            <Route element={<SurveyEditor />} path="/survey/:id" />
             <Route element={<SurveyList />} path="/surveys" />
+            <Route element={<SurveyEditor />} path="/survey/:id" />
+            {/* <Route element={<SurveyConfig />} path="/survey/:id/config" /> */}
+            <Route element={<SurveyEntryList />} path="/survey/:id/entries" />
 
             <Route element={<UserEditor />} path="/user/:id" />
             <Route element={<UsersList />} path="/users" />
+
+            <Route element={<LegacySurveyList />} path="/legacy/surveys" />
+            <Route element={<LegacySurveyEditor />} path="/legacy/survey/:id" />
+            <Route element={<LegacySurveyConfig />} path="/legacy/survey/:id/config" />
+            <Route element={<LegacySurveyEntryList />} path="/legacy/survey/:id/entries" />
 
             <Route element={<Dashboard />} path="/" />
           </Routes>

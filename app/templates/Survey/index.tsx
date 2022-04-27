@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { Survey } from '@prisma/client'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -7,16 +8,18 @@ import styled from 'styled-components'
 import * as Yup from 'yup'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import TellMe from '../../../schemas/1.0.0/TellMe'
 import SurveyHeader from '../../atoms/SurveyHeader'
 import SurveyLogo from '../../atoms/SurveyLogo'
 import SurveyQuestion from '../../atoms/SurveyQuestion'
 import SurveyTitle from '../../atoms/SurveyTitle'
 import useApi from '../../hooks/useApi'
-import SurveyManager from '../../libs/SurveyManager'
-import Block from '../../libs/SurveyManager/Block'
+import SurveyEditorManager from '../../libs/SurveyEditorManager'
 import Loader from '../../molecules/Loader'
 import SurveyForm from '../../molecules/SurveyForm'
 import Blocks from './Blocks'
+
+import type Block from '../../libs/SurveyEditorManager/Block'
 
 const Page = styled.div`
   display: flex;
@@ -35,21 +38,21 @@ const Container = styled.div`
 
 const buildValidationSchema = (blocks: Block[], message: string) =>
   blocks.reduce((schema, block) => {
-    if (!block.isQuestion || !block.isMandatory) {
+    if (!block.isQuestion || !block.isRequired) {
       return schema
     }
 
     if (block.questionInputType === SURVEY_BLOCK_TYPE.INPUT.CHECKBOX) {
       return {
         ...schema,
-        [block._id]: Yup.array(Yup.string()).required(message),
+        [block.id]: Yup.array(Yup.string()).required(message),
       }
     }
 
     if (block.questionInputType === SURVEY_BLOCK_TYPE.INPUT.FILE) {
       return {
         ...schema,
-        [block._id]: Yup.object()
+        [block.id]: Yup.object()
           .shape({
             name: Yup.string().required(message),
           })
@@ -59,11 +62,14 @@ const buildValidationSchema = (blocks: Block[], message: string) =>
 
     return {
       ...schema,
-      [block._id]: Yup.string().required(message),
+      [block.id]: Yup.string().required(message),
     }
   }, {})
 
-export default function PublicSurvey({ data: survey }) {
+type SurveyTemplateProps = {
+  survey: Survey
+}
+export function SurveyTemplate({ survey }: SurveyTemplateProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [initialValues, setInitialValues] = useState({})
   const [isSent, setIsSent] = useState(false)
@@ -71,15 +77,15 @@ export default function PublicSurvey({ data: survey }) {
   const api = useApi()
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const surveyManager = new SurveyManager(survey.blocks)
-  const surveySessionKey = `survey-${survey._id}`
+  const surveyEditorManager = new SurveyEditorManager(((survey.tree as unknown) as TellMe.Tree).children)
+  const surveySessionKey = `survey-${survey.id}`
 
   const validationMessage = intl.formatMessage({
     defaultMessage: 'This answer is required to validate the form.',
     description: '[Public Survey] Missing answer error message for a required question.',
     id: 'cvJp/S',
   })
-  const validationSchema = buildValidationSchema(surveyManager.blocks, validationMessage)
+  const validationSchema = buildValidationSchema(surveyEditorManager.blocks, validationMessage)
   const FormSchema = Yup.object().shape(validationSchema)
 
   const loadFormDataFromSession = () => {
@@ -107,7 +113,7 @@ export default function PublicSurvey({ data: survey }) {
   }
 
   const submitSurvey = async (values, { setSubmitting }) => {
-    const surveyEntryAnswers = surveyManager.conciliateFormData(values)
+    const surveyEntryAnswers = surveyEditorManager.conciliateFormData(values)
 
     const isFileInput = R.propEq('type', SURVEY_BLOCK_TYPE.INPUT.FILE)
     const nonFileAnswers = R.reject(isFileInput)(surveyEntryAnswers)
@@ -115,7 +121,7 @@ export default function PublicSurvey({ data: survey }) {
 
     const surveyEntry = {
       answers: nonFileAnswers,
-      survey: survey._id,
+      survey: survey.id,
     }
 
     const maybeBody = await api.post('survey/entry', surveyEntry)
@@ -126,7 +132,7 @@ export default function PublicSurvey({ data: survey }) {
     }
 
     const {
-      data: { _id: surveyEntryId },
+      data: { id: surveyEntryId },
     } = maybeBody
 
     await Promise.all(
@@ -154,12 +160,12 @@ export default function PublicSurvey({ data: survey }) {
 
   return (
     <Page>
-      <SurveyHeader url={survey.props.coverUrl} />
+      <SurveyHeader url={((survey.tree as unknown) as TellMe.Tree).data.coverUri} />
 
       <Container>
-        <SurveyLogo url={survey.props.logoUrl} />
+        <SurveyLogo url={((survey.tree as unknown) as TellMe.Tree).data.logoUri} />
 
-        <SurveyTitle>{survey.title}</SurveyTitle>
+        <SurveyTitle>{((survey.tree as unknown) as TellMe.Tree).data.title}</SurveyTitle>
 
         {isLoading && <Loader />}
 
@@ -170,7 +176,7 @@ export default function PublicSurvey({ data: survey }) {
             onSubmit={submitSurvey}
             validationSchema={FormSchema}
           >
-            <Blocks blocks={surveyManager.blocks} />
+            <Blocks blocks={surveyEditorManager.blocks} />
 
             <SurveyForm.Submit>
               {intl.formatMessage({
@@ -184,13 +190,11 @@ export default function PublicSurvey({ data: survey }) {
 
         {!isLoading && isSent && (
           <SurveyQuestion>
-            {survey.props.thankYouMessage && survey.props.thankYouMessage.length > 0
-              ? survey.props.thankYouMessage
-              : intl.formatMessage({
-                  defaultMessage: 'Thank you for your interest in helping our project!',
-                  description: '[Public Survey] Thank you message once the survey has been sent.',
-                  id: 'i8B3g5',
-                })}
+            {intl.formatMessage({
+              defaultMessage: 'Thank you for your interest in helping our project!',
+              description: '[Public Survey] Thank you message once the survey has been sent.',
+              id: 'i8B3g5',
+            })}
           </SurveyQuestion>
         )}
       </Container>

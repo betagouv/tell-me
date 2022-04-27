@@ -131,8 +131,30 @@ export default function Menu() {
               </Link>
             </>
           )}
+
+          <h2
+            style={{
+              borderBottom: '1px solid #3c4252',
+              color: 'white',
+              fontSize: '125%',
+              fontWeight: 'normal',
+              margin: '1.5rem 1rem 0.5rem',
+              paddingBottom: '0.5rem',
+              textTransform: 'uppercase',
+            }}
+          >
+            Legacy
+          </h2>
+          <Link to="/legacy/surveys">
+            {intl.formatMessage({
+              defaultMessage: 'Surveys',
+              description: '[Sidebar Main Menu] Surveys label.',
+              id: 'D6/Uxz',
+            })}
+          </Link>
         </MainMenu>
       </div>
+
       <UserMenu>
         <Link to="/me">
           <Settings />

@@ -12,23 +12,52 @@ declare namespace Api {
 
   declare namespace Model {
     declare namespace Survey {
-      type Block = {
-        _id: string
+      import type { Types } from 'mongoose'
+
+      type BlockType =
+        | 'ACTION.NEXT'
+        | 'ACTION.SUBMIT'
+        | 'CONTENT.QUESTION'
+        | 'CONTENT.SUBTITLE'
+        | 'CONTENT.TEXT'
+        | 'INPUT.CHECKBOX'
+        | 'INPUT.CHOICE'
+        | 'INPUT.EMAIL'
+        | 'INPUT.FILE'
+        | 'INPUT.LINEAR_SCALE'
+        | 'INPUT.LINK'
+        | 'INPUT.LONG_ANSWER'
+        | 'INPUT.NUMBER'
+        | 'INPUT.RATING'
+        | 'INPUT.SHORT_ANSWER'
+
+      interface Block {
+        _id: Types.ObjectId
         position: BlockPosition
         props: BlockProps
-        type: string
+        type: BlockType
         value: string
       }
 
-      type BlockPosition = {
+      interface BlockPosition {
         page: number
         rank: number
       }
 
-      type BlockProps = {
-        ifSelectedThenShowQuestionId: string | null
+      interface BlockProps {
+        ifSelectedThenShowQuestionId: Types.ObjectId | null
         isHidden: boolean
         isMandatory: boolean
+      }
+
+      interface BlockLegacy extends Block {
+        _id: string
+        props: BlockPropsLegacy
+        type: string
+      }
+
+      interface BlockPropsLegacy extends BlockProps {
+        ifSelectedThenShowQuestionId: string | null
       }
     }
   }

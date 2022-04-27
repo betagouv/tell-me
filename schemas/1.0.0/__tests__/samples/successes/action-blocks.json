@@ -1,0 +1,32 @@
+{
+  "type": "root",
+  "id": "R01",
+  "data": {
+    "backgroundUri": null,
+    "coverUri": null,
+    "language": "en",
+    "logoUri": null,
+    "title": "A Survey Title",
+    "version": "1.0.0"
+  },
+  "children": [
+    {
+      "type": "action_next",
+      "id": "B01",
+      "value": "A label.",
+      "data": {
+        "pageIndex": 0,
+        "pageRankIndex": 0
+      }
+    },
+    {
+      "type": "action_submit",
+      "id": "B02",
+      "value": "A label.",
+      "data": {
+        "pageIndex": 0,
+        "pageRankIndex": 1
+      }
+    }
+  ]
+}

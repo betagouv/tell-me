@@ -1,6 +1,5 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
-import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useParams } from 'react-router-dom'
@@ -17,6 +16,9 @@ import getDayjs from '../helpers/getDayjs'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
 import Loader from '../molecules/Loader'
+
+import type TellMe from '../../schemas/1.0.0/TellMe'
+import type { Survey } from '@prisma/client'
 
 const StyledCard = styled(Card)`
   display: flex;
@@ -48,7 +50,7 @@ const Source = styled.div`
 export default function SurveyEntryList() {
   const [isDownloading, setIsDownloading] = useState(false)
   const [surveyEntries, setSurveyEntries] = useState<any>(null)
-  const [survey, setSurvey] = useState<any>(null)
+  const [survey, setSurvey] = useState<TellMe.Tree | null>(null)
   const { id: surveyId } = useParams()
   const intl = useIntl()
   const api = useApi()
@@ -95,62 +97,57 @@ export default function SurveyEntryList() {
   }
 
   const loadSurvey = async () => {
-    const maybeBody = await api.get(`survey/${surveyId}`)
+    const maybeBody = await api.get<
+      Survey & {
+        data: TellMe.Data
+        tree: TellMe.Tree
+      }
+    >(`survey/${surveyId}`)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
 
-    if (isMounted()) {
-      setSurvey(maybeBody.data)
-    }
-  }
+    const data = maybeBody.data.data.entries.map(({ answers, submittedAt }) => {
+      const library = answers
+        .filter(({ type }) => type === 'file')
+        .map(({ data: { mime, uri }, question }: TellMe.FileAnswer) => (
+          <div key={question.id}>
+            <p>
+              <b>{question.value}</b>
+            </p>
+            <p>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <Button accent="secondary" onClick={() => downloadAsset(uri, mime)} size="small">
+                {getFileExtension(uri)}
+              </Button>
+            </p>
+          </div>
+        ))
 
-  const loadSurveyEntries = async () => {
-    const maybeBody = await api.get(`survey/${surveyId}/entries`)
-    if (maybeBody === null || maybeBody.hasError) {
-      return
-    }
-
-    const rawData = maybeBody.data
-    const data = R.map(({ answers, files, updatedAt }: any) => {
-      const library = files.map(({ _id, mimeType, question, url }) => (
-        <div key={_id}>
-          <p>
-            <b>{question}</b>
-          </p>
-          <p>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <Button accent="secondary" onClick={() => downloadAsset(url, mimeType)} size="small">
-              {getFileExtension(url)}
-            </Button>
-          </p>
-        </div>
-      ))
-
-      const source = answers.map(({ _id, question, values }) => (
-        <div key={_id}>
-          <p>
-            <b>{question}</b>
-          </p>
-          <p>{values.join(', ')}</p>
-        </div>
-      ))
+      const source = answers
+        .filter(({ type }) => type !== 'file')
+        .map(({ question, rawValue }) => (
+          <div key={question.id}>
+            <p>
+              <b>{question.value}</b>
+            </p>
+            <p>{rawValue}</p>
+          </div>
+        ))
 
       return {
         library: <Source>{library}</Source>,
         source: <Source>{source}</Source>,
-        updatedAt,
+        updatedAt: submittedAt,
       }
-    })(rawData)
+    })
 
-    if (isMounted()) {
-      setSurveyEntries(data)
-    }
+    setSurvey(maybeBody.data.tree)
+    setSurveyEntries(data)
   }
 
   useEffect(() => {
     loadSurvey()
-    loadSurveyEntries()
   }, [])
 
   const columns: TableColumnProps[] = [
@@ -188,7 +185,7 @@ export default function SurveyEntryList() {
   return (
     <AdminBox>
       <AdminHeader>
-        <Title>{survey.title}</Title>
+        <Title>{survey.data.title}</Title>
 
         <Button
           disabled={isDownloading}

@@ -1,16 +1,16 @@
 import handleError from '../../../api/helpers/handleError'
 import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
-import withMongoose from '../../../api/middlewares/withMongoose'
 import withPrisma from '../../../api/middlewares/withPrisma'
-import Survey from '../../../api/models/Survey'
-import SurveyEntry from '../../../api/models/SurveyEntry'
 import { USER_ROLE } from '../../../common/constants'
+
+import type { RequestWithAuth } from '../../../api/types'
+import type { NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/survey/SurveyController()'
 
-async function SurveyController(req, res) {
-  if (!['DELETE', 'GET', 'PATCH', 'POST'].includes(req.method)) {
+async function SurveyController(req: RequestWithAuth, res: NextApiResponse) {
+  if (req.method === undefined || !['DELETE', 'GET', 'PATCH', 'POST'].includes(req.method)) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return
@@ -22,13 +22,17 @@ async function SurveyController(req, res) {
       try {
         const { surveyId } = req.query
 
-        const maybeSurvey = await Survey.findById(surveyId).exec()
+        const maybeSurvey = await req.db.survey.findUnique({
+          where: {
+            id: String(surveyId),
+          },
+        })
         if (maybeSurvey === null) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
         res.status(200).json({
-          data: maybeSurvey.toObject(),
+          data: maybeSurvey,
         })
       } catch (err) {
         handleError(err, ERROR_PATH, res)
@@ -38,11 +42,12 @@ async function SurveyController(req, res) {
 
     case 'POST':
       try {
-        const newSurvey = new Survey(req.body)
-        await newSurvey.save()
+        const newSurvey = await req.db.survey.create({
+          data: req.body,
+        })
 
         res.status(201).json({
-          data: newSurvey.toObject(),
+          data: newSurvey,
         })
       } catch (err) {
         handleError(err, ERROR_PATH, res)
@@ -54,25 +59,27 @@ async function SurveyController(req, res) {
       try {
         const { surveyId } = req.query
 
-        const maybeSurvey = await Survey.findById(surveyId).exec()
-        if (maybeSurvey === null) {
+        const surveyCount = await req.db.survey.count({
+          where: {
+            id: String(surveyId),
+          },
+        })
+        if (surveyCount === 0) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
-        const maybeSurveyData = maybeSurvey.toObject()
-
-        maybeSurvey.set({
-          ...maybeSurveyData,
-          ...req.body,
-          props: {
-            ...maybeSurveyData.props,
-            ...(req.body.props || {}),
+        const updatedSurvey = await req.db.survey.update({
+          data: req.body,
+          where: {
+            id: String(surveyId),
           },
         })
-        const updatedSurvey = await maybeSurvey.save()
+        if (updatedSurvey === null) {
+          handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+        }
 
         res.status(200).json({
-          data: updatedSurvey.toObject(),
+          data: updatedSurvey,
         })
       } catch (err) {
         handleError(err, ERROR_PATH, res)
@@ -84,15 +91,20 @@ async function SurveyController(req, res) {
       try {
         const { surveyId } = req.query
 
-        const maybeSurvey = await Survey.findById(surveyId).exec()
-        if (maybeSurvey === null) {
+        const surveyCount = await req.db.survey.count({
+          where: {
+            id: String(surveyId),
+          },
+        })
+        if (surveyCount === 0) {
           handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
         }
 
-        await SurveyEntry.deleteMany({
-          survey: surveyId,
+        await req.db.survey.delete({
+          where: {
+            id: String(surveyId),
+          },
         })
-        await Survey.findByIdAndDelete(surveyId)
 
         res.status(204).end()
       } catch (err) {
@@ -101,4 +113,4 @@ async function SurveyController(req, res) {
   }
 }
 
-export default withPrisma(withMongoose(withAuth(SurveyController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER])))
+export default withPrisma(withAuth(SurveyController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER]))
