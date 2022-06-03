@@ -6,6 +6,7 @@
 /coverage
 /node_modules
 /scripts/*
+!/scripts/build/prebuild.sh
 !/scripts/db/migrate.js
 
 /.dockerignore
