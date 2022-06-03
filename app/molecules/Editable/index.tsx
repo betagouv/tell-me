@@ -13,7 +13,6 @@ import {
   useState,
 } from 'react'
 
-import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import getRandomId from '../../helpers/getRandomId'
 import useIsMounted from '../../hooks/useIsMounted'
 import usePrevious from '../../hooks/usePrevious'
@@ -21,48 +20,50 @@ import BlockMenu from './BlockMenu'
 import blockMenuReducer, { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
 import FormatMenu, { FormatMenuProps } from './FormatMenu'
 
-const MENU_ITEMS = [
+import type { BlockMenuItem } from './types'
+
+const MENU_ITEMS: BlockMenuItem[] = [
   {
     category: 'Content',
     // Icon: HelpIcon,
     label: 'Question',
-    type: SURVEY_BLOCK_TYPE.CONTENT.QUESTION,
+    type: 'question',
   },
   {
     category: 'Content',
     // Icon: HelpIcon,
     label: 'Paragraph',
-    type: SURVEY_BLOCK_TYPE.CONTENT.TEXT,
+    type: 'content_text',
   },
   {
     category: 'Input',
     // Icon: DoneAllIcon,
     label: 'Choice',
-    type: SURVEY_BLOCK_TYPE.INPUT.CHOICE,
+    type: 'input_choice',
   },
   {
     category: 'Input',
     // Icon: DoneIcon,
-    label: 'Checkboxes',
-    type: SURVEY_BLOCK_TYPE.INPUT.CHECKBOX,
+    label: 'Multiple Choices',
+    type: 'input_multiple_choice',
   },
   {
     category: 'Input',
     // Icon: DoneIcon,
     label: 'File Upload',
-    type: SURVEY_BLOCK_TYPE.INPUT.FILE,
+    type: 'input_file',
   },
   {
     category: 'Input',
     // Icon: ShortTextIcon,
     label: 'Short Answer',
-    type: SURVEY_BLOCK_TYPE.INPUT.SHORT_ANSWER,
+    type: 'input_short_answer',
   },
   {
     category: 'Input',
     // Icon: ViewHeadlineIcon,
     label: 'Long Answer',
-    type: SURVEY_BLOCK_TYPE.INPUT.LONG_ANSWER,
+    type: 'input_long_answer',
   },
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length

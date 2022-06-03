@@ -1,5 +1,6 @@
 import { Button, Card, Table } from '@singularity-ui/core'
 import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import cuid from 'cuid'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'
@@ -9,11 +10,15 @@ import { useNavigate } from 'react-router-dom'
 import AdminBox from '../atoms/AdminBox'
 import AdminHeader from '../atoms/AdminHeader'
 import Title from '../atoms/Title'
+import generateTellMeTree from '../helpers/generateTellMeTree'
 import getRandomId from '../helpers/getRandomId'
 import replaceMongoIds from '../helpers/replaceMongoIds'
 import slugify from '../helpers/slugify'
 import useApi from '../hooks/useApi'
 import useIsMounted from '../hooks/useIsMounted'
+import SurveyEditorManager from '../libs/SurveyEditorManager'
+
+import type { Prisma } from '@prisma/client'
 
 export default function SurveyList() {
   const [isLoading, setIsLoading] = useState(true)
@@ -44,7 +49,7 @@ export default function SurveyList() {
   }
 
   const openSurvey = id => {
-    const survey = R.find<any>(R.propEq('_id', id))(surveys)
+    const survey = R.find<any>(R.propEq('id', id))(surveys)
     if (survey === undefined) {
       return
     }
@@ -54,11 +59,24 @@ export default function SurveyList() {
 
   const goToSurveyEditor = async id => {
     if (id === 'new') {
-      const newSurveyTitle = `New Survey Title #${getRandomId()}`
-      const newSurveySlug = slugify(newSurveyTitle)
-      const newSurveyData = {
-        slug: newSurveySlug,
-        title: newSurveyTitle,
+      const newSurveyEditorManager = new SurveyEditorManager()
+      const id = cuid()
+      const title = `New Survey Title #${getRandomId()}`
+      const slug = slugify(title)
+      const tree = generateTellMeTree({
+        backgroundUri: null,
+        blocks: newSurveyEditorManager.blocks,
+        coverUri: null,
+        id,
+        language: intl.locale,
+        logoUri: null,
+        title,
+      }) as any
+
+      const newSurveyData: Prisma.SurveyCreateInput = {
+        id,
+        slug,
+        tree,
       }
 
       const maybeBody = await api.post('survey', newSurveyData)
@@ -66,7 +84,7 @@ export default function SurveyList() {
         return
       }
 
-      navigate(`/survey/${maybeBody.data._id}`)
+      navigate(`/survey/${maybeBody.data.id}`)
 
       return
     }
@@ -105,7 +123,7 @@ export default function SurveyList() {
   const columns: TableColumnProps[] = [
     {
       isSortable: true,
-      key: 'title',
+      key: 'tree.data.title',
       label: intl.formatMessage({
         defaultMessage: 'Title',
         description: '[Surveys List] Table "title" column label.',

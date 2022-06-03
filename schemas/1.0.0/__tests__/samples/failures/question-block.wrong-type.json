@@ -1,0 +1,22 @@
+{
+  "type": "root",
+  "id": "R01",
+  "data": {
+    "language": "en",
+    "title": "A Survey Title",
+    "version": "1.0.0"
+  },
+  "children": [
+    {
+      "type": "question_wrong",
+      "id": "B01",
+      "value": "A value.",
+      "data": {
+        "isHidden": false,
+        "isRequired": false,
+        "pageIndex": 0,
+        "pageRankIndex": 0
+      }
+    }
+  ]
+}

@@ -1,5 +1,4 @@
-import BetterPropTypes from 'better-prop-types'
-import { Fragment, FunctionComponent, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import styled, { css } from 'styled-components'
 
@@ -45,7 +44,7 @@ export type BlockMenuProps = {
   onSelect: (blockType: string) => void
   selectedIndex: number
 }
-const BlockMenu: FunctionComponent<BlockMenuProps> = ({ anchor, items, onCancel, onSelect, selectedIndex }) => {
+export default function BlockMenu({ anchor, items, onCancel, onSelect, selectedIndex }: BlockMenuProps) {
   const [popperElement, setPopperElement] = useState(null)
 
   const popper = usePopper(anchor, popperElement, {
@@ -103,20 +102,3 @@ const BlockMenu: FunctionComponent<BlockMenuProps> = ({ anchor, items, onCancel,
     </>
   )
 }
-
-BlockMenu.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  anchor: BetterPropTypes.any.isRequired,
-  items: BetterPropTypes.arrayOf(
-    BetterPropTypes.shape({
-      category: BetterPropTypes.string.isRequired,
-      label: BetterPropTypes.string.isRequired,
-      type: BetterPropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
-  onCancel: BetterPropTypes.func.isRequired,
-  onSelect: BetterPropTypes.func.isRequired,
-  selectedIndex: BetterPropTypes.number.isRequired,
-}
-
-export default BlockMenu

@@ -1,0 +1,243 @@
+{
+  "title": "JSON schema for Tell Me Survey syntax tree.",
+  "$comment": "This is a unist syntax tree: https://github.com/syntax-tree/unist.",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Block": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "https://json.schemastore.org/unist.json#"
+        }
+      ],
+      "description": "A block represents a first-degree survey node.",
+      "properties": {
+        "children": {
+          "not": true
+        },
+        "data": {
+          "allOf": [{ "$ref": "#/definitions/BlockData" }],
+          "properties": {
+            "pageIndex": {},
+            "pageRankIndex": {}
+          }
+        },
+        "id": {
+          "$ref": "#/definitions/Id",
+          "description": "The unique block ID."
+        },
+        "type": {
+          "enum": [
+            "action_next",
+            "action_submit",
+            "content_subtitle",
+            "content_text",
+            "input_checkbox",
+            "input_choice",
+            "input_email",
+            "input_file",
+            "input_linear_scale",
+            "input_link",
+            "input_long_answer",
+            "input_multiple_choice",
+            "input_number",
+            "input_phone",
+            "input_rating",
+            "input_short_answer",
+            "question"
+          ]
+        },
+        "value": {
+          "$comment": "The value is a label for actions (buttons) and inputs, a Markdown source for contents.",
+          "description": "The value represents either the label or the Markdown source depending on the block type.",
+          "type": "string"
+        }
+      },
+      "required": ["data", "id", "type", "value"]
+    },
+    "BlockData": {
+      "additionalProperties": true,
+      "properties": {
+        "pageIndex": {
+          "description": "The 0-indexed page number containing this block.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "pageRankIndex": {
+          "description": "The 0-indexed block rank on the page containing this block.",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": ["pageIndex", "pageRankIndex"],
+      "type": "object"
+    },
+    "Id": {
+      "$comment": "A CUID or UUID is recommended for IDs.",
+      "minLength": 1,
+      "type": "string"
+    },
+
+    "ActionBlock": {
+      "additionalProperties": false,
+      "allOf": [{ "$ref": "#/definitions/Block" }],
+      "description": "",
+      "properties": {
+        "data": {},
+        "id": {},
+        "type": {
+          "enum": ["action_next", "action_submit"]
+        },
+        "value": {}
+      },
+      "required": ["id", "type", "value"]
+    },
+    "ContentBlock": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/Block"
+        }
+      ],
+      "description": "",
+      "properties": {
+        "data": {},
+        "id": {},
+        "type": {
+          "enum": ["content_subtitle", "content_text"]
+        },
+        "value": {}
+      },
+      "required": ["id", "type", "value"]
+    },
+    "InputBlock": {
+      "additionalProperties": false,
+      "allOf": [{ "$ref": "#/definitions/Block" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "additionalProperties": false,
+          "properties": {
+            "ifTruethyThenShowQuestionIds": {
+              "items": { "$ref": "#/definitions/Id" },
+              "type": "array"
+            },
+            "pageIndex": {},
+            "pageRankIndex": {}
+          },
+          "required": ["ifTruethyThenShowQuestionIds"]
+        },
+        "id": {},
+        "type": {
+          "enum": [
+            "input_choice",
+            "input_email",
+            "input_file",
+            "input_linear_scale",
+            "input_link",
+            "input_long_answer",
+            "input_multiple_choice",
+            "input_number",
+            "input_phone",
+            "input_rating",
+            "input_short_answer"
+          ]
+        },
+        "value": {}
+      },
+      "required": ["data", "id", "type", "value"]
+    },
+    "QuestionBlock": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/Block"
+        }
+      ],
+      "description": "",
+      "properties": {
+        "data": {
+          "additionalProperties": false,
+          "properties": {
+            "isHidden": {
+              "type": "boolean"
+            },
+            "isRequired": {
+              "type": "boolean"
+            },
+            "pageIndex": {},
+            "pageRankIndex": {}
+          },
+          "required": ["isHidden", "isRequired"]
+        },
+        "id": {},
+        "type": {
+          "enum": ["question"]
+        },
+        "value": {}
+      },
+      "required": ["data", "id", "type", "value"]
+    }
+  },
+  "type": "object",
+  "allOf": [{ "$ref": "https://json.schemastore.org/unist.json#" }],
+  "properties": {
+    "children": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/ActionBlock" },
+          { "$ref": "#/definitions/ContentBlock" },
+          { "$ref": "#/definitions/InputBlock" },
+          { "$ref": "#/definitions/QuestionBlock" }
+        ]
+      }
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "backgroundUri": {
+          "description": "The background URI. This can be a domain-relative path, i.e.: \"/images/background.svg\".",
+          "type": ["string", "null"]
+        },
+        "coverUri": {
+          "description": "The cover URI. This can be a domain-relative path, i.e.: \"/images/cover.svg\".",
+          "type": ["string", "null"]
+        },
+        "language": {
+          "$comment": "Support language-tags (\"en\", \"fr\", etc) and subtag postfixes (\"en-GB\", \"fr-CA\", etc).",
+          "description": "The language code of the survey content as defined by IETF BCP 47 language tag.",
+          "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z]{2,}(-[a-zA-Z][a-zA-Z-]*[a-zA-Z])?)?$",
+          "type": "string"
+        },
+        "logoUri": {
+          "description": "The logo URI. This can be a domain-relative path, i.e.: \"/images/logo.svg\".",
+          "type": ["string", "null"]
+        },
+        "title": {
+          "description": "The survey title.",
+          "minLength": 1,
+          "pattern": "^[^\\s].*$",
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0.0",
+          "description": "Tell Me JSON Schema version used to validate. Major versions here should match Tell Me application major versions.",
+          "type": "string"
+        }
+      },
+      "required": ["backgroundUri", "coverUri", "language", "logoUri", "title", "version"],
+      "additionalProperties": false
+    },
+    "id": {
+      "$ref": "#/definitions/Id",
+      "description": "The unique survey ID. This should match the row ID in database \"surveys\" table."
+    },
+    "type": {
+      "type": "string",
+      "const": "root"
+    }
+  },
+  "required": ["children", "data", "id", "type"],
+  "additionalProperties": false
+}

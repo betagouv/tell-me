@@ -1,19 +1,23 @@
 import debounce from 'lodash/debounce'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
+import generateTellMeTree from '../../helpers/generateTellMeTree'
 import hashCode from '../../helpers/hashCode'
 import useApi from '../../hooks/useApi'
 import useEquivalenceEffect from '../../hooks/useEquivalenceEffect'
-import SurveyManager from '../../libs/SurveyManager/index'
+import SurveyEditorManager from '../../libs/SurveyEditorManager/index'
 import Editable from '../../molecules/Editable/index'
 import Block from './Block'
 import Title from './blocks/Title'
 import Header from './Header'
 import Loader from './Loader'
 import Logo from './Logo'
+
+import type TellMe from '../../../schemas/1.0.0/TellMe'
+import type { Survey } from '@prisma/client'
 
 const Body = styled.div`
   max-width: 82rem;
@@ -25,48 +29,140 @@ const TitleRow = styled.div`
 `
 
 export default function SurveyEditor() {
+  const $coverUri = useRef<string | null>(null)
+  const $logoUri = useRef<string | null>(null)
+  const $surveyEditorManager = useRef(new SurveyEditorManager())
+  const $title = useRef('')
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({} as any), [])
-  const surveyManagerRef = useRef(new SurveyManager())
   const [isLoading, setIsLoading] = useState(true)
-  const [title, setTitle] = useState('')
-  const [coverUrl, setCoverUrl] = useState(null)
-  const [logoUrl, setLogoUrl] = useState(null)
   const { id } = useParams()
   const api = useApi()
+  const intl = useIntl()
 
-  const surveyManager = surveyManagerRef.current
+  const isTitleFocused = $surveyEditorManager.current.focusedBlockIndex === -1
 
-  const updateData = debounce(async () => {
-    const data = {
-      blocks: surveyManager.blocksData,
-      title,
-    }
+  const appendNewBlockAt = useCallback((index: number = -1, type: TellMe.BlockType = 'content_text') => {
+    $surveyEditorManager.current.appendNewBlockAt(index, type)
 
-    ;(async () => {
-      await api.patch(`survey/${id}`, data)
-    })()
-  }, 250)
+    forceUpdate()
+  }, [])
+
+  const changeBlockTypeAt = useCallback((index: number, newType: TellMe.BlockType) => {
+    $surveyEditorManager.current.changeBlockTypeAt(index, newType)
+    $surveyEditorManager.current.setFocusAt(index)
+
+    forceUpdate()
+  }, [])
+
+  const focusNextBlock = useCallback(() => {
+    $surveyEditorManager.current.focusNextBlock()
+
+    forceUpdate()
+  }, [])
+
+  const focusPreviousBlock = useCallback(() => {
+    $surveyEditorManager.current.focusPreviousBlock()
+
+    forceUpdate()
+  }, [])
+
+  const removeBlockAt = useCallback((index: number) => {
+    $surveyEditorManager.current.removeBlockAt(index)
+
+    forceUpdate()
+  }, [])
+
+  const removeFocusedBlock = useCallback(() => {
+    $surveyEditorManager.current.removeFocusedBlock()
+
+    forceUpdate()
+  }, [])
+
+  const setIfSelectedThenShowQuestionIdsAt = useCallback((index: number, questionBlockIds: string[]) => {
+    $surveyEditorManager.current.setIfSelectedThenShowQuestionIdsAt(index, questionBlockIds)
+
+    forceUpdate()
+    updateData()
+  }, [])
+
+  const toggleObligationAt = useCallback((index: number) => {
+    $surveyEditorManager.current.toggleBlockObligationAt(index)
+
+    forceUpdate()
+  }, [])
+
+  const updateData = useCallback(
+    debounce(async () => {
+      if (id === undefined) {
+        return
+      }
+
+      const tree = generateTellMeTree({
+        backgroundUri: null,
+        blocks: $surveyEditorManager.current.blocks,
+        coverUri: $coverUri.current,
+        id,
+        language: intl.locale,
+        logoUri: $logoUri.current,
+        title: $title.current,
+      })
+
+      ;(async () => {
+        await api.patch(`survey/${id}`, { tree })
+      })()
+    }, 250),
+    [],
+  )
+
+  const uploadCover = useCallback(async (formData: FormData) => {
+    await api.put(`survey/${id}/upload?type=cover`, formData)
+  }, [])
+
+  const uploadLogo = useCallback(async (formData: FormData) => {
+    await api.put(`survey/${id}/upload?type=logo`, formData)
+  }, [])
+
+  const updateTitle = useCallback((newTitle: string) => {
+    $title.current = newTitle
+
+    updateData()
+  }, [])
+
+  const updateBlockValueAt = useCallback((index: number, newValue: string) => {
+    $surveyEditorManager.current.changeBlockValueAt(index, newValue)
+
+    updateData()
+  }, [])
+
+  const toggleBlockVisibilityAt = useCallback((index: number) => {
+    $surveyEditorManager.current.toggleBlockVisibilityAt(index)
+
+    forceUpdate()
+  }, [])
 
   useEffect(() => {
     ;(async () => {
-      const maybeBody = await api.get(`survey/${id}`)
+      const maybeBody = await api.get<
+        Survey & {
+          tree: TellMe.Tree
+        }
+      >(`survey/${id}`)
       if (maybeBody === null || maybeBody.hasError) {
         return
       }
 
       const {
-        blocks,
-        props: { coverUrl, logoUrl },
-        title,
+        tree: {
+          children,
+          data: { coverUri, logoUri, title },
+        },
       } = maybeBody.data
 
-      setTitle(title)
-      setCoverUrl(coverUrl)
-      setLogoUrl(logoUrl)
-      if (blocks.length > 0) {
-        surveyManager.blocks = blocks
-      }
+      $surveyEditorManager.current = new SurveyEditorManager(children)
+      $coverUri.current = coverUri
+      $logoUri.current = logoUri
+      $title.current = title
 
       setIsLoading(false)
     })()
@@ -79,84 +175,7 @@ export default function SurveyEditor() {
     }
 
     updateData()
-  }, [surveyManager.blocks, title])
-
-  const updateTitle = newValue => {
-    api.patch(`survey/${id}`, {
-      title: newValue,
-    })
-  }
-
-  const uploadCover = async formData => {
-    await api.put(`survey/${id}/upload?type=cover`, formData)
-  }
-
-  const uploadLogo = async formData => {
-    await api.put(`survey/${id}/upload?type=logo`, formData)
-  }
-
-  const changeBlockTypeAt = (index, newType) => {
-    surveyManager.changeBlockTypeAt(index, newType)
-    surveyManager.setFocusAt(index)
-
-    forceUpdate()
-  }
-
-  const toggleObligationAt = index => {
-    surveyManager.toggleBlockObligationAt(index)
-
-    forceUpdate()
-  }
-
-  const toggleBlockVisibilityAt = index => {
-    surveyManager.toggleBlockVisibilityAt(index)
-
-    forceUpdate()
-  }
-
-  const setIfSelectedThenShowQuestionIdAt = (index: number, questionBlockId: Common.Nullable<string>) => {
-    surveyManager.setIfSelectedThenShowQuestionIdAt(index, questionBlockId)
-
-    forceUpdate()
-  }
-
-  const appendNewBlockAt = (index: number = -1, type: string = SURVEY_BLOCK_TYPE.CONTENT.TEXT) => {
-    surveyManager.appendNewBlockAt(index, type)
-
-    forceUpdate()
-  }
-
-  const updateBlockValueAt = (index, newValue) => {
-    surveyManager.changeBlockValueAt(index, newValue)
-
-    updateData()
-  }
-
-  const removeBlockAt = index => {
-    surveyManager.removeBlockAt(index)
-
-    forceUpdate()
-  }
-
-  const removeFocusedBlock = () => {
-    surveyManager.removeFocusedBlock()
-
-    forceUpdate()
-  }
-
-  const focusPreviousBlock = () => {
-    surveyManager.focusPreviousBlock()
-
-    forceUpdate()
-  }
-
-  const focusNextBlock = () => {
-    surveyManager.focusNextBlock()
-
-    forceUpdate()
-  }
-
-  const isTitleFocused = surveyManager.focusedBlockIndex === -1
+  }, [$surveyEditorManager.current.blocks])
 
   if (isLoading) {
     return <Loader />
@@ -164,42 +183,42 @@ export default function SurveyEditor() {
 
   return (
     <>
-      <Header onChange={uploadCover} url={coverUrl} />
-      <Logo onChange={uploadLogo} url={logoUrl} />
+      <Header onChange={uploadCover} url={$coverUri.current} />
+      <Logo onChange={uploadLogo} url={$logoUri.current} />
 
       <Body>
         <TitleRow>
           <Editable
             as={Title}
-            defaultValue={title}
+            defaultValue={$title.current}
             isFocused={isTitleFocused}
             isRichText={false}
             onChange={updateTitle}
             onDownKeyDown={focusNextBlock}
             onEnterKeyDown={appendNewBlockAt}
-            onFocus={surveyManager.unsetFocus}
+            onFocus={$surveyEditorManager.current.unsetFocus}
           />
         </TitleRow>
 
-        {surveyManager.blocks.map((block, index) => (
+        {$surveyEditorManager.current.blocks.map((block, index) => (
           <Block
             // eslint-disable-next-line react/no-array-index-key
             key={`${index}.${block.type}.${hashCode(block.value)}`}
             block={block}
             index={index}
-            isFocused={index === surveyManager.focusedBlockIndex}
+            isFocused={index === $surveyEditorManager.current.focusedBlockIndex}
             onAppendBlockAt={appendNewBlockAt}
             onChangeAt={updateBlockValueAt}
-            onChangeConditionAt={setIfSelectedThenShowQuestionIdAt}
+            onChangeConditionAt={setIfSelectedThenShowQuestionIdsAt}
             onChangeTypeAt={changeBlockTypeAt}
             onDownKeyDown={focusNextBlock}
-            onFocus={surveyManager.setFocusAt}
+            onFocus={$surveyEditorManager.current.setFocusAt}
             onRemove={removeFocusedBlock}
             onRemoveAt={removeBlockAt}
             onToggleObligation={toggleObligationAt}
             onToggleVisibility={toggleBlockVisibilityAt}
             onUpKeyDown={focusPreviousBlock}
-            questionBlockAsOptions={surveyManager.questionBlockAsOptions}
+            questionBlocksAsOptions={$surveyEditorManager.current.questionBlocksAsOptions}
           />
         ))}
       </Body>

@@ -24,7 +24,11 @@ const StyledInput = styled.input`
   }
 `
 
-export default function Header({ onChange, url }) {
+type HeaderProps = {
+  onChange: (formData: FormData) => void | Promise<void>
+  url: string | null
+}
+export default function Header({ onChange, url }: HeaderProps) {
   const $header = useRef<HTMLDivElement>(null)
 
   const updateSelectedFile = event => {

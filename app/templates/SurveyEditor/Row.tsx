@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
 import styled, { css } from 'styled-components'
 
-import Block from '../../libs/SurveyManager/Block'
+import SurveyEditorManagerBlock from '../../libs/SurveyEditorManager/Block'
 
 const Box = styled.div<any>`
   align-items: flex-start;
@@ -75,7 +75,7 @@ const Asterisk = styled.div<any>`
 `
 
 type RowProps = {
-  block: Block
+  block: SurveyEditorManagerBlock
   children: any
   onCondition?: () => void
   onDelete: () => void
@@ -97,9 +97,9 @@ const Row: FunctionComponent<RowProps> = ({
       <Move onClick={onMove} />
     </Button>
 
-    <Asterisk isVisible={block.isMandatory}>*</Asterisk>
+    <Asterisk isVisible={block.isRequired}>*</Asterisk>
 
-    <Content isHidden={block.props.isHidden}>{children}</Content>
+    <Content isHidden={block.isHidden}>{children}</Content>
 
     <Button
       accent="secondary"
@@ -107,7 +107,7 @@ const Row: FunctionComponent<RowProps> = ({
       isDisabled={!block.isQuestion}
       onClick={block.isQuestion ? onToggleObligation : undefined}
     >
-      {block.isMandatory ? <ShieldOff /> : <Shield />}
+      {block.isRequired ? <ShieldOff /> : <Shield />}
     </Button>
     <Button
       accent="primary"

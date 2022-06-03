@@ -33,7 +33,11 @@ const StyledInput = styled.input<any>`
   }
 `
 
-export default function Logo({ onChange, url }) {
+type LogoProps = {
+  onChange: (formData: FormData) => void | Promise<void>
+  url: string | null
+}
+export default function Logo({ onChange, url }: LogoProps) {
   const $logo = useRef<HTMLDivElement>(null)
 
   const updateSelectedFile = event => {

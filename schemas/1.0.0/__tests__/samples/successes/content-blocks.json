@@ -1,0 +1,32 @@
+{
+  "type": "root",
+  "id": "R01",
+  "data": {
+    "backgroundUri": null,
+    "coverUri": null,
+    "language": "en",
+    "logoUri": null,
+    "title": "A Survey Title",
+    "version": "1.0.0"
+  },
+  "children": [
+    {
+      "type": "content_subtitle",
+      "id": "B01",
+      "value": "A Subtitle",
+      "data": {
+        "pageIndex": 0,
+        "pageRankIndex": 0
+      }
+    },
+    {
+      "type": "content_text",
+      "id": "B02",
+      "value": "Some **bold text**.",
+      "data": {
+        "pageIndex": 0,
+        "pageRankIndex": 1
+      }
+    }
+  ]
+}

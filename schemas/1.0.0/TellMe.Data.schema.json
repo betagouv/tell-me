@@ -1,0 +1,305 @@
+{
+  "title": "JSON schema for Tell Me Data (a).",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Answer": {
+      "type": "object",
+      "description": "A block represents a first-degree survey node.",
+      "properties": {
+        "data": {
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "value": {}
+          }
+        },
+        "question": {
+          "$ref": "#/definitions/Question",
+          "description": "The original Tell Me Survey parent question data as ."
+        },
+        "rawValue": {
+          "$comment": "Useful to ease CSV-like exports to process data within non-TellMe-aware environments.",
+          "description": "The raw value si just a simple string representation of the answer value.",
+          "type": ["string", "null"]
+        },
+        "type": {
+          "enum": ["email", "file", "link", "phone", "score", "string", "strings"]
+        }
+      },
+      "required": ["data", "question", "rawValue", "type"],
+      "additionalProperties": false
+    },
+    "AnswerData": {
+      "type": "object",
+      "description": "The value is a flexible object intended to make the answer value(s) easy to process.",
+      "properties": {},
+      "additionalProperties": true
+    },
+    "Entry": {
+      "type": "object",
+      "description": "A block represents a first-degree survey node.",
+      "properties": {
+        "answers": {
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/EmailAnswer" },
+              { "$ref": "#/definitions/FileAnswer" },
+              { "$ref": "#/definitions/LinkAnswer" },
+              { "$ref": "#/definitions/PhoneAnswer" },
+              { "$ref": "#/definitions/ScoreAnswer" },
+              { "$ref": "#/definitions/StringAnswer" },
+              { "$ref": "#/definitions/StringsAnswer" }
+            ]
+          },
+          "type": "array"
+        },
+        "openedAt": {
+          "description": "The date when the survey was first-opened by the respondent.",
+          "$comment": "Should follow RFC 3339 standard expressed in UTC date & time.",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?(Z|[\\+-]\\d{2}:\\d{2})$",
+          "type": "string"
+        },
+        "submittedAt": {
+          "description": "The date when the survey was submitted by the respondent.",
+          "$comment": "Should follow RFC 3339 standard expressed in UTC date & time.",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{3})?(Z|[\\+-]\\d{2}:\\d{2})$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Id": {
+      "type": "string",
+      "$comment": "A CUID or UUID is recommended for IDs.",
+      "minLength": 1
+    },
+    "Question": {
+      "type": "object",
+      "description": "A block represents a first-degree survey node.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Id",
+          "description": "The original Tell Me Survey parent question block unique ID."
+        },
+        "value": {
+          "description": "The parent question text as it was formulated when asked to the respondent.",
+          "type": "string"
+        }
+      },
+      "required": ["id", "value"],
+      "additionalProperties": false
+    },
+
+    "EmailAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^[a-z_\\-.]+@[a-z\\-.]+\\.[a-z]+$"
+            }
+          },
+          "required": ["value"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {
+          "pattern": "^[a-z_\\-.]+@[a-z\\-.]+\\.[a-z]+$",
+          "type": "string"
+        },
+        "type": { "const": "email" }
+      }
+    },
+    "FileAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "mime": {
+              "type": "string",
+              "description": "File MIME type (IANA media type).",
+              "$comment": "Should follow RFC 6838 standard."
+            },
+            "uri": {
+              "type": "string"
+            }
+          },
+          "required": ["mime", "uri"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {
+          "type": "string"
+        },
+        "type": { "const": "file" }
+      }
+    },
+    "LinkAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^https?:\\/\\/.+\\.[a-z]$"
+            }
+          },
+          "required": ["value"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {
+          "type": "string",
+          "pattern": "^https?:\\/\\/.+\\.[a-z]$"
+        },
+        "type": { "const": "link" }
+      }
+    },
+    "PhoneAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "value": {
+              "$comment": "Should follow E.164 standard (i.e: +33123456789).",
+              "pattern": "^\\+\\d+$",
+              "type": "string"
+            }
+          },
+          "required": ["value"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {
+          "type": "string",
+          "$comment": "Should follow E.164 standard (i.e: +33123456789).",
+          "pattern": "^\\+\\d+$"
+        },
+        "type": { "const": "phone" }
+      }
+    },
+    "ScoreAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "base": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["base", "value"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {},
+        "type": { "const": "score" }
+      }
+    },
+    "StringAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "isMarkdown": {
+              "type": "boolean"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": ["isMarkdown", "value"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {},
+        "type": { "const": "string" }
+      }
+    },
+    "StringsAnswer": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Answer" }],
+      "description": "",
+      "properties": {
+        "data": {
+          "type": "object",
+          "allOf": [{ "$ref": "#/definitions/AnswerData" }],
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minItems": 1
+              }
+            }
+          },
+          "required": ["values"],
+          "additionalProperties": false
+        },
+        "question": {},
+        "rawValue": {
+          "$comment": "Should be a comma-separated representation of the answer values."
+        },
+        "type": { "const": "strings" }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Entry" }
+    },
+    "id": {
+      "$ref": "#/definitions/Id",
+      "description": "The related survey ID."
+    },
+    "language": {
+      "type": "string",
+      "$comment": "Support language-tags (\"en\", \"fr\", etc) and subtag postfixes (\"en-GB\", \"fr-CA\", etc).",
+      "description": "The language code of the survey content as defined by IETF BCP 47 language tag.",
+      "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z]{2,}(-[a-zA-Z][a-zA-Z-]*[a-zA-Z])?)?$"
+    },
+    "title": {
+      "type": "string",
+      "description": "The related survey title.",
+      "minLength": 1,
+      "pattern": "^[^\\s].*$"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Tell Me JSON Schema version used to validate. Major versions here should match Tell Me application major versions."
+    }
+  },
+  "required": ["entries", "id", "language", "title", "version"],
+  "additionalProperties": false
+}

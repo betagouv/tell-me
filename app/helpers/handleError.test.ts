@@ -1,18 +1,19 @@
 /* eslint-disable max-classes-per-file */
 
-import ß from 'bhala'
+import { jest } from '@jest/globals'
+import { B } from 'bhala'
 
 import handleError from './handleError'
 
 describe('app/helpers/handleError()', () => {
-  const bhalaError = ß.error
+  const bhalaError = B.error
 
   beforeAll(() => {
-    ß.error = jest.fn()
+    B.error = jest.fn()
   })
 
   afterAll(() => {
-    ß.error = bhalaError
+    B.error = bhalaError
   })
 
   test('with a string error', () => {
@@ -20,9 +21,9 @@ describe('app/helpers/handleError()', () => {
 
     handleError(error, `a/path`)
 
-    expect(ß.error).toHaveBeenCalledTimes(2)
-    expect(ß.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[a/path] A string error.`))
-    expect(ß.error).toHaveBeenNthCalledWith(2, expect.stringContaining(`A string error.`))
+    expect(B.error).toHaveBeenCalledTimes(2)
+    expect(B.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[a/path] A string error.`))
+    expect(B.error).toHaveBeenNthCalledWith(2, expect.stringContaining(`A string error.`))
   })
 
   test('with an instance of Error error', () => {
@@ -30,9 +31,9 @@ describe('app/helpers/handleError()', () => {
 
     handleError(error, `a/path`)
 
-    expect(ß.error).toHaveBeenCalledTimes(2)
-    expect(ß.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[a/path] An Error message.`))
-    expect(ß.error).toHaveBeenNthCalledWith(2, expect.any(Error))
+    expect(B.error).toHaveBeenCalledTimes(2)
+    expect(B.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[a/path] An Error message.`))
+    expect(B.error).toHaveBeenNthCalledWith(2, expect.any(Error))
   })
 
   test('with an CustomError error', () => {
@@ -41,9 +42,9 @@ describe('app/helpers/handleError()', () => {
     const error = new CustomError(`A CustomError message.`)
     handleError(error, `a/path`)
 
-    expect(ß.error).toHaveBeenCalledTimes(2)
-    expect(ß.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[a/path] A CustomError message.`))
-    expect(ß.error).toHaveBeenNthCalledWith(2, expect.any(Error))
+    expect(B.error).toHaveBeenCalledTimes(2)
+    expect(B.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[a/path] A CustomError message.`))
+    expect(B.error).toHaveBeenNthCalledWith(2, expect.any(Error))
   })
 
   test('with a TooCustomError error', () => {
@@ -52,52 +53,52 @@ describe('app/helpers/handleError()', () => {
     const error = new TooCustomError()
     handleError(error, `a/path`)
 
-    expect(ß.error).toHaveBeenCalledTimes(5)
-    expect(ß.error).toHaveBeenNthCalledWith(
+    expect(B.error).toHaveBeenCalledTimes(5)
+    expect(B.error).toHaveBeenNthCalledWith(
       1,
       expect.stringContaining(
         `[app/helpers/handleError()] This type of error can't be processed. This should never happen.`,
       ),
     )
-    expect(ß.error).toHaveBeenNthCalledWith(
+    expect(B.error).toHaveBeenNthCalledWith(
       2,
       expect.stringContaining(`[app/helpers/handleError()] Error Type: object`),
     )
-    expect(ß.error).toHaveBeenNthCalledWith(
+    expect(B.error).toHaveBeenNthCalledWith(
       3,
       expect.stringContaining(`[app/helpers/handleError()] Error Constructor: TooCustomError`),
     )
-    expect(ß.error).toHaveBeenNthCalledWith(4, expect.stringContaining(`[a/path] [object Object]`))
-    expect(ß.error).toHaveBeenNthCalledWith(5, expect.any(TooCustomError))
+    expect(B.error).toHaveBeenNthCalledWith(4, expect.stringContaining(`[a/path] [object Object]`))
+    expect(B.error).toHaveBeenNthCalledWith(5, expect.any(TooCustomError))
   })
 
   test('with an undefined error', () => {
     handleError(undefined, `a/path`)
 
-    expect(ß.error).toHaveBeenCalledTimes(5)
-    expect(ß.error).toHaveBeenNthCalledWith(
+    expect(B.error).toHaveBeenCalledTimes(5)
+    expect(B.error).toHaveBeenNthCalledWith(
       1,
       expect.stringContaining(
         `[app/helpers/handleError()] This type of error can't be processed. This should never happen.`,
       ),
     )
-    expect(ß.error).toHaveBeenNthCalledWith(
+    expect(B.error).toHaveBeenNthCalledWith(
       2,
       expect.stringContaining(`[app/helpers/handleError()] Error Type: undefined`),
     )
-    expect(ß.error).toHaveBeenNthCalledWith(
+    expect(B.error).toHaveBeenNthCalledWith(
       3,
       expect.stringContaining(`[app/helpers/handleError()] Error Constructor: undefined`),
     )
-    expect(ß.error).toHaveBeenNthCalledWith(4, expect.stringContaining(`[a/path] undefined`))
-    expect(ß.error).toHaveBeenNthCalledWith(5, undefined)
+    expect(B.error).toHaveBeenNthCalledWith(4, expect.stringContaining(`[a/path] undefined`))
+    expect(B.error).toHaveBeenNthCalledWith(5, undefined)
   })
 
   test('with no path', () => {
     handleError(``)
 
-    expect(ß.error).toHaveBeenCalledTimes(2)
-    expect(ß.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[Unknown Path] `))
-    expect(ß.error).toHaveBeenNthCalledWith(2, expect.stringContaining(``))
+    expect(B.error).toHaveBeenCalledTimes(2)
+    expect(B.error).toHaveBeenNthCalledWith(1, expect.stringContaining(`[Unknown Path] `))
+    expect(B.error).toHaveBeenNthCalledWith(2, expect.stringContaining(``))
   })
 })

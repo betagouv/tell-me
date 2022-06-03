@@ -1,32 +1,42 @@
-import SurveyModel from '../../api/models/Survey'
-import convertDocumentToPojo from '../../app/server/convertDocumentToPojo'
-import getMongoose from '../../app/server/getMongoose'
-import Survey from '../../app/templates/Survey'
+import { prisma } from '../../api/libs/prisma'
+import { SurveyTemplate } from '../../app/templates/Survey'
+
+import type { NextPageContext } from 'next'
 
 export default function PublicSurveyPage({ data }) {
-  return <Survey data={data} />
+  return <SurveyTemplate survey={data} />
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: NextPageContext) {
   const {
-    query: { slug },
+    query: { slug: slugAsArray },
   } = context
+  if (!Array.isArray(slugAsArray) || typeof slugAsArray[0] !== 'string') {
+    return {
+      notFound: true,
+    }
+  }
 
-  await getMongoose()
-  const maybeSurvey = await SurveyModel.findOne({ slug }, '-createdAt -updatedAt').exec()
+  const maybeSurvey = await prisma.survey.findUnique({
+    where: {
+      slug: slugAsArray[0],
+    },
+  })
   if (maybeSurvey === null) {
     return {
       notFound: true,
     }
   }
 
-  // console.time('convertDocumentToPojo()')
-  const surveyPojo = convertDocumentToPojo(maybeSurvey)
-  // console.timeEnd('convertDocumentToPojo()')
+  const surveyWithStringDates = {
+    ...maybeSurvey,
+    createdAt: maybeSurvey.createdAt.toISOString(),
+    updatedAt: maybeSurvey.updatedAt.toISOString(),
+  }
 
   return {
     props: {
-      data: surveyPojo,
+      data: surveyWithStringDates,
     },
   }
 }

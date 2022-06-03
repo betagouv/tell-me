@@ -1,4 +1,4 @@
-import ß from 'bhala'
+import { B } from 'bhala'
 import { NextApiResponse } from 'next'
 
 import ApiError from '../libs/ApiError'
@@ -38,14 +38,14 @@ export default function handleError(error: any, path?: string, res?: NextApiResp
 
     default:
       // eslint-disable-next-line no-case-declarations
-      ß.error(`[api/helpers/handleError()] This type of error can't be processed. This should never happen.`)
-      ß.error(`[api/helpers/handleError()] Error Type: ${typeof error}`)
-      ß.error(`[api/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
+      B.error(`[api/helpers/handleError()] This type of error can't be processed. This should never happen.`)
+      B.error(`[api/helpers/handleError()] Error Type: ${typeof error}`)
+      B.error(`[api/helpers/handleError()] Error Constructor: ${getErrorConstructorName(error)}`)
       errorString = String(error)
   }
 
-  ß.error(`[${errorPath}] ${errorString}`)
-  ß.error(error)
+  B.error(`[${errorPath}] ${errorString}`)
+  B.error(error)
 
   if (res === undefined) {
     return
