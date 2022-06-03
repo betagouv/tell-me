@@ -26,9 +26,9 @@ ls -a ./node_modules
 echo ""
 
 echo "info  - Directories sizes:"
-du -sh .cache
+# du -sh .cache
 du -sh .next
-du -sh .scalingo
+# du -sh .scalingo
 du -sh api
 du -sh app
 du -sh common
