@@ -1,5 +1,5 @@
-import { Card, Table } from '@singularity-ui/core'
-import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import { Card, Table } from '@singularity/core'
+import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { Edit, Trash, UserCheck, UserX } from 'react-feather'
 import { useIntl } from 'react-intl'
@@ -71,6 +71,7 @@ export default function UserList() {
       accent: 'primary',
       action: goToUserEditor,
       Icon: Edit,
+      key: 'goToUserEditor',
       label: intl.formatMessage({
         defaultMessage: 'Edit this user',
         description: '[Users List] Table row edition button label.',
@@ -82,6 +83,7 @@ export default function UserList() {
       accent: 'danger',
       action: () => undefined,
       Icon: Trash,
+      key: 'deleteUser',
       label: intl.formatMessage({
         defaultMessage: 'Delete this user',
         description: '[Users List] Table row deletion button label.',

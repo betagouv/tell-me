@@ -1,5 +1,5 @@
-import { Button, Card, Table } from '@singularity-ui/core'
-import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import { Button, Card, Table } from '@singularity/core'
+import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useParams } from 'react-router-dom'
@@ -153,12 +153,13 @@ export default function SurveyEntryList() {
   const columns: TableColumnProps[] = [
     {
       isSortable: true,
-      key: ({ updatedAt }) => capitalizeFirstLetter(dayjs(updatedAt).fromNow()),
+      key: 'updatedAt',
       label: intl.formatMessage({
         defaultMessage: 'Date',
         description: '[Survey Answers List] Table Date column label.',
         id: 's1Q3aH',
       }),
+      transform: ({ updatedAt }) => capitalizeFirstLetter(dayjs(updatedAt).fromNow()),
     },
     {
       key: 'source',

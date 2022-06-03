@@ -1,5 +1,5 @@
-import { Button, Card, Table } from '@singularity-ui/core'
-import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import { Button, Card, Table } from '@singularity/core'
+import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import cuid from 'cuid'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
@@ -134,6 +134,7 @@ export default function SurveyList() {
       accent: 'success',
       action: goToSurveyEntryList,
       Icon: Database,
+      key: 'goToSurveyEntryList',
       label: 'View this survey results',
       type: 'action',
     },
@@ -141,6 +142,7 @@ export default function SurveyList() {
       accent: 'primary',
       action: openSurvey,
       Icon: Eye,
+      key: 'openSurvey',
       label: 'Preview this survey',
       type: 'action',
     },
@@ -148,6 +150,7 @@ export default function SurveyList() {
       accent: 'primary',
       action: goToSurveyEditor,
       Icon: Edit,
+      key: 'goToSurveyEditor',
       label: 'Edit this survey',
       type: 'action',
     },
@@ -155,6 +158,7 @@ export default function SurveyList() {
       accent: 'secondary',
       action: goToSurveyConfig,
       Icon: Settings,
+      key: 'goToSurveyConfig',
       label: 'Edit this survey settings',
       type: 'action',
     },
@@ -162,6 +166,7 @@ export default function SurveyList() {
       accent: 'secondary',
       action: duplicateSurvey,
       Icon: Copy,
+      key: 'duplicateSurvey',
       label: 'Duplicate this survey',
       type: 'action',
     },
@@ -169,6 +174,7 @@ export default function SurveyList() {
       accent: 'danger',
       action: deleteSurvey,
       Icon: Trash,
+      key: 'deleteSurvey',
       label: 'Delete this survey',
       type: 'action',
     },

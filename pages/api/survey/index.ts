@@ -10,7 +10,7 @@ import type { NextApiResponse } from 'next'
 const ERROR_PATH = 'pages/api/survey/SurveyController()'
 
 async function SurveyController(req: RequestWithAuth, res: NextApiResponse) {
-  if (req.method === undefined || !['DELETE', 'GET', 'PATCH', 'POST'].includes(req.method)) {
+  if (req.method === undefined || !['DELETE', 'GET', 'PATCH', 'POST'].includes(String(req.method))) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return

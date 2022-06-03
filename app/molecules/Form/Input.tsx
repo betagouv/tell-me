@@ -1,4 +1,4 @@
-import { TextInput } from '@singularity-ui/core'
+import { TextInput } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 import { ChangeEvent } from 'react'

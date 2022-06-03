@@ -1,16 +1,16 @@
-import { NextApiResponse } from 'next'
-
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withPrisma from '../../api/middlewares/withPrisma'
-import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
+
+import type { RequestWithAuth } from '../../api/types'
+import type { NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/RefreshTokenController()'
 
 async function RefreshTokenController(req: RequestWithAuth, res: NextApiResponse) {
-  if (req.method === undefined || !['DELETE'].includes(req.method)) {
+  if (req.method === undefined || !['DELETE'].includes(String(req.method))) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return

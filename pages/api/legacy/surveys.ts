@@ -6,9 +6,11 @@ import withPrisma from '../../../api/middlewares/withPrisma'
 import Survey from '../../../api/models/Survey'
 import { USER_ROLE } from '../../../common/constants'
 
-const ERROR_PATH = 'pages/api/SurveysController()'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-async function SurveysController(req, res) {
+const ERROR_PATH = 'pages/api/legacy/SurveysController()'
+
+async function SurveysController(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 

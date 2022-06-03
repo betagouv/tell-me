@@ -1,4 +1,4 @@
-import { Select } from '@singularity-ui/core'
+import { Select } from '@singularity/core'
 import { CornerDownRight } from 'react-feather'
 import styled from 'styled-components'
 

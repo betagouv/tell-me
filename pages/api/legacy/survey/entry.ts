@@ -6,10 +6,12 @@ import withPrisma from '../../../../api/middlewares/withPrisma'
 import SurveyEntry from '../../../../api/models/SurveyEntry'
 import { USER_ROLE } from '../../../../common/constants'
 
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 const ERROR_PATH = 'pages/api/legacy/survey/SurveyEntryController()'
 
-async function SurveyEntryController(req, res) {
-  if (!['DELETE', 'GET', 'PATCH', 'POST'].includes(req.method)) {
+async function SurveyEntryController(req: NextApiRequest, res: NextApiResponse) {
+  if (!['DELETE', 'GET', 'PATCH', 'POST'].includes(String(req.method))) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return

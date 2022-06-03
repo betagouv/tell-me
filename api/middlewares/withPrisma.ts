@@ -7,7 +7,7 @@ import { HandlerWithPrisma, RequestWithPrisma } from '../types'
 function withPrismaSingleton() {
   let prismaInstance: Common.Nullable<PrismaClient> = null
 
-  return function withPrisma(handler: HandlerWithPrisma) {
+  return function withPrisma(handler: HandlerWithPrisma | any) {
     const handlerWithPrisma = async (req: RequestWithPrisma, res: NextApiResponse) => {
       try {
         if (prismaInstance === null) {

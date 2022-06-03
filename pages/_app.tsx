@@ -1,4 +1,4 @@
-import { GlobalStyle, ThemeProvider } from '@singularity-ui/core'
+import { GlobalStyle, ThemeProvider } from '@singularity/core'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { createGlobalStyle } from 'styled-components'

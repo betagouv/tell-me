@@ -1,4 +1,4 @@
-import { Button, Dialog, TextInput } from '@singularity-ui/core'
+import { Button, Dialog, TextInput } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
 import { Bold, Italic, Link, X } from 'react-feather'
