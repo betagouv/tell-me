@@ -12,6 +12,7 @@
   "scripts": {
     "prebuild": "sh ./scripts/build/prebuild.sh",
     "build": "next build",
+    "postbuild": "sh ./scripts/build/postbuild.sh",
     "db:migrate": "prisma migrate deploy",
     "db:migrate:legacy": "ts-node -r dotenv/config ./scripts/db/migrate.ts",
     "debug": "envinfo --binaries --system --markdown",
