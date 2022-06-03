@@ -1,4 +1,4 @@
-import { Card } from '@singularity-ui/core'
+import { Card } from '@singularity/core'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'

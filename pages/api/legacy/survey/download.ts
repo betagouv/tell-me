@@ -16,6 +16,8 @@ import {
   USER_ROLE,
 } from '../../../../common/constants'
 
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 const ERROR_PATH = 'pages/api/legacy/survey/SurveyDownloadController()'
 
 const convertSurveyEntriesToCollection = R.pipe(
@@ -23,7 +25,7 @@ const convertSurveyEntriesToCollection = R.pipe(
   R.map(R.reduce((row, { question, values }) => ({ ...row, [question]: values.join(',') }), {})),
 )
 
-async function SurveyDownloadController(req, res) {
+async function SurveyDownloadController(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
@@ -36,7 +38,7 @@ async function SurveyDownloadController(req, res) {
       surveyId: [surveyId],
     } = req.query
 
-    if (!SURVEY_ENTRIES_DOWLOAD_EXTENSIONS.includes(fileExtension)) {
+    if (!SURVEY_ENTRIES_DOWLOAD_EXTENSIONS.includes(String(fileExtension))) {
       handleError(new ApiError('Missing or wrong [fileExtension] query parameter.', 422, true), ERROR_PATH, res)
 
       return

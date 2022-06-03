@@ -1,5 +1,5 @@
-import { Button, Card, Table } from '@singularity-ui/core'
-import { TableColumnProps } from '@singularity-ui/core/contents/Table/types'
+import { Button, Card, Table } from '@singularity/core'
+import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import * as R from 'ramda'
 import { useEffect, useState } from 'react'
 import { Edit, Trash } from 'react-feather'
@@ -96,6 +96,7 @@ export default function PersonalAccessTokenList() {
       accent: 'primary',
       action: goToPersonalAccessTokenEditor,
       Icon: Edit,
+      key: 'goToPersonalAccessTokenEditor',
       label: intl.formatMessage({
         defaultMessage: 'Edit this personal access token',
         description: '[Personal Access Tokens List] Table row edition button label.',
@@ -107,6 +108,7 @@ export default function PersonalAccessTokenList() {
       accent: 'danger',
       action: confirmPersonalAccessTokenDeletion,
       Icon: Trash,
+      key: 'confirmPersonalAccessTokenDeletion',
       label: intl.formatMessage({
         defaultMessage: 'Delete this personal access token',
         description: '[Personal Access Tokens List] Table row deletion button label.',

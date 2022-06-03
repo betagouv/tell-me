@@ -1,4 +1,4 @@
-import { Button } from '@singularity-ui/core'
+import { Button } from '@singularity/core'
 import { useFormikContext } from 'formik'
 import styled from 'styled-components'
 

@@ -1,17 +1,18 @@
-import { NextApiResponse } from 'next'
 import * as R from 'ramda'
 
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withPrisma from '../../api/middlewares/withPrisma'
-import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
+
+import type { RequestWithAuth } from '../../api/types'
+import type { NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/UserController()'
 
 async function UserController(req: RequestWithAuth, res: NextApiResponse) {
-  if (req.method === undefined || !['GET', 'PATCH'].includes(req.method)) {
+  if (req.method === undefined || !['GET', 'PATCH'].includes(String(req.method))) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return

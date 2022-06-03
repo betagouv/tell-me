@@ -3,10 +3,13 @@ import isReady from '../../api/helpers/isReady'
 import ApiError from '../../api/libs/ApiError'
 import withMongoose from '../../api/middlewares/withMongoose'
 
+import type { RequestWithAuth } from '../../api/types'
+import type { NextApiResponse } from 'next'
+
 const { npm_package_version: VERSION } = process.env
 const ERROR_PATH = 'pages/api/auth/IndexController()'
 
-async function IndexController(req, res) {
+async function IndexController(req: RequestWithAuth, res: NextApiResponse) {
   if (req.method !== 'GET') {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 

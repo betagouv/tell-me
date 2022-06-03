@@ -13,13 +13,15 @@ import withPrisma from '../../../../api/middlewares/withPrisma'
 import Survey from '../../../../api/models/Survey'
 import { USER_ROLE } from '../../../../common/constants'
 
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 const { AWS_S3_BUCKET, AWS_S3_REGION } = process.env
 const ASSETS_PATH = path.join(process.cwd(), 'assets')
 const ERROR_PATH = 'pages/api/legacy/survey/SurveyUploadController()'
 
 const s3 = new aws.S3()
 
-function runMiddleware(req: any, res: any, middleware: any) {
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, middleware: any) {
   return new Promise((resolve, reject) => {
     middleware(req, res, result => {
       if (result instanceof Error) {
@@ -37,8 +39,8 @@ export const config = {
   },
 }
 
-async function SurveyUploadController(req, res) {
-  if (!['PUT'].includes(req.method)) {
+async function SurveyUploadController(req: NextApiRequest, res: NextApiResponse) {
+  if (!['PUT'].includes(String(req.method))) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return
@@ -117,7 +119,7 @@ async function SurveyUploadController(req, res) {
       storage: multerStorage,
     })
 
-    await runMiddleware(req, res, upload.single(type))
+    await runMiddleware(req, res, upload.single(String(type)))
 
     res.status(204).end()
   } catch (err) {

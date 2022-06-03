@@ -1,4 +1,4 @@
-import { Checkbox as SuiCheckbox } from '@singularity-ui/core'
+import { Checkbox as SuiCheckbox } from '@singularity/core'
 import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 

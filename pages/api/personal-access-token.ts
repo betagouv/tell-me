@@ -5,13 +5,15 @@ import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withPrisma from '../../api/middlewares/withPrisma'
-import { HandlerWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
+
+import type { RequestWithAuth } from '../../api/types'
+import type { NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/PersonalAccessTokenController()'
 
-const PersonalAccessTokenController: HandlerWithAuth = async (req, res) => {
-  if (req.method === undefined || !['DELETE', 'GET', 'PATCH', 'POST'].includes(req.method)) {
+async function PersonalAccessTokenController(req: RequestWithAuth, res: NextApiResponse) {
+  if (req.method === undefined || !['DELETE', 'GET', 'PATCH', 'POST'].includes(String(req.method))) {
     handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
 
     return

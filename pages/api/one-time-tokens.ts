@@ -1,11 +1,11 @@
-import { NextApiResponse } from 'next'
-
 import handleError from '../../api/helpers/handleError'
 import ApiError from '../../api/libs/ApiError'
 import withAuth from '../../api/middlewares/withAuth'
 import withPrisma from '../../api/middlewares/withPrisma'
-import { RequestWithAuth } from '../../api/types'
 import { USER_ROLE } from '../../common/constants'
+
+import type { RequestWithAuth } from '../../api/types'
+import type { NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/OneTimeTokensController()'
 

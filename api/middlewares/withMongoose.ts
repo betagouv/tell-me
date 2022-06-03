@@ -24,7 +24,7 @@ function withMongooseSingleton() {
           })
         }
 
-        return await handler(req, res)
+        return (await handler(req, res)) as NextApiHandler
       } catch (err) {
         return handleError(err, 'api/middlewares/handlerWithMongoose()', res)
       }
