@@ -24,6 +24,7 @@
     "intl:compile": "formatjs compile-folder --ast ./locales ./locales/compiled",
     "intl:extract": "formatjs extract \"{app,pages}/**/*.tsx\" --out-file ./locales/en-US.json",
     "prepare": "husky install && node -r dotenv/config ./scripts/dev/setup.mjs",
+    "prestart": "sh ./scripts/build/prestart.sh",
     "start": "next start",
     "test": "yarn test:lint && yarn test:type && yarn test:unit",
     "test:lint": "eslint --ext js,jsx,mjs,ts,tsx .",
