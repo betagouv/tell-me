@@ -10,7 +10,6 @@
     "yarn": "1"
   },
   "scripts": {
-    "prebuild": "sh ./scripts/build/prebuild.sh",
     "build": "next build",
     "postbuild": "sh ./scripts/build/postbuild.sh",
     "db:migrate": "prisma migrate deploy",
