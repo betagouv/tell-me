@@ -35,5 +35,4 @@ du -sh common
 du -sh node_modules
 du -sh pages
 du -sh public
-du -sh workers
 echo ""
