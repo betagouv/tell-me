@@ -3,7 +3,7 @@
 # Exit when any command fails:
 set -e
 
-if [ "${NODE_ENV}" != 'production' ] || [ -n "${CI}" ]; then
+if [ "${NODE_ENV}" != "production" ] || [ -n "${CI}" ]; then
   exit 0
 fi
 
