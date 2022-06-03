@@ -25,14 +25,10 @@ echo "info  - Dependencies left:"
 ls -a ./node_modules
 echo ""
 
+echo "info  - Root directories list:"
+ls -a .
+echo ""
+
 echo "info  - Directories sizes:"
-# du -sh .cache
-du -sh .next
-# du -sh .scalingo
-du -sh api
-du -sh app
-du -sh common
-du -sh node_modules
-du -sh pages
-du -sh public
+du -hs .[^.]* * | sort -hr
 echo ""

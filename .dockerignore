@@ -6,7 +6,6 @@
 /coverage
 /node_modules
 /scripts/*
-!/scripts/build/prebuild.sh
 !/scripts/build/postbuild.sh
 !/scripts/build/prestart.sh
 !/scripts/db/migrate.js
