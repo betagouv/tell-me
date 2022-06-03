@@ -52,7 +52,7 @@ const renderBlocks = (formikContext: FormikContextType<any>, blocks: Block[]) =>
   let isHidden: boolean = false
   let questionId: Common.Nullable<string> = null
 
-  return blocks.reduce((components, block, index) => {
+  return blocks.reduce<any[]>((components, block, index) => {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { _id, countLetter, isQuestion, type, value } = block
 

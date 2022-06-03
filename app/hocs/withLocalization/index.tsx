@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
 import enUS from '../../../locales/compiled/en-US.json'
@@ -30,42 +30,28 @@ function onIntlProviderError(err) {
   handleError(err, 'components/withLocalization#onIntlProviderError()')
 }
 
-const withLocalization = Component => {
-  // We must name our wrapped component or it will appear as `Unknown` in case a bug happened within it
-  const WithLocalization = pageProps => {
-    const [locale, setLocale] = useState('en-US')
+export function WithLocalization({ children }) {
+  const [locale, setLocale] = useState(getLocale())
 
-    const messages = loadLocaleMessages(locale)
+  const refresh: LocalizationContext['refresh'] = useCallback((newLocale: string) => {
+    window.localStorage.setItem('locale', newLocale)
 
-    useEffect(() => {
-      setLocale(getLocale())
-    }, [])
+    setLocale(getLocale())
+  }, [])
 
-    const refresh: LocalizationContext['refresh'] = (newLocale: string) => {
-      window.localStorage.setItem('locale', newLocale)
+  const messages = useMemo(() => loadLocaleMessages(locale), [locale])
 
-      setLocale(getLocale())
-    }
+  const providerValue: LocalizationContext = useMemo(
+    () => ({
+      locale,
+      refresh,
+    }),
+    [locale, refresh],
+  )
 
-    const providerValue: LocalizationContext = useMemo(
-      () => ({
-        locale,
-        refresh,
-      }),
-      [locale, refresh],
-    )
-
-    return (
-      <IntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
-        <Context.Provider value={providerValue}>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Component {...pageProps} />
-        </Context.Provider>
-      </IntlProvider>
-    )
-  }
-
-  return WithLocalization
+  return (
+    <IntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
+      <Context.Provider value={providerValue}>{children}</Context.Provider>
+    </IntlProvider>
+  )
 }
-
-export default withLocalization

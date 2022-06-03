@@ -38,8 +38,8 @@ export default function blockMenuReducer(
       }
 
       // eslint-disable-next-line no-case-declarations
-      const visibleItems = R.filter(
-        R.propSatisfies<BlockMenuItem['label'], BlockMenuItem>(label => {
+      const visibleItems = state.items.filter(
+        R.propSatisfies(label => {
           if (action.payload === undefined) {
             return true
           }
@@ -48,7 +48,7 @@ export default function blockMenuReducer(
 
           return regExp.test(label)
         }, 'label'),
-      )(state.items)
+      )
 
       return {
         ...state,

@@ -55,11 +55,11 @@ export default class SurveyEditorManager {
     return this._focusedBlockIndex !== -1
   }
 
-  public get questionBlocksAsOptions(): App.SelectOption[] {
+  public get questionBlocksAsOptions(): Common.App.SelectOption[] {
     return R.pipe<any, any, any>(
       R.filter(isQuestionBlock),
       R.map(({ id, value }) => ({ label: value, value: id })),
-    )(this._blocks) as App.SelectOption[]
+    )(this._blocks) as Common.App.SelectOption[]
   }
 
   constructor(initialBlocks: TellMe.TreeBlock[] = INITIAL_BLOCKS) {
@@ -210,33 +210,7 @@ export default class SurveyEditorManager {
     this.changeBlockPropsAt(this.focusedBlockIndex, newProps)
   }
 
-  public conciliateFormData(formData: {
-    [questionBlockId: string]: string | string[]
-  }): Array<{
-    question: string
-    type: string
-    values: string[]
-  }> {
-    return R.pipe(
-      R.toPairs,
-      R.map(([questionBlockId, answerOrAnswers]) => {
-        const questionBlockIndex = this.findBlockIndexById(questionBlockId)
-        const questionBlock = this.blocks[questionBlockIndex]
-        const questionInputType = getQuestionInputTypeAt(this.blocks, questionBlockIndex)
-        if (questionInputType === undefined) {
-          throw new Error(`This question should have an input type.`)
-        }
-
-        return {
-          question: questionBlock.value,
-          type: questionInputType,
-          values: Array.isArray(answerOrAnswers) ? answerOrAnswers : [answerOrAnswers],
-        }
-      }),
-    )(formData)
-  }
-
-  public getQuestionInputTypeAt(index: number): string {
+  public getQuestionInputTypeAt(index: number): TellMe.BlockType {
     const maybeQuestionBlock = this.blocks[index]
     if (!isQuestionBlock(maybeQuestionBlock)) {
       throw new Error(`This survey block is not a question.`)

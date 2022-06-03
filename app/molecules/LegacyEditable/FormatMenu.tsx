@@ -9,8 +9,6 @@ import styled from 'styled-components'
 import { unified } from 'unified'
 import unistUtilReduce from 'unist-util-reduce'
 
-import { Node } from './types'
-
 import type { FunctionComponent, MouseEvent, MutableRefObject } from 'react'
 
 const Box = styled.div<any>`
@@ -120,14 +118,18 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sour
   const toggleSelectionWithTag = async (newTagName: string, newTagProperties: any = {}): Promise<string> => {
     // https://github.com/rehypejs/rehype/tree/main/packages/rehype-parse#unifieduserehypeparse-options
     const tree = unified()
-      .use<any[], import('hast').Root>(rehypeParse, {
+      .use<any[], import('hast').Root>(rehypeParse as any, {
         fragment: true,
       })
       .parse(source)
 
     const tagName = ((selection.anchorNode as Element).parentNode as Element).tagName.toLowerCase()
     const value = (selection.anchorNode as Element).textContent
-    const newTree = unistUtilReduce(tree, (node: Node) => {
+    if (value === null) {
+      return ''
+    }
+
+    const newTree = unistUtilReduce(tree, (node: any) => {
       if (
         (tagName === 'p' && node.type === 'text' && node.value === value) ||
         (node.tagName === tagName &&
@@ -189,7 +191,7 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sour
       })
       .parse(htmlSource)
 
-    const newTree = unistUtilReduce(tree, (node: Node) => {
+    const newTree = unistUtilReduce(tree, (node: any) => {
       if (node.tagName === whereTagName && node.type === 'element') {
         return {
           ...node,

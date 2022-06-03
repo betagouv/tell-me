@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
 import glob from 'glob'
-import R from 'ramda'
+import * as R from 'ramda'
 import { promisify } from 'util'
 
 const asyncGlob = promisify(glob)

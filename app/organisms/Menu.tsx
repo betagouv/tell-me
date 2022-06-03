@@ -1,10 +1,13 @@
+import { UserRole } from '@prisma/client'
+import { VerticalMenu } from '@singularity/core'
+import { useAuth } from 'nexauth/client'
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import { LogOut, Settings } from 'react-feather'
 import { useIntl } from 'react-intl'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { USER_ROLE } from '../../common/constants'
-import useAuth from '../hooks/useAuth'
+import { Link } from '../atoms/Link'
 
 const Container = styled.div`
   background-color: #293042;
@@ -12,8 +15,9 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
-  min-width: 16rem;
+  width: 16rem;
   position: fixed;
+  overflow-y: auto;
 `
 
 const Brand = styled.div`
@@ -40,19 +44,29 @@ const Brand = styled.div`
 const MainMenu = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 0.5rem;
+  padding: ${p => p.theme.padding.layout.medium};
 
-  > a {
+  span {
+    padding: 0;
+  }
+
+  span > a {
     color: white;
     display: block;
-    opacity: 0.75;
-    padding: 0.5rem 1rem;
+    flex-grow: 1;
+    padding: ${p => p.theme.padding.layout.small} ${p => p.theme.padding.layout.medium};
     text-decoration: none;
-
-    :hover {
-      opacity: 1;
-    }
   }
+`
+
+const MenuTitle = styled.p`
+  border-top: 1px solid ${p => p.theme.color.body.white};
+  color: ${p => p.theme.color.body.white};
+  font-size: 80%;
+  font-weight: 500;
+  margin: ${p => p.theme.padding.layout.large} 0 0;
+  opacity: 0.35;
+  padding: ${p => p.theme.padding.layout.large} 0;
 `
 
 const UserMenu = styled.div`
@@ -75,8 +89,11 @@ const UserMenu = styled.div`
 `
 
 export default function Menu() {
+  const auth = useAuth<Common.Auth.User>()
   const intl = useIntl()
-  const { logOut, user } = useAuth()
+  const router = useRouter()
+
+  const isAdmin = useMemo(() => auth.user?.role === UserRole.ADMINISTRATOR, [auth.user])
 
   return (
     <Container>
@@ -84,82 +101,93 @@ export default function Menu() {
         <Brand>Tell Me</Brand>
 
         <MainMenu>
-          <Link to="/">
-            {intl.formatMessage({
-              defaultMessage: 'Dashboard',
-              description: '[Sidebar Main Menu] Dashboard label.',
-              id: 'EEsDeJ',
-            })}
-          </Link>
-          <Link to="/surveys">
-            {intl.formatMessage({
-              defaultMessage: 'Surveys',
-              description: '[Sidebar Main Menu] Surveys label.',
-              id: 'D6/Uxz',
-            })}
-          </Link>
+          <VerticalMenu>
+            <VerticalMenu.Item isActive={router.pathname === '/'} isDark>
+              <Link href="/">
+                {intl.formatMessage({
+                  defaultMessage: 'Dashboard',
+                  description: '[Sidebar Main Menu] Dashboard label.',
+                  id: 'EEsDeJ',
+                })}
+              </Link>
+            </VerticalMenu.Item>
 
-          {user !== null && user.role === USER_ROLE.ADMINISTRATOR && (
-            <>
-              <Link to="/users">
+            <VerticalMenu.Item isActive={router.pathname.startsWith('/surveys')} isDark>
+              <Link href="/surveys">
                 {intl.formatMessage({
-                  defaultMessage: 'Users',
-                  description: '[Sidebar Main Menu] Users label.',
-                  id: 'zGNJ13',
+                  defaultMessage: 'Surveys',
+                  description: '[Sidebar Main Menu] Surveys label.',
+                  id: 'D6/Uxz',
                 })}
               </Link>
-              <Link to="/refresh-tokens">
-                {intl.formatMessage({
-                  defaultMessage: 'Refresh Tokens',
-                  description: '[Sidebar Main Menu] Refresh Tokens label.',
-                  id: 'bkZg0U',
-                })}
-              </Link>
-              <Link to="/personal-access-tokens">
-                {intl.formatMessage({
-                  defaultMessage: 'Personal Access Tokens',
-                  description: '[Sidebar Main Menu] Personal Access Tokens label.',
-                  id: 'WL5w1n',
-                })}
-              </Link>
-              <Link to="/one-time-tokens">
-                {intl.formatMessage({
-                  defaultMessage: 'One Time Tokens',
-                  description: '[Sidebar Main Menu] One Time Tokens label.',
-                  id: 'tIFSst',
-                })}
-              </Link>
-            </>
-          )}
+            </VerticalMenu.Item>
 
-          <h2
-            style={{
-              borderBottom: '1px solid #3c4252',
-              color: 'white',
-              fontSize: '125%',
-              fontWeight: 'normal',
-              margin: '1.5rem 1rem 0.5rem',
-              paddingBottom: '0.5rem',
-              textTransform: 'uppercase',
-            }}
-          >
-            Legacy
-          </h2>
-          <Link to="/legacy/surveys">
-            {intl.formatMessage({
-              defaultMessage: 'Surveys',
-              description: '[Sidebar Main Menu] Surveys label.',
-              id: 'D6/Uxz',
-            })}
-          </Link>
+            {isAdmin && (
+              <>
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/users')} isDark>
+                  <Link href="/users">
+                    {intl.formatMessage({
+                      defaultMessage: 'Users',
+                      description: '[Sidebar Main Menu] Users label.',
+                      id: 'zGNJ13',
+                    })}
+                  </Link>
+                </VerticalMenu.Item>
+
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/refresh-tokens')} isDark>
+                  <Link href="/refresh-tokens">
+                    {intl.formatMessage({
+                      defaultMessage: 'Refresh Tokens',
+                      description: '[Sidebar Main Menu] Refresh Tokens label.',
+                      id: 'bkZg0U',
+                    })}
+                  </Link>
+                </VerticalMenu.Item>
+
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/personal-access-tokens')} isDark>
+                  <Link href="/personal-access-tokens">
+                    {intl.formatMessage({
+                      defaultMessage: 'Personal Access Tokens',
+                      description: '[Sidebar Main Menu] Personal Access Tokens label.',
+                      id: 'WL5w1n',
+                    })}
+                  </Link>
+                </VerticalMenu.Item>
+
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/one-time-tokens')} isDark>
+                  <Link href="/one-time-tokens">
+                    {intl.formatMessage({
+                      defaultMessage: 'One Time Tokens',
+                      description: '[Sidebar Main Menu] One Time Tokens label.',
+                      id: 'tIFSst',
+                    })}
+                  </Link>
+                </VerticalMenu.Item>
+              </>
+            )}
+          </VerticalMenu>
+
+          <MenuTitle>LEGACY</MenuTitle>
+
+          <VerticalMenu>
+            <VerticalMenu.Item isActive={router.pathname.startsWith('/legacy/surveys')} isDark>
+              <Link href="/legacy/surveys">
+                {intl.formatMessage({
+                  defaultMessage: 'Surveys',
+                  description: '[Sidebar Main Menu] Surveys label.',
+                  id: 'D6/Uxz',
+                })}
+              </Link>
+            </VerticalMenu.Item>
+          </VerticalMenu>
         </MainMenu>
       </div>
 
       <UserMenu>
-        <Link to="/me">
+        <Link href="/me">
           <Settings />
         </Link>
-        <LogOut onClick={logOut} />
+        <LogOut onClick={auth.logOut} />
       </UserMenu>
     </Container>
   )

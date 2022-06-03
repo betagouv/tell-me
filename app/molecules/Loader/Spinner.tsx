@@ -61,7 +61,7 @@ const ThirdArc = styled(Arc)`
   animation-delay: 0s;
 `
 
-export default function Spinner() {
+export function Spinner() {
   return (
     <Box>
       <FirstArc />

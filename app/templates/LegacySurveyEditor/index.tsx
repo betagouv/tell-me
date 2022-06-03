@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
@@ -15,11 +15,6 @@ import Header from './Header'
 import Loader from './Loader'
 import Logo from './Logo'
 
-const Body = styled.div`
-  max-width: 82rem;
-  padding-bottom: 50%;
-`
-
 const TitleRow = styled.div`
   padding: 0 13rem 0 7rem;
 `
@@ -32,8 +27,10 @@ export default function LegacySurveyEditor() {
   const [title, setTitle] = useState('')
   const [coverUrl, setCoverUrl] = useState(null)
   const [logoUrl, setLogoUrl] = useState(null)
-  const { id } = useParams()
   const api = useApi()
+  const router = useRouter()
+
+  const { id } = router.query
 
   const surveyManager = surveyManagerRef.current
 
@@ -44,13 +41,13 @@ export default function LegacySurveyEditor() {
     }
 
     ;(async () => {
-      await api.patch(`legacy/survey/${id}`, data)
+      await api.patch(`legacy/surveys/${id}`, data)
     })()
   }, 250)
 
   useEffect(() => {
     ;(async () => {
-      const maybeBody = await api.get(`legacy/survey/${id}`)
+      const maybeBody = await api.get(`legacy/surveys/${id}`)
       if (maybeBody === null || maybeBody.hasError) {
         return
       }
@@ -82,17 +79,17 @@ export default function LegacySurveyEditor() {
   }, [surveyManager.blocks, title])
 
   const updateTitle = newValue => {
-    api.patch(`legacy/survey/${id}`, {
+    api.patch(`legacy/surveys/${id}`, {
       title: newValue,
     })
   }
 
   const uploadCover = async formData => {
-    await api.put(`legacy/survey/${id}/upload?type=cover`, formData)
+    await api.put(`legacy/surveys/${id}/upload?type=cover`, formData)
   }
 
   const uploadLogo = async formData => {
-    await api.put(`legacy/survey/${id}/upload?type=logo`, formData)
+    await api.put(`legacy/surveys/${id}/upload?type=logo`, formData)
   }
 
   const changeBlockTypeAt = (index, newType) => {
@@ -167,42 +164,40 @@ export default function LegacySurveyEditor() {
       <Header onChange={uploadCover} url={coverUrl} />
       <Logo onChange={uploadLogo} url={logoUrl} />
 
-      <Body>
-        <TitleRow>
-          <LegacyEditable
-            as={Title}
-            defaultValue={title}
-            isFocused={isTitleFocused}
-            isRichText={false}
-            onChange={updateTitle}
-            onDownKeyDown={focusNextBlock}
-            onEnterKeyDown={appendNewBlockAt}
-            onFocus={surveyManager.unsetFocus}
-          />
-        </TitleRow>
+      <TitleRow>
+        <LegacyEditable
+          as={Title}
+          defaultValue={title}
+          isFocused={isTitleFocused}
+          isRichText={false}
+          onChange={updateTitle}
+          onDownKeyDown={focusNextBlock}
+          onEnterKeyDown={appendNewBlockAt}
+          onFocus={surveyManager.unsetFocus}
+        />
+      </TitleRow>
 
-        {surveyManager.blocks.map((block, index) => (
-          <Block
-            // eslint-disable-next-line react/no-array-index-key
-            key={`${index}.${block.type}.${hashCode(block.value)}`}
-            block={block}
-            index={index}
-            isFocused={index === surveyManager.focusedBlockIndex}
-            onAppendBlockAt={appendNewBlockAt}
-            onChangeAt={updateBlockValueAt}
-            onChangeConditionAt={setIfSelectedThenShowQuestionIdAt}
-            onChangeTypeAt={changeBlockTypeAt}
-            onDownKeyDown={focusNextBlock}
-            onFocus={surveyManager.setFocusAt}
-            onRemove={removeFocusedBlock}
-            onRemoveAt={removeBlockAt}
-            onToggleObligation={toggleObligationAt}
-            onToggleVisibility={toggleBlockVisibilityAt}
-            onUpKeyDown={focusPreviousBlock}
-            questionBlockAsOptions={surveyManager.questionBlockAsOptions}
-          />
-        ))}
-      </Body>
+      {surveyManager.blocks.map((block, index) => (
+        <Block
+          // eslint-disable-next-line react/no-array-index-key
+          key={`${index}.${block.type}.${hashCode(block.value)}`}
+          block={block}
+          index={index}
+          isFocused={index === surveyManager.focusedBlockIndex}
+          onAppendBlockAt={appendNewBlockAt}
+          onChangeAt={updateBlockValueAt}
+          onChangeConditionAt={setIfSelectedThenShowQuestionIdAt}
+          onChangeTypeAt={changeBlockTypeAt}
+          onDownKeyDown={focusNextBlock}
+          onFocus={surveyManager.setFocusAt}
+          onRemove={removeFocusedBlock}
+          onRemoveAt={removeBlockAt}
+          onToggleObligation={toggleObligationAt}
+          onToggleVisibility={toggleBlockVisibilityAt}
+          onUpKeyDown={focusPreviousBlock}
+          questionBlockAsOptions={surveyManager.questionBlockAsOptions}
+        />
+      ))}
     </>
   )
 }

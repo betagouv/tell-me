@@ -1,6 +1,5 @@
+import { handleError } from '@common/helpers/handleError'
 import { PrismaClient } from '@prisma/client'
-
-import handleError from './handleError'
 
 // Optimize subsequent requests once it's `true`
 let IS_READY = false

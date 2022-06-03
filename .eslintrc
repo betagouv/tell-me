@@ -40,6 +40,7 @@
     "import/prefer-default-export": "off",
 
     "react/function-component-definition": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/prop-types": [
       "error",
       {
@@ -95,7 +96,13 @@
       }
     },
     {
-      "files": ["./db/**/*.ts", "./scripts/**/*.mjs"],
+      "files": ["./pages/api/**/*.ts"],
+      "rules": {
+        "consistent-return": "off"
+      }
+    },
+    {
+      "files": ["./db/**/*.ts", "./scripts/**/*.js"],
       "env": {
         "browser": false,
         "node": true
@@ -106,6 +113,7 @@
         "no-continue": "off",
         "no-restricted-syntax": "off",
 
+        "import/extensions": ["off"],
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
       }
     },

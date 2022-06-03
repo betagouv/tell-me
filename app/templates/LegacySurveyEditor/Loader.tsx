@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import Title from '../../atoms/Title'
-import Loader from '../../molecules/Loader'
+import { Loader } from '../../molecules/Loader'
 
 const Header = styled.div`
   background-color: #cccccc;

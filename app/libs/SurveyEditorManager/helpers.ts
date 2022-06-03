@@ -12,7 +12,7 @@ export const getQuestionInputTypeAt = (
     type: TellMe.BlockType
   }>,
   index: number,
-): string | undefined => {
+): TellMe.BlockType | undefined => {
   const maybeQuestionBlock = blocks[index]
   if (!isQuestionBlock(maybeQuestionBlock)) {
     return undefined

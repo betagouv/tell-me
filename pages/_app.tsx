@@ -1,12 +1,19 @@
+import { NoSsr } from '@app/hocs/NoSsr'
+import withApi from '@app/hocs/withApi'
+import { WithLocalization } from '@app/hocs/WithLocalization'
+import { Loader } from '@app/molecules/Loader'
+import { AdminBox } from '@app/organisms/AdminBox'
+import { SignInDialog } from '@app/organisms/SignInDialog'
 import { GlobalStyle, ThemeProvider } from '@singularity/core'
+import { AuthProvider } from 'nexauth/client'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { createGlobalStyle } from 'styled-components'
 
-import withApi from '../app/hocs/withApi'
-import withAuth from '../app/hocs/withAuth'
-import withLocalization from '../app/hocs/withLocalization'
-
+import '@fontsource/poppins/300.css'
+import '@fontsource/poppins/400.css'
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/700.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 const GlobalStyleCustom = createGlobalStyle<{
@@ -29,29 +36,56 @@ const GlobalStyleCustom = createGlobalStyle<{
  }
 `
 
+const PRIVATE_PATHS = [/^\/(?!public\/).*/]
+
 export default function TellMeApp({ Component, pageProps }) {
-  const { pathname } = useRouter()
+  const router = useRouter()
 
-  const WrappedComponent = withAuth(withApi(withLocalization(Component)))
+  const WrappedComponent = withApi(Component)
 
-  if (!pathname.startsWith('/survey/') && !process.browser) {
-    return <div id="__tma" suppressHydrationWarning />
+  if (router.pathname.startsWith('/public/')) {
+    return (
+      <div id="__tma">
+        <Head>
+          <title>Tell Me</title>
+
+          <meta content="initial-scale=1, width=device-width" name="viewport" />
+        </Head>
+
+        <ThemeProvider>
+          <GlobalStyle />
+          <GlobalStyleCustom />
+
+          <WithLocalization>
+            <WrappedComponent {...pageProps} />
+          </WithLocalization>
+        </ThemeProvider>
+      </div>
+    )
   }
 
   return (
-    <div id="__tma" suppressHydrationWarning>
-      <Head>
-        <title>Tell Me</title>
+    <NoSsr>
+      <div id="__tma">
+        <Head>
+          <title>Tell Me</title>
 
-        <meta content="initial-scale=1, width=device-width" name="viewport" />
-      </Head>
+          <meta content="initial-scale=1, width=device-width" name="viewport" />
+        </Head>
 
-      <ThemeProvider>
-        <GlobalStyle />
-        <GlobalStyleCustom />
+        <ThemeProvider>
+          <GlobalStyle />
+          <GlobalStyleCustom />
 
-        <WrappedComponent {...pageProps} />
-      </ThemeProvider>
-    </div>
+          <WithLocalization>
+            <AuthProvider Loader={Loader} privatePaths={PRIVATE_PATHS} SignInDialog={SignInDialog}>
+              <AdminBox>
+                <WrappedComponent {...pageProps} />
+              </AdminBox>
+            </AuthProvider>
+          </WithLocalization>
+        </ThemeProvider>
+      </div>
+    </NoSsr>
   )
 }

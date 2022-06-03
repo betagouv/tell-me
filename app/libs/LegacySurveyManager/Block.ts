@@ -14,7 +14,7 @@ export type BlockConstructorOptions = {
   isHidden: boolean
   isMandatory: boolean
   isUnlinked: boolean
-  questionBlockAsOption?: App.SelectOption
+  questionBlockAsOption?: Common.App.SelectOption
   questionId: Common.Nullable<string>
   questionInputType?: string
 }
@@ -37,7 +37,7 @@ export default class Block {
   private _isMandatory: boolean
   private _isQuestion: boolean
   private _isUnlinked: boolean
-  private _questionBlockAsOption: Common.Nullable<App.SelectOption>
+  private _questionBlockAsOption: Common.Nullable<Common.App.SelectOption>
   private _questionId: Common.Nullable<string>
   private _questionInputType: Common.Nullable<string>
 
