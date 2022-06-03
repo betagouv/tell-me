@@ -1,41 +1,19 @@
 {
+  "extends": "@ivangabriele/tsconfig-next",
   "compilerOptions": {
-    "allowJs": true,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "incremental": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "strictNullChecks": true,
-    "target": "ES5",
-    "incremental": true
+    "paths": {
+      "@api/*": ["api/*"],
+      "@app/*": ["app/*"],
+      "@common/*": ["common/*"],
+      "@schemas/*": ["schemas/*"]
+    }
   },
-  "include": [
-    "**/*.js",
-    "**/*.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts"
-  ],
-  "exclude": [
-    "node_modules/*"
-  ],
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.cjs"],
+  "exclude": [".next/*", "node_modules/*"],
   "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    },
-    "transpiler": "ts-node/transpilers/swc-experimental",
-    "transpileOnly": true
+    "esm": true
   }
 }

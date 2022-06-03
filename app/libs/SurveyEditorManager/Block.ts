@@ -12,7 +12,7 @@ export default class Block {
   private _count: Common.Nullable<number>
   private _countLetter: Common.Nullable<string>
   private _ifTruethyThenShowQuestionIds: string[]
-  private _ifTruethyThenShowQuestionsAsOptions: App.SelectOption[]
+  private _ifTruethyThenShowQuestionsAsOptions: Common.App.SelectOption[]
   private _isCheckbox: boolean
   private _isChoice: boolean
   private _isCountable: boolean
@@ -22,7 +22,7 @@ export default class Block {
   private _isQuestion: boolean
   private _isUnlinked: boolean
   private _questionId: Common.Nullable<string>
-  private _questionInputType: Common.Nullable<string>
+  private _questionInputType: Common.Nullable<TellMe.BlockType>
 
   constructor(
     block: TellMe.TreeBlock,
@@ -77,7 +77,7 @@ export default class Block {
     return this._ifTruethyThenShowQuestionsAsOptions
   }
 
-  public set ifTruethyThenShowQuestionsAsOptions(newOptions: App.SelectOption[]) {
+  public set ifTruethyThenShowQuestionsAsOptions(newOptions: Common.App.SelectOption[]) {
     this._ifTruethyThenShowQuestionsAsOptions = newOptions
   }
 

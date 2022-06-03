@@ -16,7 +16,7 @@ const { DB_URL } = process.env
 async function migrate() {
   try {
     if (DB_URL === undefined) {
-      throw new Error('`process.env.DB_URL` is undefined.')
+      return
     }
 
     const mongooseInstance = await mongoose.connect(DB_URL, {

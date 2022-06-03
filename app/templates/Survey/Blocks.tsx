@@ -61,7 +61,7 @@ const renderBlocks = (formikContext: FormikContextType<any>, blocks: Block[]) =>
   let isHidden: boolean = false
   let questionId: Common.Nullable<string> = null
 
-  return blocks.reduce((components, block, index) => {
+  return blocks.reduce<any[]>((components, block, index) => {
     if (block.isQuestion) {
       questionId = block.id
 

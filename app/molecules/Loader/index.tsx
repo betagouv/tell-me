@@ -1,7 +1,7 @@
-import Overlay from './Overlay'
-import Spinner from './Spinner'
+import { Overlay } from './Overlay'
+import { Spinner } from './Spinner'
 
-export default function Loader() {
+export function Loader() {
   return (
     <Overlay>
       <Spinner />

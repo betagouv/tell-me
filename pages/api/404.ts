@@ -1,8 +1,11 @@
-import handleError from '../../api/helpers/handleError'
+import { handleError } from '@common/helpers/handleError'
+
 import ApiError from '../../api/libs/ApiError'
 
-const ERROR_PATH = 'pages/api/auth/NotFoundController()'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function NotFoundController(req, res) {
+const ERROR_PATH = 'pages/api/404.ts'
+
+export default async function NotFoundEndpoint(req: NextApiRequest, res: NextApiResponse) {
   handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
 }

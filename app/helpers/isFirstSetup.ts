@@ -1,6 +1,5 @@
+import { handleError } from '@common/helpers/handleError'
 import ky from 'ky'
-
-import handleError from './handleError'
 
 export default async function isFirstSetup(): Promise<Common.Nullable<boolean>> {
   try {

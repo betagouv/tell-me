@@ -1,22 +1,15 @@
-import handleError from '../../api/helpers/handleError'
-import ApiError from '../../api/libs/ApiError'
-import withAuth from '../../api/middlewares/withAuth'
-import withPrisma from '../../api/middlewares/withPrisma'
-import { USER_ROLE } from '../../common/constants'
+import ApiError from '@api/libs/ApiError'
+import withAuth from '@api/middlewares/withAuth'
+import withPrisma from '@api/middlewares/withPrisma'
+import { handleError } from '@common/helpers/handleError'
+import { UserRole } from '@prisma/client'
 
-import type { RequestWithAuth } from '../../api/types'
-import type { NextApiResponse } from 'next'
+import type { RequestWithAuth } from '@api/types'
+import type { NextApiHandler, NextApiResponse } from 'next'
 
-const ERROR_PATH = 'pages/api/UserConfigController()'
+const ERROR_PATH = 'pages/api/me.ts'
 
-async function UserConfigController(req: RequestWithAuth, res: NextApiResponse) {
-  if (req.method === undefined || !['GET', 'PATCH'].includes(String(req.method))) {
-    handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
-
-    return
-  }
-
-  // eslint-disable-next-line default-case
+async function UserConfigEndpoint(req: RequestWithAuth, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
@@ -57,9 +50,14 @@ async function UserConfigController(req: RequestWithAuth, res: NextApiResponse) 
       } catch (err) {
         handleError(err, ERROR_PATH, res)
       }
+
+      return
+
+    default:
+      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
   }
 }
 
 export default withPrisma(
-  withAuth(UserConfigController, [USER_ROLE.ADMINISTRATOR, USER_ROLE.MANAGER, USER_ROLE.VIEWER]),
+  withAuth(UserConfigEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER]),
 )

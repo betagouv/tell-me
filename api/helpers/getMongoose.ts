@@ -1,6 +1,5 @@
+import { handleError } from '@common/helpers/handleError'
 import mongoose, { Mongoose } from 'mongoose'
-
-import handleError from '../../app/helpers/handleError'
 
 const { DB_URL } = process.env
 

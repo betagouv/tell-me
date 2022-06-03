@@ -1,8 +1,10 @@
-import mongoose, { Mongoose } from 'mongoose'
-import { NextApiHandler } from 'next'
+import { handleError } from '@common/helpers/handleError'
+import mongoose from 'mongoose'
 
-import handleError from '../helpers/handleError'
 import ApiError from '../libs/ApiError'
+
+import type { Mongoose } from 'mongoose'
+import type { NextApiHandler } from 'next'
 
 mongoose.Schema.Types.String.checkRequired(value => typeof value === 'string')
 
@@ -11,7 +13,7 @@ const { DB_URL } = process.env
 function withMongooseSingleton() {
   let mongooseInstance: Common.Nullable<Mongoose> = null
 
-  return function withMongoose(handler: NextApiHandler): NextApiHandler {
+  return function withMongoose(handler: any): NextApiHandler {
     const handlerWithMongoose: NextApiHandler = async (req, res) => {
       try {
         if (mongooseInstance === null) {

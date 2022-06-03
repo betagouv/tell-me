@@ -1,9 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import { NextApiRequest, NextApiResponse } from 'next'
-
-export type HandlerWithAuth<T = any> = (req: RequestWithAuth, res: NextApiResponse<T>) => void | Promise<void>
-
-export type HandlerWithPrisma<T = any> = (req: RequestWithPrisma, res: NextApiResponse<T>) => void | Promise<void>
+import type { PrismaClient } from '@prisma/client'
+import type { NextApiRequest } from 'next'
 
 export type RequestMe = {
   id: string

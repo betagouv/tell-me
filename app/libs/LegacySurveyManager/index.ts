@@ -159,11 +159,11 @@ export default class LegacySurveyManager {
     return this._focusedBlockIndex !== -1
   }
 
-  public get questionBlockAsOptions(): App.SelectOption[] {
+  public get questionBlockAsOptions(): Common.App.SelectOption[] {
     return R.pipe<any, any, any>(
       R.filter(isQuestionBlock),
       R.map(({ _id, value }) => ({ label: value, value: _id })),
-    )(this._blocks) as App.SelectOption[]
+    )(this._blocks) as Common.App.SelectOption[]
   }
 
   constructor(blocks = INITIAL_BLOCKS) {
@@ -203,31 +203,30 @@ export default class LegacySurveyManager {
       value: '',
     }
 
-    this.blocks = R.pipe<any, any, any>(
-      R.insert(index + 1, newBlock),
-      R.reduce((previousBlocks: Block[], block: Block) => {
-        const { position } = block
-        if (position.page !== newBlock.position.page || previousBlocks.length === 0) {
-          return [...previousBlocks, block]
-        }
+    const newBlocks: any[] = R.insert(index + 1, newBlock)(this.blocks as any[])
 
-        const previousBlock = R.last<Block>(previousBlocks)
-        const previousRank = typeof previousBlock === 'undefined' ? 0 : previousBlock.position.rank
-        if (position.rank === previousRank + 1) {
-          return [...previousBlocks, block]
-        }
+    this.blocks = newBlocks.reduce((previousBlocks: Block[], block: Block) => {
+      const { position } = block
+      if (position.page !== newBlock.position.page || previousBlocks.length === 0) {
+        return [...previousBlocks, block]
+      }
 
-        const repositionedBlock = {
-          ...block,
-          position: {
-            ...position,
-            rank: previousRank + 1,
-          },
-        }
+      const previousBlock = R.last<Block>(previousBlocks)
+      const previousRank = typeof previousBlock === 'undefined' ? 0 : previousBlock.position.rank
+      if (position.rank === previousRank + 1) {
+        return [...previousBlocks, block]
+      }
 
-        return [...previousBlocks, repositionedBlock]
-      }, []),
-    )(this.blocks)
+      const repositionedBlock = {
+        ...block,
+        position: {
+          ...position,
+          rank: previousRank + 1,
+        },
+      }
+
+      return [...previousBlocks, repositionedBlock]
+    }, [])
 
     this.setFocusAt(index + 1)
   }

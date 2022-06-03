@@ -1,5 +1,6 @@
+import { handleError } from '@common/helpers/handleError'
+
 import { isInputBlock, isQuestionBlock } from '../libs/SurveyEditorManager/helpers'
-import handleError from './handleError'
 
 import type TellMe from '../../schemas/1.0.0/TellMe'
 import type SurveyEditorManagerBlock from '../libs/SurveyEditorManager/Block'

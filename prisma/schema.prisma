@@ -45,9 +45,9 @@ model PersonalAccessToken {
 
 model RefreshToken {
   id        String   @id @default(cuid())
+  familyId  String?
   ip        String
   value     String   @unique
-  createdAt DateTime @default(now())
   expiredAt DateTime
 
   user   User   @relation(fields: [userId], references: [id])
@@ -61,7 +61,7 @@ model Survey {
   // Survey structured as TellMe Tree JSON Schema (TellMe.Tree.schema.json)
   tree        Json
   // Answers structured as TellMe Data JSON Schema (TellMe.Data.schema.json)
-  data        Json     @default("[]")
+  data        Json
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

@@ -21,6 +21,7 @@ import blockMenuReducer, { BlockMenuReducerAction, BlockMenuReducerState } from 
 import FormatMenu, { FormatMenuProps } from './FormatMenu'
 
 import type { BlockMenuItem } from './types'
+import type TellMe from '@schemas/1.0.0/TellMe'
 
 const MENU_ITEMS: BlockMenuItem[] = [
   {
@@ -76,7 +77,7 @@ type EditableComponent<P = Common.AnyProps> = FunctionComponent<
     isRichText?: boolean
     onBackspaceKeyDown?: () => void
     onChange: (newValue: string) => void
-    onChangeType?: (newType: string) => void
+    onChangeType?: (newType: TellMe.BlockType) => void
     onDownKeyDown?: () => void
     onEnterKeyDown?: () => void
     onFocus?: () => void
