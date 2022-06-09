@@ -77,7 +77,7 @@ export function BlockMenu({ anchor, defaultSelectedIndex, items, onCancel, onSel
   }
 
   useEffect(() => {
-    setImmediate(detectPropagatedClick)
+    setTimeout(detectPropagatedClick)
 
     return () => {
       window.removeEventListener('click', onCancel)

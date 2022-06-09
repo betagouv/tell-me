@@ -9,7 +9,7 @@ function ModalComponent({ children }) {
   )
 }
 
-ModalComponent.name = 'Modal'
+ModalComponent.displayName = 'Modal'
 
 export const Modal = Object.assign(ModalComponent, {
   Overlay,

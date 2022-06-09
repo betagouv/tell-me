@@ -51,21 +51,9 @@
     "defaultMessage": "Delete Confirmation",
     "description": "[Delete Confirmation Dialog] Title."
   },
-  "A2n/eF": {
-    "defaultMessage": "A new password",
-    "description": "[Setup Modal] Password input label."
-  },
-  "Ci9rPk": {
-    "defaultMessage": "Create",
-    "description": "[Setup Modal] Submit button label."
-  },
   "D6/Uxz": {
     "defaultMessage": "Surveys",
     "description": "[Sidebar Main Menu] Surveys label."
-  },
-  "DPOyaV": {
-    "defaultMessage": "Your email",
-    "description": "[Setup Modal] Email input label."
   },
   "Db1A9P": {
     "defaultMessage": "Label",
@@ -78,10 +66,6 @@
   "Dus0RS": {
     "defaultMessage": "Files",
     "description": "[Survey Answers List] Table Files column label."
-  },
-  "EEZTNG": {
-    "defaultMessage": "First User Setup",
-    "description": "[Setup Modal] Title."
   },
   "EEsDeJ": {
     "defaultMessage": "Dashboard",
@@ -202,10 +186,6 @@
   "h4+RiJ": {
     "defaultMessage": "Update",
     "description": "[User Editor] Form update button label."
-  },
-  "hWoiIQ": {
-    "defaultMessage": "Your new password (again)",
-    "description": "[Setup Modal] Password repeat input label."
   },
   "i0E602": {
     "defaultMessage": "Submit",

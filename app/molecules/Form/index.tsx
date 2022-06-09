@@ -44,7 +44,7 @@ function FormComponent({
   )
 }
 
-FormComponent.name = 'Form'
+FormComponent.displayName = 'Form'
 
 export const Form = Object.assign(FormComponent, {
   Checkbox,

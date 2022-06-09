@@ -327,7 +327,7 @@ export function Editable<P = Common.AnyProps>({
 
     formatMenuAnchorRef.current = event.currentTarget
 
-    setImmediate(() => {
+    setTimeout(() => {
       if (!isMounted()) {
         return
       }
@@ -384,7 +384,7 @@ export function Editable<P = Common.AnyProps>({
       return
     }
 
-    setImmediate(detectUnselection)
+    setTimeout(detectUnselection)
   }, [isFormatMenuOpen])
 
   useEffect(() => {
