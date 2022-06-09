@@ -7,19 +7,14 @@ import Survey from '@api/models/Survey'
 import SurveyEntry from '@api/models/SurveyEntry'
 import { USER_ROLE } from '@common/constants'
 import { handleError } from '@common/helpers/handleError'
-import aws from 'aws-sdk'
 import { Document } from 'mongoose'
 import multer from 'multer'
-import multerS3 from 'multer-s3'
 import path from 'path'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const { AWS_S3_BUCKET, AWS_S3_REGION } = process.env
 const ASSETS_PATH = path.join(process.cwd(), 'assets')
 const ERROR_PATH = 'pages/api/legacy/surveys/[id]/index.ts'
-
-const s3 = new aws.S3()
 
 function runMiddleware(req: NextApiRequest, res: NextApiResponse, middleware: any) {
   return new Promise((resolve, reject) => {
@@ -135,52 +130,24 @@ async function LegacySurveyEndpoint(req: NextApiRequest, res: NextApiResponse) {
           callback(null, false)
         }
 
-        const multerStorage =
-          AWS_S3_BUCKET !== undefined
-            ? multerS3({
-                acl: 'public-read',
-                bucket: AWS_S3_BUCKET,
-                contentType: multerS3.AUTO_CONTENT_TYPE,
-                key: (req, file: Express.Multer.File, callback) => {
-                  const fileExtension = getFileExtension(file.originalname)
-                  const fileName = `${id}-${type}.${fileExtension}`
-                  const publicUrl = `https://${AWS_S3_BUCKET}.s3.${AWS_S3_REGION}.amazonaws.com/${fileName}`
+        const multerStorage = multer.diskStorage({
+          destination: ASSETS_PATH,
+          filename: (_, file: Express.Multer.File, callback) => {
+            const fileExtension = getFileExtension(file.originalname)
+            const fileName = `${id}-${type}.${fileExtension}`
+            const publicUrl = `/api/asset/${fileName}`
 
-                  maybeSurvey.set({
-                    props: {
-                      ...(maybeSurvey.toObject() as any).props,
-                      [`${type}Url`]: publicUrl,
-                    },
-                  })
-                  maybeSurvey.save(() => {
-                    callback(null, fileName)
-                  })
-                },
-                metadata: (req, file: Express.Multer.File, callback) => {
-                  callback(null, {
-                    fieldName: file.fieldname,
-                  })
-                },
-                s3,
-              })
-            : multer.diskStorage({
-                destination: ASSETS_PATH,
-                filename: (_, file: Express.Multer.File, callback) => {
-                  const fileExtension = getFileExtension(file.originalname)
-                  const fileName = `${id}-${type}.${fileExtension}`
-                  const publicUrl = `/api/asset/${fileName}`
-
-                  maybeSurvey.set({
-                    props: {
-                      ...(maybeSurvey.toObject() as any).props,
-                      [`${type}Url`]: publicUrl,
-                    },
-                  })
-                  maybeSurvey.save(() => {
-                    callback(null, fileName)
-                  })
-                },
-              })
+            maybeSurvey.set({
+              props: {
+                ...(maybeSurvey.toObject() as any).props,
+                [`${type}Url`]: publicUrl,
+              },
+            })
+            maybeSurvey.save(() => {
+              callback(null, fileName)
+            })
+          },
+        })
 
         const upload = multer({
           fileFilter: multerFileFilter,

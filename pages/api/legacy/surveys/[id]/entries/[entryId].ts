@@ -7,20 +7,15 @@ import Survey from '@api/models/Survey'
 import SurveyEntry from '@api/models/SurveyEntry'
 import { USER_ROLE } from '@common/constants'
 import { handleError } from '@common/helpers/handleError'
-import aws from 'aws-sdk'
 import mongoose, { Document } from 'mongoose'
 import multer from 'multer'
-import multerS3 from 'multer-s3'
 import path from 'path'
 
 import type { RequestWithPrisma } from '@api/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const { AWS_S3_BUCKET, AWS_S3_REGION } = process.env
 const ASSETS_PATH = path.join(process.cwd(), 'assets', 'private')
 const ERROR_PATH = 'pages/api/legacy/surveys/[id]/entries/[entryId].ts'
-
-const s3 = new aws.S3()
 
 function runMiddleware(req: NextApiRequest, res: NextApiResponse, middleware: any) {
   return new Promise((resolve, reject) => {
@@ -160,56 +155,26 @@ async function SurveyEntryEndpoint(req: RequestWithPrisma, res: NextApiResponse)
           callback(null, false)
         }
 
-        const multerStorage =
-          AWS_S3_BUCKET !== undefined
-            ? multerS3({
-                acl: 'private',
-                bucket: AWS_S3_BUCKET,
-                contentType: multerS3.AUTO_CONTENT_TYPE,
-                key: (req, file: Express.Multer.File, callback) => {
-                  const fileId = new mongoose.Types.ObjectId().toString()
-                  const fileExtension = getFileExtension(file.originalname)
-                  const fileName = `${fileId}.${fileExtension}`
-                  const publicUrl = `https://${AWS_S3_BUCKET}.s3.${AWS_S3_REGION}.amazonaws.com/${fileName}`
+        const multerStorage = multer.diskStorage({
+          destination: ASSETS_PATH,
+          filename: (_, file: Express.Multer.File, callback) => {
+            const fileId = new mongoose.Types.ObjectId().toString()
+            const fileExtension = getFileExtension(file.originalname)
+            const fileName = `${fileId}.${fileExtension}`
+            const publicUrl = `/api/asset/private/${fileName}`
 
-                  ;(maybeSurveyEntry as any).files.push({
-                    _id: fileId,
-                    mimeType: file.mimetype,
-                    question,
-                    type,
-                    url: publicUrl,
-                  })
-                  maybeSurveyEntry.save(() => {
-                    callback(null, fileName)
-                  })
-                },
-                metadata: (req, file: Express.Multer.File, callback) => {
-                  callback(null, {
-                    fieldName: file.fieldname,
-                  })
-                },
-                s3,
-              })
-            : multer.diskStorage({
-                destination: ASSETS_PATH,
-                filename: (_, file: Express.Multer.File, callback) => {
-                  const fileId = new mongoose.Types.ObjectId().toString()
-                  const fileExtension = getFileExtension(file.originalname)
-                  const fileName = `${fileId}.${fileExtension}`
-                  const publicUrl = `/api/asset/private/${fileName}`
-
-                  ;(maybeSurveyEntry as any).files.push({
-                    _id: fileId,
-                    mimeType: file.mimetype,
-                    question,
-                    type,
-                    url: publicUrl,
-                  })
-                  maybeSurveyEntry.save(() => {
-                    callback(null, fileName)
-                  })
-                },
-              })
+            ;(maybeSurveyEntry as any).files.push({
+              _id: fileId,
+              mimeType: file.mimetype,
+              question,
+              type,
+              url: publicUrl,
+            })
+            maybeSurveyEntry.save(() => {
+              callback(null, fileName)
+            })
+          },
+        })
 
         const upload = multer({
           fileFilter: multerFileFilter,
