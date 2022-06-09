@@ -8,7 +8,7 @@
 /scripts/*
 !/scripts/build/postbuild.sh
 !/scripts/build/prestart.sh
-!/scripts/db/migrate.js
+!/scripts/db/migrate.ts
 
 /.dockerignore
 /.env
