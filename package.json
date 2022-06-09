@@ -90,7 +90,7 @@
     "@swc/core": "1.2.171",
     "@swc/jest": "0.2.21",
     "@types/glob": "7.2.0",
-    "@types/jest": "27.4.1",
+    "@types/jest": "28.1.1",
     "@types/ramda": "0.28.13",
     "@types/styled-components": "5.1.15",
     "@types/zxcvbn": "4.4.1",
@@ -105,7 +105,7 @@
     "fast-glob": "3.2.11",
     "glob": "7.2.0",
     "husky": "8.0.0",
-    "jest": "27.5.1",
+    "jest": "28.1.1",
     "nodemon": "2.0.14",
     "prettier": "2.0.0"
   },
