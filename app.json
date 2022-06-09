@@ -1,0 +1,38 @@
+{
+  "name": "Tell Me",
+  "description": "An awesome open source survey management system.",
+  "keywords": [],
+  "logo": "https://raw.githubusercontent.com/betagouv/tell-me/main/public/favicon.png",
+  "repository": "https://github.com/betagouv/tell-me",
+  "success_url": "/",
+  "website": "https://www.tell-me.org",
+  "env": {
+    "NODE_ENV": {
+      "description": "Application environment (don't change the default value).",
+      "value": "production"
+    },
+    "EDDSA_PRIVATE_KEY": {
+      "description": "EdDSA Private Key used to sign JWTs.",
+      "generator": "secret"
+    },
+    "NEXT_PUBLIC_EDDSA_PUBLIC_KEY": {
+      "description": "EdDSA Public Key used to verify JWTs.",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
+  "addons": ["heroku-postgresql", "papertrail"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "./scripts/build/postdeploy.sh"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "tell-me",
-  "description": "An awesome open source survey generator.",
+  "description": "An awesome open source survey management system.",
   "version": "0.0.0",
   "license": "AGPL-3.0",
   "private": true,
@@ -97,6 +97,7 @@
     "codecov": "3.8.3",
     "concurrently": "6.3.0",
     "cross-env": "7.0.3",
+    "dotenv-cli": "5.1.0",
     "envinfo": "7.8.1",
     "eslint": "8.0.0",
     "eslint-config-airbnb": "19.0.4",

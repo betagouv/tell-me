@@ -17,7 +17,7 @@
 
 ---
 
-> An awesome open source survey generator.
+> An awesome open source survey management system.
 
 ⚠️ _Work and documentation in progress!_
 
@@ -59,7 +59,7 @@ Both part are dockerized in order to ease deployment on any hosting configuratio
 
 #### Heroku
 
-_In progress._
+[![Deploy Tell Me to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/betagouv/tell-me/tree/ivan/ci-heroku-add-one-click-deployment-button)
 
 #### Scaling
 
