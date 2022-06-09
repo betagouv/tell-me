@@ -79,10 +79,6 @@
     "defaultMessage": "Files",
     "description": "[Survey Answers List] Table Files column label."
   },
-  "E/vx8U": {
-    "defaultMessage": "Thank You message",
-    "description": "[Survey Settings] Form thank you message textarea label."
-  },
   "EEZTNG": {
     "defaultMessage": "First User Setup",
     "description": "[Setup Modal] Title."
@@ -122,10 +118,6 @@
   "KahMf6": {
     "defaultMessage": "Email",
     "description": "[Personal Access Tokens List] Table Email column label."
-  },
-  "N68/ff": {
-    "defaultMessage": "Slug",
-    "description": "[Survey Settings] Form slug input label."
   },
   "NIzhyl": {
     "defaultMessage": "New personal access token",
@@ -175,17 +167,9 @@
     "defaultMessage": "Your email",
     "description": "[Signup Modal] Email input label."
   },
-  "YbP4R+": {
-    "defaultMessage": "Survey Settings",
-    "description": "[Survey Settings] Page title."
-  },
   "YsRqXk": {
     "defaultMessage": "Export as CSV",
     "description": "[Survey Answers List] Export answers in CSV format button label."
-  },
-  "YzeZvW": {
-    "defaultMessage": "Published",
-    "description": "[Survey Settings] Form published checkbox label."
   },
   "ZxR2Ts": {
     "defaultMessage": "Survey Answers",
@@ -198,10 +182,6 @@
   "bVPj59": {
     "defaultMessage": "Delete this personal access token",
     "description": "[Personal Access Tokens List] Table row deletion button label."
-  },
-  "bdTRI9": {
-    "defaultMessage": "Update",
-    "description": "[Survey Settings] Form update button label."
   },
   "bkZg0U": {
     "defaultMessage": "Refresh Tokens",
@@ -275,10 +255,6 @@
     "defaultMessage": "Update",
     "description": "[My Settings] Form update button label."
   },
-  "pglohm": {
-    "defaultMessage": "Title",
-    "description": "[Survey Settings] Form title input label."
-  },
   "q5x9RM": {
     "defaultMessage": "Sign Up",
     "description": "[Signup Modal] Submit button label."
@@ -302,10 +278,6 @@
   "ugMu4J": {
     "defaultMessage": "Email",
     "description": "[Login Modal] Form email input label."
-  },
-  "vaW853": {
-    "defaultMessage": "Thank you for your interest in helping our project!",
-    "description": "[Survey Settings] Form thank you message textarea placeholder."
   },
   "wHB27C": {
     "defaultMessage": "Log In",

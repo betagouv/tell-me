@@ -59,16 +59,6 @@ const MainMenu = styled.div`
   }
 `
 
-const MenuTitle = styled.p`
-  border-top: 1px solid ${p => p.theme.color.body.white};
-  color: ${p => p.theme.color.body.white};
-  font-size: 80%;
-  font-weight: 500;
-  margin: ${p => p.theme.padding.layout.large} 0 0;
-  opacity: 0.35;
-  padding: ${p => p.theme.padding.layout.large} 0;
-`
-
 const UserMenu = styled.div`
   display: flex;
   justify-content: space-between;
@@ -165,20 +155,6 @@ export default function Menu() {
                 </VerticalMenu.Item>
               </>
             )}
-          </VerticalMenu>
-
-          <MenuTitle>LEGACY</MenuTitle>
-
-          <VerticalMenu>
-            <VerticalMenu.Item isActive={router.pathname.startsWith('/legacy/surveys')} isDark>
-              <Link href="/legacy/surveys">
-                {intl.formatMessage({
-                  defaultMessage: 'Surveys',
-                  description: '[Sidebar Main Menu] Surveys label.',
-                  id: 'D6/Uxz',
-                })}
-              </Link>
-            </VerticalMenu.Item>
           </VerticalMenu>
         </MainMenu>
       </div>

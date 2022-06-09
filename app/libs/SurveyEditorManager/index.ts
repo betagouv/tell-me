@@ -202,7 +202,7 @@ export default class SurveyEditorManager {
     this.changeBlockValueAt(this.focusedBlockIndex, newValue)
   }
 
-  public changeFocusedBlockProps(newProps: Api.Model.Survey.BlockPropsLegacy): void {
+  public changeFocusedBlockProps(newProps: Partial<Block>): void {
     if (!this.isFocused) {
       return
     }

@@ -1,5 +1,5 @@
-import { USER_ROLE } from '@common/constants'
 import { handleError } from '@common/helpers/handleError'
+import { UserRole } from '@prisma/client'
 import dayjs from 'dayjs'
 import { getUser } from 'nexauth'
 
@@ -13,7 +13,7 @@ const ERROR_PATH = 'api/middlewares/withAuth/handler()'
 export async function handleAuth(
   req: RequestWithPrisma,
   res: NextApiResponse,
-  allowedRoles = [USER_ROLE.ADMINISTRATOR],
+  allowedRoles: UserRole[] = [UserRole.ADMINISTRATOR],
   isPublic: boolean = false,
 ) {
   let userId: string
