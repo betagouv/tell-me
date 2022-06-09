@@ -44,7 +44,7 @@
     "better-prop-types": "1.0.0",
     "bhala": "3.0.4",
     "cuid": "2.1.8",
-    "dayjs": "1.10.7",
+    "dayjs": "1.11.3",
     "dotenv": "16.0.1",
     "formik": "2.2.9",
     "fs-extra": "10.0.0",
