@@ -76,7 +76,13 @@ export default function SetupModal({ onDone }) {
         })}
       </Title>
 
-      <Form autoComplete onSubmit={confirmPasswordAndSignup} validate={validateForm} validationSchema={FormSchema}>
+      <Form
+        autoComplete="autoComplete"
+        initialValues={{}}
+        onSubmit={confirmPasswordAndSignup}
+        validate={validateForm}
+        validationSchema={FormSchema}
+      >
         <Field>
           <Form.Input
             autoComplete="email"

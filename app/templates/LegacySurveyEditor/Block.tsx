@@ -1,7 +1,7 @@
+import { SURVEY_BLOCK_TYPE } from '@common/constants'
 import BetterPropTypes from 'better-prop-types'
 import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
 
-import { SURVEY_BLOCK_TYPE } from '../../../common/constants'
 import hashCode from '../../helpers/hashCode'
 import LegacySurveyManagerBlock from '../../libs/LegacySurveyManager/Block'
 import LegacyEditable from '../../molecules/LegacyEditable'

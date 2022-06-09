@@ -1,13 +1,13 @@
+import { handleError } from '@common/helpers/handleError'
 import { PrismaClient } from '@prisma/client'
-import { NextApiResponse } from 'next'
 
-import handleError from '../helpers/handleError'
-import { HandlerWithPrisma, RequestWithPrisma } from '../types'
+import type { RequestWithPrisma } from '../types'
+import type { NextApiResponse } from 'next'
 
 function withPrismaSingleton() {
   let prismaInstance: Common.Nullable<PrismaClient> = null
 
-  return function withPrisma(handler: HandlerWithPrisma | any) {
+  return function withPrisma(handler: any) {
     const handlerWithPrisma = async (req: RequestWithPrisma, res: NextApiResponse) => {
       try {
         if (prismaInstance === null) {

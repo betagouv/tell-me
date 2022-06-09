@@ -31,16 +31,14 @@ services:
     build:
       context: .
       args:
-        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@localhost:5432/${POSTGRE_DATABASE}?schema=public
-        DB_URL: mongodb://${MONGO_USER_USERNAME}:${MONGO_USER_PASSWORD}@db_legacy:27017/${MONGO_DATABASE}
-        NEXT_PUBLIC_RSA_PUBLIC_KEY: ${NEXT_PUBLIC_RSA_PUBLIC_KEY}
+        NEXT_PUBLIC_EDDSA_PUBLIC_KEY: ${NEXT_PUBLIC_EDDSA_PUBLIC_KEY}
     restart: always
     environment:
         DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@localhost:5432/${POSTGRE_DATABASE}?schema=public
         # Legacy MongoDB database URL
         DB_URL: mongodb://${MONGO_USER_USERNAME}:${MONGO_USER_PASSWORD}@db_legacy:27017/${MONGO_DATABASE}
         DEBUG: ${DEBUG}
-        RSA_PRIVATE_KEY: ${RSA_PRIVATE_KEY}
+        EDDSA_PRIVATE_KEY: ${EDDSA_PRIVATE_KEY}
     ports:
       - ${PORT}:3000
     depends_on:

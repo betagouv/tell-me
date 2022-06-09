@@ -1,5 +1,6 @@
+import { handleError } from '@common/helpers/handleError'
+
 import generateTellMeTreeChildren from './generateTellMeTreeChildren'
-import handleError from './handleError'
 
 import type TellMe from '../../schemas/1.0.0/TellMe'
 import type SurveyEditorManagerBlock from '../libs/SurveyEditorManager/Block'
@@ -18,13 +19,13 @@ export default function generateTellMeTree({
   }): TellMe.Tree | undefined {
   try {
     const children = generateTellMeTreeChildren(blocks)
-    const data = {
+    const data: TellMe.Tree['data'] = {
       backgroundUri,
       coverUri,
       language,
       logoUri,
       title,
-      version: '1.0.0' as '1.0.0',
+      version: '1.0.0',
     }
 
     return {

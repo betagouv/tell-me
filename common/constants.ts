@@ -2,7 +2,12 @@
 
 import * as R from 'ramda'
 
-const listDeepObjectValues = input => R.pipe(R.values, R.map(R.values), R.flatten)(input)
+const listDeepObjectValues = (input: Record<string, Record<string, string>>) => {
+  const values = R.values(input)
+  const deepValues = R.map(R.values)(values)
+
+  return R.flatten(deepValues)
+}
 
 export const LOCALE = {
   en: 'en-US',

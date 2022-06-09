@@ -1,139 +1,101 @@
-import { Options } from 'ky'
+import ky from 'ky'
+import { useAuth } from 'nexauth/client'
 import { useMemo } from 'react'
 
-import handleError from '../../helpers/handleError'
-import isJwtExpired from '../../helpers/isJwtExpired'
-import useAuth from '../../hooks/useAuth'
-import api from '../../libs/api'
 import Context from './Context'
-import { ApiContext } from './types'
+
+import type { ApiContext } from './types'
+
+const API_BASE_URL = '/api'
 
 export default function withApi(Component) {
   return function WithApi(pageProps) {
-    const { refreshSessionToken, state: authState } = useAuth()
+    const auth = useAuth<Common.Auth.User>()
 
-    const { sessionToken } = authState
-    if (sessionToken !== null) {
-      api.updateAuthorizationBearer(sessionToken)
-    }
+    const providerValue: ApiContext = useMemo(() => {
+      const kyIntance = ky.create({
+        headers: {
+          authorization: `Bearer ${auth.state.accessToken}`,
+        },
+        prefixUrl: API_BASE_URL,
+      })
 
-    const handleApiError = async (
-      err: any,
-      method: string,
-      path: string,
-      options?: Options,
-    ): Promise<Common.Nullable<Api.ResponseBody>> => {
-      if (err?.response === undefined) {
-        handleError(err, `components/hocs/WithApi#${method}()`)
+      const get = async path => {
+        try {
+          const body = await kyIntance.get(path).json<Api.ResponseBody>()
 
-        return null
-      }
-
-      if (err.response.status === 401 && authState.isAuthenticated) {
-        if (authState.sessionToken === null) {
+          return body
+        } catch (err) {
           return null
         }
+      }
 
-        const isSessionTokenExpired = await isJwtExpired(authState.sessionToken)
-        if (!isSessionTokenExpired) {
-          return null
+      const post = async (path, data) => {
+        const options = {
+          json: data,
         }
 
-        const sessionToken = await refreshSessionToken()
-        if (sessionToken === null) {
+        try {
+          const body = await kyIntance.post(path, options).json<Api.ResponseBody>()
+
+          return body
+        } catch (err) {
           return null
         }
-
-        api.updateAuthorizationBearer(sessionToken)
-        const body = await api.ky[method](path, options).json()
-
-        return body as Api.ResponseBody
       }
 
-      const body = await err.response.json()
+      const patch = async (path, data) => {
+        const options = {
+          json: data,
+        }
 
-      return body
-    }
+        try {
+          const body = await kyIntance.patch(path, options).json<Api.ResponseBody>()
 
-    const get: ApiContext['get'] = async path => {
-      try {
-        const body = await api.ky.get(path).json<Api.ResponseBody>()
-
-        return body
-      } catch (err) {
-        return handleApiError(err, 'get', path)
-      }
-    }
-
-    const post: ApiContext['post'] = async (path, data) => {
-      const options = {
-        json: data,
+          return body
+        } catch (err) {
+          return null
+        }
       }
 
-      try {
-        const body = await api.ky.post(path, options).json<Api.ResponseBody>()
+      const put = async (path, formData) => {
+        const options = {
+          body: formData,
+        }
 
-        return body
-      } catch (err) {
-        return handleApiError(err, 'post', path)
-      }
-    }
+        try {
+          const body = await kyIntance.put(path, options).json<Api.ResponseBody>()
 
-    const patch: ApiContext['patch'] = async (path, data) => {
-      const options = {
-        json: data,
-      }
-
-      try {
-        const body = await api.ky.patch(path, options).json<Api.ResponseBody>()
-
-        return body
-      } catch (err) {
-        return handleApiError(err, 'patch', path)
-      }
-    }
-
-    const put: ApiContext['put'] = async (path, formData) => {
-      const options = {
-        body: formData,
+          return body
+        } catch (err) {
+          return null
+        }
       }
 
-      try {
-        const body = await api.ky.put(path, options).json<Api.ResponseBody>()
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const _delete = async path => {
+        const request = kyIntance.delete(path)
 
-        return body
-      } catch (err) {
-        return handleApiError(err, 'put', path)
+        try {
+          const body = await request.json<Api.ResponseBody>()
+
+          return body
+        } catch (err) {
+          return null
+        }
       }
-    }
 
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const _delete: ApiContext['delete'] = async path => {
-      const request = api.ky.delete(path)
-
-      try {
-        const body = await request.json<Api.ResponseBody>()
-
-        return body
-      } catch (err) {
-        return handleApiError(err, 'delete', path)
-      }
-    }
-
-    const providerValue: ApiContext = useMemo(
-      () => ({
+      return {
         delete: _delete,
         get,
         patch,
         post,
         put,
-      }),
-      [_delete, get, patch, post, put],
-    )
+      }
+    }, [auth.state.accessToken])
 
     return (
       <Context.Provider value={providerValue}>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
       </Context.Provider>
     )
