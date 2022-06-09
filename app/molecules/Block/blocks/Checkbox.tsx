@@ -54,7 +54,7 @@ const Editable = styled.div<any>`
   }
 `
 
-const Checkbox = forwardRef(({ ...props }, ref) => (
+export const Checkbox = forwardRef(({ ...props }, ref) => (
   <Label>
     <Square />
 
@@ -63,5 +63,3 @@ const Checkbox = forwardRef(({ ...props }, ref) => (
 ))
 
 Checkbox.displayName = 'Checkbox'
-
-export default Checkbox

@@ -1,6 +1,6 @@
-import ApiError from '@api/libs/ApiError'
-import withAuth from '@api/middlewares/withAuth'
-import withPrisma from '@api/middlewares/withPrisma'
+import { ApiError } from '@api/libs/ApiError'
+import { withAuth } from '@api/middlewares/withAuth'
+import { withPrisma } from '@api/middlewares/withPrisma'
 import { handleError } from '@common/helpers/handleError'
 import { UserRole } from '@prisma/client'
 import * as R from 'ramda'
@@ -37,7 +37,7 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return
+      return undefined as never
 
     case 'PATCH':
       try {
@@ -87,7 +87,7 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return
+      return undefined as never
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)

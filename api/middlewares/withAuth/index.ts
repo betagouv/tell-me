@@ -5,7 +5,7 @@ import { handleAuth } from './handleAuth'
 import type { RequestWithPrisma } from '../../types'
 import type { NextApiHandler, NextApiResponse } from 'next'
 
-export default function withAuth(
+export function withAuth(
   handler: NextApiHandler,
   allowedRoles: UserRole[] = [UserRole.ADMINISTRATOR],
   isPublic = false,
@@ -21,3 +21,5 @@ export default function withAuth(
 
   return handlerWithAuth
 }
+
+export { handleAuth }

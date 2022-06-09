@@ -2,7 +2,7 @@ import { Select } from '@singularity/core'
 import { CornerDownRight } from 'react-feather'
 import styled from 'styled-components'
 
-import SurveyEditorManagerBlock from '../../libs/SurveyEditorManager/Block'
+import type { Block as SurveyEditorManagerBlock } from '../../libs/SurveyEditorManager/Block'
 
 const Box = styled.div`
   display: flex;

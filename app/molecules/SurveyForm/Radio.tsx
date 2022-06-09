@@ -1,10 +1,9 @@
 import { Radio as SuiRadio } from '@singularity/core'
-import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 
-import SurveyField from '../../atoms/SurveyField'
+import { SurveyField } from '../../atoms/SurveyField'
 
-export default function Radio({ countLetter, label, name, value }) {
+export function Radio({ countLetter, label, name, value }) {
   const { handleChange, values } = useFormikContext<any>()
 
   const isChecked = value === values[name]
@@ -22,11 +21,4 @@ export default function Radio({ countLetter, label, name, value }) {
       />
     </SurveyField>
   )
-}
-
-Radio.propTypes = {
-  countLetter: BetterPropTypes.string.isRequired,
-  label: BetterPropTypes.string.isRequired,
-  name: BetterPropTypes.string.isRequired,
-  value: BetterPropTypes.string.isRequired,
 }

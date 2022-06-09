@@ -36,8 +36,6 @@ const StyledTextarea = styled.div<any>`
   }
 `
 
-const Textarea = forwardRef(({ ...props }, ref) => <StyledTextarea ref={ref} as="div" {...props} />)
+export const Textarea = forwardRef(({ ...props }, ref) => <StyledTextarea ref={ref} as="div" {...props} />)
 
 Textarea.displayName = 'Textarea'
-
-export default Textarea

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const SurveyHeader = styled.header<{
+export const SurveyHeader = styled.header<{
   url?: Common.Nullable<string>
 }>`
   background-color: #b8d8d8;
@@ -11,5 +11,3 @@ const SurveyHeader = styled.header<{
   height: 10rem;
   width: 100%;
 `
-
-export default SurveyHeader

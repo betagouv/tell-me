@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-namespace TellMe {
+export namespace TellMe {
   interface Block {
     data: BlockData
     /** The unique block ID. */
@@ -204,5 +204,3 @@ namespace TellMe {
     version: '1.0.0'
   }
 }
-
-export default TellMe

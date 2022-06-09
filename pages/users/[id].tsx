@@ -1,9 +1,9 @@
-import AdminHeader from '@app/atoms/AdminHeader'
-import Field from '@app/atoms/Field'
-import Title from '@app/atoms/Title'
-import useApi from '@app/hooks/useApi'
-import useIsMounted from '@app/hooks/useIsMounted'
-import Form from '@app/molecules/Form'
+import { AdminHeader } from '@app/atoms/AdminHeader'
+import { Field } from '@app/atoms/Field'
+import { Title } from '@app/atoms/Title'
+import { useApi } from '@app/hooks/useApi'
+import { useIsMounted } from '@app/hooks/useIsMounted'
+import { Form } from '@app/molecules/Form'
 import { Loader } from '@app/molecules/Loader'
 import { USER_ROLE_LABEL } from '@common/constants'
 import { Card } from '@singularity/core'
@@ -20,7 +20,7 @@ const FormSchema = Yup.object().shape({
 
 const ROLE_AS_OPTIONS = R.pipe(
   R.toPairs,
-  R.map(([value, label]) => ({ label, value })),
+  R.map(([value, label]: [string, string]) => ({ label, value })),
 )(USER_ROLE_LABEL)
 
 export default function UserEditorPage() {
@@ -91,7 +91,7 @@ export default function UserEditorPage() {
 
       <Card>
         <Form initialValues={initialValues} onSubmit={updateUserAndGoBack} validationSchema={FormSchema}>
-          <Form.Input
+          <Form.TextInput
             label={intl.formatMessage({
               defaultMessage: 'First Name',
               description: '[User Editor] Form First Name input label.',
@@ -101,7 +101,7 @@ export default function UserEditorPage() {
           />
 
           <Field>
-            <Form.Input
+            <Form.TextInput
               label={intl.formatMessage({
                 defaultMessage: 'Last Name',
                 description: '[User Editor] Form Last Name input label.',
@@ -112,7 +112,7 @@ export default function UserEditorPage() {
           </Field>
 
           <Field>
-            <Form.Input
+            <Form.TextInput
               label={intl.formatMessage({
                 defaultMessage: 'Email',
                 description: '[User Editor] Form Email input label.',

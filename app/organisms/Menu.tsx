@@ -78,7 +78,7 @@ const UserMenu = styled.div`
   }
 `
 
-export default function Menu() {
+export function Menu() {
   const auth = useAuth<Common.Auth.User>()
   const intl = useIntl()
   const router = useRouter()

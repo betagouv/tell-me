@@ -2,7 +2,7 @@ import TellMeDataSchema from '@schemas/1.0.0/TellMe.Data.schema.json'
 
 import { ajv } from '../libs/ajv'
 
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 type ValidationError = {
   instancePath: string
@@ -12,9 +12,7 @@ type ValidationError = {
   schemaPath: string
 }
 
-export async function validateTellMeData(
-  data: TellMe.Data,
-): Promise<{
+export async function validateTellMeData(data: TellMe.Data): Promise<{
   errors: ValidationError[]
   isValid: boolean
 }> {

@@ -1,5 +1,5 @@
-import isReady from '@api/helpers/isReady'
-import ApiError from '@api/libs/ApiError'
+import { isReady } from '@api/helpers/isReady'
+import { ApiError } from '@api/libs/ApiError'
 import { handleError } from '@common/helpers/handleError'
 
 import type { RequestWithAuth } from '@api/types'

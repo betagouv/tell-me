@@ -3,7 +3,7 @@ import { UserRole } from '@prisma/client'
 import dayjs from 'dayjs'
 import { getUser } from 'nexauth'
 
-import ApiError from '../../libs/ApiError'
+import { ApiError } from '../../libs/ApiError'
 
 import type { RequestWithAuth, RequestWithPrisma } from '../../types'
 import type { NextApiResponse } from 'next'

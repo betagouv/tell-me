@@ -1,10 +1,9 @@
 import { TextInput as SuiTextInput } from '@singularity/core'
-import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 
-import SurveyField from '../../atoms/SurveyField'
+import { SurveyField } from '../../atoms/SurveyField'
 
-export default function TextInput({ label, name }) {
+export function TextInput({ label, name }) {
   const { handleChange, values } = useFormikContext<any>()
 
   const value = values[name]
@@ -14,9 +13,4 @@ export default function TextInput({ label, name }) {
       <SuiTextInput defaultValue={value} name={name} onChange={handleChange} placeholder={label} type="text" />
     </SurveyField>
   )
-}
-
-TextInput.propTypes = {
-  label: BetterPropTypes.string.isRequired,
-  name: BetterPropTypes.string.isRequired,
 }

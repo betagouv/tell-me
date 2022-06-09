@@ -1,6 +1,6 @@
 import { validateTellMeTree } from '../validateTellMeTree'
 
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 describe('common/helpers/validateTellMeTree()', () => {
   test('with a valid tree', async () => {

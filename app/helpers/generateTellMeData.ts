@@ -1,11 +1,11 @@
 import { handleError } from '@common/helpers/handleError'
 
-import generateTellMeDataAnswers from './generateTellMeDataAnswers'
+import { generateTellMeDataAnswers } from './generateTellMeDataAnswers'
 
-import type TellMe from '../../schemas/1.0.0/TellMe'
-import type SurveyEditorManager from '../libs/SurveyEditorManager'
+import type { SurveyEditorManager } from '../libs/SurveyEditorManager'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
-export default function generateTellMeData({
+export function generateTellMeData({
   entries,
   formData,
   id,

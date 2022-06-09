@@ -1,6 +1,6 @@
-import ApiError from '@api/libs/ApiError'
+import { ApiError } from '@api/libs/ApiError'
 import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
-import withPrisma from '@api/middlewares/withPrisma'
+import { withPrisma } from '@api/middlewares/withPrisma'
 import { handleError } from '@common/helpers/handleError'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
 import { validateTellMeTree } from '@common/helpers/validateTellMeTree'
@@ -33,7 +33,7 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
         handleError(err, ERROR_PATH, res)
       }
 
-      return
+      return undefined as never
 
     case 'POST':
       try {
@@ -69,7 +69,7 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
         handleError(err, ERROR_PATH, res)
       }
 
-      return
+      return undefined as never
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)

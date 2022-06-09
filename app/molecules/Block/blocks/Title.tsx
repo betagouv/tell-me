@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import SurveyTitle from '../../../atoms/SurveyTitle'
+import { SurveyTitle } from '../../../atoms/SurveyTitle'
 
 export const Title = styled(SurveyTitle)`
   :empty::before {

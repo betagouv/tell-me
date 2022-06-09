@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Title from '../../atoms/Title'
+import { Title } from '../../atoms/Title'
 import { Loader as Spinner } from '../Loader'
 
 const Header = styled.div`

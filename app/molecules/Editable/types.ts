@@ -1,4 +1,4 @@
-import type TellMe from '../../../schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { Properties } from 'hast'
 
 export type BlockMenuItem = {

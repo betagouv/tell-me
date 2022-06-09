@@ -2,10 +2,10 @@ import { handleError } from '@common/helpers/handleError'
 
 import { isInputBlock, isQuestionBlock } from '../libs/SurveyEditorManager/helpers'
 
-import type TellMe from '../../schemas/1.0.0/TellMe'
-import type SurveyEditorManagerBlock from '../libs/SurveyEditorManager/Block'
+import type { Block as SurveyEditorManagerBlock } from '../libs/SurveyEditorManager/Block'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
-export default function generateTellMeTreeChildren(blocks: SurveyEditorManagerBlock[]): TellMe.TreeBlock[] {
+export function generateTellMeTreeChildren(blocks: SurveyEditorManagerBlock[]): TellMe.TreeBlock[] {
   try {
     return blocks.map(block => {
       switch (true) {

@@ -1,11 +1,11 @@
-import getLocale from '@common/helpers/getLocale'
+import { getLocale } from '@common/helpers/getLocale'
 import { handleError } from '@common/helpers/handleError'
 import { useCallback, useMemo, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
 import enUS from '../../../locales/compiled/en-US.json'
 import frFR from '../../../locales/compiled/fr-FR.json'
-import Context from './Context'
+import { Context } from './Context'
 import { LocalizationContext } from './types'
 
 export function loadLocaleMessages(locale: string) {

@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import { EffectCallback, useEffect } from 'react'
 
-import * as usePrevious from './usePrevious'
+import { usePrevious } from './usePrevious'
 
 /**
  * Run an effect observing object-dependencies equivalence (instead of equality) updates.
@@ -14,8 +14,8 @@ import * as usePrevious from './usePrevious'
  *
  * **⚠️ Support only POJO-like arrays and objects!**
  */
-export default function useEquivalenceEffect(effect: EffectCallback, depedencies: any[]): void {
-  const prevDependencies = usePrevious.default(depedencies)
+export function useEquivalenceEffect(effect: EffectCallback, depedencies: any[]): void {
+  const prevDependencies = usePrevious(depedencies)
 
   useEffect(() => {
     // Deep-equivalence check

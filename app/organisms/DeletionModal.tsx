@@ -1,6 +1,4 @@
 import { Button, Dialog } from '@singularity/core'
-import BetterPropTypes from 'better-prop-types'
-import { FunctionComponent } from 'react'
 import { useIntl } from 'react-intl'
 
 type DeletionModalProps = {
@@ -8,7 +6,7 @@ type DeletionModalProps = {
   onCancel: () => void
   onConfirm: () => void
 }
-const DeletionModal: FunctionComponent<DeletionModalProps> = ({ entity, onCancel, onConfirm }) => {
+export function DeletionModal({ entity, onCancel, onConfirm }: DeletionModalProps) {
   const intl = useIntl()
 
   return (
@@ -59,11 +57,3 @@ const DeletionModal: FunctionComponent<DeletionModalProps> = ({ entity, onCancel
     </Dialog>
   )
 }
-
-DeletionModal.propTypes = {
-  entity: BetterPropTypes.string.isRequired,
-  onCancel: BetterPropTypes.func.isRequired,
-  onConfirm: BetterPropTypes.func.isRequired,
-}
-
-export default DeletionModal

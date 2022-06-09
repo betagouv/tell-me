@@ -15,10 +15,7 @@ export type BlockMenuReducerAction = {
   }
   type: 'selectPrevious' | 'selectNext' | 'updateQuery'
 }
-export default function blockMenuReducer(
-  state: BlockMenuReducerState,
-  action: BlockMenuReducerAction,
-): BlockMenuReducerState {
+export function blockMenuReducer(state: BlockMenuReducerState, action: BlockMenuReducerAction): BlockMenuReducerState {
   switch (action.type) {
     case 'selectPrevious':
       return {

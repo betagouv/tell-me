@@ -1,27 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import BetterPropTypes from 'better-prop-types'
-import {
-  FunctionComponent,
-  KeyboardEvent,
-  MouseEvent,
-  MutableRefObject,
-  Reducer,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react'
+import { useEffect, useReducer, useRef, useState } from 'react'
 
-import getRandomId from '../../helpers/getRandomId'
-import useIsMounted from '../../hooks/useIsMounted'
-import usePrevious from '../../hooks/usePrevious'
-import BlockMenu from './BlockMenu'
-import blockMenuReducer, { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
-import FormatMenu, { FormatMenuProps } from './FormatMenu'
+import { getRandomId } from '../../helpers/getRandomId'
+import { useIsMounted } from '../../hooks/useIsMounted'
+import { usePrevious } from '../../hooks/usePrevious'
+import { BlockMenu } from './BlockMenu'
+import { blockMenuReducer } from './blockMenuReducer'
+import { FormatMenu } from './FormatMenu'
 
+import type { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
+import type { FormatMenuProps } from './FormatMenu'
 import type { BlockMenuItem } from './types'
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
+import type { KeyboardEvent, MouseEvent, MutableRefObject, Reducer } from 'react'
 
 const MENU_ITEMS: BlockMenuItem[] = [
   {
@@ -69,23 +61,20 @@ const MENU_ITEMS: BlockMenuItem[] = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-type EditableComponent<P = Common.AnyProps> = FunctionComponent<
-  P & {
-    as: any
-    defaultValue?: string
-    isFocused?: boolean
-    isRichText?: boolean
-    onBackspaceKeyDown?: () => void
-    onChange: (newValue: string) => void
-    onChangeType?: (newType: TellMe.BlockType) => void
-    onDownKeyDown?: () => void
-    onEnterKeyDown?: () => void
-    onFocus?: () => void
-    onUpKeyDown?: () => void
-  }
->
-
-const Editable: EditableComponent = ({
+type EditableProps<P = Common.AnyProps> = P & {
+  as: any
+  defaultValue?: string
+  isFocused?: boolean
+  isRichText?: boolean
+  onBackspaceKeyDown?: Common.Nullable<() => void>
+  onChange: (newValue: string) => void
+  onChangeType?: Common.Nullable<(newType: TellMe.BlockType) => void>
+  onDownKeyDown?: Common.Nullable<() => void>
+  onEnterKeyDown?: Common.Nullable<() => void>
+  onFocus?: Common.Nullable<() => void>
+  onUpKeyDown?: Common.Nullable<() => void>
+}
+export function Editable<P = Common.AnyProps>({
   as,
   defaultValue = '',
   isFocused = false,
@@ -98,7 +87,7 @@ const Editable: EditableComponent = ({
   onFocus = null,
   onUpKeyDown = null,
   ...props
-}) => {
+}: EditableProps<P>) {
   const [blockMenuState, dispatchToBlockMenu] = useReducer<Reducer<BlockMenuReducerState, BlockMenuReducerAction>>(
     blockMenuReducer,
     {
@@ -439,29 +428,12 @@ const Editable: EditableComponent = ({
       {isBlockMenuOpen && innerRef.current !== null && (
         <BlockMenu
           anchor={innerRef.current}
+          defaultSelectedIndex={blockMenuState.selectedIndex}
           items={blockMenuState.visibleItems}
           onCancel={closeBlockMenu}
           onSelect={handleBlockTypeChange}
-          selectedIndex={blockMenuState.selectedIndex}
         />
       )}
     </div>
   )
 }
-
-Editable.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  as: BetterPropTypes.any.isRequired,
-  defaultValue: BetterPropTypes.string,
-  isFocused: BetterPropTypes.bool,
-  isRichText: BetterPropTypes.bool,
-  onBackspaceKeyDown: BetterPropTypes.func,
-  onChange: BetterPropTypes.func.isRequired,
-  onChangeType: BetterPropTypes.func,
-  onDownKeyDown: BetterPropTypes.func,
-  onEnterKeyDown: BetterPropTypes.func,
-  onFocus: BetterPropTypes.func,
-  onUpKeyDown: BetterPropTypes.func,
-}
-
-export default Editable

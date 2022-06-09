@@ -1,10 +1,10 @@
-import generateTellMeTree from '@app/helpers/generateTellMeTree'
-import hashCode from '@app/helpers/hashCode'
-import useApi from '@app/hooks/useApi'
-import useEquivalenceEffect from '@app/hooks/useEquivalenceEffect'
-import SurveyEditorManager from '@app/libs/SurveyEditorManager/index'
+import { generateTellMeTree } from '@app/helpers/generateTellMeTree'
+import { hashCode } from '@app/helpers/hashCode'
+import { useApi } from '@app/hooks/useApi'
+import { useEquivalenceEffect } from '@app/hooks/useEquivalenceEffect'
+import { SurveyEditorManager } from '@app/libs/SurveyEditorManager/index'
 import { Block, Header, Loader, Logo, Title } from '@app/molecules/Block'
-import Editable from '@app/molecules/Editable/index'
+import { Editable } from '@app/molecules/Editable/index'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -12,7 +12,7 @@ import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 
 import type { Survey } from '@prisma/client'
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 const TitleRow = styled.div`
   padding: 0 13rem 0 7rem;
