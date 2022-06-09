@@ -12,7 +12,6 @@
   },
   "scripts": {
     "build": "next build",
-    "postbuild": "sh ./scripts/build/postbuild.sh",
     "db:migrate": "prisma migrate deploy",
     "db:migrate:legacy": "node --experimental-specifier-resolution=node --loader ts-node/esm -r dotenv/config ./scripts/db/migrate.ts",
     "debug": "envinfo --binaries --system --markdown",
@@ -77,6 +76,7 @@
     "rehype-stringify": "9.0.2",
     "slugify": "1.6.3",
     "styled-components": "5.3.3",
+    "ts-node": "10.8.1",
     "typescript": "4.7.3",
     "unified": "10.1.1",
     "unist-builder": "3.0.0",
@@ -113,8 +113,7 @@
     "husky": "8.0.0",
     "jest": "27.5.1",
     "nodemon": "2.0.14",
-    "prettier": "2.0.0",
-    "ts-node": "10.8.1"
+    "prettier": "2.0.0"
   },
   "prettier": "@ivangabriele/prettier-config"
 }
