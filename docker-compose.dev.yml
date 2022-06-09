@@ -4,7 +4,3 @@ services:
   db:
     ports:
       - ${POSTGRE_PORT}:5432
-
-  db_legacy:
-    ports:
-      - ${MONGO_PORT}:27017

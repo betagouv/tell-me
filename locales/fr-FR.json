@@ -79,10 +79,6 @@
     "defaultMessage": "Fichiers",
     "description": "[Survey Answers List] Table Files column label."
   },
-  "E/vx8U": {
-    "defaultMessage": "Message de remerciement",
-    "description": "[Survey Settings] Form thank you message textarea label."
-  },
   "EEZTNG": {
     "defaultMessage": "Installation",
     "description": "[Setup Modal] Title."
@@ -122,10 +118,6 @@
   "KahMf6": {
     "defaultMessage": "Email",
     "description": "[Personal Access Tokens List] Table Email column label."
-  },
-  "N68/ff": {
-    "defaultMessage": "Slug",
-    "description": "[Survey Settings] Form slug input label."
   },
   "NIzhyl": {
     "defaultMessage": "Nouveau jeton d’accès personnel",
@@ -175,17 +167,9 @@
     "defaultMessage": "Votre email",
     "description": "[Signup Modal] Email input label."
   },
-  "YbP4R+": {
-    "defaultMessage": "Préférences du formulaire",
-    "description": "[Survey Settings] Page title."
-  },
   "YsRqXk": {
     "defaultMessage": "Exporter en CSV",
     "description": "[Survey Answers List] Export answers in CSV format button label."
-  },
-  "YzeZvW": {
-    "defaultMessage": "Publié",
-    "description": "[Survey Settings] Form published checkbox label."
   },
   "ZxR2Ts": {
     "defaultMessage": "Réponses au questionnaire",
@@ -198,10 +182,6 @@
   "bVPj59": {
     "defaultMessage": "Supprimer cet jeton d’accès personnel",
     "description": "[Personal Access Tokens List] Table row deletion button label."
-  },
-  "bdTRI9": {
-    "defaultMessage": "Mettre à jour",
-    "description": "[Survey Settings] Form update button label."
   },
   "bkZg0U": {
     "defaultMessage": "Jetons de rafraîchissement",
@@ -275,10 +255,6 @@
     "defaultMessage": "Mettre à jour",
     "description": "[My Settings] Form update button label."
   },
-  "pglohm": {
-    "defaultMessage": "Titre",
-    "description": "[Survey Settings] Form title input label."
-  },
   "q5x9RM": {
     "defaultMessage": "S’inscrire",
     "description": "[Signup Modal] Submit button label."
@@ -302,10 +278,6 @@
   "ugMu4J": {
     "defaultMessage": "Email",
     "description": "[Login Modal] Form email input label."
-  },
-  "vaW853": {
-    "defaultMessage": "Merci de votre intérêt pour notre projet !",
-    "description": "[Survey Settings] Form thank you message textarea placeholder."
   },
   "wHB27C": {
     "defaultMessage": "Connexion",

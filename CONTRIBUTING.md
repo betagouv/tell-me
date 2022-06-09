@@ -50,7 +50,7 @@ yarn dev:docker
 yarn dev
 ```
 
-This will run MongoDB within a Docker container via Docker Compose and run the webapp which should then be available at
+This will run PostgreSQL within a Docker container via Docker Compose and run the webapp which should then be available at
 [http://localhost:3000](http://localhost:3000).
 
 It will also watch for file changes and automatically re-hydrate the webapp on the go.

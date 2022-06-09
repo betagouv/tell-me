@@ -2,7 +2,6 @@ import AdminHeader from '@app/atoms/AdminHeader'
 import Title from '@app/atoms/Title'
 import generateTellMeTree from '@app/helpers/generateTellMeTree'
 import getRandomId from '@app/helpers/getRandomId'
-import replaceMongoIds from '@app/helpers/replaceMongoIds'
 import slugify from '@app/helpers/slugify'
 import useApi from '@app/hooks/useApi'
 import useIsMounted from '@app/hooks/useIsMounted'
@@ -12,11 +11,11 @@ import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import cuid from 'cuid'
 import { useRouter } from 'next/router'
 import * as R from 'ramda'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 
-import type { Prisma } from '@prisma/client'
+import type { Prisma, Survey } from '@prisma/client'
 import type TellMe from '@schemas/1.0.0/TellMe'
 
 export default function SurveyListPage() {
@@ -101,29 +100,56 @@ export default function SurveyListPage() {
     router.push(`/surveys/${id}`)
   }
 
-  const goToSurveyConfig = async id => {
+  const goToSurveyConfig = async (id: string) => {
     router.push(`/surveys/${id}/config`)
   }
 
-  const duplicateSurvey = async id => {
-    const maybeGetBody = await api.get(`surveys/${id}`)
-    if (maybeGetBody === null || maybeGetBody.hasError) {
+  const duplicateSurvey = useCallback(async (sourceSurveyId: string) => {
+    const response = await api.get<
+      Omit<Survey, 'data' | 'tree'> & {
+        data: TellMe.Data
+        tree: TellMe.Tree
+      }
+    >(`surveys/${sourceSurveyId}`)
+    if (response === null || response.hasError) {
       return
     }
 
-    const newSurvey = replaceMongoIds(maybeGetBody.data)
-    newSurvey.title = `Copy #${getRandomId()} of ${newSurvey.title}`
-    newSurvey.slug = slugify(newSurvey.title)
+    const sourceSurvey = response.data
+    const id = cuid()
+    const title = `Copy #${getRandomId()} of ${sourceSurvey.tree.data.title}`
+    const slug = slugify(title)
+    const tree: any = {
+      ...sourceSurvey.tree,
+      data: {
+        ...sourceSurvey.tree.data,
+        title,
+      },
+      id,
+    } as TellMe.Tree
+    const data: any = {
+      ...sourceSurvey.data,
+      entries: [],
+      id,
+      title,
+    } as TellMe.Data
 
-    const maybePostBody = await api.post('survey', newSurvey)
+    const destinationSurvey: Prisma.SurveyCreateInput = {
+      data,
+      id,
+      slug,
+      tree,
+    }
+
+    const maybePostBody = await api.post('survey', destinationSurvey)
     if (maybePostBody === null || maybePostBody.hasError) {
       return
     }
 
-    router.push(`/surveys/${newSurvey._id}`)
-  }
+    router.push(`/surveys/${id}`)
+  }, [])
 
-  const deleteSurvey = async id => {
+  const deleteSurvey = async (id: string) => {
     await api.delete(`surveys/${id}`)
 
     await loadSurveys()

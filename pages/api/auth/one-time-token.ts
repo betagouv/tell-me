@@ -1,4 +1,5 @@
 import { handleError } from '@common/helpers/handleError'
+import { UserRole } from '@prisma/client'
 import crypto from 'crypto'
 import dayjs from 'dayjs'
 import { NextApiHandler, NextApiResponse } from 'next'
@@ -6,10 +7,8 @@ import { promisify } from 'util'
 
 import ApiError from '../../../api/libs/ApiError'
 import withAuth from '../../../api/middlewares/withAuth'
-import withMongoose from '../../../api/middlewares/withMongoose'
 import withPrisma from '../../../api/middlewares/withPrisma'
 import { RequestWithAuth } from '../../../api/types'
-import { USER_ROLE } from '../../../common/constants'
 
 const ERROR_PATH = 'pages/api/auth/AuthOneTimeTokenEndpoint()'
 const { NODE_ENV } = process.env
@@ -58,11 +57,5 @@ async function AuthOneTimeTokenEndpoint(req: RequestWithAuth, res: NextApiRespon
 }
 
 export default withPrisma(
-  withMongoose(
-    withAuth(AuthOneTimeTokenEndpoint as NextApiHandler, [
-      USER_ROLE.ADMINISTRATOR,
-      USER_ROLE.MANAGER,
-      USER_ROLE.VIEWER,
-    ]),
-  ),
+  withAuth(AuthOneTimeTokenEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER]),
 )

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
-import Context from '../hocs/wLocalization/Context'
-import { LocalizationContext } from '../hocs/wLocalization/types'
+import Context from '../hocs/withLocalization/Context'
+import { LocalizationContext } from '../hocs/withLocalization/types'
 
 /**
  * Provide API requesting helpers.

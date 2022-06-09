@@ -12,20 +12,6 @@ services:
     volumes:
       - postgre-data:/var/lib/postgresql/data
 
-  db_legacy:
-    container_name: tell_me_db_legacy
-    image: mongo:4
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
-      MONGO_INITDB_USER_USERNAME: ${MONGO_USER_USERNAME}
-      MONGO_INITDB_USER_PASSWORD: ${MONGO_USER_PASSWORD}
-    volumes:
-      - ./scripts/docker/init_mongo.sh:/docker-entrypoint-initdb.d/init_mongo.sh
-      - mongodb-data:/data/db
-
   app:
     container_name: tell_me_app
     build:
@@ -35,16 +21,12 @@ services:
     restart: always
     environment:
         DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@localhost:5432/${POSTGRE_DATABASE}?schema=public
-        # Legacy MongoDB database URL
-        DB_URL: mongodb://${MONGO_USER_USERNAME}:${MONGO_USER_PASSWORD}@db_legacy:27017/${MONGO_DATABASE}
         EDDSA_PRIVATE_KEY: ${EDDSA_PRIVATE_KEY}
         NEXT_PUBLIC_EDDSA_PUBLIC_KEY: ${NEXT_PUBLIC_EDDSA_PUBLIC_KEY}
     ports:
       - ${PORT}:3000
     depends_on:
       - db
-      - db_legacy
 
 volumes:
-  mongodb-data:
   postgre-data:
