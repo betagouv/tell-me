@@ -54,7 +54,7 @@ function SurveyFormComponent({ children, initialValues, onChange, onSubmit, vali
   )
 }
 
-SurveyFormComponent.name = 'SurveyForm'
+SurveyFormComponent.displayName = 'SurveyForm'
 
 export const SurveyForm = Object.assign(SurveyFormComponent, {
   Checkbox,

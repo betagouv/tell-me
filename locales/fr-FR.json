@@ -51,21 +51,9 @@
     "defaultMessage": "Confirmation de suppression",
     "description": "[Delete Confirmation Dialog] Title."
   },
-  "A2n/eF": {
-    "defaultMessage": "Mot de passe",
-    "description": "[Setup Modal] Password input label."
-  },
-  "Ci9rPk": {
-    "defaultMessage": "Créer",
-    "description": "[Setup Modal] Submit button label."
-  },
   "D6/Uxz": {
     "defaultMessage": "Questionnaires",
     "description": "[Sidebar Main Menu] Surveys label."
-  },
-  "DPOyaV": {
-    "defaultMessage": "Email",
-    "description": "[Setup Modal] Email input label."
   },
   "Db1A9P": {
     "defaultMessage": "Étiquette",
@@ -78,10 +66,6 @@
   "Dus0RS": {
     "defaultMessage": "Fichiers",
     "description": "[Survey Answers List] Table Files column label."
-  },
-  "EEZTNG": {
-    "defaultMessage": "Installation",
-    "description": "[Setup Modal] Title."
   },
   "EEsDeJ": {
     "defaultMessage": "Tableau de bord",
@@ -202,10 +186,6 @@
   "h4+RiJ": {
     "defaultMessage": "Mettre à jour",
     "description": "[User Editor] Form update button label."
-  },
-  "hWoiIQ": {
-    "defaultMessage": "Répêtez votre nouveau mot de passe",
-    "description": "[Setup Modal] Password repeat input label."
   },
   "i0E602": {
     "defaultMessage": "Envoyer",
