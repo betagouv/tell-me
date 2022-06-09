@@ -31,6 +31,7 @@ Then run:
 git clone https://github.com/betagouv/tell-me.git
 cd tell-me
 yarn
+yarn dev:setup
 yarn dev:docker
 yarn db:migrate
 ```

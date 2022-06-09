@@ -1,0 +1,5 @@
+{
+  "extends": ".",
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.cjs"],
+  "exclude": [".next/*", "node_modules/*"]
+}

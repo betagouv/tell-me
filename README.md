@@ -84,7 +84,6 @@ Wherever you run Let Me, the app can't run without those environment variables s
 
 Wherever you run Let Me, the app can't run without those environment variables set:
 
-- `DEBUG`: **Default: `"false"`.** Set to `"true"` to enable debug features (including in production).
 - `PORT`: **Default: `3000`.** Port on which the app will run. Most PaaS providers automatically set this environment variable, in which case you should't override it.
 
 ### PaaS & hosting providers
