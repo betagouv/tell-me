@@ -31,6 +31,7 @@ services:
     build:
       context: .
       args:
+        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@localhost:5432/${POSTGRE_DATABASE}?schema=public
         NEXT_PUBLIC_EDDSA_PUBLIC_KEY: ${NEXT_PUBLIC_EDDSA_PUBLIC_KEY}
     restart: always
     environment:
