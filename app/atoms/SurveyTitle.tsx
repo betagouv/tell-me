@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
-const SurveyTitle = styled.h1`
+export const SurveyTitle = styled.h1`
   font-size: 150%;
   font-weight: 700;
 `
-
-export default SurveyTitle

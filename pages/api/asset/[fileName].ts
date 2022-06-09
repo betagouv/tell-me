@@ -1,4 +1,4 @@
-import ApiError from '@api/libs/ApiError'
+import { ApiError } from '@api/libs/ApiError'
 import { handleError } from '@common/helpers/handleError'
 import fs, { promises as fsAsync } from 'fs'
 import { pathExists } from 'fs-extra'

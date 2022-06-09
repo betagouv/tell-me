@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const AdminHeader = styled.div`
+export const AdminHeader = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -11,5 +11,3 @@ const AdminHeader = styled.div`
     line-height: 1;
   }
 `
-
-export default AdminHeader

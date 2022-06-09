@@ -1,22 +1,22 @@
 import { prisma } from '@api/libs/prisma'
-import SurveyHeader from '@app/atoms/SurveyHeader'
-import SurveyLogo from '@app/atoms/SurveyLogo'
-import SurveyQuestion from '@app/atoms/SurveyQuestion'
-import SurveyTitle from '@app/atoms/SurveyTitle'
-import useApi from '@app/hooks/useApi'
-import SurveyEditorManager from '@app/libs/SurveyEditorManager'
+import { SurveyHeader } from '@app/atoms/SurveyHeader'
+import { SurveyLogo } from '@app/atoms/SurveyLogo'
+import { SurveyQuestion } from '@app/atoms/SurveyQuestion'
+import { SurveyTitle } from '@app/atoms/SurveyTitle'
+import { useApi } from '@app/hooks/useApi'
+import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
 import { Loader } from '@app/molecules/Loader'
-import SurveyForm from '@app/molecules/SurveyForm'
-import Blocks from '@app/templates/Survey/Blocks'
-import getDayjs from '@common/helpers/getDayjs'
+import { SurveyForm } from '@app/molecules/SurveyForm'
+import { Blocks } from '@app/templates/Survey/Blocks'
+import { getDayjs } from '@common/helpers/getDayjs'
 import { Survey } from '@prisma/client'
 import { useMemo, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 import * as Yup from 'yup'
 
-import type Block from '@app/libs/SurveyEditorManager/Block'
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { Block } from '@app/libs/SurveyEditorManager/Block'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { NextPageContext } from 'next'
 
 const Page = styled.div`
@@ -69,7 +69,7 @@ type PublicSurveyPageProps = {
 }
 export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
   const $dayJs = useRef(getDayjs())
-  const $surveyEditorManager = useRef(new SurveyEditorManager(((survey.tree as unknown) as TellMe.Tree).children))
+  const $surveyEditorManager = useRef(new SurveyEditorManager((survey.tree as unknown as TellMe.Tree).children))
   const [isLoading, setIsLoading] = useState(false)
   const [initialValues] = useState({})
   const [isSent, setIsSent] = useState(false)
@@ -108,12 +108,12 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
 
   return (
     <Page>
-      <SurveyHeader url={((survey.tree as unknown) as TellMe.Tree).data.coverUri} />
+      <SurveyHeader url={(survey.tree as unknown as TellMe.Tree).data.coverUri} />
 
       <Container>
-        <SurveyLogo url={((survey.tree as unknown) as TellMe.Tree).data.logoUri} />
+        <SurveyLogo url={(survey.tree as unknown as TellMe.Tree).data.logoUri} />
 
-        <SurveyTitle>{((survey.tree as unknown) as TellMe.Tree).data.title}</SurveyTitle>
+        <SurveyTitle>{(survey.tree as unknown as TellMe.Tree).data.title}</SurveyTitle>
 
         {isLoading && <Loader />}
 

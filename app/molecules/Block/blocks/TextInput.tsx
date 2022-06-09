@@ -36,8 +36,6 @@ const StyledTextInput = styled.div<any>`
   }
 `
 
-const TextInput = forwardRef(({ ...props }, ref) => <StyledTextInput ref={ref} {...props} />)
+export const TextInput = forwardRef(({ ...props }, ref) => <StyledTextInput ref={ref} {...props} />)
 
 TextInput.displayName = 'TextInput'
-
-export default TextInput

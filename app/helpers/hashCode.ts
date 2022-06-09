@@ -3,7 +3,7 @@
 /**
  * @see https://stackoverflow.com/a/7616484/2736233
  */
-export default function hashCode(text: string): number {
+export function hashCode(text: string): number {
   let hash = 0
 
   if (text.length === 0) {

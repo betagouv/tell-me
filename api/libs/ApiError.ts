@@ -1,4 +1,4 @@
-export default class ApiError extends Error {
+export class ApiError extends Error {
   public isExposed: boolean
   public status: number
 

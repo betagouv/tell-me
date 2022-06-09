@@ -1,8 +1,7 @@
-import BetterPropTypes from 'better-prop-types'
 import { useRef } from 'react'
 import styled from 'styled-components'
 
-import SurveyHeader from '../../atoms/SurveyHeader'
+import { SurveyHeader } from '../../atoms/SurveyHeader'
 
 const StyledSurveyHeader = styled<any>(SurveyHeader)`
   display: flex;
@@ -51,9 +50,4 @@ export function Header({ onChange, url }: HeaderProps) {
       <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
     </StyledSurveyHeader>
   )
-}
-
-Header.propTypes = {
-  onChange: BetterPropTypes.func.isRequired,
-  url: BetterPropTypes.string,
 }

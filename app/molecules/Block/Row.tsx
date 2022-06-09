@@ -1,9 +1,7 @@
-import BetterPropTypes from 'better-prop-types'
-import { FunctionComponent } from 'react'
 import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
 import styled, { css } from 'styled-components'
 
-import SurveyEditorManagerBlock from '../../libs/SurveyEditorManager/Block'
+import type { Block as SurveyEditorManagerBlock } from '../../libs/SurveyEditorManager/Block'
 
 const Box = styled.div<any>`
   align-items: flex-start;
@@ -45,7 +43,7 @@ const Button = styled.div<any>`
           opacity: 0.65;
 
           :hover {
-            background-color: ${p => p.theme.color[p.accent].active};
+            background-color: ${p.theme.color[p.accent].active};
             opacity: 1;
           }
         `
@@ -83,7 +81,7 @@ type RowProps = {
   onToggleObligation: any
   onToggleVisibility: any
 }
-export const Row: FunctionComponent<RowProps> = ({
+export function Row({
   block,
   children,
   onCondition,
@@ -91,52 +89,44 @@ export const Row: FunctionComponent<RowProps> = ({
   onMove,
   onToggleObligation,
   onToggleVisibility,
-}) => (
-  <Box isQuestion={block.isQuestion}>
-    <Button accent="primary" className="Button">
-      <Move onClick={onMove} />
-    </Button>
+}: RowProps) {
+  return (
+    <Box isQuestion={block.isQuestion}>
+      <Button accent="primary" className="Button">
+        <Move onClick={onMove} />
+      </Button>
 
-    <Asterisk isVisible={block.isRequired}>*</Asterisk>
+      <Asterisk isVisible={block.isRequired}>*</Asterisk>
 
-    <Content isHidden={block.isHidden}>{children}</Content>
+      <Content isHidden={block.isHidden}>{children}</Content>
 
-    <Button
-      accent="secondary"
-      className="Button"
-      isDisabled={!block.isQuestion}
-      onClick={block.isQuestion ? onToggleObligation : undefined}
-    >
-      {block.isRequired ? <ShieldOff /> : <Shield />}
-    </Button>
-    <Button
-      accent="primary"
-      className="Button"
-      isDisabled={!block.isQuestion}
-      onClick={block.isQuestion ? onToggleVisibility : undefined}
-    >
-      {block.isHidden ? <Eye /> : <EyeOff />}
-    </Button>
-    <Button
-      accent="secondary"
-      className="Button"
-      isDisabled={!block.isCheckbox && !block.isChoice}
-      onClick={block.isCheckbox || block.isChoice ? onCondition : undefined}
-    >
-      <CornerDownRight />
-    </Button>
-    <Button accent="danger" className="Button" onClick={onDelete}>
-      <Trash />
-    </Button>
-  </Box>
-)
-
-Row.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  block: BetterPropTypes.any.isRequired,
-  onCondition: BetterPropTypes.func,
-  onDelete: BetterPropTypes.func.isRequired,
-  onMove: BetterPropTypes.func,
-  onToggleObligation: BetterPropTypes.func.isRequired,
-  onToggleVisibility: BetterPropTypes.func.isRequired,
+      <Button
+        accent="secondary"
+        className="Button"
+        isDisabled={!block.isQuestion}
+        onClick={block.isQuestion ? onToggleObligation : undefined}
+      >
+        {block.isRequired ? <ShieldOff /> : <Shield />}
+      </Button>
+      <Button
+        accent="primary"
+        className="Button"
+        isDisabled={!block.isQuestion}
+        onClick={block.isQuestion ? onToggleVisibility : undefined}
+      >
+        {block.isHidden ? <Eye /> : <EyeOff />}
+      </Button>
+      <Button
+        accent="secondary"
+        className="Button"
+        isDisabled={!block.isCheckbox && !block.isChoice}
+        onClick={block.isCheckbox || block.isChoice ? onCondition : undefined}
+      >
+        <CornerDownRight />
+      </Button>
+      <Button accent="danger" className="Button" onClick={onDelete}>
+        <Trash />
+      </Button>
+    </Box>
+  )
 }

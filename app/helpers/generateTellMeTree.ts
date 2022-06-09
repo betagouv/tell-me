@@ -1,11 +1,11 @@
 import { handleError } from '@common/helpers/handleError'
 
-import generateTellMeTreeChildren from './generateTellMeTreeChildren'
+import { generateTellMeTreeChildren } from './generateTellMeTreeChildren'
 
-import type TellMe from '../../schemas/1.0.0/TellMe'
-import type SurveyEditorManagerBlock from '../libs/SurveyEditorManager/Block'
+import type { Block as SurveyEditorManagerBlock } from '../libs/SurveyEditorManager/Block'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
-export default function generateTellMeTree({
+export function generateTellMeTree({
   backgroundUri,
   blocks,
   coverUri,

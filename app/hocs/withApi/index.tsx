@@ -2,13 +2,13 @@ import ky from 'ky'
 import { useAuth } from 'nexauth/client'
 import { useMemo } from 'react'
 
-import Context from './Context'
+import { Context } from './Context'
 
 import type { ApiContext } from './types'
 
 const API_BASE_URL = '/api'
 
-export default function withApi(Component) {
+export function withApi(Component) {
   return function WithApi(pageProps) {
     const auth = useAuth<Common.Auth.User>()
 
@@ -72,7 +72,7 @@ export default function withApi(Component) {
         }
       }
 
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+      // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
       const _delete = async path => {
         const request = kyIntance.delete(path)
 

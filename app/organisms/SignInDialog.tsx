@@ -7,7 +7,7 @@ import zxcvbn from 'zxcvbn'
 
 import { handleError } from '../../common/helpers/handleError'
 import { ButtonAsLink } from '../atoms/ButtonAsLink'
-import Form from '../molecules/Form'
+import { Form } from '../molecules/Form'
 
 import type { FormikHelpers } from 'formik'
 import type { ChangeEvent } from 'react'
@@ -168,7 +168,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
             </p>
 
             <Field>
-              <Form.Input
+              <Form.TextInput
                 autoComplete="email"
                 label={intl.formatMessage({
                   defaultMessage: 'Email',
@@ -180,7 +180,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
               />
             </Field>
             <Field>
-              <Form.Input
+              <Form.TextInput
                 autoComplete="current-password"
                 label={intl.formatMessage({
                   defaultMessage: 'Password',
@@ -233,7 +233,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
           </p>
 
           <Field>
-            <Form.Input
+            <Form.TextInput
               autoComplete="email"
               label={intl.formatMessage({
                 defaultMessage: 'Your email',
@@ -245,9 +245,9 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
             />
           </Field>
           <Field>
-            <Form.Input
+            <Form.TextInput
               autoComplete="new-password"
-              helper={passwordHelperText}
+              helper={passwordHelperText || undefined}
               label={intl.formatMessage({
                 defaultMessage: 'A new password',
                 description: '[Signup Modal] Password input label.',
@@ -259,7 +259,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
             />
           </Field>
           <Field>
-            <Form.Input
+            <Form.TextInput
               autoComplete="new-password"
               label={intl.formatMessage({
                 defaultMessage: 'Your new password (again)',

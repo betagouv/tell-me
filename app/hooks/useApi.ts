@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 
-import Context from '../hocs/withApi/Context'
+import { Context } from '../hocs/withApi/Context'
 import { ApiContext } from '../hocs/withApi/types'
 
 /**
  * Provide API requesting helpers.
  */
-export default function useApi(): ApiContext {
+export function useApi(): ApiContext {
   const contextValue = useContext(Context)
 
   return contextValue

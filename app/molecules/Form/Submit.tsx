@@ -1,7 +1,7 @@
 import { Button } from '@singularity/core'
 import { useFormikContext } from 'formik'
 
-export default function Submit({ children }) {
+export function Submit({ children }) {
   const { isSubmitting } = useFormikContext<any>()
 
   return (

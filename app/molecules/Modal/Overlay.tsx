@@ -8,6 +8,6 @@ const StyledOverlay = styled.div`
   padding: 2rem;
 `
 
-export default function Overlay({ children }) {
+export function Overlay({ children }) {
   return <StyledOverlay>{children}</StyledOverlay>
 }

@@ -1,7 +1,7 @@
 import { B } from 'bhala'
 import { NextApiResponse } from 'next'
 
-import ApiError from '../../api/libs/ApiError'
+import { ApiError } from '../../api/libs/ApiError'
 
 const getErrorConstructorName = (error: any) => {
   if (error === undefined || error.constructor === undefined) {

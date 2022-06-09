@@ -1,10 +1,9 @@
 import { FileInput as SuiFileInput } from '@singularity/core'
-import BetterPropTypes from 'better-prop-types'
 import { useFormikContext } from 'formik'
 
-import SurveyField from '../../atoms/SurveyField'
+import { SurveyField } from '../../atoms/SurveyField'
 
-export default function FileInput({ label, name }) {
+export function FileInput({ label, name }) {
   const { setFieldValue } = useFormikContext<any>()
 
   const updateFieldValue = async event => {
@@ -18,9 +17,4 @@ export default function FileInput({ label, name }) {
       <SuiFileInput name={name} onChange={updateFieldValue} placeholder={label} />
     </SurveyField>
   )
-}
-
-FileInput.propTypes = {
-  label: BetterPropTypes.string.isRequired,
-  name: BetterPropTypes.string.isRequired,
 }

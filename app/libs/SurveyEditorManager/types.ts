@@ -1,4 +1,4 @@
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 export type BlockConstructorOptions = {
   count?: number

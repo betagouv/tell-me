@@ -1,6 +1,5 @@
 import { Button, Dialog, TextInput } from '@singularity/core'
-import BetterPropTypes from 'better-prop-types'
-import { FunctionComponent, MutableRefObject, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Bold, Italic, Link, X } from 'react-feather'
 import { usePopper } from 'react-popper'
 import rehypeParse from 'rehype-parse'
@@ -8,6 +7,8 @@ import rehypeStringify from 'rehype-stringify'
 import styled from 'styled-components'
 import { unified } from 'unified'
 import unistUtilReduce from 'unist-util-reduce'
+
+import type { MutableRefObject } from 'react'
 
 const Box = styled.div<any>`
   align-items: center;
@@ -66,7 +67,7 @@ export type FormatMenuProps = {
   onChange: (newSource: string) => void
   source: string
 }
-const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, source }) => {
+export function FormatMenu({ anchor, onChange, source }: FormatMenuProps) {
   const linkInputRef = useRef<HTMLInputElement>(null)
   const transitorySourceRef = useRef(null) as MutableRefObject<Common.Nullable<string>>
   const [arrowElement, setArrowElement] = useState(null)
@@ -303,12 +304,3 @@ const FormatMenu: FunctionComponent<FormatMenuProps> = ({ anchor, onChange, sour
     </>
   )
 }
-
-FormatMenu.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  anchor: BetterPropTypes.any.isRequired,
-  onChange: BetterPropTypes.func.isRequired,
-  source: BetterPropTypes.string.isRequired,
-}
-
-export default FormatMenu

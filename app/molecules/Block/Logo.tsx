@@ -1,8 +1,7 @@
-import BetterPropTypes from 'better-prop-types'
 import { useRef } from 'react'
 import styled from 'styled-components'
 
-import SurveyLogo from '../../atoms/SurveyLogo'
+import { SurveyLogo } from '../../atoms/SurveyLogo'
 
 const StyledSurveyLogo = styled<any>(SurveyLogo)`
   min-height: 5rem;
@@ -60,9 +59,4 @@ export function Logo({ onChange, url }: LogoProps) {
       <StyledInput accept="image/png" onChange={updateSelectedFile} type="file" />
     </StyledSurveyLogo>
   )
-}
-
-Logo.propTypes = {
-  onChange: BetterPropTypes.func.isRequired,
-  url: BetterPropTypes.string,
 }

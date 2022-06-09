@@ -1,35 +1,22 @@
 import { handleError } from '@common/helpers/handleError'
-import { PrismaClient } from '@prisma/client'
+
+import { prisma } from '../libs/prisma'
 
 import type { RequestWithPrisma } from '../types'
 import type { NextApiResponse } from 'next'
 
-function withPrismaSingleton() {
-  let prismaInstance: Common.Nullable<PrismaClient> = null
+export function withPrisma(handler: any) {
+  const handlerWithPrisma = async (req: RequestWithPrisma, res: NextApiResponse) => {
+    try {
+      const reqWithPrisma: RequestWithPrisma = Object.assign(req, {
+        db: prisma,
+      })
 
-  return function withPrisma(handler: any) {
-    const handlerWithPrisma = async (req: RequestWithPrisma, res: NextApiResponse) => {
-      try {
-        if (prismaInstance === null) {
-          prismaInstance = new PrismaClient()
-        }
-
-        const reqWithPrisma: RequestWithPrisma = Object.assign(req, {
-          db: prismaInstance,
-        })
-
-        await handler(reqWithPrisma, res)
-      } catch (err) {
-        handleError(err, 'api/middlewares/withPrisma()', res)
-      } finally {
-        if (prismaInstance !== null) {
-          await prismaInstance.$disconnect()
-        }
-      }
+      await handler(reqWithPrisma, res)
+    } catch (err) {
+      handleError(err, 'api/middlewares/withPrisma()', res)
     }
-
-    return handlerWithPrisma
   }
-}
 
-export default withPrismaSingleton()
+  return handlerWithPrisma
+}

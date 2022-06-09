@@ -1,14 +1,13 @@
+import { ApiError } from '@api/libs/ApiError'
+import { withAuth } from '@api/middlewares/withAuth'
+import { withPrisma } from '@api/middlewares/withPrisma'
+import { RequestWithAuth } from '@api/types'
 import { handleError } from '@common/helpers/handleError'
 import { UserRole } from '@prisma/client'
 import crypto from 'crypto'
 import dayjs from 'dayjs'
 import { NextApiHandler, NextApiResponse } from 'next'
 import { promisify } from 'util'
-
-import ApiError from '../../../api/libs/ApiError'
-import withAuth from '../../../api/middlewares/withAuth'
-import withPrisma from '../../../api/middlewares/withPrisma'
-import { RequestWithAuth } from '../../../api/types'
 
 const ERROR_PATH = 'pages/api/auth/AuthOneTimeTokenEndpoint()'
 const { NODE_ENV } = process.env
@@ -49,7 +48,7 @@ async function AuthOneTimeTokenEndpoint(req: RequestWithAuth, res: NextApiRespon
         handleError(err, ERROR_PATH, res)
       }
 
-      return
+      return undefined as never
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)

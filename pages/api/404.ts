@@ -1,6 +1,5 @@
+import { ApiError } from '@api/libs/ApiError'
 import { handleError } from '@common/helpers/handleError'
-
-import ApiError from '../../api/libs/ApiError'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 

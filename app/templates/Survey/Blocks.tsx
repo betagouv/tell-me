@@ -3,12 +3,12 @@
 import { FormikContextType, useFormikContext } from 'formik'
 import styled from 'styled-components'
 
-import TellMe from '../../../schemas/1.0.0/TellMe'
-import SurveyParagraph from '../../atoms/SurveyParagraph'
-import SurveyQuestion from '../../atoms/SurveyQuestion'
-import SurveyForm from '../../molecules/SurveyForm'
+import { SurveyParagraph } from '../../atoms/SurveyParagraph'
+import { SurveyQuestion } from '../../atoms/SurveyQuestion'
+import { SurveyForm } from '../../molecules/SurveyForm'
 
-import type Block from '../../libs/SurveyEditorManager/Block'
+import type { Block as SurveyEditorManagerBlock } from '../../libs/SurveyEditorManager/Block'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 const Row = styled.div<{
   isQuestion: boolean
@@ -54,7 +54,7 @@ const SURVEY_BLOCK_TYPE_COMPONENT: Record<TellMe.BlockType, any> = {
   question: SurveyQuestion,
 }
 
-const renderBlocks = (formikContext: FormikContextType<any>, blocks: Block[]) => {
+const renderBlocks = (formikContext: FormikContextType<any>, blocks: SurveyEditorManagerBlock[]) => {
   const { errors, submitCount, values } = formikContext
 
   let indexableBlockIndex: Common.Nullable<number> = null
@@ -127,7 +127,7 @@ const renderBlocks = (formikContext: FormikContextType<any>, blocks: Block[]) =>
   }, [])
 }
 
-export default function Blocks({ blocks }) {
+export function Blocks({ blocks }) {
   const formikContext = useFormikContext()
 
   return <>{renderBlocks(formikContext, blocks)}</>

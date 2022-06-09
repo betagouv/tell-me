@@ -1,10 +1,10 @@
 import { handleError } from '@common/helpers/handleError'
 import * as R from 'ramda'
 
-import type TellMe from '../../schemas/1.0.0/TellMe'
-import type SurveyEditorManager from '../libs/SurveyEditorManager'
+import type { SurveyEditorManager } from '../libs/SurveyEditorManager'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
-export default function generateTellMeDataAnswers(
+export function generateTellMeDataAnswers(
   surveyManager: SurveyEditorManager,
   formData: Record<string, string | string[]>,
 ): TellMe.DataEntryAnswer[] {

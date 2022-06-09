@@ -1,4 +1,4 @@
-import Menu from '@app/organisms/Menu'
+import { Menu } from '@app/organisms/Menu'
 import styled from 'styled-components'
 
 const Page = styled.div`

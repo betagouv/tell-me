@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file, no-console */
 
-import ApiError from '@api/libs/ApiError'
+import { ApiError } from '@api/libs/ApiError'
 import { jest } from '@jest/globals'
 import { B } from 'bhala'
 
@@ -114,7 +114,7 @@ describe('common/helpers/handleError()', () => {
       NODE_ENV: 'development',
     }
 
-    handleError('An error.', `a/path`, (fakeRes as unknown) as NextApiResponse) as undefined
+    handleError('An error.', `a/path`, fakeRes as unknown as NextApiResponse) as undefined
 
     expect(spiedFakeResStatus).toHaveBeenCalledWith(500)
     expect(spiedFakeResJson).toHaveBeenCalledWith({
@@ -132,7 +132,7 @@ describe('common/helpers/handleError()', () => {
       NODE_ENV: 'development',
     }
 
-    handleError(new ApiError('An error.', 500), `a/path`, (fakeRes as unknown) as NextApiResponse) as undefined
+    handleError(new ApiError('An error.', 500), `a/path`, fakeRes as unknown as NextApiResponse) as undefined
 
     expect(spiedFakeResStatus).toHaveBeenCalledWith(500)
     expect(spiedFakeResJson).toHaveBeenCalledWith({
@@ -150,7 +150,7 @@ describe('common/helpers/handleError()', () => {
       NODE_ENV: 'development',
     }
 
-    handleError(new ApiError('An error.', 400, true), `a/path`, (fakeRes as unknown) as NextApiResponse) as undefined
+    handleError(new ApiError('An error.', 400, true), `a/path`, fakeRes as unknown as NextApiResponse) as undefined
 
     expect(spiedFakeResStatus).toHaveBeenCalledWith(400)
     expect(spiedFakeResJson).toHaveBeenCalledWith({
@@ -168,7 +168,7 @@ describe('common/helpers/handleError()', () => {
       NODE_ENV: 'production',
     }
 
-    handleError('An error.', `a/path`, (fakeRes as unknown) as NextApiResponse) as undefined
+    handleError('An error.', `a/path`, fakeRes as unknown as NextApiResponse) as undefined
 
     expect(spiedFakeResStatus).toHaveBeenCalledWith(400)
     expect(spiedFakeResJson).toHaveBeenCalledWith({
@@ -185,7 +185,7 @@ describe('common/helpers/handleError()', () => {
       NODE_ENV: 'production',
     }
 
-    handleError(new ApiError('An error.', 500), `a/path`, (fakeRes as unknown) as NextApiResponse) as undefined
+    handleError(new ApiError('An error.', 500), `a/path`, fakeRes as unknown as NextApiResponse) as undefined
 
     expect(spiedFakeResStatus).toHaveBeenCalledWith(400)
     expect(spiedFakeResJson).toHaveBeenCalledWith({
@@ -202,7 +202,7 @@ describe('common/helpers/handleError()', () => {
       NODE_ENV: 'production',
     }
 
-    handleError(new ApiError('An error.', 400, true), `a/path`, (fakeRes as unknown) as NextApiResponse) as undefined
+    handleError(new ApiError('An error.', 400, true), `a/path`, fakeRes as unknown as NextApiResponse) as undefined
 
     expect(spiedFakeResStatus).toHaveBeenCalledWith(400)
     expect(spiedFakeResJson).toHaveBeenCalledWith({

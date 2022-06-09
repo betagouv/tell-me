@@ -1,55 +1,55 @@
 import { getCountLetter, isInputBlock, isQuestionBlock } from './helpers'
 
-import type TellMe from '../../../schemas/1.0.0/TellMe'
 import type { BlockConstructorOptions } from './types'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
-export default class Block {
+export class Block {
   public readonly data: TellMe.BlockData
   public readonly id: string
   public readonly type: TellMe.BlockType
   public readonly value: string
 
-  private _count: Common.Nullable<number>
-  private _countLetter: Common.Nullable<string>
-  private _ifTruethyThenShowQuestionIds: string[]
-  private _ifTruethyThenShowQuestionsAsOptions: Common.App.SelectOption[]
-  private _isCheckbox: boolean
-  private _isChoice: boolean
-  private _isCountable: boolean
-  private _isHidden: boolean
-  private _isInput: boolean
-  private _isRequired: boolean
-  private _isQuestion: boolean
-  private _isUnlinked: boolean
-  private _questionId: Common.Nullable<string>
-  private _questionInputType: Common.Nullable<TellMe.BlockType>
+  #count: Common.Nullable<number>
+  #countLetter: Common.Nullable<string>
+  #ifTruethyThenShowQuestionIds: string[]
+  #ifTruethyThenShowQuestionsAsOptions: Common.App.SelectOption[]
+  #isCheckbox: boolean
+  #isChoice: boolean
+  #isCountable: boolean
+  #isHidden: boolean
+  #isInput: boolean
+  #isRequired: boolean
+  #isQuestion: boolean
+  #isUnlinked: boolean
+  #questionId: Common.Nullable<string>
+  #questionInputType: Common.Nullable<TellMe.BlockType>
 
   constructor(
     block: TellMe.TreeBlock,
     { count, ifTruethyThenShowQuestionsAsOptions, isCountable, questionId, questionInputType }: BlockConstructorOptions,
   ) {
-    this._count = isCountable && count !== undefined ? count : null
-    this._countLetter = isCountable && count !== undefined ? getCountLetter(count) : null
-    this._ifTruethyThenShowQuestionIds = (block.data as any).ifTruethyThenShowQuestionIds || []
-    this._isCheckbox = block.type === 'input_multiple_choice'
-    this._isChoice = block.type === 'input_choice'
+    this.#count = isCountable && count !== undefined ? count : null
+    this.#countLetter = isCountable && count !== undefined ? getCountLetter(count) : null
+    this.#ifTruethyThenShowQuestionIds = (block.data as any).ifTruethyThenShowQuestionIds || []
+    this.#isCheckbox = block.type === 'input_multiple_choice'
+    this.#isChoice = block.type === 'input_choice'
     /**
      * @description
      * If `true`, this means that this block is an multi-blocks input, most likely a radio or select-like one.
      */
-    this._isCountable = isCountable
-    this._isHidden = Boolean((block.data as any).isHidden)
-    this._isInput = isInputBlock(block)
-    this._isRequired = Boolean((block.data as any).isRequired)
-    this._isQuestion = isQuestionBlock(block)
+    this.#isCountable = isCountable
+    this.#isHidden = Boolean((block.data as any).isHidden)
+    this.#isInput = isInputBlock(block)
+    this.#isRequired = Boolean((block.data as any).isRequired)
+    this.#isQuestion = isQuestionBlock(block)
     /**
      * @description
      * If `true`, this means that this block is an input that can't be linked to a parent question block.
      */
-    this._isUnlinked = false
-    this._ifTruethyThenShowQuestionsAsOptions = ifTruethyThenShowQuestionsAsOptions || []
-    this._questionId = questionId
-    this._questionInputType = questionInputType || null
+    this.#isUnlinked = false
+    this.#ifTruethyThenShowQuestionsAsOptions = ifTruethyThenShowQuestionsAsOptions || []
+    this.#questionId = questionId
+    this.#questionInputType = questionInputType || null
 
     this.id = block.id
     this.data = block.data
@@ -58,74 +58,74 @@ export default class Block {
   }
 
   public get count() {
-    return this._count
+    return this.#count
   }
 
   public get countLetter() {
-    return this._countLetter
+    return this.#countLetter
   }
 
   public get ifTruethyThenShowQuestionIds() {
-    return this._ifTruethyThenShowQuestionIds
+    return this.#ifTruethyThenShowQuestionIds
   }
 
   public set ifTruethyThenShowQuestionIds(newValue: string[]) {
-    this._ifTruethyThenShowQuestionIds = newValue
+    this.#ifTruethyThenShowQuestionIds = newValue
   }
 
   public get ifTruethyThenShowQuestionsAsOptions() {
-    return this._ifTruethyThenShowQuestionsAsOptions
+    return this.#ifTruethyThenShowQuestionsAsOptions
   }
 
   public set ifTruethyThenShowQuestionsAsOptions(newOptions: Common.App.SelectOption[]) {
-    this._ifTruethyThenShowQuestionsAsOptions = newOptions
+    this.#ifTruethyThenShowQuestionsAsOptions = newOptions
   }
 
   public get isCheckbox() {
-    return this._isCheckbox
+    return this.#isCheckbox
   }
 
   public get isChoice() {
-    return this._isChoice
+    return this.#isChoice
   }
 
   public get isCountable() {
-    return this._isCountable
+    return this.#isCountable
   }
 
   public get isHidden() {
-    return this._isHidden
+    return this.#isHidden
   }
 
   public set isHidden(newValue: boolean) {
-    this._isHidden = newValue
+    this.#isHidden = newValue
   }
 
   public get isInput() {
-    return this._isInput
+    return this.#isInput
   }
 
   public get isRequired() {
-    return this._isRequired
+    return this.#isRequired
   }
 
   public set isRequired(newValue: boolean) {
-    this._isRequired = newValue
+    this.#isRequired = newValue
   }
 
   public get isQuestion() {
-    return this._isQuestion
+    return this.#isQuestion
   }
 
   public get isUnlinked() {
-    return this._isUnlinked
+    return this.#isUnlinked
   }
 
   public get questionId() {
-    return this._questionId
+    return this.#questionId
   }
 
   public get questionInputType() {
-    return this._questionInputType
+    return this.#questionInputType
   }
 }

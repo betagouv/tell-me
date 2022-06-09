@@ -1,4 +1,4 @@
-import { forwardRef, ForwardRefRenderFunction, HTMLAttributes } from 'react'
+import { forwardRef } from 'react'
 import { Upload } from 'react-feather'
 import styled from 'styled-components'
 
@@ -76,15 +76,11 @@ const Editable = styled.div`
   }
 `
 
-const FileInputWithRef: ForwardRefRenderFunction<HTMLDivElement, HTMLAttributes<any>> = (props, ref) => (
+export const FileInput = forwardRef<HTMLDivElement>((props, ref) => (
   <Box>
     <Upload />
     <Editable ref={ref} {...props} />
   </Box>
-)
-
-const FileInput = forwardRef(FileInputWithRef)
+))
 
 FileInput.displayName = 'FileInput'
-
-export default FileInput

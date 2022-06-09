@@ -1,9 +1,9 @@
-import AdminHeader from '@app/atoms/AdminHeader'
-import Field from '@app/atoms/Field'
-import Title from '@app/atoms/Title'
-import useApi from '@app/hooks/useApi'
-import useIsMounted from '@app/hooks/useIsMounted'
-import Form from '@app/molecules/Form'
+import { AdminHeader } from '@app/atoms/AdminHeader'
+import { Field } from '@app/atoms/Field'
+import { Title } from '@app/atoms/Title'
+import { useApi } from '@app/hooks/useApi'
+import { useIsMounted } from '@app/hooks/useIsMounted'
+import { Form } from '@app/molecules/Form'
 import { Loader } from '@app/molecules/Loader'
 import { Card } from '@singularity/core'
 import { FormikHelpers } from 'formik'
@@ -108,7 +108,7 @@ export default function PersonalAccessTokenEditorPage() {
 
       <Card>
         <Form initialValues={initialValues} onSubmit={updatePersonalAccessTokenAndGoBack} validationSchema={FormSchema}>
-          <Form.Input
+          <Form.TextInput
             isDisabled={isCreated}
             label={intl.formatMessage({
               defaultMessage: 'Label',
@@ -120,7 +120,7 @@ export default function PersonalAccessTokenEditorPage() {
 
           {isCreated && (
             <Field>
-              <Form.Input
+              <Form.TextInput
                 isDisabled
                 label={intl.formatMessage({
                   defaultMessage: 'Value',

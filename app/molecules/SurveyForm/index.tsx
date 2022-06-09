@@ -1,16 +1,17 @@
-import BetterPropTypes from 'better-prop-types'
 import { Formik, Form as FormikForm, useFormikContext } from 'formik'
 import debounce from 'lodash/debounce'
 import { useEffect } from 'react'
 import styled from 'styled-components'
-import * as Yup from 'yup'
 
-import Checkbox from './Checkbox'
-import FileInput from './FileInput'
-import Radio from './Radio'
-import Submit from './Submit'
-import Textarea from './Textarea'
-import TextInput from './TextInput'
+import { Checkbox } from './Checkbox'
+import { FileInput } from './FileInput'
+import { Radio } from './Radio'
+import { Submit } from './Submit'
+import { Textarea } from './Textarea'
+import { TextInput } from './TextInput'
+
+import type { FormikConfig, FormikValues } from 'formik'
+import type { FormHTMLAttributes } from 'react'
 
 const StyledForm = styled(FormikForm)`
   display: flex;
@@ -32,7 +33,10 @@ const FormListener = ({ children, onChange }) => {
   return children
 }
 
-function SurveyForm({ children, initialValues, onChange, onSubmit, validate, validationSchema }) {
+type FormProps<Values extends FormikValues = FormikValues, ExtraProps = {}> = FormikConfig<Values> &
+  ExtraProps &
+  Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'>
+function SurveyFormComponent({ children, initialValues, onChange, onSubmit, validate, validationSchema }: FormProps) {
   const onChangeDebounced = onChange ? debounce(onChange, 250) : onChange
 
   return (
@@ -50,22 +54,9 @@ function SurveyForm({ children, initialValues, onChange, onSubmit, validate, val
   )
 }
 
-SurveyForm.defaultProps = {
-  initialValues: {},
-  onChange: null,
-  validate: () => ({}),
-}
+SurveyFormComponent.name = 'SurveyForm'
 
-SurveyForm.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  initialValues: BetterPropTypes.object,
-  onChange: BetterPropTypes.func,
-  onSubmit: BetterPropTypes.func.isRequired,
-  validate: BetterPropTypes.func,
-  validationSchema: BetterPropTypes.instanceOf(Yup.ObjectSchema).isRequired,
-}
-
-export default Object.assign(SurveyForm, {
+export const SurveyForm = Object.assign(SurveyFormComponent, {
   Checkbox,
   FileInput,
   Radio,

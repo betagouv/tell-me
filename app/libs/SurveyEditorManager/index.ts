@@ -1,12 +1,12 @@
 import cuid from 'cuid'
 import * as R from 'ramda'
 
-import generateTellMeTreeChildren from '../../helpers/generateTellMeTreeChildren'
-import Block from './Block'
+import { generateTellMeTreeChildren } from '../../helpers/generateTellMeTreeChildren'
+import { Block } from './Block'
 import { getQuestionInputTypeAt, isBlockCountable, isInputBlock, isQuestionBlock } from './helpers'
 
-import type TellMe from '../../../schemas/1.0.0/TellMe'
 import type { BlockConstructorOptions } from './types'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 const INITIAL_BLOCKS: TellMe.TreeBlock[] = [
   {
@@ -31,40 +31,40 @@ const INITIAL_BLOCKS: TellMe.TreeBlock[] = [
   },
 ]
 
-export default class SurveyEditorManager {
-  private _blocks: Block[]
-  private _focusedBlockIndex: number
+export class SurveyEditorManager {
+  #blocks: Block[]
+  #focusedBlockIndex: number
 
   public get blocks() {
-    return this._blocks
+    return this.#blocks
   }
 
   public get focusedBlock(): Common.Nullable<Block> {
-    if (this._focusedBlockIndex < 0) {
+    if (this.#focusedBlockIndex < 0) {
       return null
     }
 
-    return this._blocks[this._focusedBlockIndex]
+    return this.#blocks[this.#focusedBlockIndex]
   }
 
   public get focusedBlockIndex(): number {
-    return this._focusedBlockIndex
+    return this.#focusedBlockIndex
   }
 
   public get isFocused(): boolean {
-    return this._focusedBlockIndex !== -1
+    return this.#focusedBlockIndex !== -1
   }
 
   public get questionBlocksAsOptions(): Common.App.SelectOption[] {
     return R.pipe<any, any, any>(
       R.filter(isQuestionBlock),
       R.map(({ id, value }) => ({ label: value, value: id })),
-    )(this._blocks) as Common.App.SelectOption[]
+    )(this.#blocks) as Common.App.SelectOption[]
   }
 
   constructor(initialBlocks: TellMe.TreeBlock[] = INITIAL_BLOCKS) {
-    this._blocks = []
-    this._focusedBlockIndex = -1
+    this.#blocks = []
+    this.#focusedBlockIndex = -1
 
     Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach(key => {
       if (this[key] instanceof Function && key !== 'constructor') {
@@ -80,7 +80,7 @@ export default class SurveyEditorManager {
    * If `index=-1`, the new block is prepended to the first block.
    */
   public appendNewBlockAt(index: number, type: TellMe.BlockType): void {
-    if (index !== -1 && this._blocks[index] === undefined) {
+    if (index !== -1 && this.#blocks[index] === undefined) {
       return
     }
 
@@ -103,7 +103,7 @@ export default class SurveyEditorManager {
       ;(newBlock as TellMe.InputBlock).data.ifTruethyThenShowQuestionIds = []
     }
 
-    const blocksAsTellMeTreeBlocks = generateTellMeTreeChildren(this._blocks)
+    const blocksAsTellMeTreeBlocks = generateTellMeTreeChildren(this.#blocks)
 
     this.initializeBlocks(
       R.pipe<any, any, any>(
@@ -144,7 +144,7 @@ export default class SurveyEditorManager {
   }
 
   public changeBlockTypeAt(index: number, newType: TellMe.BlockType): void {
-    const treeBlocks = generateTellMeTreeChildren(this._blocks)
+    const treeBlocks = generateTellMeTreeChildren(this.#blocks)
 
     const treeBlock = { ...treeBlocks[index] }
 
@@ -175,7 +175,7 @@ export default class SurveyEditorManager {
   public changeBlockPropsAt(index: number, newProps: Partial<Block>): void {
     const updatedBlock = Object.assign(this.blocks[index], newProps)
 
-    this._blocks = R.update(index, updatedBlock)(this._blocks)
+    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
   }
 
   public changeBlockValueAt(index: number, newValue: string): void {
@@ -183,7 +183,7 @@ export default class SurveyEditorManager {
       value: newValue,
     })
 
-    this._blocks = R.update(index, updatedBlock)(this._blocks)
+    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
   }
 
   public changeFocusedBlockType(newType: TellMe.BlockType): void {
@@ -260,7 +260,7 @@ export default class SurveyEditorManager {
       return
     }
 
-    this._blocks = this._blocks.reduce((newBlocks: Block[], block: Block) => {
+    this.#blocks = this.#blocks.reduce((newBlocks: Block[], block: Block) => {
       const { data } = block
       if (data.pageIndex !== oldBlock.data.pageIndex || data.pageRankIndex < oldBlock.data.pageRankIndex) {
         return [...newBlocks, block]
@@ -294,13 +294,13 @@ export default class SurveyEditorManager {
   }
 
   public setFocusAt(index = -1): void {
-    this._focusedBlockIndex = index
+    this.#focusedBlockIndex = index
   }
 
   public setIfSelectedThenShowQuestionIdsAt(index: number, questionBlockIds: string[]): void {
     const questionBlocksAsOptions = questionBlockIds
       .map(questionBlockId => this.findBlockIndexById(questionBlockId))
-      .map(questionBlockIndex => this._blocks[questionBlockIndex])
+      .map(questionBlockIndex => this.#blocks[questionBlockIndex])
       .map(questionBlock => ({
         label: questionBlock.value,
         value: questionBlock.id,
@@ -311,7 +311,7 @@ export default class SurveyEditorManager {
       ifTruethyThenShowQuestionsAsOptions: questionBlocksAsOptions,
     })
 
-    this._blocks = R.update(index, updatedBlock)(this._blocks)
+    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
   }
 
   public toggleBlockObligationAt(index: number): void {
@@ -333,7 +333,7 @@ export default class SurveyEditorManager {
   private initializeBlocks(blocks: TellMe.TreeBlock[]) {
     let questionId: Common.Nullable<string> = null
 
-    this._blocks = blocks.reduce((previousBlocks: Block[], block: TellMe.TreeBlock, index: number) => {
+    this.#blocks = blocks.reduce((previousBlocks: Block[], block: TellMe.TreeBlock, index: number) => {
       const lastBlock = R.last<Block>(previousBlocks)
       const { data } = block as TellMe.TreeBlock
       const isCountable = isBlockCountable(block)

@@ -1,10 +1,10 @@
-import AdminHeader from '@app/atoms/AdminHeader'
-import Field from '@app/atoms/Field'
-import Title from '@app/atoms/Title'
-import useApi from '@app/hooks/useApi'
-import useIsMounted from '@app/hooks/useIsMounted'
-import useLocalization from '@app/hooks/useLocalization'
-import Form from '@app/molecules/Form'
+import { AdminHeader } from '@app/atoms/AdminHeader'
+import { Field } from '@app/atoms/Field'
+import { Title } from '@app/atoms/Title'
+import { useApi } from '@app/hooks/useApi'
+import { useIsMounted } from '@app/hooks/useIsMounted'
+import { useLocalization } from '@app/hooks/useLocalization'
+import { Form } from '@app/molecules/Form'
 import { Loader } from '@app/molecules/Loader'
 import { LOCALE_LABEL } from '@common/constants'
 import { Card } from '@singularity/core'
@@ -19,7 +19,7 @@ const FormSchema = Yup.object().shape({
 
 const LOCALE_AS_OPTIONS = R.pipe(
   R.toPairs,
-  R.map(([value, label]) => ({ label, value })),
+  R.map(([value, label]: [string, string]) => ({ label, value })),
 )(LOCALE_LABEL)
 
 export default function MePage() {

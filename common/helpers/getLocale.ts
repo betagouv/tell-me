@@ -4,7 +4,7 @@ import * as R from 'ramda'
 import { LOCALE, LOCALES } from '../constants'
 import { isBrowser } from './isBrowser'
 
-export default function getLocale(): string {
+export function getLocale(): string {
   if (!isBrowser()) {
     return 'en-US'
   }

@@ -1,7 +1,7 @@
-import Overlay from './Overlay'
-import Window from './Window'
+import { Overlay } from './Overlay'
+import { Window } from './Window'
 
-function Modal({ children }) {
+function ModalComponent({ children }) {
   return (
     <Overlay>
       <Window>{children}</Window>
@@ -9,7 +9,9 @@ function Modal({ children }) {
   )
 }
 
-export default Object.assign(Modal, {
+ModalComponent.name = 'Modal'
+
+export const Modal = Object.assign(ModalComponent, {
   Overlay,
   Window,
 })

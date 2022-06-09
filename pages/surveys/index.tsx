@@ -1,11 +1,11 @@
-import AdminHeader from '@app/atoms/AdminHeader'
-import Title from '@app/atoms/Title'
-import generateTellMeTree from '@app/helpers/generateTellMeTree'
-import getRandomId from '@app/helpers/getRandomId'
-import slugify from '@app/helpers/slugify'
-import useApi from '@app/hooks/useApi'
-import useIsMounted from '@app/hooks/useIsMounted'
-import SurveyEditorManager from '@app/libs/SurveyEditorManager'
+import { AdminHeader } from '@app/atoms/AdminHeader'
+import { Title } from '@app/atoms/Title'
+import { generateTellMeTree } from '@app/helpers/generateTellMeTree'
+import { getRandomId } from '@app/helpers/getRandomId'
+import { slugify } from '@app/helpers/slugify'
+import { useApi } from '@app/hooks/useApi'
+import { useIsMounted } from '@app/hooks/useIsMounted'
+import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import cuid from 'cuid'
@@ -16,7 +16,7 @@ import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 
 import type { Prisma, Survey } from '@prisma/client'
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 export default function SurveyListPage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -55,8 +55,8 @@ export default function SurveyListPage() {
     window.open(`/public/surveys/${survey.slug}`, '_blank')
   }
 
-  const goToSurveyEditor = async id => {
-    if (id === 'new') {
+  const goToSurveyEditor = async (idOrNew: string) => {
+    if (idOrNew === 'new') {
       const newSurveyEditorManager = new SurveyEditorManager()
 
       const id = cuid()
@@ -97,7 +97,7 @@ export default function SurveyListPage() {
       return
     }
 
-    router.push(`/surveys/${id}`)
+    router.push(`/surveys/${idOrNew}`)
   }
 
   const goToSurveyConfig = async (id: string) => {

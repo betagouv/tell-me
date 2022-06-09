@@ -33,18 +33,18 @@ const Item = styled.div<any>`
   ${p =>
     p.isSelected &&
     css`
-      background-color: ${p => p.theme.color.primary.active};
+      background-color: ${p.theme.color.primary.active};
     `}
 `
 
 export type BlockMenuProps = {
   anchor: HTMLElement
+  defaultSelectedIndex: number
   items: BlockMenuItem[]
   onCancel: () => void
   onSelect: (blockType: string) => void
-  selectedIndex: number
 }
-export default function BlockMenu({ anchor, items, onCancel, onSelect, selectedIndex }: BlockMenuProps) {
+export function BlockMenu({ anchor, defaultSelectedIndex, items, onCancel, onSelect }: BlockMenuProps) {
   const [popperElement, setPopperElement] = useState(null)
 
   const popper = usePopper(anchor, popperElement, {
@@ -92,7 +92,7 @@ export default function BlockMenu({ anchor, items, onCancel, onSelect, selectedI
           <Fragment key={label}>
             {(index === 0 || category !== items[index - 1].category) && <Category>{category}</Category>}
 
-            <Item data-index={index} isSelected={index === selectedIndex} onClick={handleSelect}>
+            <Item data-index={index} isSelected={index === defaultSelectedIndex} onClick={handleSelect}>
               {/* <Icon fontSize="small" /> */}
               {label}
             </Item>

@@ -1,5 +1,5 @@
 import { NoSsr } from '@app/hocs/NoSsr'
-import withApi from '@app/hocs/withApi'
+import { withApi } from '@app/hocs/withApi'
 import { WithLocalization } from '@app/hocs/withLocalization'
 import { Loader } from '@app/molecules/Loader'
 import { AdminBox } from '@app/organisms/AdminBox'

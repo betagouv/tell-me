@@ -4,9 +4,7 @@ import { LocalizationContext } from './types'
 
 const noop = () => undefined
 
-const Context = createContext<LocalizationContext>({
+export const Context = createContext<LocalizationContext>({
   locale: null,
   refresh: noop,
 })
-
-export default Context

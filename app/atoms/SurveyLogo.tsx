@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import BetterPropTypes from 'better-prop-types'
-import { forwardRef, ForwardRefRenderFunction } from 'react'
+import { forwardRef } from 'react'
 import styled from 'styled-components'
+
+import type { ForwardedRef, HTMLAttributes } from 'react'
 
 const Container = styled.div`
   height: 5rem;
@@ -13,7 +14,7 @@ const Container = styled.div`
 const Placeholder = styled.div<{
   url?: Common.Nullable<string>
 }>`
-  background-color: #d5e5a3;
+  background-color: #4f5736;
   background-image: url('${p => p.url || ''}');
   background-position: center;
   background-repeat: no-repeat;
@@ -26,27 +27,22 @@ const Placeholder = styled.div<{
   width: 6rem;
 `
 
-type SuveyLogoProps = {
-  className?: string
-  url?: Common.Nullable<string>
+type SuveyLogoProps = HTMLAttributes<HTMLDivElement> & {
+  url: Common.Nullable<string>
 }
-const SurveyLogoWithoutRef: ForwardRefRenderFunction<HTMLDivElement, SuveyLogoProps> = (
-  { children, className, url, ...props },
-  ref,
-) => (
-  <Container className={className}>
-    <Placeholder ref={ref} url={url} {...props} />
+function SurveyLogoWithoutRef(
+  { children, className, url, ...props }: SuveyLogoProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
+  return (
+    <Container className={className}>
+      <Placeholder ref={ref} url={url} {...props} />
 
-    {children}
-  </Container>
-)
+      {children}
+    </Container>
+  )
+}
 
-const SurveyLogo = forwardRef(SurveyLogoWithoutRef)
+export const SurveyLogo = forwardRef(SurveyLogoWithoutRef)
 
 SurveyLogo.displayName = 'SurveyLogo'
-
-SurveyLogo.propTypes = {
-  url: BetterPropTypes.string,
-}
-
-export default SurveyLogo

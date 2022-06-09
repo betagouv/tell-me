@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import PropsTypes from 'better-prop-types'
-import { forwardRef, ForwardRefRenderFunction } from 'react'
+import { forwardRef } from 'react'
 import styled from 'styled-components'
+
+import type { BaseHTMLAttributes, ForwardedRef } from 'react'
 
 const Label = styled.div`
   /* https://github.com/singularity-ui/core/blob/main/fields/Radio.jsx */
@@ -47,23 +48,15 @@ const Editable = styled.div`
   }
 `
 
-type RadioProps = {
+type RadioProps = BaseHTMLAttributes<HTMLDivElement> & {
   countLetter: string
 }
-const RadioWithoutRef: ForwardRefRenderFunction<HTMLDivElement, RadioProps> = ({ countLetter, ...props }, ref) => (
+export const Radio = forwardRef(({ countLetter, ...props }: RadioProps, ref: ForwardedRef<HTMLDivElement>) => (
   <Label>
     <Letter>{countLetter}</Letter>
 
     <Editable ref={ref} {...props} />
   </Label>
-)
-
-const Radio = forwardRef(RadioWithoutRef)
+))
 
 Radio.displayName = 'Radio'
-
-Radio.propTypes = {
-  countLetter: PropsTypes.string.isRequired,
-}
-
-export default Radio

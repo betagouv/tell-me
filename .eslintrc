@@ -1,18 +1,17 @@
 {
-  "extends": ["@ivangabriele/eslint-config-typescript-react"],
-  "env": {
-    "browser": true,
-    "node": true
-  },
+  "extends": ["@ivangabriele/eslint-config-typescript-next"],
   "parserOptions": {
     "ecmaVersion": 2021,
+    "extraFileExtensions": [".cjs"],
     "project": "./tsconfig.dev.json"
   },
   "ignorePatterns": ["next-env.d.ts"],
   "plugins": ["formatjs"],
   "rules": {
-    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+
+    "@typescript-eslint/no-use-before-define": "off",
 
     "formatjs/enforce-default-message": "error",
     "formatjs/enforce-description": "error",
@@ -35,74 +34,32 @@
     "formatjs/no-emoji": "error",
     "formatjs/no-multiple-plurals": "error",
     "formatjs/no-multiple-whitespaces": "error",
-    "formatjs/no-offset": "error",
-
-    "import/prefer-default-export": "off",
-
-    "react/function-component-definition": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/prop-types": [
-      "error",
-      {
-        "ignore": [
-          "children",
-          "className",
-          "Component",
-          "contentEditable",
-          "dangerouslySetInnerHTML",
-          "pageProps",
-          "ref"
-        ]
-      }
-    ],
-    "react/react-in-jsx-scope": "off",
-    "react/require-default-props": "off",
-    "react-hooks/exhaustive-deps": "off",
-
-    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-    "@typescript-eslint/no-shadow": "off",
-    "@typescript-eslint/no-use-before-define": "off"
+    "formatjs/no-offset": "error"
   },
   "overrides": [
     {
-      "files": ["./api/**/*.js", "./pages/api/**/*.js", "./scripts/**/*.js", "./api/**/*.ts", "./pages/api/**/*.ts"],
+      "files": ["./app/**/*.ts", "./app/**/*.tsx", "./common/**/*.ts", "./pages/**/*.tsx"],
       "env": {
-        "browser": false
+        "browser": true,
+        "node": true
       }
     },
     {
-      "files": ["./api/models/**/*.js", "./api/models/**/*.ts"],
-      "rules": {
-        "sort-keys-fix/sort-keys-fix": "off"
+      "files": ["./api/**/*.ts", "./pages/**/*.ts"],
+      "env": {
+        "browser": false,
+        "node": true
       }
     },
     {
       "files": [
-        "**/atoms/*.jsx",
-        "**/blocks/*.jsx",
-        "./pages/**/*.jsx",
-        "**/atoms/*.tsx",
-        "**/blocks/*.tsx",
-        "./pages/**/*.tsx"
+        "./config/**/*.js",
+        "./config/**/*.ts",
+        "./e2e/**/*.ts",
+        "./prisma/seeds/**/*.js",
+        "./scripts/**/*.js",
+        "**/*.test.ts"
       ],
-      "rules": {
-        "react/jsx-props-no-spreading": "off"
-      }
-    },
-    {
-      "files": ["./pages/**/*.jsx", "./pages/**/*.tsx"],
-      "rules": {
-        "react/prop-types": "off"
-      }
-    },
-    {
-      "files": ["./pages/api/**/*.ts"],
-      "rules": {
-        "consistent-return": "off"
-      }
-    },
-    {
-      "files": ["./db/**/*.ts", "./scripts/**/*.js"],
       "env": {
         "browser": false,
         "node": true
@@ -114,25 +71,8 @@
         "no-restricted-syntax": "off",
 
         "import/extensions": ["off"],
+        "import/no-default-export": ["off"],
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
-      }
-    },
-    {
-      "files": ["./e2e/**/*.js", "./e2e/**/*.ts", "**/*.test.js", "**/*.test.ts"],
-      "plugins": ["jest"],
-      "env": {
-        "browser": false,
-        "jest": true,
-        "node": true
-      },
-      "rules": {
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-
-        "jest/no-disabled-tests": "error",
-        "jest/no-focused-tests": "error",
-        "jest/no-identical-title": "error",
-        "jest/prefer-to-have-length": "error",
-        "jest/valid-expect": "error"
       }
     }
   ]

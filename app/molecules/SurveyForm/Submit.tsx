@@ -6,7 +6,7 @@ const Container = styled.div`
   padding: ${p => p.theme.padding.layout.large} 0;
 `
 
-export default function Submit({ children }) {
+export function Submit({ children }) {
   const { isSubmitting } = useFormikContext<any>()
 
   return (

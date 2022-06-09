@@ -1,14 +1,14 @@
-import ApiError from '@api/libs/ApiError'
-import withPrisma from '@api/middlewares/withPrisma'
-import generateTellMeData from '@app/helpers/generateTellMeData'
-import SurveyEditorManager from '@app/libs/SurveyEditorManager'
-import getDayjs from '@common/helpers/getDayjs'
+import { ApiError } from '@api/libs/ApiError'
+import { withPrisma } from '@api/middlewares/withPrisma'
+import { generateTellMeData } from '@app/helpers/generateTellMeData'
+import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
+import { getDayjs } from '@common/helpers/getDayjs'
 import { handleError } from '@common/helpers/handleError'
 import { isPojo } from '@common/helpers/isPojo'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
 
 import type { RequestWithPrisma } from '@api/types'
-import type TellMe from '@schemas/1.0.0/TellMe'
+import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/surveys/[id]/index.ts'
@@ -41,7 +41,7 @@ async function SurveyEntryIndexEndpoint(req: RequestWithPrisma, res: NextApiResp
         const {
           data: { entries },
           tree,
-        } = (survey as unknown) as {
+        } = survey as unknown as {
           data: TellMe.Data
           tree: TellMe.Tree
         }
@@ -88,7 +88,7 @@ async function SurveyEntryIndexEndpoint(req: RequestWithPrisma, res: NextApiResp
         handleError(err, ERROR_PATH, res)
       }
 
-      return
+      return undefined as never
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
