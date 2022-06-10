@@ -43,7 +43,7 @@ const buildValidationSchema = (blocks: Block[], message: string) =>
     if (block.questionInputType === 'input_multiple_choice') {
       return {
         ...schema,
-        [block.id]: Yup.array(Yup.string()).required(message),
+        [block.id]: Yup.array(Yup.string()).length(1, message).required(message),
       }
     }
 
@@ -60,7 +60,7 @@ const buildValidationSchema = (blocks: Block[], message: string) =>
 
     return {
       ...schema,
-      [block.id]: Yup.string().required(message),
+      [block.id]: Yup.string().trim().required(message),
     }
   }, {})
 
