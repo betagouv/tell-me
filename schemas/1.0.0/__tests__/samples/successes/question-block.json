@@ -17,6 +17,7 @@
       "data": {
         "isHidden": false,
         "isRequired": false,
+        "key": null,
         "pageIndex": 0,
         "pageRankIndex": 0
       }

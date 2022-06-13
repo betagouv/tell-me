@@ -6,6 +6,7 @@ import { getDayjs } from '@common/helpers/getDayjs'
 import { handleError } from '@common/helpers/handleError'
 import { isPojo } from '@common/helpers/isPojo'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
+import cuid from 'cuid'
 
 import type { RequestWithPrisma } from '@api/types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
@@ -46,16 +47,18 @@ async function SurveyEntryIndexEndpoint(req: RequestWithPrisma, res: NextApiResp
           tree: TellMe.Tree
         }
 
+        const entryId = cuid()
         const submittedAt = dayjs.utc().toISOString()
         const surveyManager = new SurveyEditorManager(tree.children)
 
         const newData: any = generateTellMeData({
           entries,
+          entryId,
           formData: req.body.formData,
-          id: tree.id,
           language: tree.data.language,
           openedAt: req.body.openedAt,
           submittedAt,
+          surveyId: tree.id,
           surveyManager,
           title: tree.data.title,
         })

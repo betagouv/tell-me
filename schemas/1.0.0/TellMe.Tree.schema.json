@@ -4,13 +4,9 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Block": {
-      "additionalProperties": false,
-      "allOf": [
-        {
-          "$ref": "https://json.schemastore.org/unist.json#"
-        }
-      ],
       "description": "A block represents a first-degree survey node.",
+      "type": "object",
+      "allOf": [{ "$ref": "https://json.schemastore.org/unist.json#" }],
       "properties": {
         "children": {
           "not": true
@@ -53,24 +49,25 @@
           "type": "string"
         }
       },
-      "required": ["data", "id", "type", "value"]
+      "required": ["data", "id", "type", "value"],
+      "additionalProperties": false
     },
     "BlockData": {
-      "additionalProperties": true,
+      "type": "object",
       "properties": {
         "pageIndex": {
           "description": "The 0-indexed page number containing this block.",
-          "minimum": 0,
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         },
         "pageRankIndex": {
           "description": "The 0-indexed block rank on the page containing this block.",
-          "minimum": 0,
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         }
       },
       "required": ["pageIndex", "pageRankIndex"],
-      "type": "object"
+      "additionalProperties": true
     },
     "Id": {
       "$comment": "A CUID or UUID is recommended for IDs.",
@@ -79,9 +76,8 @@
     },
 
     "ActionBlock": {
-      "additionalProperties": false,
+      "type": "object",
       "allOf": [{ "$ref": "#/definitions/Block" }],
-      "description": "",
       "properties": {
         "data": {},
         "id": {},
@@ -90,16 +86,12 @@
         },
         "value": {}
       },
-      "required": ["id", "type", "value"]
+      "required": ["id", "type", "value"],
+      "additionalProperties": false
     },
     "ContentBlock": {
-      "additionalProperties": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/Block"
-        }
-      ],
-      "description": "",
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Block" }],
       "properties": {
         "data": {},
         "id": {},
@@ -108,12 +100,12 @@
         },
         "value": {}
       },
-      "required": ["id", "type", "value"]
+      "required": ["id", "type", "value"],
+      "additionalProperties": false
     },
     "InputBlock": {
-      "additionalProperties": false,
+      "type": "object",
       "allOf": [{ "$ref": "#/definitions/Block" }],
-      "description": "",
       "properties": {
         "data": {
           "additionalProperties": false,
@@ -145,19 +137,14 @@
         },
         "value": {}
       },
-      "required": ["data", "id", "type", "value"]
+      "required": ["data", "id", "type", "value"],
+      "additionalProperties": false
     },
     "QuestionBlock": {
-      "additionalProperties": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/Block"
-        }
-      ],
-      "description": "",
+      "type": "object",
+      "allOf": [{ "$ref": "#/definitions/Block" }],
       "properties": {
         "data": {
-          "additionalProperties": false,
           "properties": {
             "isHidden": {
               "type": "boolean"
@@ -165,10 +152,16 @@
             "isRequired": {
               "type": "boolean"
             },
+            "key": {
+              "description": "The question unique key.",
+              "$comment": "Optional key to ease question identification (i.e.: when exposed via an API).",
+              "$oneOf": [{ "type": "string" }, { "type": "null" }]
+            },
             "pageIndex": {},
             "pageRankIndex": {}
           },
-          "required": ["isHidden", "isRequired"]
+          "required": ["isHidden", "isRequired", "key"],
+          "additionalProperties": false
         },
         "id": {},
         "type": {
@@ -176,7 +169,8 @@
         },
         "value": {}
       },
-      "required": ["data", "id", "type", "value"]
+      "required": ["data", "id", "type", "value"],
+      "additionalProperties": false
     }
   },
   "type": "object",

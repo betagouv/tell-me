@@ -41,13 +41,6 @@ export default function SurveyEditorPage() {
     forceUpdate()
   }, [])
 
-  const changeBlockTypeAt = useCallback((index: number, newType: TellMe.BlockType) => {
-    $surveyEditorManager.current.changeBlockTypeAt(index, newType)
-    $surveyEditorManager.current.setFocusAt(index)
-
-    forceUpdate()
-  }, [])
-
   const focusNextBlock = useCallback(() => {
     $surveyEditorManager.current.focusNextBlock()
 
@@ -81,6 +74,13 @@ export default function SurveyEditorPage() {
 
   const toggleObligationAt = useCallback((index: number) => {
     $surveyEditorManager.current.toggleBlockObligationAt(index)
+
+    forceUpdate()
+  }, [])
+
+  const updateBlockTypeAt = useCallback((index: number, newType: TellMe.BlockType) => {
+    $surveyEditorManager.current.updateBlockTypeAt(index, newType)
+    $surveyEditorManager.current.setFocusAt(index)
 
     forceUpdate()
   }, [])
@@ -123,7 +123,7 @@ export default function SurveyEditorPage() {
   }, [])
 
   const updateBlockValueAt = useCallback((index: number, newValue: string) => {
-    $surveyEditorManager.current.changeBlockValueAt(index, newValue)
+    $surveyEditorManager.current.updateBlockValueAt(index, newValue)
 
     updateData()
   }, [])
@@ -206,7 +206,7 @@ export default function SurveyEditorPage() {
           onAppendBlockAt={appendNewBlockAt}
           onChangeAt={updateBlockValueAt}
           onChangeConditionAt={setIfSelectedThenShowQuestionIdsAt}
-          onChangeTypeAt={changeBlockTypeAt}
+          onChangeTypeAt={updateBlockTypeAt}
           onDownKeyDown={focusNextBlock}
           onFocus={$surveyEditorManager.current.setFocusAt}
           onRemove={removeFocusedBlock}

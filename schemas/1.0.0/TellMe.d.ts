@@ -67,6 +67,8 @@ export namespace TellMe {
     data: BlockData & {
       isHidden: boolean
       isRequired: boolean
+      /** The question unique key. Optional key to ease question identification (i.e.: when exposed via an API). */
+      key: string | null
     }
     type: 'question'
   }
@@ -116,7 +118,10 @@ export namespace TellMe {
   }
 
   type Question = {
+    /** The original Tell Me Survey parent question block unique ID. */
     id: string
+    /** The question unique key. Optional key to ease question identification (i.e.: when exposed via an API). */
+    key: string | null
     value: string
   }
 
@@ -190,6 +195,7 @@ export namespace TellMe {
 
   type DataEntry = {
     answers: DataEntryAnswer[]
+    id: string
     /** RFC 3339 UTC date & time */
     openedAt: string
     /** RFC 3339 UTC date & time */
@@ -198,6 +204,7 @@ export namespace TellMe {
 
   interface Data {
     entries: DataEntry[]
+    /** The related survey ID. */
     id: string
     language: string
     title: string
