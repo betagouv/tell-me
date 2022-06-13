@@ -1,5 +1,5 @@
 import { Formik, Form as FormikForm, useFormikContext } from 'formik'
-import debounce from 'lodash/debounce'
+import debounce from 'lodash.debounce'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 
