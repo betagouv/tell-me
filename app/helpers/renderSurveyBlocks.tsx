@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { SurveyParagraph } from '../atoms/SurveyParagraph'
 import { SurveyQuestion } from '../atoms/SurveyQuestion'
 import { SurveyForm } from '../molecules/SurveyForm'
+import { isSurveyBlockVisible } from './isSurveyBlockVisible'
 
 import type { Block } from '../libs/SurveyEditorManager/Block'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
@@ -56,50 +57,9 @@ export function renderSurveyBlocks(formikContext: FormikContextType<Record<strin
   const { errors, submitCount, values } = formikContext
 
   let indexableBlockIndex: Common.Nullable<number> = null
-  let isHidden: boolean = false
-  let questionId: Common.Nullable<string> = null
 
   return blocks.reduce<JSX.Element[]>((components, block, index) => {
-    if (block.isQuestion) {
-      questionId = block.id
-
-      if (block.isHidden) {
-        const neededBlocks = blocks.filter(
-          _block =>
-            _block.isInput && _block.questionId !== null && _block.ifTruethyThenShowQuestionIds.includes(block.id),
-        )
-
-        const found = neededBlocks.find(_block => {
-          if (_block.questionId === null) {
-            return false
-          }
-
-          const valueOrValues: string | string[] | undefined = values[_block.questionId]
-          if (valueOrValues === undefined) {
-            return false
-          }
-
-          switch (_block.type) {
-            case 'input_choice':
-              return typeof valueOrValues === 'string' && valueOrValues === _block.value
-
-            case 'input_multiple_choice':
-              return Array.isArray(valueOrValues) && valueOrValues.includes(_block.value)
-
-            default:
-              return typeof valueOrValues === 'string' && valueOrValues.trim().length > 0
-          }
-        })
-
-        if (found === undefined) {
-          isHidden = true
-
-          return components
-        }
-      }
-
-      isHidden = false
-    } else if (isHidden) {
+    if (!isSurveyBlockVisible(block, blocks, values)) {
       return components
     }
 
@@ -123,7 +83,7 @@ export function renderSurveyBlocks(formikContext: FormikContextType<Record<strin
         countLetter={block.countLetter}
         index={indexableBlockIndex}
         label={label}
-        name={questionId}
+        name={block.questionId}
         value={label}
       />
     ) : (

@@ -332,11 +332,13 @@ export class SurveyEditorManager {
 
   private initializeBlocks(blocks: TellMe.TreeBlock[]) {
     let questionId: Common.Nullable<string> = null
+    let isHidden: boolean = false
 
     this.#blocks = blocks.reduce((previousBlocks: Block[], block: TellMe.TreeBlock, index: number) => {
       const lastBlock = R.last<Block>(previousBlocks)
       const { data } = block as TellMe.TreeBlock
       const isCountable = isBlockCountable(block)
+
       const isQuestion = isQuestionBlock(block)
       const isInput = isInputBlock(block)
       const additionalProps: Partial<BlockConstructorOptions> = {
@@ -366,11 +368,13 @@ export class SurveyEditorManager {
       }
 
       if (isQuestion) {
+        isHidden = (block as TellMe.QuestionBlock).data.isHidden
         questionId = block.id
 
         additionalProps.questionInputType = getQuestionInputTypeAt(blocks, index)
       }
 
+      additionalProps.isHidden = isHidden
       additionalProps.questionId = questionId
 
       const normalizedBlock = new Block(block, additionalProps as BlockConstructorOptions)
