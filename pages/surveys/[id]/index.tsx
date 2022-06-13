@@ -5,6 +5,7 @@ import { useEquivalenceEffect } from '@app/hooks/useEquivalenceEffect'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager/index'
 import { Block, Header, Loader, Logo, Title } from '@app/molecules/Block'
 import { Editable } from '@app/molecules/Editable/index'
+import { AdminBox } from '@app/organisms/AdminBox'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -170,11 +171,15 @@ export default function SurveyEditorPage() {
   }, [$surveyEditorManager.current.blocks])
 
   if (isLoading) {
-    return <Loader />
+    return (
+      <AdminBox>
+        <Loader />
+      </AdminBox>
+    )
   }
 
   return (
-    <>
+    <AdminBox>
       <Header onChange={uploadCover} url={$coverUri.current} />
       <Logo onChange={uploadLogo} url={$logoUri.current} />
 
@@ -212,6 +217,6 @@ export default function SurveyEditorPage() {
           questionBlocksAsOptions={$surveyEditorManager.current.questionBlocksAsOptions}
         />
       ))}
-    </>
+    </AdminBox>
   )
 }

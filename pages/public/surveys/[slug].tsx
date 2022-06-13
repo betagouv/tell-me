@@ -3,19 +3,18 @@ import { SurveyHeader } from '@app/atoms/SurveyHeader'
 import { SurveyLogo } from '@app/atoms/SurveyLogo'
 import { SurveyQuestion } from '@app/atoms/SurveyQuestion'
 import { SurveyTitle } from '@app/atoms/SurveyTitle'
+import { generateValidationSchema } from '@app/helpers/generateValidationSchema'
 import { useApi } from '@app/hooks/useApi'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
 import { Loader } from '@app/molecules/Loader'
 import { SurveyForm } from '@app/molecules/SurveyForm'
-import { Blocks } from '@app/templates/Survey/Blocks'
+import { SurveyFormBody } from '@app/organisms/SurveyFormContent'
 import { getDayjs } from '@common/helpers/getDayjs'
 import { Survey } from '@prisma/client'
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import styled from 'styled-components'
-import * as Yup from 'yup'
 
-import type { Block } from '@app/libs/SurveyEditorManager/Block'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { NextPageContext } from 'next'
 
@@ -34,36 +33,6 @@ const Container = styled.div`
   width: 960px;
 `
 
-const buildValidationSchema = (blocks: Block[], message: string) =>
-  blocks.reduce((schema, block) => {
-    if (!block.isQuestion || !block.isRequired) {
-      return schema
-    }
-
-    if (block.questionInputType === 'input_multiple_choice') {
-      return {
-        ...schema,
-        [block.id]: Yup.array(Yup.string()).length(1, message).required(message),
-      }
-    }
-
-    if (block.questionInputType === 'input_file') {
-      return {
-        ...schema,
-        [block.id]: Yup.object()
-          .shape({
-            name: Yup.string().required(message),
-          })
-          .nullable(),
-      }
-    }
-
-    return {
-      ...schema,
-      [block.id]: Yup.string().trim().required(message),
-    }
-  }, {})
-
 type PublicSurveyPageProps = {
   survey: Survey
 }
@@ -73,20 +42,22 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [initialValues] = useState({})
   const [isSent, setIsSent] = useState(false)
-  const intl = useIntl()
   const api = useApi()
+  const intl = useIntl()
 
   const openedAt = useMemo(() => $dayJs.current.utc().toISOString(), [])
+  const validationMessage = useMemo(
+    () =>
+      intl.formatMessage({
+        defaultMessage: 'This answer is required to validate the form.',
+        description: '[Public Survey] Missing answer error message for a required question.',
+        id: 'cvJp/S',
+      }),
+    [],
+  )
+  const FormSchema = useMemo(() => generateValidationSchema($surveyEditorManager.current.blocks, validationMessage), [])
 
-  const validationMessage = intl.formatMessage({
-    defaultMessage: 'This answer is required to validate the form.',
-    description: '[Public Survey] Missing answer error message for a required question.',
-    id: 'cvJp/S',
-  })
-  const validationSchema = buildValidationSchema($surveyEditorManager.current.blocks, validationMessage)
-  const FormSchema = Yup.object().shape(validationSchema)
-
-  const submitSurvey = async (values, { setSubmitting }) => {
+  const submitSurvey = useCallback(async (values, { setSubmitting }) => {
     setIsLoading(true)
 
     const url = `surveys/${survey.id}/entries`
@@ -104,7 +75,7 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
 
     setIsSent(true)
     setIsLoading(false)
-  }
+  }, [])
 
   return (
     <Page>
@@ -119,7 +90,7 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
 
         {!isLoading && !isSent && (
           <SurveyForm initialValues={initialValues} onSubmit={submitSurvey} validationSchema={FormSchema}>
-            <Blocks blocks={$surveyEditorManager.current.blocks} />
+            <SurveyFormBody blocks={$surveyEditorManager.current.blocks} />
 
             <SurveyForm.Submit>
               {intl.formatMessage({

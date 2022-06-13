@@ -6,6 +6,7 @@ import { useIsMounted } from '@app/hooks/useIsMounted'
 import { useLocalization } from '@app/hooks/useLocalization'
 import { Form } from '@app/molecules/Form'
 import { Loader } from '@app/molecules/Loader'
+import { AdminBox } from '@app/organisms/AdminBox'
 import { LOCALE_LABEL } from '@common/constants'
 import { Card } from '@singularity/core'
 import * as R from 'ramda'
@@ -68,11 +69,15 @@ export default function MePage() {
   }
 
   if (isLoading) {
-    return <Loader />
+    return (
+      <AdminBox>
+        <Loader />
+      </AdminBox>
+    )
   }
 
   return (
-    <>
+    <AdminBox>
       <AdminHeader>
         <Title>
           {intl.formatMessage({
@@ -108,6 +113,6 @@ export default function MePage() {
           </Field>
         </Form>
       </Card>
-    </>
+    </AdminBox>
   )
 }

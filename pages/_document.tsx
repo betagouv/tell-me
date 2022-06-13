@@ -16,12 +16,7 @@ export default class TellMeDocument extends Document {
 
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        styles: [initialProps.styles, sheet.getStyleElement()],
       }
     } finally {
       sheet.seal()

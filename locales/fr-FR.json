@@ -1,23 +1,7 @@
 {
-  "+6xdMp": {
-    "defaultMessage": "Jetons jetables",
-    "description": "[One Time Tokens List] Page title."
-  },
-  "+lem9Q": {
-    "defaultMessage": "TTL",
-    "description": "[Refresh Tokens List] Table \"TTL\" column label."
-  },
-  "/2pv6j": {
-    "defaultMessage": "Tableau de bord",
-    "description": "[Dashboard] Page title."
-  },
   "0llMw7": {
     "defaultMessage": "Valeur",
     "description": "[Personal Access Token Editor] Form Value input label."
-  },
-  "20hT19": {
-    "defaultMessage": "IP",
-    "description": "[Refresh Tokens List] Table \"IP\" column label."
   },
   "4toEG": {
     "defaultMessage": "Éditer cet·te utilisateur·rices",
@@ -26,10 +10,6 @@
   "6StYcj": {
     "defaultMessage": "Réponses",
     "description": "[Survey Answers List] Table Answers column label."
-  },
-  "73PR4k": {
-    "defaultMessage": "Supprimer ce jeton jetable",
-    "description": "[One Time Tokens List] Table row deletion button label."
   },
   "7LF9Gb": {
     "defaultMessage": "Mettre à jour",
@@ -91,10 +71,6 @@
     "defaultMessage": "Nouveau questionnaire",
     "description": "[Surveys List] New survey button label."
   },
-  "Ikt38A": {
-    "defaultMessage": "Jetons de rafraîchissement",
-    "description": "[Refresh Tokens List] Page title."
-  },
   "K06DbM": {
     "defaultMessage": "Répêtez votre nouveau mot de passe",
     "description": "[Signup Modal] Password repeat input label."
@@ -122,10 +98,6 @@
   "QWfMAC": {
     "defaultMessage": "Création d’un jeton d’accès personnel",
     "description": "[Personal Access Token Editor] Creation page title."
-  },
-  "TAgUUN": {
-    "defaultMessage": "IP",
-    "description": "[One Time Tokens List] Table IP column label."
   },
   "TYZzVl": {
     "defaultMessage": "Étiquette",
@@ -167,10 +139,6 @@
     "defaultMessage": "Supprimer cet jeton d’accès personnel",
     "description": "[Personal Access Tokens List] Table row deletion button label."
   },
-  "bkZg0U": {
-    "defaultMessage": "Jetons de rafraîchissement",
-    "description": "[Sidebar Main Menu] Refresh Tokens label."
-  },
   "cZz32J": {
     "defaultMessage": "Édition d’un jeton d’accès personnel",
     "description": "[Personal Access Token Editor] Edition page title."
@@ -178,6 +146,10 @@
   "cvJp/S": {
     "defaultMessage": "Cette réponse est requise pour valider le questionnaire :",
     "description": "[Public Survey] Missing answer error message for a required question."
+  },
+  "dashboard.page.title": {
+    "defaultMessage": "Tableau de bord",
+    "description": "[Dashboard] Page title."
   },
   "fWOJDC": {
     "defaultMessage": "Un nouveau mot de passe",
@@ -195,17 +167,9 @@
     "defaultMessage": "Merci de votre intérêt pour notre projet !",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
-  "iMAa/d": {
-    "defaultMessage": "Email",
-    "description": "[One Time Tokens List] Table Email column label."
-  },
   "j3Zg1g": {
     "defaultMessage": "Expiré le",
     "description": "[Personal Access Tokens List] Table Expired At column label."
-  },
-  "jGB2t1": {
-    "defaultMessage": "Email",
-    "description": "[Refresh Tokens List] Table \"email\" column label."
   },
   "kx4x9D": {
     "defaultMessage": "Rôle",
@@ -243,17 +207,9 @@
     "defaultMessage": "Date",
     "description": "[Survey Answers List] Table Date column label."
   },
-  "tIFSst": {
-    "defaultMessage": "Jetons jetables",
-    "description": "[Sidebar Main Menu] One Time Tokens label."
-  },
   "tnYUFj": {
     "defaultMessage": "Questionnaires",
     "description": "[Surveys List] Page title."
-  },
-  "uaDzBk": {
-    "defaultMessage": "Supprimer ce jeton de rafraîchissement",
-    "description": "[Refresh Tokens List] Table row \"token deletion\" button label."
   },
   "ugMu4J": {
     "defaultMessage": "Email",
@@ -266,10 +222,6 @@
   "xhJCpr": {
     "defaultMessage": "Mot de passe",
     "description": "[Login Modal] Form password input label."
-  },
-  "yW/8Sz": {
-    "defaultMessage": "Expiré le",
-    "description": "[One Time Tokens List] Table Expired At column label."
   },
   "zGNJ13": {
     "defaultMessage": "Utilisateur·rices",

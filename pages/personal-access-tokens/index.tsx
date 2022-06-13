@@ -2,6 +2,7 @@ import { AdminHeader } from '@app/atoms/AdminHeader'
 import { Title } from '@app/atoms/Title'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
+import { AdminBox } from '@app/organisms/AdminBox'
 import { DeletionModal } from '@app/organisms/DeletionModal'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
@@ -117,7 +118,7 @@ export default function PersonalAccessTokenListPage() {
   ]
 
   return (
-    <>
+    <AdminBox>
       <AdminHeader>
         <Title>
           {intl.formatMessage({
@@ -149,6 +150,6 @@ export default function PersonalAccessTokenListPage() {
       {hasDeletionModal && (
         <DeletionModal entity={selectedEntity} onCancel={closeDeletionModal} onConfirm={deletePersonalAccessToken} />
       )}
-    </>
+    </AdminBox>
   )
 }

@@ -5,6 +5,7 @@ import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { Form } from '@app/molecules/Form'
 import { Loader } from '@app/molecules/Loader'
+import { AdminBox } from '@app/organisms/AdminBox'
 import { USER_ROLE_LABEL } from '@common/constants'
 import { Card } from '@singularity/core'
 import { useRouter } from 'next/router'
@@ -74,11 +75,15 @@ export default function UserEditorPage() {
   }
 
   if (isLoading) {
-    return <Loader />
+    return (
+      <AdminBox>
+        <Loader />
+      </AdminBox>
+    )
   }
 
   return (
-    <>
+    <AdminBox>
       <AdminHeader>
         <Title>
           {intl.formatMessage({
@@ -157,6 +162,6 @@ export default function UserEditorPage() {
           </Field>
         </Form>
       </Card>
-    </>
+    </AdminBox>
   )
 }

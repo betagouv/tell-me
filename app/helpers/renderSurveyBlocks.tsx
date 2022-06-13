@@ -1,14 +1,12 @@
-/* eslint-disable react/prop-types */
-
-import { FormikContextType, useFormikContext } from 'formik'
 import styled from 'styled-components'
 
-import { SurveyParagraph } from '../../atoms/SurveyParagraph'
-import { SurveyQuestion } from '../../atoms/SurveyQuestion'
-import { SurveyForm } from '../../molecules/SurveyForm'
+import { SurveyParagraph } from '../atoms/SurveyParagraph'
+import { SurveyQuestion } from '../atoms/SurveyQuestion'
+import { SurveyForm } from '../molecules/SurveyForm'
 
-import type { Block as SurveyEditorManagerBlock } from '../../libs/SurveyEditorManager/Block'
+import type { Block } from '../libs/SurveyEditorManager/Block'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
+import type { FormikContextType } from 'formik'
 
 const Row = styled.div<{
   isQuestion: boolean
@@ -54,26 +52,46 @@ const SURVEY_BLOCK_TYPE_COMPONENT: Record<TellMe.BlockType, any> = {
   question: SurveyQuestion,
 }
 
-const renderBlocks = (formikContext: FormikContextType<any>, blocks: SurveyEditorManagerBlock[]) => {
+export function renderSurveyBlocks(formikContext: FormikContextType<Record<string, string>>, blocks: Block[]) {
   const { errors, submitCount, values } = formikContext
 
   let indexableBlockIndex: Common.Nullable<number> = null
   let isHidden: boolean = false
   let questionId: Common.Nullable<string> = null
 
-  return blocks.reduce<any[]>((components, block, index) => {
+  return blocks.reduce<JSX.Element[]>((components, block, index) => {
     if (block.isQuestion) {
       questionId = block.id
 
       if (block.isHidden) {
-        const result = blocks.find(
+        const neededBlocks = blocks.filter(
           _block =>
-            _block.isInput &&
-            _block.questionId !== null &&
-            _block.ifTruethyThenShowQuestionIds.includes(block.id) &&
-            values[_block.questionId] === _block.value,
+            _block.isInput && _block.questionId !== null && _block.ifTruethyThenShowQuestionIds.includes(block.id),
         )
-        if (result === undefined) {
+
+        const found = neededBlocks.find(_block => {
+          if (_block.questionId === null) {
+            return false
+          }
+
+          const valueOrValues: string | string[] | undefined = values[_block.questionId]
+          if (valueOrValues === undefined) {
+            return false
+          }
+
+          switch (_block.type) {
+            case 'input_choice':
+              return typeof valueOrValues === 'string' && valueOrValues === _block.value
+
+            case 'input_multiple_choice':
+              return Array.isArray(valueOrValues) && valueOrValues.includes(_block.value)
+
+            default:
+              return typeof valueOrValues === 'string' && valueOrValues.trim().length > 0
+          }
+        })
+
+        if (found === undefined) {
           isHidden = true
 
           return components
@@ -125,10 +143,4 @@ const renderBlocks = (formikContext: FormikContextType<any>, blocks: SurveyEdito
 
     return [...components, newComponent, <Error key={`${block.id}.error`}>{error}</Error>]
   }, [])
-}
-
-export function Blocks({ blocks }) {
-  const formikContext = useFormikContext()
-
-  return <>{renderBlocks(formikContext, blocks)}</>
 }

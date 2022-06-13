@@ -124,32 +124,12 @@ export function Menu() {
                   </Link>
                 </VerticalMenu.Item>
 
-                <VerticalMenu.Item isActive={router.pathname.startsWith('/refresh-tokens')} isDark>
-                  <Link href="/refresh-tokens">
-                    {intl.formatMessage({
-                      defaultMessage: 'Refresh Tokens',
-                      description: '[Sidebar Main Menu] Refresh Tokens label.',
-                      id: 'bkZg0U',
-                    })}
-                  </Link>
-                </VerticalMenu.Item>
-
                 <VerticalMenu.Item isActive={router.pathname.startsWith('/personal-access-tokens')} isDark>
                   <Link href="/personal-access-tokens">
                     {intl.formatMessage({
                       defaultMessage: 'Personal Access Tokens',
                       description: '[Sidebar Main Menu] Personal Access Tokens label.',
                       id: 'WL5w1n',
-                    })}
-                  </Link>
-                </VerticalMenu.Item>
-
-                <VerticalMenu.Item isActive={router.pathname.startsWith('/one-time-tokens')} isDark>
-                  <Link href="/one-time-tokens">
-                    {intl.formatMessage({
-                      defaultMessage: 'One Time Tokens',
-                      description: '[Sidebar Main Menu] One Time Tokens label.',
-                      id: 'tIFSst',
                     })}
                   </Link>
                 </VerticalMenu.Item>
