@@ -13,6 +13,7 @@
   "scripts": {
     "build": "next build",
     "db:migrate": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
     "debug": "envinfo --binaries --system --markdown",
     "dev": "concurrently \"next dev\" \"yarn dev:intl\"",
     "dev:docker": "docker-compose down && docker-compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up -d db",
@@ -30,6 +31,9 @@
     "test:type": "tsc -p ./tsconfig.dev.json",
     "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=./config/jest.config.js --detectOpenHandles",
     "test:unit:watch": "yarn test:unit --watch"
+  },
+  "prisma": {
+    "seed": "node --experimental-json-modules -r dotenv/config ./prisma/seeds/index.js"
   },
   "dependencies": {
     "@fontsource/poppins": "4.5.8",
@@ -69,7 +73,7 @@
     "slugify": "1.6.3",
     "styled-components": "5.3.3",
     "ts-node": "10.8.1",
-    "typescript": "4.4.4",
+    "typescript": "4.7.3",
     "unified": "10.1.1",
     "unist-builder": "3.0.0",
     "unist-util-reduce": "0.2.2",
@@ -78,6 +82,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-import-assertions": "7.17.12",
     "@commitlint/cli": "17.0.0",
     "@commitlint/config-conventional": "17.0.0",
     "@formatjs/cli": "4.4.0",
@@ -94,14 +99,14 @@
     "@types/ramda": "0.28.13",
     "@types/styled-components": "5.1.15",
     "@types/zxcvbn": "4.4.1",
-    "@typescript-eslint/eslint-plugin": "5.18.0",
-    "@typescript-eslint/parser": "5.18.0",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
     "babel-jest": "27.5.1",
     "codecov": "3.8.3",
     "concurrently": "6.3.0",
     "cross-env": "7.0.3",
     "envinfo": "7.8.1",
-    "eslint": "8.0.0",
+    "eslint": "8.17.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-prettier": "8.3.0",

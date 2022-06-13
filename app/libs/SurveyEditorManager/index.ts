@@ -3,33 +3,11 @@ import * as R from 'ramda'
 
 import { generateTellMeTreeChildren } from '../../helpers/generateTellMeTreeChildren'
 import { Block } from './Block'
+import { INITIAL_BLOCKS } from './constants'
 import { getQuestionInputTypeAt, isBlockCountable, isInputBlock, isQuestionBlock } from './helpers'
 
 import type { BlockConstructorOptions } from './types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
-
-const INITIAL_BLOCKS: TellMe.TreeBlock[] = [
-  {
-    data: {
-      pageIndex: 0,
-      pageRankIndex: 0,
-    },
-    id: cuid(),
-    type: 'content_text',
-    value: 'This is some free text.',
-  },
-  {
-    data: {
-      isHidden: false,
-      isRequired: true,
-      pageIndex: 0,
-      pageRankIndex: 1,
-    },
-    id: cuid(),
-    type: 'question',
-    value: `What's your first question?`,
-  },
-]
 
 export class SurveyEditorManager {
   #blocks: Block[]
@@ -143,73 +121,6 @@ export class SurveyEditorManager {
     this.appendNewBlockAt(this.focusedBlockIndex, type)
   }
 
-  public changeBlockTypeAt(index: number, newType: TellMe.BlockType): void {
-    const treeBlocks = generateTellMeTreeChildren(this.#blocks)
-
-    const treeBlock = { ...treeBlocks[index] }
-
-    const updatedTreeBlock = {
-      data: {
-        pageIndex: treeBlock.data.pageIndex,
-        pageRankIndex: treeBlock.data.pageRankIndex,
-      },
-      id: treeBlock.id,
-      type: newType,
-      value: treeBlock.value,
-    }
-
-    if (isQuestionBlock(updatedTreeBlock)) {
-      ;(updatedTreeBlock as TellMe.QuestionBlock).data.isHidden = false
-      ;(updatedTreeBlock as TellMe.QuestionBlock).data.isRequired = true
-    }
-
-    if (isInputBlock(updatedTreeBlock)) {
-      ;(updatedTreeBlock as TellMe.InputBlock).data.ifTruethyThenShowQuestionIds = []
-    }
-
-    const nextTreeBlocks = R.update(index, updatedTreeBlock)(treeBlocks) as TellMe.TreeBlock[]
-
-    this.initializeBlocks(nextTreeBlocks)
-  }
-
-  public changeBlockPropsAt(index: number, newProps: Partial<Block>): void {
-    const updatedBlock = Object.assign(this.blocks[index], newProps)
-
-    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
-  }
-
-  public changeBlockValueAt(index: number, newValue: string): void {
-    const updatedBlock = Object.assign(this.blocks[index], {
-      value: newValue,
-    })
-
-    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
-  }
-
-  public changeFocusedBlockType(newType: TellMe.BlockType): void {
-    if (!this.isFocused) {
-      return
-    }
-
-    this.changeBlockTypeAt(this.focusedBlockIndex, newType)
-  }
-
-  public changeFocusedBlockValue(newValue): void {
-    if (!this.isFocused) {
-      return
-    }
-
-    this.changeBlockValueAt(this.focusedBlockIndex, newValue)
-  }
-
-  public changeFocusedBlockProps(newProps: Partial<Block>): void {
-    if (!this.isFocused) {
-      return
-    }
-
-    this.changeBlockPropsAt(this.focusedBlockIndex, newProps)
-  }
-
   public getQuestionInputTypeAt(index: number): TellMe.BlockType {
     const maybeQuestionBlock = this.blocks[index]
     if (!isQuestionBlock(maybeQuestionBlock)) {
@@ -315,15 +226,82 @@ export class SurveyEditorManager {
   }
 
   public toggleBlockObligationAt(index: number): void {
-    this.changeBlockPropsAt(index, {
+    this.updateBlockPropsAt(index, {
       isRequired: !this.blocks[index].isRequired,
     })
   }
 
   public toggleBlockVisibilityAt(index: number): void {
-    this.changeBlockPropsAt(index, {
+    this.updateBlockPropsAt(index, {
       isHidden: !this.blocks[index].isHidden,
     })
+  }
+
+  public updateBlockTypeAt(index: number, newType: TellMe.BlockType): void {
+    const treeBlocks = generateTellMeTreeChildren(this.#blocks)
+
+    const treeBlock = { ...treeBlocks[index] }
+
+    const updatedTreeBlock = {
+      data: {
+        pageIndex: treeBlock.data.pageIndex,
+        pageRankIndex: treeBlock.data.pageRankIndex,
+      },
+      id: treeBlock.id,
+      type: newType,
+      value: treeBlock.value,
+    }
+
+    if (isQuestionBlock(updatedTreeBlock)) {
+      ;(updatedTreeBlock as TellMe.QuestionBlock).data.isHidden = false
+      ;(updatedTreeBlock as TellMe.QuestionBlock).data.isRequired = true
+    }
+
+    if (isInputBlock(updatedTreeBlock)) {
+      ;(updatedTreeBlock as TellMe.InputBlock).data.ifTruethyThenShowQuestionIds = []
+    }
+
+    const nextTreeBlocks = R.update(index, updatedTreeBlock)(treeBlocks) as TellMe.TreeBlock[]
+
+    this.initializeBlocks(nextTreeBlocks)
+  }
+
+  public updateBlockPropsAt(index: number, newProps: Partial<Block>): void {
+    const updatedBlock = Object.assign(this.blocks[index], newProps)
+
+    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
+  }
+
+  public updateBlockValueAt(index: number, newValue: string): void {
+    const updatedBlock = Object.assign(this.blocks[index], {
+      value: newValue,
+    })
+
+    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
+  }
+
+  public updateFocusedBlockType(newType: TellMe.BlockType): void {
+    if (!this.isFocused) {
+      return
+    }
+
+    this.updateBlockTypeAt(this.focusedBlockIndex, newType)
+  }
+
+  public updateFocusedBlockValue(newValue): void {
+    if (!this.isFocused) {
+      return
+    }
+
+    this.updateBlockValueAt(this.focusedBlockIndex, newValue)
+  }
+
+  public updateFocusedBlockProps(newProps: Partial<Block>): void {
+    if (!this.isFocused) {
+      return
+    }
+
+    this.updateBlockPropsAt(this.focusedBlockIndex, newProps)
   }
 
   public unsetFocus(): void {

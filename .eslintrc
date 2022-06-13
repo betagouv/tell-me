@@ -1,7 +1,7 @@
 {
   "extends": ["@ivangabriele/eslint-config-typescript-next"],
   "parserOptions": {
-    "ecmaVersion": 2021,
+    "ecmaVersion": 2022,
     "extraFileExtensions": [".cjs"],
     "project": "./tsconfig.dev.json"
   },

@@ -7,16 +7,19 @@ import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 export function generateTellMeData({
   entries,
+  entryId,
   formData,
-  id,
   language,
   openedAt,
   submittedAt,
+  surveyId,
   surveyManager,
   title,
-}: Omit<TellMe.Data, 'version'> &
-  Omit<TellMe.DataEntry, 'answers'> & {
+}: Omit<TellMe.Data, 'id' | 'version'> &
+  Omit<TellMe.DataEntry, 'answers' | 'id'> & {
+    entryId: string
     formData: Record<string, string | string[]>
+    surveyId: string
     surveyManager: SurveyEditorManager
   }): TellMe.Data | undefined {
   try {
@@ -26,6 +29,7 @@ export function generateTellMeData({
       ...entries,
       {
         answers,
+        id: entryId,
         openedAt,
         submittedAt,
       },
@@ -33,7 +37,7 @@ export function generateTellMeData({
 
     return {
       entries: newEntries,
-      id,
+      id: surveyId,
       language,
       title,
       version: '1.0.0',

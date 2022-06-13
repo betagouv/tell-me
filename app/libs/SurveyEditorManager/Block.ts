@@ -15,12 +15,15 @@ export class Block {
   #ifTruethyThenShowQuestionsAsOptions: Common.App.SelectOption[]
   #isCheckbox: boolean
   #isChoice: boolean
+  /** If `true`, this means that this block is an multi-blocks input, most likely a radio or select-like one. */
   #isCountable: boolean
   #isHidden: boolean
   #isInput: boolean
   #isRequired: boolean
   #isQuestion: boolean
+  /** If `true`, this means that this block is an input that can't be linked to a parent question block. */
   #isUnlinked: boolean
+  #key: Common.Nullable<string>
   #questionId: Common.Nullable<string>
   #questionInputType: Common.Nullable<TellMe.BlockType>
 
@@ -38,23 +41,16 @@ export class Block {
     this.#count = isCountable && count !== undefined ? count : null
     this.#countLetter = isCountable && count !== undefined ? getCountLetter(count) : null
     this.#ifTruethyThenShowQuestionIds = (block.data as any).ifTruethyThenShowQuestionIds || []
+    this.#ifTruethyThenShowQuestionsAsOptions = ifTruethyThenShowQuestionsAsOptions || []
     this.#isCheckbox = block.type === 'input_multiple_choice'
     this.#isChoice = block.type === 'input_choice'
-    /**
-     * @description
-     * If `true`, this means that this block is an multi-blocks input, most likely a radio or select-like one.
-     */
     this.#isCountable = isCountable
     this.#isHidden = isHidden
     this.#isInput = isInputBlock(block)
     this.#isRequired = Boolean((block.data as any).isRequired)
     this.#isQuestion = isQuestionBlock(block)
-    /**
-     * @description
-     * If `true`, this means that this block is an input that can't be linked to a parent question block.
-     */
     this.#isUnlinked = false
-    this.#ifTruethyThenShowQuestionsAsOptions = ifTruethyThenShowQuestionsAsOptions || []
+    this.#key = (block.data as any).key ?? null
     this.#questionId = questionId
     this.#questionInputType = questionInputType || null
 
@@ -106,6 +102,14 @@ export class Block {
 
   public set isHidden(newValue: boolean) {
     this.#isHidden = newValue
+  }
+
+  public get key() {
+    return this.#key
+  }
+
+  public set key(newValue: string | null) {
+    this.#key = newValue
   }
 
   public get isInput() {
