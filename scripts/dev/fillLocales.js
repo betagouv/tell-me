@@ -1,9 +1,6 @@
+import fastGlob from 'fast-glob'
 import { promises as fs } from 'fs'
-import glob from 'glob'
 import * as R from 'ramda'
-import { promisify } from 'util'
-
-const asyncGlob = promisify(glob)
 
 const sortPairByKeyCaseSensitive = R.sortBy(R.prop(0))
 const mergeRightButDescription = R.curry((enUsLocale, foreignLocale) =>
@@ -22,7 +19,7 @@ const mergeRightButDescription = R.curry((enUsLocale, foreignLocale) =>
 )
 
 ;(async () => {
-  const localeFilePaths = await asyncGlob('./locales/*.json')
+  const localeFilePaths = await fastGlob('./locales/*.json')
   const nonEnUsLocaleFilePaths = R.reject(R.endsWith('en-US.json'))(localeFilePaths)
 
   const enUsLocaleSource = await fs.readFile('./locales/en-US.json', 'utf-8')
