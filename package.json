@@ -77,7 +77,7 @@
     "@babel/plugin-syntax-import-assertions": "7.17.12",
     "@commitlint/cli": "17.0.0",
     "@commitlint/config-conventional": "17.0.0",
-    "@formatjs/cli": "4.4.0",
+    "@formatjs/cli": "5.0.2",
     "@ivangabriele/commitlint-config": "1.0.6",
     "@ivangabriele/eslint-config-typescript-next": "4.1.1",
     "@ivangabriele/prettier-config": "3.0.2",
