@@ -1,32 +1,8 @@
 {
-  "+6xdMp": [
-    {
-      "type": 0,
-      "value": "Jetons jetables"
-    }
-  ],
-  "+lem9Q": [
-    {
-      "type": 0,
-      "value": "TTL"
-    }
-  ],
-  "/2pv6j": [
-    {
-      "type": 0,
-      "value": "Tableau de bord"
-    }
-  ],
   "0llMw7": [
     {
       "type": 0,
       "value": "Valeur"
-    }
-  ],
-  "20hT19": [
-    {
-      "type": 0,
-      "value": "IP"
     }
   ],
   "4toEG": [
@@ -39,12 +15,6 @@
     {
       "type": 0,
       "value": "Réponses"
-    }
-  ],
-  "73PR4k": [
-    {
-      "type": 0,
-      "value": "Supprimer ce jeton jetable"
     }
   ],
   "7LF9Gb": [
@@ -137,12 +107,6 @@
       "value": "Nouveau questionnaire"
     }
   ],
-  "Ikt38A": [
-    {
-      "type": 0,
-      "value": "Jetons de rafraîchissement"
-    }
-  ],
   "K06DbM": [
     {
       "type": 0,
@@ -183,12 +147,6 @@
     {
       "type": 0,
       "value": "Création d’un jeton d’accès personnel"
-    }
-  ],
-  "TAgUUN": [
-    {
-      "type": 0,
-      "value": "IP"
     }
   ],
   "TYZzVl": [
@@ -251,12 +209,6 @@
       "value": "Supprimer cet jeton d’accès personnel"
     }
   ],
-  "bkZg0U": [
-    {
-      "type": 0,
-      "value": "Jetons de rafraîchissement"
-    }
-  ],
   "cZz32J": [
     {
       "type": 0,
@@ -267,6 +219,12 @@
     {
       "type": 0,
       "value": "Cette réponse est requise pour valider le questionnaire :"
+    }
+  ],
+  "dashboard.page.title": [
+    {
+      "type": 0,
+      "value": "Tableau de bord"
     }
   ],
   "fWOJDC": [
@@ -293,22 +251,10 @@
       "value": "Merci de votre intérêt pour notre projet !"
     }
   ],
-  "iMAa/d": [
-    {
-      "type": 0,
-      "value": "Email"
-    }
-  ],
   "j3Zg1g": [
     {
       "type": 0,
       "value": "Expiré le"
-    }
-  ],
-  "jGB2t1": [
-    {
-      "type": 0,
-      "value": "Email"
     }
   ],
   "kx4x9D": [
@@ -379,22 +325,10 @@
       "value": "Date"
     }
   ],
-  "tIFSst": [
-    {
-      "type": 0,
-      "value": "Jetons jetables"
-    }
-  ],
   "tnYUFj": [
     {
       "type": 0,
       "value": "Questionnaires"
-    }
-  ],
-  "uaDzBk": [
-    {
-      "type": 0,
-      "value": "Supprimer ce jeton de rafraîchissement"
     }
   ],
   "ugMu4J": [
@@ -413,12 +347,6 @@
     {
       "type": 0,
       "value": "Mot de passe"
-    }
-  ],
-  "yW/8Sz": [
-    {
-      "type": 0,
-      "value": "Expiré le"
     }
   ],
   "zGNJ13": [

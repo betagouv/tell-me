@@ -1,7 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 
-import * as R from 'ramda'
-
 import type { UserRole } from '@prisma/client'
 
 export const LOCALE = {
@@ -15,8 +13,6 @@ export const LOCALE_LABEL = {
   'en-US': 'English (US)',
   'fr-FR': 'Français (France)',
 }
-
-export const LOCALES = R.keys(LOCALE)
 
 export const SURVEY_ENTRIES_DOWLOAD_CONTENT_TYPE = {
   CSV: 'text/csv',

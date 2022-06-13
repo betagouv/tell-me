@@ -1,5 +1,6 @@
 import { getLocale } from '@common/helpers/getLocale'
 import { handleError } from '@common/helpers/handleError'
+import jsCookie from 'js-cookie'
 import { useCallback, useMemo, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 
@@ -31,27 +32,32 @@ function onIntlProviderError(err) {
 }
 
 export function WithLocalization({ children }) {
-  const [locale, setLocale] = useState(getLocale())
-
-  const refresh: LocalizationContext['refresh'] = useCallback((newLocale: string) => {
-    window.localStorage.setItem('locale', newLocale)
-
-    setLocale(getLocale())
-  }, [])
+  const [locale, setLocale] = useState<string>(getLocale())
 
   const messages = useMemo(() => loadLocaleMessages(locale), [locale])
+
+  const refresh: LocalizationContext['refresh'] = useCallback((newLocale: string) => {
+    jsCookie.set('LOCALE', newLocale, {
+      expires: 365,
+      sameSite: 'strict',
+    })
+
+    setLocale(newLocale)
+  }, [])
 
   const providerValue: LocalizationContext = useMemo(
     () => ({
       locale,
       refresh,
     }),
-    [locale, refresh],
+    [locale],
   )
 
   return (
-    <IntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
-      <Context.Provider value={providerValue}>{children}</Context.Provider>
-    </IntlProvider>
+    <Context.Provider value={providerValue}>
+      <IntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
+        {children}
+      </IntlProvider>
+    </Context.Provider>
   )
 }

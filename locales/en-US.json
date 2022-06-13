@@ -1,23 +1,7 @@
 {
-  "+6xdMp": {
-    "defaultMessage": "One Time Tokens",
-    "description": "[One Time Tokens List] Page title."
-  },
-  "+lem9Q": {
-    "defaultMessage": "TTL",
-    "description": "[Refresh Tokens List] Table \"TTL\" column label."
-  },
-  "/2pv6j": {
-    "defaultMessage": "Dashboard",
-    "description": "[Dashboard] Page title."
-  },
   "0llMw7": {
     "defaultMessage": "Value",
     "description": "[Personal Access Token Editor] Form Value input label."
-  },
-  "20hT19": {
-    "defaultMessage": "IP",
-    "description": "[Refresh Tokens List] Table \"IP\" column label."
   },
   "4toEG": {
     "defaultMessage": "Edit this user",
@@ -26,10 +10,6 @@
   "6StYcj": {
     "defaultMessage": "Answers",
     "description": "[Survey Answers List] Table Answers column label."
-  },
-  "73PR4k": {
-    "defaultMessage": "Delete this one time token",
-    "description": "[One Time Tokens List] Table row deletion button label."
   },
   "7LF9Gb": {
     "defaultMessage": "Update",
@@ -91,10 +71,6 @@
     "defaultMessage": "New survey",
     "description": "[Surveys List] New survey button label."
   },
-  "Ikt38A": {
-    "defaultMessage": "Refresh Tokens",
-    "description": "[Refresh Tokens List] Page title."
-  },
   "K06DbM": {
     "defaultMessage": "Your new password (again)",
     "description": "[Signup Modal] Password repeat input label."
@@ -122,10 +98,6 @@
   "QWfMAC": {
     "defaultMessage": "New PAT",
     "description": "[Personal Access Token Editor] Creation page title."
-  },
-  "TAgUUN": {
-    "defaultMessage": "IP",
-    "description": "[One Time Tokens List] Table IP column label."
   },
   "TYZzVl": {
     "defaultMessage": "Label",
@@ -167,10 +139,6 @@
     "defaultMessage": "Delete this personal access token",
     "description": "[Personal Access Tokens List] Table row deletion button label."
   },
-  "bkZg0U": {
-    "defaultMessage": "Refresh Tokens",
-    "description": "[Sidebar Main Menu] Refresh Tokens label."
-  },
   "cZz32J": {
     "defaultMessage": "Edit PAT",
     "description": "[Personal Access Token Editor] Edition page title."
@@ -178,6 +146,10 @@
   "cvJp/S": {
     "defaultMessage": "This answer is required to validate the form.",
     "description": "[Public Survey] Missing answer error message for a required question."
+  },
+  "dashboard.page.title": {
+    "defaultMessage": "Dashboard",
+    "description": "[Dashboard] Page title."
   },
   "fWOJDC": {
     "defaultMessage": "A new password",
@@ -195,17 +167,9 @@
     "defaultMessage": "Thank you for your interest in helping our project!",
     "description": "[Public Survey] Thank you message once the survey has been sent."
   },
-  "iMAa/d": {
-    "defaultMessage": "Email",
-    "description": "[One Time Tokens List] Table Email column label."
-  },
   "j3Zg1g": {
     "defaultMessage": "Expired at",
     "description": "[Personal Access Tokens List] Table Expired At column label."
-  },
-  "jGB2t1": {
-    "defaultMessage": "Email",
-    "description": "[Refresh Tokens List] Table \"email\" column label."
   },
   "kx4x9D": {
     "defaultMessage": "Role",
@@ -243,17 +207,9 @@
     "defaultMessage": "Date",
     "description": "[Survey Answers List] Table Date column label."
   },
-  "tIFSst": {
-    "defaultMessage": "One Time Tokens",
-    "description": "[Sidebar Main Menu] One Time Tokens label."
-  },
   "tnYUFj": {
     "defaultMessage": "Survey",
     "description": "[Surveys List] Page title."
-  },
-  "uaDzBk": {
-    "defaultMessage": "Delete this refresh token",
-    "description": "[Refresh Tokens List] Table row \"token deletion\" button label."
   },
   "ugMu4J": {
     "defaultMessage": "Email",
@@ -266,10 +222,6 @@
   "xhJCpr": {
     "defaultMessage": "Password",
     "description": "[Login Modal] Form password input label."
-  },
-  "yW/8Sz": {
-    "defaultMessage": "Expired at",
-    "description": "[One Time Tokens List] Table Expired At column label."
   },
   "zGNJ13": {
     "defaultMessage": "Users",

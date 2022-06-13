@@ -6,6 +6,7 @@ import { slugify } from '@app/helpers/slugify'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
+import { AdminBox } from '@app/organisms/AdminBox'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import cuid from 'cuid'
@@ -216,7 +217,7 @@ export default function SurveyListPage() {
   ]
 
   return (
-    <>
+    <AdminBox>
       <AdminHeader>
         <Title>
           {intl.formatMessage({
@@ -238,6 +239,6 @@ export default function SurveyListPage() {
       <Card>
         <Table columns={columns} data={surveys} defaultSortedKey="lastName" isLoading={isLoading} />
       </Card>
-    </>
+    </AdminBox>
   )
 }

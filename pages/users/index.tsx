@@ -2,6 +2,7 @@ import { AdminHeader } from '@app/atoms/AdminHeader'
 import { Title } from '@app/atoms/Title'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
+import { AdminBox } from '@app/organisms/AdminBox'
 import { Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import { useRouter } from 'next/router'
@@ -92,7 +93,7 @@ export default function UserListPage() {
   ]
 
   return (
-    <>
+    <AdminBox>
       <AdminHeader>
         <Title>
           {intl.formatMessage({
@@ -106,6 +107,6 @@ export default function UserListPage() {
       <Card>
         <Table columns={columns} data={users} defaultSortedKey="lastName" isLoading={isLoading} />
       </Card>
-    </>
+    </AdminBox>
   )
 }

@@ -1,32 +1,8 @@
 {
-  "+6xdMp": [
-    {
-      "type": 0,
-      "value": "One Time Tokens"
-    }
-  ],
-  "+lem9Q": [
-    {
-      "type": 0,
-      "value": "TTL"
-    }
-  ],
-  "/2pv6j": [
-    {
-      "type": 0,
-      "value": "Dashboard"
-    }
-  ],
   "0llMw7": [
     {
       "type": 0,
       "value": "Value"
-    }
-  ],
-  "20hT19": [
-    {
-      "type": 0,
-      "value": "IP"
     }
   ],
   "4toEG": [
@@ -39,12 +15,6 @@
     {
       "type": 0,
       "value": "Answers"
-    }
-  ],
-  "73PR4k": [
-    {
-      "type": 0,
-      "value": "Delete this one time token"
     }
   ],
   "7LF9Gb": [
@@ -137,12 +107,6 @@
       "value": "New survey"
     }
   ],
-  "Ikt38A": [
-    {
-      "type": 0,
-      "value": "Refresh Tokens"
-    }
-  ],
   "K06DbM": [
     {
       "type": 0,
@@ -183,12 +147,6 @@
     {
       "type": 0,
       "value": "New PAT"
-    }
-  ],
-  "TAgUUN": [
-    {
-      "type": 0,
-      "value": "IP"
     }
   ],
   "TYZzVl": [
@@ -251,12 +209,6 @@
       "value": "Delete this personal access token"
     }
   ],
-  "bkZg0U": [
-    {
-      "type": 0,
-      "value": "Refresh Tokens"
-    }
-  ],
   "cZz32J": [
     {
       "type": 0,
@@ -267,6 +219,12 @@
     {
       "type": 0,
       "value": "This answer is required to validate the form."
+    }
+  ],
+  "dashboard.page.title": [
+    {
+      "type": 0,
+      "value": "Dashboard"
     }
   ],
   "fWOJDC": [
@@ -293,22 +251,10 @@
       "value": "Thank you for your interest in helping our project!"
     }
   ],
-  "iMAa/d": [
-    {
-      "type": 0,
-      "value": "Email"
-    }
-  ],
   "j3Zg1g": [
     {
       "type": 0,
       "value": "Expired at"
-    }
-  ],
-  "jGB2t1": [
-    {
-      "type": 0,
-      "value": "Email"
     }
   ],
   "kx4x9D": [
@@ -379,22 +325,10 @@
       "value": "Date"
     }
   ],
-  "tIFSst": [
-    {
-      "type": 0,
-      "value": "One Time Tokens"
-    }
-  ],
   "tnYUFj": [
     {
       "type": 0,
       "value": "Survey"
-    }
-  ],
-  "uaDzBk": [
-    {
-      "type": 0,
-      "value": "Delete this refresh token"
     }
   ],
   "ugMu4J": [
@@ -413,12 +347,6 @@
     {
       "type": 0,
       "value": "Password"
-    }
-  ],
-  "yW/8Sz": [
-    {
-      "type": 0,
-      "value": "Expired at"
     }
   ],
   "zGNJ13": [

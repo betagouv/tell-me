@@ -7,6 +7,7 @@ import { getRandomId } from '@app/helpers/getRandomId'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { Loader } from '@app/molecules/Loader'
+import { AdminBox } from '@app/organisms/AdminBox'
 import { SURVEY_ENTRIES_DOWLOAD_EXTENSION } from '@common/constants'
 import { getDayjs } from '@common/helpers/getDayjs'
 import { Button, Card, Table } from '@singularity/core'
@@ -182,11 +183,15 @@ export default function SurveyEntryListPage() {
   ]
 
   if (isLoading) {
-    return <Loader />
+    return (
+      <AdminBox>
+        <Loader />
+      </AdminBox>
+    )
   }
 
   return (
-    <>
+    <AdminBox>
       <AdminHeader>
         <Title>{survey.data.title}</Title>
 
@@ -214,6 +219,6 @@ export default function SurveyEntryListPage() {
 
         <StyledTable columns={columns} data={surveyEntries} defaultSortedKey="updatedAt" defaultSortedKeyIsDesc />
       </StyledCard>
-    </>
+    </AdminBox>
   )
 }

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 

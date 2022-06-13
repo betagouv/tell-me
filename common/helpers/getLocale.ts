@@ -1,25 +1,12 @@
-import { getUserLocales } from 'get-user-locale'
-import * as R from 'ramda'
+import jsCookie from 'js-cookie'
 
-import { LOCALE, LOCALES } from '../constants'
-import { isBrowser } from './isBrowser'
+import { LOCALE } from '../constants'
 
 export function getLocale(): string {
-  if (!isBrowser()) {
+  const cookieLocale = jsCookie.get('LOCALE') ?? 'en-US'
+  if (LOCALE[cookieLocale] === undefined) {
     return 'en-US'
   }
 
-  const maybeLocalStorageLocale = window.localStorage.getItem('locale')
-
-  if (maybeLocalStorageLocale !== null) {
-    return maybeLocalStorageLocale
-  }
-
-  const browserLocales = getUserLocales()
-  const supportedBrowserLocales = R.intersection(browserLocales, LOCALES)
-  if (supportedBrowserLocales.length === 0) {
-    return 'en-US'
-  }
-
-  return LOCALE[supportedBrowserLocales[0]]
+  return cookieLocale
 }
