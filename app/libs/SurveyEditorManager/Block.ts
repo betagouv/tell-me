@@ -26,7 +26,14 @@ export class Block {
 
   constructor(
     block: TellMe.TreeBlock,
-    { count, ifTruethyThenShowQuestionsAsOptions, isCountable, questionId, questionInputType }: BlockConstructorOptions,
+    {
+      count,
+      ifTruethyThenShowQuestionsAsOptions,
+      isCountable,
+      isHidden,
+      questionId,
+      questionInputType,
+    }: BlockConstructorOptions,
   ) {
     this.#count = isCountable && count !== undefined ? count : null
     this.#countLetter = isCountable && count !== undefined ? getCountLetter(count) : null
@@ -38,7 +45,7 @@ export class Block {
      * If `true`, this means that this block is an multi-blocks input, most likely a radio or select-like one.
      */
     this.#isCountable = isCountable
-    this.#isHidden = Boolean((block.data as any).isHidden)
+    this.#isHidden = isHidden
     this.#isInput = isInputBlock(block)
     this.#isRequired = Boolean((block.data as any).isRequired)
     this.#isQuestion = isQuestionBlock(block)

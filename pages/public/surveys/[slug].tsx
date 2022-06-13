@@ -55,7 +55,7 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
       }),
     [],
   )
-  const FormSchema = useMemo(() => generateValidationSchema($surveyEditorManager.current.blocks, validationMessage), [])
+  const FormSchema = generateValidationSchema($surveyEditorManager.current.blocks, validationMessage)
 
   const submitSurvey = useCallback(async (values, { setSubmitting }) => {
     setIsLoading(true)

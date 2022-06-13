@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          # cache: yarn
+          cache: yarn
           node-version: 16
       - run: yarn
       - run: yarn test:lint
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          # cache: yarn
+          cache: yarn
           node-version: 16
       - run: yarn
       - run: yarn test:type
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          # cache: yarn
+          cache: yarn
           node-version: 16
       - run: yarn
       - run: yarn test:unit --coverage

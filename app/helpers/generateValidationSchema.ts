@@ -4,7 +4,7 @@ import type { Block } from '../libs/SurveyEditorManager/Block'
 
 export function generateValidationSchema(blocks: Block[], message: string) {
   const shape = blocks.reduce((schema, block) => {
-    if (!block.isQuestion || !block.isRequired) {
+    if (!block.isQuestion || !block.isRequired || block.isHidden) {
       return schema
     }
 
