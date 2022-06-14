@@ -27,6 +27,7 @@ const GlobalStyleCustom = createGlobalStyle`
     min-height: 0;
     min-width: 0;
  }
+
 `
 
 const PRIVATE_PATHS = [/^\/(?!public|test\/).*/]
@@ -40,6 +41,8 @@ export default function TellMeApp({ Component, pageProps }) {
         <title>Tell Me</title>
 
         <meta content="initial-scale=1, width=device-width" name="viewport" />
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
 
       <ThemeProvider>

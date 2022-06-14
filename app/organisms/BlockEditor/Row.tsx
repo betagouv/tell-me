@@ -1,12 +1,11 @@
-import { CornerDownRight, Eye, EyeOff, Move, Shield, ShieldOff, Trash } from 'react-feather'
 import styled, { css } from 'styled-components'
 
-import type { Block as SurveyEditorManagerBlock } from '../../libs/SurveyEditorManager/Block'
+import type { Block } from '../../libs/SurveyEditorManager/Block'
+import type { HTMLAttributes } from 'react'
 
-const Box = styled.div<any>`
+const Box = styled.div`
   align-items: flex-start;
   display: flex;
-  margin-top: ${p => (p.isQuestion ? p.theme.padding.layout.large : 0)};
   min-height: 3rem;
   padding: 0 1rem 0 1rem;
 
@@ -31,6 +30,7 @@ const Content = styled.div<any>`
 const Button = styled.div<any>`
   align-items: center;
   background-color: ${p => p.theme.color[p.accent].background};
+  color: ${p => p.theme.color.body.white};
   display: flex;
   justify-content: center;
   min-height: 3rem;
@@ -40,22 +40,14 @@ const Button = styled.div<any>`
     !p.isDisabled
       ? css<any>`
           cursor: pointer;
-          opacity: 0.65;
 
           :hover {
             background-color: ${p.theme.color[p.accent].active};
-            opacity: 1;
           }
         `
       : css`
-          opacity: 0.1;
+          opacity: 0;
         `}
-
-  svg {
-    color: ${p => p.theme.color.body.white};
-    height: 2rem !important;
-    max-width: 2rem !important;
-  }
 `
 
 const Asterisk = styled.div<any>`
@@ -72,28 +64,41 @@ const Asterisk = styled.div<any>`
   user-select: none;
 `
 
+const ICON: Record<string, (props: HTMLAttributes<HTMLSpanElement>) => JSX.Element> = {
+  Add: () => <span className="material-icons md-24">add</span>,
+  AddModerator: () => <span className="material-icons md-24">add_moderator</span>,
+  Delete: () => <span className="material-icons md-24">delete</span>,
+  Emergency: () => <span className="material-icons md-24">key</span>,
+  Key: () => <span className="material-icons md-24">key</span>,
+  KeyOff: () => <span className="material-icons md-24">key_off</span>,
+  RemoveModerator: () => <span className="material-icons md-24">remove_moderator</span>,
+  SubdirectoryArrowLeft: () => <span className="material-icons md-24">subdirectory_arrow_left</span>,
+  Visibility: () => <span className="material-icons md-24">visibility</span>,
+  VisibilityOff: () => <span className="material-icons md-24">visibility_off</span>,
+}
+
 type RowProps = {
-  block: SurveyEditorManagerBlock
+  block: Block
   children: any
-  onCondition?: () => void
-  onDelete: () => void
-  onMove?: () => void
+  onClickCondition: Common.FunctionLike
+  onClickDelete: Common.FunctionLike
+  onClickKey: Common.FunctionLike
   onToggleObligation: any
   onToggleVisibility: any
 }
 export function Row({
   block,
   children,
-  onCondition,
-  onDelete,
-  onMove,
+  onClickCondition,
+  onClickDelete,
+  onClickKey,
   onToggleObligation,
   onToggleVisibility,
 }: RowProps) {
   return (
-    <Box isQuestion={block.isQuestion}>
+    <Box>
       <Button accent="primary" className="Button">
-        <Move onClick={onMove} />
+        <ICON.Add onClick={undefined} />
       </Button>
 
       <Asterisk isVisible={block.isRequired}>*</Asterisk>
@@ -101,12 +106,12 @@ export function Row({
       <Content isHidden={block.isHidden}>{children}</Content>
 
       <Button
-        accent="secondary"
+        accent="primary"
         className="Button"
         isDisabled={!block.isQuestion}
         onClick={block.isQuestion ? onToggleObligation : undefined}
       >
-        {block.isRequired ? <ShieldOff /> : <Shield />}
+        {block.isRequired ? <ICON.RemoveModerator /> : <ICON.AddModerator />}
       </Button>
       <Button
         accent="primary"
@@ -114,18 +119,26 @@ export function Row({
         isDisabled={!block.isQuestion}
         onClick={block.isQuestion ? onToggleVisibility : undefined}
       >
-        {block.isHidden ? <Eye /> : <EyeOff />}
+        {block.isHidden ? <ICON.Visibility /> : <ICON.VisibilityOff />}
+      </Button>
+      <Button
+        accent="secondary"
+        className="Button"
+        isDisabled={!block.isQuestion}
+        onClick={block.isQuestion ? onClickKey : undefined}
+      >
+        {block.key ? <ICON.Key /> : <ICON.KeyOff />}
       </Button>
       <Button
         accent="secondary"
         className="Button"
         isDisabled={!block.isCheckbox && !block.isChoice}
-        onClick={block.isCheckbox || block.isChoice ? onCondition : undefined}
+        onClick={block.isCheckbox || block.isChoice ? onClickCondition : undefined}
       >
-        <CornerDownRight />
+        <ICON.SubdirectoryArrowLeft />
       </Button>
-      <Button accent="danger" className="Button" onClick={onDelete}>
-        <Trash />
+      <Button accent="danger" className="Button" onClick={onClickDelete}>
+        <ICON.Delete />
       </Button>
     </Box>
   )

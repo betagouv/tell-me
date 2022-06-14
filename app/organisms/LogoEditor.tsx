@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
 
-import { SurveyLogo } from '../../atoms/SurveyLogo'
+import { SurveyLogo } from '../atoms/SurveyLogo'
 
 const StyledSurveyLogo = styled<any>(SurveyLogo)`
   min-height: 5rem;
@@ -32,11 +32,11 @@ const StyledInput = styled.input<any>`
   }
 `
 
-type LogoProps = {
+type LogoEditorProps = {
   onChange: (formData: FormData) => void | Promise<void>
   url: string | null
 }
-export function Logo({ onChange, url }: LogoProps) {
+export function LogoEditor({ onChange, url }: LogoEditorProps) {
   const $logo = useRef<HTMLDivElement>(null)
 
   const updateSelectedFile = event => {

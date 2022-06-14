@@ -38,7 +38,7 @@ export async function generateSurveysMissingKeysAndIds(prisma) {
       const typedData = data
 
       const treeChildrenWithKey = typedTree.children.map(child => {
-        if (child.type !== 'question') {
+        if (child.type !== 'question' || child.data.key !== undefined) {
           return child
         }
 
@@ -64,18 +64,24 @@ export async function generateSurveysMissingKeysAndIds(prisma) {
       }
 
       const dataEntriesWithId = typedData.entries.map(entry => {
-        const answersWithQuestionKey = entry.answers.map(answer => ({
-          ...answer,
-          question: {
-            ...answer.question,
-            key: null,
-          },
-        }))
+        const answersWithQuestionKey = entry.answers.map(answer => {
+          if (answer.question.key !== undefined) {
+            return answer
+          }
+
+          return {
+            ...answer,
+            question: {
+              ...answer.question,
+              key: null,
+            },
+          }
+        })
 
         return {
           ...entry,
           answers: answersWithQuestionKey,
-          id: cuid(),
+          id: entry.id === undefined ? cuid() : entry.id,
         }
       })
 

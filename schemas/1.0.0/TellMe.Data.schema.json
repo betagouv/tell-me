@@ -72,13 +72,24 @@
       "additionalProperties": false
     },
     "Id": {
-      "type": "string",
       "$comment": "A CUID or UUID is recommended for IDs.",
+      "type": "string",
       "minLength": 1
     },
+    "Key": {
+      "description": "A unique key.",
+      "$comment": "Should only contain uppercase letters and underscores in-between.",
+      "$oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Z]([A-Z_]*[A-Z])?$"
+        },
+        { "type": "null" }
+      ]
+    },
     "Question": {
-      "type": "object",
       "description": "A block represents a first-degree survey node.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "The original Tell Me Survey parent question block unique ID.",
@@ -87,7 +98,7 @@
         "key": {
           "description": "The question unique key.",
           "$comment": "Optional key to ease question identification (i.e.: when exposed via an API).",
-          "$oneOf": [{ "type": "string" }, { "type": "null" }]
+          "$ref": "#/definitions/Key"
         },
         "value": {
           "description": "The parent question text as it was formulated when asked to the respondent.",
