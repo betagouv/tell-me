@@ -74,6 +74,17 @@
       "minLength": 1,
       "type": "string"
     },
+    "Key": {
+      "description": "A unique key.",
+      "$comment": "Should only contain uppercase letters and underscores in-between.",
+      "$oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Z]([A-Z_]*[A-Z])?$"
+        },
+        { "type": "null" }
+      ]
+    },
 
     "ActionBlock": {
       "type": "object",
@@ -155,7 +166,7 @@
             "key": {
               "description": "The question unique key.",
               "$comment": "Optional key to ease question identification (i.e.: when exposed via an API).",
-              "$oneOf": [{ "type": "string" }, { "type": "null" }]
+              "$ref": "#/definitions/Key"
             },
             "pageIndex": {},
             "pageRankIndex": {}

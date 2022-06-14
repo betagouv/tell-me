@@ -204,40 +204,7 @@ export class SurveyEditorManager {
     this.removeBlockAt(this.focusedBlockIndex)
   }
 
-  public setFocusAt(index = -1): void {
-    this.#focusedBlockIndex = index
-  }
-
-  public setIfSelectedThenShowQuestionIdsAt(index: number, questionBlockIds: string[]): void {
-    const questionBlocksAsOptions = questionBlockIds
-      .map(questionBlockId => this.findBlockIndexById(questionBlockId))
-      .map(questionBlockIndex => this.#blocks[questionBlockIndex])
-      .map(questionBlock => ({
-        label: questionBlock.value,
-        value: questionBlock.id,
-      }))
-
-    const updatedBlock = Object.assign(this.blocks[index], {
-      ifTruethyThenShowQuestionIds: questionBlockIds,
-      ifTruethyThenShowQuestionsAsOptions: questionBlocksAsOptions,
-    })
-
-    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
-  }
-
-  public toggleBlockObligationAt(index: number): void {
-    this.updateBlockPropsAt(index, {
-      isRequired: !this.blocks[index].isRequired,
-    })
-  }
-
-  public toggleBlockVisibilityAt(index: number): void {
-    this.updateBlockPropsAt(index, {
-      isHidden: !this.blocks[index].isHidden,
-    })
-  }
-
-  public updateBlockTypeAt(index: number, newType: TellMe.BlockType): void {
+  public setBlockTypeAt(index: number, newType: TellMe.BlockType): void {
     const treeBlocks = generateTellMeTreeChildren(this.#blocks)
 
     const treeBlock = { ...treeBlocks[index] }
@@ -266,13 +233,13 @@ export class SurveyEditorManager {
     this.initializeBlocks(nextTreeBlocks)
   }
 
-  public updateBlockPropsAt(index: number, newProps: Partial<Block>): void {
+  public setBlockPropsAt(index: number, newProps: Partial<Block>): void {
     const updatedBlock = Object.assign(this.blocks[index], newProps)
 
     this.#blocks = R.update(index, updatedBlock)(this.#blocks)
   }
 
-  public updateBlockValueAt(index: number, newValue: string): void {
+  public setBlockValueAt(index: number, newValue: string): void {
     const updatedBlock = Object.assign(this.blocks[index], {
       value: newValue,
     })
@@ -280,28 +247,61 @@ export class SurveyEditorManager {
     this.#blocks = R.update(index, updatedBlock)(this.#blocks)
   }
 
-  public updateFocusedBlockType(newType: TellMe.BlockType): void {
-    if (!this.isFocused) {
-      return
-    }
-
-    this.updateBlockTypeAt(this.focusedBlockIndex, newType)
+  public setFocusAt(index = -1): void {
+    this.#focusedBlockIndex = index
   }
 
-  public updateFocusedBlockValue(newValue): void {
+  public setFocusedBlockType(newType: TellMe.BlockType): void {
     if (!this.isFocused) {
       return
     }
 
-    this.updateBlockValueAt(this.focusedBlockIndex, newValue)
+    this.setBlockTypeAt(this.focusedBlockIndex, newType)
   }
 
-  public updateFocusedBlockProps(newProps: Partial<Block>): void {
+  public setFocusedBlockValue(newValue): void {
     if (!this.isFocused) {
       return
     }
 
-    this.updateBlockPropsAt(this.focusedBlockIndex, newProps)
+    this.setBlockValueAt(this.focusedBlockIndex, newValue)
+  }
+
+  public setFocusedBlockProps(newProps: Partial<Block>): void {
+    if (!this.isFocused) {
+      return
+    }
+
+    this.setBlockPropsAt(this.focusedBlockIndex, newProps)
+  }
+
+  public setIfSelectedThenShowQuestionIdsAt(index: number, questionBlockIds: string[]): void {
+    const questionBlocksAsOptions = questionBlockIds
+      .map(questionBlockId => this.findBlockIndexById(questionBlockId))
+      .map(questionBlockIndex => this.#blocks[questionBlockIndex])
+      .map(questionBlock => ({
+        label: questionBlock.value,
+        value: questionBlock.id,
+      }))
+
+    const updatedBlock = Object.assign(this.blocks[index], {
+      ifTruethyThenShowQuestionIds: questionBlockIds,
+      ifTruethyThenShowQuestionsAsOptions: questionBlocksAsOptions,
+    })
+
+    this.#blocks = R.update(index, updatedBlock)(this.#blocks)
+  }
+
+  public toggleBlockObligationAt(index: number): void {
+    this.setBlockPropsAt(index, {
+      isRequired: !this.blocks[index].isRequired,
+    })
+  }
+
+  public toggleBlockVisibilityAt(index: number): void {
+    this.setBlockPropsAt(index, {
+      isHidden: !this.blocks[index].isHidden,
+    })
   }
 
   public unsetFocus(): void {

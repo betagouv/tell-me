@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import styled from 'styled-components'
 
-import { SurveyHeader } from '../../atoms/SurveyHeader'
+import { SurveyHeader } from '../atoms/SurveyHeader'
 
 const StyledSurveyHeader = styled<any>(SurveyHeader)`
   display: flex;
@@ -23,11 +23,11 @@ const StyledInput = styled.input`
   }
 `
 
-type HeaderProps = {
+type HeaderEditorProps = {
   onChange: (formData: FormData) => void | Promise<void>
   url: string | null
 }
-export function Header({ onChange, url }: HeaderProps) {
+export function HeaderEditor({ onChange, url }: HeaderEditorProps) {
   const $header = useRef<HTMLDivElement>(null)
 
   const updateSelectedFile = event => {

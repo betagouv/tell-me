@@ -1,11 +1,13 @@
 import { generateTellMeTree } from '@app/helpers/generateTellMeTree'
 import { hashCode } from '@app/helpers/hashCode'
 import { useApi } from '@app/hooks/useApi'
-import { useEquivalenceEffect } from '@app/hooks/useEquivalenceEffect'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager/index'
-import { Block, Header, Loader, Logo, Title } from '@app/molecules/Block'
-import { Editable } from '@app/molecules/Editable/index'
 import { AdminBox } from '@app/organisms/AdminBox'
+import { BlockEditor } from '@app/organisms/BlockEditor'
+import { Loader } from '@app/organisms/BlockEditor/Loader'
+import { HeaderEditor } from '@app/organisms/HeaderEditor'
+import { LogoEditor } from '@app/organisms/LogoEditor'
+import { TitleEditor } from '@app/organisms/TitleEditor'
 import debounce from 'lodash.debounce'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -39,6 +41,7 @@ export default function SurveyEditorPage() {
     $surveyEditorManager.current.appendNewBlockAt(index, type)
 
     forceUpdate()
+    updateData()
   }, [])
 
   const focusNextBlock = useCallback(() => {
@@ -57,12 +60,14 @@ export default function SurveyEditorPage() {
     $surveyEditorManager.current.removeBlockAt(index)
 
     forceUpdate()
+    updateData()
   }, [])
 
   const removeFocusedBlock = useCallback(() => {
     $surveyEditorManager.current.removeFocusedBlock()
 
     forceUpdate()
+    updateData()
   }, [])
 
   const setIfSelectedThenShowQuestionIdsAt = useCallback((index: number, questionBlockIds: string[]) => {
@@ -72,17 +77,42 @@ export default function SurveyEditorPage() {
     updateData()
   }, [])
 
+  const toggleBlockVisibilityAt = useCallback((index: number) => {
+    $surveyEditorManager.current.toggleBlockVisibilityAt(index)
+
+    forceUpdate()
+    updateData()
+  }, [])
+
   const toggleObligationAt = useCallback((index: number) => {
     $surveyEditorManager.current.toggleBlockObligationAt(index)
 
     forceUpdate()
+    updateData()
+  }, [])
+
+  const updateBlockKeyAt = useCallback((index: number, newKey: string | null) => {
+    $surveyEditorManager.current.setBlockPropsAt(index, {
+      key: newKey,
+    })
+
+    forceUpdate()
+    updateData()
   }, [])
 
   const updateBlockTypeAt = useCallback((index: number, newType: TellMe.BlockType) => {
-    $surveyEditorManager.current.updateBlockTypeAt(index, newType)
+    $surveyEditorManager.current.setBlockTypeAt(index, newType)
     $surveyEditorManager.current.setFocusAt(index)
 
     forceUpdate()
+    updateData()
+  }, [])
+
+  const updateBlockValueAt = useCallback((index: number, newValue: string) => {
+    $surveyEditorManager.current.setBlockValueAt(index, newValue)
+
+    forceUpdate()
+    updateData()
   }, [])
 
   const updateData = useCallback(
@@ -108,30 +138,18 @@ export default function SurveyEditorPage() {
     [],
   )
 
-  const uploadCover = useCallback(async (formData: FormData) => {
-    await api.put(`survey/${id}/upload?type=cover`, formData)
-  }, [])
-
-  const uploadLogo = useCallback(async (formData: FormData) => {
-    await api.put(`survey/${id}/upload?type=logo`, formData)
-  }, [])
-
   const updateTitle = useCallback((newTitle: string) => {
     $title.current = newTitle
 
     updateData()
   }, [])
 
-  const updateBlockValueAt = useCallback((index: number, newValue: string) => {
-    $surveyEditorManager.current.updateBlockValueAt(index, newValue)
-
-    updateData()
+  const uploadCover = useCallback(async (formData: FormData) => {
+    await api.put(`survey/${id}/upload?type=cover`, formData)
   }, [])
 
-  const toggleBlockVisibilityAt = useCallback((index: number) => {
-    $surveyEditorManager.current.toggleBlockVisibilityAt(index)
-
-    forceUpdate()
+  const uploadLogo = useCallback(async (formData: FormData) => {
+    await api.put(`survey/${id}/upload?type=logo`, formData)
   }, [])
 
   useEffect(() => {
@@ -161,15 +179,6 @@ export default function SurveyEditorPage() {
     })()
   }, [])
 
-  useEquivalenceEffect(() => {
-    // Let's not override existing survey data with the initialization one
-    if (isLoading) {
-      return
-    }
-
-    updateData()
-  }, [$surveyEditorManager.current.blocks])
-
   if (isLoading) {
     return (
       <AdminBox>
@@ -180,15 +189,13 @@ export default function SurveyEditorPage() {
 
   return (
     <AdminBox>
-      <Header onChange={uploadCover} url={$coverUri.current} />
-      <Logo onChange={uploadLogo} url={$logoUri.current} />
+      <HeaderEditor onChange={uploadCover} url={$coverUri.current} />
+      <LogoEditor onChange={uploadLogo} url={$logoUri.current} />
 
       <TitleRow>
-        <Editable
-          as={Title}
+        <TitleEditor
           defaultValue={$title.current}
           isFocused={isTitleFocused}
-          isRichText={false}
           onChange={updateTitle}
           onDownKeyDown={focusNextBlock}
           onEnterKeyDown={appendNewBlockAt}
@@ -197,7 +204,7 @@ export default function SurveyEditorPage() {
       </TitleRow>
 
       {$surveyEditorManager.current.blocks.map((block, index) => (
-        <Block
+        <BlockEditor
           // eslint-disable-next-line react/no-array-index-key
           key={`${index}.${block.type}.${hashCode(block.value)}`}
           block={block}
@@ -206,9 +213,10 @@ export default function SurveyEditorPage() {
           onAppendBlockAt={appendNewBlockAt}
           onChangeAt={updateBlockValueAt}
           onChangeConditionAt={setIfSelectedThenShowQuestionIdsAt}
+          onChangeKeyAt={updateBlockKeyAt}
           onChangeTypeAt={updateBlockTypeAt}
           onDownKeyDown={focusNextBlock}
-          onFocus={$surveyEditorManager.current.setFocusAt}
+          onFocusAt={$surveyEditorManager.current.setFocusAt}
           onRemove={removeFocusedBlock}
           onRemoveAt={removeBlockAt}
           onToggleObligation={toggleObligationAt}

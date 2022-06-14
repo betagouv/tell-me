@@ -1,8 +1,9 @@
 import { Select } from '@singularity/core'
+import { useCallback } from 'react'
 import { CornerDownRight } from 'react-feather'
 import styled from 'styled-components'
 
-import type { Block as SurveyEditorManagerBlock } from '../../libs/SurveyEditorManager/Block'
+import type { Block } from '../../libs/SurveyEditorManager/Block'
 
 const Box = styled.div`
   display: flex;
@@ -18,16 +19,16 @@ const StyledSelect = styled(Select)`
 `
 
 type ConditionProps = {
-  block: SurveyEditorManagerBlock
+  block: Block
   onChange: (newQuestionBlocksIds: string[]) => void | Promise<void>
   questionBlocksAsOptions: Common.App.SelectOption[]
 }
 export function Condition({ block, onChange, questionBlocksAsOptions }: ConditionProps) {
-  const handleChange = (newQuestionBlocksAsOptions: Common.App.SelectOption[]) => {
+  const handleChange = useCallback((newQuestionBlocksAsOptions: Common.App.SelectOption[]) => {
     const newQuestionBlocksIds = newQuestionBlocksAsOptions.map(({ value }) => value)
 
     onChange(newQuestionBlocksIds)
-  }
+  }, [])
 
   return (
     <Box>

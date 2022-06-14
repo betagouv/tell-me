@@ -6,8 +6,6 @@ declare namespace Common {
 
   type FunctionLike<R = void | Promise<void>> = () => R
 
-  type FunctionLike<R = void | Promise<void>> = () => R
-
   /** Make this type nullable */
   type Nullable<T> = T | null
 
