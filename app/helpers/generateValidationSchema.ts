@@ -11,7 +11,7 @@ export function generateValidationSchema(blocks: Block[], message: string) {
     if (block.questionInputType === 'input_multiple_choice') {
       return {
         ...schema,
-        [block.id]: Yup.array(Yup.string()).length(1, message).required(message),
+        [block.id]: Yup.array(Yup.string()).min(1, message).required(message),
       }
     }
 
