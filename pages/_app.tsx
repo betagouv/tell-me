@@ -14,11 +14,7 @@ import '@fontsource/poppins/500.css'
 import '@fontsource/poppins/700.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-const GlobalStyleCustom = createGlobalStyle<{
-  theme: {
-    color: any
-  }
-}>`
+const GlobalStyleCustom = createGlobalStyle`
   html, body {
     height: 100%;
   }
