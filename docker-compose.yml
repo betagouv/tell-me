@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   db:
     container_name: tell_me_db

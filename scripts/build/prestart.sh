@@ -10,3 +10,4 @@ fi
 
 yarn prisma generate
 yarn db:migrate
+yarn db:seed
