@@ -228,8 +228,8 @@ export function Editable<P = Common.AnyProps>({
     }
 
     // eslint-disable-next-line default-case
-    switch (event.keyCode) {
-      case 40:
+    switch (event.key) {
+      case 'ArrowDown':
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -242,7 +242,7 @@ export function Editable<P = Common.AnyProps>({
 
         return
 
-      case 38:
+      case 'ArrowUp':
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -255,7 +255,8 @@ export function Editable<P = Common.AnyProps>({
 
         return
 
-      case 13:
+      case 'Enter':
+      case 'NumpadEnter':
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -268,15 +269,14 @@ export function Editable<P = Common.AnyProps>({
 
         return
 
-      case 191:
-      case 111:
+      case '/':
         if (hasBlockMenu && !isBlockMenuOpen) {
           openBlockMenu()
         }
 
         return
 
-      case 27:
+      case 'Escape':
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
@@ -285,7 +285,7 @@ export function Editable<P = Common.AnyProps>({
 
         return
 
-      case 8:
+      case 'Backspace':
         if (isBlockMenuOpen) {
           if (blockMenuState.query.length === 0) {
             closeBlockMenu()

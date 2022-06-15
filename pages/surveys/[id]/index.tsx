@@ -1,5 +1,4 @@
 import { generateTellMeTree } from '@app/helpers/generateTellMeTree'
-import { hashCode } from '@app/helpers/hashCode'
 import { useApi } from '@app/hooks/useApi'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager/index'
 import { AdminBox } from '@app/organisms/AdminBox'
@@ -111,7 +110,6 @@ export default function SurveyEditorPage() {
   const updateBlockValueAt = useCallback((index: number, newValue: string) => {
     $surveyEditorManager.current.setBlockValueAt(index, newValue)
 
-    forceUpdate()
     updateData()
   }, [])
 
@@ -205,8 +203,6 @@ export default function SurveyEditorPage() {
 
       {$surveyEditorManager.current.blocks.map((block, index) => (
         <BlockEditor
-          // eslint-disable-next-line react/no-array-index-key
-          key={`${index}.${block.type}.${hashCode(block.value)}`}
           block={block}
           index={index}
           isFocused={index === $surveyEditorManager.current.focusedBlockIndex}
