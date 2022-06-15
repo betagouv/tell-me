@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 
-import { hashCode } from '../../helpers/hashCode'
 import { Editable } from '../../molecules/Editable'
 import { Checkbox } from './blocks/Checkbox'
 import { FileInput } from './blocks/FileInput'
@@ -161,7 +160,6 @@ export function BlockEditor({
   const [isKeyOpen, setIsKeyOpen] = useState(block.key !== null)
 
   const { Component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[block.type]
-  const key = `${index}.${block.type}.${isFocused}.${hashCode(block.value)}`
   const finalPlaceholder = block.count !== null ? `${placeholder} ${block.count}` : placeholder
 
   const handleConditionChange = useCallback(
@@ -253,7 +251,6 @@ export function BlockEditor({
         onToggleVisibility={toggleVisibility}
       >
         <Editable
-          key={key}
           as={Component}
           count={block.count}
           countLetter={block.countLetter}
