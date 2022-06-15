@@ -105,7 +105,7 @@
           "type": "string"
         }
       },
-      "required": ["id", "value"],
+      "required": ["id", "key", "value"],
       "additionalProperties": false
     },
 
