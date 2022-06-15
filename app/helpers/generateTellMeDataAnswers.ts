@@ -1,3 +1,5 @@
+/* eslint-disable no-case-declarations */
+
 import { handleError } from '@common/helpers/handleError'
 import * as R from 'ramda'
 
@@ -23,31 +25,37 @@ export function generateTellMeDataAnswers(
           case 'input_choice':
           case 'input_long_answer':
           case 'input_short_answer':
-            return {
+            const stringAnswer: TellMe.StringAnswer = {
               data: {
                 isMarkdown: false,
                 value: answerOrAnswers as string,
               },
               question: {
                 id: questionBlock.id,
+                key: questionBlock.key,
                 value: questionBlock.value,
               },
               rawValue: answerOrAnswers as string,
               type: 'string',
-            } as TellMe.StringAnswer
+            }
+
+            return stringAnswer
 
           case 'input_multiple_choice':
-            return {
+            const stringsAnswer: TellMe.StringsAnswer = {
               data: {
                 values: answerOrAnswers as string[],
               },
               question: {
                 id: questionBlock.id,
+                key: questionBlock.key,
                 value: questionBlock.value,
               },
               rawValue: (answerOrAnswers as string[]).join(', '),
               type: 'strings',
-            } as TellMe.StringsAnswer
+            }
+
+            return stringsAnswer
 
           default:
             throw new Error(`This question should have an input type.`)
