@@ -256,6 +256,7 @@ export function Editable<P = Common.AnyProps>({
         return
 
       case 'Enter':
+      case 'NumpadEnter':
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
