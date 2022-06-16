@@ -194,10 +194,10 @@ export default function SurveyEditorPage() {
         <TitleEditor
           defaultValue={$title.current}
           isFocused={isTitleFocused}
-          onChange={updateTitle}
           onDownKeyDown={focusNextBlock}
           onEnterKeyDown={appendNewBlockAt}
           onFocus={$surveyEditorManager.current.unsetFocus}
+          onValueChange={updateTitle}
         />
       </TitleRow>
 

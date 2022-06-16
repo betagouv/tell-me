@@ -46,15 +46,17 @@ const Editable = styled.div`
   }
 `
 
-type RadioProps = BaseHTMLAttributes<HTMLDivElement> & {
+type SurveyEditorRadioProps = BaseHTMLAttributes<HTMLDivElement> & {
   countLetter: string
 }
-export const Radio = forwardRef(({ countLetter, ...props }: RadioProps, ref: ForwardedRef<HTMLDivElement>) => (
-  <Label>
-    <Letter>{countLetter}</Letter>
+export const SurveyEditorRadio = forwardRef(
+  ({ countLetter, ...props }: SurveyEditorRadioProps, ref: ForwardedRef<HTMLDivElement>) => (
+    <Label>
+      <Letter>{countLetter}</Letter>
 
-    <Editable ref={ref} {...props} />
-  </Label>
-))
+      <Editable ref={ref} {...props} />
+    </Label>
+  ),
+)
 
-Radio.displayName = 'Radio'
+SurveyEditorRadio.displayName = 'SurveyEditorRadio'

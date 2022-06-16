@@ -1,8 +1,8 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 
-const StyledTextInput = styled.div<any>`
-  /* https://github.com/singularity-ui/core/blob/main/fields/TextInput.jsx */
+const StyledTextarea = styled.div<any>`
+  /* https://github.com/singularity-ui/core/blob/main/fields/Textarea.jsx */
 
   background-color: ${p => p.theme.color.body.white};
   border: solid 1px ${p => p.theme.color.secondary.default};
@@ -10,7 +10,7 @@ const StyledTextInput = styled.div<any>`
   font-family: inherit;
   font-size: ${p => p.theme.typography.size.medium * 100}%;
   font-weight: 400;
-  margin: 0.25rem 0;
+  height: 5rem;
   padding: ${p => p.theme.padding.input.medium};
   transition-delay: 0s, 0s, 0s, 0s;
   transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
@@ -36,6 +36,6 @@ const StyledTextInput = styled.div<any>`
   }
 `
 
-export const TextInput = forwardRef(({ ...props }, ref) => <StyledTextInput ref={ref} {...props} />)
+export const SurveyEditorTextarea = forwardRef(({ ...props }, ref) => <StyledTextarea ref={ref} as="div" {...props} />)
 
-TextInput.displayName = 'TextInput'
+SurveyEditorTextarea.displayName = 'SurveyEditorTextarea'

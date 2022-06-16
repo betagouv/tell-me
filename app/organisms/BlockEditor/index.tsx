@@ -1,14 +1,14 @@
-import { useCallback, useRef, useState } from 'react'
+import { ReactNode, useCallback, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 
+import { SurveyEditorCheckbox } from '../../atoms/SurveyEditorCheckbox'
+import { SurveyEditorFileInput } from '../../atoms/SurveyEditorFileInput'
+import { SurveyEditorParagraph } from '../../atoms/SurveyEditorParagraph'
+import { SurveyEditorQuestion } from '../../atoms/SurveyEditorQuestion'
+import { SurveyEditorRadio } from '../../atoms/SurveyEditorRadio'
+import { SurveyEditorTextarea } from '../../atoms/SurveyEditorTextarea'
+import { SurveyEditorTextInput } from '../../atoms/SurveyEditorTextInput'
 import { Editable } from '../../molecules/Editable'
-import { Checkbox } from './blocks/Checkbox'
-import { FileInput } from './blocks/FileInput'
-import { Paragraph } from './blocks/Paragraph'
-import { Question } from './blocks/Question'
-import { Radio } from './blocks/Radio'
-import { Textarea } from './blocks/Textarea'
-import { TextInput } from './blocks/TextInput'
 import { Condition } from './Condition'
 import { Key } from './Key'
 import { Row } from './Row'
@@ -20,7 +20,7 @@ import type { MutableRefObject } from 'react'
 const SURVEY_BLOCK_TYPE_COMPONENT: Record<
   TellMe.BlockType,
   {
-    Component: any
+    Component: ReactNode
     isRichText: boolean
     placeholder: string
   }
@@ -28,85 +28,85 @@ const SURVEY_BLOCK_TYPE_COMPONENT: Record<
   action_next: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   action_submit: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   content_subtitle: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   content_text: {
-    Component: Paragraph,
+    Component: SurveyEditorParagraph,
     isRichText: true,
     placeholder: `Insert some text or type '/' to insert a new type of block`,
   },
   input_checkbox: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_choice: {
-    Component: Radio,
+    Component: SurveyEditorRadio,
     isRichText: false,
     placeholder: `Option`,
   },
   input_email: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_file: {
-    Component: FileInput,
+    Component: SurveyEditorFileInput,
     isRichText: false,
     placeholder: `Choose a file…`,
   },
   input_linear_scale: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_link: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_long_answer: {
-    Component: Textarea,
+    Component: SurveyEditorTextarea,
     isRichText: false,
     placeholder: `Type placeholder text`,
   },
   input_multiple_choice: {
-    Component: Checkbox,
+    Component: SurveyEditorCheckbox,
     isRichText: false,
     placeholder: `Choice`,
   },
   input_number: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_phone: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_rating: {
     Component: () => null,
     isRichText: false,
-    placeholder: `TODO`,
+    placeholder: '',
   },
   input_short_answer: {
-    Component: TextInput,
+    Component: SurveyEditorTextInput,
     isRichText: false,
     placeholder: `Type placeholder text`,
   },
   question: {
-    Component: Question,
+    Component: SurveyEditorQuestion,
     isRichText: false,
     placeholder: `What is your question?`,
   },
@@ -159,21 +159,16 @@ export function BlockEditor({
   const [isConditionOpen, setIsConditionOpen] = useState(block.ifTruethyThenShowQuestionIds.length > 0)
   const [isKeyOpen, setIsKeyOpen] = useState(block.key !== null)
 
-  const { Component, isRichText, placeholder } = SURVEY_BLOCK_TYPE_COMPONENT[block.type]
-  const finalPlaceholder = block.count !== null ? `${placeholder} ${block.count}` : placeholder
+  const { Component, isRichText, placeholder } = useMemo(() => SURVEY_BLOCK_TYPE_COMPONENT[block.type], [block.type])
+  const controlledPlaceholder = useMemo(
+    () => (block.count !== null ? `${placeholder} ${block.count}` : placeholder),
+    [block.count, placeholder],
+  )
+  const editableKey = useMemo(() => `${block.id}.${block.type}.${isFocused}`, [block.id, block.type, isFocused])
 
   const handleConditionChange = useCallback(
     (newQuestionBlocksIds: string[]) => {
       onChangeConditionAt(index, newQuestionBlocksIds)
-    },
-    [index],
-  )
-
-  const handleChange = useCallback(
-    (newValue: string) => {
-      $value.current = newValue
-
-      onChangeAt(index, newValue)
     },
     [index],
   )
@@ -210,6 +205,15 @@ export function BlockEditor({
   const handleTypeChange = useCallback(
     (newType: TellMe.BlockType) => {
       onChangeTypeAt(index, newType)
+    },
+    [index],
+  )
+
+  const handleValueChange = useCallback(
+    (newValue: string) => {
+      $value.current = newValue
+
+      onChangeAt(index, newValue)
     },
     [index],
   )
@@ -251,6 +255,7 @@ export function BlockEditor({
         onToggleVisibility={toggleVisibility}
       >
         <Editable
+          key={editableKey}
           as={Component}
           count={block.count}
           countLetter={block.countLetter}
@@ -258,13 +263,13 @@ export function BlockEditor({
           isFocused={isFocused}
           isRichText={isRichText}
           onBackspaceKeyDown={onRemove}
-          onChange={handleChange}
-          onChangeType={handleTypeChange}
           onDownKeyDown={onDownKeyDown}
           onEnterKeyDown={handleEnterKeyDown}
           onFocus={handleFocus}
+          onTypeChange={handleTypeChange}
           onUpKeyDown={onUpKeyDown}
-          placeholder={finalPlaceholder}
+          onValueChange={handleValueChange}
+          placeholder={controlledPlaceholder}
         />
 
         {isConditionOpen && (

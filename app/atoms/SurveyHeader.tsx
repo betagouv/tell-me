@@ -11,3 +11,5 @@ export const SurveyHeader = styled.header<{
   height: 10rem;
   width: 100%;
 `
+
+SurveyHeader.displayName = 'SurveyHeader'
