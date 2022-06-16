@@ -12,6 +12,8 @@
   },
   "scripts": {
     "build": "next build",
+    "ci:e2e:check": "sh ./scripts/ci/e2e/check.sh",
+    "ci:e2e:setup": "sh ./scripts/ci/e2e/setup.sh",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "debug": "envinfo --binaries --system --markdown",
@@ -27,6 +29,7 @@
     "prestart": "sh ./scripts/build/prestart.sh",
     "start": "next start",
     "test": "yarn test:lint && yarn test:type && yarn test:unit",
+    "test:e2e": "playwright test -c ./config/playwright.config.ts",
     "test:lint": "eslint --ext cjs,js,jsx,ts,tsx .",
     "test:type": "tsc -p ./tsconfig.dev.json",
     "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=./config/jest.config.js --detectOpenHandles",

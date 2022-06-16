@@ -1,6 +1,6 @@
 import { Dialog, Field } from '@singularity/core'
 import { NexauthError, useAuth } from 'nexauth/client'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 import zxcvbn from 'zxcvbn'
@@ -23,32 +23,92 @@ type SignUpValues = {
   signUpPasswordConfirmation: string
 }
 
-export enum SignInDialogType {
+enum SignInDialogType {
   LOG_IN = 'LOG_IN',
   SIGN_UP = 'SIGN_UP',
 }
 
-const logInFormSchema = Yup.object().shape({
-  logInEmail: Yup.string().required(`Veuillez entrer votre email.`).email(`Votre addresse email est mal formatée.`),
-  logInPassword: Yup.string().required(`Veuillez entrer votre mot de passe.`),
-})
+const ERROR_PATH = 'app/organisms/<SignInDialog />'
 
-const signUpFormSchema = Yup.object().shape({
-  signUpEmail: Yup.string().required(`Veuillez entrer votre email.`).email(`Votre addresse email est mal formatée.`),
-  signUpPassword: Yup.string().required(`Veuillez entrer un mot de passe.`),
-  signUpPasswordConfirmation: Yup.string()
-    .required(`Veuillez répéter le mot de passe.`)
-    .oneOf([Yup.ref('signUpPassword'), null], 'Les mots de passe ne correspondent pas.'),
-})
-
-type SignInDialogProps = {
-  defaultType?: SignInDialogType
-}
-export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDialogProps) {
+export function SignInDialog() {
   const [passwordHelperText, setPasswordHelperText] = useState<Common.Nullable<string>>(null)
-  const [type, setType] = useState(defaultType)
+  const [type, setType] = useState(SignInDialogType.LOG_IN)
   const auth = useAuth<Common.Auth.User>()
   const intl = useIntl()
+
+  const logInFormSchema = useMemo(
+    () =>
+      Yup.object().shape({
+        logInEmail: Yup.string()
+          .required(
+            intl.formatMessage({
+              defaultMessage: 'Please enter your email.',
+              description: '[Login Dialog] Email input requirement error.',
+              id: 'LOGIN_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR',
+            }),
+          )
+          .email(
+            intl.formatMessage({
+              defaultMessage: "Your email doesn't look right.",
+              description: '[Login Dialog] Email input format error.',
+              id: 'LOGIN_DIALOG__EMAIL_INPUT_FORMAT_ERROR',
+            }),
+          ),
+        logInPassword: Yup.string().required(
+          intl.formatMessage({
+            defaultMessage: 'Please enter your password.',
+            description: '[Login Dialog] Password input requirement error.',
+            id: 'LOGIN_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR',
+          }),
+        ),
+      }),
+    [],
+  )
+
+  const signUpFormSchema = useMemo(
+    () =>
+      Yup.object().shape({
+        signUpEmail: Yup.string()
+          .required(
+            intl.formatMessage({
+              defaultMessage: 'Please enter your email.',
+              description: '[Signup Dialog] Email input requirement error.',
+              id: 'SIGNUP_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR',
+            }),
+          )
+          .email(
+            intl.formatMessage({
+              defaultMessage: "Your email doesn't look right.",
+              description: '[Signup Dialog] Email input format error.',
+              id: 'SIGNUP_DIALOG__EMAIL_INPUT_FORMAT_ERROR',
+            }),
+          ),
+        signUpPassword: Yup.string().required(
+          intl.formatMessage({
+            defaultMessage: 'Please enter your password.',
+            description: '[Signup Dialog] Password input requirement error.',
+            id: 'SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR',
+          }),
+        ),
+        signUpPasswordConfirmation: Yup.string()
+          .required(
+            intl.formatMessage({
+              defaultMessage: 'Please enter your password.',
+              description: '[Signup Dialog] Password confirmation input requirement error.',
+              id: 'SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR',
+            }),
+          )
+          .oneOf(
+            [Yup.ref('signUpPassword')],
+            intl.formatMessage({
+              defaultMessage: "Passwords don't match.",
+              description: '[Signup Dialog] Password confirmation input match error.',
+              id: 'SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_MATCH_ERROR',
+            }),
+          ),
+      }),
+    [],
+  )
 
   const checkPasswordStrength = (event: ChangeEvent<HTMLInputElement>): void => {
     const password = event.currentTarget.value
@@ -77,13 +137,21 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
           switch (res.error.email) {
             case NexauthError.LOG_IN_WRONG_EMAIL_OR_PASSWORD:
               setErrors({
-                logInEmail: 'Mauvais email et/ou mot de passe.',
+                logInEmail: intl.formatMessage({
+                  defaultMessage: 'Wrong email and/or password.',
+                  description: '[Login Dialog] Wrong creadentials error.',
+                  id: 'LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR',
+                }),
               })
               break
 
             case NexauthError.LOG_IN_UNACCEPTABLE_CONDITION:
               setErrors({
-                logInEmail: 'Votre compte n’a pas encore été activé.',
+                logInEmail: intl.formatMessage({
+                  defaultMessage: 'Your account has not yet been activated.',
+                  description: '[Login Dialog] Disabled account error.',
+                  id: 'LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR',
+                }),
               })
               break
 
@@ -96,41 +164,54 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
         setSubmitting(false)
       }
     } catch (err) {
-      handleError(err, 'pages/admin/signin.js:validateForm()')
+      handleError(err, ERROR_PATH)
     }
   }
 
   const signUp = async (values: SignUpValues, { setErrors, setSubmitting }: FormikHelpers<SignUpValues>) => {
-    const { signUpEmail: email, signUpPassword: password } = values
+    try {
+      const { signUpEmail: email, signUpPassword: password } = values
 
-    const res = await auth.signUp({
-      email: email.trim().toLocaleLowerCase(),
-      password,
-    })
-    if (res.isError) {
-      if (res.error.email !== undefined) {
-        switch (res.error.email) {
-          case NexauthError.SIGN_UP_DUPLICATE_EMAIL:
-            setErrors({
-              signUpEmail: 'Cette adresse email est déjà associée à un compte.',
-            })
-            break
+      const res = await auth.signUp({
+        email: email.trim().toLocaleLowerCase(),
+        password,
+      })
+      if (res.isError) {
+        if (res.error.email !== undefined) {
+          switch (res.error.email) {
+            case NexauthError.SIGN_UP_DUPLICATE_EMAIL:
+              setErrors({
+                signUpEmail: intl.formatMessage({
+                  defaultMessage: 'This email is already associated with an existing account.',
+                  description: '[Signup Dialog] Duplicate account error.',
+                  id: 'SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR',
+                }),
+              })
+              break
 
-          default:
-            // eslint-disable-next-line no-console
-            console.error(res.error)
+            default:
+              setErrors({
+                signUpEmail: JSON.stringify(res.error),
+              })
+              // eslint-disable-next-line no-console
+              console.error(res.error)
+          }
+        } else {
+          // eslint-disable-next-line no-console
+          console.error(res.error)
         }
-      } else {
-        // eslint-disable-next-line no-console
-        console.error(res.error)
+
+        setSubmitting(false)
+
+        return
       }
 
-      setSubmitting(false)
+      handleError(res, ERROR_PATH)
 
-      return
+      switchToLogIn()
+    } catch (err) {
+      handleError(err, ERROR_PATH)
     }
-
-    switchToLogIn()
   }
 
   const switchToLogIn = () => {
@@ -155,7 +236,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
             <Dialog.Title>
               {intl.formatMessage({
                 defaultMessage: 'Log In',
-                description: '[Login Modal] Modal title.',
+                description: '[Login Dialog] Modal title.',
                 id: 'wHB27C',
               })}
             </Dialog.Title>
@@ -172,7 +253,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
                 autoComplete="email"
                 label={intl.formatMessage({
                   defaultMessage: 'Email',
-                  description: '[Login Modal] Form email input label.',
+                  description: '[Login Dialog] Form email input label.',
                   id: 'ugMu4J',
                 })}
                 name="logInEmail"
@@ -184,7 +265,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
                 autoComplete="current-password"
                 label={intl.formatMessage({
                   defaultMessage: 'Password',
-                  description: '[Login Modal] Form password input label.',
+                  description: '[Login Dialog] Form password input label.',
                   id: 'xhJCpr',
                 })}
                 name="logInPassword"
@@ -197,7 +278,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
             <Form.Submit>
               {intl.formatMessage({
                 defaultMessage: 'Log In',
-                description: '[Login Modal] Form submit button label.',
+                description: '[Login Dialog] Form submit button label.',
                 id: 'I8y4ic',
               })}
             </Form.Submit>
@@ -220,7 +301,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
           <Dialog.Title>
             {intl.formatMessage({
               defaultMessage: 'Sign Up',
-              description: '[Signup Modal] Title.',
+              description: '[Signup Dialog] Title.',
               id: 'EYeJTo',
             })}
           </Dialog.Title>
@@ -237,7 +318,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
               autoComplete="email"
               label={intl.formatMessage({
                 defaultMessage: 'Your email',
-                description: '[Signup Modal] Email input label.',
+                description: '[Signup Dialog] Email input label.',
                 id: 'YJ9OxG',
               })}
               name="signUpEmail"
@@ -250,7 +331,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
               helper={passwordHelperText || undefined}
               label={intl.formatMessage({
                 defaultMessage: 'A new password',
-                description: '[Signup Modal] Password input label.',
+                description: '[Signup Dialog] Password input label.',
                 id: 'fWOJDC',
               })}
               name="signUpPassword"
@@ -263,7 +344,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
               autoComplete="new-password"
               label={intl.formatMessage({
                 defaultMessage: 'Your new password (again)',
-                description: '[Signup Modal] Password repeat input label.',
+                description: '[Signup Dialog] Password repeat input label.',
                 id: 'K06DbM',
               })}
               name="signUpPasswordConfirmation"
@@ -276,7 +357,7 @@ export function SignInDialog({ defaultType = SignInDialogType.LOG_IN }: SignInDi
           <Form.Submit>
             {intl.formatMessage({
               defaultMessage: 'Sign Up',
-              description: '[Signup Modal] Submit button label.',
+              description: '[Signup Dialog] Submit button label.',
               id: 'q5x9RM',
             })}
           </Form.Submit>

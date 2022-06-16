@@ -140,10 +140,25 @@ export function Menu() {
       </div>
 
       <UserMenu>
-        <Link href="/me">
+        <Link
+          aria-label={intl.formatMessage({
+            defaultMessage: 'My settings',
+            description: '[Menu] Settings button aria label.',
+            id: 'MENU__SETTINGS_BUTTON_ARIA_LABEL',
+          })}
+          href="/me"
+        >
           <Settings />
         </Link>
-        <LogOut onClick={auth.logOut} />
+        <LogOut
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Log out',
+            description: '[Menu] Log out button aria label.',
+            id: 'MENU__LOG_OUT_BUTTON_ARIA_LABEL',
+          })}
+          onClick={auth.logOut}
+          role="button"
+        />
       </UserMenu>
     </Container>
   )

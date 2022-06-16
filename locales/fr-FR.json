@@ -53,7 +53,7 @@
   },
   "EYeJTo": {
     "defaultMessage": "Inscription",
-    "description": "[Signup Modal] Title."
+    "description": "[Signup Dialog] Title."
   },
   "FC8ax/": {
     "defaultMessage": "Édition d’un·e utilisateur·rice",
@@ -65,7 +65,7 @@
   },
   "I8y4ic": {
     "defaultMessage": "Se connecter",
-    "description": "[Login Modal] Form submit button label."
+    "description": "[Login Dialog] Form submit button label."
   },
   "IEpCqZ": {
     "defaultMessage": "Nouveau questionnaire",
@@ -73,11 +73,39 @@
   },
   "K06DbM": {
     "defaultMessage": "Répêtez votre nouveau mot de passe",
-    "description": "[Signup Modal] Password repeat input label."
+    "description": "[Signup Dialog] Password repeat input label."
   },
   "KahMf6": {
     "defaultMessage": "Email",
     "description": "[Personal Access Tokens List] Table Email column label."
+  },
+  "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": {
+    "defaultMessage": "Votre compte n'a pas encore été activé.",
+    "description": "[Login Dialog] Disabled account error."
+  },
+  "LOGIN_DIALOG__EMAIL_INPUT_FORMAT_ERROR": {
+    "defaultMessage": "Votre email semble mal formaté.",
+    "description": "[Login Dialog] Email input format error."
+  },
+  "LOGIN_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Veuillez entrer votre email.",
+    "description": "[Login Dialog] Email input requirement error."
+  },
+  "LOGIN_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Veuillez entrer votre mot de passe.",
+    "description": "[Login Dialog] Password input requirement error."
+  },
+  "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": {
+    "defaultMessage": "Mauvais email et/ou mot de passe.",
+    "description": "[Login Dialog] Wrong creadentials error."
+  },
+  "MENU__LOG_OUT_BUTTON_ARIA_LABEL": {
+    "defaultMessage": "Me déconnecter",
+    "description": "[Menu] Log out button aria label."
+  },
+  "MENU__SETTINGS_BUTTON_ARIA_LABEL": {
+    "defaultMessage": "Mes préférences",
+    "description": "[Menu] Settings button aria label."
   },
   "NIzhyl": {
     "defaultMessage": "Nouveau jeton d’accès personnel",
@@ -98,6 +126,30 @@
   "QWfMAC": {
     "defaultMessage": "Création d’un jeton d’accès personnel",
     "description": "[Personal Access Token Editor] Creation page title."
+  },
+  "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": {
+    "defaultMessage": "Cette adresse email est déjà associée à un compte.",
+    "description": "[Signup Dialog] Duplicate account error."
+  },
+  "SIGNUP_DIALOG__EMAIL_INPUT_FORMAT_ERROR": {
+    "defaultMessage": "Votre email semble mal formaté.",
+    "description": "[Signup Dialog] Email input format error."
+  },
+  "SIGNUP_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Veuillez entrer votre email.",
+    "description": "[Signup Dialog] Email input requirement error."
+  },
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_MATCH_ERROR": {
+    "defaultMessage": "Les mots de passe ne correspondent pas.",
+    "description": "[Signup Dialog] Password confirmation input match error."
+  },
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Veuillez répéter le mot de passe.",
+    "description": "[Signup Dialog] Password confirmation input requirement error."
+  },
+  "SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Veuillez entrer votre mot de passe.",
+    "description": "[Signup Dialog] Password input requirement error."
   },
   "TYZzVl": {
     "defaultMessage": "Étiquette",
@@ -121,7 +173,7 @@
   },
   "YJ9OxG": {
     "defaultMessage": "Votre email",
-    "description": "[Signup Modal] Email input label."
+    "description": "[Signup Dialog] Email input label."
   },
   "YsRqXk": {
     "defaultMessage": "Exporter en CSV",
@@ -153,7 +205,7 @@
   },
   "fWOJDC": {
     "defaultMessage": "Un nouveau mot de passe",
-    "description": "[Signup Modal] Password input label."
+    "description": "[Signup Dialog] Password input label."
   },
   "h4+RiJ": {
     "defaultMessage": "Mettre à jour",
@@ -201,7 +253,7 @@
   },
   "q5x9RM": {
     "defaultMessage": "S’inscrire",
-    "description": "[Signup Modal] Submit button label."
+    "description": "[Signup Dialog] Submit button label."
   },
   "s1Q3aH": {
     "defaultMessage": "Date",
@@ -213,15 +265,15 @@
   },
   "ugMu4J": {
     "defaultMessage": "Email",
-    "description": "[Login Modal] Form email input label."
+    "description": "[Login Dialog] Form email input label."
   },
   "wHB27C": {
     "defaultMessage": "Connexion",
-    "description": "[Login Modal] Modal title."
+    "description": "[Login Dialog] Modal title."
   },
   "xhJCpr": {
     "defaultMessage": "Mot de passe",
-    "description": "[Login Modal] Form password input label."
+    "description": "[Login Dialog] Form password input label."
   },
   "zGNJ13": {
     "defaultMessage": "Utilisateur·rices",
