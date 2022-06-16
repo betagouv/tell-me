@@ -142,7 +142,7 @@ export default function SurveyListPage() {
       tree,
     }
 
-    const maybePostBody = await api.post('survey', destinationSurvey)
+    const maybePostBody = await api.post('surveys', destinationSurvey)
     if (maybePostBody === null || maybePostBody.hasError) {
       return
     }

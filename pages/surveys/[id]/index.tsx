@@ -143,11 +143,11 @@ export default function SurveyEditorPage() {
   }, [])
 
   const uploadCover = useCallback(async (formData: FormData) => {
-    await api.put(`survey/${id}/upload?type=cover`, formData)
+    await api.put(`surveys/${id}/upload?type=cover`, formData)
   }, [])
 
   const uploadLogo = useCallback(async (formData: FormData) => {
-    await api.put(`survey/${id}/upload?type=logo`, formData)
+    await api.put(`surveys/${id}/upload?type=logo`, formData)
   }, [])
 
   useEffect(() => {
@@ -203,6 +203,7 @@ export default function SurveyEditorPage() {
 
       {$surveyEditorManager.current.blocks.map((block, index) => (
         <BlockEditor
+          key={block.id}
           block={block}
           index={index}
           isFocused={index === $surveyEditorManager.current.focusedBlockIndex}
