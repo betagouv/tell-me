@@ -1,4 +1,4 @@
-import ky from 'ky'
+import ky, { HTTPError } from 'ky'
 import { useAuth } from 'nexauth/client'
 import { useMemo } from 'react'
 
@@ -20,12 +20,22 @@ export function withApi(Component) {
         prefixUrl: API_BASE_URL,
       })
 
-      const get = async path => {
+      async function get<T = any>(path: string): Promise<Common.Nullable<Api.ResponseBody<T>>> {
         try {
-          const body = await kyIntance.get(path).json<Api.ResponseBody>()
+          const body = await kyIntance.get(path).json<Api.ResponseBodySuccess<T>>()
 
           return body
         } catch (err) {
+          if (err instanceof HTTPError) {
+            try {
+              const bodyError: Api.ResponseBodyFailure = await err.response.json()
+
+              return bodyError
+            } catch (errBis) {
+              return null
+            }
+          }
+
           return null
         }
       }
