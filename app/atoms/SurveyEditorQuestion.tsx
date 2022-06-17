@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { SurveyQuestion } from '../../../atoms/SurveyQuestion'
+import { SurveyQuestion } from './SurveyQuestion'
 
-export const Question = styled(SurveyQuestion)`
+export const SurveyEditorQuestion = styled(SurveyQuestion)`
   margin: 0.5rem 0;
 
   :focus:empty::before {
@@ -13,3 +13,5 @@ export const Question = styled(SurveyQuestion)`
     width: 100%;
   }
 `
+
+SurveyEditorQuestion.displayName = 'SurveyEditorQuestion'

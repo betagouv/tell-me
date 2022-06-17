@@ -6,3 +6,5 @@ export const SurveyQuestion = styled.p`
   font-weight: 500;
   margin: ${p => p.theme.padding.layout.small} 0;
 `
+
+SurveyQuestion.displayName = 'SurveyQuestion'

@@ -76,11 +76,11 @@ const Editable = styled.div`
   }
 `
 
-export const FileInput = forwardRef<HTMLDivElement>((props, ref) => (
+export const SurveyEditorFileInput = forwardRef<HTMLDivElement>((props, ref) => (
   <Box>
     <Upload />
     <Editable ref={ref} {...props} />
   </Box>
 ))
 
-FileInput.displayName = 'FileInput'
+SurveyEditorFileInput.displayName = 'SurveyEditorFileInput'

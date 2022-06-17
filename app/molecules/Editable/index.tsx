@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { useEffect, useReducer, useRef, useState } from 'react'
+import { HTMLAttributes, useEffect, useReducer, useRef, useState } from 'react'
 
 import { getRandomId } from '../../helpers/getRandomId'
 import { useIsMounted } from '../../hooks/useIsMounted'
@@ -61,33 +61,35 @@ const MENU_ITEMS: BlockMenuItem[] = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-type EditableProps<P = Common.AnyProps> = P & {
+type EditableProps = HTMLAttributes<HTMLDivElement> & {
   as: any
+  count?: Common.Nullable<number>
+  countLetter?: Common.Nullable<string>
   defaultValue?: string
   isFocused?: boolean
   isRichText?: boolean
   onBackspaceKeyDown?: Common.Nullable<() => void>
-  onChange: (newValue: string) => void
-  onChangeType?: Common.Nullable<(newType: TellMe.BlockType) => void>
   onDownKeyDown?: Common.Nullable<() => void>
   onEnterKeyDown?: Common.Nullable<() => void>
   onFocus?: Common.Nullable<() => void>
+  onTypeChange?: Common.Nullable<(newType: TellMe.BlockType) => void>
   onUpKeyDown?: Common.Nullable<() => void>
+  onValueChange: (newValue: string) => void
 }
-export function Editable<P = Common.AnyProps>({
+export function Editable({
   as,
   defaultValue = '',
   isFocused = false,
   isRichText = false,
   onBackspaceKeyDown = null,
-  onChange,
-  onChangeType = null,
   onDownKeyDown = null,
   onEnterKeyDown = null,
-  onFocus = null,
+  onFocus,
+  onTypeChange = null,
   onUpKeyDown = null,
+  onValueChange,
   ...props
-}: EditableProps<P>) {
+}: EditableProps) {
   const [blockMenuState, dispatchToBlockMenu] = useReducer<Reducer<BlockMenuReducerState, BlockMenuReducerAction>>(
     blockMenuReducer,
     {
@@ -98,7 +100,7 @@ export function Editable<P = Common.AnyProps>({
       visibleItems: MENU_ITEMS,
     },
   )
-  const componentRef = useRef<HTMLElement>(null)
+  const componentRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
   const lastValueBeforeOpeningBlockMenuRef = useRef(defaultValue) as MutableRefObject<string>
   const [isBlockMenuOpen, setIsBlockMenuOpen] = useState<boolean>(false)
@@ -143,14 +145,14 @@ export function Editable<P = Common.AnyProps>({
 
   const handleBlockTypeChange = newBlockType => {
     if (lastValueBeforeOpeningBlockMenuRef.current !== null) {
-      onChange(lastValueBeforeOpeningBlockMenuRef.current)
+      onValueChange(lastValueBeforeOpeningBlockMenuRef.current)
     }
 
-    if (onChangeType === null) {
+    if (onTypeChange === null) {
       return
     }
 
-    onChangeType(newBlockType)
+    onTypeChange(newBlockType)
   }
 
   const handleClick = () => {
@@ -162,7 +164,7 @@ export function Editable<P = Common.AnyProps>({
   }
 
   const handleFocus = (): void => {
-    if (onFocus !== null) {
+    if (onFocus !== undefined) {
       onFocus()
     }
   }
@@ -179,7 +181,7 @@ export function Editable<P = Common.AnyProps>({
         lastValueBeforeOpeningBlockMenuRef.current = newValue
       }
 
-      onChange(newValue)
+      onValueChange(newValue)
 
       return
     }
@@ -198,7 +200,7 @@ export function Editable<P = Common.AnyProps>({
       lastValueBeforeOpeningBlockMenuRef.current = newValue
     }
 
-    onChange(newValue)
+    onValueChange(newValue)
   }
 
   const openBlockMenu = () => {
@@ -219,7 +221,7 @@ export function Editable<P = Common.AnyProps>({
     hasFormattedRef.current = true
 
     closeFormatMenu()
-    onChange(newValue)
+    onValueChange(newValue)
   }
 
   const controlKey = (event: KeyboardEvent<HTMLElement>) => {
@@ -413,7 +415,7 @@ export function Editable<P = Common.AnyProps>({
 
       <Component
         ref={componentRef}
-        contentEditable
+        contentEditable="true"
         dangerouslySetInnerHTML={innerHTML}
         onClick={handleClick}
         onFocus={handleFocus}
@@ -437,3 +439,5 @@ export function Editable<P = Common.AnyProps>({
     </div>
   )
 }
+
+Editable.displayName = 'Editable'
