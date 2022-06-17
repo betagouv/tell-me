@@ -86,27 +86,8 @@ export namespace TellMe {
       language: string
       /** The logo URI. This can be a domain-relative path, i.e.: "/images/logo.svg". */
       logoUri: string | null
-      /** The survey title. */
-      title: string
-      /** Tell Me JSON Schema version used to validate. Major versions here should match Tell Me application major versions. */
-      version: '1.0.0'
-    }
-    /** The unique survey ID. This should match the row ID in database "surveys" table. */
-    id: string
-    type: 'root'
-  }
-
-  interface TreeEntry {
-    children: TreeBlock[]
-    data: {
-      /** The background URI. This can be a domain-relative path, i.e.: "/images/background.svg". */
-      backgroundUri: string | null
-      /** The cover URI. This can be a domain-relative path, i.e.: "/images/cover.svg". */
-      coverUri: string | null
-      /** The language code of the survey content as defined by IETF BCP 47 language tag. */
-      language: string
-      /** The logo URI. This can be a domain-relative path, i.e.: "/images/logo.svg". */
-      logoUri: string | null
+      /** The custom thank you message shown to a user once the survey is submitted. */
+      thankYouMessage: string | null
       /** The survey title. */
       title: string
       /** Tell Me JSON Schema version used to validate. Major versions here should match Tell Me application major versions. */

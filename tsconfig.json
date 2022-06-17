@@ -12,8 +12,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.cjs"],
-  "exclude": [".next/*", "config/*", "e2e/*", "node_modules/*", "**/__tests__/*"],
-  "ts-node": {
-    "esm": true
-  }
+  "exclude": [".next/*", "config/*", "e2e/*", "node_modules/*", "**/__tests__/*"]
 }

@@ -71,6 +71,12 @@
       "value": "Fichiers"
     }
   ],
+  "E/vx8U": [
+    {
+      "type": 0,
+      "value": "Thank You message"
+    }
+  ],
   "EEsDeJ": [
     {
       "type": 0,
@@ -159,6 +165,12 @@
     {
       "type": 0,
       "value": "Mes préférences"
+    }
+  ],
+  "N68/ff": [
+    {
+      "type": 0,
+      "value": "Slug"
     }
   ],
   "NIzhyl": [
@@ -263,10 +275,22 @@
       "value": "Votre email"
     }
   ],
+  "YbP4R+": [
+    {
+      "type": 0,
+      "value": "Survey Settings"
+    }
+  ],
   "YsRqXk": [
     {
       "type": 0,
       "value": "Exporter en CSV"
+    }
+  ],
+  "YzeZvW": [
+    {
+      "type": 0,
+      "value": "Published"
     }
   ],
   "ZxR2Ts": [
@@ -285,6 +309,12 @@
     {
       "type": 0,
       "value": "Supprimer cet jeton d’accès personnel"
+    }
+  ],
+  "bdTRI9": [
+    {
+      "type": 0,
+      "value": "Update"
     }
   ],
   "cZz32J": [
@@ -391,6 +421,12 @@
       "value": "Mettre à jour"
     }
   ],
+  "pglohm": [
+    {
+      "type": 0,
+      "value": "Title"
+    }
+  ],
   "q5x9RM": [
     {
       "type": 0,
@@ -413,6 +449,12 @@
     {
       "type": 0,
       "value": "Email"
+    }
+  ],
+  "vaW853": [
+    {
+      "type": 0,
+      "value": "Thank you for your interest in helping our project!"
     }
   ],
   "wHB27C": [

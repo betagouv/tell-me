@@ -203,11 +203,11 @@
       "properties": {
         "backgroundUri": {
           "description": "The background URI. This can be a domain-relative path, i.e.: \"/images/background.svg\".",
-          "type": ["string", "null"]
+          "$oneOf": [{ "type": "string" }, { "type": "null" }]
         },
         "coverUri": {
           "description": "The cover URI. This can be a domain-relative path, i.e.: \"/images/cover.svg\".",
-          "type": ["string", "null"]
+          "$oneOf": [{ "type": "string" }, { "type": "null" }]
         },
         "language": {
           "$comment": "Support language-tags (\"en\", \"fr\", etc) and subtag postfixes (\"en-GB\", \"fr-CA\", etc).",
@@ -217,7 +217,11 @@
         },
         "logoUri": {
           "description": "The logo URI. This can be a domain-relative path, i.e.: \"/images/logo.svg\".",
-          "type": ["string", "null"]
+          "$oneOf": [{ "type": "string" }, { "type": "null" }]
+        },
+        "thankYouMessage": {
+          "description": "The custom thank you message shown to a user once the survey is submitted.",
+          "$oneOf": [{ "type": "string" }, { "type": "null" }]
         },
         "title": {
           "description": "The survey title.",
