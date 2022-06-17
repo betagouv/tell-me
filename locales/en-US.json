@@ -33,7 +33,7 @@
   },
   "D6/Uxz": {
     "defaultMessage": "Surveys",
-    "description": "[Sidebar Main Menu] Surveys label."
+    "description": "[Main Menu] Surveys label."
   },
   "Db1A9P": {
     "defaultMessage": "Label",
@@ -53,7 +53,7 @@
   },
   "EEsDeJ": {
     "defaultMessage": "Dashboard",
-    "description": "[Sidebar Main Menu] Dashboard label."
+    "description": "[Main Menu] Dashboard label."
   },
   "EYeJTo": {
     "defaultMessage": "Sign Up",
@@ -74,6 +74,42 @@
   "IEpCqZ": {
     "defaultMessage": "New survey",
     "description": "[Surveys List] New survey button label."
+  },
+  "IMPORT_EXPORT_PAGE__PAGE_TITLE": {
+    "defaultMessage": "Import / Export",
+    "description": "[Import / Export Page] Page title."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION": {
+    "defaultMessage": "You can import surveys between different Tell Me instances using their API.",
+    "description": "[Import Surveys via API Form] Description."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION_HELPER": {
+    "defaultMessage": "You first have to generate a Personal Access Token on the source instance in order for the current instance to have access to the remote data.",
+    "description": "[Import Surveys via API Form] Description helper."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__IMPORT_BUTTON_LABEL": {
+    "defaultMessage": "Import Surveys",
+    "description": "[Import Surveys via API Form] Form import button label."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_LABEL": {
+    "defaultMessage": "Personal Access Token",
+    "description": "[Import Surveys via API Form] Personal Access Token input label."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Please generate a Personal Access Token on the remote Tell Me source and copy/paste its value here.",
+    "description": "[Import Surveys via API Form] Password input requirement error."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_FORMAT_ERROR": {
+    "defaultMessage": "This URL format doesn't look right.",
+    "description": "[Import Surveys via API Form] Url input format error."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_LABEL": {
+    "defaultMessage": "URL",
+    "description": "[Import Surveys via API Form] URL input label."
+  },
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_REQUIREMENT_ERROR": {
+    "defaultMessage": "Please enter the Tell Me remote source url.",
+    "description": "[Import Surveys via API Form] Url input requirement error."
   },
   "K06DbM": {
     "defaultMessage": "Your new password (again)",
@@ -102,6 +138,14 @@
   "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": {
     "defaultMessage": "Wrong email and/or password.",
     "description": "[Login Dialog] Wrong creadentials error."
+  },
+  "MAIN_MENU__ADMINISTRATION_TITLE": {
+    "defaultMessage": "ADMINISTRATION",
+    "description": "[Main Menu] Administration title."
+  },
+  "MAIN_MENU__IMPORT_EXPORT_ITEM": {
+    "defaultMessage": "Import / Export",
+    "description": "[Main Menu] Import / Export item."
   },
   "MENU__LOG_OUT_BUTTON_ARIA_LABEL": {
     "defaultMessage": "Log out",
@@ -152,7 +196,7 @@
     "description": "[Signup Dialog] Password confirmation input match error."
   },
   "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please enter your password.",
+    "defaultMessage": "Please confirm your password.",
     "description": "[Signup Dialog] Password confirmation input requirement error."
   },
   "SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": {
@@ -173,7 +217,7 @@
   },
   "WL5w1n": {
     "defaultMessage": "Personal Access Tokens",
-    "description": "[Sidebar Main Menu] Personal Access Tokens label."
+    "description": "[Main Menu] Personal Access Tokens label."
   },
   "XJmbHw": {
     "defaultMessage": "Role",
@@ -305,6 +349,6 @@
   },
   "zGNJ13": {
     "defaultMessage": "Users",
-    "description": "[Sidebar Main Menu] Users label."
+    "description": "[Main Menu] Users label."
   }
 }

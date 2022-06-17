@@ -1,52 +1,37 @@
 import { Select as SingularitySelect } from '@singularity/core'
 import { useFormikContext } from 'formik'
+import { useCallback, useMemo } from 'react'
 
-type SelectProps = {
-  helper?: string
-  isAsync?: boolean
-  isDisabled?: boolean
-  isMulti?: boolean
-  label: string
+import type { SelectProps as SuiSelectProps } from '@singularity/core'
+
+type SelectProps = SuiSelectProps & {
   name: string
-  noLabel?: boolean
-  options?: Common.App.SelectOption[]
-  placeholder?: string
 }
-export function Select({
-  helper,
-  isAsync = false,
-  isDisabled = false,
-  isMulti = false,
-  label,
-  noLabel = false,
-  name,
-  options = [],
-  placeholder,
-}: SelectProps) {
-  const { errors, setFieldValue, submitCount, touched, values } = useFormikContext<any>()
+export function Select({ isDisabled = false, name, ...rest }: SelectProps) {
+  const { errors, isSubmitting, setFieldValue, submitCount, touched, values } = useFormikContext<any>()
 
-  const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
-  const maybeError = hasError ? String(errors[name]) : undefined
+  const controlledIsDisabled = useMemo(() => isDisabled && isSubmitting, [isDisabled, isSubmitting])
+  const defaultValue = useMemo(() => values[name], [values[name]])
+  const maybeError = useMemo(() => {
+    const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
 
-  const updateFormikValues = option => {
+    return hasError ? String(errors[name]) : undefined
+  }, [errors[name], touched[name], submitCount])
+
+  const updateFormikValues = useCallback(option => {
     setFieldValue(name, option)
-  }
+  }, [])
 
   return (
     <SingularitySelect
-      cacheOptions={isAsync}
-      defaultValue={values[name]}
+      defaultValue={defaultValue}
       error={maybeError}
-      helper={helper}
-      isAsync={isAsync}
       isClearable
-      isDisabled={isDisabled}
-      isMulti={isMulti}
-      label={!noLabel ? label : undefined}
+      isDisabled={controlledIsDisabled}
+      isLoading={isSubmitting}
       name={name}
       onChange={updateFormikValues}
-      options={!isAsync ? options : undefined}
-      placeholder={placeholder}
+      {...rest}
     />
   )
 }

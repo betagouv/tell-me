@@ -93,7 +93,7 @@ export function SignInDialog() {
         signUpPasswordConfirmation: Yup.string()
           .required(
             intl.formatMessage({
-              defaultMessage: 'Please enter your password.',
+              defaultMessage: 'Please confirm your password.',
               description: '[Signup Dialog] Password confirmation input requirement error.',
               id: 'SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR',
             }),

@@ -1,29 +1,32 @@
 import { Textarea as SingularityTextarea } from '@singularity/core'
 import { useFormikContext } from 'formik'
+import { useMemo } from 'react'
 
-type TextareaProps = {
-  helper?: string
-  isDisabled?: boolean
-  label?: string
+import type { TextareaProps as SuiTextareaProps } from '@singularity/core'
+
+type TextareaProps = SuiTextareaProps & {
   name: string
-  placeholder?: string
 }
-export function Textarea({ helper, isDisabled, label, name, placeholder }: TextareaProps) {
-  const { errors, handleChange, submitCount, touched, values } = useFormikContext<any>()
+export function Textarea({ autoComplete = 'off', disabled = false, name, ...rest }: TextareaProps) {
+  const { errors, handleChange, isSubmitting, submitCount, touched, values } = useFormikContext<any>()
 
-  const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
-  const maybeError = hasError ? String(errors[name]) : undefined
+  const controlledDisabled = useMemo(() => disabled && isSubmitting, [disabled, isSubmitting])
+  const defaultValue = useMemo(() => values[name], [values[name]])
+  const maybeError = useMemo(() => {
+    const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
+
+    return hasError ? String(errors[name]) : undefined
+  }, [errors[name], touched[name], submitCount])
 
   return (
     <SingularityTextarea
-      defaultValue={values[name]}
-      disabled={isDisabled}
+      autoComplete={autoComplete}
+      defaultValue={defaultValue}
+      disabled={controlledDisabled}
       error={maybeError}
-      helper={helper}
-      label={label}
       name={name}
       onChange={handleChange}
-      placeholder={placeholder}
+      {...rest}
     />
   )
 }

@@ -10,15 +10,20 @@ import { TextInput } from './TextInput'
 import type { FormikConfig, FormikValues } from 'formik'
 import type { FormHTMLAttributes } from 'react'
 
-const StyledForm = styled(FormikForm)`
+const Box = styled.div<{
+  withTopMargin: boolean
+}>`
   display: flex;
   flex-direction: column;
+  margin-top: ${p => (p.withTopMargin ? p.theme.padding.layout.medium : 0)};
   width: 100%;
 `
 
 type FormComponentProps<Values extends FormikValues = FormikValues, ExtraProps = {}> = FormikConfig<Values> &
   ExtraProps &
-  Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'>
+  Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
+    withTopMargin?: boolean
+  }
 function FormComponent({
   children,
   initialErrors,
@@ -26,21 +31,24 @@ function FormComponent({
   onSubmit,
   validate,
   validationSchema,
+  withTopMargin = false,
   ...props
 }: FormComponentProps) {
   return (
-    <Formik
-      enableReinitialize
-      initialErrors={initialErrors}
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validate={validate}
-      validationSchema={validationSchema}
-    >
-      <StyledForm noValidate {...props}>
-        {children}
-      </StyledForm>
-    </Formik>
+    <Box withTopMargin={withTopMargin}>
+      <Formik
+        enableReinitialize
+        initialErrors={initialErrors}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validate={validate}
+        validationSchema={validationSchema}
+      >
+        <FormikForm noValidate {...props}>
+          {children}
+        </FormikForm>
+      </Formik>
+    </Box>
   )
 }
 

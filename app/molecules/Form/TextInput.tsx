@@ -1,45 +1,41 @@
 import { TextInput as SuiTextInput } from '@singularity/core'
 import { useFormikContext } from 'formik'
-import { ChangeEvent, ChangeEventHandler, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
-import type { TextInputProps } from '@singularity/core'
+import type { TextInputProps as SuiTextInputProps } from '@singularity/core'
+import type { ChangeEvent, ChangeEventHandler } from 'react'
 
-type CustomTextInputProps = TextInputProps & {
-  isDisabled?: boolean
+type TextInputProps = SuiTextInputProps & {
   name: string
   onChange?: ChangeEventHandler<HTMLInputElement>
-  type?: string
 }
-export function TextInput({
-  autoComplete = 'off',
-  isDisabled = false,
-  name,
-  onChange,
-  type = 'text',
-  ...props
-}: CustomTextInputProps) {
+export function TextInput({ autoComplete = 'off', disabled, name, onChange, type = 'text', ...props }: TextInputProps) {
   const { errors, handleChange, isSubmitting, submitCount, touched, values } = useFormikContext<any>()
 
-  const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
-  const maybeError = hasError ? String(errors[name]) : undefined
+  const controlledDisabled = useMemo(() => disabled && isSubmitting, [disabled, isSubmitting])
   const defaultVaLue = useMemo(() => values[name], [values[name]])
+  const maybeError = useMemo(() => {
+    const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])
 
-  const checkChange = (event: ChangeEvent<HTMLInputElement>) => {
+    return hasError ? String(errors[name]) : undefined
+  }, [errors[name], touched[name], submitCount])
+
+  const controlChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     if (onChange !== undefined) {
       onChange(event)
     }
 
     handleChange(event)
-  }
+  }, [])
 
   return (
     <SuiTextInput
       autoComplete={autoComplete}
       defaultValue={defaultVaLue}
-      disabled={isDisabled || isSubmitting}
+      disabled={controlledDisabled}
       error={maybeError}
       name={name}
-      onChange={checkChange}
+      onChange={controlChange}
       type={type}
       {...props}
     />

@@ -46,6 +46,10 @@ const MainMenu = styled.div`
   flex-direction: column;
   padding: ${p => p.theme.padding.layout.medium};
 
+  p:not(:first-child) {
+    margin-top: ${p => p.theme.padding.layout.large};
+  }
+
   span {
     padding: 0;
   }
@@ -57,6 +61,16 @@ const MainMenu = styled.div`
     padding: ${p => p.theme.padding.layout.small} ${p => p.theme.padding.layout.medium};
     text-decoration: none;
   }
+`
+
+const MainMenuTitle = styled.p`
+  border-top: 1px solid ${p => p.theme.color.body.white};
+  color: ${p => p.theme.color.body.white};
+  font-size: 80%;
+  font-weight: 500;
+  margin: ${p => p.theme.padding.layout.giant} 0 0;
+  opacity: 0.35;
+  padding: ${p => p.theme.padding.layout.small} ${p => p.theme.padding.layout.medium};
 `
 
 const UserMenu = styled.div`
@@ -96,7 +110,7 @@ export function Menu() {
               <Link href="/">
                 {intl.formatMessage({
                   defaultMessage: 'Dashboard',
-                  description: '[Sidebar Main Menu] Dashboard label.',
+                  description: '[Main Menu] Dashboard label.',
                   id: 'EEsDeJ',
                 })}
               </Link>
@@ -106,7 +120,7 @@ export function Menu() {
               <Link href="/surveys">
                 {intl.formatMessage({
                   defaultMessage: 'Surveys',
-                  description: '[Sidebar Main Menu] Surveys label.',
+                  description: '[Main Menu] Surveys label.',
                   id: 'D6/Uxz',
                 })}
               </Link>
@@ -114,12 +128,20 @@ export function Menu() {
 
             {isAdmin && (
               <>
-                <VerticalMenu.Item isActive={router.pathname.startsWith('/users')} isDark>
-                  <Link href="/users">
+                <MainMenuTitle>
+                  {intl.formatMessage({
+                    defaultMessage: 'ADMINISTRATION',
+                    description: '[Main Menu] Administration title.',
+                    id: 'MAIN_MENU__ADMINISTRATION_TITLE',
+                  })}
+                </MainMenuTitle>
+
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/import-export')} isDark>
+                  <Link href="/import-export">
                     {intl.formatMessage({
-                      defaultMessage: 'Users',
-                      description: '[Sidebar Main Menu] Users label.',
-                      id: 'zGNJ13',
+                      defaultMessage: 'Import / Export',
+                      description: '[Main Menu] Import / Export item.',
+                      id: 'MAIN_MENU__IMPORT_EXPORT_ITEM',
                     })}
                   </Link>
                 </VerticalMenu.Item>
@@ -128,8 +150,18 @@ export function Menu() {
                   <Link href="/personal-access-tokens">
                     {intl.formatMessage({
                       defaultMessage: 'Personal Access Tokens',
-                      description: '[Sidebar Main Menu] Personal Access Tokens label.',
+                      description: '[Main Menu] Personal Access Tokens label.',
                       id: 'WL5w1n',
+                    })}
+                  </Link>
+                </VerticalMenu.Item>
+
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/users')} isDark>
+                  <Link href="/users">
+                    {intl.formatMessage({
+                      defaultMessage: 'Users',
+                      description: '[Main Menu] Users label.',
+                      id: 'zGNJ13',
                     })}
                   </Link>
                 </VerticalMenu.Item>

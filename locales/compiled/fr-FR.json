@@ -113,6 +113,60 @@
       "value": "Nouveau questionnaire"
     }
   ],
+  "IMPORT_EXPORT_PAGE__PAGE_TITLE": [
+    {
+      "type": 0,
+      "value": "Import / Export"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION": [
+    {
+      "type": 0,
+      "value": "You can import surveys between different Tell Me instances using their API."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION_HELPER": [
+    {
+      "type": 0,
+      "value": "You first have to generate a Personal Access Token on the source instance in order for the current instance to have access to the remote data."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__IMPORT_BUTTON_LABEL": [
+    {
+      "type": 0,
+      "value": "Import Surveys"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Personal Access Token"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please generate a Personal Access Token on the remote Tell Me source and copy/paste its value here."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "This URL format doesn't look right."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "URL"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter the Tell Me remote source url."
+    }
+  ],
   "K06DbM": [
     {
       "type": 0,
@@ -153,6 +207,18 @@
     {
       "type": 0,
       "value": "Mauvais email et/ou mot de passe."
+    }
+  ],
+  "MAIN_MENU__ADMINISTRATION_TITLE": [
+    {
+      "type": 0,
+      "value": "ADMINISTRATION"
+    }
+  ],
+  "MAIN_MENU__IMPORT_EXPORT_ITEM": [
+    {
+      "type": 0,
+      "value": "Import / Export"
     }
   ],
   "MENU__LOG_OUT_BUTTON_ARIA_LABEL": [

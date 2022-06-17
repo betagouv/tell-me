@@ -15,7 +15,7 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
   switch (req.method) {
     case 'GET':
       try {
-        const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER])
+        const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
         if (authResult === undefined) {
           return undefined as never
         }
