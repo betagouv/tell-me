@@ -47,6 +47,10 @@
     "defaultMessage": "Fichiers",
     "description": "[Survey Answers List] Table Files column label."
   },
+  "E/vx8U": {
+    "defaultMessage": "Thank You message",
+    "description": "[Survey Config] Form thank you message textarea label."
+  },
   "EEsDeJ": {
     "defaultMessage": "Tableau de bord",
     "description": "[Sidebar Main Menu] Dashboard label."
@@ -106,6 +110,10 @@
   "MENU__SETTINGS_BUTTON_ARIA_LABEL": {
     "defaultMessage": "Mes préférences",
     "description": "[Menu] Settings button aria label."
+  },
+  "N68/ff": {
+    "defaultMessage": "Slug",
+    "description": "[Survey Config] Form slug input label."
   },
   "NIzhyl": {
     "defaultMessage": "Nouveau jeton d’accès personnel",
@@ -175,9 +183,17 @@
     "defaultMessage": "Votre email",
     "description": "[Signup Dialog] Email input label."
   },
+  "YbP4R+": {
+    "defaultMessage": "Survey Settings",
+    "description": "[Survey Config] Page title."
+  },
   "YsRqXk": {
     "defaultMessage": "Exporter en CSV",
     "description": "[Survey Answers List] Export answers in CSV format button label."
+  },
+  "YzeZvW": {
+    "defaultMessage": "Published",
+    "description": "[Survey Config] Form published checkbox label."
   },
   "ZxR2Ts": {
     "defaultMessage": "Réponses au questionnaire",
@@ -190,6 +206,10 @@
   "bVPj59": {
     "defaultMessage": "Supprimer cet jeton d’accès personnel",
     "description": "[Personal Access Tokens List] Table row deletion button label."
+  },
+  "bdTRI9": {
+    "defaultMessage": "Update",
+    "description": "[Survey Config] Form update button label."
   },
   "cZz32J": {
     "defaultMessage": "Édition d’un jeton d’accès personnel",
@@ -251,6 +271,10 @@
     "defaultMessage": "Mettre à jour",
     "description": "[My Settings] Form update button label."
   },
+  "pglohm": {
+    "defaultMessage": "Title",
+    "description": "[Survey Config] Form title input label."
+  },
   "q5x9RM": {
     "defaultMessage": "S’inscrire",
     "description": "[Signup Dialog] Submit button label."
@@ -266,6 +290,10 @@
   "ugMu4J": {
     "defaultMessage": "Email",
     "description": "[Login Dialog] Form email input label."
+  },
+  "vaW853": {
+    "defaultMessage": "Thank you for your interest in helping our project!",
+    "description": "[Survey Config] Form thank you message textarea placeholder."
   },
   "wHB27C": {
     "defaultMessage": "Connexion",

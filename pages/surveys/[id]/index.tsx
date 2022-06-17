@@ -24,6 +24,7 @@ export default function SurveyEditorPage() {
   const $coverUri = useRef<string | null>(null)
   const $logoUri = useRef<string | null>(null)
   const $surveyEditorManager = useRef(new SurveyEditorManager())
+  const $thankYouMessage = useRef<TellMe.Tree['data']['thankYouMessage']>(null)
   const $title = useRef('')
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({} as any), [])
@@ -126,6 +127,7 @@ export default function SurveyEditorPage() {
         id: String(id),
         language: intl.locale,
         logoUri: $logoUri.current,
+        thankYouMessage: $thankYouMessage.current,
         title: $title.current,
       })
 
@@ -164,11 +166,12 @@ export default function SurveyEditorPage() {
       const {
         tree: {
           children,
-          data: { coverUri, logoUri, title },
+          data: { coverUri, logoUri, thankYouMessage, title },
         },
       } = maybeBody.data
 
       $surveyEditorManager.current = new SurveyEditorManager(children)
+      $thankYouMessage.current = thankYouMessage
       $coverUri.current = coverUri
       $logoUri.current = logoUri
       $title.current = title

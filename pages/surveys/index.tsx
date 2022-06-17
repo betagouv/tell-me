@@ -71,6 +71,7 @@ export default function SurveyListPage() {
         id,
         language,
         logoUri: null,
+        thankYouMessage: null,
         title,
       })
       const data: any = {

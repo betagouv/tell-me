@@ -1,7 +1,14 @@
 import { Textarea as SingularityTextarea } from '@singularity/core'
 import { useFormikContext } from 'formik'
 
-export function Textarea({ helper, isDisabled, label, name, placeholder }) {
+type TextareaProps = {
+  helper?: string
+  isDisabled?: boolean
+  label?: string
+  name: string
+  placeholder?: string
+}
+export function Textarea({ helper, isDisabled, label, name, placeholder }: TextareaProps) {
   const { errors, handleChange, submitCount, touched, values } = useFormikContext<any>()
 
   const hasError = (touched[name] !== undefined || submitCount > 0) && Boolean(errors[name])

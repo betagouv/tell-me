@@ -12,6 +12,7 @@ export function generateTellMeTree({
   id,
   language,
   logoUri,
+  thankYouMessage,
   title,
 }: Omit<TellMe.Tree, 'children' | 'data' | 'type'> &
   Omit<TellMe.Tree['data'], 'version'> & {
@@ -24,6 +25,7 @@ export function generateTellMeTree({
       coverUri,
       language,
       logoUri,
+      thankYouMessage,
       title,
       version: '1.0.0',
     }

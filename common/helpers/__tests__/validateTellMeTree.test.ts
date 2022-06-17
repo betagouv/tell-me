@@ -11,6 +11,7 @@ describe('common/helpers/validateTellMeTree()', () => {
         coverUri: null,
         language: 'en-US',
         logoUri: null,
+        thankYouMessage: null,
         title: 'A Title',
         version: '1.0.0',
       },

@@ -34,7 +34,9 @@ const Container = styled.div`
 `
 
 type PublicSurveyPageProps = {
-  survey: Survey
+  survey: Survey & {
+    tree: TellMe.Tree
+  }
 }
 export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
   const $dayJs = useRef(getDayjs())
@@ -46,6 +48,17 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
   const intl = useIntl()
 
   const openedAt = useMemo(() => $dayJs.current.utc().toISOString(), [])
+  const thankYouMessage = useMemo(
+    () =>
+      survey.tree.data.thankYouMessage === null
+        ? intl.formatMessage({
+            defaultMessage: 'Thank you for your interest in helping our project!',
+            description: '[Public Survey] Thank you message once the survey has been sent.',
+            id: 'i8B3g5',
+          })
+        : survey.tree.data.thankYouMessage,
+    [],
+  )
   const validationMessage = useMemo(
     () =>
       intl.formatMessage({
@@ -102,15 +115,7 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
           </SurveyForm>
         )}
 
-        {!isLoading && isSent && (
-          <SurveyQuestion>
-            {intl.formatMessage({
-              defaultMessage: 'Thank you for your interest in helping our project!',
-              description: '[Public Survey] Thank you message once the survey has been sent.',
-              id: 'i8B3g5',
-            })}
-          </SurveyQuestion>
-        )}
+        {!isLoading && isSent && <SurveyQuestion>{thankYouMessage}</SurveyQuestion>}
       </Container>
     </Page>
   )

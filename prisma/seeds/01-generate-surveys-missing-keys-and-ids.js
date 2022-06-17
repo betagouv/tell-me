@@ -25,7 +25,7 @@ const ajv = new Ajv({
  */
 export async function generateSurveysMissingKeysAndIds(prisma) {
   try {
-    B.info(`[${ERROR_PATH}]`, 'Generating missing tree and data IDs…')
+    B.info(`[${ERROR_PATH}]`, 'Generating surveys missing tree and data IDs…')
 
     const surveys = await prisma.survey.findMany()
     const validateTree = await ajv.compileAsync(TellMeTreeSchema)
