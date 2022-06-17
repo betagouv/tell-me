@@ -18,7 +18,7 @@
     "db:seed": "prisma db seed",
     "debug": "envinfo --binaries --system --markdown",
     "dev": "concurrently \"next dev\" \"yarn dev:intl\"",
-    "dev:docker": "docker-compose down && docker-compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up -d db",
+    "dev:docker": "docker compose down && docker compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up -d db",
     "dev:intl": "nodemon -e tsx --exec \"yarn intl\" --watch ./app --watch ./pages",
     "dev:migrate": "prisma migrate dev",
     "dev:setup": "sh ./scripts/dev/setup.sh",

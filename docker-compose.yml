@@ -15,10 +15,10 @@ services:
     build:
       context: .
       args:
-        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@localhost:5432/${POSTGRE_DATABASE}?schema=public
+        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@db:5432/${POSTGRE_DATABASE}?schema=public
     restart: always
     environment:
-        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@localhost:5432/${POSTGRE_DATABASE}?schema=public
+        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@db:5432/${POSTGRE_DATABASE}?schema=public
         EDDSA_PRIVATE_KEY: ${EDDSA_PRIVATE_KEY}
         NEXT_PUBLIC_EDDSA_PUBLIC_KEY: ${NEXT_PUBLIC_EDDSA_PUBLIC_KEY}
     ports:
