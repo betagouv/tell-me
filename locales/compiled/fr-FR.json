@@ -119,6 +119,48 @@
       "value": "Email"
     }
   ],
+  "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": [
+    {
+      "type": 0,
+      "value": "Votre compte n'a pas encore été activé."
+    }
+  ],
+  "LOGIN_DIALOG__EMAIL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "Votre email semble mal formaté."
+    }
+  ],
+  "LOGIN_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Veuillez entrer votre email."
+    }
+  ],
+  "LOGIN_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Veuillez entrer votre mot de passe."
+    }
+  ],
+  "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": [
+    {
+      "type": 0,
+      "value": "Mauvais email et/ou mot de passe."
+    }
+  ],
+  "MENU__LOG_OUT_BUTTON_ARIA_LABEL": [
+    {
+      "type": 0,
+      "value": "Me déconnecter"
+    }
+  ],
+  "MENU__SETTINGS_BUTTON_ARIA_LABEL": [
+    {
+      "type": 0,
+      "value": "Mes préférences"
+    }
+  ],
   "NIzhyl": [
     {
       "type": 0,
@@ -147,6 +189,42 @@
     {
       "type": 0,
       "value": "Création d’un jeton d’accès personnel"
+    }
+  ],
+  "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": [
+    {
+      "type": 0,
+      "value": "Cette adresse email est déjà associée à un compte."
+    }
+  ],
+  "SIGNUP_DIALOG__EMAIL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "Votre email semble mal formaté."
+    }
+  ],
+  "SIGNUP_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Veuillez entrer votre email."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_MATCH_ERROR": [
+    {
+      "type": 0,
+      "value": "Les mots de passe ne correspondent pas."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Veuillez répéter le mot de passe."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Veuillez entrer votre mot de passe."
     }
   ],
   "TYZzVl": [

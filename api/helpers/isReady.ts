@@ -1,5 +1,6 @@
 import { handleError } from '@common/helpers/handleError'
-import { PrismaClient } from '@prisma/client'
+
+import { prisma } from '../libs/prisma'
 
 // Optimize subsequent requests once it's `true`
 let IS_READY = false
@@ -7,9 +8,8 @@ let IS_READY = false
 export async function isReady(): Promise<boolean> {
   try {
     if (!IS_READY) {
-      const prismaInstance = new PrismaClient()
-      const usersCount = await prismaInstance.user.count()
-      await prismaInstance.$disconnect()
+      const usersCount = await prisma.user.count()
+      await prisma.$disconnect()
 
       IS_READY = usersCount > 0
     }

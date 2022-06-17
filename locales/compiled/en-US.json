@@ -119,6 +119,48 @@
       "value": "Email"
     }
   ],
+  "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": [
+    {
+      "type": 0,
+      "value": "Your account has not yet been activated."
+    }
+  ],
+  "LOGIN_DIALOG__EMAIL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "Your email doesn't look right."
+    }
+  ],
+  "LOGIN_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your email."
+    }
+  ],
+  "LOGIN_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your password."
+    }
+  ],
+  "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": [
+    {
+      "type": 0,
+      "value": "Wrong email and/or password."
+    }
+  ],
+  "MENU__LOG_OUT_BUTTON_ARIA_LABEL": [
+    {
+      "type": 0,
+      "value": "Log out"
+    }
+  ],
+  "MENU__SETTINGS_BUTTON_ARIA_LABEL": [
+    {
+      "type": 0,
+      "value": "My settings"
+    }
+  ],
   "NIzhyl": [
     {
       "type": 0,
@@ -147,6 +189,42 @@
     {
       "type": 0,
       "value": "New PAT"
+    }
+  ],
+  "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": [
+    {
+      "type": 0,
+      "value": "This email is already associated with an existing account."
+    }
+  ],
+  "SIGNUP_DIALOG__EMAIL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "Your email doesn't look right."
+    }
+  ],
+  "SIGNUP_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your email."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_MATCH_ERROR": [
+    {
+      "type": 0,
+      "value": "Passwords don't match."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your password."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your password."
     }
   ],
   "TYZzVl": [

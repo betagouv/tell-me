@@ -53,6 +53,71 @@ jobs:
       - name: Upload Coverage
         run: yarn codecov
 
+  test_e2e:
+    name: E2E Test
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://test_db_user:test_db_password@localhost:5432/tell_me?schema=public
+      NODE_ENV: production
+    services:
+      db:
+        image: postgres:14
+        env:
+          POSTGRES_DB: tell_me
+          POSTGRES_USER: test_db_user
+          POSTGRES_PASSWORD: test_db_password
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cache
+        if: ${{ always() }}
+        id: cache
+        uses: actions/cache@v3
+        # https://playwright.dev/docs/ci#directories-to-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            **/.next/cache
+          key: ${{ hashFiles('**/yarn.lock') }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: 16
+      - name: Install
+        run: yarn --frozen-lockfile --production=false
+      - name: Install Playwright browsers
+        if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+        run: |
+          npx playwright install-deps chromium
+          npx playwright install chromium
+      - name: Setup CI
+        run: yarn ci:e2e:setup
+      - name: Build
+        run: yarn build
+      - name: Serve
+        run: yarn start &
+      - name: Wait for server
+        # https://stackoverflow.com/a/50055449/2736233
+        run: timeout 30 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' localhost 3000
+      - name: Run end-to-end tests
+        run: yarn test:e2e
+      - name: Archive failed tests trace
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            ./test-results
+
   docker:
     name: Docker
     runs-on: ubuntu-latest

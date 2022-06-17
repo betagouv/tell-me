@@ -17,7 +17,9 @@ async function IndexEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         }
         data.isReady = await isReady()
 
-        res.status(200).json({ data })
+        res.status(200).json({
+          data,
+        })
       } catch (err) {
         handleError(err, ERROR_PATH, res)
       }

@@ -136,10 +136,17 @@ sketch
 ################################################################################
 # Custom
 
-/.env.local
+# Playwright storage states
+/e2e/states/*
+!/e2e/states/README.md
 
+# Tell Me users assets (when not using an external static server)
 /assets/*
 !/assets/README.md
 !/assets/private
 /assets/private/*
 !/assets/private/README.md
+
+# Playwright traces
+/test-results
+/test-results.zip
