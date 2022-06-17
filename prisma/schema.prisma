@@ -20,6 +20,14 @@ enum UserRole {
 // =========================================================
 // Models
 
+model GlobalVariable {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model OneTimeToken {
   id        String   @id @default(cuid())
   ip        String

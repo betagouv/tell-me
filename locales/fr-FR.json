@@ -33,7 +33,7 @@
   },
   "D6/Uxz": {
     "defaultMessage": "Questionnaires",
-    "description": "[Main Menu] Surveys label."
+    "description": "[Main Menu] Surveys item."
   },
   "Db1A9P": {
     "defaultMessage": "Étiquette",
@@ -53,7 +53,7 @@
   },
   "EEsDeJ": {
     "defaultMessage": "Tableau de bord",
-    "description": "[Main Menu] Dashboard label."
+    "description": "[Main Menu] Dashboard item."
   },
   "EYeJTo": {
     "defaultMessage": "Inscription",
@@ -75,9 +75,9 @@
     "defaultMessage": "Nouveau questionnaire",
     "description": "[Surveys List] New survey button label."
   },
-  "IMPORT_EXPORT_PAGE__PAGE_TITLE": {
+  "IMPORT_EXPORT_PAGE__TITLE": {
     "defaultMessage": "Import / Export",
-    "description": "[Import / Export Page] Page title."
+    "description": "[Import / Export Page] Title."
   },
   "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION": {
     "defaultMessage": "You can import surveys between different Tell Me instances using their API.",
@@ -147,6 +147,10 @@
     "defaultMessage": "Import / Export",
     "description": "[Main Menu] Import / Export item."
   },
+  "MAIN_MENU__SETTINGS_ITEM": {
+    "defaultMessage": "Settings",
+    "description": "[Main Menu] Settings item."
+  },
   "MENU__LOG_OUT_BUTTON_ARIA_LABEL": {
     "defaultMessage": "Me déconnecter",
     "description": "[Menu] Log out button aria label."
@@ -178,6 +182,18 @@
   "QWfMAC": {
     "defaultMessage": "Création d’un jeton d’accès personnel",
     "description": "[Personal Access Token Editor] Creation page title."
+  },
+  "SETTINGS_FORM__BASE_URL_INPUT_LABEL:": {
+    "defaultMessage": "Base URL",
+    "description": "[Settings Form] Base URL input label."
+  },
+  "SETTINGS_FORM__UPDATE_BUTTON_LABEL": {
+    "defaultMessage": "Update",
+    "description": "[Settings Form] Form update button label."
+  },
+  "SETTINGS_PAGE__TITLE": {
+    "defaultMessage": "Settings",
+    "description": "[Settings Page] Title."
   },
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": {
     "defaultMessage": "Cette adresse email est déjà associée à un compte.",
@@ -217,7 +233,7 @@
   },
   "WL5w1n": {
     "defaultMessage": "Jetons d’accès personnel",
-    "description": "[Main Menu] Personal Access Tokens label."
+    "description": "[Main Menu] Personal Access Tokens item."
   },
   "XJmbHw": {
     "defaultMessage": "Rôle",
@@ -349,6 +365,6 @@
   },
   "zGNJ13": {
     "defaultMessage": "Utilisateur·rices",
-    "description": "[Main Menu] Users label."
+    "description": "[Main Menu] Users item."
   }
 }

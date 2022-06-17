@@ -15,7 +15,6 @@ RUN yarn
 
 ENV DATABASE_URL=$DATABASE_URL
 ENV NEXT_PUBLIC_NODE_ENV=production
-ENV NODE_ENV=production
 
 RUN yarn build
 

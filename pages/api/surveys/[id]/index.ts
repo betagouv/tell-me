@@ -17,7 +17,7 @@ async function SurveyEndpoint(req: RequestWithAuth, res: NextApiResponse) {
       try {
         const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
         if (authResult === undefined) {
-          return undefined as never
+          return undefined
         }
 
         const { id } = req.query
@@ -41,13 +41,13 @@ async function SurveyEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     case 'PATCH':
       try {
         const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
         if (authResult === undefined) {
-          return undefined as never
+          return undefined
         }
 
         const { id } = req.query
@@ -103,13 +103,13 @@ async function SurveyEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     case 'DELETE':
       try {
         const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
         if (authResult === undefined) {
-          return undefined as never
+          return undefined
         }
 
         const { id } = req.query
@@ -137,7 +137,7 @@ async function SurveyEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)

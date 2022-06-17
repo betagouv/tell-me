@@ -2,11 +2,11 @@ import { UserRole } from '@prisma/client'
 
 import { handleAuth } from './handleAuth'
 
-import type { RequestWithPrisma } from '../../types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiHandlerWithPrisma, RequestWithPrisma } from '../../types'
+import type { NextApiResponse } from 'next'
 
 export function withAuth(
-  handler: NextApiHandler,
+  handler: NextApiHandlerWithPrisma,
   allowedRoles: UserRole[] = [UserRole.ADMINISTRATOR],
   isPublic = false,
 ) {

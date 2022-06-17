@@ -13,7 +13,7 @@ import * as Yup from 'yup'
 
 import type { Survey } from '@prisma/client'
 
-const ERROR_PATH = 'pages/<ImportExportPage />'
+const ERROR_PATH = 'pages/import-export.tsx'
 
 export default function ImportExportPage() {
   const api = useApi()
@@ -93,8 +93,8 @@ export default function ImportExportPage() {
         <Title>
           {intl.formatMessage({
             defaultMessage: 'Import / Export',
-            description: '[Import / Export Page] Page title.',
-            id: 'IMPORT_EXPORT_PAGE__PAGE_TITLE',
+            description: '[Import / Export Page] Title.',
+            id: 'IMPORT_EXPORT_PAGE__TITLE',
           })}
         </Title>
       </AdminHeader>

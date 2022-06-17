@@ -50,7 +50,7 @@ export function LogoEditor({ onChange, url }: LogoEditorProps) {
     $logo.current.style.backgroundImage = `url(${imageUri})`
 
     const formData = new FormData()
-    formData.append('logo', image)
+    formData.append('file', image)
     onChange(formData)
   }
 

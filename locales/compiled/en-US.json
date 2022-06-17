@@ -113,7 +113,7 @@
       "value": "New survey"
     }
   ],
-  "IMPORT_EXPORT_PAGE__PAGE_TITLE": [
+  "IMPORT_EXPORT_PAGE__TITLE": [
     {
       "type": 0,
       "value": "Import / Export"
@@ -221,6 +221,12 @@
       "value": "Import / Export"
     }
   ],
+  "MAIN_MENU__SETTINGS_ITEM": [
+    {
+      "type": 0,
+      "value": "Global Settings"
+    }
+  ],
   "MENU__LOG_OUT_BUTTON_ARIA_LABEL": [
     {
       "type": 0,
@@ -267,6 +273,24 @@
     {
       "type": 0,
       "value": "New PAT"
+    }
+  ],
+  "SETTINGS_FORM__BASE_URL_INPUT_LABEL:": [
+    {
+      "type": 0,
+      "value": "Base URL"
+    }
+  ],
+  "SETTINGS_FORM__UPDATE_BUTTON_LABEL": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "SETTINGS_PAGE__TITLE": [
+    {
+      "type": 0,
+      "value": "Global Settings"
     }
   ],
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": [
