@@ -37,7 +37,7 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     case 'PATCH':
       try {
@@ -87,7 +87,7 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)

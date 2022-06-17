@@ -41,7 +41,7 @@ export function HeaderEditor({ onChange, url }: HeaderEditorProps) {
     $header.current.style.backgroundImage = `url(${imageUri})`
 
     const formData = new FormData()
-    formData.append('cover', image)
+    formData.append('file', image)
     onChange(formData)
   }
 

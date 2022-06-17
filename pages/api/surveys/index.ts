@@ -17,7 +17,7 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
       try {
         const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
         if (authResult === undefined) {
-          return undefined as never
+          return undefined
         }
 
         const surveys = await req.db.survey.findMany({
@@ -33,14 +33,14 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     case 'POST':
       try {
         const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
         if (authResult === undefined) {
           // eslint-disable-next-line consistent-return
-          return undefined as never
+          return undefined
         }
 
         const treeValidation = await validateTellMeTree(req.body.tree)
@@ -69,7 +69,7 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
         handleError(err, ERROR_PATH, res)
       }
 
-      return undefined as never
+      return undefined
 
     default:
       handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)

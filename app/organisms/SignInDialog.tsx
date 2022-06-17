@@ -24,8 +24,8 @@ type SignUpValues = {
 }
 
 enum SignInDialogType {
-  LOG_IN = 'LOG_IN',
-  SIGN_UP = 'SIGN_UP',
+  LOG_IN,
+  SIGN_UP,
 }
 
 const ERROR_PATH = 'app/organisms/<SignInDialog />'

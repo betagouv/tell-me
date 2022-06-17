@@ -10,10 +10,10 @@ const Container = styled.div`
 `
 
 const Placeholder = styled.div<{
-  url?: Common.Nullable<string>
+  url: Common.Nullable<string>
 }>`
-  background-color: #4f5736;
-  background-image: url('${p => p.url || ''}');
+  background-color: #dddddd;
+  background-image: url('${p => p.url ?? ''}');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

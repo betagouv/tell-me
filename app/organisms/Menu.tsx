@@ -110,7 +110,7 @@ export function Menu() {
               <Link href="/">
                 {intl.formatMessage({
                   defaultMessage: 'Dashboard',
-                  description: '[Main Menu] Dashboard label.',
+                  description: '[Main Menu] Dashboard item.',
                   id: 'EEsDeJ',
                 })}
               </Link>
@@ -120,7 +120,7 @@ export function Menu() {
               <Link href="/surveys">
                 {intl.formatMessage({
                   defaultMessage: 'Surveys',
-                  description: '[Main Menu] Surveys label.',
+                  description: '[Main Menu] Surveys item.',
                   id: 'D6/Uxz',
                 })}
               </Link>
@@ -150,8 +150,18 @@ export function Menu() {
                   <Link href="/personal-access-tokens">
                     {intl.formatMessage({
                       defaultMessage: 'Personal Access Tokens',
-                      description: '[Main Menu] Personal Access Tokens label.',
+                      description: '[Main Menu] Personal Access Tokens item.',
                       id: 'WL5w1n',
+                    })}
+                  </Link>
+                </VerticalMenu.Item>
+
+                <VerticalMenu.Item isActive={router.pathname.startsWith('/settings')} isDark>
+                  <Link href="/settings">
+                    {intl.formatMessage({
+                      defaultMessage: 'Global Settings',
+                      description: '[Main Menu] Settings item.',
+                      id: 'MAIN_MENU__SETTINGS_ITEM',
                     })}
                   </Link>
                 </VerticalMenu.Item>
@@ -160,7 +170,7 @@ export function Menu() {
                   <Link href="/users">
                     {intl.formatMessage({
                       defaultMessage: 'Users',
-                      description: '[Main Menu] Users label.',
+                      description: '[Main Menu] Users item.',
                       id: 'zGNJ13',
                     })}
                   </Link>
