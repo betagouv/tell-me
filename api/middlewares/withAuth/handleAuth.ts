@@ -1,9 +1,11 @@
+import { runMiddleware } from '@api/helpers/runMiddleware'
 import { handleError } from '@common/helpers/handleError'
 import { UserRole } from '@prisma/client'
 import dayjs from 'dayjs'
 import { getUser } from 'nexauth'
 
 import { ApiError } from '../../libs/ApiError'
+import { withCors } from '../withCors'
 
 import type { RequestWithAuth, RequestWithPrisma } from '../../types'
 import type { NextApiResponse } from 'next'
@@ -19,14 +21,20 @@ export async function handleAuth(
   let userId: string
 
   try {
-    if (typeof req.query.personalAccessToken === 'string') {
+    // Only public routes can be accessed via PATs
+    if (isPublic && typeof req.query.personalAccessToken === 'string') {
       // —————————————————————————————————————————————————————————————————————————————
       // PAT-based authentication
       // Cancellable 90 days tokens used for external back-end private API requests.
 
-      if (!isPublic) {
+      // Only GET routes can be public:
+      if (req.method !== 'GET') {
         return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
       }
+
+      // Set Access-Control-Allow-Origin responde header to "*"
+      // in order to allow API calls from anywhere in public routes
+      await runMiddleware(req, res, withCors())
 
       const personalAccessToken = Array.isArray(req.query.personalAccessToken)
         ? req.query.personalAccessToken[0]

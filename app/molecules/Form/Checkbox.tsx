@@ -1,27 +1,30 @@
-import { Checkbox as SingularityCheckbox } from '@singularity/core'
+import { Checkbox as SuiCheckbox } from '@singularity/core'
 import { useFormikContext } from 'formik'
+import { useCallback, useMemo } from 'react'
 
-type CheckboxProps = {
-  isDisabled?: boolean
-  label: string
+import type { CheckboxProps as SuiCheckboxProps } from '@singularity/core'
+import type { ChangeEvent } from 'react'
+
+type CheckboxProps = SuiCheckboxProps & {
   name: string
 }
-export function Checkbox({ isDisabled, label, name }: CheckboxProps) {
-  const { setFieldValue, values } = useFormikContext<any>()
+export function Checkbox({ disabled, name, ...rest }: CheckboxProps) {
+  const { isSubmitting, setFieldValue, values } = useFormikContext<any>()
 
-  const isChecked = Boolean(values[name])
+  const controlledDisabled = useMemo(() => disabled && isSubmitting, [disabled, isSubmitting])
+  const defaultChecked = useMemo(() => Boolean(values[name]), [values[name]])
 
-  const updateFormikValues = event => {
+  const updateFormikValues = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setFieldValue(name, event.target.checked)
-  }
+  }, [])
 
   return (
-    <SingularityCheckbox
-      defaultChecked={isChecked}
-      disabled={isDisabled}
-      label={label}
+    <SuiCheckbox
+      defaultChecked={defaultChecked}
+      disabled={controlledDisabled}
       name={name}
       onChange={updateFormikValues}
+      {...rest}
     />
   )
 }

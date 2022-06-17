@@ -1,12 +1,11 @@
 import { AdminHeader } from '@app/atoms/AdminHeader'
-import { Field } from '@app/atoms/Field'
 import { Title } from '@app/atoms/Title'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { Form } from '@app/molecules/Form'
 import { Loader } from '@app/molecules/Loader'
 import { AdminBox } from '@app/organisms/AdminBox'
-import { Card } from '@singularity/core'
+import { Card, Field } from '@singularity/core'
 import { FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
 import * as R from 'ramda'
@@ -114,7 +113,7 @@ export default function PersonalAccessTokenEditorPage() {
       <Card>
         <Form initialValues={initialValues} onSubmit={updatePersonalAccessTokenAndGoBack} validationSchema={FormSchema}>
           <Form.TextInput
-            isDisabled={isCreated}
+            disabled={isCreated}
             label={intl.formatMessage({
               defaultMessage: 'Label',
               description: '[Personal Access Token Editor] Form Label input label.',
@@ -126,7 +125,7 @@ export default function PersonalAccessTokenEditorPage() {
           {isCreated && (
             <Field>
               <Form.TextInput
-                isDisabled
+                disabled
                 label={intl.formatMessage({
                   defaultMessage: 'Value',
                   description: '[Personal Access Token Editor] Form Value input label.',
