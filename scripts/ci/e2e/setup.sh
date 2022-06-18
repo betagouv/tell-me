@@ -8,4 +8,4 @@ if [ ! -f "./.env" ]; then
 fi
 
 # https://betagouv.github.io/nexauth/#/initialize?id=development
-yarn nexauth init
+pnpm exec nexauth init

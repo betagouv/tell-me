@@ -28,7 +28,7 @@
   - [Architecture](#architecture)
   - [PaaS & hosting providers](#paas--hosting-providers)
     - [Heroku](#heroku)
-    - [Scaling](#scaling)
+    - [Scalingo](#scalingo)
 - [Contributing](#contributing)
 
 ---
@@ -57,13 +57,17 @@ Both part are dockerized in order to ease deployment on any hosting configuratio
 
 ### PaaS & hosting providers
 
+> ⚠️ **IMPORTANT**  
+> You can't deploy and run successful instances without generating and setting `EDDSA_PRIVATE_KEY` and `NEXT_PUBLIC_EDDSA_PUBLIC_KEY` env vars.  
+> This will be only handled once the setup feature is ready.
+
 #### Heroku
 
-_In progress._
+[![Deploy Tell Me to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/betagouv/tell-me#main)
 
-#### Scaling
+#### Scalingo
 
-_In progress._
+[![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://github.com/betagouv/tell-me#main)
 
 ## Contributing
 

@@ -3,10 +3,10 @@ import { withApi } from '@app/hocs/withApi'
 import { WithLocalization } from '@app/hocs/withLocalization'
 import { Loader } from '@app/molecules/Loader'
 import { SignInDialog } from '@app/organisms/SignInDialog'
-import { GlobalStyle, ThemeProvider } from '@singularity/core'
+import { GlobalStyle, theme } from '@singularity/core'
 import { AuthProvider } from 'nexauth/client'
 import Head from 'next/head'
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import '@fontsource/poppins/300.css'
 import '@fontsource/poppins/400.css'
@@ -45,7 +45,7 @@ export default function TellMeApp({ Component, pageProps }) {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
 
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalStyleCustom />
 

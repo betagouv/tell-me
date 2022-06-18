@@ -6,18 +6,23 @@
 /coverage
 /node_modules
 /scripts/*
-!/scripts/build/postbuild.sh
+!/scripts/build/postinstall.sh
 !/scripts/build/prestart.sh
 !/scripts/db/migrate.ts
 
 /.dockerignore
+/.editorconfig
 /.env
 /.env.example
 /.eslintrc
 /.gitignore
+/app.json
 /docker-compose.dev.yml
 /docker-compose.yml
 /Dockerfile
+/Procfile
+/scalingo.json
+/tsconfig.dev.json
 
 /assets/*
 !/assets/README.md

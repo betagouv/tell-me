@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import { SurveyEditorCheckbox } from '../../atoms/SurveyEditorCheckbox'
@@ -20,7 +20,7 @@ import type { MutableRefObject } from 'react'
 const SURVEY_BLOCK_TYPE_COMPONENT: Record<
   TellMe.BlockType,
   {
-    Component: ReactNode
+    Component: any
     isRichText: boolean
     placeholder: string
   }

@@ -9,7 +9,14 @@ import frFR from '../../../locales/compiled/fr-FR.json'
 import { Context } from './Context'
 import { LocalizationContext } from './types'
 
-export function loadLocaleMessages(locale: string) {
+// Prevent this error:
+// error TS2786: 'IntlProvider' cannot be used as a JSX component.
+//   Its instance type 'IntlProvider' is not a valid JSX element.
+//     Types of property 'refs' are incompatible.
+// TODO Fix the original 'react-intl' type declaration: https://github.com/formatjs/formatjs.
+const RetypedIntlProvider = IntlProvider as any
+
+function loadLocaleMessages(locale: string) {
   switch (locale) {
     case 'en-US':
       return enUS
@@ -55,9 +62,9 @@ export function WithLocalization({ children }) {
 
   return (
     <Context.Provider value={providerValue}>
-      <IntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
+      <RetypedIntlProvider locale={locale} messages={messages} onError={onIntlProviderError}>
         {children}
-      </IntlProvider>
+      </RetypedIntlProvider>
     </Context.Provider>
   )
 }

@@ -1,6 +1,6 @@
 export default {
   clearMocks: true,
-  collectCoverageFrom: ['{api,app}/{hooks,libs}/**/*.ts', '**/helpers/**/*.{js,ts}', 'common/**/*.ts'],
+  collectCoverageFrom: ['{api,app,common}/{helpers,hooks,libs}/**/*.ts'],
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   maxWorkers: '50%',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -29,8 +29,5 @@ export default {
       },
     ],
   },
-  transformIgnorePatterns: [
-    // https://formatjs.io/docs/react-intl#jest
-    '/node_modules/(?!intl-messageformat|@formatjs/icu-messageformat-parser).+\\.js$',
-  ],
+  transformIgnorePatterns: [],
 }
