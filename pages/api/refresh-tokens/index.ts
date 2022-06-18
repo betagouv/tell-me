@@ -1,19 +1,20 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/refresh-tokens/index.ts'
 
-async function RefreshTokensEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function RefreshTokensEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const refreshTokens = await req.db.refreshToken.findMany({
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
+        const refreshTokens = await prisma.refreshToken.findMany({
           select: {
             expiredAt: true,
             id: true,
@@ -33,14 +34,12 @@ async function RefreshTokensEndpoint(req: RequestWithAuth, res: NextApiResponse)
           data: refreshTokens,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(RefreshTokensEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR]))

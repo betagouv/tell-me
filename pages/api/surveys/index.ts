@@ -1,26 +1,22 @@
 import { ApiError } from '@api/libs/ApiError'
+import { prisma } from '@api/libs/prisma'
 import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
 import { validateTellMeTree } from '@common/helpers/validateTellMeTree'
 import { UserRole } from '@prisma/client'
 
-import type { RequestWithPrisma } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/surveys/index.ts'
 
-async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse) {
+export default async function SurveyIndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
-        if (authResult === undefined) {
-          return undefined
-        }
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
 
-        const surveys = await req.db.survey.findMany({
+        const surveys = await prisma.survey.findMany({
           orderBy: {
             updatedAt: 'desc',
           },
@@ -30,35 +26,31 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
           data: surveys,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
-      return undefined
+      return
 
     case 'POST':
       try {
-        const authResult = handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
-        if (authResult === undefined) {
-          // eslint-disable-next-line consistent-return
-          return undefined
-        }
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
 
         const treeValidation = await validateTellMeTree(req.body.tree)
         if (!treeValidation.isValid) {
           // eslint-disable-next-line no-console
           console.error(treeValidation.errors)
 
-          return handleError(new ApiError('Payload `tree` is invalid.', 422, true), ERROR_PATH, res)
+          throw new ApiError('Payload `tree` is invalid.', 422, true)
         }
         const dataValidation = await validateTellMeData(req.body.data)
         if (!dataValidation.isValid) {
           // eslint-disable-next-line no-console
           console.error(dataValidation.errors)
 
-          return handleError(new ApiError('Payload `data` is invalid.', 422, true), ERROR_PATH, res)
+          throw new ApiError('Payload `data` is invalid.', 422, true)
         }
 
-        const newSurvey = await req.db.survey.create({
+        const newSurvey = await prisma.survey.create({
           data: req.body,
         })
 
@@ -66,14 +58,12 @@ async function SurveyIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse)
           data: newSurvey,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
-      return undefined
+      return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withPrisma(SurveyIndexEndpoint as NextApiHandler))

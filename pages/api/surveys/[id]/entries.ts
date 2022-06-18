@@ -1,41 +1,40 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withPrisma } from '@api/middlewares/withPrisma'
+import { prisma } from '@api/libs/prisma'
 import { generateTellMeData } from '@app/helpers/generateTellMeData'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
 import { getDayjs } from '@common/helpers/getDayjs'
-import { handleError } from '@common/helpers/handleError'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { isPojo } from '@common/helpers/isPojo'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
 import cuid from 'cuid'
 
-import type { RequestWithPrisma } from '@api/types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
-import type { NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/surveys/[id]/index.ts'
 
-async function SurveyEntryIndexEndpoint(req: RequestWithPrisma, res: NextApiResponse) {
+export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'POST':
       try {
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
         if (!isPojo(req.body.formData)) {
-          return handleError(new ApiError('Payload `formData` is invalid.', 422, true), ERROR_PATH, res)
+          throw new ApiError('Payload `formData` is invalid.', 422, true)
         }
         if (typeof req.body.openedAt !== 'string') {
-          return handleError(new ApiError('Payload `openedAt` is invalid.', 422, true), ERROR_PATH, res)
+          throw new ApiError('Payload `openedAt` is invalid.', 422, true)
         }
 
-        const survey = await req.db.survey.findUnique({
+        const survey = await prisma.survey.findUnique({
           where: {
             id,
           },
         })
         if (survey === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         const dayjs = getDayjs()
@@ -69,10 +68,10 @@ async function SurveyEntryIndexEndpoint(req: RequestWithPrisma, res: NextApiResp
           // eslint-disable-next-line no-console
           console.error(dataValidation.errors)
 
-          return handleError(new ApiError('Data validation did not pass.', 500), ERROR_PATH, res)
+          throw new ApiError('Data validation did not pass.', 422)
         }
 
-        const updatedSurvey = await req.db.survey.update({
+        const updatedSurvey = await prisma.survey.update({
           data: {
             data: newData,
           },
@@ -81,21 +80,19 @@ async function SurveyEntryIndexEndpoint(req: RequestWithPrisma, res: NextApiResp
           },
         })
         if (updatedSurvey === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         res.status(200).json({
           data: updatedSurvey,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(SurveyEntryIndexEndpoint)

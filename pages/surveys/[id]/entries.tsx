@@ -8,7 +8,6 @@ import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { Loader } from '@app/molecules/Loader'
 import { AdminBox } from '@app/organisms/AdminBox'
-import { SURVEY_ENTRIES_DOWLOAD_EXTENSION } from '@common/constants'
 import { getDayjs } from '@common/helpers/getDayjs'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
@@ -195,11 +194,7 @@ export default function SurveyEntryListPage() {
       <AdminHeader>
         <Title>{survey.data.title}</Title>
 
-        <Button
-          disabled={isDownloading}
-          onClick={() => exportEntries(SURVEY_ENTRIES_DOWLOAD_EXTENSION.CSV)}
-          size="small"
-        >
+        <Button disabled={isDownloading} onClick={() => exportEntries('csv')} size="small">
           {intl.formatMessage({
             defaultMessage: 'Export as CSV',
             description: '[Survey Answers List] Export answers in CSV format button label.',

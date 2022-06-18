@@ -1,36 +1,37 @@
 import { ApiError } from '@api/libs/ApiError'
-import { GlobalVariableKey } from '@api/libs/globalVariable'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { GlobalVariableKey } from '@common/constants'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 import * as R from 'ramda'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/users/[id].ts'
 
-async function GlobalVariableEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function GlobalVariableEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'PATCH':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { key } = req.query
         if (typeof key !== 'string' || GlobalVariableKey[key] === undefined) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         const updatedData = R.pick(['value'])(req.body) as {
           value: string | null
         }
 
-        const globalVariableCount = await req.db.globalVariable.count({
+        const globalVariableCount = await prisma.globalVariable.count({
           where: {
             key,
           },
         })
         if (globalVariableCount === 0) {
-          const updatedGlobalVariable = await req.db.globalVariable.create({
+          const updatedGlobalVariable = await prisma.globalVariable.create({
             data: {
               ...updatedData,
               key,
@@ -44,7 +45,7 @@ async function GlobalVariableEndpoint(req: RequestWithAuth, res: NextApiResponse
           return undefined
         }
 
-        const updatedGlobalVariable = await req.db.globalVariable.update({
+        const updatedGlobalVariable = await prisma.globalVariable.update({
           data: updatedData,
           where: {
             key,
@@ -55,14 +56,12 @@ async function GlobalVariableEndpoint(req: RequestWithAuth, res: NextApiResponse
           data: updatedGlobalVariable,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(GlobalVariableEndpoint as any, [UserRole.ADMINISTRATOR]))

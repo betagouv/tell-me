@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 module.exports = {
   compiler: {
     styledComponents: true,
@@ -19,6 +20,9 @@ module.exports = {
   ],
   reactStrictMode: true,
   swcMinify: true,
+  typescript: {
+    tsconfigPath: './tsconfig.build.json',
+  },
   webpack: config => {
     // https://formatjs.io/docs/guides/advanced-usage#webpackconfigjs
     // eslint-disable-next-line no-param-reassign

@@ -1,14 +1,13 @@
 import { isReady } from '@api/helpers/isReady'
 import { ApiError } from '@api/libs/ApiError'
-import { handleError } from '@common/helpers/handleError'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const { npm_package_version: VERSION } = process.env
 const ERROR_PATH = 'pages/api/index.ts'
 
-async function IndexEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function IndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
@@ -21,14 +20,12 @@ async function IndexEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           data,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default IndexEndpoint

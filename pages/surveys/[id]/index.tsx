@@ -146,31 +146,29 @@ export default function SurveyEditorPage() {
 
   const uploadCover = useCallback(async (formData: FormData) => {
     const maybeBody = await api.put<{
-      path: string
       url: string | null
     }>(`assets`, formData)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
 
-    const { path, url } = maybeBody.data
+    const { url } = maybeBody.data
 
-    $coverUri.current = url ?? path
+    $coverUri.current = url
     updateData()
   }, [])
 
   const uploadLogo = useCallback(async (formData: FormData) => {
     const maybeBody = await api.put<{
-      path: string
       url: string | null
     }>(`assets`, formData)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
 
-    const { path, url } = maybeBody.data
+    const { url } = maybeBody.data
 
-    $logoUri.current = url ?? path
+    $logoUri.current = url
     updateData()
   }, [])
 

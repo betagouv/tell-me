@@ -1,19 +1,12 @@
+import { loadSchema } from '@common/helpers/loadSchema'
 import Ajv from 'ajv'
 import { B } from 'bhala'
 import fastGlob from 'fast-glob'
 import { promises as fs } from 'fs'
-import ky from 'ky-universal'
 
 import TellMeTreeSchema from '../TellMe.Tree.schema.json'
 
 import type { ValidateFunction } from 'ajv'
-
-const loadSchema = async (schemaUrl: string): Promise<any> => {
-  const response = await ky.get(schemaUrl)
-  const schema = await response.json()
-
-  return schema
-}
 
 describe('schemas/1.0.0/TellMe.Tree.schema.json', () => {
   const ajv = new Ajv({
@@ -26,6 +19,10 @@ describe('schemas/1.0.0/TellMe.Tree.schema.json', () => {
 
   beforeAll(async () => {
     ajvValidate = await ajv.compileAsync(TellMeTreeSchema)
+  })
+
+  test('', () => {
+    expect(1 + 1).toBe(2)
   })
 
   describe('should pass', () => {

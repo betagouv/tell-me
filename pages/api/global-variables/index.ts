@@ -1,33 +1,32 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/global-variables.ts'
 
-async function UserIndexEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function UserIndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const globalVariables = await req.db.globalVariable.findMany()
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
+        const globalVariables = await prisma.globalVariable.findMany()
 
         res.status(200).json({
           data: globalVariables,
           hasError: false,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(UserIndexEndpoint as any, [UserRole.ADMINISTRATOR]))

@@ -1,38 +1,48 @@
+import { handleApiError } from '@common/helpers/handleApiError'
+
 import { prisma } from './prisma'
 
-export enum GlobalVariableKey {
-  BASE_URL = 'BASE_URL',
-}
+import type { GlobalVariableKey } from '@common/constants'
 
-const globalVariables = {
+export const globalVariables = {
   get: async (key: GlobalVariableKey): Promise<string | null> => {
-    const globalVariable = await prisma.globalVariable.findUnique({
-      where: {
-        key,
-      },
-    })
-    if (globalVariable === null) {
-      return null
-    }
+    try {
+      const globalVariable = await prisma.globalVariable.findUnique({
+        where: {
+          key,
+        },
+      })
+      if (globalVariable === null) {
+        return null
+      }
 
-    return globalVariable.value
+      return globalVariable.value
+    } catch (err) {
+      return handleApiError(err, 'api/libs/globalVariables.get()')
+    }
   },
 
-  set: async (key: GlobalVariableKey, value: string | null): Promise<string | null> => {
-    const globalVariable = await prisma.globalVariable.update({
-      data: {
-        value,
-      },
-      where: {
-        key,
-      },
-    })
-    if (globalVariable === null) {
-      return null
-    }
+  set: async (key: GlobalVariableKey, value: string | number | null): Promise<string | null> => {
+    try {
+      const stringOrNullValue = typeof value === 'number' ? String(value) : value
+      const normalizedValue =
+        typeof stringOrNullValue === 'string' && stringOrNullValue.trim().length === 0 ? null : stringOrNullValue
 
-    return globalVariable.value
+      const globalVariable = await prisma.globalVariable.update({
+        data: {
+          value: normalizedValue,
+        },
+        where: {
+          key,
+        },
+      })
+      if (globalVariable === null) {
+        return null
+      }
+
+      return globalVariable.value
+    } catch (err) {
+      return handleApiError(err, 'api/libs/globalVariables.set()')
+    }
   },
 }
-
-export { globalVariables }
