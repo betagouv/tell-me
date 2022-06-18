@@ -67,7 +67,7 @@ Both part are dockerized in order to ease deployment on any hosting configuratio
 
 #### Scalingo
 
-[![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://github.com/betagouv/tell-me#main)
+[![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy?source=https://github.com/betagouv/tell-me#main)
 
 ## Contributing
 
