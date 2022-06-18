@@ -1,0 +1,29 @@
+{
+  "//": "https://devcenter.heroku.com/articles/app-json-schema",
+  "name": "Tell Me",
+  "description": "An awesome open source survey management system.",
+  "keywords": [],
+  "logo": "https://raw.githubusercontent.com/betagouv/tell-me/main/public/favicon.png",
+  "repository": "https://github.com/betagouv/tell-me",
+  "success_url": "/",
+  "website": "https://www.tell-me.org",
+  "env": {
+    "NODE_ENV": {
+      "description": "Application environment (don't change the default value).",
+      "required": true,
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
+  "addons": ["heroku-postgresql"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/unfold/heroku-buildpack-pnpm"
+    }
+  ]
+}

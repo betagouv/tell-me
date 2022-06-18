@@ -17,7 +17,7 @@
 ### Requirements
 
 - [Node.js](https://nodejs.org)
-- [Yarn](https://yarnpkg.com/getting-started/install)
+- [pnpm](https://pnpm.io/installation#using-corepack)
 - [Docker](https://www.docker.com/get-started)
 
 ### Setup
@@ -30,24 +30,24 @@ Then run:
 ```sh
 git clone https://github.com/betagouv/tell-me.git
 cd tell-me
-yarn
-yarn dev:setup
-yarn dev:docker
-yarn db:migrate
+pnp i
+pnp run dev:setup
+pnp run dev:docker
+pnp run db:migrate
 ```
 
 > 📋 **Note**  
-> The `yarn` command install the dependencies but also run the `scripts/dev/setup.js` scripts. This script does the
-> following tasks, if necessary:
+> The `pnp run dev:setup` command (script) does the following, if necessary:
 >
 > - Copy `.env.example` file to a `.env` one.
-> - Generate a RSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io))
+> - Generate an EdDSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io)).
+> - Install [Playwright](https://playwright.dev) browsers for E2E tests.
 
 ### Local development
 
 ```sh
-yarn dev:docker
-yarn dev
+pnp run dev:docker
+pnp run dev
 ```
 
 This will run PostgreSQL within a Docker container via Docker Compose and run the webapp which should then be available at
@@ -117,7 +117,7 @@ committed. If there is any lint error can't be auto-fixed, your changes won't be
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
-  "eslint.packageManager": "yarn",
+  "eslint.packageManager": "pnpm",
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

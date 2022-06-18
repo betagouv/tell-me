@@ -2,18 +2,15 @@
 
 import { HTMLAttributes, useEffect, useReducer, useRef, useState } from 'react'
 
-import { getRandomId } from '../../helpers/getRandomId'
 import { useIsMounted } from '../../hooks/useIsMounted'
 import { usePrevious } from '../../hooks/usePrevious'
 import { BlockMenu } from './BlockMenu'
 import { blockMenuReducer } from './blockMenuReducer'
-import { FormatMenu } from './FormatMenu'
 
 import type { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
-import type { FormatMenuProps } from './FormatMenu'
 import type { BlockMenuItem } from './types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
-import type { KeyboardEvent, MouseEvent, MutableRefObject, Reducer } from 'react'
+import type { KeyboardEvent, MutableRefObject, Reducer } from 'react'
 
 const MENU_ITEMS: BlockMenuItem[] = [
   {
@@ -109,11 +106,9 @@ export function Editable({
 
   // States used for rich text blocks
   const controlledValueRef = useRef(defaultValue) as MutableRefObject<string>
-  const formatMenuAnchorRef = useRef(null) as MutableRefObject<Common.Nullable<FormatMenuProps['anchor']>>
   const selectionFocusNodeRef = useRef(null) as MutableRefObject<Common.Nullable<Node>>
   const selectionFocusOffsetRef = useRef<number>(defaultValue.length)
   const hasFormattedRef = useRef<boolean>(false)
-  const [formatMenuKey, setFormatMenuKey] = useState<string>(getRandomId())
   const [isFormatMenuOpen, setIsFormatMenuOpen] = useState<boolean>(false)
 
   const Component = as
@@ -207,21 +202,6 @@ export function Editable({
     if (isMounted()) {
       setIsBlockMenuOpen(true)
     }
-  }
-
-  const openFormatMenu = () => {
-    if (isMounted()) {
-      setIsFormatMenuOpen(true)
-      setFormatMenuKey(getRandomId())
-    }
-  }
-
-  const updateControlledValue = async (newValue: string) => {
-    controlledValueRef.current = newValue
-    hasFormattedRef.current = true
-
-    closeFormatMenu()
-    onValueChange(newValue)
   }
 
   const controlKey = (event: KeyboardEvent<HTMLElement>) => {
@@ -322,39 +302,6 @@ export function Editable({
     }
   }
 
-  const handleSelection = (event: MouseEvent<HTMLElement>) => {
-    if (!isMounted() || !isRichText) {
-      return
-    }
-
-    formatMenuAnchorRef.current = event.currentTarget
-
-    setTimeout(() => {
-      if (!isMounted()) {
-        return
-      }
-
-      const selection = window.getSelection()
-      if (selection === null || selection.isCollapsed) {
-        if (isFormatMenuOpen) {
-          closeFormatMenu()
-        }
-
-        return
-      }
-
-      selectionFocusNodeRef.current = selection.focusNode
-      selectionFocusOffsetRef.current = selection.focusOffset
-
-      // TODO Handle multi-node rich text formatting.
-      if (selection.anchorNode !== selection.focusNode) {
-        return
-      }
-
-      openFormatMenu()
-    })
-  }
-
   useEffect(() => {
     if (!isMounted() || !isFocused || componentRef.current === null) {
       return
@@ -404,15 +351,6 @@ export function Editable({
 
   return (
     <div ref={innerRef}>
-      {isFormatMenuOpen && formatMenuAnchorRef.current !== null && (
-        <FormatMenu
-          key={formatMenuKey}
-          anchor={formatMenuAnchorRef.current}
-          onChange={updateControlledValue}
-          source={controlledValueRef.current}
-        />
-      )}
-
       <Component
         ref={componentRef}
         contentEditable="true"
@@ -421,7 +359,6 @@ export function Editable({
         onFocus={handleFocus}
         onInput={handleInput}
         onKeyDown={controlKey}
-        onMouseUp={handleSelection}
         spellCheck={false}
         suppressContentEditableWarning
         {...props}

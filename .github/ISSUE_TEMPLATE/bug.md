@@ -18,7 +18,7 @@ A clear and concise description of what you expected to happen:
 
 ## Link to repl or repo (HIGHLY RECOMMENDED)
 
-Please provide either one or multiple screenshot links (i.e. using https://imgur.com/upload):
+Please provide either one or multiple screenshot links (i.e. using <https://imgur.com/upload>):
 
 ## Link to repl or repo (if you're a developer)
 
@@ -26,5 +26,4 @@ Please provide either a [repl.it demo](https://repl.it) or a minimal repository 
 
 ## Environment Info (if you're a developer)
 
-Please run `yarn debug` within the project directory and paste the results here:
-
+Please run `pnpm run debug` within the project directory and paste the results here:

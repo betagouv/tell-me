@@ -1,0 +1,31 @@
+{
+  "//": "https://developers.scalingo.com/scalingo-json-schema",
+  "name": "Tell Me",
+  "description": "An awesome open source survey management system.",
+  "keywords": [],
+  "logo": "https://raw.githubusercontent.com/betagouv/tell-me/main/public/favicon.png",
+  "repository": "https://github.com/betagouv/tell-me",
+  "success_url": "/",
+  "website": "https://www.tell-me.org",
+  "env": {
+    "BUILDPACK_URL": {
+      "description": "Custom buildpack to support pnpm (don't change the default value).",
+      "value": "https://github.com/unfold/heroku-buildpack-pnpm"
+    },
+    "NODE_ENV": {
+      "description": "Application environment (don't change the default value).",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "S"
+    }
+  },
+  "addons": [
+    {
+      "plan": "postgresql:postgresql-sandbox"
+    }
+  ]
+}
