@@ -164,6 +164,16 @@ export default function SettingsPage() {
 
           <Form.TextInput
             label={intl.formatMessage({
+              defaultMessage: 'Bucket',
+              description: '[Settings Form] S3 Bucket input label.',
+              id: 'SETTINGS_FORM__S3_BUCKET_INPUT_LABEL',
+            })}
+            name={GlobalVariableKey.S3_BUCKET}
+            placeholder="tell-me-assets"
+          />
+
+          <Form.TextInput
+            label={intl.formatMessage({
               defaultMessage: 'Public URL',
               description: '[Settings Form] S3 Public URL input label.',
               id: 'SETTINGS_FORM__S3_URL_INPUT_LABEL',

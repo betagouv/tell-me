@@ -191,6 +191,10 @@
     "defaultMessage": "Access Key",
     "description": "[Settings Form] S3 Access Key input label."
   },
+  "SETTINGS_FORM__S3_BUCKET_INPUT_LABEL": {
+    "defaultMessage": "Bucket",
+    "description": "[Settings Form] S3 Bucket input label."
+  },
   "SETTINGS_FORM__S3_ENDPOINT_INPUT_LABEL": {
     "defaultMessage": "Endpoint",
     "description": "[Settings Form] S3 Endpoint input label."
