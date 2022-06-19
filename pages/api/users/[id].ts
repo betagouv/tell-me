@@ -1,31 +1,32 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 import * as R from 'ramda'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/users/[id].ts'
 
-async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function UserEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        const maybeUser = await req.db.user.findUnique({
+        const maybeUser = await prisma.user.findUnique({
           where: {
             id,
           },
         })
         if (maybeUser === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         const userWithoutPassword = R.omit(['password'])(maybeUser)
@@ -34,19 +35,21 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           data: userWithoutPassword,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
-      return undefined
+      return
 
     case 'PATCH':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        const maybeUser = await req.db.user.findUnique({
+        const maybeUser = await prisma.user.findUnique({
           select: {
             email: true,
             firstName: true,
@@ -60,7 +63,7 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           },
         })
         if (maybeUser === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         const updatedUserData = R.pick(['email', 'firstName', 'isActive', 'lastName', 'role'])(req.body) as {
@@ -71,7 +74,7 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           role: UserRole
         }
 
-        const updatedUser = await req.db.user.update({
+        const updatedUser = await prisma.user.update({
           data: updatedUserData,
           where: {
             id,
@@ -84,14 +87,12 @@ async function UserEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           data: updatedUserWithoutPassword,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
-      return undefined
+      return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(UserEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR]))

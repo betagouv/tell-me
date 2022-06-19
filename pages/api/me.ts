@@ -1,23 +1,22 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/me.ts'
 
-async function UserConfigEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function UserConfigEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const userId = req.me.id
+        const me = await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER])
 
-        const userConfig = await req.db.userConfig.findUnique({
+        const userConfig = await prisma.userConfig.findUnique({
           where: {
-            userId,
+            userId: me.id,
           },
         })
 
@@ -25,22 +24,22 @@ async function UserConfigEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           data: userConfig,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     case 'PATCH':
       try {
-        const userId = req.me.id
+        const me = await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER])
         const updatedUserConfigData = {
           locale: String(req.body.locale),
         }
 
-        const updatedUserConfig = await req.db.userConfig.update({
+        const updatedUserConfig = await prisma.userConfig.update({
           data: updatedUserConfigData,
           where: {
-            userId,
+            userId: me.id,
           },
         })
 
@@ -48,16 +47,12 @@ async function UserConfigEndpoint(req: RequestWithAuth, res: NextApiResponse) {
           data: updatedUserConfig,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(
-  withAuth(UserConfigEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER]),
-)

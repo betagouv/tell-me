@@ -1,36 +1,38 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { RequestWithAuth } from '@api/types'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 import crypto from 'crypto'
 import dayjs from 'dayjs'
-import { NextApiHandler, NextApiResponse } from 'next'
 import { promisify } from 'util'
 
-const ERROR_PATH = 'pages/api/auth/AuthOneTimeTokenEndpoint()'
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 const { NODE_ENV } = process.env
+const ERROR_PATH = 'pages/api/auth/AuthOneTimeTokenEndpoint()'
 
 const asyncRandomBytes = promisify(crypto.randomBytes)
 
-async function AuthOneTimeTokenEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function AuthOneTimeTokenEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
+        const me = await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER])
+
         const maybeIp = NODE_ENV === 'production' ? req.headers['x-real-ip'] : '0.0.0.0'
         if (maybeIp === undefined) {
-          return handleError(new ApiError(`Unresolvable IP.`, 403, true), ERROR_PATH, res)
+          throw new ApiError(`Unresolvable IP.`, 403, true)
         }
 
         const valueBuffer = await asyncRandomBytes(48)
 
         const expiredAt = dayjs().add(5, 'minute').toDate()
         const ip = Array.isArray(maybeIp) ? maybeIp.join(', ') : maybeIp
-        const userId = req.me.id
+        const userId = me.id
         const value = valueBuffer.toString('hex')
 
-        await req.db.oneTimeToken.create({
+        await prisma.oneTimeToken.create({
           data: {
             expiredAt,
             ip,
@@ -45,16 +47,12 @@ async function AuthOneTimeTokenEndpoint(req: RequestWithAuth, res: NextApiRespon
           },
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(
-  withAuth(AuthOneTimeTokenEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER]),
-)

@@ -187,6 +187,34 @@
     "defaultMessage": "Base URL",
     "description": "[Settings Form] Base URL input label."
   },
+  "SETTINGS_FORM__S3_ACCESS_KEY_INPUT_LABEL": {
+    "defaultMessage": "Access Key",
+    "description": "[Settings Form] S3 Access Key input label."
+  },
+  "SETTINGS_FORM__S3_ENDPOINT_INPUT_LABEL": {
+    "defaultMessage": "Endpoint",
+    "description": "[Settings Form] S3 Endpoint input label."
+  },
+  "SETTINGS_FORM__S3_PORT_INPUT_HELPER": {
+    "defaultMessage": "Only required for MinIO custom servers.",
+    "description": "[Settings Form] S3 Port input helper."
+  },
+  "SETTINGS_FORM__S3_PORT_INPUT_LABEL": {
+    "defaultMessage": "Port",
+    "description": "[Settings Form] S3 Port input label."
+  },
+  "SETTINGS_FORM__S3_SECRET_KEY_INPUT_LABEL": {
+    "defaultMessage": "Secret Key",
+    "description": "[Settings Form] S3 Secret Key input label."
+  },
+  "SETTINGS_FORM__S3_SUBTITLE": {
+    "defaultMessage": "S3-compatible Static Assets Server",
+    "description": "[Settings Form] S3 subtitle."
+  },
+  "SETTINGS_FORM__S3_URL_INPUT_LABEL": {
+    "defaultMessage": "Public URL",
+    "description": "[Settings Form] S3 Public URL input label."
+  },
   "SETTINGS_FORM__UPDATE_BUTTON_LABEL": {
     "defaultMessage": "Update",
     "description": "[Settings Form] Form update button label."

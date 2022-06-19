@@ -1,21 +1,22 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 import crypto from 'crypto'
 import dayjs from 'dayjs'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/personal-access-tokens/index.ts'
 
-async function PersonalAccessTokenIndexEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function PersonalAccessTokenIndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const personalAccessTokens = await req.db.personalAccessToken.findMany({
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
+        const personalAccessTokens = await prisma.personalAccessToken.findMany({
           select: {
             expiredAt: true,
             id: true,
@@ -35,19 +36,21 @@ async function PersonalAccessTokenIndexEndpoint(req: RequestWithAuth, res: NextA
           data: personalAccessTokens,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     case 'POST':
       try {
+        const me = await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const label = String(req.body.label)
         const expiredAt = dayjs().add(90, 'day').toDate()
-        const userId = req.me.id
+        const userId = me.id
         const value = crypto.randomBytes(32).toString('hex')
 
-        const newPersonalAccessToken = await req.db.personalAccessToken.create({
+        const newPersonalAccessToken = await prisma.personalAccessToken.create({
           data: {
             expiredAt,
             label,
@@ -74,14 +77,12 @@ async function PersonalAccessTokenIndexEndpoint(req: RequestWithAuth, res: NextA
           data: newPersonalAccessToken,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(PersonalAccessTokenIndexEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR]))

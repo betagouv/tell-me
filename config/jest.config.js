@@ -3,7 +3,6 @@ export default {
   collectCoverageFrom: ['{api,app,common}/{helpers,hooks,libs}/**/*.ts'],
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   maxWorkers: '50%',
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
     '^@api/(.*)$': '<rootDir>/api/$1',

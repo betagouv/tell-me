@@ -5,7 +5,7 @@ import type { UserRole } from '@prisma/client'
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
  */
-export const FILE_EXTENSION_MIME_TYPE = {
+export const FILE_EXTENSION_MIME_TYPE = Object.freeze({
   doc: 'application/msword',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   gif: 'image/gif',
@@ -24,41 +24,41 @@ export const FILE_EXTENSION_MIME_TYPE = {
   webp: 'image/webp',
   xls: 'application/vnd.ms-excel',
   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-}
+})
+
+export type MimeType = typeof FILE_EXTENSION_MIME_TYPE[keyof typeof FILE_EXTENSION_MIME_TYPE]
 
 /**
  * List of acceptable asset mime types.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
  */
-export const MIME_TYPES = Object.values(FILE_EXTENSION_MIME_TYPE)
+export const MIME_TYPES: Readonly<MimeType[]> = Object.freeze(Object.values(FILE_EXTENSION_MIME_TYPE))
 
-export const LOCALE = {
+export enum GlobalVariableKey {
+  BASE_URL = 'BASE_URL',
+  S3_ACCESS_KEY = 'S3_ACCESS_KEY',
+  S3_BUCKET = 'S3_BUCKET',
+  S3_ENDPOINT = 'S3_ENDPOINT',
+  S3_PORT = 'S3_PORT',
+  S3_SECRET_KEY = 'S3_SECRET_KEY',
+  S3_URL = 'S3_URL',
+}
+
+export const LOCALE = Object.freeze({
   en: 'en-US',
   'en-US': 'en-US',
   fr: 'fr-FR',
   'fr-FR': 'fr-FR',
-}
+})
 
-export const LOCALE_LABEL = {
+export const LOCALE_LABEL = Object.freeze({
   'en-US': 'English (US)',
   'fr-FR': 'Français (France)',
-}
+})
 
-export const SURVEY_ENTRIES_DOWLOAD_CONTENT_TYPE = {
-  CSV: 'text/csv',
-  XLSX: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-}
-
-export const SURVEY_ENTRIES_DOWLOAD_EXTENSION = {
-  CSV: 'csv',
-  XLSX: 'xlsx',
-}
-
-export const SURVEY_ENTRIES_DOWLOAD_EXTENSIONS = Object.values(SURVEY_ENTRIES_DOWLOAD_EXTENSION)
-
-export const USER_ROLE_LABEL: Record<UserRole, string> = {
+export const USER_ROLE_LABEL: Record<UserRole, string> = Object.freeze({
   ADMINISTRATOR: 'Administror',
   MANAGER: 'Manager',
   VIEWER: 'Viewer',
-}
+})

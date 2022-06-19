@@ -1,24 +1,25 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/personal-access-tokens/[id].ts'
 
-async function PersonalAccessTokenEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function PersonalAccessTokenEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
+        const maybePersonalAccessToken = await prisma.personalAccessToken.findUnique({
           select: {
             createdAt: true,
             expiredAt: true,
@@ -38,37 +39,39 @@ async function PersonalAccessTokenEndpoint(req: RequestWithAuth, res: NextApiRes
           },
         })
         if (maybePersonalAccessToken === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         res.status(201).json({
           data: maybePersonalAccessToken,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     case 'PATCH':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
+        const maybePersonalAccessToken = await prisma.personalAccessToken.findUnique({
           where: {
             id,
           },
         })
         if (maybePersonalAccessToken === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         const label = String(req.body.label)
 
-        const updatedPersonalAccessToken = await req.db.personalAccessToken.update({
+        const updatedPersonalAccessToken = await prisma.personalAccessToken.update({
           data: {
             label,
           },
@@ -81,28 +84,30 @@ async function PersonalAccessTokenEndpoint(req: RequestWithAuth, res: NextApiRes
           data: updatedPersonalAccessToken,
         })
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     case 'DELETE':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
+        const maybePersonalAccessToken = await prisma.personalAccessToken.findUnique({
           where: {
             id,
           },
         })
         if (maybePersonalAccessToken === null) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        await req.db.personalAccessToken.delete({
+        await prisma.personalAccessToken.delete({
           where: {
             id,
           },
@@ -110,14 +115,12 @@ async function PersonalAccessTokenEndpoint(req: RequestWithAuth, res: NextApiRes
 
         res.status(204).end()
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(PersonalAccessTokenEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR]))

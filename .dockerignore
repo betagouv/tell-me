@@ -3,12 +3,15 @@
 /.husky
 /.next
 /.vscode
+/assets/*
+!/assets/README.md
 /coverage
 /node_modules
 /scripts/*
 !/scripts/build/postinstall.sh
 !/scripts/build/prestart.sh
 !/scripts/db/migrate.ts
+/test-results
 
 /.dockerignore
 /.editorconfig
@@ -23,6 +26,4 @@
 /Procfile
 /scalingo.json
 /tsconfig.dev.json
-
-/assets/*
-!/assets/README.md
+/test-results.zip

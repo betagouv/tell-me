@@ -1,19 +1,19 @@
 import { runMiddleware } from '@api/helpers/runMiddleware'
-import { handleError } from '@common/helpers/handleError'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 import dayjs from 'dayjs'
 import { getUser } from 'nexauth'
 
 import { ApiError } from '../../libs/ApiError'
+import { prisma } from '../../libs/prisma'
 import { withCors } from '../withCors'
 
-import type { RequestWithAuth, RequestWithPrisma } from '../../types'
-import type { NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'api/middlewares/withAuth/handler()'
 
 export async function handleAuth(
-  req: RequestWithPrisma,
+  req: NextApiRequest,
   res: NextApiResponse,
   allowedRoles: UserRole[] = [UserRole.ADMINISTRATOR],
   isPublic: boolean = false,
@@ -29,7 +29,7 @@ export async function handleAuth(
 
       // Only GET routes can be public:
       if (req.method !== 'GET') {
-        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        throw new ApiError(`Unauthorized.`, 401, true)
       }
 
       // Set Access-Control-Allow-Origin responde header to "*"
@@ -40,22 +40,22 @@ export async function handleAuth(
         ? req.query.personalAccessToken[0]
         : req.query.personalAccessToken
 
-      const maybePersonalAccessToken = await req.db.personalAccessToken.findUnique({
+      const maybePersonalAccessToken = await prisma.personalAccessToken.findUnique({
         where: {
           value: personalAccessToken,
         },
       })
       if (maybePersonalAccessToken === null) {
-        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        throw new ApiError(`Unauthorized.`, 401, true)
       }
       if (dayjs().isAfter(dayjs(maybePersonalAccessToken.expiredAt))) {
-        await req.db.personalAccessToken.delete({
+        await prisma.personalAccessToken.delete({
           where: {
             value: personalAccessToken,
           },
         })
 
-        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        throw new ApiError(`Unauthorized.`, 401, true)
       }
 
       userId = maybePersonalAccessToken.userId
@@ -66,25 +66,25 @@ export async function handleAuth(
 
       const oneTimeToken = Array.isArray(req.query.oneTimeToken) ? req.query.oneTimeToken[0] : req.query.oneTimeToken
 
-      const maybeOneTimeToken = await req.db.oneTimeToken.findUnique({
+      const maybeOneTimeToken = await prisma.oneTimeToken.findUnique({
         where: {
           value: oneTimeToken,
         },
       })
       if (maybeOneTimeToken === null) {
-        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        throw new ApiError(`Unauthorized.`, 401, true)
       }
       if (dayjs().isAfter(dayjs(maybeOneTimeToken.expiredAt))) {
-        await req.db.oneTimeToken.delete({
+        await prisma.oneTimeToken.delete({
           where: {
             value: oneTimeToken,
           },
         })
 
-        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        throw new ApiError(`Unauthorized.`, 401, true)
       }
 
-      await req.db.oneTimeToken.delete({
+      await prisma.oneTimeToken.delete({
         where: {
           value: oneTimeToken,
         },
@@ -98,36 +98,31 @@ export async function handleAuth(
 
       const user = await getUser(req)
       if (user === undefined) {
-        return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+        throw new ApiError(`Unauthorized.`, 401, true)
       }
 
       userId = user.id
     }
 
-    const maybeUser = await req.db.user.findUnique({
+    const user = await prisma.user.findUnique({
+      select: {
+        id: true,
+        isActive: true,
+        role: true,
+      },
       where: {
         id: userId,
       },
     })
-    if (maybeUser === null || !maybeUser.isActive) {
-      return handleError(new ApiError(`Unauthorized.`, 401, true), ERROR_PATH, res)
+    if (user === null || !user.isActive) {
+      throw new ApiError(`Unauthorized.`, 401, true)
+    }
+    if (!allowedRoles.includes(user.role)) {
+      throw new ApiError(`Forbidden.`, 403, true)
     }
 
-    if (!allowedRoles.includes(maybeUser.role)) {
-      return handleError(new ApiError(`Forbidden.`, 403, true), ERROR_PATH, res)
-    }
-
-    const reqWithAuth: RequestWithAuth = Object.assign(req, {
-      me: {
-        id: userId,
-      },
-    })
-
-    return {
-      reqWithAuth,
-      res,
-    }
+    return user
   } catch (err) {
-    return handleError(err, ERROR_PATH, res)
+    return handleApiEndpointError(err, ERROR_PATH, res)
   }
 }

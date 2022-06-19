@@ -1,24 +1,25 @@
 import { ApiError } from '@api/libs/ApiError'
-import { withAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
-import { handleError } from '@common/helpers/handleError'
+import { prisma } from '@api/libs/prisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 
-import type { RequestWithAuth } from '@api/types'
-import type { NextApiHandler, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/one-time-tokens/[id].ts'
 
-async function OneTimeTokenEndpoint(req: RequestWithAuth, res: NextApiResponse) {
+export default async function OneTimeTokenEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'DELETE':
       try {
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+
         const { id } = req.query
         if (typeof id !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
-        await req.db.oneTimeToken.delete({
+        await prisma.oneTimeToken.delete({
           where: {
             id,
           },
@@ -26,14 +27,12 @@ async function OneTimeTokenEndpoint(req: RequestWithAuth, res: NextApiResponse) 
 
         res.status(204).end()
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(withAuth(OneTimeTokenEndpoint as NextApiHandler, [UserRole.ADMINISTRATOR]))

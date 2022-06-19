@@ -1,28 +1,26 @@
 import { getFileExtension } from '@api/helpers/getFileExtension'
 import { isPath } from '@api/helpers/isPath'
 import { ApiError } from '@api/libs/ApiError'
-import { handleAuth } from '@api/middlewares/withAuth'
-import { withPrisma } from '@api/middlewares/withPrisma'
+import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
 import { FILE_EXTENSION_MIME_TYPE } from '@common/constants'
-import { handleError } from '@common/helpers/handleError'
+import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { UserRole } from '@prisma/client'
 import { getAbsolutePath } from 'esm-path'
 import fs, { promises as fsAsync } from 'fs'
 
-import type { RequestWithPrisma } from '@api/types'
-import type { NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const ERROR_PATH = 'pages/api/asset/[fileName].ts'
 const PRIVATE_ASSETS_RELATIVE_PATH = '../../../assets/private'
 const PUBLIC_ASSETS_RELATIVE_PATH = '../../../assets'
 
-async function AssetEndpoint(req: RequestWithPrisma, res: NextApiResponse) {
+export default async function AssetEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
         const { fileName } = req.query
         if (typeof fileName !== 'string') {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
 
         const publicAssetPath = getAbsolutePath(import.meta.url, PUBLIC_ASSETS_RELATIVE_PATH, fileName)
@@ -31,7 +29,7 @@ async function AssetEndpoint(req: RequestWithPrisma, res: NextApiResponse) {
         const isAssetPublic = await isPath(publicAssetPath)
         const isAssetPrivate = await isPath(privateAssetPath)
         if (!isAssetPublic && !isAssetPrivate) {
-          return handleError(new ApiError('Not found.', 404, true), ERROR_PATH, res)
+          throw new ApiError('Not found.', 404, true)
         }
         if (!isAssetPublic) {
           await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER])
@@ -45,7 +43,7 @@ async function AssetEndpoint(req: RequestWithPrisma, res: NextApiResponse) {
         const assetFileExtension = getFileExtension(assetPath)
         const assetMimeType = FILE_EXTENSION_MIME_TYPE[assetFileExtension]
         if (assetMimeType === undefined) {
-          return handleError(new ApiError('Not acceptable.', 406, true), ERROR_PATH, res)
+          throw new ApiError('Not acceptable.', 406, true)
         }
 
         const assetStat = await fsAsync.stat(assetPath)
@@ -60,14 +58,12 @@ async function AssetEndpoint(req: RequestWithPrisma, res: NextApiResponse) {
         const assetReadStream = fs.createReadStream(assetPath)
         assetReadStream.pipe(res)
       } catch (err) {
-        handleError(err, ERROR_PATH, res)
+        handleApiEndpointError(err, ERROR_PATH, res, true)
       }
 
       return undefined
 
     default:
-      handleError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res)
+      handleApiEndpointError(new ApiError('Method not allowed.', 405, true), ERROR_PATH, res, true)
   }
 }
-
-export default withPrisma(AssetEndpoint)
