@@ -287,6 +287,12 @@
       "value": "Access Key"
     }
   ],
+  "SETTINGS_FORM__S3_BUCKET_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Bucket"
+    }
+  ],
   "SETTINGS_FORM__S3_ENDPOINT_INPUT_LABEL": [
     {
       "type": 0,
