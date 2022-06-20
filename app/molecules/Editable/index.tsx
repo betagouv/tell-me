@@ -11,6 +11,7 @@ import type { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuR
 import type { BlockMenuItem } from './types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { KeyboardEvent, MutableRefObject, Reducer } from 'react'
+import type { Promisable } from 'type-fest'
 
 const MENU_ITEMS: BlockMenuItem[] = [
   {
@@ -58,19 +59,19 @@ const MENU_ITEMS: BlockMenuItem[] = [
 ]
 const MENU_ITEMS_LENGTH = MENU_ITEMS.length
 
-type EditableProps = HTMLAttributes<HTMLDivElement> & {
+type EditableProps = Omit<HTMLAttributes<HTMLDivElement>, 'onFocus'> & {
   as: any
-  count?: Common.Nullable<number>
-  countLetter?: Common.Nullable<string>
+  count?: number | null
+  countLetter?: string | null
   defaultValue?: string
   isFocused?: boolean
   isRichText?: boolean
-  onBackspaceKeyDown?: Common.Nullable<() => void>
-  onDownKeyDown?: Common.Nullable<() => void>
-  onEnterKeyDown?: Common.Nullable<() => void>
-  onFocus?: Common.Nullable<() => void>
-  onTypeChange?: Common.Nullable<(newType: TellMe.BlockType) => void>
-  onUpKeyDown?: Common.Nullable<() => void>
+  onBackspaceKeyDown?: () => Promisable<void>
+  onDownKeyDown?: () => Promisable<void>
+  onEnterKeyDown?: () => Promisable<void>
+  onFocus?: () => Promisable<void>
+  onTypeChange?: (newType: TellMe.BlockType) => Promisable<void>
+  onUpKeyDown?: () => Promisable<void>
   onValueChange: (newValue: string) => void
 }
 export function Editable({
@@ -78,12 +79,12 @@ export function Editable({
   defaultValue = '',
   isFocused = false,
   isRichText = false,
-  onBackspaceKeyDown = null,
-  onDownKeyDown = null,
-  onEnterKeyDown = null,
+  onBackspaceKeyDown,
+  onDownKeyDown,
+  onEnterKeyDown,
   onFocus,
-  onTypeChange = null,
-  onUpKeyDown = null,
+  onTypeChange,
+  onUpKeyDown,
   onValueChange,
   ...props
 }: EditableProps) {
@@ -106,7 +107,7 @@ export function Editable({
 
   // States used for rich text blocks
   const controlledValueRef = useRef(defaultValue) as MutableRefObject<string>
-  const selectionFocusNodeRef = useRef(null) as MutableRefObject<Common.Nullable<Node>>
+  const selectionFocusNodeRef = useRef(null) as MutableRefObject<Node | null>
   const selectionFocusOffsetRef = useRef<number>(defaultValue.length)
   const hasFormattedRef = useRef<boolean>(false)
   const [isFormatMenuOpen, setIsFormatMenuOpen] = useState<boolean>(false)
@@ -143,7 +144,7 @@ export function Editable({
       onValueChange(lastValueBeforeOpeningBlockMenuRef.current)
     }
 
-    if (onTypeChange === null) {
+    if (!onTypeChange) {
       return
     }
 
@@ -216,7 +217,7 @@ export function Editable({
           event.preventDefault()
 
           dispatchToBlockMenu({ type: 'selectNext' })
-        } else if (onDownKeyDown !== null) {
+        } else if (onDownKeyDown) {
           event.preventDefault()
 
           onDownKeyDown()
@@ -229,7 +230,7 @@ export function Editable({
           event.preventDefault()
 
           dispatchToBlockMenu({ type: 'selectPrevious' })
-        } else if (onUpKeyDown !== null) {
+        } else if (onUpKeyDown) {
           event.preventDefault()
 
           onUpKeyDown()
@@ -243,7 +244,7 @@ export function Editable({
           event.preventDefault()
 
           handleBlockTypeChange(blockMenuState.visibleItems[blockMenuState.selectedIndex].type)
-        } else if (onEnterKeyDown !== null) {
+        } else if (onEnterKeyDown) {
           event.preventDefault()
 
           onEnterKeyDown()
@@ -281,11 +282,7 @@ export function Editable({
             },
             type: 'updateQuery',
           })
-        } else if (
-          componentRef.current !== null &&
-          componentRef.current.innerText.length === 0 &&
-          onBackspaceKeyDown !== null
-        ) {
+        } else if (componentRef.current !== null && componentRef.current.innerText.length === 0 && onBackspaceKeyDown) {
           event.preventDefault()
 
           onBackspaceKeyDown()

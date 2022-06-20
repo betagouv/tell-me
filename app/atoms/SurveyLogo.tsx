@@ -10,7 +10,7 @@ const Container = styled.div`
 `
 
 const Placeholder = styled.div<{
-  url: Common.Nullable<string>
+  url: string | null
 }>`
   background-color: #dddddd;
   background-image: url('${p => p.url ?? ''}');
@@ -26,7 +26,7 @@ const Placeholder = styled.div<{
 `
 
 type SuveyLogoProps = HTMLAttributes<HTMLDivElement> & {
-  url: Common.Nullable<string>
+  url: string | null
 }
 function SurveyLogoWithoutRef(
   { children, className, url, ...props }: SuveyLogoProps,

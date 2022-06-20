@@ -53,6 +53,24 @@
       "value": "Questionnaires"
     }
   ],
+  "DASBOARD_PAGE__SUBMISSIONS_COUNTER_LABEL": [
+    {
+      "type": 0,
+      "value": "Submissions"
+    }
+  ],
+  "DASBOARD_PAGE__SURVEYS_COUNTER_LABEL": [
+    {
+      "type": 0,
+      "value": "Surveys"
+    }
+  ],
+  "DASBOARD_PAGE__TITLE": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
   "Db1A9P": [
     {
       "type": 0,
@@ -465,12 +483,6 @@
     {
       "type": 0,
       "value": "Cette réponse est requise pour valider le questionnaire :"
-    }
-  ],
-  "dashboard.page.title": [
-    {
-      "type": 0,
-      "value": "Tableau de bord"
     }
   ],
   "fWOJDC": [

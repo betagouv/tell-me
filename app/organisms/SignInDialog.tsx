@@ -31,7 +31,7 @@ enum SignInDialogType {
 const ERROR_PATH = 'app/organisms/<SignInDialog />'
 
 export function SignInDialog() {
-  const [passwordHelperText, setPasswordHelperText] = useState<Common.Nullable<string>>(null)
+  const [passwordHelperText, setPasswordHelperText] = useState<string | null>(null)
   const [type, setType] = useState(SignInDialogType.LOG_IN)
   const auth = useAuth<Common.Auth.User>()
   const intl = useIntl()

@@ -11,7 +11,7 @@ import { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
-import type { Survey } from '@prisma/client'
+import type { SurveyWithJsonType } from '@common/types'
 
 const ERROR_PATH = 'pages/import-export.tsx'
 
@@ -61,7 +61,7 @@ export default function ImportExportPage() {
           personalAccessToken: values.viaApiSurveysImportPersonalAccessToken,
         },
       })
-      const sourceData = await sourceResponse.json<Api.ResponseBody<Survey[]>>()
+      const sourceData = await sourceResponse.json<Api.ResponseBody<SurveyWithJsonType[]>>()
       if (sourceData.hasError) {
         setSubmitting(false)
 
@@ -72,7 +72,7 @@ export default function ImportExportPage() {
 
       await Promise.all(
         sourceSurveys.map(async sourceSurvey => {
-          const maybeBody = await api.get<Survey>(`surveys/${sourceSurvey.id}`)
+          const maybeBody = await api.get<SurveyWithJsonType>(`surveys/${sourceSurvey.id}`)
           if (maybeBody === null || !maybeBody.hasError || maybeBody.code !== 404) {
             return
           }

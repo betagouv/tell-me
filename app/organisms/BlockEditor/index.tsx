@@ -16,6 +16,7 @@ import { Row } from './Row'
 import type { Block } from '../../libs/SurveyEditorManager/Block'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { MutableRefObject } from 'react'
+import type { Promisable } from 'type-fest'
 
 const SURVEY_BLOCK_TYPE_COMPONENT: Record<
   TellMe.BlockType,
@@ -128,9 +129,9 @@ type BlockEditorProps = {
   /** Only applies to 'question' blocks. */
   onChangeKeyAt: (blockIndex: number, newKey: string | null) => void | Promise<void>
   onChangeTypeAt: (blockIndex: number, newType: TellMe.BlockType) => void | Promise<void>
-  onDownKeyDown: Common.FunctionLike
+  onDownKeyDown: () => Promisable<void>
   onFocusAt: (blockIndex: number) => void | Promise<void>
-  onRemove: Common.FunctionLike
+  onRemove: () => Promisable<void>
   onRemoveAt: (blockIndex: number) => void | Promise<void>
   onToggleObligation: any
   onToggleVisibility: any

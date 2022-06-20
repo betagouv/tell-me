@@ -1,6 +1,8 @@
 import ky from 'ky-universal'
 
-export async function loadSchema(schemaUrl: string): Promise<Common.Pojo> {
+import type { AnySchemaObject } from 'ajv'
+
+export async function loadSchema(schemaUrl: string): Promise<AnySchemaObject> {
   const response = await ky.get(schemaUrl)
   const schema = await response.json()
 

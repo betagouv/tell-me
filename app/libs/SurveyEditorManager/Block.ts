@@ -9,8 +9,8 @@ export class Block {
   public readonly type: TellMe.BlockType
   public readonly value: string
 
-  #count: Common.Nullable<number>
-  #countLetter: Common.Nullable<string>
+  #count: number | null
+  #countLetter: string | null
   #ifTruethyThenShowQuestionIds: string[]
   #ifTruethyThenShowQuestionsAsOptions: Common.App.SelectOption[]
   #isCheckbox: boolean
@@ -23,9 +23,9 @@ export class Block {
   #isQuestion: boolean
   /** If `true`, this means that this block is an input that can't be linked to a parent question block. */
   #isUnlinked: boolean
-  #key: Common.Nullable<string>
-  #questionId: Common.Nullable<string>
-  #questionInputType: Common.Nullable<TellMe.BlockType>
+  #key: string | null
+  #questionId: string | null
+  #questionInputType: TellMe.BlockType | null
 
   constructor(
     block: TellMe.TreeBlock,

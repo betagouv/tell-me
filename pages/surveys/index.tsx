@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Copy, Database, Edit, Eye, Settings, Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 
-import type { Prisma, Survey } from '@prisma/client'
+import type { SurveyWithJsonType } from '@common/types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 export default function SurveyListPage() {
@@ -82,7 +82,7 @@ export default function SurveyListPage() {
         version: '1.0.0',
       } as TellMe.Data
 
-      const newSurveyData: Prisma.SurveyCreateInput = {
+      const newSurveyData: Pick<SurveyWithJsonType, 'data' | 'id' | 'slug' | 'tree'> = {
         data,
         id,
         slug,
@@ -107,12 +107,7 @@ export default function SurveyListPage() {
   }
 
   const duplicateSurvey = useCallback(async (sourceSurveyId: string) => {
-    const response = await api.get<
-      Omit<Survey, 'data' | 'tree'> & {
-        data: TellMe.Data
-        tree: TellMe.Tree
-      }
-    >(`surveys/${sourceSurveyId}`)
+    const response = await api.get<SurveyWithJsonType>(`surveys/${sourceSurveyId}`)
     if (response === null || response.hasError) {
       return
     }
@@ -136,7 +131,7 @@ export default function SurveyListPage() {
       title,
     } as TellMe.Data
 
-    const destinationSurvey: Prisma.SurveyCreateInput = {
+    const destinationSurvey: Pick<SurveyWithJsonType, 'data' | 'id' | 'slug' | 'tree'> = {
       data,
       id,
       slug,

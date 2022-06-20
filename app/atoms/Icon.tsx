@@ -1,4 +1,10 @@
+import styled from 'styled-components'
+
 import type { HTMLAttributes } from 'react'
+
+const Box = styled.span`
+  font-size: inherit;
+`
 
 type IconProps = HTMLAttributes<HTMLSpanElement> & {
   /**
@@ -10,8 +16,8 @@ type IconProps = HTMLAttributes<HTMLSpanElement> & {
 }
 export function Icon({ icon, ...rest }: IconProps) {
   return (
-    <span className="material-icons md-24" {...rest}>
+    <Box className="material-icons" {...rest}>
       {icon}
-    </span>
+    </Box>
   )
 }

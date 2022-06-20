@@ -12,5 +12,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.cjs"],
-  "exclude": [".next/*", "config/*", "e2e/*", "node_modules/*", "**/__tests__/*"]
+  "exclude": [".next/*", "config/*", "e2e/*", "node_modules/*"]
 }

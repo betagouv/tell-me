@@ -5,11 +5,13 @@ import { useMemo } from 'react'
 import { Context } from './Context'
 
 import type { ApiContext } from './types'
+import type { AppProps } from 'next/app'
+import type { JsonObject } from 'type-fest'
 
 const API_BASE_URL = '/api'
 
-export function withApi(Component) {
-  return function WithApi(pageProps) {
+export function withApi(Component: AppProps['Component']) {
+  return function WithApi(pageProps: AppProps['pageProps']) {
     const auth = useAuth<Common.Auth.User>()
 
     const providerValue: ApiContext = useMemo(() => {
@@ -20,7 +22,7 @@ export function withApi(Component) {
         prefixUrl: API_BASE_URL,
       })
 
-      async function get<T = any>(path: string): Promise<Common.Nullable<Api.ResponseBody<T>>> {
+      async function get<T = any>(path: string): Promise<Api.ResponseBody<T> | null> {
         try {
           const body = await kyIntance.get(path).json<Api.ResponseBodySuccess<T>>()
 
@@ -40,10 +42,7 @@ export function withApi(Component) {
         }
       }
 
-      async function post<T = any>(
-        path: string,
-        data: Record<string, Common.Pojo | Common.Pojo[]>,
-      ): Promise<Common.Nullable<Api.ResponseBody<T>>> {
+      async function post<T = any>(path: string, data: JsonObject): Promise<Api.ResponseBody<T> | null> {
         try {
           const options = {
             json: data,
@@ -66,10 +65,7 @@ export function withApi(Component) {
         }
       }
 
-      async function patch<T = any>(
-        path: string,
-        data: Record<string, Common.Pojo | Common.Pojo[]>,
-      ): Promise<Common.Nullable<Api.ResponseBody<T>>> {
+      async function patch<T = any>(path: string, data: JsonObject): Promise<Api.ResponseBody<T> | null> {
         try {
           const options = {
             json: data,
@@ -92,7 +88,7 @@ export function withApi(Component) {
         }
       }
 
-      async function put<T = any>(path: string, formData: BodyInit): Promise<Common.Nullable<Api.ResponseBody<T>>> {
+      async function put<T = any>(path: string, formData: BodyInit): Promise<Api.ResponseBody<T> | null> {
         try {
           const options = {
             body: formData,
@@ -116,7 +112,7 @@ export function withApi(Component) {
       }
 
       // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-      async function _delete<T = any>(path: string): Promise<Common.Nullable<Api.ResponseBody<T>>> {
+      async function _delete<T = any>(path: string): Promise<Api.ResponseBody<T> | null> {
         try {
           const body = await kyIntance.delete(path).json<Api.ResponseBodySuccess<T>>()
 

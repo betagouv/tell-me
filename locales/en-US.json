@@ -35,6 +35,18 @@
     "defaultMessage": "Surveys",
     "description": "[Main Menu] Surveys item."
   },
+  "DASBOARD_PAGE__SUBMISSIONS_COUNTER_LABEL": {
+    "defaultMessage": "Submissions",
+    "description": "[Dashboard Page] Submissions counter label."
+  },
+  "DASBOARD_PAGE__SURVEYS_COUNTER_LABEL": {
+    "defaultMessage": "Surveys",
+    "description": "[Dashboard Page] Surveys counter label."
+  },
+  "DASBOARD_PAGE__TITLE": {
+    "defaultMessage": "Dashboard",
+    "description": "[Dashboard Page] Title."
+  },
   "Db1A9P": {
     "defaultMessage": "Label",
     "description": "[Personal Access Token Editor] Form Label input label."
@@ -310,10 +322,6 @@
   "cvJp/S": {
     "defaultMessage": "This answer is required to validate the form.",
     "description": "[Public Survey] Missing answer error message for a required question."
-  },
-  "dashboard.page.title": {
-    "defaultMessage": "Dashboard",
-    "description": "[Dashboard] Page title."
   },
   "fWOJDC": {
     "defaultMessage": "A new password",

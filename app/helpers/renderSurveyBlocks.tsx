@@ -56,7 +56,7 @@ const SURVEY_BLOCK_TYPE_COMPONENT: Record<TellMe.BlockType, any> = {
 export function renderSurveyBlocks(formikContext: FormikContextType<Record<string, string>>, blocks: Block[]) {
   const { errors, submitCount, values } = formikContext
 
-  let indexableBlockIndex: Common.Nullable<number> = null
+  let indexableBlockIndex: number | null = null
 
   return blocks.reduce<JSX.Element[]>((components, block, index) => {
     if (!isSurveyBlockVisible(block, blocks, values)) {

@@ -11,12 +11,12 @@ import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
-import type { Prisma, Survey } from '@prisma/client'
+import type { SurveyWithJsonType } from '@common/types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 type FormValues = {
-  isPublished: Survey['isPublished']
-  slug: Survey['slug']
+  isPublished: SurveyWithJsonType['isPublished']
+  slug: SurveyWithJsonType['slug']
   thankYouMessage: TellMe.Tree['data']['thankYouMessage']
   title: TellMe.Tree['data']['title']
 }
@@ -36,11 +36,7 @@ export default function SurveyConfigPage() {
   })
 
   const loadSurvey = async () => {
-    const maybeBody = await api.get<
-      Survey & {
-        tree: TellMe.Tree
-      }
-    >(`surveys/${id}`)
+    const maybeBody = await api.get<SurveyWithJsonType>(`surveys/${id}`)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
@@ -72,11 +68,7 @@ export default function SurveyConfigPage() {
 
   const updateSurveyAndGoBack = async (values: any, { setErrors, setSubmitting }) => {
     const { isPublished, slug, thankYouMessage, title } = values as FormValues
-    const maybeGetBody = await api.get<
-      Omit<Survey, 'tree'> & {
-        tree: TellMe.Tree
-      }
-    >(`surveys/${id}`)
+    const maybeGetBody = await api.get<SurveyWithJsonType>(`surveys/${id}`)
     if (maybeGetBody === null || maybeGetBody.hasError) {
       return
     }
@@ -92,10 +84,10 @@ export default function SurveyConfigPage() {
       },
     }
 
-    const udpatedData: Prisma.SurveyUpdateInput = {
+    const udpatedData: Pick<SurveyWithJsonType, 'isPublished' | 'slug' | 'tree'> = {
       isPublished,
       slug,
-      tree: tree as any,
+      tree,
     }
 
     const maybePostBody = await api.patch(`surveys/${id}`, udpatedData)
