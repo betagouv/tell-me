@@ -19,56 +19,56 @@
 
 > An awesome open source survey generator.
 
-⚠️ _Work and documentation in progress!_
+⚠️ _Work and documentation in progress. The v1 is coming soon!_
 
 ---
 
 - [Roadmap](#roadmap)
 - [Deployment](#deployment)
-  - [Architecture](#architecture)
-  - [PaaS & hosting providers](#paas--hosting-providers)
-    - [Heroku](#heroku)
-    - [Scalingo](#scalingo)
+  - [Heroku](#heroku)
+  - [Scalingo](#scalingo)
 - [Contributing](#contributing)
+  - [Developers](#developers)
+  - [Translators](#translators)
 
 ---
 
 ## Roadmap
 
-- Accessibility
-- Handle survey file upload (in progress)
-- Add public API to access survey results via a PAT (in progress)
-- Allow survey per-result deletion (in progress)
-- Add dashboard
-- Teams (with an environment variable switch in order to host a shared BetaGouv service?)
+- [ ] 🪅 Accessibility
+- [ ] 🔼 Survey file upload field
+- [x] 🔑 Public API via PAT generation
+- [x] 🗳️ Submissions deletion
+- [x] 📊 Dashboard statistics
+- [ ] 🐾 Teams
+- [x] 🌎 Localisation CI via Crowdin
 
 ## Deployment
-
-### Architecture
-
-1. **Application**  
-   Let Me is a monolithic application gathering both web application and RESTful API
-   written in Javascript / Node.js, running above [Next.js Framework](https://nextjs.org)).
-
-2. **Database**  
-   It requires a [PostgreSQL database](https://www.postgresql.org).
-
-Both part are dockerized in order to ease deployment on any hosting configuration.
-
-### PaaS & hosting providers
 
 > ⚠️ **IMPORTANT**  
 > You can't deploy and run successful instances without generating and setting `EDDSA_PRIVATE_KEY` and `NEXT_PUBLIC_EDDSA_PUBLIC_KEY` env vars.  
 > This will be only handled once the setup feature is ready.
 
-#### Heroku
+Tell Me application is automatically deployable on most PaaS. It's also relatively easy to deploy via Docker.
+
+You'll only need to attach a PostgreSQL database.
+
+### Heroku
 
 [![Deploy Tell Me to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/betagouv/tell-me#main)
 
-#### Scalingo
+### Scalingo
 
 [![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy?source=https://github.com/betagouv/tell-me#main)
 
 ## Contributing
 
-Please see our [CONTRIBUTING.md](/CONTRIBUTING.md).
+### Developers
+
+Please check our [CONTRIBUTING.md document](/CONTRIBUTING.md) to setup and run Tell Me locally 🛸.
+
+### Translators
+
+[![Crowdin](https://badges.crowdin.net/tell-me-open-source/localized.svg)](https://crowdin.com/project/tell-me-open-source)
+
+Please join our [Crowdin Dashboard](https://crowdin.com/project/tell-me-open-source) to help us translate Tell Me to the world 🌎!
