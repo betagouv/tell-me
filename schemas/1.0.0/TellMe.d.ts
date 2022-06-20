@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 export namespace TellMe {
-  interface Block {
+  type Block = {
     data: BlockData
     /** The unique block ID. */
     id: string
@@ -36,15 +36,15 @@ export namespace TellMe {
     | 'input_short_answer'
     | 'question'
 
-  interface ActionBlock extends Block {
+  type ActionBlock = Block & {
     type: 'action_next' | 'action_submit'
   }
 
-  interface ContentBlock extends Block {
+  type ContentBlock = Block & {
     type: 'content_subtitle' | 'content_text'
   }
 
-  interface InputBlock extends Block {
+  type InputBlock = Block & {
     data: BlockData & {
       ifTruethyThenShowQuestionIds: string[]
     }
@@ -63,7 +63,7 @@ export namespace TellMe {
       | 'input_short_answer'
   }
 
-  interface QuestionBlock extends Block {
+  type QuestionBlock = Block & {
     data: BlockData & {
       isHidden: boolean
       isRequired: boolean
@@ -75,7 +75,7 @@ export namespace TellMe {
 
   type TreeBlock = ActionBlock | ContentBlock | InputBlock | QuestionBlock
 
-  interface Tree {
+  type Tree = {
     children: TreeBlock[]
     data: {
       /** The background URI. This can be a domain-relative path, i.e.: "/images/background.svg". */
@@ -106,21 +106,21 @@ export namespace TellMe {
     value: string
   }
 
-  interface Answer {
+  type Answer = {
     data: Record<string, any>
     question: Question
     rawValue: string
     type: 'email' | 'file' | 'link' | 'phone' | 'score' | 'string' | 'strings'
   }
 
-  interface EmailAnswer extends Answer {
+  type EmailAnswer = Answer & {
     data: {
       value: string
     }
     type: 'email'
   }
 
-  interface FileAnswer extends Answer {
+  type FileAnswer = Answer & {
     data: {
       mime: string
       uri: string
@@ -128,21 +128,21 @@ export namespace TellMe {
     type: 'file'
   }
 
-  interface LinkAnswer extends Answer {
+  type LinkAnswer = Answer & {
     data: {
       value: string
     }
     type: 'link'
   }
 
-  interface PhoneAnswer extends Answer {
+  type PhoneAnswer = Answer & {
     data: {
       value: string
     }
     type: 'phone'
   }
 
-  interface ScoreAnswer extends Answer {
+  type ScoreAnswer = Answer & {
     data: {
       base: number
       value: number
@@ -150,7 +150,7 @@ export namespace TellMe {
     type: 'score'
   }
 
-  interface StringAnswer extends Answer {
+  type StringAnswer = Answer & {
     data: {
       isMarkdown: boolean
       value: string
@@ -158,7 +158,7 @@ export namespace TellMe {
     type: 'string'
   }
 
-  interface StringsAnswer extends Answer {
+  type StringsAnswer = Answer & {
     data: {
       values: string[]
     }
@@ -183,7 +183,7 @@ export namespace TellMe {
     submittedAt: string
   }
 
-  interface Data {
+  type Data = {
     entries: DataEntry[]
     /** The related survey ID. */
     id: string

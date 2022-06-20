@@ -1,12 +1,14 @@
 import { SurveyEditorTitle } from '../atoms/SurveyEditorTitle'
 import { Editable } from '../molecules/Editable'
 
+import type { Promisable } from 'type-fest'
+
 type TitleEditorProps = {
   defaultValue: string
   isFocused: boolean
-  onDownKeyDown: Common.FunctionLike
-  onEnterKeyDown: Common.FunctionLike
-  onFocus: Common.FunctionLike
+  onDownKeyDown: () => Promisable<void>
+  onEnterKeyDown: () => Promisable<void>
+  onFocus: () => Promisable<void>
   onValueChange: (newTitle: string) => void | Promise<void>
 }
 export function TitleEditor(props: TitleEditorProps) {

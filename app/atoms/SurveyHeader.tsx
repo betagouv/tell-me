@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SurveyHeader = styled.header<{
-  url: Common.Nullable<string>
+  url: string | null
 }>`
   background-color: #b8d8d8;
   background-image: url('${p => p.url ?? ''}');

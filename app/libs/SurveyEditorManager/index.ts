@@ -17,7 +17,7 @@ export class SurveyEditorManager {
     return this.#blocks
   }
 
-  public get focusedBlock(): Common.Nullable<Block> {
+  public get focusedBlock(): Block | null {
     if (this.#focusedBlockIndex < 0) {
       return null
     }
@@ -309,7 +309,7 @@ export class SurveyEditorManager {
   }
 
   private initializeBlocks(blocks: TellMe.TreeBlock[]) {
-    let questionId: Common.Nullable<string> = null
+    let questionId: string | null = null
     let isHidden: boolean = false
 
     this.#blocks = blocks.reduce((previousBlocks: Block[], block: TellMe.TreeBlock, index: number) => {

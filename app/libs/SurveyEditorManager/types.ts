@@ -5,6 +5,6 @@ export type BlockConstructorOptions = {
   ifTruethyThenShowQuestionsAsOptions?: Common.App.SelectOption[]
   isCountable: boolean
   isHidden: boolean
-  questionId: Common.Nullable<string>
+  questionId: string | null
   questionInputType?: TellMe.BlockType
 }

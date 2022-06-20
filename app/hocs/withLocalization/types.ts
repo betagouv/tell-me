@@ -1,4 +1,4 @@
 export type LocalizationContext = {
-  locale: Common.Nullable<string>
+  locale: string | null
   refresh: (newLocale: string) => void
 }

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 import type { Block } from '../../libs/SurveyEditorManager/Block'
 import type { HTMLAttributes } from 'react'
+import type { Promisable } from 'type-fest'
 
 const Box = styled.div`
   align-items: flex-start;
@@ -80,11 +81,11 @@ const ICON: Record<string, (props: HTMLAttributes<HTMLSpanElement>) => JSX.Eleme
 type RowProps = {
   block: Block
   children: any
-  onClickCondition: Common.FunctionLike
-  onClickDelete: Common.FunctionLike
-  onClickKey: Common.FunctionLike
-  onToggleObligation: any
-  onToggleVisibility: any
+  onClickCondition: () => Promisable<void>
+  onClickDelete: () => Promisable<void>
+  onClickKey: () => Promisable<void>
+  onToggleObligation: () => Promisable<void>
+  onToggleVisibility: () => Promisable<void>
 }
 export function Row({
   block,

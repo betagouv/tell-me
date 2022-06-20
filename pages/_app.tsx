@@ -8,6 +8,8 @@ import { AuthProvider } from 'nexauth/client'
 import Head from 'next/head'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
+import type { AppProps } from 'next/app'
+
 import '@fontsource/poppins/300.css'
 import '@fontsource/poppins/400.css'
 import '@fontsource/poppins/500.css'
@@ -32,7 +34,7 @@ const GlobalStyleCustom = createGlobalStyle`
 
 const PRIVATE_PATHS = [/^\/(?!public|test\/).*/]
 
-export default function TellMeApp({ Component, pageProps }) {
+export default function TellMeApp({ Component, pageProps }: AppProps) {
   const WrappedComponent = withApi(Component)
 
   return (
