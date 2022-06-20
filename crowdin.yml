@@ -5,4 +5,4 @@ commit_message: "fix(locales): update translations"
 
 files:
   - source: "/locales/en-US.json"
-    translation: "/locales/fr-FR.json"
+    translation: "/locales/%locale%.json"
