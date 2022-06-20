@@ -1,410 +1,410 @@
 {
   "0llMw7": {
-    "defaultMessage": "Value",
-    "description": "[Personal Access Token Editor] Form Value input label."
+    "description": "[Personal Access Token Editor] Form Value input label.",
+    "message": "Value"
   },
   "4toEG": {
-    "defaultMessage": "Edit this user",
-    "description": "[Users List] Table row edition button label."
+    "description": "[Users List] Table row edition button label.",
+    "message": "Edit this user"
   },
   "6StYcj": {
-    "defaultMessage": "Answers",
-    "description": "[Survey Answers List] Table Answers column label."
+    "description": "[Survey Answers List] Table Answers column label.",
+    "message": "Answers"
   },
   "7LF9Gb": {
-    "defaultMessage": "Update",
-    "description": "[Personal Access Token Editor] Form update button label."
+    "description": "[Personal Access Token Editor] Form update button label.",
+    "message": "Update"
   },
   "8F0yyx": {
-    "defaultMessage": "Delete this user",
-    "description": "[Users List] Table row deletion button label."
+    "description": "[Users List] Table row deletion button label.",
+    "message": "Delete this user"
   },
   "8vxOf": {
-    "defaultMessage": "Users",
-    "description": "[Users List] Page title."
+    "description": "[Users List] Page title.",
+    "message": "Users"
   },
   "91i3BC": {
-    "defaultMessage": "Title",
-    "description": "[Surveys List] Table \"title\" column label."
+    "description": "[Surveys List] Table \"title\" column label.",
+    "message": "Title"
   },
   "9vy90u": {
-    "defaultMessage": "Delete Confirmation",
-    "description": "[Delete Confirmation Dialog] Title."
+    "description": "[Delete Confirmation Dialog] Title.",
+    "message": "Delete Confirmation"
   },
   "D6/Uxz": {
-    "defaultMessage": "Surveys",
-    "description": "[Main Menu] Surveys item."
+    "description": "[Main Menu] Surveys item.",
+    "message": "Surveys"
   },
   "DASBOARD_PAGE__SUBMISSIONS_COUNTER_LABEL": {
-    "defaultMessage": "Submissions",
-    "description": "[Dashboard Page] Submissions counter label."
+    "description": "[Dashboard Page] Submissions counter label.",
+    "message": "Submissions"
   },
   "DASBOARD_PAGE__SURVEYS_COUNTER_LABEL": {
-    "defaultMessage": "Surveys",
-    "description": "[Dashboard Page] Surveys counter label."
+    "description": "[Dashboard Page] Surveys counter label.",
+    "message": "Surveys"
   },
   "DASBOARD_PAGE__TITLE": {
-    "defaultMessage": "Dashboard",
-    "description": "[Dashboard Page] Title."
+    "description": "[Dashboard Page] Title.",
+    "message": "Dashboard"
   },
   "Db1A9P": {
-    "defaultMessage": "Label",
-    "description": "[Personal Access Token Editor] Form Label input label."
+    "description": "[Personal Access Token Editor] Form Label input label.",
+    "message": "Label"
   },
   "Ddm/Wq": {
-    "defaultMessage": "Delete",
-    "description": "[Delete Confirmation Dialog] Delete button label."
+    "description": "[Delete Confirmation Dialog] Delete button label.",
+    "message": "Delete"
   },
   "Dus0RS": {
-    "defaultMessage": "Files",
-    "description": "[Survey Answers List] Table Files column label."
+    "description": "[Survey Answers List] Table Files column label.",
+    "message": "Files"
   },
   "E/vx8U": {
-    "defaultMessage": "Thank You message",
-    "description": "[Survey Config] Form thank you message textarea label."
+    "description": "[Survey Config] Form thank you message textarea label.",
+    "message": "Thank You message"
   },
   "EEsDeJ": {
-    "defaultMessage": "Dashboard",
-    "description": "[Main Menu] Dashboard item."
+    "description": "[Main Menu] Dashboard item.",
+    "message": "Dashboard"
   },
   "EYeJTo": {
-    "defaultMessage": "Sign Up",
-    "description": "[Signup Dialog] Title."
+    "description": "[Signup Dialog] Title.",
+    "message": "Sign Up"
   },
   "FC8ax/": {
-    "defaultMessage": "Edit user",
-    "description": "[User Editor] Edition page title."
+    "description": "[User Editor] Edition page title.",
+    "message": "Edit user"
   },
   "HF2UUz": {
-    "defaultMessage": "Personal Access Tokens",
-    "description": "[Personal Access Tokens List] Page title."
+    "description": "[Personal Access Tokens List] Page title.",
+    "message": "Personal Access Tokens"
   },
   "I8y4ic": {
-    "defaultMessage": "Log In",
-    "description": "[Login Dialog] Form submit button label."
+    "description": "[Login Dialog] Form submit button label.",
+    "message": "Log In"
   },
   "IEpCqZ": {
-    "defaultMessage": "New survey",
-    "description": "[Surveys List] New survey button label."
+    "description": "[Surveys List] New survey button label.",
+    "message": "New survey"
   },
   "IMPORT_EXPORT_PAGE__TITLE": {
-    "defaultMessage": "Import / Export",
-    "description": "[Import / Export Page] Title."
+    "description": "[Import / Export Page] Title.",
+    "message": "Import / Export"
   },
   "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION": {
-    "defaultMessage": "You can import surveys between different Tell Me instances using their API.",
-    "description": "[Import Surveys via API Form] Description."
+    "description": "[Import Surveys via API Form] Description.",
+    "message": "You can import surveys between different Tell Me instances using their API."
   },
   "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION_HELPER": {
-    "defaultMessage": "You first have to generate a Personal Access Token on the source instance in order for the current instance to have access to the remote data.",
-    "description": "[Import Surveys via API Form] Description helper."
+    "description": "[Import Surveys via API Form] Description helper.",
+    "message": "You first have to generate a Personal Access Token on the source instance in order for the current instance to have access to the remote data."
   },
   "IMPORT_SURVEYS_VIA_API_FORM__IMPORT_BUTTON_LABEL": {
-    "defaultMessage": "Import Surveys",
-    "description": "[Import Surveys via API Form] Form import button label."
+    "description": "[Import Surveys via API Form] Form import button label.",
+    "message": "Import Surveys"
   },
   "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_LABEL": {
-    "defaultMessage": "Personal Access Token",
-    "description": "[Import Surveys via API Form] Personal Access Token input label."
+    "description": "[Import Surveys via API Form] Personal Access Token input label.",
+    "message": "Personal Access Token"
   },
   "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please generate a Personal Access Token on the remote Tell Me source and copy/paste its value here.",
-    "description": "[Import Surveys via API Form] Password input requirement error."
+    "description": "[Import Surveys via API Form] Password input requirement error.",
+    "message": "Please generate a Personal Access Token on the remote Tell Me source and copy/paste its value here."
   },
   "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_FORMAT_ERROR": {
-    "defaultMessage": "This URL format doesn't look right.",
-    "description": "[Import Surveys via API Form] Url input format error."
+    "description": "[Import Surveys via API Form] Url input format error.",
+    "message": "This URL format doesn't look right."
   },
   "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_LABEL": {
-    "defaultMessage": "URL",
-    "description": "[Import Surveys via API Form] URL input label."
+    "description": "[Import Surveys via API Form] URL input label.",
+    "message": "URL"
   },
   "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please enter the Tell Me remote source url.",
-    "description": "[Import Surveys via API Form] Url input requirement error."
+    "description": "[Import Surveys via API Form] Url input requirement error.",
+    "message": "Please enter the Tell Me remote source url."
   },
   "K06DbM": {
-    "defaultMessage": "Your new password (again)",
-    "description": "[Signup Dialog] Password repeat input label."
+    "description": "[Signup Dialog] Password repeat input label.",
+    "message": "Your new password (again)"
   },
   "KahMf6": {
-    "defaultMessage": "Email",
-    "description": "[Personal Access Tokens List] Table Email column label."
+    "description": "[Personal Access Tokens List] Table Email column label.",
+    "message": "Email"
   },
   "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": {
-    "defaultMessage": "Your account has not yet been activated.",
-    "description": "[Login Dialog] Disabled account error."
+    "description": "[Login Dialog] Disabled account error.",
+    "message": "Your account has not yet been activated."
   },
   "LOGIN_DIALOG__EMAIL_INPUT_FORMAT_ERROR": {
-    "defaultMessage": "Your email doesn't look right.",
-    "description": "[Login Dialog] Email input format error."
+    "description": "[Login Dialog] Email input format error.",
+    "message": "Your email doesn't look right."
   },
   "LOGIN_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please enter your email.",
-    "description": "[Login Dialog] Email input requirement error."
+    "description": "[Login Dialog] Email input requirement error.",
+    "message": "Please enter your email."
   },
   "LOGIN_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please enter your password.",
-    "description": "[Login Dialog] Password input requirement error."
+    "description": "[Login Dialog] Password input requirement error.",
+    "message": "Please enter your password."
   },
   "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": {
-    "defaultMessage": "Wrong email and/or password.",
-    "description": "[Login Dialog] Wrong creadentials error."
+    "description": "[Login Dialog] Wrong creadentials error.",
+    "message": "Wrong email and/or password."
   },
   "MAIN_MENU__ADMINISTRATION_TITLE": {
-    "defaultMessage": "ADMINISTRATION",
-    "description": "[Main Menu] Administration title."
+    "description": "[Main Menu] Administration title.",
+    "message": "ADMINISTRATION"
   },
   "MAIN_MENU__IMPORT_EXPORT_ITEM": {
-    "defaultMessage": "Import / Export",
-    "description": "[Main Menu] Import / Export item."
+    "description": "[Main Menu] Import / Export item.",
+    "message": "Import / Export"
   },
   "MAIN_MENU__SETTINGS_ITEM": {
-    "defaultMessage": "Global Settings",
-    "description": "[Main Menu] Settings item."
+    "description": "[Main Menu] Settings item.",
+    "message": "Global Settings"
   },
   "MENU__LOG_OUT_BUTTON_ARIA_LABEL": {
-    "defaultMessage": "Log out",
-    "description": "[Menu] Log out button aria label."
+    "description": "[Menu] Log out button aria label.",
+    "message": "Log out"
   },
   "MENU__SETTINGS_BUTTON_ARIA_LABEL": {
-    "defaultMessage": "My settings",
-    "description": "[Menu] Settings button aria label."
+    "description": "[Menu] Settings button aria label.",
+    "message": "My settings"
   },
   "N68/ff": {
-    "defaultMessage": "Slug",
-    "description": "[Survey Config] Form slug input label."
+    "description": "[Survey Config] Form slug input label.",
+    "message": "Slug"
   },
   "NIzhyl": {
-    "defaultMessage": "New personal access token",
-    "description": "[Personal Access Tokens List] New personal access token button label."
+    "description": "[Personal Access Tokens List] New personal access token button label.",
+    "message": "New personal access token"
   },
   "NNlf6B": {
-    "defaultMessage": "My Settings",
-    "description": "[My Settings] Page title."
+    "description": "[My Settings] Page title.",
+    "message": "My Settings"
   },
   "Q0wotK": {
-    "defaultMessage": "Email",
-    "description": "[User Editor] Form Email input label."
+    "description": "[User Editor] Form Email input label.",
+    "message": "Email"
   },
   "QBtMwD": {
-    "defaultMessage": "Email",
-    "description": "[Users List] Table Email column label."
+    "description": "[Users List] Table Email column label.",
+    "message": "Email"
   },
   "QWfMAC": {
-    "defaultMessage": "New PAT",
-    "description": "[Personal Access Token Editor] Creation page title."
+    "description": "[Personal Access Token Editor] Creation page title.",
+    "message": "New PAT"
   },
   "SETTINGS_FORM__BASE_URL_INPUT_LABEL:": {
-    "defaultMessage": "Base URL",
-    "description": "[Settings Form] Base URL input label."
+    "description": "[Settings Form] Base URL input label.",
+    "message": "Base URL"
   },
   "SETTINGS_FORM__S3_ACCESS_KEY_INPUT_LABEL": {
-    "defaultMessage": "Access Key",
-    "description": "[Settings Form] S3 Access Key input label."
+    "description": "[Settings Form] S3 Access Key input label.",
+    "message": "Access Key"
   },
   "SETTINGS_FORM__S3_BUCKET_INPUT_LABEL": {
-    "defaultMessage": "Bucket",
-    "description": "[Settings Form] S3 Bucket input label."
+    "description": "[Settings Form] S3 Bucket input label.",
+    "message": "Bucket"
   },
   "SETTINGS_FORM__S3_ENDPOINT_INPUT_LABEL": {
-    "defaultMessage": "Endpoint",
-    "description": "[Settings Form] S3 Endpoint input label."
+    "description": "[Settings Form] S3 Endpoint input label.",
+    "message": "Endpoint"
   },
   "SETTINGS_FORM__S3_PORT_INPUT_HELPER": {
-    "defaultMessage": "Only required for MinIO custom servers.",
-    "description": "[Settings Form] S3 Port input helper."
+    "description": "[Settings Form] S3 Port input helper.",
+    "message": "Only required for MinIO custom servers."
   },
   "SETTINGS_FORM__S3_PORT_INPUT_LABEL": {
-    "defaultMessage": "Port",
-    "description": "[Settings Form] S3 Port input label."
+    "description": "[Settings Form] S3 Port input label.",
+    "message": "Port"
   },
   "SETTINGS_FORM__S3_SECRET_KEY_INPUT_LABEL": {
-    "defaultMessage": "Secret Key",
-    "description": "[Settings Form] S3 Secret Key input label."
+    "description": "[Settings Form] S3 Secret Key input label.",
+    "message": "Secret Key"
   },
   "SETTINGS_FORM__S3_SUBTITLE": {
-    "defaultMessage": "S3-compatible Static Assets Server",
-    "description": "[Settings Form] S3 subtitle."
+    "description": "[Settings Form] S3 subtitle.",
+    "message": "S3-compatible Static Assets Server"
   },
   "SETTINGS_FORM__S3_URL_INPUT_LABEL": {
-    "defaultMessage": "Public URL",
-    "description": "[Settings Form] S3 Public URL input label."
+    "description": "[Settings Form] S3 Public URL input label.",
+    "message": "Public URL"
   },
   "SETTINGS_FORM__UPDATE_BUTTON_LABEL": {
-    "defaultMessage": "Update",
-    "description": "[Settings Form] Form update button label."
+    "description": "[Settings Form] Form update button label.",
+    "message": "Update"
   },
   "SETTINGS_PAGE__TITLE": {
-    "defaultMessage": "Global Settings",
-    "description": "[Settings Page] Title."
+    "description": "[Settings Page] Title.",
+    "message": "Global Settings"
   },
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": {
-    "defaultMessage": "This email is already associated with an existing account.",
-    "description": "[Signup Dialog] Duplicate account error."
+    "description": "[Signup Dialog] Duplicate account error.",
+    "message": "This email is already associated with an existing account."
   },
   "SIGNUP_DIALOG__EMAIL_INPUT_FORMAT_ERROR": {
-    "defaultMessage": "Your email doesn't look right.",
-    "description": "[Signup Dialog] Email input format error."
+    "description": "[Signup Dialog] Email input format error.",
+    "message": "Your email doesn't look right."
   },
   "SIGNUP_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please enter your email.",
-    "description": "[Signup Dialog] Email input requirement error."
+    "description": "[Signup Dialog] Email input requirement error.",
+    "message": "Please enter your email."
   },
   "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_MATCH_ERROR": {
-    "defaultMessage": "Passwords don't match.",
-    "description": "[Signup Dialog] Password confirmation input match error."
+    "description": "[Signup Dialog] Password confirmation input match error.",
+    "message": "Passwords don't match."
   },
   "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please confirm your password.",
-    "description": "[Signup Dialog] Password confirmation input requirement error."
+    "description": "[Signup Dialog] Password confirmation input requirement error.",
+    "message": "Please confirm your password."
   },
   "SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": {
-    "defaultMessage": "Please enter your password.",
-    "description": "[Signup Dialog] Password input requirement error."
+    "description": "[Signup Dialog] Password input requirement error.",
+    "message": "Please enter your password."
   },
   "TYZzVl": {
-    "defaultMessage": "Label",
-    "description": "[Personal Access Tokens List] Table Label column label."
+    "description": "[Personal Access Tokens List] Table Label column label.",
+    "message": "Label"
   },
   "UaLCH+": {
-    "defaultMessage": "First Name",
-    "description": "[User Editor] Form First Name input label."
+    "description": "[User Editor] Form First Name input label.",
+    "message": "First Name"
   },
   "VXF18U": {
-    "defaultMessage": "Activated account",
-    "description": "[User Editor] Form activated account checkbox label."
+    "description": "[User Editor] Form activated account checkbox label.",
+    "message": "Activated account"
   },
   "WL5w1n": {
-    "defaultMessage": "Personal Access Tokens",
-    "description": "[Main Menu] Personal Access Tokens item."
+    "description": "[Main Menu] Personal Access Tokens item.",
+    "message": "Personal Access Tokens"
   },
   "XJmbHw": {
-    "defaultMessage": "Role",
-    "description": "[User Editor] Form Role select label."
+    "description": "[User Editor] Form Role select label.",
+    "message": "Role"
   },
   "YJ9OxG": {
-    "defaultMessage": "Your email",
-    "description": "[Signup Dialog] Email input label."
+    "description": "[Signup Dialog] Email input label.",
+    "message": "Your email"
   },
   "YbP4R+": {
-    "defaultMessage": "Survey Config",
-    "description": "[Survey Config] Page title."
+    "description": "[Survey Config] Page title.",
+    "message": "Survey Config"
   },
   "YsRqXk": {
-    "defaultMessage": "Export as CSV",
-    "description": "[Survey Answers List] Export answers in CSV format button label."
+    "description": "[Survey Answers List] Export answers in CSV format button label.",
+    "message": "Export as CSV"
   },
   "YzeZvW": {
-    "defaultMessage": "Published",
-    "description": "[Survey Config] Form published checkbox label."
+    "description": "[Survey Config] Form published checkbox label.",
+    "message": "Published"
   },
   "ZxR2Ts": {
-    "defaultMessage": "Survey Answers",
-    "description": "[Survey Answers List] Survey answers list subtitle."
+    "description": "[Survey Answers List] Survey answers list subtitle.",
+    "message": "Survey Answers"
   },
   "ax3sGB": {
-    "defaultMessage": "Edit this personal access token",
-    "description": "[Personal Access Tokens List] Table row edition button label."
+    "description": "[Personal Access Tokens List] Table row edition button label.",
+    "message": "Edit this personal access token"
   },
   "bVPj59": {
-    "defaultMessage": "Delete this personal access token",
-    "description": "[Personal Access Tokens List] Table row deletion button label."
+    "description": "[Personal Access Tokens List] Table row deletion button label.",
+    "message": "Delete this personal access token"
   },
   "bdTRI9": {
-    "defaultMessage": "Update",
-    "description": "[Survey Config] Form update button label."
+    "description": "[Survey Config] Form update button label.",
+    "message": "Update"
   },
   "cZz32J": {
-    "defaultMessage": "Edit PAT",
-    "description": "[Personal Access Token Editor] Edition page title."
+    "description": "[Personal Access Token Editor] Edition page title.",
+    "message": "Edit PAT"
   },
   "cvJp/S": {
-    "defaultMessage": "This answer is required to validate the form.",
-    "description": "[Public Survey] Missing answer error message for a required question."
+    "description": "[Public Survey] Missing answer error message for a required question.",
+    "message": "This answer is required to validate the form."
   },
   "fWOJDC": {
-    "defaultMessage": "A new password",
-    "description": "[Signup Dialog] Password input label."
+    "description": "[Signup Dialog] Password input label.",
+    "message": "A new password"
   },
   "h4+RiJ": {
-    "defaultMessage": "Update",
-    "description": "[User Editor] Form update button label."
+    "description": "[User Editor] Form update button label.",
+    "message": "Update"
   },
   "i0E602": {
-    "defaultMessage": "Submit",
-    "description": "[Public Survey] Submit button label."
+    "description": "[Public Survey] Submit button label.",
+    "message": "Submit"
   },
   "i8B3g5": {
-    "defaultMessage": "Thank you for your interest in helping our project!",
-    "description": "[Public Survey] Thank you message once the survey has been sent."
+    "description": "[Public Survey] Thank you message once the survey has been sent.",
+    "message": "Thank you for your interest in helping our project!"
   },
   "j3Zg1g": {
-    "defaultMessage": "Expired at",
-    "description": "[Personal Access Tokens List] Table Expired At column label."
+    "description": "[Personal Access Tokens List] Table Expired At column label.",
+    "message": "Expired at"
   },
   "kx4x9D": {
-    "defaultMessage": "Role",
-    "description": "[Users List] Table Role column label."
+    "description": "[Users List] Table Role column label.",
+    "message": "Role"
   },
   "lGHKue": {
-    "defaultMessage": "Language",
-    "description": "[My Settings] Form language select label."
+    "description": "[My Settings] Form language select label.",
+    "message": "Language"
   },
   "mJMucx": {
-    "defaultMessage": "Cancel",
-    "description": "[Delete Confirmation Dialog] Cancel button label."
+    "description": "[Delete Confirmation Dialog] Cancel button label.",
+    "message": "Cancel"
   },
   "nsfyN3": {
-    "defaultMessage": "Create",
-    "description": "[Personal Access Token Editor] Form create button label."
+    "description": "[Personal Access Token Editor] Form create button label.",
+    "message": "Create"
   },
   "oRbw/6": {
-    "defaultMessage": "Are you sure you want to delete <strong>{entity}</strong>?",
-    "description": "[Delete Confirmation Dialog] Message."
+    "description": "[Delete Confirmation Dialog] Message.",
+    "message": "Are you sure you want to delete <strong>{entity}</strong>?"
   },
   "oatzvs": {
-    "defaultMessage": "Last Name",
-    "description": "[User Editor] Form Last Name input label."
+    "description": "[User Editor] Form Last Name input label.",
+    "message": "Last Name"
   },
   "pLn6i2": {
-    "defaultMessage": "Update",
-    "description": "[My Settings] Form update button label."
+    "description": "[My Settings] Form update button label.",
+    "message": "Update"
   },
   "pglohm": {
-    "defaultMessage": "Title",
-    "description": "[Survey Config] Form title input label."
+    "description": "[Survey Config] Form title input label.",
+    "message": "Title"
   },
   "q5x9RM": {
-    "defaultMessage": "Sign Up",
-    "description": "[Signup Dialog] Submit button label."
+    "description": "[Signup Dialog] Submit button label.",
+    "message": "Sign Up"
   },
   "s1Q3aH": {
-    "defaultMessage": "Date",
-    "description": "[Survey Answers List] Table Date column label."
+    "description": "[Survey Answers List] Table Date column label.",
+    "message": "Date"
   },
   "tnYUFj": {
-    "defaultMessage": "Survey",
-    "description": "[Surveys List] Page title."
+    "description": "[Surveys List] Page title.",
+    "message": "Survey"
   },
   "ugMu4J": {
-    "defaultMessage": "Email",
-    "description": "[Login Dialog] Form email input label."
+    "description": "[Login Dialog] Form email input label.",
+    "message": "Email"
   },
   "vaW853": {
-    "defaultMessage": "Thank you for your interest in helping our project!",
-    "description": "[Survey Config] Form thank you message textarea placeholder."
+    "description": "[Survey Config] Form thank you message textarea placeholder.",
+    "message": "Thank you for your interest in helping our project!"
   },
   "wHB27C": {
-    "defaultMessage": "Log In",
-    "description": "[Login Dialog] Modal title."
+    "description": "[Login Dialog] Modal title.",
+    "message": "Log In"
   },
   "xhJCpr": {
-    "defaultMessage": "Password",
-    "description": "[Login Dialog] Form password input label."
+    "description": "[Login Dialog] Form password input label.",
+    "message": "Password"
   },
   "zGNJ13": {
-    "defaultMessage": "Users",
-    "description": "[Main Menu] Users item."
+    "description": "[Main Menu] Users item.",
+    "message": "Users"
   }
 }
