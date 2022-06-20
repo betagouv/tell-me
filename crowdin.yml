@@ -1,0 +1,8 @@
+# https://developer.crowdin.com/configuration-file/
+
+pull_request_title: "fix(locales): update translations"
+commit_message: "fix(locales): update translations"
+
+files:
+  - source: "/locales/en-US.json"
+    translation: "/locales/fr-FR.json"
