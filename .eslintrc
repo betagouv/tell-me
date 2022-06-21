@@ -8,15 +8,17 @@
   "ignorePatterns": ["next-env.d.ts"],
   "plugins": ["formatjs"],
   "rules": {
-    "react/jsx-props-no-spreading": "off",
-    "react/require-default-props": "off",
-
     "@typescript-eslint/no-use-before-define": "off",
 
     "formatjs/enforce-default-message": "error",
     "formatjs/enforce-description": "error",
     "formatjs/enforce-id": "error",
-    "formatjs/enforce-placeholders": "error",
+    "formatjs/enforce-placeholders": [
+      "error",
+      {
+        "ignoreList": ["a"]
+      }
+    ],
     "formatjs/enforce-plural-rules": [
       "error",
       // https://formatjs.io/docs/tooling/linter/#available-rules-1
@@ -34,7 +36,11 @@
     "formatjs/no-emoji": "error",
     "formatjs/no-multiple-plurals": "error",
     "formatjs/no-multiple-whitespaces": "error",
-    "formatjs/no-offset": "error"
+    "formatjs/no-offset": "error",
+
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unstable-nested-components": "off",
+    "react/require-default-props": "off"
   },
   "overrides": [
     {

@@ -197,6 +197,26 @@
       "value": "Email"
     }
   ],
+  "LOGIN_DIALOG__DESCRIPTION": [
+    {
+      "type": 0,
+      "value": "Please "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "sign up"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " if you don’t have an account."
+    }
+  ],
   "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": [
     {
       "type": 0,
@@ -357,6 +377,26 @@
     {
       "type": 0,
       "value": "Global Settings"
+    }
+  ],
+  "SIGNUP_DIALOG__DESCRIPTION": [
+    {
+      "type": 0,
+      "value": "Please "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "log in"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " if you already have an account."
     }
   ],
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": [

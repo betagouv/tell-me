@@ -1,8 +1,8 @@
 import { ApiError } from '@api/libs/ApiError'
+import { dayjs } from '@api/libs/dayjs'
 import { prisma } from '@api/libs/prisma'
 import { generateTellMeData } from '@app/helpers/generateTellMeData'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
-import { getDayjs } from '@common/helpers/getDayjs'
 import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { isPojo } from '@common/helpers/isPojo'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
@@ -37,7 +37,6 @@ export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res:
           throw new ApiError('Not found.', 404, true)
         }
 
-        const dayjs = getDayjs()
         const {
           data: { entries },
           tree,

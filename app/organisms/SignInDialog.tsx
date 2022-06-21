@@ -1,7 +1,7 @@
 import { Dialog, Field } from '@singularity/core'
 import { NexauthError, useAuth } from 'nexauth/client'
 import { useMemo, useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import * as Yup from 'yup'
 import zxcvbn from 'zxcvbn'
 
@@ -236,16 +236,23 @@ export function SignInDialog() {
             <Dialog.Title>
               {intl.formatMessage({
                 defaultMessage: 'Log In',
-                description: '[Login Dialog] Modal title.',
+                description: '[Login Dialog] Title.',
                 id: 'wHB27C',
               })}
             </Dialog.Title>
             <p>
-              Please{' '}
-              <ButtonAsLink onClick={switchToSignUp} type="button">
-                sign up
-              </ButtonAsLink>{' '}
-              if you don’t have an account.
+              <FormattedMessage
+                defaultMessage="Please <a>sign up</a> if you don’t have an account."
+                description="[Login Dialog] Description."
+                id="LOGIN_DIALOG__DESCRIPTION"
+                values={{
+                  a: chunks => (
+                    <ButtonAsLink onClick={switchToSignUp} type="button">
+                      {chunks}
+                    </ButtonAsLink>
+                  ),
+                }}
+              />
             </p>
 
             <Field>
@@ -306,11 +313,18 @@ export function SignInDialog() {
             })}
           </Dialog.Title>
           <p>
-            Please{' '}
-            <ButtonAsLink onClick={switchToLogIn} type="button">
-              log in
-            </ButtonAsLink>{' '}
-            if you already have an account.
+            <FormattedMessage
+              defaultMessage="Please <a>log in</a> if you already have an account."
+              description="[Signup Dialog] Description."
+              id="SIGNUP_DIALOG__DESCRIPTION"
+              values={{
+                a: chunks => (
+                  <ButtonAsLink onClick={switchToLogIn} type="button">
+                    {chunks}
+                  </ButtonAsLink>
+                ),
+              }}
+            />
           </p>
 
           <Field>

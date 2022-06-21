@@ -1,4 +1,7 @@
+import type { LocaleValue } from '@common/constants'
+import type { Promisable } from 'type-fest'
+
 export type LocalizationContext = {
-  locale: string | null
-  refresh: (newLocale: string) => void
+  locale: LocaleValue
+  refresh: (newLocale: LocaleValue) => Promisable<void>
 }

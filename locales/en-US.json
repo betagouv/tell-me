@@ -131,6 +131,10 @@
     "description": "[Personal Access Tokens List] Table Email column label.",
     "message": "Email"
   },
+  "LOGIN_DIALOG__DESCRIPTION": {
+    "description": "[Login Dialog] Description.",
+    "message": "Please <a>sign up</a> if you don’t have an account."
+  },
   "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": {
     "description": "[Login Dialog] Disabled account error.",
     "message": "Your account has not yet been activated."
@@ -238,6 +242,10 @@
   "SETTINGS_PAGE__TITLE": {
     "description": "[Settings Page] Title.",
     "message": "Global Settings"
+  },
+  "SIGNUP_DIALOG__DESCRIPTION": {
+    "description": "[Signup Dialog] Description.",
+    "message": "Please <a>log in</a> if you already have an account."
   },
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": {
     "description": "[Signup Dialog] Duplicate account error.",
@@ -396,7 +404,7 @@
     "message": "Thank you for your interest in helping our project!"
   },
   "wHB27C": {
-    "description": "[Login Dialog] Modal title.",
+    "description": "[Login Dialog] Title.",
     "message": "Log In"
   },
   "xhJCpr": {

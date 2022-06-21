@@ -12,7 +12,7 @@ dayjs.extend(localeData)
 dayjs.extend(relativeTime)
 dayjs.extend(utc)
 
-export function getDayjs(): typeof dayjs {
+export function getLocalizedDayjs(): typeof dayjs {
   const locale = getLocale().substring(0, 2)
 
   dayjs.locale(locale)

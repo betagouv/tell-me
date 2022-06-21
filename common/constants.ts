@@ -1,4 +1,11 @@
+import * as R from 'ramda'
+import { ValueOf } from 'type-fest'
+
 import type { UserRole } from '@prisma/client'
+
+export enum Cookie {
+  TELL_ME_LOCALE = 'TELL_ME_LOCALE',
+}
 
 /**
  * List of acceptable asset file types.
@@ -33,7 +40,7 @@ export type MimeType = typeof FILE_EXTENSION_MIME_TYPE[keyof typeof FILE_EXTENSI
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
  */
-export const MIME_TYPES: Readonly<MimeType[]> = Object.freeze(Object.values(FILE_EXTENSION_MIME_TYPE))
+export const MIME_TYPES = R.values(FILE_EXTENSION_MIME_TYPE)
 
 export enum GlobalVariableKey {
   BASE_URL = 'BASE_URL',
@@ -45,12 +52,22 @@ export enum GlobalVariableKey {
   S3_URL = 'S3_URL',
 }
 
+/**
+ * Supported locales.
+ */
 export const LOCALE = Object.freeze({
   en: 'en-US',
   'en-US': 'en-US',
   fr: 'fr-FR',
   'fr-FR': 'fr-FR',
 })
+export type LocaleKey = keyof typeof LOCALE
+export type LocaleValue = ValueOf<typeof LOCALE>
+
+/**
+ * List of supported locales.
+ */
+export const LOCALES = R.keys(LOCALE)
 
 export const LOCALE_LABEL = Object.freeze({
   'en-US': 'English (US)',
