@@ -4,12 +4,12 @@ import { SurveyLogo } from '@app/atoms/SurveyLogo'
 import { SurveyQuestion } from '@app/atoms/SurveyQuestion'
 import { SurveyTitle } from '@app/atoms/SurveyTitle'
 import { generateValidationSchema } from '@app/helpers/generateValidationSchema'
+import { getLocalizedDayjs } from '@app/helpers/getLocalizedDayjs'
 import { useApi } from '@app/hooks/useApi'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
 import { Loader } from '@app/molecules/Loader'
 import { SurveyForm } from '@app/molecules/SurveyForm'
 import { SurveyFormBody } from '@app/organisms/SurveyFormContent'
-import { getDayjs } from '@common/helpers/getDayjs'
 import { Survey } from '@prisma/client'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -39,7 +39,7 @@ type PublicSurveyPageProps = {
   }
 }
 export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
-  const $dayJs = useRef(getDayjs())
+  const $dayJs = useRef(getLocalizedDayjs())
   const $surveyEditorManager = useRef(new SurveyEditorManager((survey.tree as unknown as TellMe.Tree).children))
   const [isLoading, setIsLoading] = useState(false)
   const [initialValues] = useState({})

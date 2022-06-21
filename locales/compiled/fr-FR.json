@@ -68,7 +68,7 @@
   "DASBOARD_PAGE__TITLE": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "Tableau de bord"
     }
   ],
   "Db1A9P": [
@@ -92,7 +92,7 @@
   "E/vx8U": [
     {
       "type": 0,
-      "value": "Thank You message"
+      "value": "Message de remerciement"
     }
   ],
   "EEsDeJ": [
@@ -110,13 +110,13 @@
   "FC8ax/": [
     {
       "type": 0,
-      "value": "Édition d’un·e utilisateur·rice"
+      "value": "Édition d'un·e utilisateur·rice"
     }
   ],
   "HF2UUz": [
     {
       "type": 0,
-      "value": "Jetons d’accès personnel"
+      "value": "Jetons d'accès personnel"
     }
   ],
   "I8y4ic": [
@@ -197,6 +197,22 @@
       "value": "Email"
     }
   ],
+  "LOGIN_DIALOG__DESCRIPTION": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Inscrivez-vous"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " si vous n'avez pas de compte."
+    }
+  ],
   "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": [
     {
       "type": 0,
@@ -266,7 +282,7 @@
   "NIzhyl": [
     {
       "type": 0,
-      "value": "Nouveau jeton d’accès personnel"
+      "value": "Nouveau jeton d'accès personnel"
     }
   ],
   "NNlf6B": [
@@ -290,7 +306,7 @@
   "QWfMAC": [
     {
       "type": 0,
-      "value": "Création d’un jeton d’accès personnel"
+      "value": "Création d'un jeton d'accès personnel"
     }
   ],
   "SETTINGS_FORM__BASE_URL_INPUT_LABEL:": [
@@ -350,13 +366,29 @@
   "SETTINGS_FORM__UPDATE_BUTTON_LABEL": [
     {
       "type": 0,
-      "value": "Update"
+      "value": "Mettre à jour"
     }
   ],
   "SETTINGS_PAGE__TITLE": [
     {
       "type": 0,
       "value": "Settings"
+    }
+  ],
+  "SIGNUP_DIALOG__DESCRIPTION": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Connectez-vous"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " si vous avez déjà un compte."
     }
   ],
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": [
@@ -416,7 +448,7 @@
   "WL5w1n": [
     {
       "type": 0,
-      "value": "Jetons d’accès personnel"
+      "value": "Jetons d'accès personnel"
     }
   ],
   "XJmbHw": [
@@ -434,7 +466,7 @@
   "YbP4R+": [
     {
       "type": 0,
-      "value": "Survey Settings"
+      "value": "Paramètres du questionnaire"
     }
   ],
   "YsRqXk": [
@@ -446,7 +478,7 @@
   "YzeZvW": [
     {
       "type": 0,
-      "value": "Published"
+      "value": "Publié"
     }
   ],
   "ZxR2Ts": [
@@ -458,13 +490,13 @@
   "ax3sGB": [
     {
       "type": 0,
-      "value": "Éditer ce jeton d’accès personnel"
+      "value": "Éditer ce jeton d'accès personnel"
     }
   ],
   "bVPj59": [
     {
       "type": 0,
-      "value": "Supprimer cet jeton d’accès personnel"
+      "value": "Supprimer cet jeton d'accès personnel"
     }
   ],
   "bdTRI9": [
@@ -476,7 +508,7 @@
   "cZz32J": [
     {
       "type": 0,
-      "value": "Édition d’un jeton d’accès personnel"
+      "value": "Édition d'un jeton d'accès personnel"
     }
   ],
   "cvJp/S": [
@@ -574,13 +606,13 @@
   "pglohm": [
     {
       "type": 0,
-      "value": "Title"
+      "value": "Titre"
     }
   ],
   "q5x9RM": [
     {
       "type": 0,
-      "value": "S’inscrire"
+      "value": "S'inscrire"
     }
   ],
   "s1Q3aH": [

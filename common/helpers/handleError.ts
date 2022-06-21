@@ -3,6 +3,22 @@ import { B } from 'bhala'
 import { ApiError } from '../../api/libs/ApiError'
 import { getConstructorName } from './getConstructorName'
 
+function extractMessageFromAnyError(error: unknown): string {
+  if (typeof error === 'string') {
+    return error
+  }
+
+  if (error instanceof ApiError || error instanceof Error) {
+    return error.message
+  }
+
+  B.error(`[common/helpers/handleError()] This type of error cannot be processed. This should never happen.`)
+  B.error(`[common/helpers/handleError()] Error Type: ${typeof error}`)
+  B.error(`[common/helpers/handleError()] Error Constructor: ${getConstructorName(error)}`)
+
+  return String(error)
+}
+
 /**
  * Handle all kinds of errors. Any error should be caught and handled by this function.
  *
@@ -12,30 +28,13 @@ import { getConstructorName } from './getConstructorName'
  * handleError(err, "scripts/myFileName#oneOfTheScriptFunctions()");
  */
 export function handleError(
-  error: any,
+  error: unknown,
   path: string,
 ): {
   message: string
   path: string
 } {
-  let message
-  switch (true) {
-    case typeof error === 'string':
-      message = error
-      break
-
-    case error instanceof ApiError:
-    case error instanceof Error:
-      message = error.message
-      break
-
-    default:
-      // eslint-disable-next-line no-case-declarations
-      B.error(`[common/helpers/handleError()] This type of error cannot be processed. This should never happen.`)
-      B.error(`[common/helpers/handleError()] Error Type: ${typeof error}`)
-      B.error(`[common/helpers/handleError()] Error Constructor: ${getConstructorName(error)}`)
-      message = String(error)
-  }
+  const message = extractMessageFromAnyError(error)
 
   // There is no need to cluster logs with controlled errors
   if (!(error instanceof ApiError)) {

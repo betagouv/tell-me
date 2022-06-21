@@ -45,7 +45,7 @@
   },
   "DASBOARD_PAGE__TITLE": {
     "description": "[Dashboard Page] Title.",
-    "message": "Dashboard"
+    "message": "Tableau de bord"
   },
   "Db1A9P": {
     "description": "[Personal Access Token Editor] Form Label input label.",
@@ -61,7 +61,7 @@
   },
   "E/vx8U": {
     "description": "[Survey Config] Form thank you message textarea label.",
-    "message": "Thank You message"
+    "message": "Message de remerciement"
   },
   "EEsDeJ": {
     "description": "[Main Menu] Dashboard item.",
@@ -73,11 +73,11 @@
   },
   "FC8ax/": {
     "description": "[User Editor] Edition page title.",
-    "message": "Édition d’un·e utilisateur·rice"
+    "message": "Édition d'un·e utilisateur·rice"
   },
   "HF2UUz": {
     "description": "[Personal Access Tokens List] Page title.",
-    "message": "Jetons d’accès personnel"
+    "message": "Jetons d'accès personnel"
   },
   "I8y4ic": {
     "description": "[Login Dialog] Form submit button label.",
@@ -131,6 +131,10 @@
     "description": "[Personal Access Tokens List] Table Email column label.",
     "message": "Email"
   },
+  "LOGIN_DIALOG__DESCRIPTION": {
+    "description": "[Login Dialog] Description.",
+    "message": "<a>Inscrivez-vous</a> si vous n'avez pas de compte."
+  },
   "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": {
     "description": "[Login Dialog] Disabled account error.",
     "message": "Votre compte n'a pas encore été activé."
@@ -177,7 +181,7 @@
   },
   "NIzhyl": {
     "description": "[Personal Access Tokens List] New personal access token button label.",
-    "message": "Nouveau jeton d’accès personnel"
+    "message": "Nouveau jeton d'accès personnel"
   },
   "NNlf6B": {
     "description": "[My Settings] Page title.",
@@ -193,7 +197,7 @@
   },
   "QWfMAC": {
     "description": "[Personal Access Token Editor] Creation page title.",
-    "message": "Création d’un jeton d’accès personnel"
+    "message": "Création d'un jeton d'accès personnel"
   },
   "SETTINGS_FORM__BASE_URL_INPUT_LABEL:": {
     "description": "[Settings Form] Base URL input label.",
@@ -233,11 +237,15 @@
   },
   "SETTINGS_FORM__UPDATE_BUTTON_LABEL": {
     "description": "[Settings Form] Form update button label.",
-    "message": "Update"
+    "message": "Mettre à jour"
   },
   "SETTINGS_PAGE__TITLE": {
     "description": "[Settings Page] Title.",
     "message": "Settings"
+  },
+  "SIGNUP_DIALOG__DESCRIPTION": {
+    "description": "[Signup Dialog] Description.",
+    "message": "<a>Connectez-vous</a> si vous avez déjà un compte."
   },
   "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": {
     "description": "[Signup Dialog] Duplicate account error.",
@@ -277,7 +285,7 @@
   },
   "WL5w1n": {
     "description": "[Main Menu] Personal Access Tokens item.",
-    "message": "Jetons d’accès personnel"
+    "message": "Jetons d'accès personnel"
   },
   "XJmbHw": {
     "description": "[User Editor] Form Role select label.",
@@ -289,7 +297,7 @@
   },
   "YbP4R+": {
     "description": "[Survey Config] Page title.",
-    "message": "Survey Settings"
+    "message": "Paramètres du questionnaire"
   },
   "YsRqXk": {
     "description": "[Survey Answers List] Export answers in CSV format button label.",
@@ -297,7 +305,7 @@
   },
   "YzeZvW": {
     "description": "[Survey Config] Form published checkbox label.",
-    "message": "Published"
+    "message": "Publié"
   },
   "ZxR2Ts": {
     "description": "[Survey Answers List] Survey answers list subtitle.",
@@ -305,11 +313,11 @@
   },
   "ax3sGB": {
     "description": "[Personal Access Tokens List] Table row edition button label.",
-    "message": "Éditer ce jeton d’accès personnel"
+    "message": "Éditer ce jeton d'accès personnel"
   },
   "bVPj59": {
     "description": "[Personal Access Tokens List] Table row deletion button label.",
-    "message": "Supprimer cet jeton d’accès personnel"
+    "message": "Supprimer cet jeton d'accès personnel"
   },
   "bdTRI9": {
     "description": "[Survey Config] Form update button label.",
@@ -317,7 +325,7 @@
   },
   "cZz32J": {
     "description": "[Personal Access Token Editor] Edition page title.",
-    "message": "Édition d’un jeton d’accès personnel"
+    "message": "Édition d'un jeton d'accès personnel"
   },
   "cvJp/S": {
     "description": "[Public Survey] Missing answer error message for a required question.",
@@ -373,11 +381,11 @@
   },
   "pglohm": {
     "description": "[Survey Config] Form title input label.",
-    "message": "Title"
+    "message": "Titre"
   },
   "q5x9RM": {
     "description": "[Signup Dialog] Submit button label.",
-    "message": "S’inscrire"
+    "message": "S'inscrire"
   },
   "s1Q3aH": {
     "description": "[Survey Answers List] Table Date column label.",
@@ -396,7 +404,7 @@
     "message": "Thank you for your interest in helping our project!"
   },
   "wHB27C": {
-    "description": "[Login Dialog] Modal title.",
+    "description": "[Login Dialog] Title.",
     "message": "Connexion"
   },
   "xhJCpr": {

@@ -3,12 +3,12 @@ import { AdminHeader } from '@app/atoms/AdminHeader'
 import { Subtitle } from '@app/atoms/Subtitle'
 import { Title } from '@app/atoms/Title'
 import { capitalizeFirstLetter } from '@app/helpers/capitalizeFirstLetter'
+import { getLocalizedDayjs } from '@app/helpers/getLocalizedDayjs'
 import { getRandomId } from '@app/helpers/getRandomId'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { Loader } from '@app/molecules/Loader'
 import { AdminBox } from '@app/organisms/AdminBox'
-import { getDayjs } from '@common/helpers/getDayjs'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import { useRouter } from 'next/router'
@@ -57,7 +57,7 @@ export default function SurveyEntryListPage() {
 
   const { id: surveyId } = router.query
 
-  const dayjs = getDayjs()
+  const dayjs = getLocalizedDayjs()
   const isLoading = survey === null || surveyEntries === null
 
   const downloadAsset = async (url: string, mimeType: string): Promise<void> => {
