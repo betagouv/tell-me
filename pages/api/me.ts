@@ -21,7 +21,7 @@ export default async function UserConfigEndpoint(req: NextApiRequest, res: NextA
         })
 
         res.status(200).json({
-          data: userConfig,
+          data: userConfig || {},
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
@@ -36,12 +36,25 @@ export default async function UserConfigEndpoint(req: NextApiRequest, res: NextA
           locale: String(req.body.locale),
         }
 
-        const updatedUserConfig = await prisma.userConfig.update({
-          data: updatedUserConfigData,
+        const userConfig = await prisma.userConfig.findUnique({
           where: {
             userId: me.id,
           },
         })
+        const updatedUserConfig =
+          userConfig === null
+            ? await prisma.userConfig.create({
+                data: {
+                  ...updatedUserConfigData,
+                  userId: me.id,
+                },
+              })
+            : await prisma.userConfig.update({
+                data: updatedUserConfigData,
+                where: {
+                  userId: me.id,
+                },
+              })
 
         res.status(200).json({
           data: updatedUserConfig,
