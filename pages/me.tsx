@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import * as Yup from 'yup'
 
+import type { LocaleValue } from '@common/constants'
+
 const FormSchema = Yup.object().shape({
   localeAsOption: Yup.object().required(`You must select a language.`),
 })
@@ -31,17 +33,25 @@ export default function MePage() {
   const localization = useLocalization()
 
   const loadMyConfig = async () => {
-    const maybeBody = await api.get(`me`)
+    const maybeBody = await api.get<{
+      locale?: LocaleValue
+    }>(`me`)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
 
     const myConfigData = maybeBody.data
     const myEditableConfigData: any = {}
-    myEditableConfigData.localeAsOption = {
-      label: LOCALE_LABEL[myConfigData.locale],
-      value: myConfigData.locale,
-    }
+
+    myEditableConfigData.localeAsOption = myConfigData.locale
+      ? {
+          label: LOCALE_LABEL[myConfigData.locale],
+          value: myConfigData.locale,
+        }
+      : {
+          label: LOCALE_LABEL[localization.locale],
+          value: localization.locale,
+        }
 
     if (isMounted()) {
       setInitialValues(myEditableConfigData)
