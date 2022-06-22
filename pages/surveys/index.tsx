@@ -217,7 +217,7 @@ export default function SurveyListPage() {
       <AdminHeader>
         <Title>
           {intl.formatMessage({
-            defaultMessage: 'Survey',
+            defaultMessage: 'Surveys',
             description: '[Surveys List] Page title.',
             id: 'tnYUFj',
           })}

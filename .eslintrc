@@ -64,6 +64,7 @@
         "./e2e/**/*.ts",
         "./prisma/seeds/**/*.js",
         "./scripts/**/*.js",
+        "./scripts/**/*.ts",
         "**/*.test.ts"
       ],
       "env": {
