@@ -150,3 +150,6 @@ sketch
 # Playwright traces
 /test-results
 /test-results.zip
+
+# Demo
+/docs/_media/demo.webm

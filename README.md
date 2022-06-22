@@ -17,11 +17,14 @@
 
 ---
 
-> An awesome open source survey generator.
+**An awesome open source survey generator!**
 
-⚠️ _Work and documentation in progress. The v1 is coming soon!_
+![Isn't that awesome!?](/docs/_media/demo.gif "Tell Me Demo Screenshot")
 
 ---
+
+> ⚠️ **Warning**  
+> _Work and documentation in progress. The v1 is coming soon!_
 
 - [Roadmap](#roadmap)
 - [Deployment](#deployment)

@@ -326,6 +326,7 @@ export function SignInDialog() {
               }}
             />
           </p>
+          <p>{JSON.stringify(process.env.NEXT_PUBLIC_IS_DEMO)}</p>
 
           <Field>
             <Form.TextInput

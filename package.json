@@ -17,6 +17,8 @@
     "db:migrate": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "debug": "envinfo --binaries --system --markdown",
+    "demo:record": "sh ./scripts/demo/record.sh",
+    "demo:setup": "sh ./scripts/demo/setup.sh",
     "dev": "concurrently \"next dev\" \"pnpm run dev:intl\"",
     "dev:docker": "docker compose down && docker compose -f ./docker-compose.yml -f ./docker-compose.dev.yml up -d db",
     "dev:intl": "nodemon -e tsx --exec \"pnpm run intl\" --watch ./app --watch ./pages",
