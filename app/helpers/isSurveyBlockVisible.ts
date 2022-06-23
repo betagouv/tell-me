@@ -1,6 +1,6 @@
 import type { Block } from '../libs/SurveyEditorManager/Block'
 
-export function isSurveyBlockVisible(block: Block, blocks: Block[], values: Record<string, string>) {
+export function isSurveyBlockVisible(block: Block, blocks: Block[], values: Record<string, string | string[]>) {
   if (block.questionId === null || !block.isHidden) {
     return true
   }
@@ -13,6 +13,9 @@ export function isSurveyBlockVisible(block: Block, blocks: Block[], values: Reco
   )
 
   const found = neededBlocks.find(_block => {
+    // This case should be impossible
+    // TODO Improve typings instead of ignoring an impossible case.
+    /* istanbul ignore next */
     if (_block.questionId === null) {
       return false
     }
