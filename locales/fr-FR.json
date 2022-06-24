@@ -7,10 +7,6 @@
     "description": "[Users List] Table row edition button label.",
     "message": "Éditer cet·te utilisateur·rices"
   },
-  "6StYcj": {
-    "description": "[Survey Answers List] Table Answers column label.",
-    "message": "Réponses"
-  },
   "7LF9Gb": {
     "description": "[Personal Access Token Editor] Form update button label.",
     "message": "Mettre à jour"

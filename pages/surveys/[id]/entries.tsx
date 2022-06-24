@@ -132,7 +132,15 @@ export default function SurveyEntryListPage() {
             <p>
               <b>{question.value}</b>
             </p>
-            <p>{rawValue}</p>
+            <div
+              style={{
+                whiteSpace: 'normal',
+              }}
+            >
+              {rawValue.split(/\n{2,}/).map(part => (
+                <p>{part}</p>
+              ))}
+            </div>
           </div>
         ))
 
