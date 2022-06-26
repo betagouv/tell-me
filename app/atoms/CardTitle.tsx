@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const CardTitle = styled.h2<{
-  accent?: string
+  accent?: 'danger' | 'info' | 'primary' | 'secondary' | 'success' | 'warning'
   isFirst?: boolean
   withBottomMargin?: boolean
 }>`

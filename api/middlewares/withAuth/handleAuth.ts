@@ -65,6 +65,9 @@ export async function handleAuth(
       // Disposable tokens used for internal front-end private API requests.
 
       const oneTimeToken = Array.isArray(req.query.oneTimeToken) ? req.query.oneTimeToken[0] : req.query.oneTimeToken
+      if (oneTimeToken === undefined) {
+        throw new ApiError(`Unauthorized.`, 401, true)
+      }
 
       const maybeOneTimeToken = await prisma.oneTimeToken.findUnique({
         where: {
