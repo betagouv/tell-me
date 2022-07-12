@@ -9,6 +9,9 @@ import { getQuestionInputTypeAt, isBlockCountable, isInputBlock, isQuestionBlock
 import type { BlockConstructorOptions } from './types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 
+/**
+ * Handle all the Survey Editor behaviors for any given Tell Me Survey as defined in the JSON Schema.
+ */
 export class SurveyEditorManager {
   #blocks: Block[]
   #focusedBlockIndex: number

@@ -5,6 +5,8 @@
   - [Setup](#setup)
   - [Local development](#local-development)
 - [Architecture](#architecture)
+- [Concepts](#concepts)
+  - [Advanced concepts](#advanced-concepts)
   - [Main directories](#main-directories)
   - [Technological stack](#technological-stack)
 - [Best practice](#best-practice)
@@ -30,14 +32,14 @@ Then run:
 ```sh
 git clone https://github.com/betagouv/tell-me.git
 cd tell-me
-pnp i
-pnp run dev:setup
-pnp run dev:docker
-pnp run db:migrate
+pnpm i
+pnpm run dev:setup
+pnpm run dev:docker
+pnpm run db:migrate
 ```
 
 > 📋 **Note**  
-> The `pnp run dev:setup` command (script) does the following, if necessary:
+> The `pnpm run dev:setup` command (script) does the following, if necessary:
 >
 > - Copy `.env.example` file to a `.env` one.
 > - Generate an EdDSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io)).
@@ -46,8 +48,8 @@ pnp run db:migrate
 ### Local development
 
 ```sh
-pnp run dev:docker
-pnp run dev
+pnpm run dev:docker
+pnpm run dev
 ```
 
 This will run PostgreSQL within a Docker container via Docker Compose and run the webapp which should then be available at
@@ -57,20 +59,41 @@ It will also watch for file changes and automatically re-hydrate the webapp on t
 
 ## Architecture
 
-The monolithic application is conceptually split into 2 parts:
+This is a monolithic application conceptually split into 2 concerns:
 
-- **API**: The RESTFul API used by both the BACK and the FRONT.
-- **Application**: The authentication-protected back-office web application, used to administrate and manage all the data.
+- **Api**: The back-end RESTFul API used by both front-office and back-office.
+- **App**: The front-end.
+
+## Concepts
+
+For the sake of clarity, all comments within and outside source code refer to a few internal concepts defined as:
+
+- **Survey Editor**: The surver editor in the back-office.
+- **Survey Form**: The survey form filled by end-users.
+- **Tell Me Tree**: The JSON representation of a Survey Form.
+- **Tell Me Data**: The JSON representation of survey entries submitted by end-users.
+
+### Advanced concepts
+
+Survey Forms as well as their JSON representation (Tell Me Tree) are made of questions, inputs, buttons (submit, next) 
+and some free text content (subtitles, paragraphs). Each of those are conceptualized as **blocks**. For example, a 
+question with two choices is made of 3 **blocks**: one for the the question (text) itself and one block per choice.
 
 ### Main directories
 
 ```sh
-api/                # API code base
-app/                # Application code base
-common/             # Source files that are common to all parts (API & Application)
-pages/              # URL path entrypoint file (natively handled by Next.js)
-public/             # Public assets (natively handled by Next.js)
-scripts/            # Docker, database and enviroment-related scripts
+├─  api/            # Back-end code base
+├─  app/            # Front-end code base
+├─  common/         # Source files that are common to all parts (API & Application)
+├─  config/         # Tests configuration, setup and teardown
+├─  locales/        # Localization files (automatically generated and updated)
+├─┐ pages/          # Entrypoint pages (routes there are natively handled by Next.js)
+│ ├─  api/          # API endpoints controllers
+│ ├─  public/       # Front-office (survey form for end-users and previews)
+│ └─  **/*          # Back-office
+├─  public/         # Public assets (natively handled by Next.js)
+├─  schemas/        # JSON Schema for Tell Me Tree and Tell Me Data with data fakers (= generators)
+└─  scripts/        # CI, Docker, deployment, database and enviroment-related scripts
 ```
 
 ### Technological stack
