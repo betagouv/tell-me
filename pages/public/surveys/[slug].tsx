@@ -104,6 +104,7 @@ export default function PublicSurveyPage({ survey }: PublicSurveyPageProps) {
         {!isLoading && !isSent && (
           <SurveyForm initialValues={initialValues} onSubmit={submitSurvey} validationSchema={FormSchema}>
             <SurveyFormBody blocks={$surveyEditorManager.current.blocks} />
+            <SurveyForm.ErrorSummary blocks={$surveyEditorManager.current.blocks} />
 
             <SurveyForm.Submit>
               {intl.formatMessage({

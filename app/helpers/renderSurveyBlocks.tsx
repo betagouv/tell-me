@@ -9,22 +9,8 @@ import type { Block } from '../libs/SurveyEditorManager/Block'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { FormikContextType } from 'formik'
 
-const Row = styled.div<{
-  isQuestion: boolean
-}>`
-  display: flex;
-  margin-top: ${p => (p.isQuestion ? p.theme.padding.layout.large : 0)};
-`
-
-const Asterisk = styled.div`
-  align-items: center;
-  color: black;
-  display: flex;
-  font-size: 125%;
-  font-weight: 700;
-  justify-content: center;
-  min-height: 3rem;
-  padding-left: 0.5rem;
+const Question = styled.h2`
+  margin-top: ${p => p.theme.padding.layout.large};
 `
 
 const Error = styled.p`
@@ -77,22 +63,33 @@ export function renderSurveyBlocks(formikContext: FormikContextType<Record<strin
     const innerHTML = { __html: block.value }
     const label = block.value
 
-    const newComponent = block.isInput ? (
-      <Component
-        key={block.id}
-        countLetter={block.countLetter}
-        index={indexableBlockIndex}
-        label={label}
-        name={block.questionId}
-        value={label}
-      />
-    ) : (
-      <Row key={block.id} isQuestion={block.isQuestion}>
-        <Component dangerouslySetInnerHTML={innerHTML} />
-
-        {block.isRequired && <Asterisk>*</Asterisk>}
-      </Row>
-    )
+    let newComponent
+    if (block.isInput) {
+      newComponent = (
+        <Component
+          key={block.id}
+          countLetter={block.countLetter}
+          index={indexableBlockIndex}
+          label={label}
+          name={block.questionId}
+          value={label}
+        />
+      )
+    } else if (block.isQuestion) {
+      newComponent = (
+        <Question key={block.id} id={`question-${block.id}`}>
+          {`${block.value}${block.isRequired ? ' *' : ''}`}
+        </Question>
+      )
+    } else {
+      newComponent = (
+        <Component
+          key={block.id}
+          dangerouslySetInnerHTML={innerHTML}
+          id={block.isQuestion ? `question-${block.id}` : undefined}
+        />
+      )
+    }
 
     if (submitCount === 0 || !errors[block.id]) {
       return [...components, newComponent]
