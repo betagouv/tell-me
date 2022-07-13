@@ -58,24 +58,24 @@ type ErrorSummaryProps = {
   blocks: Block[]
 }
 export function ErrorSummary({ blocks }: ErrorSummaryProps) {
-  const { errors: formikErrors } = useFormikContext<Record<string, string>>()
+  const { errors: formikErrors, submitCount } = useFormikContext<Record<string, string>>()
 
   const summaryErrors = useMemo(
     () => mapFormikErrorsToSurmmaryErrors(blocks, formikErrors as Record<string, string>),
     [blocks, formikErrors],
   )
 
-  if (isEmpty(summaryErrors)) {
+  if (submitCount === 0 || isEmpty(summaryErrors)) {
     return null
   }
 
   return (
     <>
       {summaryErrors.map(({ id, message, question }) => (
-        <ErrorCard>
+        <ErrorCard key={`${id}-summaryError`}>
           <p>{message}</p>
           <p>
-            <a href={`#question-${id}`}>{question}</a>
+            <a href={`#${id}-question`}>{question}</a>
           </p>
         </ErrorCard>
       ))}

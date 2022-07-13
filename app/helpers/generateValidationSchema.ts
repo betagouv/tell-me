@@ -72,7 +72,7 @@ export function generateValidationSchema(blocks: Block[], message: string) {
 
               switch (neededBlock.type) {
                 case 'input_choice':
-                  return valueOrValues === neededBlock.value
+                  return valueOrValues === neededBlock.value.trim()
 
                 case 'input_multiple_choice':
                   return Array.isArray(valueOrValues) && valueOrValues.includes(neededBlock.value)

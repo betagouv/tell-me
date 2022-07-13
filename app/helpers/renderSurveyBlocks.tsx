@@ -77,7 +77,7 @@ export function renderSurveyBlocks(formikContext: FormikContextType<Record<strin
       )
     } else if (block.isQuestion) {
       newComponent = (
-        <Question key={block.id} id={`question-${block.id}`}>
+        <Question key={block.id} id={`${block.id}-question`}>
           {`${block.value}${block.isRequired ? ' *' : ''}`}
         </Question>
       )
@@ -98,6 +98,6 @@ export function renderSurveyBlocks(formikContext: FormikContextType<Record<strin
     // The `.name` case covers Yup file input validation:
     const error = (errors[block.id] as any).name || errors[block.id]
 
-    return [...components, newComponent, <Error key={`${block.id}.error`}>{error}</Error>]
+    return [...components, newComponent, <Error key={`${block.id}-error`}>{error}</Error>]
   }, [])
 }
