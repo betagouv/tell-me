@@ -3,9 +3,11 @@ import { withApi } from '@app/hocs/withApi'
 import { WithLocalization } from '@app/hocs/withLocalization'
 import { Loader } from '@app/molecules/Loader'
 import { SignInDialog } from '@app/organisms/SignInDialog'
+import { store } from '@app/store'
 import { GlobalStyle, theme } from '@singularity/core'
 import { AuthProvider } from 'nexauth/client'
 import Head from 'next/head'
+import { Provider } from 'react-redux'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import type { AppProps } from 'next/app'
@@ -53,7 +55,9 @@ export default function TellMeApp({ Component, pageProps }: AppProps) {
 
         <WithLocalization>
           <AuthProvider Loader={Loader} privatePaths={PRIVATE_PATHS} SignInDialog={SignInDialog}>
-            <WrappedComponent {...pageProps} />
+            <Provider store={store}>
+              <WrappedComponent {...pageProps} />
+            </Provider>
           </AuthProvider>
         </WithLocalization>
       </ThemeProvider>

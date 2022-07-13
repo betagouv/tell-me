@@ -249,6 +249,7 @@ export function BlockEditor({
 
       <Row
         block={block}
+        onClickAdd={handleEnterKeyDown}
         onClickCondition={toggleCondition}
         onClickDelete={handleDelete}
         onClickKey={toggleKey}
@@ -261,6 +262,7 @@ export function BlockEditor({
           count={block.count}
           countLetter={block.countLetter}
           defaultValue={block.value}
+          id={block.id}
           isFocused={isFocused}
           isRichText={isRichText}
           onBackspaceKeyDown={onRemove}
