@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import styled from 'styled-components'
 
 import { Checkbox } from './Checkbox'
+import { ErrorSummary } from './ErrorSummary'
 import { FileInput } from './FileInput'
 import { Radio } from './Radio'
 import { Submit } from './Submit'
@@ -58,6 +59,7 @@ SurveyFormComponent.displayName = 'SurveyForm'
 
 export const SurveyForm = Object.assign(SurveyFormComponent, {
   Checkbox,
+  ErrorSummary,
   FileInput,
   Radio,
   Submit,
