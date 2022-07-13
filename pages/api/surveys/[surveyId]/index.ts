@@ -8,7 +8,7 @@ import { UserRole } from '@prisma/client'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const ERROR_PATH = 'pages/api/surveys/[id]/index.ts'
+const ERROR_PATH = 'pages/api/surveys/[surveyId]/index.ts'
 
 export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
@@ -16,14 +16,14 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
       try {
         await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
 
-        const { id } = req.query
-        if (typeof id !== 'string') {
+        const { surveyId } = req.query
+        if (typeof surveyId !== 'string') {
           throw new ApiError('Not found.', 404, true)
         }
 
         const maybeSurvey = await prisma.survey.findUnique({
           where: {
-            id,
+            id: surveyId,
           },
         })
         if (maybeSurvey === null) {
@@ -32,6 +32,7 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
 
         res.status(200).json({
           data: maybeSurvey,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
@@ -43,8 +44,8 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
       try {
         await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
 
-        const { id } = req.query
-        if (typeof id !== 'string') {
+        const { surveyId } = req.query
+        if (typeof surveyId !== 'string') {
           throw new ApiError('Not found.', 404, true)
         }
         if (typeof req.body.tree !== 'undefined') {
@@ -72,7 +73,7 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
 
         const surveyCount = await prisma.survey.count({
           where: {
-            id,
+            id: surveyId,
           },
         })
         if (surveyCount === 0) {
@@ -82,7 +83,7 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
         const updatedSurvey = await prisma.survey.update({
           data: req.body,
           where: {
-            id,
+            id: surveyId,
           },
         })
         if (updatedSurvey === null) {
@@ -91,6 +92,7 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
 
         res.status(200).json({
           data: updatedSurvey,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
@@ -102,27 +104,30 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
       try {
         await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
 
-        const { id } = req.query
-        if (typeof id !== 'string') {
+        const { surveyId } = req.query
+        if (typeof surveyId !== 'string') {
           throw new ApiError('Not found.', 404, true)
         }
 
         const surveyCount = await prisma.survey.count({
           where: {
-            id,
+            id: surveyId,
           },
         })
         if (surveyCount === 0) {
           throw new ApiError('Not found.', 404, true)
         }
 
-        await prisma.survey.delete({
+        const deletedSurvey = await prisma.survey.delete({
           where: {
-            id,
+            id: surveyId,
           },
         })
 
-        res.status(204).end()
+        res.status(200).json({
+          data: deletedSurvey,
+          hasError: false,
+        })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
       }

@@ -4,15 +4,16 @@ import { Subtitle } from '@app/atoms/Subtitle'
 import { Title } from '@app/atoms/Title'
 import { capitalizeFirstLetter } from '@app/helpers/capitalizeFirstLetter'
 import { getLocalizedDayjs } from '@app/helpers/getLocalizedDayjs'
-import { getRandomId } from '@app/helpers/getRandomId'
 import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { Loader } from '@app/molecules/Loader'
 import { AdminBox } from '@app/organisms/AdminBox'
+import { DeletionModal } from '@app/organisms/DeletionModal'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { Trash } from 'react-feather'
 import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 
@@ -47,7 +48,10 @@ const Source = styled.div`
 `
 
 export default function SurveyEntryListPage() {
+  const [hasDeletionModal, setHasDeletionModal] = useState(false)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [selectedEntity, setSelectedEntity] = useState('')
+  const [selectedSurveyEntryId, setSelectedSurveyEntryId] = useState('')
   const [surveyEntries, setSurveyEntries] = useState<any>(null)
   const [survey, setSurvey] = useState<TellMe.Tree | null>(null)
   const api = useApi()
@@ -59,6 +63,33 @@ export default function SurveyEntryListPage() {
 
   const dayjs = getLocalizedDayjs()
   const isLoading = survey === null || surveyEntries === null
+
+  const closeDeletionModal = useCallback(() => {
+    setHasDeletionModal(false)
+  }, [])
+
+  const confirmSurveyEntryDeletion = useCallback(
+    async (surveyEntryId: string): Promise<void> => {
+      setSelectedSurveyEntryId(surveyEntryId)
+      setSelectedEntity(
+        intl.formatMessage({
+          defaultMessage: 'this submission',
+          description: '[Survey Submissions List] Selected entity generic label.',
+          id: 'LPYwIE',
+        }),
+      )
+      setHasDeletionModal(true)
+    },
+    [intl, surveyEntries],
+  )
+
+  const deleteSurveyEntry = useCallback(async (): Promise<void> => {
+    setHasDeletionModal(false)
+
+    await api.delete(`surveys/${surveyId}/entries/${selectedSurveyEntryId}`)
+
+    await loadSurvey()
+  }, [selectedSurveyEntryId])
 
   const downloadAsset = async (url: string, mimeType: string): Promise<void> => {
     if (/^https:\/\/[^/]+\.amazonaws\.com\//.test(url)) {
@@ -108,7 +139,7 @@ export default function SurveyEntryListPage() {
       return
     }
 
-    const newSurveyEntries = maybeBody.data.data.entries.map(({ answers, submittedAt }) => {
+    const newSurveyEntries = maybeBody.data.data.entries.map(({ answers, id: surveyEntryId, submittedAt }) => {
       const library = answers
         .filter(({ type }) => type === 'file')
         .map(({ data: { mime, uri }, question }: any) => (
@@ -145,7 +176,7 @@ export default function SurveyEntryListPage() {
         ))
 
       return {
-        id: getRandomId(),
+        id: surveyEntryId,
         library: <Source>{library}</Source>,
         source: <Source>{source}</Source>,
         updatedAt: submittedAt,
@@ -166,7 +197,7 @@ export default function SurveyEntryListPage() {
       key: 'updatedAt',
       label: intl.formatMessage({
         defaultMessage: 'Date',
-        description: '[Survey Answers List] Table Date column label.',
+        description: '[Survey Submissions List] Table Date column label.',
         id: 's1Q3aH',
       }),
       transform: ({ updatedAt }) => capitalizeFirstLetter(dayjs(updatedAt).fromNow()),
@@ -175,7 +206,7 @@ export default function SurveyEntryListPage() {
       key: 'source',
       label: intl.formatMessage({
         defaultMessage: 'Answers',
-        description: '[Survey Answers List] Table Answers column label.',
+        description: '[Survey Submissions List] Table Answers column label.',
         id: '6StYcj',
       }),
     },
@@ -183,9 +214,21 @@ export default function SurveyEntryListPage() {
       key: 'library',
       label: intl.formatMessage({
         defaultMessage: 'Files',
-        description: '[Survey Answers List] Table Files column label.',
+        description: '[Survey Submissions List] Table Files column label.',
         id: 'Dus0RS',
       }),
+    },
+    {
+      accent: 'danger',
+      action: confirmSurveyEntryDeletion,
+      Icon: Trash,
+      key: 'confirmSurveyEntryDeletion',
+      label: intl.formatMessage({
+        defaultMessage: 'Delete this survey entry',
+        description: '[Survey Submissions List] Table row deletion button label.',
+        id: '5CazlS',
+      }),
+      type: 'action',
     },
   ]
 
@@ -205,7 +248,7 @@ export default function SurveyEntryListPage() {
         <Button disabled={isDownloading} onClick={() => exportEntries('csv')} size="small">
           {intl.formatMessage({
             defaultMessage: 'Export as CSV',
-            description: '[Survey Answers List] Export answers in CSV format button label.',
+            description: '[Survey Submissions List] Export answers in CSV format button label.',
             id: 'YsRqXk',
           })}
         </Button>
@@ -215,13 +258,17 @@ export default function SurveyEntryListPage() {
         <Subtitle>
           {intl.formatMessage({
             defaultMessage: 'Survey Answers',
-            description: '[Survey Answers List] Survey answers list subtitle.',
+            description: '[Survey Submissions List] Survey answers list subtitle.',
             id: 'ZxR2Ts',
           })}
         </Subtitle>
 
         <StyledTable columns={columns} data={surveyEntries} defaultSortedKey="updatedAt" defaultSortedKeyIsDesc />
       </StyledCard>
+
+      {hasDeletionModal && (
+        <DeletionModal entity={selectedEntity} onCancel={closeDeletionModal} onConfirm={deleteSurveyEntry} />
+      )}
     </AdminBox>
   )
 }

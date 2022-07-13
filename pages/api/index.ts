@@ -18,6 +18,7 @@ export default async function IndexEndpoint(req: NextApiRequest, res: NextApiRes
 
         res.status(200).json({
           data,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

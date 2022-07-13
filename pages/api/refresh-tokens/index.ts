@@ -32,6 +32,7 @@ export default async function RefreshTokensEndpoint(req: NextApiRequest, res: Ne
 
         res.status(200).json({
           data: refreshTokens,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

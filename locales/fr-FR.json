@@ -52,7 +52,7 @@
     "message": "Supprimer"
   },
   "Dus0RS": {
-    "description": "[Survey Answers List] Table Files column label.",
+    "description": "[Survey Submissions List] Table Files column label.",
     "message": "Fichiers"
   },
   "E/vx8U": {
@@ -296,7 +296,7 @@
     "message": "Paramètres du questionnaire"
   },
   "YsRqXk": {
-    "description": "[Survey Answers List] Export answers in CSV format button label.",
+    "description": "[Survey Submissions List] Export answers in CSV format button label.",
     "message": "Exporter en CSV"
   },
   "YzeZvW": {
@@ -304,7 +304,7 @@
     "message": "Publié"
   },
   "ZxR2Ts": {
-    "description": "[Survey Answers List] Survey answers list subtitle.",
+    "description": "[Survey Submissions List] Survey answers list subtitle.",
     "message": "Réponses au questionnaire"
   },
   "ax3sGB": {
@@ -384,7 +384,7 @@
     "message": "S'inscrire"
   },
   "s1Q3aH": {
-    "description": "[Survey Answers List] Table Date column label.",
+    "description": "[Survey Submissions List] Table Date column label.",
     "message": "Date"
   },
   "tnYUFj": {

@@ -7,6 +7,7 @@ import { useApi } from '@app/hooks/useApi'
 import { useIsMounted } from '@app/hooks/useIsMounted'
 import { SurveyEditorManager } from '@app/libs/SurveyEditorManager'
 import { AdminBox } from '@app/organisms/AdminBox'
+import { DeletionModal } from '@app/organisms/DeletionModal'
 import { Button, Card, Table } from '@singularity/core'
 import { TableColumnProps } from '@singularity/core/contents/Table/types'
 import cuid from 'cuid'
@@ -20,12 +21,38 @@ import type { SurveyWithJsonType } from '@common/types'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 export default function SurveyListPage() {
+  const [hasDeletionModal, setHasDeletionModal] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [selectedEntity, setSelectedEntity] = useState('')
+  const [selectedSurveyId, setSelectedSurveyId] = useState('')
   const [surveys, setSurveys] = useState([])
   const router = useRouter()
   const intl = useIntl()
   const api = useApi()
   const isMounted = useIsMounted()
+
+  const closeDeletionModal = useCallback(() => {
+    setHasDeletionModal(false)
+  }, [])
+
+  const confirmSurveyDeletion = useCallback(
+    async (surveyId: string): Promise<void> => {
+      const survey = R.find(R.propEq('id', surveyId))(surveys) as any
+
+      setSelectedSurveyId(surveyId)
+      setSelectedEntity(survey.tree.data.title)
+      setHasDeletionModal(true)
+    },
+    [intl, surveys],
+  )
+
+  const deleteSurvey = useCallback(async (): Promise<void> => {
+    setHasDeletionModal(false)
+
+    await api.delete(`surveys/${selectedSurveyId}`)
+
+    await loadSurveys()
+  }, [selectedSurveyId])
 
   const loadSurveys = async () => {
     const maybeBody = await api.get('surveys')
@@ -146,12 +173,6 @@ export default function SurveyListPage() {
     router.push(`/surveys/${id}`)
   }, [])
 
-  const deleteSurvey = async (id: string) => {
-    await api.delete(`surveys/${id}`)
-
-    await loadSurveys()
-  }
-
   const columns: TableColumnProps[] = [
     {
       isSortable: true,
@@ -204,7 +225,7 @@ export default function SurveyListPage() {
     },
     {
       accent: 'danger',
-      action: deleteSurvey,
+      action: confirmSurveyDeletion,
       Icon: Trash,
       key: 'deleteSurvey',
       label: 'Delete this survey',
@@ -235,6 +256,10 @@ export default function SurveyListPage() {
       <Card>
         <Table columns={columns} data={surveys} defaultSortedKey="lastName" isLoading={isLoading} />
       </Card>
+
+      {hasDeletionModal && (
+        <DeletionModal entity={selectedEntity} onCancel={closeDeletionModal} onConfirm={deleteSurvey} />
+      )}
     </AdminBox>
   )
 }

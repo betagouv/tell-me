@@ -33,6 +33,7 @@ export default async function UserEndpoint(req: NextApiRequest, res: NextApiResp
 
         res.status(200).json({
           data: userWithoutPassword,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
@@ -85,6 +86,7 @@ export default async function UserEndpoint(req: NextApiRequest, res: NextApiResp
 
         res.status(200).json({
           data: updatedUserWithoutPassword,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
