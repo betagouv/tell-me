@@ -12,5 +12,5 @@ type TitleEditorProps = {
   onValueChange: (newTitle: string) => void | Promise<void>
 }
 export function TitleEditor(props: TitleEditorProps) {
-  return <Editable as={SurveyEditorTitle} isRichText={false} {...props} />
+  return <Editable as={SurveyEditorTitle} id="title" isRichText={false} {...props} />
 }

@@ -1,6 +1,8 @@
+import { editableActions } from '@app/molecules/Editable/slice'
+import { useDispatch } from 'react-redux'
 import styled, { css } from 'styled-components'
 
-import type { Block } from '../../libs/SurveyEditorManager/Block'
+import type { Block } from '@app/libs/SurveyEditorManager/Block'
 import type { HTMLAttributes } from 'react'
 import type { Promisable } from 'type-fest'
 
@@ -69,6 +71,7 @@ const ICON: Record<string, (props: HTMLAttributes<HTMLSpanElement>) => JSX.Eleme
   Add: () => <span className="material-icons md-24">add</span>,
   AddModerator: () => <span className="material-icons md-24">add_moderator</span>,
   Delete: () => <span className="material-icons md-24">delete</span>,
+  Edit: () => <span className="material-icons md-24">edit</span>,
   Emergency: () => <span className="material-icons md-24">key</span>,
   Key: () => <span className="material-icons md-24">key</span>,
   KeyOff: () => <span className="material-icons md-24">key_off</span>,
@@ -81,6 +84,7 @@ const ICON: Record<string, (props: HTMLAttributes<HTMLSpanElement>) => JSX.Eleme
 type RowProps = {
   block: Block
   children: any
+  onClickAdd: () => Promisable<void>
   onClickCondition: () => Promisable<void>
   onClickDelete: () => Promisable<void>
   onClickKey: () => Promisable<void>
@@ -90,16 +94,22 @@ type RowProps = {
 export function Row({
   block,
   children,
+  onClickAdd,
   onClickCondition,
   onClickDelete,
   onClickKey,
   onToggleObligation,
   onToggleVisibility,
 }: RowProps) {
+  const dispatch = useDispatch()
+
   return (
     <Box>
-      <Button accent="primary" className="Button">
-        <ICON.Add onClick={undefined} />
+      <Button accent="primary" className="Button" onClick={onClickAdd}>
+        <ICON.Add />
+      </Button>
+      <Button accent="primary" className="Button" onClick={() => dispatch(editableActions.openBlockMenu(block.id))}>
+        <ICON.Edit />
       </Button>
 
       <Asterisk isVisible={block.isRequired}>*</Asterisk>

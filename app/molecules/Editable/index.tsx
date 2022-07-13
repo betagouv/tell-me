@@ -1,11 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { HTMLAttributes, useEffect, useReducer, useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { useIsMounted } from '../../hooks/useIsMounted'
 import { usePrevious } from '../../hooks/usePrevious'
 import { BlockMenu } from './BlockMenu'
 import { blockMenuReducer } from './blockMenuReducer'
+import { editableActions } from './slice'
 
 import type { BlockMenuReducerAction, BlockMenuReducerState } from './blockMenuReducer'
 import type { BlockMenuItem } from './types'
@@ -64,6 +66,7 @@ type EditableProps = Omit<HTMLAttributes<HTMLDivElement>, 'onFocus'> & {
   count?: number | null
   countLetter?: string | null
   defaultValue?: string
+  id: string
   isFocused?: boolean
   isRichText?: boolean
   onBackspaceKeyDown?: () => Promisable<void>
@@ -77,6 +80,7 @@ type EditableProps = Omit<HTMLAttributes<HTMLDivElement>, 'onFocus'> & {
 export function Editable({
   as,
   defaultValue = '',
+  id,
   isFocused = false,
   isRichText = false,
   onBackspaceKeyDown,
@@ -101,9 +105,13 @@ export function Editable({
   const componentRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
   const lastValueBeforeOpeningBlockMenuRef = useRef(defaultValue) as MutableRefObject<string>
-  const [isBlockMenuOpen, setIsBlockMenuOpen] = useState<boolean>(false)
+  // const [isBlockMenuOpen, setIsBlockMenuOpen] = useState<boolean>(false)
+  const dispatch = useDispatch()
   const isMounted = useIsMounted()
   const wasFocused = usePrevious(isFocused)
+  const isBlockMenuOpen = useSelector(
+    (store: any) => store.editable.isBlockMenuForId === id && store.editable.isBlockMenuOpen,
+  )
 
   // States used for rich text blocks
   const controlledValueRef = useRef(defaultValue) as MutableRefObject<string>
@@ -116,12 +124,6 @@ export function Editable({
   const hasBlockMenu = MENU_ITEMS.length > 0
   // Used as content editable div prop for rich text blocks
   const innerHTML = { __html: controlledValueRef.current }
-
-  const closeBlockMenu = () => {
-    if (isMounted()) {
-      setIsBlockMenuOpen(false)
-    }
-  }
 
   const closeFormatMenu = (event?: globalThis.MouseEvent) => {
     if (event === undefined) {
@@ -199,12 +201,6 @@ export function Editable({
     onValueChange(newValue)
   }
 
-  const openBlockMenu = () => {
-    if (isMounted()) {
-      setIsBlockMenuOpen(true)
-    }
-  }
-
   const controlKey = (event: KeyboardEvent<HTMLElement>) => {
     if (!isMounted()) {
       return
@@ -254,7 +250,7 @@ export function Editable({
 
       case '/':
         if (hasBlockMenu && !isBlockMenuOpen) {
-          openBlockMenu()
+          dispatch(editableActions.openBlockMenu(id))
         }
 
         return
@@ -263,7 +259,7 @@ export function Editable({
         if (hasBlockMenu && isBlockMenuOpen) {
           event.preventDefault()
 
-          closeBlockMenu()
+          dispatch(editableActions.closeBlockMenu())
         }
 
         return
@@ -271,7 +267,7 @@ export function Editable({
       case 'Backspace':
         if (isBlockMenuOpen) {
           if (blockMenuState.query.length === 0) {
-            closeBlockMenu()
+            dispatch(editableActions.closeBlockMenu())
 
             return
           }
@@ -366,7 +362,7 @@ export function Editable({
           anchor={innerRef.current}
           defaultSelectedIndex={blockMenuState.selectedIndex}
           items={blockMenuState.visibleItems}
-          onCancel={closeBlockMenu}
+          onCancel={() => dispatch(editableActions.closeBlockMenu())}
           onSelect={handleBlockTypeChange}
         />
       )}

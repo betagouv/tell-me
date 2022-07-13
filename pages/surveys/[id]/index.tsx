@@ -17,7 +17,7 @@ import type { Survey } from '@prisma/client'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 
 const TitleRow = styled.div`
-  padding: 0 13rem 0 7rem;
+  padding: 0 13rem 0 10rem;
 `
 
 export default function SurveyEditorPage() {

@@ -7,7 +7,7 @@ const StyledSurveyLogo = styled<any>(SurveyLogo)`
   min-height: 5rem;
 
   > div {
-    margin-left: 8rem;
+    margin-left: 9.5rem;
   }
 `
 
@@ -17,7 +17,7 @@ const StyledInput = styled.input<any>`
   color: transparent;
   cursor: pointer;
   height: 6rem;
-  left: 5rem;
+  left: 6.5rem;
   opacity: 0.75 !important;
   position: absolute;
   top: -3rem;
