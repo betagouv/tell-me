@@ -11,6 +11,12 @@
       "value": "Edit this user"
     }
   ],
+  "5CazlS": [
+    {
+      "type": 0,
+      "value": "Delete this survey entry"
+    }
+  ],
   "6StYcj": [
     {
       "type": 0,
@@ -245,6 +251,12 @@
     {
       "type": 0,
       "value": "Wrong email and/or password."
+    }
+  ],
+  "LPYwIE": [
+    {
+      "type": 0,
+      "value": "this submission"
     }
   ],
   "MAIN_MENU__ADMINISTRATION_TITLE": [

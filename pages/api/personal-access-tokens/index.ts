@@ -34,6 +34,7 @@ export default async function PersonalAccessTokenIndexEndpoint(req: NextApiReque
 
         res.status(200).json({
           data: personalAccessTokens,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
@@ -75,6 +76,7 @@ export default async function PersonalAccessTokenIndexEndpoint(req: NextApiReque
 
         res.status(201).json({
           data: newPersonalAccessToken,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

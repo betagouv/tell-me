@@ -18,6 +18,7 @@ export default async function UserIndexEndpoint(req: NextApiRequest, res: NextAp
 
         res.status(200).json({
           data: users,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

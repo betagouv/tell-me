@@ -7,3 +7,8 @@ export type SurveyWithJsonType = Omit<Survey, 'createdAt' | 'data' | 'tree' | 'u
   tree: TellMe.Tree
   updatedAt: string
 }
+
+export type SurveyWithJsonTypeAndDate = Omit<SurveyWithJsonType, 'createdAt' | 'updatedAt'> & {
+  createdAt: Date
+  updatedAt: Date
+}

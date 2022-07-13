@@ -54,6 +54,7 @@ export default async function GlobalVariableEndpoint(req: NextApiRequest, res: N
 
         res.status(200).json({
           data: updatedGlobalVariable,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

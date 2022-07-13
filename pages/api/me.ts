@@ -22,6 +22,7 @@ export default async function UserConfigEndpoint(req: NextApiRequest, res: NextA
 
         res.status(200).json({
           data: userConfig || {},
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
@@ -58,6 +59,7 @@ export default async function UserConfigEndpoint(req: NextApiRequest, res: NextA
 
         res.status(200).json({
           data: updatedUserConfig,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

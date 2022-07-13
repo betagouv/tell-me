@@ -11,14 +11,14 @@ import cuid from 'cuid'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const ERROR_PATH = 'pages/api/surveys/[id]/index.ts'
+const ERROR_PATH = 'pages/api/surveys/[surveyId]/index.ts'
 
 export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'POST':
       try {
-        const { id } = req.query
-        if (typeof id !== 'string') {
+        const { surveyId } = req.query
+        if (typeof surveyId !== 'string') {
           throw new ApiError('Not found.', 404, true)
         }
         if (!isPojo(req.body.formData)) {
@@ -30,7 +30,7 @@ export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res:
 
         const survey = await prisma.survey.findUnique({
           where: {
-            id,
+            id: surveyId,
           },
         })
         if (survey === null) {
@@ -75,15 +75,16 @@ export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res:
             data: newData,
           },
           where: {
-            id,
+            id: surveyId,
           },
         })
         if (updatedSurvey === null) {
           throw new ApiError('Not found.', 404, true)
         }
 
-        res.status(200).json({
+        res.status(201).json({
           data: updatedSurvey,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

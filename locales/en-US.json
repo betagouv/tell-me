@@ -7,8 +7,12 @@
     "description": "[Users List] Table row edition button label.",
     "message": "Edit this user"
   },
+  "5CazlS": {
+    "description": "[Survey Submissions List] Table row deletion button label.",
+    "message": "Delete this survey entry"
+  },
   "6StYcj": {
-    "description": "[Survey Answers List] Table Answers column label.",
+    "description": "[Survey Submissions List] Table Answers column label.",
     "message": "Answers"
   },
   "7LF9Gb": {
@@ -56,7 +60,7 @@
     "message": "Delete"
   },
   "Dus0RS": {
-    "description": "[Survey Answers List] Table Files column label.",
+    "description": "[Survey Submissions List] Table Files column label.",
     "message": "Files"
   },
   "E/vx8U": {
@@ -154,6 +158,10 @@
   "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": {
     "description": "[Login Dialog] Wrong creadentials error.",
     "message": "Wrong email and/or password."
+  },
+  "LPYwIE": {
+    "description": "[Survey Submissions List] Selected entity generic label.",
+    "message": "this submission"
   },
   "MAIN_MENU__ADMINISTRATION_TITLE": {
     "description": "[Main Menu] Administration title.",
@@ -300,7 +308,7 @@
     "message": "Survey Config"
   },
   "YsRqXk": {
-    "description": "[Survey Answers List] Export answers in CSV format button label.",
+    "description": "[Survey Submissions List] Export answers in CSV format button label.",
     "message": "Export as CSV"
   },
   "YzeZvW": {
@@ -308,7 +316,7 @@
     "message": "Published"
   },
   "ZxR2Ts": {
-    "description": "[Survey Answers List] Survey answers list subtitle.",
+    "description": "[Survey Submissions List] Survey answers list subtitle.",
     "message": "Survey Answers"
   },
   "ax3sGB": {
@@ -388,7 +396,7 @@
     "message": "Sign Up"
   },
   "s1Q3aH": {
-    "description": "[Survey Answers List] Table Date column label.",
+    "description": "[Survey Submissions List] Table Date column label.",
     "message": "Date"
   },
   "tnYUFj": {

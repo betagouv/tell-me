@@ -32,6 +32,7 @@ export default async function OneTimeTokenIndexEndpoint(req: NextApiRequest, res
 
         res.status(200).json({
           data: oneTimeTokens,
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)

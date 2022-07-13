@@ -45,6 +45,7 @@ export default async function AuthOneTimeTokenEndpoint(req: NextApiRequest, res:
           data: {
             oneTimeToken: value,
           },
+          hasError: false,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
