@@ -22,7 +22,12 @@ export class SurveyEditorManager {
       return null
     }
 
-    return this.#blocks[this.#focusedBlockIndex]
+    const block = this.#blocks[this.#focusedBlockIndex]
+    if (block === undefined) {
+      return null
+    }
+
+    return block
   }
 
   public get focusedBlockIndex(): number {
@@ -44,11 +49,26 @@ export class SurveyEditorManager {
     this.#blocks = []
     this.#focusedBlockIndex = -1
 
-    Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach(key => {
-      if (this[key] instanceof Function && key !== 'constructor') {
-        this[key] = this[key].bind(this)
-      }
-    })
+    this.appendNewBlockAt = this.appendNewBlockAt.bind(this)
+    this.appendNewBlockToFocusedBlock = this.appendNewBlockToFocusedBlock.bind(this)
+    this.findBlockIndexById = this.findBlockIndexById.bind(this)
+    this.focusNextBlock = this.focusNextBlock.bind(this)
+    this.focusPreviousBlock = this.focusPreviousBlock.bind(this)
+    this.getQuestionInputTypeAt = this.getQuestionInputTypeAt.bind(this)
+    this.initializeBlocks = this.initializeBlocks.bind(this)
+    this.removeBlockAt = this.removeBlockAt.bind(this)
+    this.removeFocusedBlock = this.removeFocusedBlock.bind(this)
+    this.setBlockPropsAt = this.setBlockPropsAt.bind(this)
+    this.setBlockTypeAt = this.appendNewBlockAt.bind(this)
+    this.setBlockValueAt = this.appendNewBlockAt.bind(this)
+    this.setFocusAt = this.setFocusAt.bind(this)
+    this.setFocusedBlockProps = this.setFocusedBlockProps.bind(this)
+    this.setFocusedBlockType = this.setFocusedBlockType.bind(this)
+    this.setFocusedBlockValue = this.setFocusedBlockValue.bind(this)
+    this.setIfSelectedThenShowQuestionIdsAt = this.setIfSelectedThenShowQuestionIdsAt.bind(this)
+    this.toggleBlockObligationAt = this.toggleBlockObligationAt.bind(this)
+    this.toggleBlockVisibilityAt = this.toggleBlockVisibilityAt.bind(this)
+    this.unsetFocus = this.unsetFocus.bind(this)
 
     this.initializeBlocks(initialBlocks)
   }
@@ -62,10 +82,12 @@ export class SurveyEditorManager {
       return
     }
 
+    const oldBlock = this.blocks[index]
+
     const newBlock = {
       data: {
-        pageIndex: index === -1 ? 0 : this.blocks[index].data.pageIndex,
-        pageRankIndex: index === -1 ? 0 : this.blocks[index].data.pageRankIndex + 1,
+        pageIndex: index === -1 || oldBlock === undefined ? 0 : oldBlock.data.pageIndex,
+        pageRankIndex: index === -1 || oldBlock === undefined ? 0 : oldBlock.data.pageRankIndex + 1,
       },
       id: cuid(),
       type,
@@ -132,13 +154,12 @@ export class SurveyEditorManager {
     // eslint-disable-next-line no-plusplus
     while (++nextBlockIndex < blocksLength) {
       const nextBlock = this.blocks[nextBlockIndex]
+      if (nextBlock === undefined || isQuestionBlock(nextBlock)) {
+        break
+      }
 
       if (isInputBlock(nextBlock)) {
         return nextBlock.type
-      }
-
-      if (isQuestionBlock(nextBlock)) {
-        break
       }
     }
 

@@ -12,7 +12,12 @@ import type { NextApiResponse } from 'next'
  * If <isLast> is not set to `true`, the handler will rethrow a SilentError
  * after sending the response to avoid any subsequent code to be run.
  */
-export function handleApiEndpointError(error: any, path: string, res: NextApiResponse, isLast: boolean = false): never {
+export function handleApiEndpointError(
+  error: unknown,
+  path: string,
+  res: NextApiResponse,
+  isLast: boolean = false,
+): never {
   if (isLast && error instanceof SilentError) {
     return undefined as never
   }

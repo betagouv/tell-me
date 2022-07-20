@@ -14,7 +14,7 @@ import { handleError } from './handleError'
  *
  * ⚠️ Don't use that within SSR pages!
  */
-export function handleApiError(error: any, path: string): never {
+export function handleApiError(error: unknown, path: string): never {
   if (!(error instanceof ApiError)) {
     handleError(error, path)
   }

@@ -1,8 +1,10 @@
 import Document from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
+import type { DocumentContext } from 'next/document'
+
 export default class TellMeDocument extends Document {
-  static async getInitialProps(ctx) {
+  static override async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = ctx.renderPage
 

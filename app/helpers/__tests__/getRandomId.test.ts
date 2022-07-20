@@ -6,7 +6,7 @@ import crypto from 'crypto'
 
 // TODO Repleace this polyfill once this is fixed: https://github.com/jsdom/jsdom/issues/1612.
 window.crypto = {
-  getRandomValues: buffer => crypto.randomFillSync(buffer),
+  getRandomValues: (buffer: any) => crypto.randomFillSync(buffer),
 } as any
 
 // eslint-disable-next-line import/first
