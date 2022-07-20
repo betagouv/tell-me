@@ -4,7 +4,8 @@
 
 name: Fix Dependabot
 
-on: pull_request_target
+on:
+  pull_request_target:
 
 permissions: read-all
 
