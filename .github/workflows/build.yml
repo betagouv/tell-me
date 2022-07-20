@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  raw:
+    name: Raw
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+      - name: Install
+        run: pnpm install
+      - name: Build
+        run: pnpm run build
+
+  docker:
+    name: Docker
+    runs-on: ubuntu-latest
+    env:
+      PORT: 3000
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: docker-compose build app

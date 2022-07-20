@@ -1,0 +1,30 @@
+services:
+  db:
+    container_name: tell_me_db
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRE_DATABASE}
+      POSTGRES_USER: ${POSTGRE_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRE_PASSWORD}
+    volumes:
+      - postgre-data:/var/lib/postgresql/data
+
+  app:
+    container_name: tell_me_app
+    build:
+      context: .
+      args:
+        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@db:5432/${POSTGRE_DATABASE}?schema=public
+    restart: always
+    environment:
+        DATABASE_URL: postgresql://${POSTGRE_USERNAME}:${POSTGRE_PASSWORD}@db:5432/${POSTGRE_DATABASE}?schema=public
+        EDDSA_PRIVATE_KEY: ${EDDSA_PRIVATE_KEY}
+        NEXT_PUBLIC_EDDSA_PUBLIC_KEY: ${NEXT_PUBLIC_EDDSA_PUBLIC_KEY}
+    ports:
+      - ${PORT}:3000
+    depends_on:
+      - db
+
+volumes:
+  postgre-data:

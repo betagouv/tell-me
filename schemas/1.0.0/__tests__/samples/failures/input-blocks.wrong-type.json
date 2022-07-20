@@ -1,0 +1,21 @@
+{
+  "type": "root",
+  "id": "R01",
+  "data": {
+    "language": "en",
+    "title": "A Survey Title",
+    "version": "1.0.0"
+  },
+  "children": [
+    {
+      "type": "input_wrong",
+      "id": "B01",
+      "value": "An value.",
+      "data": {
+        "ifTruethyThenShowQuestionIds": [],
+        "pageIndex": 0,
+        "pageRankIndex": 0
+      }
+    }
+  ]
+}

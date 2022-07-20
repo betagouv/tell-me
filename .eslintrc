@@ -1,0 +1,86 @@
+{
+  "extends": ["@ivangabriele/eslint-config-typescript-next"],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "extraFileExtensions": [".cjs"],
+    "project": "./tsconfig.dev.json"
+  },
+  "ignorePatterns": ["next-env.d.ts"],
+  "plugins": ["formatjs"],
+  "rules": {
+    "@typescript-eslint/no-use-before-define": "off",
+
+    "formatjs/enforce-default-message": "error",
+    "formatjs/enforce-description": "error",
+    "formatjs/enforce-id": "error",
+    "formatjs/enforce-placeholders": [
+      "error",
+      {
+        "ignoreList": ["a"]
+      }
+    ],
+    "formatjs/enforce-plural-rules": [
+      "error",
+      // https://formatjs.io/docs/tooling/linter/#available-rules-1
+      {
+        "few": false,
+        "many": false,
+        "one": true,
+        "other": true,
+        "two": false,
+        "zero": false
+      }
+    ],
+    "formatjs/no-camel-case": "error",
+    "formatjs/no-complex-selectors": ["error", { "limit": 2 }],
+    "formatjs/no-emoji": "error",
+    "formatjs/no-multiple-plurals": "error",
+    "formatjs/no-multiple-whitespaces": "error",
+    "formatjs/no-offset": "error",
+
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unstable-nested-components": "off",
+    "react/require-default-props": "off"
+  },
+  "overrides": [
+    {
+      "files": ["./app/**/*.ts", "./app/**/*.tsx", "./common/**/*.ts", "./pages/**/*.tsx"],
+      "env": {
+        "browser": true,
+        "node": true
+      }
+    },
+    {
+      "files": ["./api/**/*.ts", "./pages/**/*.ts"],
+      "env": {
+        "browser": false,
+        "node": true
+      }
+    },
+    {
+      "files": [
+        "./config/**/*.js",
+        "./config/**/*.ts",
+        "./e2e/**/*.ts",
+        "./prisma/seeds/**/*.js",
+        "./scripts/**/*.js",
+        "./scripts/**/*.ts",
+        "**/*.test.ts"
+      ],
+      "env": {
+        "browser": false,
+        "node": true
+      },
+      "rules": {
+        "no-await-in-loop": "off",
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "no-continue": "off",
+        "no-restricted-syntax": "off",
+
+        "import/extensions": ["off"],
+        "import/no-default-export": ["off"],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+      }
+    }
+  ]
+}

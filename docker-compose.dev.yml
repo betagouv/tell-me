@@ -1,0 +1,4 @@
+services:
+  db:
+    ports:
+      - ${POSTGRE_PORT}:5432

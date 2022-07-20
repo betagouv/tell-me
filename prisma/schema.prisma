@@ -1,0 +1,106 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["filterJson", "fullTextSearch"]
+}
+
+// =========================================================
+// Constants
+
+enum UserRole {
+  ADMINISTRATOR
+  MANAGER
+  VIEWER
+}
+
+// =========================================================
+// Models
+
+model GlobalVariable {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OneTimeToken {
+  id        String   @id @default(cuid())
+  ip        String
+  value     String   @unique
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model PersonalAccessToken {
+  id        String   @id @default(cuid())
+  name      String?
+  label     String?
+  value     String   @unique
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  familyId  String?
+  ip        String
+  value     String   @unique
+  expiredAt DateTime
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Survey {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  isPublished Boolean  @default(false)
+  // Survey structured as TellMe Tree JSON Schema (TellMe.Tree.schema.json)
+  tree        Json
+  // Answers structured as TellMe Data JSON Schema (TellMe.Data.schema.json)
+  data        Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model User {
+  id        String   @id @default(cuid())
+  role      UserRole @default(VIEWER)
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  oneTimeTokens        OneTimeToken[]
+  personalAccessTokens PersonalAccessToken[]
+  refreshTokens        RefreshToken[]
+  surveys              Survey[]
+  userConfig           UserConfig?
+}
+
+model UserConfig {
+  id        String   @id @default(cuid())
+  locale    String   @default("en-US")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], map: "UserConfig_userId_fkey")
+  userId String @unique
+}

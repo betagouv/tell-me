@@ -1,0 +1,26 @@
+FROM node:16-alpine
+
+# Mandatory arguments
+ARG DATABASE_URL
+ARG EDDSA_PRIVATE_KEY
+ARG NEXT_PUBLIC_EDDSA_PUBLIC_KEY
+
+ENV DATABASE_URL=$DATABASE_URL
+ENV EDDSA_PRIVATE_KEY=$EDDSA_PRIVATE_KEY
+ENV NEXT_PUBLIC_EDDSA_PUBLIC_KEY=$NEXT_PUBLIC_EDDSA_PUBLIC_KEY
+ENV NEXT_PUBLIC_NODE_ENV=production
+ENV NODE_ENV=production
+
+EXPOSE 3000
+
+WORKDIR /app
+
+COPY . .
+
+RUN corepack enable
+RUN corepack prepare pnpm@7.2.1
+RUN pnpm i -g pnpm
+RUN pnpm install --frozen-lockfile
+RUN pnpm run build
+
+ENTRYPOINT [ "pnp", "start" ]

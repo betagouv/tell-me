@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Exit when any command fails:
+set -e
+
+# Load .env file
+if [ -f "./.env" ]; then
+  export $(egrep -v '^(#|EDDSA_PRIVATE_KEY|NEXT_PUBLIC_EDDSA_PUBLIC_KEY)' ./.env | xargs) > /dev/null
+fi
+
+pnpm exec prisma generate
+
+if [ -z "$CI" ] && [ "${NODE_ENV}" != "production" ]; then
+  pnpm exec husky install
+fi

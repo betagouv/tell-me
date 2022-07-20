@@ -1,0 +1,680 @@
+{
+  "0llMw7": [
+    {
+      "type": 0,
+      "value": "Value"
+    }
+  ],
+  "4toEG": [
+    {
+      "type": 0,
+      "value": "Edit this user"
+    }
+  ],
+  "5CazlS": [
+    {
+      "type": 0,
+      "value": "Delete this survey entry"
+    }
+  ],
+  "6StYcj": [
+    {
+      "type": 0,
+      "value": "Answers"
+    }
+  ],
+  "7LF9Gb": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "8F0yyx": [
+    {
+      "type": 0,
+      "value": "Delete this user"
+    }
+  ],
+  "8vxOf": [
+    {
+      "type": 0,
+      "value": "Users"
+    }
+  ],
+  "91i3BC": [
+    {
+      "type": 0,
+      "value": "Title"
+    }
+  ],
+  "9vy90u": [
+    {
+      "type": 0,
+      "value": "Delete Confirmation"
+    }
+  ],
+  "D6/Uxz": [
+    {
+      "type": 0,
+      "value": "Surveys"
+    }
+  ],
+  "DASBOARD_PAGE__SUBMISSIONS_COUNTER_LABEL": [
+    {
+      "type": 0,
+      "value": "Submissions"
+    }
+  ],
+  "DASBOARD_PAGE__SURVEYS_COUNTER_LABEL": [
+    {
+      "type": 0,
+      "value": "Surveys"
+    }
+  ],
+  "DASBOARD_PAGE__TITLE": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
+  "Db1A9P": [
+    {
+      "type": 0,
+      "value": "Label"
+    }
+  ],
+  "Ddm/Wq": [
+    {
+      "type": 0,
+      "value": "Delete"
+    }
+  ],
+  "Dus0RS": [
+    {
+      "type": 0,
+      "value": "Files"
+    }
+  ],
+  "E/vx8U": [
+    {
+      "type": 0,
+      "value": "Thank You message"
+    }
+  ],
+  "EEsDeJ": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
+  "EYeJTo": [
+    {
+      "type": 0,
+      "value": "Sign Up"
+    }
+  ],
+  "FC8ax/": [
+    {
+      "type": 0,
+      "value": "Edit user"
+    }
+  ],
+  "HF2UUz": [
+    {
+      "type": 0,
+      "value": "Personal Access Tokens"
+    }
+  ],
+  "I8y4ic": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "IEpCqZ": [
+    {
+      "type": 0,
+      "value": "New survey"
+    }
+  ],
+  "IMPORT_EXPORT_PAGE__TITLE": [
+    {
+      "type": 0,
+      "value": "Import / Export"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION": [
+    {
+      "type": 0,
+      "value": "You can import surveys between different Tell Me instances using their API."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__DESCRIPTION_HELPER": [
+    {
+      "type": 0,
+      "value": "You first have to generate a Personal Access Token on the source instance in order for the current instance to have access to the remote data."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__IMPORT_BUTTON_LABEL": [
+    {
+      "type": 0,
+      "value": "Import Surveys"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Personal Access Token"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__PAT_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please generate a Personal Access Token on the remote Tell Me source and copy/paste its value here."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "This URL format doesn't look right."
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "URL"
+    }
+  ],
+  "IMPORT_SURVEYS_VIA_API_FORM__URL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter the Tell Me remote source url."
+    }
+  ],
+  "K06DbM": [
+    {
+      "type": 0,
+      "value": "Your new password (again)"
+    }
+  ],
+  "KahMf6": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "LOGIN_DIALOG__DESCRIPTION": [
+    {
+      "type": 0,
+      "value": "Please "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "sign up"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " if you don’t have an account."
+    }
+  ],
+  "LOGIN_DIALOG__DISABLED_ACCOUNT_ERROR": [
+    {
+      "type": 0,
+      "value": "Your account has not yet been activated."
+    }
+  ],
+  "LOGIN_DIALOG__EMAIL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "Your email doesn't look right."
+    }
+  ],
+  "LOGIN_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your email."
+    }
+  ],
+  "LOGIN_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your password."
+    }
+  ],
+  "LOGIN_DIALOG__WRONG_CREDENTIALS_ERROR": [
+    {
+      "type": 0,
+      "value": "Wrong email and/or password."
+    }
+  ],
+  "LPYwIE": [
+    {
+      "type": 0,
+      "value": "this submission"
+    }
+  ],
+  "MAIN_MENU__ADMINISTRATION_TITLE": [
+    {
+      "type": 0,
+      "value": "ADMINISTRATION"
+    }
+  ],
+  "MAIN_MENU__IMPORT_EXPORT_ITEM": [
+    {
+      "type": 0,
+      "value": "Import / Export"
+    }
+  ],
+  "MAIN_MENU__SETTINGS_ITEM": [
+    {
+      "type": 0,
+      "value": "Global Settings"
+    }
+  ],
+  "MENU__LOG_OUT_BUTTON_ARIA_LABEL": [
+    {
+      "type": 0,
+      "value": "Log out"
+    }
+  ],
+  "MENU__SETTINGS_BUTTON_ARIA_LABEL": [
+    {
+      "type": 0,
+      "value": "My settings"
+    }
+  ],
+  "N68/ff": [
+    {
+      "type": 0,
+      "value": "Slug"
+    }
+  ],
+  "NIzhyl": [
+    {
+      "type": 0,
+      "value": "New personal access token"
+    }
+  ],
+  "NNlf6B": [
+    {
+      "type": 0,
+      "value": "My Settings"
+    }
+  ],
+  "Q0wotK": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "QBtMwD": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "QWfMAC": [
+    {
+      "type": 0,
+      "value": "New PAT"
+    }
+  ],
+  "SETTINGS_FORM__BASE_URL_INPUT_LABEL:": [
+    {
+      "type": 0,
+      "value": "Base URL"
+    }
+  ],
+  "SETTINGS_FORM__S3_ACCESS_KEY_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Access Key"
+    }
+  ],
+  "SETTINGS_FORM__S3_BUCKET_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Bucket"
+    }
+  ],
+  "SETTINGS_FORM__S3_ENDPOINT_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Endpoint"
+    }
+  ],
+  "SETTINGS_FORM__S3_PORT_INPUT_HELPER": [
+    {
+      "type": 0,
+      "value": "Only required for MinIO custom servers."
+    }
+  ],
+  "SETTINGS_FORM__S3_PORT_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Port"
+    }
+  ],
+  "SETTINGS_FORM__S3_SECRET_KEY_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Secret Key"
+    }
+  ],
+  "SETTINGS_FORM__S3_SUBTITLE": [
+    {
+      "type": 0,
+      "value": "S3-compatible Static Assets Server"
+    }
+  ],
+  "SETTINGS_FORM__S3_URL_INPUT_LABEL": [
+    {
+      "type": 0,
+      "value": "Public URL"
+    }
+  ],
+  "SETTINGS_FORM__UPDATE_BUTTON_LABEL": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "SETTINGS_PAGE__TITLE": [
+    {
+      "type": 0,
+      "value": "Global Settings"
+    }
+  ],
+  "SIGNUP_DIALOG__DESCRIPTION": [
+    {
+      "type": 0,
+      "value": "Please "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "log in"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " if you already have an account."
+    }
+  ],
+  "SIGNUP_DIALOG__DUPLICATE_ACCOUNT_ERROR": [
+    {
+      "type": 0,
+      "value": "This email is already associated with an existing account."
+    }
+  ],
+  "SIGNUP_DIALOG__EMAIL_INPUT_FORMAT_ERROR": [
+    {
+      "type": 0,
+      "value": "Your email doesn't look right."
+    }
+  ],
+  "SIGNUP_DIALOG__EMAIL_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your email."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_MATCH_ERROR": [
+    {
+      "type": 0,
+      "value": "Passwords don't match."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_CONFIRMATION_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please confirm your password."
+    }
+  ],
+  "SIGNUP_DIALOG__PASSWORD_INPUT_REQUIREMENT_ERROR": [
+    {
+      "type": 0,
+      "value": "Please enter your password."
+    }
+  ],
+  "TYZzVl": [
+    {
+      "type": 0,
+      "value": "Label"
+    }
+  ],
+  "UaLCH+": [
+    {
+      "type": 0,
+      "value": "First Name"
+    }
+  ],
+  "VXF18U": [
+    {
+      "type": 0,
+      "value": "Activated account"
+    }
+  ],
+  "WL5w1n": [
+    {
+      "type": 0,
+      "value": "Personal Access Tokens"
+    }
+  ],
+  "XJmbHw": [
+    {
+      "type": 0,
+      "value": "Role"
+    }
+  ],
+  "YJ9OxG": [
+    {
+      "type": 0,
+      "value": "Your email"
+    }
+  ],
+  "YbP4R+": [
+    {
+      "type": 0,
+      "value": "Survey Config"
+    }
+  ],
+  "YsRqXk": [
+    {
+      "type": 0,
+      "value": "Export as CSV"
+    }
+  ],
+  "YzeZvW": [
+    {
+      "type": 0,
+      "value": "Published"
+    }
+  ],
+  "ZxR2Ts": [
+    {
+      "type": 0,
+      "value": "Survey Answers"
+    }
+  ],
+  "ax3sGB": [
+    {
+      "type": 0,
+      "value": "Edit this personal access token"
+    }
+  ],
+  "bVPj59": [
+    {
+      "type": 0,
+      "value": "Delete this personal access token"
+    }
+  ],
+  "bdTRI9": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "cZz32J": [
+    {
+      "type": 0,
+      "value": "Edit PAT"
+    }
+  ],
+  "cvJp/S": [
+    {
+      "type": 0,
+      "value": "This answer is required to validate the form."
+    }
+  ],
+  "fWOJDC": [
+    {
+      "type": 0,
+      "value": "A new password"
+    }
+  ],
+  "h4+RiJ": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "i0E602": [
+    {
+      "type": 0,
+      "value": "Submit"
+    }
+  ],
+  "i8B3g5": [
+    {
+      "type": 0,
+      "value": "Thank you for your interest in helping our project!"
+    }
+  ],
+  "j3Zg1g": [
+    {
+      "type": 0,
+      "value": "Expired at"
+    }
+  ],
+  "kx4x9D": [
+    {
+      "type": 0,
+      "value": "Role"
+    }
+  ],
+  "lGHKue": [
+    {
+      "type": 0,
+      "value": "Language"
+    }
+  ],
+  "mJMucx": [
+    {
+      "type": 0,
+      "value": "Cancel"
+    }
+  ],
+  "nsfyN3": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "oRbw/6": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to delete "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "entity"
+        }
+      ],
+      "type": 8,
+      "value": "strong"
+    },
+    {
+      "type": 0,
+      "value": "?"
+    }
+  ],
+  "oatzvs": [
+    {
+      "type": 0,
+      "value": "Last Name"
+    }
+  ],
+  "pLn6i2": [
+    {
+      "type": 0,
+      "value": "Update"
+    }
+  ],
+  "pglohm": [
+    {
+      "type": 0,
+      "value": "Title"
+    }
+  ],
+  "q5x9RM": [
+    {
+      "type": 0,
+      "value": "Sign Up"
+    }
+  ],
+  "s1Q3aH": [
+    {
+      "type": 0,
+      "value": "Date"
+    }
+  ],
+  "tnYUFj": [
+    {
+      "type": 0,
+      "value": "Surveys"
+    }
+  ],
+  "ugMu4J": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "vaW853": [
+    {
+      "type": 0,
+      "value": "Thank you for your interest in helping our project!"
+    }
+  ],
+  "wHB27C": [
+    {
+      "type": 0,
+      "value": "Log In"
+    }
+  ],
+  "xhJCpr": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "zGNJ13": [
+    {
+      "type": 0,
+      "value": "Users"
+    }
+  ]
+}

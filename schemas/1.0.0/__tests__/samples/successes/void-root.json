@@ -1,0 +1,13 @@
+{
+  "type": "root",
+  "id": "R01",
+  "data": {
+    "backgroundUri": null,
+    "coverUri": null,
+    "language": "en",
+    "logoUri": null,
+    "title": "A Survey Title",
+    "version": "1.0.0"
+  },
+  "children": []
+}
