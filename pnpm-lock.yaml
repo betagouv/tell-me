@@ -47,7 +47,7 @@ specifiers:
   eslint-plugin-formatjs: 2.18.0
   eslint-plugin-import: 2.25.4
   eslint-plugin-jest: 26.0.0
-  eslint-plugin-jsx-a11y: 6.5.1
+  eslint-plugin-jsx-a11y: 6.6.0
   eslint-plugin-prettier: 4.0.0
   eslint-plugin-react: 7.28.0
   eslint-plugin-react-hooks: 4.3.0
@@ -153,7 +153,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.0.2
   '@formatjs/cli': 5.0.2
   '@ivangabriele/commitlint-config': 1.0.6_bssb22avzi7eofuwqdtvauqn5i
-  '@ivangabriele/eslint-config-typescript-next': 4.1.1_auyerqidqltmj6ws34zpprlnra
+  '@ivangabriele/eslint-config-typescript-next': 4.1.1_fipcvijfnaqvja4pileauqddam
   '@ivangabriele/prettier-config': 3.0.2_prettier@2.5.1
   '@jest/globals': 28.0.0
   '@playwright/test': 1.22.2
@@ -163,13 +163,13 @@ devDependencies:
   concurrently: 6.3.0
   envinfo: 7.8.1
   eslint: 8.17.0
-  eslint-config-airbnb: 19.0.4_lafrb3nrbslexsndij4alkhtpa
+  eslint-config-airbnb: 19.0.4_jz7vbowrulusvhckd6ubcfi32m
   eslint-config-airbnb-typescript: 17.0.0_so3uphmmfo6z57mhomebox7igi
   eslint-config-prettier: 8.3.0_eslint@8.17.0
   eslint-plugin-formatjs: 2.18.0_eslint@8.17.0
   eslint-plugin-import: 2.25.4_pv5w3e62ssxduf5aiwxbc3knra
   eslint-plugin-jest: 26.0.0_r7v5z2gjzsikpmtxuuavofrofi
-  eslint-plugin-jsx-a11y: 6.5.1_eslint@8.17.0
+  eslint-plugin-jsx-a11y: 6.6.0_eslint@8.17.0
   eslint-plugin-prettier: 4.0.0_rejks7blq3cj7ybhy3cgof7opi
   eslint-plugin-react: 7.28.0_eslint@8.17.0
   eslint-plugin-react-hooks: 4.3.0_eslint@8.17.0
@@ -1002,7 +1002,7 @@ packages:
       husky: 8.0.0
     dev: true
 
-  /@ivangabriele/eslint-config-typescript-next/4.1.1_auyerqidqltmj6ws34zpprlnra:
+  /@ivangabriele/eslint-config-typescript-next/4.1.1_fipcvijfnaqvja4pileauqddam:
     resolution: {integrity: sha512-OxkFa9epm/PtxIe21pFPrY3m5nV2KHAl9KoL81CHK06dUR7eTBPdVtXYUbsRNJQvvTow6pDpsgcIyz2n2q6E8Q==}
     peerDependencies:
       '@ivangabriele/prettier-config': ^3.0.2
@@ -1028,12 +1028,12 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.30.7_aq7uryhocdbvbqum33pitcm3y4
       '@typescript-eslint/parser': 5.27.1_ud6rd4xtew5bv4yhvkvu24pzm4
       eslint: 8.17.0
-      eslint-config-airbnb: 19.0.4_lafrb3nrbslexsndij4alkhtpa
+      eslint-config-airbnb: 19.0.4_jz7vbowrulusvhckd6ubcfi32m
       eslint-config-airbnb-typescript: 17.0.0_so3uphmmfo6z57mhomebox7igi
       eslint-config-prettier: 8.3.0_eslint@8.17.0
       eslint-plugin-import: 2.25.4_pv5w3e62ssxduf5aiwxbc3knra
       eslint-plugin-jest: 26.0.0_r7v5z2gjzsikpmtxuuavofrofi
-      eslint-plugin-jsx-a11y: 6.5.1_eslint@8.17.0
+      eslint-plugin-jsx-a11y: 6.6.0_eslint@8.17.0
       eslint-plugin-prettier: 4.0.0_rejks7blq3cj7ybhy3cgof7opi
       eslint-plugin-react: 7.28.0_eslint@8.17.0
       eslint-plugin-react-hooks: 4.3.0_eslint@8.17.0
@@ -3366,6 +3366,7 @@ packages:
 
   /core-js-pure/3.23.1:
     resolution: {integrity: sha512-3qNgf6TqI3U1uhuSYRzJZGfFd4T+YlbyVPl+jgRiKjdZopvG4keZQwWZDAWpu1UH9nCgTpUzIV3GFawC7cJsqg==}
+    deprecated: core-js-pure@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js-pure.
     requiresBuild: true
     dev: true
 
@@ -4060,7 +4061,7 @@ packages:
       eslint-plugin-import: 2.25.4_pv5w3e62ssxduf5aiwxbc3knra
     dev: true
 
-  /eslint-config-airbnb/19.0.4_lafrb3nrbslexsndij4alkhtpa:
+  /eslint-config-airbnb/19.0.4_jz7vbowrulusvhckd6ubcfi32m:
     resolution: {integrity: sha512-T75QYQVQX57jiNgpF9r1KegMICE94VYwoFQyMGhrvc+lB8YF2E/M/PYDaQe1AJcWaEgqLE+ErXV1Og/+6Vyzew==}
     engines: {node: ^10.12.0 || ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -4073,7 +4074,7 @@ packages:
       eslint: 8.17.0
       eslint-config-airbnb-base: 15.0.0_pwgqxhifmvrsmxdp6f62gt5dzq
       eslint-plugin-import: 2.25.4_pv5w3e62ssxduf5aiwxbc3knra
-      eslint-plugin-jsx-a11y: 6.5.1_eslint@8.17.0
+      eslint-plugin-jsx-a11y: 6.6.0_eslint@8.17.0
       eslint-plugin-react: 7.28.0_eslint@8.17.0
       eslint-plugin-react-hooks: 4.3.0_eslint@8.17.0
       object.assign: 4.1.2
@@ -4195,8 +4196,8 @@ packages:
       - typescript
     dev: true
 
-  /eslint-plugin-jsx-a11y/6.5.1_eslint@8.17.0:
-    resolution: {integrity: sha512-sVCFKX9fllURnXT2JwLN5Qgo24Ug5NF6dxhkmxsMEUZhXRcGg+X3e1JbJ84YePQKBl5E0ZjAH5Q4rkdcGY99+g==}
+  /eslint-plugin-jsx-a11y/6.6.0_eslint@8.17.0:
+    resolution: {integrity: sha512-kTeLuIzpNhXL2CwLlc8AHI0aFRwWHcg483yepO9VQiHzM9bZwJdzTkzBszbuPrbgGmq2rlX/FaT2fJQsjUSHsw==}
     engines: {node: '>=4.0'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -4211,9 +4212,10 @@ packages:
       emoji-regex: 9.2.2
       eslint: 8.17.0
       has: 1.0.3
-      jsx-ast-utils: 3.3.0
+      jsx-ast-utils: 3.3.2
       language-tags: 1.0.5
       minimatch: 3.1.2
+      semver: 6.3.0
     dev: true
 
   /eslint-plugin-prettier/4.0.0_rejks7blq3cj7ybhy3cgof7opi:
@@ -6137,6 +6139,14 @@ packages:
 
   /jsx-ast-utils/3.3.0:
     resolution: {integrity: sha512-XzO9luP6L0xkxwhIJMTJQpZo/eeN60K08jHdexfD569AGxeNug6UketeHXEhROoM8aR7EcUoOQmIhcJQjcuq8Q==}
+    engines: {node: '>=4.0'}
+    dependencies:
+      array-includes: 3.1.5
+      object.assign: 4.1.2
+    dev: true
+
+  /jsx-ast-utils/3.3.2:
+    resolution: {integrity: sha512-4ZCADZHRkno244xlNnn4AOG6sRQ7iBZ5BbgZ4vW4y5IZw7cVUD1PPeblm1xx/nfmMxPdt/LHsXZW8z/j58+l9Q==}
     engines: {node: '>=4.0'}
     dependencies:
       array-includes: 3.1.5
