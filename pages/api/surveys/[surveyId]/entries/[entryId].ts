@@ -15,7 +15,7 @@ export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res:
   switch (req.method) {
     case 'DELETE':
       try {
-        await handleAuth(req, res, [UserRole.ADMINISTRATOR])
+        await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER])
 
         const { entryId, surveyId } = req.query
         if (typeof entryId !== 'string' || typeof surveyId !== 'string') {
