@@ -114,7 +114,7 @@
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-formatjs": "2.18.0",
-    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jest": "26.0.0",
     "eslint-plugin-jsx-a11y": "6.6.0",
     "eslint-plugin-prettier": "4.0.0",
