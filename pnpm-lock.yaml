@@ -81,7 +81,7 @@ specifiers:
   react-intl: 5.24.1
   react-popper: 2.3.0
   react-redux: 8.0.2
-  react-spinners: 0.12.0
+  react-spinners: 0.13.3
   react-toastify: 9.0.7
   slugify: 1.6.3
   styled-components: 5.3.3
@@ -138,7 +138,7 @@ dependencies:
   react-intl: 5.24.1_ncsd6cfs7j5o4bjouwnervdxhm
   react-popper: 2.3.0_kz2vxbzpsgxv356x2ucg6oykdm
   react-redux: 8.0.2_4dt2r24i4v24wrx5gqs2w2gty4
-  react-spinners: 0.12.0_4dt2r24i4v24wrx5gqs2w2gty4
+  react-spinners: 0.13.3_sfoxds7t5ydpegc3knd667wn6m
   react-toastify: 9.0.7_sfoxds7t5ydpegc3knd667wn6m
   slugify: 1.6.3
   styled-components: 5.3.3_sfoxds7t5ydpegc3knd667wn6m
@@ -7708,18 +7708,14 @@ packages:
       - '@types/react'
     dev: false
 
-  /react-spinners/0.12.0_4dt2r24i4v24wrx5gqs2w2gty4:
-    resolution: {integrity: sha512-kC/3g4Dk3kBaVfYVu7f+Zxd9wTxt6Lzws5cP3jCuE03TZwTNtwS++ZGUNF8BR3M8UrUFXP0gil0L9LONOsUkjw==}
+  /react-spinners/0.13.3_sfoxds7t5ydpegc3knd667wn6m:
+    resolution: {integrity: sha512-FHQMH6dAl1Vw4Lxv0H7hbGsjBs0aKNVwjGrDJLuD9R/C3h9+IuBhKJOJyCcegxMaLiBSBV96Tp+XV3OwPK8Vtw==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@emotion/react': 11.9.3_ibn23vwgltlnuhzfavdpx3icti
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@types/react'
     dev: false
 
   /react-toastify/9.0.7_sfoxds7t5ydpegc3knd667wn6m:
