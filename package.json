@@ -96,7 +96,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.0.0",
+    "@commitlint/cli": "17.0.3",
     "@commitlint/config-conventional": "17.0.2",
     "@formatjs/cli": "5.0.2",
     "@ivangabriele/commitlint-config": "1.0.6",
