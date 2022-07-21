@@ -85,7 +85,7 @@
     "react-intl": "5.24.1",
     "react-popper": "2.3.0",
     "react-redux": "8.0.2",
-    "react-spinners": "0.12.0",
+    "react-spinners": "0.13.3",
     "react-toastify": "9.0.7",
     "slugify": "1.6.3",
     "styled-components": "5.3.3",
