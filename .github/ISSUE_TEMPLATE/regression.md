@@ -28,4 +28,4 @@ Please provide either a [repl.it demo](https://repl.it) or a minimal repository 
 
 ## Environment Info (if you're a developer)
 
-Please run `pnpm run debug` within the project directory and paste the results here:
+Please run `pnpm debug` within the project directory and paste the results here:

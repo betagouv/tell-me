@@ -23,7 +23,7 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Run
-        run: pnpm run test:lint
+        run: pnpm test:lint
 
   type:
     name: Type
@@ -43,7 +43,7 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Run
-        run: pnpm run test:type
+        run: pnpm test:type
 
   unit_test:
     name: Unit Test
@@ -66,7 +66,7 @@ jobs:
           # https://github.com/swc-project/swc/discussions/4152
           pnpm install @swc/core-linux-x64-gnu
       - name: Run
-        run: pnpm run test:unit --coverage
+        run: pnpm test:unit --coverage
       - name: Cover
         run: npx codecov
 
@@ -122,16 +122,16 @@ jobs:
           npx playwright install-deps chromium
           npx playwright install chromium
       - name: Setup CI
-        run: pnpm run ci:e2e:setup
+        run: pnpm ci:e2e:setup
       - name: Build
-        run: pnpm run build
+        run: pnpm build
       - name: Serve
         run: pnpm start &
       - name: Wait for server
         # https://stackoverflow.com/a/50055449/2736233
         run: timeout 30 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' localhost 3000
       - name: Run
-        run: pnpm run test:e2e
+        run: pnpm test:e2e
       - name: Archive failed tests trace
         if: ${{ failure() }}
         uses: actions/upload-artifact@v3

@@ -20,7 +20,7 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Build
-        run: pnpm run build
+        run: pnpm build
 
   docker:
     name: Docker
