@@ -1,8 +1,13 @@
 # Contributing
 
+This documentation is for contributors (developers, translators and any good soul).
+
+If you're rather looking for production deployment instructions, it's not ready yet.
+But it will be ready in a few weeks on a dedicated website.
+
 - [Get Started](#get-started)
   - [Requirements](#requirements)
-  - [Setup](#setup)
+  - [First Setup](#first-setup)
   - [Local development](#local-development)
 - [Architecture](#architecture)
   - [Main directories](#main-directories)
@@ -20,7 +25,7 @@
 - [pnpm](https://pnpm.io/installation#using-corepack)
 - [Docker](https://www.docker.com/get-started)
 
-### Setup
+### First Setup
 
 > ⚠️ **Important**  
 > If you're under **Windows**, please run all the CLI commands within a Linux shell-like terminal (i.e.: Git Bash).
@@ -30,10 +35,10 @@ Then run:
 ```sh
 git clone https://github.com/betagouv/tell-me.git
 cd tell-me
-pnp i
-pnp run dev:setup
-pnp run dev:docker
-pnp run db:migrate
+pnpm i
+pnpm dev:setup
+pnpm dev:docker
+pnpm db:migrate
 ```
 
 > 📋 **Note**  
@@ -46,8 +51,8 @@ pnp run db:migrate
 ### Local development
 
 ```sh
-pnp run dev:docker
-pnp run dev
+pnpm dev:docker
+pnpm dev
 ```
 
 This will run PostgreSQL within a Docker container via Docker Compose and run the webapp which should then be available at

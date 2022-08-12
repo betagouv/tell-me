@@ -17,10 +17,11 @@ WORKDIR /app
 
 COPY . .
 
+# https://pnpm.io/installation#using-corepack
 RUN corepack enable
-RUN corepack prepare pnpm@7.2.1
-RUN pnpm i -g pnpm
-RUN pnpm install --frozen-lockfile
-RUN pnpm run build
+RUN corepack prepare pnpm@7.9.0 --activate
+
+RUN pnpm i --frozen-lockfile
+RUN pnpm build
 
 ENTRYPOINT [ "pnp", "start" ]
