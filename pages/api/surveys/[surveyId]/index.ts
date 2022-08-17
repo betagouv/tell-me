@@ -1,3 +1,4 @@
+import { guardAsNaturalNumber } from '@api/helpers/guardNaturalNumber'
 import { ApiError } from '@api/libs/ApiError'
 import { prisma } from '@api/libs/prisma'
 import { handleAuth } from '@api/middlewares/withAuth/handleAuth'
@@ -5,6 +6,8 @@ import { handleApiEndpointError } from '@common/helpers/handleApiEndpointError'
 import { validateTellMeData } from '@common/helpers/validateTellMeData'
 import { validateTellMeTree } from '@common/helpers/validateTellMeTree'
 import { UserRole } from '@prisma/client'
+import { TellMe } from '@schemas/1.0.0/TellMe'
+import { descend, prop } from 'ramda'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -17,8 +20,10 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
         await handleAuth(req, res, [UserRole.ADMINISTRATOR, UserRole.MANAGER, UserRole.VIEWER], true)
 
         const { surveyId } = req.query
+        const perPage = guardAsNaturalNumber(req.query.perPage, 10, 100)
+        const pageIndex = guardAsNaturalNumber(req.query.pageIndex, 0)
         if (typeof surveyId !== 'string') {
-          throw new ApiError('Not found.', 404, true)
+          throw new ApiError('`surveyId` must be a string.', 422, true)
         }
 
         const maybeSurvey = await prisma.survey.findUnique({
@@ -30,9 +35,25 @@ export default async function SurveyEndpoint(req: NextApiRequest, res: NextApiRe
           throw new ApiError('Not found.', 404, true)
         }
 
+        const data = maybeSurvey.data as TellMe.Data
+        const byUpdatedAtDesc = descend(prop('submittedAt') as any)
+        const sortedEntries = data.entries.sort(byUpdatedAtDesc)
+        const pageLength = Math.ceil(sortedEntries.length / perPage)
+        const paginatedEntries = sortedEntries.slice(perPage * pageIndex, perPage * (pageIndex + 1))
+        const surveyWithNormalizedEntries = {
+          ...maybeSurvey,
+          data: {
+            ...data,
+            entries: paginatedEntries,
+          },
+        }
+
         res.status(200).json({
-          data: maybeSurvey,
+          data: surveyWithNormalizedEntries,
           hasError: false,
+          pageIndex,
+          pageLength,
+          perPage,
         })
       } catch (err) {
         handleApiEndpointError(err, ERROR_PATH, res, true)
