@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:18-alpine
 
 # https://github.com/prisma/prisma/issues/16834#issuecomment-1355195025
 RUN apk add --update --no-cache openssl1.1-compat
@@ -24,7 +24,7 @@ COPY . .
 
 # https://pnpm.io/installation#using-corepack
 RUN corepack enable
-RUN corepack prepare pnpm@7.9.0 --activate
+RUN corepack prepare pnpm@7.22.0 --activate
 
 RUN pnpm i --frozen-lockfile --prod=false
 RUN pnpm build
