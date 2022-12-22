@@ -7,7 +7,7 @@ if [ ! -f "./.env" ]; then
   cp ./.env.example ./.env
 fi
 
-pnpm exec husky install
 # https://betagouv.github.io/nexauth/#/initialize?id=development
 pnpm exec nexauth init
-pnpm exec playwright install
+pnpm exec playwright install chromium
+pnpm exec husky install

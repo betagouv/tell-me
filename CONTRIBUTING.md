@@ -42,11 +42,12 @@ pnpm db:migrate
 ```
 
 > 📋 **Note**  
-> The `pnp run dev:setup` command (script) does the following, if necessary:
+> The `pnpm run dev:setup` command (script) does the following, if necessary:
 >
 > - Copy `.env.example` file to a `.env` one.
 > - Generate an EdDSA Key Pair (required in order to generate and verify [JWTs](https://jwt.io)).
-> - Install [Playwright](https://playwright.dev) browsers for E2E tests.
+> - Install [Playwright](https://playwright.dev) Chromium for E2E tests.
+> - Install Git hooks via [husky](https://typicode.github.io/husky/#/).
 
 ### Local development
 
