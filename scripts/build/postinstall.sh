@@ -9,7 +9,3 @@ if [ -f "./.env" ]; then
 fi
 
 pnpm exec prisma generate
-
-if [ -z "$CI" ] && [ "${NODE_ENV}" != "production" ]; then
-  pnpm exec husky install
-fi
