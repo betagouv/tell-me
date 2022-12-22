@@ -29,4 +29,4 @@ RUN corepack prepare pnpm@7.9.0 --activate
 RUN pnpm i --frozen-lockfile --prod=false
 RUN pnpm build
 
-ENTRYPOINT [ "pnp", "start" ]
+ENTRYPOINT [ "pnpm", "start" ]
