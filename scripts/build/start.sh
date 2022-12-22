@@ -9,5 +9,4 @@ if [ -f "./.env" ]; then
 fi
 
 pnpm db:migrate
-pnpm db:seed
 pnpm exec next start

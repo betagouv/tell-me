@@ -1,7 +1,6 @@
 name: Check
 
 on:
-  pull_request:
   push:
 
 jobs:
@@ -12,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
       - name: Setup Node.js
@@ -32,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
       - name: Setup Node.js
@@ -52,7 +51,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
       - name: Setup Node.js
@@ -106,7 +105,7 @@ jobs:
             **/.next/cache
           key: ${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.2
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: 7
       - name: Setup Node.js
