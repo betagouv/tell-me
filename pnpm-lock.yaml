@@ -74,7 +74,7 @@ specifiers:
   nodemon: 2.0.14
   numeral: 2.0.6
   prettier: 2.5.1
-  prisma: 4.0.0
+  prisma: 4.1.0
   ramda: 0.28.0
   react: 17.0.2
   react-dom: 17.0.2
@@ -99,7 +99,7 @@ dependencies:
   '@fontsource/poppins': 4.5.8
   '@ivangabriele/tsconfig-next': 1.2.2
   '@popperjs/core': 2.11.5
-  '@prisma/client': 4.0.0_prisma@4.0.0
+  '@prisma/client': 4.0.0_prisma@4.1.0
   '@reduxjs/toolkit': 1.8.3_thunyjspsylz6iliyoygaytnnq
   '@shopify/react-web-worker': 5.0.1_gdjom6r726p3grwsawiv52ijca
   '@singularity/core': 4.2.0_dhonyxziwu6e2pkqzpinfueyja
@@ -133,7 +133,7 @@ dependencies:
   nexauth: 2.1.1_zhtyyhxvjc4vmyivr6fwl32yja
   next: 12.1.6_gdjom6r726p3grwsawiv52ijca
   numeral: 2.0.6
-  prisma: 4.0.0
+  prisma: 4.1.0
   ramda: 0.28.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -1498,7 +1498,7 @@ packages:
     resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
     dev: false
 
-  /@prisma/client/4.0.0_prisma@4.0.0:
+  /@prisma/client/4.0.0_prisma@4.1.0:
     resolution: {integrity: sha512-g1h2OGoRo7anBVQ9Cw3gsbjwPtvf7i0pkGxKeZICtwkvE5CZXW+xZF4FZdmrViYkKaAShbISL0teNpu9ecpf4g==}
     engines: {node: '>=14.17'}
     requiresBuild: true
@@ -1509,15 +1509,15 @@ packages:
         optional: true
     dependencies:
       '@prisma/engines-version': 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
-      prisma: 4.0.0
+      prisma: 4.1.0
     dev: false
 
   /@prisma/engines-version/3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11:
     resolution: {integrity: sha512-PiZhdD624SrYEjyLboI0X7OugNbxUzDJx9v/6ldTKuqNDVUCmRH/Z00XwDi/dgM4FlqOSO+YiUsSiSKjxxG8cw==}
     dev: false
 
-  /@prisma/engines/3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11:
-    resolution: {integrity: sha512-u/rG4lDHALolWBLr3yebZ+N2qImp3SDMcu7bHNJuRDaYvYEXy/MqfNRNEgd9GoPsXL3gofYf0VzJf2AmCG3YVw==}
+  /@prisma/engines/4.1.0:
+    resolution: {integrity: sha512-quqHXD3P83NBLVtRlts4SgKHmqgA8GMiyDTJ7af03Wg0gl6F5t65mBYvIuwmD+52vHm42JtIsp/fAO9YIV0JBA==}
     requiresBuild: true
     dev: false
 
@@ -7455,13 +7455,13 @@ packages:
     hasBin: true
     dev: false
 
-  /prisma/4.0.0:
-    resolution: {integrity: sha512-Dtsar03XpCBkcEb2ooGWO/WcgblDTLzGhPcustbehwlFXuTMliMDRzXsfygsgYwQoZnAUKRd1rhpvBNEUziOVw==}
+  /prisma/4.1.0:
+    resolution: {integrity: sha512-iwqpAT6In1uvMSwQAM3PqmaBdhh2OaQ/2t+n3RjpW4vAKP3R7E1T34FZUU4zGOWtMWm5dt0sPThQkT/h87r6gw==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 3.16.0-49.da41d2bb3406da22087b849f0e911199ba4fbf11
+      '@prisma/engines': 4.1.0
     dev: false
 
   /process-nextick-args/2.0.1:
