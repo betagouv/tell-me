@@ -134,7 +134,7 @@ export default function SurveyEntryListPage() {
         data: TellMe.Data
         tree: TellMe.Tree
       }
-    >(`surveys/${surveyId}`)
+    >(`surveys/${surveyId}?perPage=100`)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
