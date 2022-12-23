@@ -11,7 +11,7 @@ import cuid from 'cuid'
 import type { TellMe } from '@schemas/1.0.0/TellMe'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const ERROR_PATH = 'pages/api/surveys/[surveyId]/index.ts'
+const ERROR_PATH = 'pages/api/surveys/[surveyId]/entries/index.ts'
 
 export default async function SurveyEntryIndexEndpoint(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
