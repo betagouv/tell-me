@@ -64,6 +64,7 @@
     "ajv": "8.11.0",
     "bhala": "3.0.4",
     "cors": "2.8.5",
+    "csv-stringify": "6.2.3",
     "cuid": "2.1.8",
     "dayjs": "1.11.3",
     "dotenv": "16.0.1",
@@ -92,7 +93,6 @@
     "styled-components": "5.3.3",
     "type-fest": "2.13.1",
     "typescript": "4.7.4",
-    "xlsx": "0.17.4",
     "yup": "0.32.9",
     "zxcvbn": "4.4.2"
   },

@@ -99,7 +99,7 @@ export default function SurveyEntryListPage() {
       return
     }
 
-    const maybeBody = await api.get('auth/one-time-token')
+    const maybeBody = await api.get('one-time-tokens/new')
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
@@ -109,19 +109,19 @@ export default function SurveyEntryListPage() {
     window.open(`${url}?mimeType=${mimeType}&oneTimeToken=${oneTimeToken}`, '')
   }
 
-  const exportEntries = async fileExtension => {
+  const exportEntries = async () => {
     if (isMounted()) {
       setIsDownloading(true)
     }
 
-    const maybeBody = await api.get(`auth/one-time-token`)
+    const maybeBody = await api.get(`one-time-tokens/new`)
     if (maybeBody === null || maybeBody.hasError) {
       return
     }
 
     const { oneTimeToken } = maybeBody.data
 
-    window.open(`/api/surveys/${surveyId}/download?fileExtension=${fileExtension}&oneTimeToken=${oneTimeToken}`)
+    window.open(`/api/surveys/${surveyId}/entries/download?oneTimeToken=${oneTimeToken}`)
 
     if (isMounted()) {
       setIsDownloading(false)
@@ -245,7 +245,15 @@ export default function SurveyEntryListPage() {
       <AdminHeader>
         <Title>{survey.data.title}</Title>
 
-        <Button disabled={isDownloading} onClick={() => exportEntries('csv')} size="small">
+        <Button
+          disabled={isDownloading}
+          onClick={exportEntries}
+          size="small"
+          // TODO Fix that in @singularity/core.
+          style={{
+            whiteSpace: 'nowrap',
+          }}
+        >
           {intl.formatMessage({
             defaultMessage: 'Export as CSV',
             description: '[Survey Submissions List] Export answers in CSV format button label.',
