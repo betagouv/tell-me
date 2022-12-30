@@ -21,15 +21,15 @@ enum StaticServerType {
 
 const CACHE: {
   type?: StaticServerType
-} = {
-  type: undefined,
-}
+} = {}
 
 export class StaticServer {
   #type?: StaticServerType
 
   constructor() {
-    this.#type = CACHE.type
+    if (CACHE.type !== undefined) {
+      this.#type = CACHE.type
+    }
   }
 
   public async upload(filePath: string, mimeType: MimeType): Promise<UploadedFileInfo> {
