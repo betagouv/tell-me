@@ -7,10 +7,11 @@
   "repository": "https://github.com/betagouv/tell-me",
   "success_url": "/",
   "website": "https://www.tell-me.org",
+  "stack": "scalingo-20",
   "env": {
     "BUILDPACK_URL": {
       "description": "Custom buildpack to support pnpm (don't change the default value).",
-      "value": "https://github.com/unfold/heroku-buildpack-pnpm"
+      "value": "https://github.com/unfold/heroku-buildpack-pnpm#main"
     },
     "NODE_ENV": {
       "description": "Application environment (don't change the default value).",

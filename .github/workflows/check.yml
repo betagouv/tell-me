@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: pnpm
-          node-version: 16
+          node-version: 18
       - name: Install
         run: pnpm install
       - name: Run
@@ -38,9 +38,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: pnpm
-          node-version: 16
+          node-version: 18
       - name: Install
-        run: pnpm install
+        run: pnpm i --frozen-lockfile
       - name: Run
         run: pnpm test:type
 
@@ -58,12 +58,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: pnpm
-          node-version: 16
+          node-version: 18
       - name: Install
         run: |
-          pnpm install
+          pnpm i --frozen-lockfile
           # https://github.com/swc-project/swc/discussions/4152
-          pnpm install @swc/core-linux-x64-gnu
+          pnpm i @swc/core-linux-x64-gnu
       - name: Run
         run: pnpm test:unit --coverage
       - name: Cover
@@ -112,9 +112,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: pnpm
-          node-version: 16
+          node-version: 18
       - name: Install
-        run: pnpm install --prod=false
+        run: |
+          pnpm i --frozen-lockfile --prod=false
+          # https://github.com/swc-project/swc/discussions/4152
+          pnpm i @swc/core-linux-x64-gnu
       - name: Install Playwright browsers
         if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: |
@@ -127,8 +130,10 @@ jobs:
       - name: Serve
         run: pnpm start &
       - name: Wait for server
-        # https://stackoverflow.com/a/50055449/2736233
-        run: timeout 30 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' localhost 3000
+        run: |
+          # https://stackoverflow.com/a/50055449/2736233
+          timeout 10s bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' localhost 3000
+          sleep 10s
       - name: Run
         run: pnpm test:e2e
       - name: Archive failed tests trace

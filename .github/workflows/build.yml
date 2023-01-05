@@ -30,5 +30,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
       - name: Build
-        run: yarn docker:build
+        run: pnpm docker:build
