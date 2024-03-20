@@ -75,3 +75,5 @@ Please check our [CONTRIBUTING.md document](/CONTRIBUTING.md) to setup and run T
 [![Crowdin](https://badges.crowdin.net/tell-me-open-source/localized.svg)](https://crowdin.com/project/tell-me-open-source)
 
 Please join our [Crowdin Dashboard](https://crowdin.com/project/tell-me-open-source) to help us translate Tell Me to the world 🌎!
+# My New README
+This is the new README content.
